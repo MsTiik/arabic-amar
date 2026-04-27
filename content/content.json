@@ -609,7 +609,7 @@
       "lessonId": "lesson-body-parts"
     },
     {
-      "id": "lesson-body-parts__head",
+      "id": "lesson-body-parts__head-2",
       "arabic": "شَعْرٌ",
       "arabicFolded": "شعر",
       "pronunciation": "shaʿrun",
@@ -623,7 +623,7 @@
       "lessonId": "lesson-body-parts"
     },
     {
-      "id": "lesson-body-parts__head",
+      "id": "lesson-body-parts__head-3",
       "arabic": "وَجْهٌ",
       "arabicFolded": "وجه",
       "pronunciation": "wajhun",
@@ -637,7 +637,7 @@
       "lessonId": "lesson-body-parts"
     },
     {
-      "id": "lesson-body-parts__head",
+      "id": "lesson-body-parts__head-4",
       "arabic": "جَبِينٌ",
       "arabicFolded": "جبين",
       "pronunciation": "jabīnun",
@@ -651,7 +651,7 @@
       "lessonId": "lesson-body-parts"
     },
     {
-      "id": "lesson-body-parts__head",
+      "id": "lesson-body-parts__head-5",
       "arabic": "حَاجِبٌ",
       "arabicFolded": "حاجب",
       "pronunciation": "ḥājibun",
@@ -665,7 +665,7 @@
       "lessonId": "lesson-body-parts"
     },
     {
-      "id": "lesson-body-parts__head",
+      "id": "lesson-body-parts__head-6",
       "arabic": "أَنْفٌ",
       "arabicFolded": "أنف",
       "pronunciation": "anf̣un",
@@ -679,7 +679,7 @@
       "lessonId": "lesson-body-parts"
     },
     {
-      "id": "lesson-body-parts__head",
+      "id": "lesson-body-parts__head-7",
       "arabic": "فَمٌ",
       "arabicFolded": "فم",
       "pronunciation": "famun",
@@ -693,7 +693,7 @@
       "lessonId": "lesson-body-parts"
     },
     {
-      "id": "lesson-body-parts__head",
+      "id": "lesson-body-parts__head-8",
       "arabic": "لِسَانٌ",
       "arabicFolded": "لسان",
       "pronunciation": "lisānun",
@@ -707,7 +707,7 @@
       "lessonId": "lesson-body-parts"
     },
     {
-      "id": "lesson-body-parts__head",
+      "id": "lesson-body-parts__head-9",
       "arabic": "ذَقْنٌ",
       "arabicFolded": "ذقن",
       "pronunciation": "dhaqnun",
@@ -721,7 +721,7 @@
       "lessonId": "lesson-body-parts"
     },
     {
-      "id": "lesson-body-parts__head",
+      "id": "lesson-body-parts__head-10",
       "arabic": "عَيْنٌ",
       "arabicFolded": "عين",
       "pronunciation": "ʿaynun",
@@ -735,7 +735,7 @@
       "lessonId": "lesson-body-parts"
     },
     {
-      "id": "lesson-body-parts__head",
+      "id": "lesson-body-parts__head-11",
       "arabic": "أُذُنٌ",
       "arabicFolded": "أذن",
       "pronunciation": "udhunun",
@@ -749,7 +749,7 @@
       "lessonId": "lesson-body-parts"
     },
     {
-      "id": "lesson-body-parts__head",
+      "id": "lesson-body-parts__head-12",
       "arabic": "أَسْنَانٌ",
       "arabicFolded": "أسنان",
       "pronunciation": "asnānun",
@@ -777,7 +777,7 @@
       "lessonId": "lesson-body-parts"
     },
     {
-      "id": "lesson-body-parts__upper-body",
+      "id": "lesson-body-parts__upper-body-2",
       "arabic": "ذِرَاعٌ",
       "arabicFolded": "ذراع",
       "pronunciation": "dhirāʿun",
@@ -791,7 +791,7 @@
       "lessonId": "lesson-body-parts"
     },
     {
-      "id": "lesson-body-parts__upper-body",
+      "id": "lesson-body-parts__upper-body-3",
       "arabic": "صَدْرٌ",
       "arabicFolded": "صدر",
       "pronunciation": "ṣadrun",
@@ -805,7 +805,7 @@
       "lessonId": "lesson-body-parts"
     },
     {
-      "id": "lesson-body-parts__upper-body",
+      "id": "lesson-body-parts__upper-body-4",
       "arabic": "يَدٌ",
       "arabicFolded": "يد",
       "pronunciation": "yadun",
@@ -833,7 +833,7 @@
       "lessonId": "lesson-body-parts"
     },
     {
-      "id": "lesson-body-parts__core-internal",
+      "id": "lesson-body-parts__core-internal-2",
       "arabic": "بَطْنٌ",
       "arabicFolded": "بطن",
       "pronunciation": "baṭnun",
@@ -861,7 +861,7 @@
       "lessonId": "lesson-body-parts"
     },
     {
-      "id": "lesson-body-parts__lower-body",
+      "id": "lesson-body-parts__lower-body-2",
       "arabic": "رِجْلٌ",
       "arabicFolded": "رجل",
       "pronunciation": "rijlun",
@@ -875,7 +875,7 @@
       "lessonId": "lesson-body-parts"
     },
     {
-      "id": "lesson-body-parts__lower-body",
+      "id": "lesson-body-parts__lower-body-3",
       "arabic": "رُكْبَةٌ",
       "arabicFolded": "ركبة",
       "pronunciation": "rukbatun",
@@ -889,7 +889,7 @@
       "lessonId": "lesson-body-parts"
     },
     {
-      "id": "lesson-body-parts__lower-body",
+      "id": "lesson-body-parts__lower-body-4",
       "arabic": "سَاقٌ",
       "arabicFolded": "ساق",
       "pronunciation": "sāqun",
@@ -903,7 +903,7 @@
       "lessonId": "lesson-body-parts"
     },
     {
-      "id": "lesson-body-parts__lower-body",
+      "id": "lesson-body-parts__lower-body-5",
       "arabic": "قَدَمٌ",
       "arabicFolded": "قدم",
       "pronunciation": "qadamun",
@@ -945,7 +945,7 @@
       "lessonId": "lesson-numbers"
     },
     {
-      "id": "lesson-numbers__units-1-9",
+      "id": "lesson-numbers__units-1-9-2",
       "arabic": "اِثْنَانِ",
       "arabicFolded": "اثنان",
       "pronunciation": "ithnān(i)",
@@ -959,7 +959,7 @@
       "lessonId": "lesson-numbers"
     },
     {
-      "id": "lesson-numbers__units-1-9",
+      "id": "lesson-numbers__units-1-9-3",
       "arabic": "ثَلَاثَةٌ",
       "arabicFolded": "ثلاثة",
       "pronunciation": "thalāthatun",
@@ -973,7 +973,7 @@
       "lessonId": "lesson-numbers"
     },
     {
-      "id": "lesson-numbers__units-1-9",
+      "id": "lesson-numbers__units-1-9-4",
       "arabic": "أَرْبَعَةٌ",
       "arabicFolded": "أربعة",
       "pronunciation": "arbaʿatun",
@@ -987,7 +987,7 @@
       "lessonId": "lesson-numbers"
     },
     {
-      "id": "lesson-numbers__units-1-9",
+      "id": "lesson-numbers__units-1-9-5",
       "arabic": "خَمْسَةٌ",
       "arabicFolded": "خمسة",
       "pronunciation": "khamsatun",
@@ -1001,7 +1001,7 @@
       "lessonId": "lesson-numbers"
     },
     {
-      "id": "lesson-numbers__units-1-9",
+      "id": "lesson-numbers__units-1-9-6",
       "arabic": "سِتَّةٌ",
       "arabicFolded": "ستة",
       "pronunciation": "sittatun",
@@ -1015,7 +1015,7 @@
       "lessonId": "lesson-numbers"
     },
     {
-      "id": "lesson-numbers__units-1-9",
+      "id": "lesson-numbers__units-1-9-7",
       "arabic": "سَبْعَةٌ",
       "arabicFolded": "سبعة",
       "pronunciation": "sabʿatun",
@@ -1029,7 +1029,7 @@
       "lessonId": "lesson-numbers"
     },
     {
-      "id": "lesson-numbers__units-1-9",
+      "id": "lesson-numbers__units-1-9-8",
       "arabic": "ثَمَانِيَةٌ",
       "arabicFolded": "ثمانية",
       "pronunciation": "thamāniyatun",
@@ -1043,7 +1043,7 @@
       "lessonId": "lesson-numbers"
     },
     {
-      "id": "lesson-numbers__units-1-9",
+      "id": "lesson-numbers__units-1-9-9",
       "arabic": "تِسْعَةٌ",
       "arabicFolded": "تسعة",
       "pronunciation": "tisʿatun",
@@ -1085,7 +1085,7 @@
       "lessonId": "lesson-numbers"
     },
     {
-      "id": "lesson-numbers__teens-11-19",
+      "id": "lesson-numbers__teens-11-19-2",
       "arabic": "اِثْنَا عَشَرَ",
       "arabicFolded": "اثنا عشر",
       "pronunciation": "ithnā ʿashara",
@@ -1099,7 +1099,7 @@
       "lessonId": "lesson-numbers"
     },
     {
-      "id": "lesson-numbers__teens-11-19",
+      "id": "lesson-numbers__teens-11-19-3",
       "arabic": "ثَلَاثَةَ عَشَرَ",
       "arabicFolded": "ثلاثة عشر",
       "pronunciation": "thalāthata ʿashara",
@@ -1113,7 +1113,7 @@
       "lessonId": "lesson-numbers"
     },
     {
-      "id": "lesson-numbers__teens-11-19",
+      "id": "lesson-numbers__teens-11-19-4",
       "arabic": "أَرْبَعَةَ عَشَرَ",
       "arabicFolded": "أربعة عشر",
       "pronunciation": "arbaʿata ʿashara",
@@ -1127,7 +1127,7 @@
       "lessonId": "lesson-numbers"
     },
     {
-      "id": "lesson-numbers__teens-11-19",
+      "id": "lesson-numbers__teens-11-19-5",
       "arabic": "خَمْسَةَ عَشَرَ",
       "arabicFolded": "خمسة عشر",
       "pronunciation": "khamsata ʿashara",
@@ -1141,7 +1141,7 @@
       "lessonId": "lesson-numbers"
     },
     {
-      "id": "lesson-numbers__teens-11-19",
+      "id": "lesson-numbers__teens-11-19-6",
       "arabic": "سِتَّةَ عَشَرَ",
       "arabicFolded": "ستة عشر",
       "pronunciation": "sittata ʿashara",
@@ -1155,7 +1155,7 @@
       "lessonId": "lesson-numbers"
     },
     {
-      "id": "lesson-numbers__teens-11-19",
+      "id": "lesson-numbers__teens-11-19-7",
       "arabic": "سَبْعَةَ عَشَرَ",
       "arabicFolded": "سبعة عشر",
       "pronunciation": "sabʿata ʿashara",
@@ -1169,7 +1169,7 @@
       "lessonId": "lesson-numbers"
     },
     {
-      "id": "lesson-numbers__teens-11-19",
+      "id": "lesson-numbers__teens-11-19-8",
       "arabic": "ثَمَانِيَةَ عَشَرَ",
       "arabicFolded": "ثمانية عشر",
       "pronunciation": "thamāniyata ʿashara",
@@ -1183,7 +1183,7 @@
       "lessonId": "lesson-numbers"
     },
     {
-      "id": "lesson-numbers__teens-11-19",
+      "id": "lesson-numbers__teens-11-19-9",
       "arabic": "تِسْعَةَ عَشَرَ",
       "arabicFolded": "تسعة عشر",
       "pronunciation": "tisʿata ʿashara",
@@ -1211,7 +1211,7 @@
       "lessonId": "lesson-numbers"
     },
     {
-      "id": "lesson-numbers__tens-20-90",
+      "id": "lesson-numbers__tens-20-90-2",
       "arabic": "ثَلَاثُونَ",
       "arabicFolded": "ثلاثون",
       "pronunciation": "thalāthūna",
@@ -1225,7 +1225,7 @@
       "lessonId": "lesson-numbers"
     },
     {
-      "id": "lesson-numbers__tens-20-90",
+      "id": "lesson-numbers__tens-20-90-3",
       "arabic": "أَرْبَعُونَ",
       "arabicFolded": "أربعون",
       "pronunciation": "arbaʿūna",
@@ -1239,7 +1239,7 @@
       "lessonId": "lesson-numbers"
     },
     {
-      "id": "lesson-numbers__tens-20-90",
+      "id": "lesson-numbers__tens-20-90-4",
       "arabic": "خَمْسُونَ",
       "arabicFolded": "خمسون",
       "pronunciation": "khamsūna",
@@ -1253,7 +1253,7 @@
       "lessonId": "lesson-numbers"
     },
     {
-      "id": "lesson-numbers__tens-20-90",
+      "id": "lesson-numbers__tens-20-90-5",
       "arabic": "سِتُّونَ",
       "arabicFolded": "ستون",
       "pronunciation": "sittūna",
@@ -1267,7 +1267,7 @@
       "lessonId": "lesson-numbers"
     },
     {
-      "id": "lesson-numbers__tens-20-90",
+      "id": "lesson-numbers__tens-20-90-6",
       "arabic": "سَبْعُونَ",
       "arabicFolded": "سبعون",
       "pronunciation": "sabʿūna",
@@ -1281,7 +1281,7 @@
       "lessonId": "lesson-numbers"
     },
     {
-      "id": "lesson-numbers__tens-20-90",
+      "id": "lesson-numbers__tens-20-90-7",
       "arabic": "ثَمَانُونَ",
       "arabicFolded": "ثمانون",
       "pronunciation": "thamānūna",
@@ -1295,7 +1295,7 @@
       "lessonId": "lesson-numbers"
     },
     {
-      "id": "lesson-numbers__tens-20-90",
+      "id": "lesson-numbers__tens-20-90-8",
       "arabic": "تِسْعُونَ",
       "arabicFolded": "تسعون",
       "pronunciation": "tisʿūna",
@@ -1323,7 +1323,7 @@
       "lessonId": "lesson-numbers"
     },
     {
-      "id": "lesson-numbers__hundreds-100-900",
+      "id": "lesson-numbers__hundreds-100-900-2",
       "arabic": "مِائَتَانِ",
       "arabicFolded": "مائتان",
       "pronunciation": "miʾatāni",
@@ -1337,7 +1337,7 @@
       "lessonId": "lesson-numbers"
     },
     {
-      "id": "lesson-numbers__hundreds-100-900",
+      "id": "lesson-numbers__hundreds-100-900-3",
       "arabic": "ثَلَاثُمِائَةٌ",
       "arabicFolded": "ثلاثمائة",
       "pronunciation": "thalāthu-miʾa(tin)",
@@ -1351,7 +1351,7 @@
       "lessonId": "lesson-numbers"
     },
     {
-      "id": "lesson-numbers__hundreds-100-900",
+      "id": "lesson-numbers__hundreds-100-900-4",
       "arabic": "أَرْبَعُمِائَةٌ",
       "arabicFolded": "أربعمائة",
       "pronunciation": "arbaʿu-miʾa(tin)",
@@ -1365,7 +1365,7 @@
       "lessonId": "lesson-numbers"
     },
     {
-      "id": "lesson-numbers__hundreds-100-900",
+      "id": "lesson-numbers__hundreds-100-900-5",
       "arabic": "خَمْسُمِائَةٌ",
       "arabicFolded": "خمسمائة",
       "pronunciation": "khamsu-miʾa(tin)",
@@ -1379,7 +1379,7 @@
       "lessonId": "lesson-numbers"
     },
     {
-      "id": "lesson-numbers__hundreds-100-900",
+      "id": "lesson-numbers__hundreds-100-900-6",
       "arabic": "سِتُّمِائَةٌ",
       "arabicFolded": "ستمائة",
       "pronunciation": "sittu-miʾa(tin)",
@@ -1393,7 +1393,7 @@
       "lessonId": "lesson-numbers"
     },
     {
-      "id": "lesson-numbers__hundreds-100-900",
+      "id": "lesson-numbers__hundreds-100-900-7",
       "arabic": "سَبْعُمِائَةٌ",
       "arabicFolded": "سبعمائة",
       "pronunciation": "sabʿu-miʾa(tin)",
@@ -1407,7 +1407,7 @@
       "lessonId": "lesson-numbers"
     },
     {
-      "id": "lesson-numbers__hundreds-100-900",
+      "id": "lesson-numbers__hundreds-100-900-8",
       "arabic": "ثَمَانِمِائَةٌ",
       "arabicFolded": "ثمانمائة",
       "pronunciation": "thamāni-miʾa(tin)",
@@ -1421,7 +1421,7 @@
       "lessonId": "lesson-numbers"
     },
     {
-      "id": "lesson-numbers__hundreds-100-900",
+      "id": "lesson-numbers__hundreds-100-900-9",
       "arabic": "تِسْعُمِائَةٌ",
       "arabicFolded": "تسعمائة",
       "pronunciation": "tisʿu-miʾa(tin)",
@@ -1449,7 +1449,7 @@
       "lessonId": "lesson-numbers"
     },
     {
-      "id": "lesson-numbers__large",
+      "id": "lesson-numbers__large-2",
       "arabic": "مِلْيُونٌ",
       "arabicFolded": "مليون",
       "pronunciation": "milyūnun",
@@ -1476,7 +1476,7 @@
       "lessonId": "lesson-time"
     },
     {
-      "id": "lesson-time__general",
+      "id": "lesson-time__general-2",
       "arabic": "دَقيقَة",
       "arabicFolded": "دقيقة",
       "pronunciation": "daqīqah",
@@ -1489,7 +1489,7 @@
       "lessonId": "lesson-time"
     },
     {
-      "id": "lesson-time__general",
+      "id": "lesson-time__general-3",
       "arabic": "دَقيقَتان",
       "arabicFolded": "دقيقتان",
       "pronunciation": "daqīqataan",
@@ -1502,7 +1502,7 @@
       "lessonId": "lesson-time"
     },
     {
-      "id": "lesson-time__general",
+      "id": "lesson-time__general-4",
       "arabic": "دَقائِق",
       "arabicFolded": "دقائق",
       "pronunciation": "daqāʾiq",
@@ -1515,7 +1515,7 @@
       "lessonId": "lesson-time"
     },
     {
-      "id": "lesson-time__general",
+      "id": "lesson-time__general-5",
       "arabic": "صَباحًا",
       "arabicFolded": "صباحا",
       "pronunciation": "ṣabāḥan",
@@ -1528,7 +1528,7 @@
       "lessonId": "lesson-time"
     },
     {
-      "id": "lesson-time__general",
+      "id": "lesson-time__general-6",
       "arabic": "مَساءً",
       "arabicFolded": "مساء",
       "pronunciation": "masāʾan",
@@ -1554,7 +1554,7 @@
       "lessonId": "lesson-time"
     },
     {
-      "id": "lesson-time__connectors",
+      "id": "lesson-time__connectors-2",
       "arabic": "إِلّا",
       "arabicFolded": "إلا",
       "pronunciation": "illā",
@@ -1580,7 +1580,7 @@
       "lessonId": "lesson-time"
     },
     {
-      "id": "lesson-time__fractions",
+      "id": "lesson-time__fractions-2",
       "arabic": "نِصف",
       "arabicFolded": "نصف",
       "pronunciation": "niṣf",
@@ -1606,7 +1606,7 @@
       "lessonId": "lesson-time"
     },
     {
-      "id": "lesson-time__hours-1-12",
+      "id": "lesson-time__hours-1-12-2",
       "arabic": "السّاعَةُ الثّانِيَةُ",
       "arabicFolded": "الساعة الثانية",
       "pronunciation": "as-sāʿatu ath-thāniyah",
@@ -1619,7 +1619,7 @@
       "lessonId": "lesson-time"
     },
     {
-      "id": "lesson-time__hours-1-12",
+      "id": "lesson-time__hours-1-12-3",
       "arabic": "السّاعَةُ الثّالِثَةُ",
       "arabicFolded": "الساعة الثالثة",
       "pronunciation": "as-sāʿatu ath-thālithah",
@@ -1632,7 +1632,7 @@
       "lessonId": "lesson-time"
     },
     {
-      "id": "lesson-time__hours-1-12",
+      "id": "lesson-time__hours-1-12-4",
       "arabic": "السّاعَةُ الرّابِعَةُ",
       "arabicFolded": "الساعة الرابعة",
       "pronunciation": "as-sāʿatu ar-rābiʿah",
@@ -1645,7 +1645,7 @@
       "lessonId": "lesson-time"
     },
     {
-      "id": "lesson-time__hours-1-12",
+      "id": "lesson-time__hours-1-12-5",
       "arabic": "السّاعَةُ الخامِسَةُ",
       "arabicFolded": "الساعة الخامسة",
       "pronunciation": "as-sāʿatu al-khāmisah",
@@ -1658,7 +1658,7 @@
       "lessonId": "lesson-time"
     },
     {
-      "id": "lesson-time__hours-1-12",
+      "id": "lesson-time__hours-1-12-6",
       "arabic": "السّاعَةُ السّادِسَةُ",
       "arabicFolded": "الساعة السادسة",
       "pronunciation": "as-sāʿatu as-sādisah",
@@ -1671,7 +1671,7 @@
       "lessonId": "lesson-time"
     },
     {
-      "id": "lesson-time__hours-1-12",
+      "id": "lesson-time__hours-1-12-7",
       "arabic": "السّاعَةُ السّابِعَةُ",
       "arabicFolded": "الساعة السابعة",
       "pronunciation": "as-sāʿatu as-sābiʿah",
@@ -1684,7 +1684,7 @@
       "lessonId": "lesson-time"
     },
     {
-      "id": "lesson-time__hours-1-12",
+      "id": "lesson-time__hours-1-12-8",
       "arabic": "السّاعَةُ الثّامِنَةُ",
       "arabicFolded": "الساعة الثامنة",
       "pronunciation": "as-sāʿatu ath-thāminah",
@@ -1697,7 +1697,7 @@
       "lessonId": "lesson-time"
     },
     {
-      "id": "lesson-time__hours-1-12",
+      "id": "lesson-time__hours-1-12-9",
       "arabic": "السّاعَةُ التّاسِعَةُ",
       "arabicFolded": "الساعة التاسعة",
       "pronunciation": "as-sāʿatu at-tāsiʿah",
@@ -1710,7 +1710,7 @@
       "lessonId": "lesson-time"
     },
     {
-      "id": "lesson-time__hours-1-12",
+      "id": "lesson-time__hours-1-12-10",
       "arabic": "السّاعَةُ العاشِرَةُ",
       "arabicFolded": "الساعة العاشرة",
       "pronunciation": "as-sāʿatu al-ʿāshirah",
@@ -1723,7 +1723,7 @@
       "lessonId": "lesson-time"
     },
     {
-      "id": "lesson-time__hours-1-12",
+      "id": "lesson-time__hours-1-12-11",
       "arabic": "السّاعَةُ الحادِيَةُ عَشَرَةَ",
       "arabicFolded": "الساعة الحادية عشرة",
       "pronunciation": "as-sāʿatu al-ḥādiyata ʿasharah",
@@ -1736,7 +1736,7 @@
       "lessonId": "lesson-time"
     },
     {
-      "id": "lesson-time__hours-1-12",
+      "id": "lesson-time__hours-1-12-12",
       "arabic": "السّاعَةُ الثّانِيَةُ عَشَرَةَ",
       "arabicFolded": "الساعة الثانية عشرة",
       "pronunciation": "as-sāʿatu ath-thāniyata ʿasharah",
@@ -1762,7 +1762,7 @@
       "lessonId": "lesson-days-of-the-week"
     },
     {
-      "id": "lesson-days-of-the-week__general",
+      "id": "lesson-days-of-the-week__general-2",
       "arabic": "أُسْبُوع",
       "arabicFolded": "أسبوع",
       "pronunciation": "usbūʿ",
@@ -1775,7 +1775,7 @@
       "lessonId": "lesson-days-of-the-week"
     },
     {
-      "id": "lesson-days-of-the-week__general",
+      "id": "lesson-days-of-the-week__general-3",
       "arabic": "أَيَّام",
       "arabicFolded": "أيام",
       "pronunciation": "ayyām",
@@ -1788,7 +1788,7 @@
       "lessonId": "lesson-days-of-the-week"
     },
     {
-      "id": "lesson-days-of-the-week__general",
+      "id": "lesson-days-of-the-week__general-4",
       "arabic": "الأُسْبُوع",
       "arabicFolded": "الأسبوع",
       "pronunciation": "al-usbūʿ",
@@ -1815,7 +1815,7 @@
       "lessonId": "lesson-days-of-the-week"
     },
     {
-      "id": "lesson-days-of-the-week__days",
+      "id": "lesson-days-of-the-week__days-2",
       "arabic": "الاِثْنَيْن",
       "arabicFolded": "الاثنين",
       "pronunciation": "al-ithnayn",
@@ -1829,7 +1829,7 @@
       "lessonId": "lesson-days-of-the-week"
     },
     {
-      "id": "lesson-days-of-the-week__days",
+      "id": "lesson-days-of-the-week__days-3",
       "arabic": "الثُّلَاثَاء",
       "arabicFolded": "الثلاثاء",
       "pronunciation": "ath-thulāthāʾ",
@@ -1843,7 +1843,7 @@
       "lessonId": "lesson-days-of-the-week"
     },
     {
-      "id": "lesson-days-of-the-week__days",
+      "id": "lesson-days-of-the-week__days-4",
       "arabic": "الأَرْبِعَاء",
       "arabicFolded": "الأربعاء",
       "pronunciation": "al-arbiʿāʾ",
@@ -1857,7 +1857,7 @@
       "lessonId": "lesson-days-of-the-week"
     },
     {
-      "id": "lesson-days-of-the-week__days",
+      "id": "lesson-days-of-the-week__days-5",
       "arabic": "الخَمِيس",
       "arabicFolded": "الخميس",
       "pronunciation": "al-khamīs",
@@ -1871,7 +1871,7 @@
       "lessonId": "lesson-days-of-the-week"
     },
     {
-      "id": "lesson-days-of-the-week__days",
+      "id": "lesson-days-of-the-week__days-6",
       "arabic": "الجُمُعَة",
       "arabicFolded": "الجمعة",
       "pronunciation": "al-jumuʿah",
@@ -1885,7 +1885,7 @@
       "lessonId": "lesson-days-of-the-week"
     },
     {
-      "id": "lesson-days-of-the-week__days",
+      "id": "lesson-days-of-the-week__days-7",
       "arabic": "السَّبْت",
       "arabicFolded": "السبت",
       "pronunciation": "as-sabt",
@@ -1912,7 +1912,7 @@
       "lessonId": "lesson-days-of-the-week"
     },
     {
-      "id": "lesson-days-of-the-week__expressions",
+      "id": "lesson-days-of-the-week__expressions-2",
       "arabic": "غَدًا",
       "arabicFolded": "غدا",
       "pronunciation": "ghadan",
@@ -1925,7 +1925,7 @@
       "lessonId": "lesson-days-of-the-week"
     },
     {
-      "id": "lesson-days-of-the-week__expressions",
+      "id": "lesson-days-of-the-week__expressions-3",
       "arabic": "أَمْس",
       "arabicFolded": "أمس",
       "pronunciation": "ams",
@@ -1951,7 +1951,7 @@
       "lessonId": "lesson-islamic-and-gregorian-months"
     },
     {
-      "id": "lesson-islamic-and-gregorian-months__general",
+      "id": "lesson-islamic-and-gregorian-months__general-2",
       "arabic": "أَشْهُر",
       "arabicFolded": "أشهر",
       "pronunciation": "ashhur",
@@ -1964,7 +1964,7 @@
       "lessonId": "lesson-islamic-and-gregorian-months"
     },
     {
-      "id": "lesson-islamic-and-gregorian-months__general",
+      "id": "lesson-islamic-and-gregorian-months__general-3",
       "arabic": "السَّنَة",
       "arabicFolded": "السنة",
       "pronunciation": "as-sanah",
@@ -1977,7 +1977,7 @@
       "lessonId": "lesson-islamic-and-gregorian-months"
     },
     {
-      "id": "lesson-islamic-and-gregorian-months__general",
+      "id": "lesson-islamic-and-gregorian-months__general-4",
       "arabic": "السَّنَة الهِجْرِيَّة",
       "arabicFolded": "السنة الهجرية",
       "pronunciation": "as-sanah al-hijriyyah",
@@ -1997,7 +1997,7 @@
       "english": "The Islamic (Hijri) months are based on the lunar calendar, which follows the cycles of the moonThe English months are based on the solar calendar, which follows the sun. A Hijri year is about 354 days, whereas a Gregorian year is about 365 days, so the Islamic year is approximately 11 days shorter. Because of this difference, Islamic months do not align with fixed English months and move earlier each year.For example, Ramadan can occur in summer one year and winter several years later. Therefore, Islamic and English months are not direct equivalents and cannot be matched one-to-one.",
       "category": "ISLAMICMONTHS",
       "isExtra": false,
-      "monthIndex": 12,
+      "monthIndex": 9,
       "monthSystem": "hijri",
       "topicSlugs": [
         "islamic-and-gregorian-months"
@@ -2005,14 +2005,14 @@
       "lessonId": "lesson-islamic-and-gregorian-months"
     },
     {
-      "id": "lesson-islamic-and-gregorian-months__islamicmonths",
+      "id": "lesson-islamic-and-gregorian-months__islamicmonths-2",
       "arabic": "٢ - صَفَر",
       "arabicFolded": "٢ - صفر",
       "pronunciation": "ṣafar",
       "english": "The Islamic (Hijri) months are based on the lunar calendar, which follows the cycles of the moonThe English months are based on the solar calendar, which follows the sun. A Hijri year is about 354 days, whereas a Gregorian year is about 365 days, so the Islamic year is approximately 11 days shorter. Because of this difference, Islamic months do not align with fixed English months and move earlier each year.For example, Ramadan can occur in summer one year and winter several years later. Therefore, Islamic and English months are not direct equivalents and cannot be matched one-to-one.",
       "category": "ISLAMICMONTHS",
       "isExtra": false,
-      "monthIndex": 12,
+      "monthIndex": 9,
       "monthSystem": "hijri",
       "topicSlugs": [
         "islamic-and-gregorian-months"
@@ -2020,14 +2020,14 @@
       "lessonId": "lesson-islamic-and-gregorian-months"
     },
     {
-      "id": "lesson-islamic-and-gregorian-months__islamicmonths",
+      "id": "lesson-islamic-and-gregorian-months__islamicmonths-3",
       "arabic": "٣ - رَبِيع الأَوَّل",
       "arabicFolded": "٣ - ربيع الأول",
       "pronunciation": "rabīʿ al-awwal",
       "english": "The Islamic (Hijri) months are based on the lunar calendar, which follows the cycles of the moonThe English months are based on the solar calendar, which follows the sun. A Hijri year is about 354 days, whereas a Gregorian year is about 365 days, so the Islamic year is approximately 11 days shorter. Because of this difference, Islamic months do not align with fixed English months and move earlier each year.For example, Ramadan can occur in summer one year and winter several years later. Therefore, Islamic and English months are not direct equivalents and cannot be matched one-to-one.",
       "category": "ISLAMICMONTHS",
       "isExtra": false,
-      "monthIndex": 12,
+      "monthIndex": 9,
       "monthSystem": "hijri",
       "topicSlugs": [
         "islamic-and-gregorian-months"
@@ -2035,14 +2035,14 @@
       "lessonId": "lesson-islamic-and-gregorian-months"
     },
     {
-      "id": "lesson-islamic-and-gregorian-months__islamicmonths",
+      "id": "lesson-islamic-and-gregorian-months__islamicmonths-4",
       "arabic": "٤ - رَبِيع الآخِر / الثَّانِي",
       "arabicFolded": "٤ - ربيع الآخر / الثاني",
       "pronunciation": "rabīʿ al-ākhir / ath-thānī",
       "english": "The Islamic (Hijri) months are based on the lunar calendar, which follows the cycles of the moonThe English months are based on the solar calendar, which follows the sun. A Hijri year is about 354 days, whereas a Gregorian year is about 365 days, so the Islamic year is approximately 11 days shorter. Because of this difference, Islamic months do not align with fixed English months and move earlier each year.For example, Ramadan can occur in summer one year and winter several years later. Therefore, Islamic and English months are not direct equivalents and cannot be matched one-to-one.",
       "category": "ISLAMICMONTHS",
       "isExtra": false,
-      "monthIndex": 12,
+      "monthIndex": 9,
       "monthSystem": "hijri",
       "topicSlugs": [
         "islamic-and-gregorian-months"
@@ -2050,14 +2050,14 @@
       "lessonId": "lesson-islamic-and-gregorian-months"
     },
     {
-      "id": "lesson-islamic-and-gregorian-months__islamicmonths",
+      "id": "lesson-islamic-and-gregorian-months__islamicmonths-5",
       "arabic": "٥ - جُمَادَى الأُولَى",
       "arabicFolded": "٥ - جمادى الأولى",
       "pronunciation": "jumādā al-ūlā",
       "english": "The Islamic (Hijri) months are based on the lunar calendar, which follows the cycles of the moonThe English months are based on the solar calendar, which follows the sun. A Hijri year is about 354 days, whereas a Gregorian year is about 365 days, so the Islamic year is approximately 11 days shorter. Because of this difference, Islamic months do not align with fixed English months and move earlier each year.For example, Ramadan can occur in summer one year and winter several years later. Therefore, Islamic and English months are not direct equivalents and cannot be matched one-to-one.",
       "category": "ISLAMICMONTHS",
       "isExtra": false,
-      "monthIndex": 12,
+      "monthIndex": 9,
       "monthSystem": "hijri",
       "topicSlugs": [
         "islamic-and-gregorian-months"
@@ -2065,14 +2065,14 @@
       "lessonId": "lesson-islamic-and-gregorian-months"
     },
     {
-      "id": "lesson-islamic-and-gregorian-months__islamicmonths",
+      "id": "lesson-islamic-and-gregorian-months__islamicmonths-6",
       "arabic": "٦ - جُمَادَى الآخِرَة / الثَّانِيَة",
       "arabicFolded": "٦ - جمادى الآخرة / الثانية",
       "pronunciation": "jumādā al-ākhirah / ath-thaniyah",
       "english": "The Islamic (Hijri) months are based on the lunar calendar, which follows the cycles of the moonThe English months are based on the solar calendar, which follows the sun. A Hijri year is about 354 days, whereas a Gregorian year is about 365 days, so the Islamic year is approximately 11 days shorter. Because of this difference, Islamic months do not align with fixed English months and move earlier each year.For example, Ramadan can occur in summer one year and winter several years later. Therefore, Islamic and English months are not direct equivalents and cannot be matched one-to-one.",
       "category": "ISLAMICMONTHS",
       "isExtra": false,
-      "monthIndex": 12,
+      "monthIndex": 9,
       "monthSystem": "hijri",
       "topicSlugs": [
         "islamic-and-gregorian-months"
@@ -2080,14 +2080,14 @@
       "lessonId": "lesson-islamic-and-gregorian-months"
     },
     {
-      "id": "lesson-islamic-and-gregorian-months__islamicmonths",
+      "id": "lesson-islamic-and-gregorian-months__islamicmonths-7",
       "arabic": "٧ - رَجَب",
       "arabicFolded": "٧ - رجب",
       "pronunciation": "rajab",
       "english": "The Islamic (Hijri) months are based on the lunar calendar, which follows the cycles of the moonThe English months are based on the solar calendar, which follows the sun. A Hijri year is about 354 days, whereas a Gregorian year is about 365 days, so the Islamic year is approximately 11 days shorter. Because of this difference, Islamic months do not align with fixed English months and move earlier each year.For example, Ramadan can occur in summer one year and winter several years later. Therefore, Islamic and English months are not direct equivalents and cannot be matched one-to-one.",
       "category": "ISLAMICMONTHS",
       "isExtra": false,
-      "monthIndex": 12,
+      "monthIndex": 9,
       "monthSystem": "hijri",
       "topicSlugs": [
         "islamic-and-gregorian-months"
@@ -2095,14 +2095,14 @@
       "lessonId": "lesson-islamic-and-gregorian-months"
     },
     {
-      "id": "lesson-islamic-and-gregorian-months__islamicmonths",
+      "id": "lesson-islamic-and-gregorian-months__islamicmonths-8",
       "arabic": "٨ - شَعْبَان",
       "arabicFolded": "٨ - شعبان",
       "pronunciation": "shaʿbān",
       "english": "The Islamic (Hijri) months are based on the lunar calendar, which follows the cycles of the moonThe English months are based on the solar calendar, which follows the sun. A Hijri year is about 354 days, whereas a Gregorian year is about 365 days, so the Islamic year is approximately 11 days shorter. Because of this difference, Islamic months do not align with fixed English months and move earlier each year.For example, Ramadan can occur in summer one year and winter several years later. Therefore, Islamic and English months are not direct equivalents and cannot be matched one-to-one.",
       "category": "ISLAMICMONTHS",
       "isExtra": false,
-      "monthIndex": 12,
+      "monthIndex": 9,
       "monthSystem": "hijri",
       "topicSlugs": [
         "islamic-and-gregorian-months"
@@ -2110,14 +2110,14 @@
       "lessonId": "lesson-islamic-and-gregorian-months"
     },
     {
-      "id": "lesson-islamic-and-gregorian-months__islamicmonths",
+      "id": "lesson-islamic-and-gregorian-months__islamicmonths-9",
       "arabic": "٩ - رَمَضَان",
       "arabicFolded": "٩ - رمضان",
       "pronunciation": "ramaḍān",
       "english": "The Islamic (Hijri) months are based on the lunar calendar, which follows the cycles of the moonThe English months are based on the solar calendar, which follows the sun. A Hijri year is about 354 days, whereas a Gregorian year is about 365 days, so the Islamic year is approximately 11 days shorter. Because of this difference, Islamic months do not align with fixed English months and move earlier each year.For example, Ramadan can occur in summer one year and winter several years later. Therefore, Islamic and English months are not direct equivalents and cannot be matched one-to-one.",
       "category": "ISLAMICMONTHS",
       "isExtra": false,
-      "monthIndex": 12,
+      "monthIndex": 9,
       "monthSystem": "hijri",
       "topicSlugs": [
         "islamic-and-gregorian-months"
@@ -2125,14 +2125,14 @@
       "lessonId": "lesson-islamic-and-gregorian-months"
     },
     {
-      "id": "lesson-islamic-and-gregorian-months__islamicmonths",
+      "id": "lesson-islamic-and-gregorian-months__islamicmonths-10",
       "arabic": "١٠ - شَوَّال",
       "arabicFolded": "١٠ - شوال",
       "pronunciation": "shawwāl",
       "english": "The Islamic (Hijri) months are based on the lunar calendar, which follows the cycles of the moonThe English months are based on the solar calendar, which follows the sun. A Hijri year is about 354 days, whereas a Gregorian year is about 365 days, so the Islamic year is approximately 11 days shorter. Because of this difference, Islamic months do not align with fixed English months and move earlier each year.For example, Ramadan can occur in summer one year and winter several years later. Therefore, Islamic and English months are not direct equivalents and cannot be matched one-to-one.",
       "category": "ISLAMICMONTHS",
       "isExtra": false,
-      "monthIndex": 12,
+      "monthIndex": 9,
       "monthSystem": "hijri",
       "topicSlugs": [
         "islamic-and-gregorian-months"
@@ -2140,14 +2140,14 @@
       "lessonId": "lesson-islamic-and-gregorian-months"
     },
     {
-      "id": "lesson-islamic-and-gregorian-months__islamicmonths",
+      "id": "lesson-islamic-and-gregorian-months__islamicmonths-11",
       "arabic": "١١ - ذُو القَعْدَة",
       "arabicFolded": "١١ - ذو القعدة",
       "pronunciation": "dhū al-qaʿdah",
       "english": "The Islamic (Hijri) months are based on the lunar calendar, which follows the cycles of the moonThe English months are based on the solar calendar, which follows the sun. A Hijri year is about 354 days, whereas a Gregorian year is about 365 days, so the Islamic year is approximately 11 days shorter. Because of this difference, Islamic months do not align with fixed English months and move earlier each year.For example, Ramadan can occur in summer one year and winter several years later. Therefore, Islamic and English months are not direct equivalents and cannot be matched one-to-one.",
       "category": "ISLAMICMONTHS",
       "isExtra": false,
-      "monthIndex": 12,
+      "monthIndex": 9,
       "monthSystem": "hijri",
       "topicSlugs": [
         "islamic-and-gregorian-months"
@@ -2155,14 +2155,14 @@
       "lessonId": "lesson-islamic-and-gregorian-months"
     },
     {
-      "id": "lesson-islamic-and-gregorian-months__islamicmonths",
+      "id": "lesson-islamic-and-gregorian-months__islamicmonths-12",
       "arabic": "١٢ - ذُو الحِجَّة",
       "arabicFolded": "١٢ - ذو الحجة",
       "pronunciation": "dhū al-ḥijjah",
       "english": "The Islamic (Hijri) months are based on the lunar calendar, which follows the cycles of the moonThe English months are based on the solar calendar, which follows the sun. A Hijri year is about 354 days, whereas a Gregorian year is about 365 days, so the Islamic year is approximately 11 days shorter. Because of this difference, Islamic months do not align with fixed English months and move earlier each year.For example, Ramadan can occur in summer one year and winter several years later. Therefore, Islamic and English months are not direct equivalents and cannot be matched one-to-one.",
       "category": "ISLAMICMONTHS",
       "isExtra": false,
-      "monthIndex": 12,
+      "monthIndex": 9,
       "monthSystem": "hijri",
       "topicSlugs": [
         "islamic-and-gregorian-months"
@@ -2185,7 +2185,7 @@
       "lessonId": "lesson-islamic-and-gregorian-months"
     },
     {
-      "id": "lesson-islamic-and-gregorian-months__gregorianmonths",
+      "id": "lesson-islamic-and-gregorian-months__gregorianmonths-2",
       "arabic": "٢ - فِبْرَايِر",
       "arabicFolded": "٢ - فبراير",
       "pronunciation": "fibrāyir",
@@ -2200,7 +2200,7 @@
       "lessonId": "lesson-islamic-and-gregorian-months"
     },
     {
-      "id": "lesson-islamic-and-gregorian-months__gregorianmonths",
+      "id": "lesson-islamic-and-gregorian-months__gregorianmonths-3",
       "arabic": "٣ - مَارِس",
       "arabicFolded": "٣ - مارس",
       "pronunciation": "māris",
@@ -2215,7 +2215,7 @@
       "lessonId": "lesson-islamic-and-gregorian-months"
     },
     {
-      "id": "lesson-islamic-and-gregorian-months__gregorianmonths",
+      "id": "lesson-islamic-and-gregorian-months__gregorianmonths-4",
       "arabic": "٤ - أَبْرِيل",
       "arabicFolded": "٤ - أبريل",
       "pronunciation": "abrīl",
@@ -2230,7 +2230,7 @@
       "lessonId": "lesson-islamic-and-gregorian-months"
     },
     {
-      "id": "lesson-islamic-and-gregorian-months__gregorianmonths",
+      "id": "lesson-islamic-and-gregorian-months__gregorianmonths-5",
       "arabic": "٥ - مَايُو",
       "arabicFolded": "٥ - مايو",
       "pronunciation": "māyū",
@@ -2245,7 +2245,7 @@
       "lessonId": "lesson-islamic-and-gregorian-months"
     },
     {
-      "id": "lesson-islamic-and-gregorian-months__gregorianmonths",
+      "id": "lesson-islamic-and-gregorian-months__gregorianmonths-6",
       "arabic": "٦ - يُونْيُو",
       "arabicFolded": "٦ - يونيو",
       "pronunciation": "yūnyū",
@@ -2260,7 +2260,7 @@
       "lessonId": "lesson-islamic-and-gregorian-months"
     },
     {
-      "id": "lesson-islamic-and-gregorian-months__gregorianmonths",
+      "id": "lesson-islamic-and-gregorian-months__gregorianmonths-7",
       "arabic": "٧ - يُولْيُو",
       "arabicFolded": "٧ - يوليو",
       "pronunciation": "yūlyū",
@@ -2275,7 +2275,7 @@
       "lessonId": "lesson-islamic-and-gregorian-months"
     },
     {
-      "id": "lesson-islamic-and-gregorian-months__gregorianmonths",
+      "id": "lesson-islamic-and-gregorian-months__gregorianmonths-8",
       "arabic": "٨ - أُغُسْطُس",
       "arabicFolded": "٨ - أغسطس",
       "pronunciation": "ughusṭus",
@@ -2290,7 +2290,7 @@
       "lessonId": "lesson-islamic-and-gregorian-months"
     },
     {
-      "id": "lesson-islamic-and-gregorian-months__gregorianmonths",
+      "id": "lesson-islamic-and-gregorian-months__gregorianmonths-9",
       "arabic": "٩ - سِبْتَمْبِر",
       "arabicFolded": "٩ - سبتمبر",
       "pronunciation": "sibtambir",
@@ -2305,7 +2305,7 @@
       "lessonId": "lesson-islamic-and-gregorian-months"
     },
     {
-      "id": "lesson-islamic-and-gregorian-months__gregorianmonths",
+      "id": "lesson-islamic-and-gregorian-months__gregorianmonths-10",
       "arabic": "١٠ - أُكْتُوبَر",
       "arabicFolded": "١٠ - أكتوبر",
       "pronunciation": "uktūbar",
@@ -2320,7 +2320,7 @@
       "lessonId": "lesson-islamic-and-gregorian-months"
     },
     {
-      "id": "lesson-islamic-and-gregorian-months__gregorianmonths",
+      "id": "lesson-islamic-and-gregorian-months__gregorianmonths-11",
       "arabic": "١١ - نُوفَمْبِر",
       "arabicFolded": "١١ - نوفمبر",
       "pronunciation": "nūfambir",
@@ -2335,7 +2335,7 @@
       "lessonId": "lesson-islamic-and-gregorian-months"
     },
     {
-      "id": "lesson-islamic-and-gregorian-months__gregorianmonths",
+      "id": "lesson-islamic-and-gregorian-months__gregorianmonths-12",
       "arabic": "١٢ - دِيسَمْبِر",
       "arabicFolded": "١٢ - ديسمبر",
       "pronunciation": "dīsambir",
@@ -2363,7 +2363,7 @@
       "lessonId": "lesson-entities"
     },
     {
-      "id": "lesson-entities__animals",
+      "id": "lesson-entities__animals-2",
       "arabic": "أَرْنَبٌ",
       "arabicFolded": "أرنب",
       "pronunciation": "arnab",
@@ -2376,7 +2376,7 @@
       "lessonId": "lesson-entities"
     },
     {
-      "id": "lesson-entities__animals",
+      "id": "lesson-entities__animals-3",
       "arabic": "كَلْبٌ",
       "arabicFolded": "كلب",
       "pronunciation": "kalb",
@@ -2389,7 +2389,7 @@
       "lessonId": "lesson-entities"
     },
     {
-      "id": "lesson-entities__animals",
+      "id": "lesson-entities__animals-4",
       "arabic": "عُصْفُورٌ",
       "arabicFolded": "عصفور",
       "pronunciation": "ʿuṣfūr",
@@ -2402,7 +2402,7 @@
       "lessonId": "lesson-entities"
     },
     {
-      "id": "lesson-entities__animals",
+      "id": "lesson-entities__animals-5",
       "arabic": "قِطَّةٌ",
       "arabicFolded": "قطة",
       "pronunciation": "qiṭṭah",
@@ -2415,7 +2415,7 @@
       "lessonId": "lesson-entities"
     },
     {
-      "id": "lesson-entities__animals",
+      "id": "lesson-entities__animals-6",
       "arabic": "زَرَافَةٌ",
       "arabicFolded": "زرافة",
       "pronunciation": "zarāfah",
@@ -2428,7 +2428,7 @@
       "lessonId": "lesson-entities"
     },
     {
-      "id": "lesson-entities__animals",
+      "id": "lesson-entities__animals-7",
       "arabic": "أَسَدٌ",
       "arabicFolded": "أسد",
       "pronunciation": "asad",
@@ -2441,7 +2441,7 @@
       "lessonId": "lesson-entities"
     },
     {
-      "id": "lesson-entities__animals",
+      "id": "lesson-entities__animals-8",
       "arabic": "حِصَانٌ",
       "arabicFolded": "حصان",
       "pronunciation": "ḥiṣān",
@@ -2454,7 +2454,7 @@
       "lessonId": "lesson-entities"
     },
     {
-      "id": "lesson-entities__animals",
+      "id": "lesson-entities__animals-9",
       "arabic": "سَمَكَةٌ",
       "arabicFolded": "سمكة",
       "pronunciation": "samakah",
@@ -2467,7 +2467,7 @@
       "lessonId": "lesson-entities"
     },
     {
-      "id": "lesson-entities__animals",
+      "id": "lesson-entities__animals-10",
       "arabic": "فَهَدٌ",
       "arabicFolded": "فهد",
       "pronunciation": "fahad",
@@ -2480,7 +2480,7 @@
       "lessonId": "lesson-entities"
     },
     {
-      "id": "lesson-entities__animals",
+      "id": "lesson-entities__animals-11",
       "arabic": "فِيلٌ",
       "arabicFolded": "فيل",
       "pronunciation": "fīl",
@@ -2506,7 +2506,7 @@
       "lessonId": "lesson-entities"
     },
     {
-      "id": "lesson-entities__plants",
+      "id": "lesson-entities__plants-2",
       "arabic": "نَخْلَةٌ",
       "arabicFolded": "نخلة",
       "pronunciation": "nakhlah",
@@ -2519,7 +2519,7 @@
       "lessonId": "lesson-entities"
     },
     {
-      "id": "lesson-entities__plants",
+      "id": "lesson-entities__plants-3",
       "arabic": "بَرْسِيمٌ",
       "arabicFolded": "برسيم",
       "pronunciation": "barseem",
@@ -2532,7 +2532,7 @@
       "lessonId": "lesson-entities"
     },
     {
-      "id": "lesson-entities__plants",
+      "id": "lesson-entities__plants-4",
       "arabic": "جَزَرٌ",
       "arabicFolded": "جزر",
       "pronunciation": "jazar",
@@ -2545,7 +2545,7 @@
       "lessonId": "lesson-entities"
     },
     {
-      "id": "lesson-entities__plants",
+      "id": "lesson-entities__plants-5",
       "arabic": "فُولٌ",
       "arabicFolded": "فول",
       "pronunciation": "fūl",
@@ -2558,7 +2558,7 @@
       "lessonId": "lesson-entities"
     },
     {
-      "id": "lesson-entities__plants",
+      "id": "lesson-entities__plants-6",
       "arabic": "شَجَرَةٌ",
       "arabicFolded": "شجرة",
       "pronunciation": "shajarah",
@@ -2571,7 +2571,7 @@
       "lessonId": "lesson-entities"
     },
     {
-      "id": "lesson-entities__plants",
+      "id": "lesson-entities__plants-7",
       "arabic": "وَرْدَةٌ",
       "arabicFolded": "وردة",
       "pronunciation": "wardah",
@@ -2584,7 +2584,7 @@
       "lessonId": "lesson-entities"
     },
     {
-      "id": "lesson-entities__plants",
+      "id": "lesson-entities__plants-8",
       "arabic": "بِطِّيخٌ",
       "arabicFolded": "بطيخ",
       "pronunciation": "biṭṭīkh",
@@ -2610,7 +2610,7 @@
       "lessonId": "lesson-entities"
     },
     {
-      "id": "lesson-entities__insects",
+      "id": "lesson-entities__insects-2",
       "arabic": "نَحْلَةٌ",
       "arabicFolded": "نحلة",
       "pronunciation": "naḥlah",
@@ -2623,7 +2623,7 @@
       "lessonId": "lesson-entities"
     },
     {
-      "id": "lesson-entities__insects",
+      "id": "lesson-entities__insects-3",
       "arabic": "عَنْكَبُوتٌ",
       "arabicFolded": "عنكبوت",
       "pronunciation": "ʿankabūt",
@@ -2636,7 +2636,7 @@
       "lessonId": "lesson-entities"
     },
     {
-      "id": "lesson-entities__insects",
+      "id": "lesson-entities__insects-4",
       "arabic": "بَرْغُوثٌ",
       "arabicFolded": "برغوث",
       "pronunciation": "barghūth",
@@ -2649,7 +2649,7 @@
       "lessonId": "lesson-entities"
     },
     {
-      "id": "lesson-entities__insects",
+      "id": "lesson-entities__insects-5",
       "arabic": "نَمْلَةٌ",
       "arabicFolded": "نملة",
       "pronunciation": "namlah",
@@ -2662,7 +2662,7 @@
       "lessonId": "lesson-entities"
     },
     {
-      "id": "lesson-entities__insects",
+      "id": "lesson-entities__insects-6",
       "arabic": "جَرَادٌ",
       "arabicFolded": "جراد",
       "pronunciation": "jarād",
@@ -2675,7 +2675,7 @@
       "lessonId": "lesson-entities"
     },
     {
-      "id": "lesson-entities__insects",
+      "id": "lesson-entities__insects-7",
       "arabic": "صُرْصُورٌ",
       "arabicFolded": "صرصور",
       "pronunciation": "ṣuṛṣūr",
@@ -2688,7 +2688,7 @@
       "lessonId": "lesson-entities"
     },
     {
-      "id": "lesson-entities__insects",
+      "id": "lesson-entities__insects-8",
       "arabic": "دَبُّورٌ",
       "arabicFolded": "دبور",
       "pronunciation": "dabbūr",
@@ -2714,7 +2714,7 @@
       "lessonId": "lesson-entities"
     },
     {
-      "id": "lesson-entities__liquids",
+      "id": "lesson-entities__liquids-2",
       "arabic": "عَسَلٌ",
       "arabicFolded": "عسل",
       "pronunciation": "ʿasal",
@@ -2727,7 +2727,7 @@
       "lessonId": "lesson-entities"
     },
     {
-      "id": "lesson-entities__liquids",
+      "id": "lesson-entities__liquids-3",
       "arabic": "لَبَنٌ",
       "arabicFolded": "لبن",
       "pronunciation": "laban",
@@ -2740,7 +2740,7 @@
       "lessonId": "lesson-entities"
     },
     {
-      "id": "lesson-entities__liquids",
+      "id": "lesson-entities__liquids-4",
       "arabic": "قَهْوَةٌ",
       "arabicFolded": "قهوة",
       "pronunciation": "qahwah",
@@ -2753,7 +2753,7 @@
       "lessonId": "lesson-entities"
     },
     {
-      "id": "lesson-entities__liquids",
+      "id": "lesson-entities__liquids-5",
       "arabic": "مَاءٌ",
       "arabicFolded": "ماء",
       "pronunciation": "māʾ",
@@ -2766,7 +2766,7 @@
       "lessonId": "lesson-entities"
     },
     {
-      "id": "lesson-entities__liquids",
+      "id": "lesson-entities__liquids-6",
       "arabic": "شَايٌ",
       "arabicFolded": "شاي",
       "pronunciation": "shāy",
@@ -2779,7 +2779,7 @@
       "lessonId": "lesson-entities"
     },
     {
-      "id": "lesson-entities__liquids",
+      "id": "lesson-entities__liquids-7",
       "arabic": "عَصِيرٌ",
       "arabicFolded": "عصير",
       "pronunciation": "ʿaṣīr",
@@ -2805,7 +2805,7 @@
       "lessonId": "lesson-entities"
     },
     {
-      "id": "lesson-entities__objects",
+      "id": "lesson-entities__objects-2",
       "arabic": "سَرِيرٌ",
       "arabicFolded": "سرير",
       "pronunciation": "sarīr",
@@ -2818,7 +2818,7 @@
       "lessonId": "lesson-entities"
     },
     {
-      "id": "lesson-entities__objects",
+      "id": "lesson-entities__objects-3",
       "arabic": "مِرْآةٌ",
       "arabicFolded": "مرآة",
       "pronunciation": "mirʾāh",
@@ -2831,7 +2831,7 @@
       "lessonId": "lesson-entities"
     },
     {
-      "id": "lesson-entities__objects",
+      "id": "lesson-entities__objects-4",
       "arabic": "بَابٌ",
       "arabicFolded": "باب",
       "pronunciation": "bāb",
@@ -2844,7 +2844,7 @@
       "lessonId": "lesson-entities"
     },
     {
-      "id": "lesson-entities__objects",
+      "id": "lesson-entities__objects-5",
       "arabic": "مِنْضَدَةٌ",
       "arabicFolded": "منضدة",
       "pronunciation": "minḍadah",
@@ -2857,7 +2857,7 @@
       "lessonId": "lesson-entities"
     },
     {
-      "id": "lesson-entities__objects",
+      "id": "lesson-entities__objects-6",
       "arabic": "حَاسُوبٌ",
       "arabicFolded": "حاسوب",
       "pronunciation": "ḥāsūb",
@@ -2870,7 +2870,7 @@
       "lessonId": "lesson-entities"
     },
     {
-      "id": "lesson-entities__objects",
+      "id": "lesson-entities__objects-7",
       "arabic": "مَكْتَبَةٌ",
       "arabicFolded": "مكتبة",
       "pronunciation": "maktabah",
@@ -2883,7 +2883,7 @@
       "lessonId": "lesson-entities"
     },
     {
-      "id": "lesson-entities__objects",
+      "id": "lesson-entities__objects-8",
       "arabic": "لُعْبَةٌ",
       "arabicFolded": "لعبة",
       "pronunciation": "luʿbah",
@@ -2896,7 +2896,7 @@
       "lessonId": "lesson-entities"
     },
     {
-      "id": "lesson-entities__objects",
+      "id": "lesson-entities__objects-9",
       "arabic": "كُرْسِيٌّ",
       "arabicFolded": "كرسي",
       "pronunciation": "kursiyy",
@@ -2909,7 +2909,7 @@
       "lessonId": "lesson-entities"
     },
     {
-      "id": "lesson-entities__objects",
+      "id": "lesson-entities__objects-10",
       "arabic": "هَاتِفٌ",
       "arabicFolded": "هاتف",
       "pronunciation": "hātif",
@@ -2922,7 +2922,7 @@
       "lessonId": "lesson-entities"
     },
     {
-      "id": "lesson-entities__objects",
+      "id": "lesson-entities__objects-11",
       "arabic": "ثَلَّاجَةٌ",
       "arabicFolded": "ثلاجة",
       "pronunciation": "thallājah",
@@ -2948,7 +2948,7 @@
       "lessonId": "lesson-getting-to-know-each-other"
     },
     {
-      "id": "lesson-getting-to-know-each-other__greetings",
+      "id": "lesson-getting-to-know-each-other__greetings-2",
       "arabic": "وَعَلَيْكُمُ السَّلَامُ",
       "arabicFolded": "وعليكم السلام",
       "pronunciation": "wa ʿalaykumu s-salām",
@@ -2974,7 +2974,7 @@
       "lessonId": "lesson-getting-to-know-each-other"
     },
     {
-      "id": "lesson-getting-to-know-each-other__introductory-terms",
+      "id": "lesson-getting-to-know-each-other__introductory-terms-2",
       "arabic": "اسْمُكَ",
       "arabicFolded": "اسمك",
       "pronunciation": "ismuka",
@@ -2987,7 +2987,7 @@
       "lessonId": "lesson-getting-to-know-each-other"
     },
     {
-      "id": "lesson-getting-to-know-each-other__introductory-terms",
+      "id": "lesson-getting-to-know-each-other__introductory-terms-3",
       "arabic": "أَنَا",
       "arabicFolded": "أنا",
       "pronunciation": "anā",
@@ -3000,7 +3000,7 @@
       "lessonId": "lesson-getting-to-know-each-other"
     },
     {
-      "id": "lesson-getting-to-know-each-other__introductory-terms",
+      "id": "lesson-getting-to-know-each-other__introductory-terms-4",
       "arabic": "أَنْتَ",
       "arabicFolded": "أنت",
       "pronunciation": "anta",
@@ -3013,7 +3013,7 @@
       "lessonId": "lesson-getting-to-know-each-other"
     },
     {
-      "id": "lesson-getting-to-know-each-other__introductory-terms",
+      "id": "lesson-getting-to-know-each-other__introductory-terms-5",
       "arabic": "أَنْتِ",
       "arabicFolded": "أنت",
       "pronunciation": "anti",
@@ -3026,7 +3026,7 @@
       "lessonId": "lesson-getting-to-know-each-other"
     },
     {
-      "id": "lesson-getting-to-know-each-other__introductory-terms",
+      "id": "lesson-getting-to-know-each-other__introductory-terms-6",
       "arabic": "هَذَا",
       "arabicFolded": "هذا",
       "pronunciation": "hādhā",
@@ -3039,7 +3039,7 @@
       "lessonId": "lesson-getting-to-know-each-other"
     },
     {
-      "id": "lesson-getting-to-know-each-other__introductory-terms",
+      "id": "lesson-getting-to-know-each-other__introductory-terms-7",
       "arabic": "هَذِهِ",
       "arabicFolded": "هذه",
       "pronunciation": "hādhihi",
@@ -3065,7 +3065,7 @@
       "lessonId": "lesson-getting-to-know-each-other"
     },
     {
-      "id": "lesson-getting-to-know-each-other__bonus-introductory-terms-not-from-lesson",
+      "id": "lesson-getting-to-know-each-other__bonus-introductory-terms-not-from-lesson-2",
       "arabic": "هِيَ",
       "arabicFolded": "هي",
       "pronunciation": "hiya",
@@ -3078,7 +3078,7 @@
       "lessonId": "lesson-getting-to-know-each-other"
     },
     {
-      "id": "lesson-getting-to-know-each-other__bonus-introductory-terms-not-from-lesson",
+      "id": "lesson-getting-to-know-each-other__bonus-introductory-terms-not-from-lesson-3",
       "arabic": "نَحْنُ",
       "arabicFolded": "نحن",
       "pronunciation": "naḥnu",
@@ -3091,7 +3091,7 @@
       "lessonId": "lesson-getting-to-know-each-other"
     },
     {
-      "id": "lesson-getting-to-know-each-other__bonus-introductory-terms-not-from-lesson",
+      "id": "lesson-getting-to-know-each-other__bonus-introductory-terms-not-from-lesson-4",
       "arabic": "هُمْ",
       "arabicFolded": "هم",
       "pronunciation": "hum",
@@ -3104,7 +3104,7 @@
       "lessonId": "lesson-getting-to-know-each-other"
     },
     {
-      "id": "lesson-getting-to-know-each-other__bonus-introductory-terms-not-from-lesson",
+      "id": "lesson-getting-to-know-each-other__bonus-introductory-terms-not-from-lesson-5",
       "arabic": "هُنَّ",
       "arabicFolded": "هن",
       "pronunciation": "hunna",
@@ -3117,7 +3117,7 @@
       "lessonId": "lesson-getting-to-know-each-other"
     },
     {
-      "id": "lesson-getting-to-know-each-other__bonus-introductory-terms-not-from-lesson",
+      "id": "lesson-getting-to-know-each-other__bonus-introductory-terms-not-from-lesson-6",
       "arabic": "ذَلِكَ",
       "arabicFolded": "ذلك",
       "pronunciation": "dhālika",
@@ -3130,7 +3130,7 @@
       "lessonId": "lesson-getting-to-know-each-other"
     },
     {
-      "id": "lesson-getting-to-know-each-other__bonus-introductory-terms-not-from-lesson",
+      "id": "lesson-getting-to-know-each-other__bonus-introductory-terms-not-from-lesson-7",
       "arabic": "تِلْكَ",
       "arabicFolded": "تلك",
       "pronunciation": "tilka",
@@ -3143,7 +3143,7 @@
       "lessonId": "lesson-getting-to-know-each-other"
     },
     {
-      "id": "lesson-getting-to-know-each-other__bonus-introductory-terms-not-from-lesson",
+      "id": "lesson-getting-to-know-each-other__bonus-introductory-terms-not-from-lesson-8",
       "arabic": "هَؤُلَاءِ",
       "arabicFolded": "هؤلاء",
       "pronunciation": "hāʾulāʾ",
@@ -3156,7 +3156,7 @@
       "lessonId": "lesson-getting-to-know-each-other"
     },
     {
-      "id": "lesson-getting-to-know-each-other__bonus-introductory-terms-not-from-lesson",
+      "id": "lesson-getting-to-know-each-other__bonus-introductory-terms-not-from-lesson-9",
       "arabic": "أُولَٰئِكَ",
       "arabicFolded": "أولئك",
       "pronunciation": "ulāʾika",
@@ -3182,7 +3182,7 @@
       "lessonId": "lesson-getting-to-know-each-other"
     },
     {
-      "id": "lesson-getting-to-know-each-other__basic-responses",
+      "id": "lesson-getting-to-know-each-other__basic-responses-2",
       "arabic": "عَفْوًا",
       "arabicFolded": "عفوا",
       "pronunciation": "ʿafwan",
@@ -3195,7 +3195,7 @@
       "lessonId": "lesson-getting-to-know-each-other"
     },
     {
-      "id": "lesson-getting-to-know-each-other__basic-responses",
+      "id": "lesson-getting-to-know-each-other__basic-responses-3",
       "arabic": "مِنْ فَضْلِكَ",
       "arabicFolded": "من فضلك",
       "pronunciation": "min faḍlika",
@@ -3208,7 +3208,7 @@
       "lessonId": "lesson-getting-to-know-each-other"
     },
     {
-      "id": "lesson-getting-to-know-each-other__basic-responses",
+      "id": "lesson-getting-to-know-each-other__basic-responses-4",
       "arabic": "مِنْ فَضْلِكِ",
       "arabicFolded": "من فضلك",
       "pronunciation": "min faḍliki",
@@ -3221,7 +3221,7 @@
       "lessonId": "lesson-getting-to-know-each-other"
     },
     {
-      "id": "lesson-getting-to-know-each-other__basic-responses",
+      "id": "lesson-getting-to-know-each-other__basic-responses-5",
       "arabic": "حَالُكَ",
       "arabicFolded": "حالك",
       "pronunciation": "ḥāluka",
@@ -3234,7 +3234,7 @@
       "lessonId": "lesson-getting-to-know-each-other"
     },
     {
-      "id": "lesson-getting-to-know-each-other__basic-responses",
+      "id": "lesson-getting-to-know-each-other__basic-responses-6",
       "arabic": "نَعَمْ",
       "arabicFolded": "نعم",
       "pronunciation": "naʿam",
@@ -3247,7 +3247,7 @@
       "lessonId": "lesson-getting-to-know-each-other"
     },
     {
-      "id": "lesson-getting-to-know-each-other__basic-responses",
+      "id": "lesson-getting-to-know-each-other__basic-responses-7",
       "arabic": "لَا",
       "arabicFolded": "لا",
       "pronunciation": "lā",
@@ -3260,7 +3260,7 @@
       "lessonId": "lesson-getting-to-know-each-other"
     },
     {
-      "id": "lesson-getting-to-know-each-other__basic-responses",
+      "id": "lesson-getting-to-know-each-other__basic-responses-8",
       "arabic": "نَعَمْ؟",
       "arabicFolded": "نعم؟",
       "pronunciation": "naʿam?",
@@ -3273,7 +3273,7 @@
       "lessonId": "lesson-getting-to-know-each-other"
     },
     {
-      "id": "lesson-getting-to-know-each-other__basic-responses",
+      "id": "lesson-getting-to-know-each-other__basic-responses-9",
       "arabic": "خَيْرٌ",
       "arabicFolded": "خير",
       "pronunciation": "khayrun",
@@ -3286,7 +3286,7 @@
       "lessonId": "lesson-getting-to-know-each-other"
     },
     {
-      "id": "lesson-getting-to-know-each-other__basic-responses",
+      "id": "lesson-getting-to-know-each-other__basic-responses-10",
       "arabic": "أَنَا بِخَيْرٍ",
       "arabicFolded": "أنا بخير",
       "pronunciation": "anā bikhayr",
@@ -3299,7 +3299,7 @@
       "lessonId": "lesson-getting-to-know-each-other"
     },
     {
-      "id": "lesson-getting-to-know-each-other__basic-responses",
+      "id": "lesson-getting-to-know-each-other__basic-responses-11",
       "arabic": "الْحَمْدُ لِلَّهِ",
       "arabicFolded": "الحمد لله",
       "pronunciation": "al-ḥamdu lillāh",
@@ -3325,7 +3325,7 @@
       "lessonId": "lesson-getting-to-know-each-other"
     },
     {
-      "id": "lesson-getting-to-know-each-other__question-starters",
+      "id": "lesson-getting-to-know-each-other__question-starters-2",
       "arabic": "مَاذَا",
       "arabicFolded": "ماذا",
       "pronunciation": "mādhā",
@@ -3338,7 +3338,7 @@
       "lessonId": "lesson-getting-to-know-each-other"
     },
     {
-      "id": "lesson-getting-to-know-each-other__question-starters",
+      "id": "lesson-getting-to-know-each-other__question-starters-3",
       "arabic": "مَنْ",
       "arabicFolded": "من",
       "pronunciation": "man",
@@ -3351,7 +3351,7 @@
       "lessonId": "lesson-getting-to-know-each-other"
     },
     {
-      "id": "lesson-getting-to-know-each-other__question-starters",
+      "id": "lesson-getting-to-know-each-other__question-starters-4",
       "arabic": "مِنْ",
       "arabicFolded": "من",
       "pronunciation": "min",
@@ -3364,7 +3364,7 @@
       "lessonId": "lesson-getting-to-know-each-other"
     },
     {
-      "id": "lesson-getting-to-know-each-other__question-starters",
+      "id": "lesson-getting-to-know-each-other__question-starters-5",
       "arabic": "أَيْنَ",
       "arabicFolded": "أين",
       "pronunciation": "ayna",
@@ -3377,7 +3377,7 @@
       "lessonId": "lesson-getting-to-know-each-other"
     },
     {
-      "id": "lesson-getting-to-know-each-other__question-starters",
+      "id": "lesson-getting-to-know-each-other__question-starters-6",
       "arabic": "كَيْفَ",
       "arabicFolded": "كيف",
       "pronunciation": "kayfa",
@@ -3390,7 +3390,7 @@
       "lessonId": "lesson-getting-to-know-each-other"
     },
     {
-      "id": "lesson-getting-to-know-each-other__question-starters",
+      "id": "lesson-getting-to-know-each-other__question-starters-7",
       "arabic": "مَتَى",
       "arabicFolded": "متى",
       "pronunciation": "matā",
@@ -3403,7 +3403,7 @@
       "lessonId": "lesson-getting-to-know-each-other"
     },
     {
-      "id": "lesson-getting-to-know-each-other__question-starters",
+      "id": "lesson-getting-to-know-each-other__question-starters-8",
       "arabic": "كَمْ",
       "arabicFolded": "كم",
       "pronunciation": "kam",
@@ -3416,7 +3416,7 @@
       "lessonId": "lesson-getting-to-know-each-other"
     },
     {
-      "id": "lesson-getting-to-know-each-other__question-starters",
+      "id": "lesson-getting-to-know-each-other__question-starters-9",
       "arabic": "لِمَاذَا",
       "arabicFolded": "لماذا",
       "pronunciation": "limādhā",
@@ -3429,7 +3429,7 @@
       "lessonId": "lesson-getting-to-know-each-other"
     },
     {
-      "id": "lesson-getting-to-know-each-other__question-starters",
+      "id": "lesson-getting-to-know-each-other__question-starters-10",
       "arabic": "أَيُّ",
       "arabicFolded": "أي",
       "pronunciation": "ayy",
@@ -3442,7 +3442,7 @@
       "lessonId": "lesson-getting-to-know-each-other"
     },
     {
-      "id": "lesson-getting-to-know-each-other__question-starters",
+      "id": "lesson-getting-to-know-each-other__question-starters-11",
       "arabic": "هَلْ",
       "arabicFolded": "هل",
       "pronunciation": "hal",
@@ -3468,7 +3468,7 @@
       "lessonId": "lesson-getting-to-know-each-other"
     },
     {
-      "id": "lesson-getting-to-know-each-other__sentence-and-word-connections",
+      "id": "lesson-getting-to-know-each-other__sentence-and-word-connections-2",
       "arabic": "أَوْ",
       "arabicFolded": "أو",
       "pronunciation": "aw",
@@ -3481,7 +3481,7 @@
       "lessonId": "lesson-getting-to-know-each-other"
     },
     {
-      "id": "lesson-getting-to-know-each-other__sentence-and-word-connections",
+      "id": "lesson-getting-to-know-each-other__sentence-and-word-connections-3",
       "arabic": "لَكِنْ",
       "arabicFolded": "لكن",
       "pronunciation": "lākin",
@@ -3507,7 +3507,7 @@
       "lessonId": "lesson-getting-to-know-each-other"
     },
     {
-      "id": "lesson-getting-to-know-each-other__introductory-greetings",
+      "id": "lesson-getting-to-know-each-other__introductory-greetings-2",
       "arabic": "وَعَلَيْكُمُ السَّلَام",
       "arabicFolded": "وعليكم السلام",
       "pronunciation": "wa ʿalaykumu as-salām",
@@ -3533,7 +3533,7 @@
       "lessonId": "lesson-getting-to-know-each-other"
     },
     {
-      "id": "lesson-getting-to-know-each-other__asking-giving-your-name",
+      "id": "lesson-getting-to-know-each-other__asking-giving-your-name-2",
       "arabic": "اِسْمِي حَسَن",
       "arabicFolded": "اسمي حسن",
       "pronunciation": "ismī ḥasan",
@@ -3546,7 +3546,7 @@
       "lessonId": "lesson-getting-to-know-each-other"
     },
     {
-      "id": "lesson-getting-to-know-each-other__asking-giving-your-name",
+      "id": "lesson-getting-to-know-each-other__asking-giving-your-name-3",
       "arabic": "وَأَنْتَ؟",
       "arabicFolded": "وأنت؟",
       "pronunciation": "wa anta?",
@@ -3559,7 +3559,7 @@
       "lessonId": "lesson-getting-to-know-each-other"
     },
     {
-      "id": "lesson-getting-to-know-each-other__asking-giving-your-name",
+      "id": "lesson-getting-to-know-each-other__asking-giving-your-name-4",
       "arabic": "أَنَا حَمْزَة",
       "arabicFolded": "أنا حمزة",
       "pronunciation": "anā ḥamzah",
@@ -3585,7 +3585,7 @@
       "lessonId": "lesson-getting-to-know-each-other"
     },
     {
-      "id": "lesson-getting-to-know-each-other__asking-giving-well-being",
+      "id": "lesson-getting-to-know-each-other__asking-giving-well-being-2",
       "arabic": "أَنَا بِخَيْرٍ، الحَمْدُ لِلَّه",
       "arabicFolded": "أنا بخير، الحمد لله",
       "pronunciation": "anā bikhayr, al-ḥamdu lillāh",
@@ -3611,7 +3611,7 @@
       "lessonId": "lesson-getting-to-know-each-other"
     },
     {
-      "id": "lesson-getting-to-know-each-other__asking-giving-origin",
+      "id": "lesson-getting-to-know-each-other__asking-giving-origin-2",
       "arabic": "أَنَا مِنْ مِصْر",
       "arabicFolded": "أنا من مصر",
       "pronunciation": "anā min miṣr",
@@ -3637,7 +3637,7 @@
       "lessonId": "lesson-getting-to-know-each-other"
     },
     {
-      "id": "lesson-getting-to-know-each-other__asking-giving-occupation",
+      "id": "lesson-getting-to-know-each-other__asking-giving-occupation-2",
       "arabic": "نَعَمْ، أَنَا طَالِب",
       "arabicFolded": "نعم، أنا طالب",
       "pronunciation": "naʿam, anā ṭālib",
@@ -3663,7 +3663,7 @@
       "lessonId": "lesson-getting-to-know-each-other"
     },
     {
-      "id": "lesson-getting-to-know-each-other__continents",
+      "id": "lesson-getting-to-know-each-other__continents-2",
       "arabic": "قَارَّاتٌ",
       "arabicFolded": "قارات",
       "pronunciation": "qaarraat",
@@ -3689,7 +3689,7 @@
       "lessonId": "lesson-getting-to-know-each-other"
     },
     {
-      "id": "lesson-getting-to-know-each-other__examples",
+      "id": "lesson-getting-to-know-each-other__examples-2",
       "arabic": "آسِيَا",
       "arabicFolded": "آسيا",
       "pronunciation": "Āsiyā",
@@ -3702,7 +3702,7 @@
       "lessonId": "lesson-getting-to-know-each-other"
     },
     {
-      "id": "lesson-getting-to-know-each-other__examples",
+      "id": "lesson-getting-to-know-each-other__examples-3",
       "arabic": "أُورُوبَّا",
       "arabicFolded": "أوروبا",
       "pronunciation": "Ūrūbbā",
@@ -3715,7 +3715,7 @@
       "lessonId": "lesson-getting-to-know-each-other"
     },
     {
-      "id": "lesson-getting-to-know-each-other__examples",
+      "id": "lesson-getting-to-know-each-other__examples-4",
       "arabic": "أَمْرِيكَا الشَّمَالِيَّةُ",
       "arabicFolded": "أمريكا الشمالية",
       "pronunciation": "Amrīkā ash-Shamāliyya",
@@ -3728,7 +3728,7 @@
       "lessonId": "lesson-getting-to-know-each-other"
     },
     {
-      "id": "lesson-getting-to-know-each-other__examples",
+      "id": "lesson-getting-to-know-each-other__examples-5",
       "arabic": "أَمْرِيكَا الجَنُوبِيَّةُ",
       "arabicFolded": "أمريكا الجنوبية",
       "pronunciation": "Amrīkā al-Janūbiyya",
@@ -3741,7 +3741,7 @@
       "lessonId": "lesson-getting-to-know-each-other"
     },
     {
-      "id": "lesson-getting-to-know-each-other__examples",
+      "id": "lesson-getting-to-know-each-other__examples-6",
       "arabic": "أُسْتَرَالِيَا",
       "arabicFolded": "أستراليا",
       "pronunciation": "Ustrāliyā",
@@ -3754,7 +3754,7 @@
       "lessonId": "lesson-getting-to-know-each-other"
     },
     {
-      "id": "lesson-getting-to-know-each-other__examples",
+      "id": "lesson-getting-to-know-each-other__examples-7",
       "arabic": "القَارَّةُ القُطْبِيَّةُ الجَنُوبِيَّةُ",
       "arabicFolded": "القارة القطبية الجنوبية",
       "pronunciation": "al-Qārrah al-Quṭbiyyah al-Janūbiyyah",
@@ -3780,7 +3780,7 @@
       "lessonId": "lesson-getting-to-know-each-other"
     },
     {
-      "id": "lesson-getting-to-know-each-other__compass-directions",
+      "id": "lesson-getting-to-know-each-other__compass-directions-2",
       "arabic": "غَرْبٌ",
       "arabicFolded": "غرب",
       "pronunciation": "gharb",
@@ -3793,7 +3793,7 @@
       "lessonId": "lesson-getting-to-know-each-other"
     },
     {
-      "id": "lesson-getting-to-know-each-other__compass-directions",
+      "id": "lesson-getting-to-know-each-other__compass-directions-3",
       "arabic": "شَمَالٌ",
       "arabicFolded": "شمال",
       "pronunciation": "shamāl",
@@ -3806,7 +3806,7 @@
       "lessonId": "lesson-getting-to-know-each-other"
     },
     {
-      "id": "lesson-getting-to-know-each-other__compass-directions",
+      "id": "lesson-getting-to-know-each-other__compass-directions-4",
       "arabic": "جَنُوبٌ",
       "arabicFolded": "جنوب",
       "pronunciation": "janūb",
@@ -4988,7 +4988,7 @@
       "lessonId": "lesson-getting-to-know-each-other"
     },
     {
-      "id": "lesson-getting-to-know-each-other__prepositions",
+      "id": "lesson-getting-to-know-each-other__prepositions-2",
       "arabic": "إِلَى",
       "arabicFolded": "إلى",
       "pronunciation": "ilā",
@@ -5001,7 +5001,7 @@
       "lessonId": "lesson-getting-to-know-each-other"
     },
     {
-      "id": "lesson-getting-to-know-each-other__prepositions",
+      "id": "lesson-getting-to-know-each-other__prepositions-3",
       "arabic": "مَعَ",
       "arabicFolded": "مع",
       "pronunciation": "maʿa",
@@ -5014,7 +5014,7 @@
       "lessonId": "lesson-getting-to-know-each-other"
     },
     {
-      "id": "lesson-getting-to-know-each-other__prepositions",
+      "id": "lesson-getting-to-know-each-other__prepositions-4",
       "arabic": "لِ",
       "arabicFolded": "ل",
       "pronunciation": "li",
@@ -5027,7 +5027,7 @@
       "lessonId": "lesson-getting-to-know-each-other"
     },
     {
-      "id": "lesson-getting-to-know-each-other__prepositions",
+      "id": "lesson-getting-to-know-each-other__prepositions-5",
       "arabic": "بِ",
       "arabicFolded": "ب",
       "pronunciation": "bi",
@@ -5040,7 +5040,7 @@
       "lessonId": "lesson-getting-to-know-each-other"
     },
     {
-      "id": "lesson-getting-to-know-each-other__prepositions",
+      "id": "lesson-getting-to-know-each-other__prepositions-6",
       "arabic": "فِي",
       "arabicFolded": "في",
       "pronunciation": "fī",
@@ -5053,7 +5053,7 @@
       "lessonId": "lesson-getting-to-know-each-other"
     },
     {
-      "id": "lesson-getting-to-know-each-other__prepositions",
+      "id": "lesson-getting-to-know-each-other__prepositions-7",
       "arabic": "عَلَى",
       "arabicFolded": "على",
       "pronunciation": "ʿalā",
@@ -5066,7 +5066,7 @@
       "lessonId": "lesson-getting-to-know-each-other"
     },
     {
-      "id": "lesson-getting-to-know-each-other__prepositions",
+      "id": "lesson-getting-to-know-each-other__prepositions-8",
       "arabic": "بَيْنَ",
       "arabicFolded": "بين",
       "pronunciation": "bayna",
@@ -5079,7 +5079,7 @@
       "lessonId": "lesson-getting-to-know-each-other"
     },
     {
-      "id": "lesson-getting-to-know-each-other__prepositions",
+      "id": "lesson-getting-to-know-each-other__prepositions-9",
       "arabic": "تَحْتَ",
       "arabicFolded": "تحت",
       "pronunciation": "taḥta",
@@ -5092,7 +5092,7 @@
       "lessonId": "lesson-getting-to-know-each-other"
     },
     {
-      "id": "lesson-getting-to-know-each-other__prepositions",
+      "id": "lesson-getting-to-know-each-other__prepositions-10",
       "arabic": "فَوْقَ",
       "arabicFolded": "فوق",
       "pronunciation": "fawqa",
@@ -5105,7 +5105,7 @@
       "lessonId": "lesson-getting-to-know-each-other"
     },
     {
-      "id": "lesson-getting-to-know-each-other__prepositions",
+      "id": "lesson-getting-to-know-each-other__prepositions-11",
       "arabic": "أَمَامَ",
       "arabicFolded": "أمام",
       "pronunciation": "amāma",
@@ -5118,7 +5118,7 @@
       "lessonId": "lesson-getting-to-know-each-other"
     },
     {
-      "id": "lesson-getting-to-know-each-other__prepositions",
+      "id": "lesson-getting-to-know-each-other__prepositions-12",
       "arabic": "وَرَاءَ",
       "arabicFolded": "وراء",
       "pronunciation": "warāʾa",
@@ -5131,7 +5131,7 @@
       "lessonId": "lesson-getting-to-know-each-other"
     },
     {
-      "id": "lesson-getting-to-know-each-other__prepositions",
+      "id": "lesson-getting-to-know-each-other__prepositions-13",
       "arabic": "عَنْ",
       "arabicFolded": "عن",
       "pronunciation": "ʿan",
@@ -5157,7 +5157,7 @@
       "lessonId": "lesson-getting-to-know-each-other"
     },
     {
-      "id": "lesson-getting-to-know-each-other__people",
+      "id": "lesson-getting-to-know-each-other__people-2",
       "arabic": "مُدَرِّسٌ",
       "arabicFolded": "مدرس",
       "pronunciation": "mudarris",
@@ -5170,7 +5170,7 @@
       "lessonId": "lesson-getting-to-know-each-other"
     },
     {
-      "id": "lesson-getting-to-know-each-other__people",
+      "id": "lesson-getting-to-know-each-other__people-3",
       "arabic": "صَدِيقٌ",
       "arabicFolded": "صديق",
       "pronunciation": "ṣadīq",
@@ -5183,7 +5183,7 @@
       "lessonId": "lesson-getting-to-know-each-other"
     },
     {
-      "id": "lesson-getting-to-know-each-other__people",
+      "id": "lesson-getting-to-know-each-other__people-4",
       "arabic": "عَدُوٌّ",
       "arabicFolded": "عدو",
       "pronunciation": "ʿaduww",
@@ -5209,7 +5209,7 @@
       "lessonId": "lesson-getting-to-know-each-other"
     },
     {
-      "id": "lesson-getting-to-know-each-other__common-terms-in-excercise-books-and-questions",
+      "id": "lesson-getting-to-know-each-other__common-terms-in-excercise-books-and-questions-2",
       "arabic": "قَرَأَ",
       "arabicFolded": "قرأ",
       "pronunciation": "qaraʾa",
@@ -5222,7 +5222,7 @@
       "lessonId": "lesson-getting-to-know-each-other"
     },
     {
-      "id": "lesson-getting-to-know-each-other__common-terms-in-excercise-books-and-questions",
+      "id": "lesson-getting-to-know-each-other__common-terms-in-excercise-books-and-questions-3",
       "arabic": "كَتَبَ",
       "arabicFolded": "كتب",
       "pronunciation": "kataba",
@@ -5235,7 +5235,7 @@
       "lessonId": "lesson-getting-to-know-each-other"
     },
     {
-      "id": "lesson-getting-to-know-each-other__common-terms-in-excercise-books-and-questions",
+      "id": "lesson-getting-to-know-each-other__common-terms-in-excercise-books-and-questions-4",
       "arabic": "أَجَابَ",
       "arabicFolded": "أجاب",
       "pronunciation": "ajāba",
@@ -5248,7 +5248,7 @@
       "lessonId": "lesson-getting-to-know-each-other"
     },
     {
-      "id": "lesson-getting-to-know-each-other__common-terms-in-excercise-books-and-questions",
+      "id": "lesson-getting-to-know-each-other__common-terms-in-excercise-books-and-questions-5",
       "arabic": "صِلْ",
       "arabicFolded": "صل",
       "pronunciation": "sil",
@@ -5261,7 +5261,7 @@
       "lessonId": "lesson-getting-to-know-each-other"
     },
     {
-      "id": "lesson-getting-to-know-each-other__common-terms-in-excercise-books-and-questions",
+      "id": "lesson-getting-to-know-each-other__common-terms-in-excercise-books-and-questions-6",
       "arabic": "بَدَّلَ",
       "arabicFolded": "بدل",
       "pronunciation": "baddala",
@@ -5274,7 +5274,7 @@
       "lessonId": "lesson-getting-to-know-each-other"
     },
     {
-      "id": "lesson-getting-to-know-each-other__common-terms-in-excercise-books-and-questions",
+      "id": "lesson-getting-to-know-each-other__common-terms-in-excercise-books-and-questions-7",
       "arabic": "سُؤَالٌ",
       "arabicFolded": "سؤال",
       "pronunciation": "suʾāl",
@@ -5287,7 +5287,7 @@
       "lessonId": "lesson-getting-to-know-each-other"
     },
     {
-      "id": "lesson-getting-to-know-each-other__common-terms-in-excercise-books-and-questions",
+      "id": "lesson-getting-to-know-each-other__common-terms-in-excercise-books-and-questions-8",
       "arabic": "مِثَالٌ",
       "arabicFolded": "مثال",
       "pronunciation": "mithāl",
@@ -5300,7 +5300,7 @@
       "lessonId": "lesson-getting-to-know-each-other"
     },
     {
-      "id": "lesson-getting-to-know-each-other__common-terms-in-excercise-books-and-questions",
+      "id": "lesson-getting-to-know-each-other__common-terms-in-excercise-books-and-questions-9",
       "arabic": "فِقْرَةٌ",
       "arabicFolded": "فقرة",
       "pronunciation": "fiqrah",
@@ -5313,7 +5313,7 @@
       "lessonId": "lesson-getting-to-know-each-other"
     },
     {
-      "id": "lesson-getting-to-know-each-other__common-terms-in-excercise-books-and-questions",
+      "id": "lesson-getting-to-know-each-other__common-terms-in-excercise-books-and-questions-10",
       "arabic": "عَنْ",
       "arabicFolded": "عن",
       "pronunciation": "ʿan",
@@ -5326,7 +5326,7 @@
       "lessonId": "lesson-getting-to-know-each-other"
     },
     {
-      "id": "lesson-getting-to-know-each-other__common-terms-in-excercise-books-and-questions",
+      "id": "lesson-getting-to-know-each-other__common-terms-in-excercise-books-and-questions-11",
       "arabic": "كَمَا",
       "arabicFolded": "كما",
       "pronunciation": "kamā",
@@ -5352,7 +5352,7 @@
       "lessonId": "lesson-getting-to-know-each-other"
     },
     {
-      "id": "lesson-getting-to-know-each-other__general-verbs",
+      "id": "lesson-getting-to-know-each-other__general-verbs-2",
       "arabic": "طَلَبَ",
       "arabicFolded": "طلب",
       "pronunciation": "ṭalaba",
@@ -5365,7 +5365,7 @@
       "lessonId": "lesson-getting-to-know-each-other"
     },
     {
-      "id": "lesson-getting-to-know-each-other__general-verbs",
+      "id": "lesson-getting-to-know-each-other__general-verbs-3",
       "arabic": "دَرَسَ",
       "arabicFolded": "درس",
       "pronunciation": "darasa",
@@ -5378,7 +5378,7 @@
       "lessonId": "lesson-getting-to-know-each-other"
     },
     {
-      "id": "lesson-getting-to-know-each-other__general-verbs",
+      "id": "lesson-getting-to-know-each-other__general-verbs-4",
       "arabic": "جَلَسَ",
       "arabicFolded": "جلس",
       "pronunciation": "jalasa",
@@ -5391,7 +5391,7 @@
       "lessonId": "lesson-getting-to-know-each-other"
     },
     {
-      "id": "lesson-getting-to-know-each-other__general-verbs",
+      "id": "lesson-getting-to-know-each-other__general-verbs-5",
       "arabic": "اِقْرَأْ",
       "arabicFolded": "اقرأ",
       "pronunciation": "iqraʾ",
@@ -5404,7 +5404,7 @@
       "lessonId": "lesson-getting-to-know-each-other"
     },
     {
-      "id": "lesson-getting-to-know-each-other__general-verbs",
+      "id": "lesson-getting-to-know-each-other__general-verbs-6",
       "arabic": "اُكْتُبْ",
       "arabicFolded": "اكتب",
       "pronunciation": "uktub",
@@ -5417,7 +5417,7 @@
       "lessonId": "lesson-getting-to-know-each-other"
     },
     {
-      "id": "lesson-getting-to-know-each-other__general-verbs",
+      "id": "lesson-getting-to-know-each-other__general-verbs-7",
       "arabic": "أَجِبْ",
       "arabicFolded": "أجب",
       "pronunciation": "ajib",
@@ -5430,7 +5430,7 @@
       "lessonId": "lesson-getting-to-know-each-other"
     },
     {
-      "id": "lesson-getting-to-know-each-other__general-verbs",
+      "id": "lesson-getting-to-know-each-other__general-verbs-8",
       "arabic": "بَدِّلْ",
       "arabicFolded": "بدل",
       "pronunciation": "baddil",
@@ -5443,7 +5443,7 @@
       "lessonId": "lesson-getting-to-know-each-other"
     },
     {
-      "id": "lesson-getting-to-know-each-other__general-verbs",
+      "id": "lesson-getting-to-know-each-other__general-verbs-9",
       "arabic": "اسْأَلْ",
       "arabicFolded": "اسأل",
       "pronunciation": "isʾal",
@@ -5469,7 +5469,7 @@
       "lessonId": "lesson-the-classroom"
     },
     {
-      "id": "lesson-the-classroom__rooms-places",
+      "id": "lesson-the-classroom__rooms-places-2",
       "arabic": "حُجْرَةُ الدِّرَاسَةِ",
       "arabicFolded": "حجرة الدراسة",
       "pronunciation": "ḥujratu ad-dirāsah",
@@ -5482,7 +5482,7 @@
       "lessonId": "lesson-the-classroom"
     },
     {
-      "id": "lesson-the-classroom__rooms-places",
+      "id": "lesson-the-classroom__rooms-places-3",
       "arabic": "مَكْتَبَة",
       "arabicFolded": "مكتبة",
       "pronunciation": "maktabah",
@@ -5495,7 +5495,7 @@
       "lessonId": "lesson-the-classroom"
     },
     {
-      "id": "lesson-the-classroom__rooms-places",
+      "id": "lesson-the-classroom__rooms-places-4",
       "arabic": "مُخْتَبَر",
       "arabicFolded": "مختبر",
       "pronunciation": "mukhtabar",
@@ -5521,7 +5521,7 @@
       "lessonId": "lesson-the-classroom"
     },
     {
-      "id": "lesson-the-classroom__furniture",
+      "id": "lesson-the-classroom__furniture-2",
       "arabic": "مَقْعَد",
       "arabicFolded": "مقعد",
       "pronunciation": "maqʿad",
@@ -5547,7 +5547,7 @@
       "lessonId": "lesson-the-classroom"
     },
     {
-      "id": "lesson-the-classroom__learning-tools",
+      "id": "lesson-the-classroom__learning-tools-2",
       "arabic": "مِسْطَرَة",
       "arabicFolded": "مسطرة",
       "pronunciation": "misṭarah",
@@ -5560,7 +5560,7 @@
       "lessonId": "lesson-the-classroom"
     },
     {
-      "id": "lesson-the-classroom__learning-tools",
+      "id": "lesson-the-classroom__learning-tools-3",
       "arabic": "مِمْحَاة",
       "arabicFolded": "ممحاة",
       "pronunciation": "mimḥāh",
@@ -5573,7 +5573,7 @@
       "lessonId": "lesson-the-classroom"
     },
     {
-      "id": "lesson-the-classroom__learning-tools",
+      "id": "lesson-the-classroom__learning-tools-4",
       "arabic": "مِبْرَاة",
       "arabicFolded": "مبراة",
       "pronunciation": "mibrāh",
@@ -5599,7 +5599,7 @@
       "lessonId": "lesson-the-classroom"
     },
     {
-      "id": "lesson-the-classroom__classroom-items",
+      "id": "lesson-the-classroom__classroom-items-2",
       "arabic": "مَسَّاحَة",
       "arabicFolded": "مساحة",
       "pronunciation": "massāḥah",
@@ -5612,7 +5612,7 @@
       "lessonId": "lesson-the-classroom"
     },
     {
-      "id": "lesson-the-classroom__classroom-items",
+      "id": "lesson-the-classroom__classroom-items-3",
       "arabic": "خَرِيطَة",
       "arabicFolded": "خريطة",
       "pronunciation": "kharīṭah",
@@ -5625,7 +5625,7 @@
       "lessonId": "lesson-the-classroom"
     },
     {
-      "id": "lesson-the-classroom__classroom-items",
+      "id": "lesson-the-classroom__classroom-items-4",
       "arabic": "صُورَة",
       "arabicFolded": "صورة",
       "pronunciation": "ṣūrah",
@@ -5638,7 +5638,7 @@
       "lessonId": "lesson-the-classroom"
     },
     {
-      "id": "lesson-the-classroom__classroom-items",
+      "id": "lesson-the-classroom__classroom-items-5",
       "arabic": "نُقْطَة",
       "arabicFolded": "نقطة",
       "pronunciation": "nuqṭah",
@@ -5664,7 +5664,7 @@
       "lessonId": "lesson-the-classroom"
     },
     {
-      "id": "lesson-the-classroom__room-features",
+      "id": "lesson-the-classroom__room-features-2",
       "arabic": "مِرْوَحَة",
       "arabicFolded": "مروحة",
       "pronunciation": "mirwaḥah",
@@ -6158,5 +6158,5 @@
     "instagram": "@majestic_messenger",
     "docUrl": "https://docs.google.com/document/d/1wqbU7rsLUm0wqCjQPS2PbtCTThZOxnE2CnClxa8DETc/edit"
   },
-  "fetchedAt": "2026-04-27T23:16:07.963Z"
+  "fetchedAt": "2026-04-27T23:50:45.012Z"
 }

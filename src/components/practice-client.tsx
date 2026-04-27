@@ -111,7 +111,7 @@ function PracticeInner({ vocab, topics, lessons }: Props) {
             title="Mixed multiple choice"
             description="Random 12 words across all lessons (Arabic ↔ English)."
             onClick={() => {
-              const sample = sampleRandom(vocab, 12, 13);
+              const sample = sampleRandom(vocab, 12, Date.now());
               setManualDeck(
                 makeMultipleChoiceDeck(sample, vocab, "ar-to-en", {
                   id: "deck-mixed-mc",
@@ -124,7 +124,7 @@ function PracticeInner({ vocab, topics, lessons }: Props) {
             title="Flashcards (mixed)"
             description="Tap to flip. Self-rate after each card."
             onClick={() => {
-              const sample = sampleRandom(vocab, 15, 23);
+              const sample = sampleRandom(vocab, 15, Date.now());
               setManualDeck(
                 makeFlashcardDeck(sample, {
                   id: "deck-mixed-flash",
@@ -137,7 +137,7 @@ function PracticeInner({ vocab, topics, lessons }: Props) {
             title="Type the transliteration"
             description="Read the Arabic, type the pronunciation."
             onClick={() => {
-              const sample = sampleRandom(vocab, 10, 31);
+              const sample = sampleRandom(vocab, 10, Date.now());
               setManualDeck(
                 makeFillBlankDeck(sample, {
                   id: "deck-mixed-fill",
@@ -151,7 +151,7 @@ function PracticeInner({ vocab, topics, lessons }: Props) {
             description="Decide masculine or feminine on Body Parts and Entities."
             onClick={() => {
               const candidates = vocab.filter((v) => v.gender === "M" || v.gender === "F");
-              const sample = sampleRandom(candidates, 12, 41);
+              const sample = sampleRandom(candidates, 12, Date.now());
               setManualDeck(
                 makeGenderQuizDeck(sample, {
                   id: "deck-mixed-gender",
