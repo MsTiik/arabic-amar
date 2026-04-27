@@ -1,0 +1,153 @@
+@import "tailwindcss";
+
+/*
+ * Design tokens — warm neutral background with subtle traditional accents.
+ * Values are OKLCH for perceptual uniformity. Keeping them on :root so dark mode
+ * can override individual tokens cleanly, and so Tailwind v4 `@theme inline` can
+ * read them.
+ */
+:root {
+  --background: oklch(0.985 0.01 90);
+  --background-soft: oklch(0.97 0.015 85);
+  --foreground: oklch(0.22 0.025 270);
+  --foreground-soft: oklch(0.45 0.025 270);
+  --muted: oklch(0.93 0.012 85);
+  --muted-foreground: oklch(0.5 0.02 270);
+  --border: oklch(0.9 0.01 85);
+  --primary: oklch(0.45 0.13 200);
+  --primary-foreground: oklch(0.99 0.005 200);
+  --accent-gold: oklch(0.7 0.13 80);
+  --accent-gold-soft: oklch(0.92 0.07 85);
+  --success: oklch(0.6 0.16 145);
+  --success-soft: oklch(0.92 0.06 145);
+  --danger: oklch(0.6 0.18 25);
+  --danger-soft: oklch(0.95 0.05 25);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.22 0.025 270);
+  --ring: oklch(0.6 0.13 200 / 50%);
+
+  --font-arabic: var(--font-amiri), "Noto Naskh Arabic", "Scheherazade New",
+    "Traditional Arabic", serif;
+  --font-arabic-display: var(--font-amiri-quran), var(--font-amiri),
+    "Noto Naskh Arabic", serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: oklch(0.18 0.02 270);
+    --background-soft: oklch(0.22 0.02 270);
+    --foreground: oklch(0.95 0.01 90);
+    --foreground-soft: oklch(0.78 0.015 90);
+    --muted: oklch(0.26 0.02 270);
+    --muted-foreground: oklch(0.7 0.015 270);
+    --border: oklch(0.32 0.02 270);
+    --primary: oklch(0.65 0.13 200);
+    --primary-foreground: oklch(0.15 0.02 270);
+    --accent-gold: oklch(0.78 0.13 80);
+    --accent-gold-soft: oklch(0.32 0.06 80);
+    --success: oklch(0.7 0.14 145);
+    --success-soft: oklch(0.3 0.07 145);
+    --danger: oklch(0.7 0.16 25);
+    --danger-soft: oklch(0.32 0.07 25);
+    --card: oklch(0.24 0.02 270);
+    --card-foreground: oklch(0.95 0.01 90);
+    --ring: oklch(0.7 0.14 200 / 60%);
+  }
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-background-soft: var(--background-soft);
+  --color-foreground: var(--foreground);
+  --color-foreground-soft: var(--foreground-soft);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-accent-gold: var(--accent-gold);
+  --color-accent-gold-soft: var(--accent-gold-soft);
+  --color-success: var(--success);
+  --color-success-soft: var(--success-soft);
+  --color-danger: var(--danger);
+  --color-danger-soft: var(--danger-soft);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-ring: var(--ring);
+  --font-sans: var(--font-sans);
+  --font-arabic: var(--font-arabic);
+  --font-arabic-display: var(--font-arabic-display);
+}
+
+html,
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/*
+ * Arabic typography. Diacritics are rendered at full opacity (NEVER muted) so
+ * tashkeel are clearly visible — that's the whole point of the site. Line-height
+ * is generous so combining marks above the consonants don't collide with descenders
+ * from the line above.
+ */
+.font-arabic {
+  font-family: var(--font-arabic);
+  font-feature-settings: "liga", "calt", "kern";
+  line-height: 2;
+  letter-spacing: 0;
+  unicode-bidi: isolate;
+  direction: rtl;
+}
+
+.font-arabic-display {
+  font-family: var(--font-arabic-display);
+  font-feature-settings: "liga", "calt", "kern";
+  line-height: 1.7;
+  letter-spacing: 0;
+  unicode-bidi: isolate;
+  direction: rtl;
+  font-weight: 600;
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+.text-pretty {
+  text-wrap: pretty;
+}
+
+/* Subtle calligraphic divider used between sections */
+.calligraphic-divider {
+  --c: oklch(from var(--accent-gold) l c h / 30%);
+  background-image: radial-gradient(circle, var(--c) 1px, transparent 1.5px);
+  background-size: 14px 14px;
+  background-repeat: repeat-x;
+  background-position: center;
+  height: 14px;
+}
+
+/* Hover ring used by topic cards & vocab cards */
+.hover-lift {
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease,
+    border-color 0.18s ease;
+}
+.hover-lift:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 1px 2px oklch(from var(--foreground) l c h / 5%),
+    0 8px 24px oklch(from var(--foreground) l c h / 6%);
+}
+
+/* Scoped focus ring */
+.focus-ring:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
