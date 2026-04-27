@@ -132,56 +132,57 @@ export function VocabBankClient({ vocab, topics }: Props) {
         </div>
       </div>
 
-      {showEmpty ? (
-        <div className="rounded-2xl border border-border bg-card p-8 text-center">
-          <p className="text-base text-foreground">No words match those filters.</p>
-          <p className="mt-1 text-sm text-muted-foreground">
-            Try removing a filter or searching by transliteration (e.g. <em>raʾsun</em> or{" "}
-            <em>rasun</em>).
-          </p>
-        </div>
-      ) : null}
-
-      {!collapsed && !isFiltering ? (
-        <div className="space-y-8">
-          {groupedByTopic.map(([slug, entries]) => {
-            const topic = topics.find((t) => t.slug === slug);
-            return (
-              <section key={slug}>
-                <header className="mb-3 flex items-baseline justify-between">
-                  <h2 className="text-xl font-semibold tracking-tight">
-                    {topic?.name ?? slug}
-                    {topic?.nameArabic ? (
-                      <ArabicText
-                        variant="inline"
-                        className="ml-3 text-2xl text-foreground-soft"
-                      >
-                        {topic.nameArabic}
-                      </ArabicText>
-                    ) : null}
-                  </h2>
-                  <span className="text-xs text-muted-foreground">
-                    {entries.length} words
-                  </span>
-                </header>
-                <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-3">
-                  {entries.map((entry) => (
-                    <VocabCard key={entry.id} entry={entry} size="md" />
-                  ))}
-                </div>
-              </section>
-            );
-          })}
-        </div>
-      ) : null}
-
-      {(collapsed || isFiltering) && filtered.length > 0 ? (
-        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-3">
-          {filtered.map((entry) => (
-            <VocabCard key={entry.id} entry={entry} size="md" />
-          ))}
-        </div>
-      ) : null}
+      <div className="space-y-8">
+        {showEmpty ? (
+          <div className="rounded-2xl border border-border bg-card p-8 text-center">
+            <p className="text-base text-foreground">No words match those filters.</p>
+            <p className="mt-1 text-sm text-muted-foreground">
+              Try removing a filter or searching by transliteration (e.g. <em>raʾsun</em> or{" "}
+              <em>rasun</em>).
+            </p>
+          </div>
+        ) : collapsed || isFiltering ? (
+          <div
+            key="flat-grid"
+            className="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-3"
+          >
+            {filtered.map((entry) => (
+              <VocabCard key={entry.id} entry={entry} size="md" />
+            ))}
+          </div>
+        ) : (
+          <div key="grouped" className="space-y-8">
+            {groupedByTopic.map(([slug, entries]) => {
+              const topic = topics.find((t) => t.slug === slug);
+              return (
+                <section key={slug}>
+                  <header className="mb-3 flex items-baseline justify-between">
+                    <h2 className="text-xl font-semibold tracking-tight">
+                      {topic?.name ?? slug}
+                      {topic?.nameArabic ? (
+                        <ArabicText
+                          variant="inline"
+                          className="ml-3 text-2xl text-foreground-soft"
+                        >
+                          {topic.nameArabic}
+                        </ArabicText>
+                      ) : null}
+                    </h2>
+                    <span className="text-xs text-muted-foreground">
+                      {entries.length} words
+                    </span>
+                  </header>
+                  <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-3">
+                    {entries.map((entry) => (
+                      <VocabCard key={entry.id} entry={entry} size="md" />
+                    ))}
+                  </div>
+                </section>
+              );
+            })}
+          </div>
+        )}
+      </div>
     </div>
   );
 }

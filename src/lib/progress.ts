@@ -66,8 +66,14 @@ function getSnapshot(): UserProgress {
   return cached;
 }
 
+// `useSyncExternalStore` requires `getServerSnapshot` to return a stable
+// reference; returning a fresh object each call triggers the
+// "getServerSnapshot should be cached" infinite-loop warning and causes
+// React to re-render forever during hydration.
+let serverSnapshot: UserProgress | null = null;
 function getServerSnapshot(): UserProgress {
-  return defaultProgress();
+  if (!serverSnapshot) serverSnapshot = defaultProgress();
+  return serverSnapshot;
 }
 
 function subscribe(l: Listener): () => void {

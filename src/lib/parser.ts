@@ -262,23 +262,26 @@ const WEEKDAY_LOOKUP: Record<string, number> = {
   sunday: 7,
 };
 
-const HIJRI_MONTH_NAMES = [
-  "muharram",
-  "safar",
-  "rabi al-awwal",
-  "rabi' al-awwal",
-  "rabi al-thani",
-  "rabi' al-thani",
-  "jumada al-awwal",
-  "jumada al-thani",
-  "rajab",
-  "shaban",
-  "sha'ban",
-  "ramadan",
-  "shawwal",
-  "dhu al-qadah",
-  "dhu al-qa'dah",
-  "dhu al-hijjah",
+// Each tuple is [name-variant, hijri-month-number]. The flat-array form
+// previously used `index + 1` as the month number, which broke as soon as a
+// month had more than one spelling (e.g. `rabi al-awwal` / `rabi' al-awwal`).
+const HIJRI_MONTH_LOOKUP: ReadonlyArray<readonly [string, number]> = [
+  ["muharram", 1],
+  ["safar", 2],
+  ["rabi al-awwal", 3],
+  ["rabi' al-awwal", 3],
+  ["rabi al-thani", 4],
+  ["rabi' al-thani", 4],
+  ["jumada al-awwal", 5],
+  ["jumada al-thani", 6],
+  ["rajab", 7],
+  ["shaban", 8],
+  ["sha'ban", 8],
+  ["ramadan", 9],
+  ["shawwal", 10],
+  ["dhu al-qadah", 11],
+  ["dhu al-qa'dah", 11],
+  ["dhu al-hijjah", 12],
 ];
 
 const GREGORIAN_MONTHS = [
@@ -448,9 +451,9 @@ export async function parseDocxBuffer(
       let monthSystem: VocabEntry["monthSystem"] | undefined;
       if (isMonthsLesson && english) {
         const lower = english.toLowerCase();
-        for (let i = 0; i < HIJRI_MONTH_NAMES.length; i++) {
-          if (lower.includes(HIJRI_MONTH_NAMES[i])) {
-            monthIndex = i + 1;
+        for (const [name, num] of HIJRI_MONTH_LOOKUP) {
+          if (lower.includes(name)) {
+            monthIndex = num;
             monthSystem = "hijri";
             break;
           }
@@ -822,6 +825,32 @@ export async function parseDocxBuffer(
   }
 
   const topics = [...topicMap.values()].sort((a, b) => a.order - b.order);
+
+  // Deduplicate vocab IDs: stableId() drops diacritics, so two distinct
+  // entries that share the same lesson + category + un-diacritised arabic
+  // would collide and break React's keyed reconciliation downstream.
+  // Suffix collisions with -2, -3, … so every entry has a unique id.
+  const vocabIdCounts = new Map<string, number>();
+  for (const v of vocab) {
+    const baseId = v.id;
+    const count = (vocabIdCounts.get(baseId) ?? 0) + 1;
+    vocabIdCounts.set(baseId, count);
+    if (count > 1) {
+      v.id = `${baseId}-${count}`;
+      warn(`Duplicate vocab id collapsed: ${v.id}`);
+    }
+  }
+
+  const ruleIdCounts = new Map<string, number>();
+  for (const r of rules) {
+    const baseId = r.id;
+    const count = (ruleIdCounts.get(baseId) ?? 0) + 1;
+    ruleIdCounts.set(baseId, count);
+    if (count > 1) {
+      r.id = `${baseId}-${count}`;
+      warn(`Duplicate rule id collapsed: ${r.id}`);
+    }
+  }
 
   const content: SiteContent = {
     lessons,
