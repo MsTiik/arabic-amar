@@ -62,6 +62,29 @@ function cellText(cell: HTMLElement): string {
   return cell.text.replace(/\s+/g, " ").trim();
 }
 
+/**
+ * Split a table cell into one entry per logical line, treating each top-level
+ * `<p>` or `<br>` as a hard break. Used by rule example cells where the doc
+ * stacks multiple "هٰذَا رَأْسٌ - this is a head" lines in a single cell;
+ * collapsing them with `cellText` produces an unreadable run-on string.
+ */
+function cellLines(cell: HTMLElement): string[] {
+  const ps = cell.querySelectorAll("p");
+  const sources = ps.length > 0 ? ps : [cell];
+  const out: string[] = [];
+  for (const src of sources) {
+    // Translate <br> into newlines before extracting text.
+    const html = src.innerHTML.replace(/<br\s*\/?\s*>/gi, "\n");
+    const tmp = parse(`<div>${html}</div>`);
+    const raw = tmp.text;
+    for (const line of raw.split(/\n+/)) {
+      const trimmed = line.replace(/[ \t]+/g, " ").trim();
+      if (trimmed) out.push(trimmed);
+    }
+  }
+  return out;
+}
+
 interface ParsedLessonHeading {
   number: string;
   title: string;
@@ -118,6 +141,11 @@ function parseSubSectionHeading(heading: string): SubSection | undefined {
 
 interface RowData {
   cells: string[];
+  /** Source cell elements aligned with `cells`, preserved for callers (e.g. rule
+   * example extraction) that need to inspect paragraph structure beyond the
+   * whitespace-collapsed text. Undefined entries correspond to rowspan-filled
+   * positions whose source cell lives in an earlier row. */
+  cellElements: (HTMLElement | undefined)[];
 }
 
 /**
@@ -128,10 +156,12 @@ interface RowData {
 function tableToMatrix(table: HTMLElement): RowData[] {
   const rawRows = table.querySelectorAll("tr");
   const matrix: string[][] = [];
+  const elements: (HTMLElement | undefined)[][] = [];
   // Fill cells respecting rowspan/colspan
   for (let r = 0; r < rawRows.length; r++) {
     const cells = rawRows[r].querySelectorAll("th, td");
     if (!matrix[r]) matrix[r] = [];
+    if (!elements[r]) elements[r] = [];
     let c = 0;
     for (const cell of cells) {
       // Skip past any positions already filled by a prior rowspan
@@ -141,14 +171,21 @@ function tableToMatrix(table: HTMLElement): RowData[] {
       const colSpan = Math.max(1, Number(cell.getAttribute("colspan") ?? "1"));
       for (let dr = 0; dr < rowSpan; dr++) {
         if (!matrix[r + dr]) matrix[r + dr] = [];
+        if (!elements[r + dr]) elements[r + dr] = [];
         for (let dc = 0; dc < colSpan; dc++) {
           matrix[r + dr][c + dc] = text;
+          // Only the originating cell carries the element reference so callers
+          // can tell merged copies apart from the source.
+          elements[r + dr][c + dc] = dr === 0 && dc === 0 ? cell : undefined;
         }
       }
       c += colSpan;
     }
   }
-  return matrix.map((cells) => ({ cells }));
+  return matrix.map((cells, r) => ({
+    cells,
+    cellElements: elements[r] ?? [],
+  }));
 }
 
 interface DocCursor {
@@ -607,7 +644,23 @@ export async function parseDocxBuffer(
         // "Rule No." / numbering columns: skip.
         if (["rule no.", "rule no", "no.", "#"].includes(headerLabel.toLowerCase())) continue;
         if (exampleCols.includes(i)) {
-          examples.push({ arabic: extractInlineArabic(cell) ?? "", english: cell });
+          // Split multi-paragraph example cells into one example per line so
+          // "هٰذَا رَأْسٌ - this is a head\nهٰذَا شَعْرٌ - this is hair"
+          // doesn't render as a single run-on string.
+          const cellEl = row.cellElements?.[i];
+          const lines = cellEl ? cellLines(cellEl) : [cell];
+          for (const line of lines) {
+            const arabic = extractInlineArabic(line) ?? "";
+            // Strip the Arabic span and any leading separator from the English
+            // gloss so the rule card doesn't render the Arabic twice.
+            const english = arabic
+              ? line
+                  .replace(arabic, "")
+                  .replace(/^\s*[-–—:.]\s*/, "")
+                  .trim()
+              : line;
+            examples.push({ arabic, english });
+          }
         } else {
           bodyParts.push(`**${headerLabel}:** ${cell}`);
         }

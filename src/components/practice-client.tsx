@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useMemo, useState } from "react";
 
 import {
@@ -35,6 +35,7 @@ export function PracticeClient(props: Props) {
 
 function PracticeInner({ vocab, topics, lessons }: Props) {
   const search = useSearchParams();
+  const router = useRouter();
   const deckParam = search.get("deck"); // "mistakes" | "today"
   const topicSlug = search.get("topic") ?? "";
   const kindParam = search.get("kind") ?? "mc"; // "flashcard" | "mc" | "fill" | "gender" | "ordering"
@@ -78,6 +79,12 @@ function PracticeInner({ vocab, topics, lessons }: Props) {
   function exitActive() {
     setManualDeck(null);
     setExitedKey(urlDeckKey);
+    // If we exited a deck that came from URL params, clear them so a refresh
+    // doesn't drop the user back into the deck and the address bar reflects
+    // the picker view they're now looking at.
+    if (deckParam || topicSlug || search.get("kind")) {
+      router.replace("/practice");
+    }
   }
 
   if (activeDeck) {
