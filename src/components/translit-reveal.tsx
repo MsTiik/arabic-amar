@@ -11,6 +11,11 @@ interface Props {
   className?: string;
   /** Override the toggle label when hidden. Default: "Show pronunciation". */
   hiddenLabel?: string;
+  /** BCP-47 language tag for the revealed text. Defaults to `ar-Latn`
+   *  (Arabic transliterated in Latin script). Pass `undefined` (or any other
+   *  tag) when the revealed text is not a transliteration — e.g. an English
+   *  meaning hint — so screen readers get the right pronunciation. */
+  lang?: string;
 }
 
 /**
@@ -23,6 +28,7 @@ export function TranslitReveal({
   variant = "block",
   className,
   hiddenLabel = "Show pronunciation",
+  lang = "ar-Latn",
 }: Props) {
   const [shown, setShown] = useState(false);
   if (!text || !text.trim()) return null;
@@ -41,7 +47,7 @@ export function TranslitReveal({
           "block w-full text-center text-[10px] leading-tight text-muted-foreground/60 hover:text-muted-foreground focus-ring rounded",
           className,
         )}
-        lang={shown ? "ar-Latn" : undefined}
+        lang={shown ? lang : undefined}
       >
         {shown ? text : "🔊 hint"}
       </button>
@@ -61,7 +67,7 @@ export function TranslitReveal({
         "mx-auto mt-1 block text-xs italic text-muted-foreground/70 hover:text-muted-foreground focus-ring rounded px-2",
         className,
       )}
-      lang={shown ? "ar-Latn" : undefined}
+      lang={shown ? lang : undefined}
     >
       {shown ? text : hiddenLabel}
     </button>

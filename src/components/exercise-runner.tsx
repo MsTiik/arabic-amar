@@ -254,7 +254,18 @@ function MultipleChoiceView({
         ) : null}
         <p className="mt-2 text-base font-medium">{question.prompt}</p>
         {question.promptHint ? (
-          <TranslitReveal text={question.promptHint} />
+          question.kind === "multiple-choice-translit-to-ar" ? (
+            // For translit→Arabic, the prompt itself is already the
+            // transliteration; the hint stores the English meaning, not a
+            // pronunciation, so use English-appropriate label and lang.
+            <TranslitReveal
+              text={question.promptHint}
+              hiddenLabel="Show meaning"
+              lang={undefined}
+            />
+          ) : (
+            <TranslitReveal text={question.promptHint} />
+          )
         ) : null}
       </div>
 
