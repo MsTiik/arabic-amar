@@ -104,11 +104,10 @@ export function makeMultipleChoiceDeck(
     } else {
       prompt = v.pronunciation;
       promptHint = v.english;
-      optionRender = (e) => ({
-        text: e.arabic,
-        isArabic: true,
-        translit: e.pronunciation,
-      });
+      // Intentionally NOT setting `translit` on options here: the prompt IS the
+      // transliteration, so a per-option reveal would let the user click each
+      // option's hint until one matches the prompt without reading any Arabic.
+      optionRender = (e) => ({ text: e.arabic, isArabic: true });
     }
 
     const options = shuffled.map((e) => {
