@@ -38,6 +38,10 @@ export function TranslitReveal({
   // text is plain English). Otherwise default to `ar-Latn`.
   const resolvedLang =
     lang === "" ? undefined : (lang ?? "ar-Latn");
+  // Mirror the hidden-state label for the shown state so screen readers stay
+  // consistent when callers override `hiddenLabel` (e.g. "Show meaning" →
+  // "Hide meaning").
+  const shownLabel = hiddenLabel.replace(/^Show\b/i, "Hide");
 
   if (variant === "inline") {
     return (
@@ -48,7 +52,7 @@ export function TranslitReveal({
           setShown((s) => !s);
         }}
         aria-pressed={shown}
-        aria-label={shown ? "Hide pronunciation" : hiddenLabel}
+        aria-label={shown ? shownLabel : hiddenLabel}
         className={cn(
           "block w-full text-center text-[10px] leading-tight text-muted-foreground/60 hover:text-muted-foreground focus-ring rounded",
           className,
@@ -68,7 +72,7 @@ export function TranslitReveal({
         setShown((s) => !s);
       }}
       aria-pressed={shown}
-      aria-label={shown ? "Hide pronunciation" : hiddenLabel}
+      aria-label={shown ? shownLabel : hiddenLabel}
       className={cn(
         "mx-auto mt-1 block text-xs italic text-muted-foreground/70 hover:text-muted-foreground focus-ring rounded px-2",
         className,
