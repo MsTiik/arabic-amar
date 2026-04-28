@@ -56,6 +56,15 @@ export function TopicHeader({ topic, vocab, ruleCount }: Props) {
           </div>
         </div>
       </div>
+      {topic.notes && topic.notes.length > 0 ? (
+        <div className="mt-5 space-y-3 border-t border-border pt-5">
+          {topic.notes.map((note, i) => (
+            <p key={i} className="text-sm leading-relaxed text-foreground-soft">
+              {note}
+            </p>
+          ))}
+        </div>
+      ) : null}
     </header>
   );
 }

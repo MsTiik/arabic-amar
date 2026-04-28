@@ -86,6 +86,10 @@ export interface Topic {
   vocabCount: number;
   ruleCount: number;
   conversationCount: number;
+  /** Section-level notes — explanations that apply to a whole category and were
+   *  duplicated across many entries in the source doc (e.g. the Hijri/Gregorian
+   *  calendar explanation that the Google Doc repeated for every month). */
+  notes?: string[];
 }
 
 export interface SiteContent {

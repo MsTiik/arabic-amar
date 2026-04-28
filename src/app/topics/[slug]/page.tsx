@@ -71,9 +71,9 @@ export default async function TopicPage({
                         {group.entries.length} words
                       </span>
                     </header>
-                    <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-3">
+                    <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                       {group.entries.map((entry) => (
-                        <VocabCard key={entry.id} entry={entry} size="lg" />
+                        <VocabCard key={entry.id} entry={entry} size="md" />
                       ))}
                     </div>
                   </section>

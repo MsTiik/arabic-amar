@@ -506,7 +506,8 @@
       ],
       "vocabCount": 23,
       "ruleCount": 5,
-      "conversationCount": 0
+      "conversationCount": 0,
+      "notes": []
     },
     {
       "slug": "numbers",
@@ -518,7 +519,8 @@
       ],
       "vocabCount": 39,
       "ruleCount": 5,
-      "conversationCount": 0
+      "conversationCount": 0,
+      "notes": []
     },
     {
       "slug": "time",
@@ -530,7 +532,8 @@
       ],
       "vocabCount": 22,
       "ruleCount": 5,
-      "conversationCount": 0
+      "conversationCount": 0,
+      "notes": []
     },
     {
       "slug": "days-of-the-week",
@@ -542,7 +545,8 @@
       ],
       "vocabCount": 14,
       "ruleCount": 0,
-      "conversationCount": 0
+      "conversationCount": 0,
+      "notes": []
     },
     {
       "slug": "islamic-and-gregorian-months",
@@ -554,7 +558,10 @@
       ],
       "vocabCount": 28,
       "ruleCount": 0,
-      "conversationCount": 0
+      "conversationCount": 0,
+      "notes": [
+        "The Islamic (Hijri) months are based on the lunar calendar, which follows the cycles of the moonThe English months are based on the solar calendar, which follows the sun. A Hijri year is about 354 days, whereas a Gregorian year is about 365 days, so the Islamic year is approximately 11 days shorter. Because of this difference, Islamic months do not align with fixed English months and move earlier each year.For example, Ramadan can occur in summer one year and winter several years later. Therefore, Islamic and English months are not direct equivalents and cannot be matched one-to-one."
+      ]
     },
     {
       "slug": "entities",
@@ -566,7 +573,8 @@
       ],
       "vocabCount": 45,
       "ruleCount": 0,
-      "conversationCount": 0
+      "conversationCount": 0,
+      "notes": []
     },
     {
       "slug": "getting-to-know-each-other",
@@ -578,7 +586,8 @@
       ],
       "vocabCount": 173,
       "ruleCount": 9,
-      "conversationCount": 0
+      "conversationCount": 0,
+      "notes": []
     },
     {
       "slug": "the-classroom",
@@ -590,7 +599,8 @@
       ],
       "vocabCount": 18,
       "ruleCount": 0,
-      "conversationCount": 0
+      "conversationCount": 0,
+      "notes": []
     }
   ],
   "vocab": [
@@ -1994,7 +2004,7 @@
       "arabic": "١ - مُحَرَّم",
       "arabicFolded": "١ - محرم",
       "pronunciation": "muḥarram",
-      "english": "The Islamic (Hijri) months are based on the lunar calendar, which follows the cycles of the moonThe English months are based on the solar calendar, which follows the sun. A Hijri year is about 354 days, whereas a Gregorian year is about 365 days, so the Islamic year is approximately 11 days shorter. Because of this difference, Islamic months do not align with fixed English months and move earlier each year.For example, Ramadan can occur in summer one year and winter several years later. Therefore, Islamic and English months are not direct equivalents and cannot be matched one-to-one.",
+      "english": "",
       "category": "ISLAMICMONTHS",
       "isExtra": false,
       "monthIndex": 9,
@@ -2009,7 +2019,7 @@
       "arabic": "٢ - صَفَر",
       "arabicFolded": "٢ - صفر",
       "pronunciation": "ṣafar",
-      "english": "The Islamic (Hijri) months are based on the lunar calendar, which follows the cycles of the moonThe English months are based on the solar calendar, which follows the sun. A Hijri year is about 354 days, whereas a Gregorian year is about 365 days, so the Islamic year is approximately 11 days shorter. Because of this difference, Islamic months do not align with fixed English months and move earlier each year.For example, Ramadan can occur in summer one year and winter several years later. Therefore, Islamic and English months are not direct equivalents and cannot be matched one-to-one.",
+      "english": "",
       "category": "ISLAMICMONTHS",
       "isExtra": false,
       "monthIndex": 9,
@@ -2024,7 +2034,7 @@
       "arabic": "٣ - رَبِيع الأَوَّل",
       "arabicFolded": "٣ - ربيع الأول",
       "pronunciation": "rabīʿ al-awwal",
-      "english": "The Islamic (Hijri) months are based on the lunar calendar, which follows the cycles of the moonThe English months are based on the solar calendar, which follows the sun. A Hijri year is about 354 days, whereas a Gregorian year is about 365 days, so the Islamic year is approximately 11 days shorter. Because of this difference, Islamic months do not align with fixed English months and move earlier each year.For example, Ramadan can occur in summer one year and winter several years later. Therefore, Islamic and English months are not direct equivalents and cannot be matched one-to-one.",
+      "english": "",
       "category": "ISLAMICMONTHS",
       "isExtra": false,
       "monthIndex": 9,
@@ -2039,7 +2049,7 @@
       "arabic": "٤ - رَبِيع الآخِر / الثَّانِي",
       "arabicFolded": "٤ - ربيع الآخر / الثاني",
       "pronunciation": "rabīʿ al-ākhir / ath-thānī",
-      "english": "The Islamic (Hijri) months are based on the lunar calendar, which follows the cycles of the moonThe English months are based on the solar calendar, which follows the sun. A Hijri year is about 354 days, whereas a Gregorian year is about 365 days, so the Islamic year is approximately 11 days shorter. Because of this difference, Islamic months do not align with fixed English months and move earlier each year.For example, Ramadan can occur in summer one year and winter several years later. Therefore, Islamic and English months are not direct equivalents and cannot be matched one-to-one.",
+      "english": "",
       "category": "ISLAMICMONTHS",
       "isExtra": false,
       "monthIndex": 9,
@@ -2054,7 +2064,7 @@
       "arabic": "٥ - جُمَادَى الأُولَى",
       "arabicFolded": "٥ - جمادى الأولى",
       "pronunciation": "jumādā al-ūlā",
-      "english": "The Islamic (Hijri) months are based on the lunar calendar, which follows the cycles of the moonThe English months are based on the solar calendar, which follows the sun. A Hijri year is about 354 days, whereas a Gregorian year is about 365 days, so the Islamic year is approximately 11 days shorter. Because of this difference, Islamic months do not align with fixed English months and move earlier each year.For example, Ramadan can occur in summer one year and winter several years later. Therefore, Islamic and English months are not direct equivalents and cannot be matched one-to-one.",
+      "english": "",
       "category": "ISLAMICMONTHS",
       "isExtra": false,
       "monthIndex": 9,
@@ -2069,7 +2079,7 @@
       "arabic": "٦ - جُمَادَى الآخِرَة / الثَّانِيَة",
       "arabicFolded": "٦ - جمادى الآخرة / الثانية",
       "pronunciation": "jumādā al-ākhirah / ath-thaniyah",
-      "english": "The Islamic (Hijri) months are based on the lunar calendar, which follows the cycles of the moonThe English months are based on the solar calendar, which follows the sun. A Hijri year is about 354 days, whereas a Gregorian year is about 365 days, so the Islamic year is approximately 11 days shorter. Because of this difference, Islamic months do not align with fixed English months and move earlier each year.For example, Ramadan can occur in summer one year and winter several years later. Therefore, Islamic and English months are not direct equivalents and cannot be matched one-to-one.",
+      "english": "",
       "category": "ISLAMICMONTHS",
       "isExtra": false,
       "monthIndex": 9,
@@ -2084,7 +2094,7 @@
       "arabic": "٧ - رَجَب",
       "arabicFolded": "٧ - رجب",
       "pronunciation": "rajab",
-      "english": "The Islamic (Hijri) months are based on the lunar calendar, which follows the cycles of the moonThe English months are based on the solar calendar, which follows the sun. A Hijri year is about 354 days, whereas a Gregorian year is about 365 days, so the Islamic year is approximately 11 days shorter. Because of this difference, Islamic months do not align with fixed English months and move earlier each year.For example, Ramadan can occur in summer one year and winter several years later. Therefore, Islamic and English months are not direct equivalents and cannot be matched one-to-one.",
+      "english": "",
       "category": "ISLAMICMONTHS",
       "isExtra": false,
       "monthIndex": 9,
@@ -2099,7 +2109,7 @@
       "arabic": "٨ - شَعْبَان",
       "arabicFolded": "٨ - شعبان",
       "pronunciation": "shaʿbān",
-      "english": "The Islamic (Hijri) months are based on the lunar calendar, which follows the cycles of the moonThe English months are based on the solar calendar, which follows the sun. A Hijri year is about 354 days, whereas a Gregorian year is about 365 days, so the Islamic year is approximately 11 days shorter. Because of this difference, Islamic months do not align with fixed English months and move earlier each year.For example, Ramadan can occur in summer one year and winter several years later. Therefore, Islamic and English months are not direct equivalents and cannot be matched one-to-one.",
+      "english": "",
       "category": "ISLAMICMONTHS",
       "isExtra": false,
       "monthIndex": 9,
@@ -2114,7 +2124,7 @@
       "arabic": "٩ - رَمَضَان",
       "arabicFolded": "٩ - رمضان",
       "pronunciation": "ramaḍān",
-      "english": "The Islamic (Hijri) months are based on the lunar calendar, which follows the cycles of the moonThe English months are based on the solar calendar, which follows the sun. A Hijri year is about 354 days, whereas a Gregorian year is about 365 days, so the Islamic year is approximately 11 days shorter. Because of this difference, Islamic months do not align with fixed English months and move earlier each year.For example, Ramadan can occur in summer one year and winter several years later. Therefore, Islamic and English months are not direct equivalents and cannot be matched one-to-one.",
+      "english": "",
       "category": "ISLAMICMONTHS",
       "isExtra": false,
       "monthIndex": 9,
@@ -2129,7 +2139,7 @@
       "arabic": "١٠ - شَوَّال",
       "arabicFolded": "١٠ - شوال",
       "pronunciation": "shawwāl",
-      "english": "The Islamic (Hijri) months are based on the lunar calendar, which follows the cycles of the moonThe English months are based on the solar calendar, which follows the sun. A Hijri year is about 354 days, whereas a Gregorian year is about 365 days, so the Islamic year is approximately 11 days shorter. Because of this difference, Islamic months do not align with fixed English months and move earlier each year.For example, Ramadan can occur in summer one year and winter several years later. Therefore, Islamic and English months are not direct equivalents and cannot be matched one-to-one.",
+      "english": "",
       "category": "ISLAMICMONTHS",
       "isExtra": false,
       "monthIndex": 9,
@@ -2144,7 +2154,7 @@
       "arabic": "١١ - ذُو القَعْدَة",
       "arabicFolded": "١١ - ذو القعدة",
       "pronunciation": "dhū al-qaʿdah",
-      "english": "The Islamic (Hijri) months are based on the lunar calendar, which follows the cycles of the moonThe English months are based on the solar calendar, which follows the sun. A Hijri year is about 354 days, whereas a Gregorian year is about 365 days, so the Islamic year is approximately 11 days shorter. Because of this difference, Islamic months do not align with fixed English months and move earlier each year.For example, Ramadan can occur in summer one year and winter several years later. Therefore, Islamic and English months are not direct equivalents and cannot be matched one-to-one.",
+      "english": "",
       "category": "ISLAMICMONTHS",
       "isExtra": false,
       "monthIndex": 9,
@@ -2159,7 +2169,7 @@
       "arabic": "١٢ - ذُو الحِجَّة",
       "arabicFolded": "١٢ - ذو الحجة",
       "pronunciation": "dhū al-ḥijjah",
-      "english": "The Islamic (Hijri) months are based on the lunar calendar, which follows the cycles of the moonThe English months are based on the solar calendar, which follows the sun. A Hijri year is about 354 days, whereas a Gregorian year is about 365 days, so the Islamic year is approximately 11 days shorter. Because of this difference, Islamic months do not align with fixed English months and move earlier each year.For example, Ramadan can occur in summer one year and winter several years later. Therefore, Islamic and English months are not direct equivalents and cannot be matched one-to-one.",
+      "english": "",
       "category": "ISLAMICMONTHS",
       "isExtra": false,
       "monthIndex": 9,
