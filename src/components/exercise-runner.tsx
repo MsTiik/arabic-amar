@@ -261,7 +261,7 @@ function MultipleChoiceView({
             <TranslitReveal
               text={question.promptHint}
               hiddenLabel="Show meaning"
-              lang={undefined}
+              lang=""
             />
           ) : (
             <TranslitReveal text={question.promptHint} />

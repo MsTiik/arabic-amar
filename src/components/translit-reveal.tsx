@@ -12,9 +12,11 @@ interface Props {
   /** Override the toggle label when hidden. Default: "Show pronunciation". */
   hiddenLabel?: string;
   /** BCP-47 language tag for the revealed text. Defaults to `ar-Latn`
-   *  (Arabic transliterated in Latin script). Pass `undefined` (or any other
-   *  tag) when the revealed text is not a transliteration — e.g. an English
-   *  meaning hint — so screen readers get the right pronunciation. */
+   *  (Arabic transliterated in Latin script). Pass an empty string (`""`)
+   *  when the revealed text is not a transliteration — e.g. an English
+   *  meaning hint — so screen readers get the right pronunciation.
+   *  (An explicit `undefined` will be treated as "not provided" by JS
+   *  default-parameter semantics and fall back to `ar-Latn`.) */
   lang?: string;
 }
 
@@ -28,10 +30,14 @@ export function TranslitReveal({
   variant = "block",
   className,
   hiddenLabel = "Show pronunciation",
-  lang = "ar-Latn",
+  lang,
 }: Props) {
   const [shown, setShown] = useState(false);
   if (!text || !text.trim()) return null;
+  // `lang === ""` → caller explicitly wants no lang attribute (e.g. revealed
+  // text is plain English). Otherwise default to `ar-Latn`.
+  const resolvedLang =
+    lang === "" ? undefined : (lang ?? "ar-Latn");
 
   if (variant === "inline") {
     return (
@@ -47,7 +53,7 @@ export function TranslitReveal({
           "block w-full text-center text-[10px] leading-tight text-muted-foreground/60 hover:text-muted-foreground focus-ring rounded",
           className,
         )}
-        lang={shown ? lang : undefined}
+        lang={shown ? resolvedLang : undefined}
       >
         {shown ? text : "🔊 hint"}
       </button>
@@ -67,7 +73,7 @@ export function TranslitReveal({
         "mx-auto mt-1 block text-xs italic text-muted-foreground/70 hover:text-muted-foreground focus-ring rounded px-2",
         className,
       )}
-      lang={shown ? lang : undefined}
+      lang={shown ? resolvedLang : undefined}
     >
       {shown ? text : hiddenLabel}
     </button>
