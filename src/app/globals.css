@@ -26,10 +26,15 @@
   --card-foreground: oklch(0.22 0.025 270);
   --ring: oklch(0.6 0.13 200 / 50%);
 
-  --font-arabic: var(--font-amiri), "Noto Naskh Arabic", "Scheherazade New",
-    "Traditional Arabic", serif;
-  --font-arabic-display: var(--font-amiri-quran), var(--font-amiri),
-    "Noto Naskh Arabic", serif;
+  /*
+   * Arabic stack matches the look the Google Doc gets from "Arial": a clean,
+   * sans-serif Arabic typeface. Noto Sans Arabic is the de-facto web equivalent
+   * (Arial doesn't ship Arabic glyphs on most Linux/web targets).
+   */
+  --font-arabic: var(--font-noto-arabic), "Segoe UI", Tahoma, Arial,
+    "Helvetica Neue", system-ui, sans-serif;
+  --font-arabic-display: var(--font-noto-arabic), "Segoe UI", Tahoma, Arial,
+    "Helvetica Neue", system-ui, sans-serif;
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 }
 
@@ -98,7 +103,7 @@ body {
 .font-arabic {
   font-family: var(--font-arabic);
   font-feature-settings: "liga", "calt", "kern";
-  line-height: 2;
+  line-height: 1.9;
   letter-spacing: 0;
   unicode-bidi: isolate;
   direction: rtl;
@@ -107,7 +112,7 @@ body {
 .font-arabic-display {
   font-family: var(--font-arabic-display);
   font-feature-settings: "liga", "calt", "kern";
-  line-height: 1.7;
+  line-height: 1.6;
   letter-spacing: 0;
   unicode-bidi: isolate;
   direction: rtl;

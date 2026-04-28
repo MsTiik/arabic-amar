@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Amiri, Amiri_Quran, Inter } from "next/font/google";
+import { Inter, Noto_Sans_Arabic } from "next/font/google";
 
 import { Topbar } from "@/components/topbar";
 import "./globals.css";
@@ -9,17 +9,12 @@ const inter = Inter({
   subsets: ["latin"],
 });
 
-const amiri = Amiri({
-  variable: "--font-amiri",
-  subsets: ["arabic", "latin"],
-  weight: ["400", "700"],
-  style: ["normal", "italic"],
-});
-
-const amiriQuran = Amiri_Quran({
-  variable: "--font-amiri-quran",
+// Noto Sans Arabic mirrors the look the Google Doc gets from "Arial" — a
+// neutral, sans-serif Arabic typeface — while keeping full diacritic coverage.
+const notoArabic = Noto_Sans_Arabic({
+  variable: "--font-noto-arabic",
   subsets: ["arabic"],
-  weight: ["400"],
+  weight: ["400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -39,7 +34,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${amiri.variable} ${amiriQuran.variable} h-full antialiased`}
+      className={`${inter.variable} ${notoArabic.variable} h-full antialiased`}
     >
       <body className="min-h-full bg-background text-foreground flex flex-col">
         <Topbar />

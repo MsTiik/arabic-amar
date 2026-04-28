@@ -164,7 +164,7 @@ export function VocabBankClient({ vocab, topics }: Props) {
                     {entries.length} words
                   </span>
                 </header>
-                <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-3">
+                <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                   {entries.map((entry) => (
                     <VocabCard key={entry.id} entry={entry} size="md" />
                   ))}
@@ -176,7 +176,7 @@ export function VocabBankClient({ vocab, topics }: Props) {
       ) : null}
 
       {(collapsed || isFiltering) && filtered.length > 0 ? (
-        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-3">
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {filtered.map((entry) => (
             <VocabCard key={entry.id} entry={entry} size="md" />
           ))}
