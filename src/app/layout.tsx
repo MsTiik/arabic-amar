@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { Inter, Noto_Sans_Arabic } from "next/font/google";
+import { Inter } from "next/font/google";
+import localFont from "next/font/local";
 
 import { Topbar } from "@/components/topbar";
 import "./globals.css";
@@ -9,12 +10,16 @@ const inter = Inter({
   subsets: ["latin"],
 });
 
-// Noto Sans Arabic mirrors the look the Google Doc gets from "Arial" — a
-// neutral, sans-serif Arabic typeface — while keeping full diacritic coverage.
-const notoArabic = Noto_Sans_Arabic({
+// Self-hosted Noto Naskh Arabic (Medium). Naskh is the traditional book/Quran
+// hand and has full coverage of tashkeel (fathatan, dammatan, kasratan, fatha,
+// damma, kasra, shadda, sukun, dagger alif, etc.) — preserving every diacritic
+// from the source doc end-to-end.
+const notoArabic = localFont({
   variable: "--font-noto-arabic",
-  subsets: ["arabic"],
-  weight: ["400", "500", "600", "700"],
+  src: [
+    { path: "./fonts/NotoNaskhArabic-Medium.ttf", weight: "500", style: "normal" },
+  ],
+  display: "swap",
 });
 
 export const metadata: Metadata = {

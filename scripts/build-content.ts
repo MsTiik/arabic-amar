@@ -10,7 +10,7 @@ import fs from "node:fs/promises";
 import path from "node:path";
 
 import { parseDocxBuffer } from "../src/lib/parser";
-import { dedupeLongRepeatedEnglish } from "../src/lib/post-process";
+import { applySpellingFixes, dedupeLongRepeatedEnglish } from "../src/lib/post-process";
 import { fetchDocxBytes, getDocId, getDocUrl } from "../src/lib/source";
 
 const OUTPUT_PATH = path.resolve(process.cwd(), "content", "content.json");
@@ -30,7 +30,7 @@ async function loadBuffer(): Promise<Buffer> {
 async function main(): Promise<void> {
   const buf = await loadBuffer();
   const { content: raw, warnings } = await parseDocxBuffer(buf, { verbose: true });
-  const content = dedupeLongRepeatedEnglish(raw);
+  const content = applySpellingFixes(dedupeLongRepeatedEnglish(raw));
 
   if (warnings.length > 0) {
     console.warn(`[content] parser produced ${warnings.length} warning(s):`);

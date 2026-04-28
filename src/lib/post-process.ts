@@ -3,6 +3,32 @@ import type { SiteContent, Topic, VocabEntry } from "./types";
 const NOTE_MIN_CHARS = 60;
 const NOTE_MIN_REPEATS = 3;
 
+/** Source-doc typo fixes that the parser cannot reasonably do on its own. */
+const SPELLING_FIXES: Record<string, string> = {
+  ERUOPE: "EUROPE",
+};
+
+function fixSpelling(s: string | undefined): string | undefined {
+  if (!s) return s;
+  return SPELLING_FIXES[s] ?? s;
+}
+
+/**
+ * Apply known spelling fixes from the source document. The Google Doc has a
+ * handful of obvious typos in non-content metadata (continent codes etc.) that
+ * we'd rather present cleanly without altering vocabulary itself.
+ */
+export function applySpellingFixes(content: SiteContent): SiteContent {
+  return {
+    ...content,
+    vocab: content.vocab.map((v) => ({
+      ...v,
+      continent: fixSpelling(v.continent),
+      subCategory: fixSpelling(v.subCategory),
+    })),
+  };
+}
+
 /**
  * Detect when many vocab entries within the same topic+category share an
  * identical long english text and lift that text into a topic-level note.

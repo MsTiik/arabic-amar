@@ -27,14 +27,14 @@
   --ring: oklch(0.6 0.13 200 / 50%);
 
   /*
-   * Arabic stack matches the look the Google Doc gets from "Arial": a clean,
-   * sans-serif Arabic typeface. Noto Sans Arabic is the de-facto web equivalent
-   * (Arial doesn't ship Arabic glyphs on most Linux/web targets).
+   * Arabic stack uses Noto Naskh Arabic — the traditional book/Quran hand
+   * with full tashkeel coverage. Self-hosted from public/ to guarantee the
+   * exact glyphs render every diacritic at full opacity.
    */
-  --font-arabic: var(--font-noto-arabic), "Segoe UI", Tahoma, Arial,
-    "Helvetica Neue", system-ui, sans-serif;
-  --font-arabic-display: var(--font-noto-arabic), "Segoe UI", Tahoma, Arial,
-    "Helvetica Neue", system-ui, sans-serif;
+  --font-arabic: var(--font-noto-arabic), "Noto Naskh Arabic", "Amiri",
+    "Scheherazade New", system-ui, serif;
+  --font-arabic-display: var(--font-noto-arabic), "Noto Naskh Arabic",
+    "Amiri", "Scheherazade New", system-ui, serif;
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 }
 
