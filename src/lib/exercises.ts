@@ -32,11 +32,21 @@ function pickDistractors(
   return ordered.slice(0, count);
 }
 
+/**
+ * Some entries (e.g. Hijri month rows whose English column was a long
+ * rowspanned explanation lifted to topic.notes) end up without a usable
+ * English gloss. Skip those so flashcards/MC/fill don't show empty prompts
+ * or blank option buttons.
+ */
+function withEnglish(vocab: VocabEntry[]): VocabEntry[] {
+  return vocab.filter((v) => v.english && v.english.trim() !== "");
+}
+
 export function makeFlashcardDeck(
   vocab: VocabEntry[],
   opts: { id: string; title: string; topicSlug?: string; lessonId?: string },
 ): ExerciseDeck {
-  const questions: ExerciseQuestion[] = vocab.map((v, idx) => ({
+  const questions: ExerciseQuestion[] = withEnglish(vocab).map((v, idx) => ({
     id: `${v.id}__flash_${idx}`,
     kind: "flashcard",
     wordId: v.id,
@@ -59,8 +69,13 @@ export function makeMultipleChoiceDeck(
     "translit-to-ar": "multiple-choice-translit-to-ar",
   };
   const kind = kindMap[direction];
-  const questions: ExerciseQuestion[] = vocab.map((v, idx) => {
-    const distractors = pickDistractors(pool, v, 3, idx + 1);
+  // Directions that depend on english need entries (and a distractor pool)
+  // that actually have an english gloss; otherwise prompts/options render blank.
+  const needsEnglish = direction === "en-to-ar" || direction === "ar-to-en";
+  const sourceVocab = needsEnglish ? withEnglish(vocab) : vocab;
+  const sourcePool = needsEnglish ? withEnglish(pool) : pool;
+  const questions: ExerciseQuestion[] = sourceVocab.map((v, idx) => {
+    const distractors = pickDistractors(sourcePool, v, 3, idx + 1);
     const allCandidates = [v, ...distractors];
     const shuffled = shuffle(allCandidates, idx + 7);
     const correctId = `opt-${v.id}`;
@@ -106,7 +121,7 @@ export function makeFillBlankDeck(
   vocab: VocabEntry[],
   opts: { id: string; title: string; topicSlug?: string; lessonId?: string },
 ): ExerciseDeck {
-  const questions: ExerciseQuestion[] = vocab.map((v, idx) => ({
+  const questions: ExerciseQuestion[] = withEnglish(vocab).map((v, idx) => ({
     id: `${v.id}__fillblank_${idx}`,
     kind: "fill-blank-translit",
     wordId: v.id,
