@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useMemo, useState } from "react";
 
 import {
@@ -35,6 +35,7 @@ export function PracticeClient(props: Props) {
 
 function PracticeInner({ vocab, topics, lessons }: Props) {
   const search = useSearchParams();
+  const router = useRouter();
   const deckParam = search.get("deck"); // "mistakes" | "today"
   const topicSlug = search.get("topic") ?? "";
   const kindParam = search.get("kind") ?? "mc"; // "flashcard" | "mc" | "fill" | "gender" | "ordering"
@@ -78,6 +79,12 @@ function PracticeInner({ vocab, topics, lessons }: Props) {
   function exitActive() {
     setManualDeck(null);
     setExitedKey(urlDeckKey);
+    // If we exited a deck that came from URL params, clear them so a refresh
+    // doesn't drop the user back into the deck and the address bar reflects
+    // the picker view they're now looking at.
+    if (deckParam || topicSlug || search.get("kind")) {
+      router.replace("/practice");
+    }
   }
 
   if (activeDeck) {
@@ -111,7 +118,7 @@ function PracticeInner({ vocab, topics, lessons }: Props) {
             title="Mixed multiple choice"
             description="Random 12 words across all lessons (Arabic ↔ English)."
             onClick={() => {
-              const sample = sampleRandom(vocab, 12, 13);
+              const sample = sampleRandom(vocab, 12, Date.now());
               setManualDeck(
                 makeMultipleChoiceDeck(sample, vocab, "ar-to-en", {
                   id: "deck-mixed-mc",
@@ -124,7 +131,7 @@ function PracticeInner({ vocab, topics, lessons }: Props) {
             title="Flashcards (mixed)"
             description="Tap to flip. Self-rate after each card."
             onClick={() => {
-              const sample = sampleRandom(vocab, 15, 23);
+              const sample = sampleRandom(vocab, 15, Date.now());
               setManualDeck(
                 makeFlashcardDeck(sample, {
                   id: "deck-mixed-flash",
@@ -137,7 +144,7 @@ function PracticeInner({ vocab, topics, lessons }: Props) {
             title="Type the transliteration"
             description="Read the Arabic, type the pronunciation."
             onClick={() => {
-              const sample = sampleRandom(vocab, 10, 31);
+              const sample = sampleRandom(vocab, 10, Date.now());
               setManualDeck(
                 makeFillBlankDeck(sample, {
                   id: "deck-mixed-fill",
@@ -151,7 +158,7 @@ function PracticeInner({ vocab, topics, lessons }: Props) {
             description="Decide masculine or feminine on Body Parts and Entities."
             onClick={() => {
               const candidates = vocab.filter((v) => v.gender === "M" || v.gender === "F");
-              const sample = sampleRandom(candidates, 12, 41);
+              const sample = sampleRandom(candidates, 12, Date.now());
               setManualDeck(
                 makeGenderQuizDeck(sample, {
                   id: "deck-mixed-gender",
@@ -242,7 +249,10 @@ function DeckButton({
 
 function sampleRandom<T>(arr: T[], n: number, seed: number): T[] {
   const a = [...arr];
-  let s = seed || 1;
+  // Reduce the seed into the LCG's range first. Date.now() (~1.78e12 in 2026)
+  // multiplied by 9301 overflows Number.MAX_SAFE_INTEGER (9.0e15) on the
+  // first step, costing precision on the first swap.
+  let s = (seed % 233280) || 1;
   for (let i = a.length - 1; i > 0; i--) {
     s = (s * 9301 + 49297) % 233280;
     const j = Math.floor((s / 233280) * (i + 1));

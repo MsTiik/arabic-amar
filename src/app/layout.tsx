@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { Amiri, Amiri_Quran, Inter } from "next/font/google";
+import { Inter } from "next/font/google";
+import localFont from "next/font/local";
 
 import { Topbar } from "@/components/topbar";
 import "./globals.css";
@@ -9,17 +10,16 @@ const inter = Inter({
   subsets: ["latin"],
 });
 
-const amiri = Amiri({
-  variable: "--font-amiri",
-  subsets: ["arabic", "latin"],
-  weight: ["400", "700"],
-  style: ["normal", "italic"],
-});
-
-const amiriQuran = Amiri_Quran({
-  variable: "--font-amiri-quran",
-  subsets: ["arabic"],
-  weight: ["400"],
+// Self-hosted Noto Naskh Arabic (Medium). Naskh is the traditional book/Quran
+// hand and has full coverage of tashkeel (fathatan, dammatan, kasratan, fatha,
+// damma, kasra, shadda, sukun, dagger alif, etc.) — preserving every diacritic
+// from the source doc end-to-end.
+const notoArabic = localFont({
+  variable: "--font-noto-arabic",
+  src: [
+    { path: "./fonts/NotoNaskhArabic-Medium.ttf", weight: "500", style: "normal" },
+  ],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -39,7 +39,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${amiri.variable} ${amiriQuran.variable} h-full antialiased`}
+      className={`${inter.variable} ${notoArabic.variable} h-full antialiased`}
     >
       <body className="min-h-full bg-background text-foreground flex flex-col">
         <Topbar />

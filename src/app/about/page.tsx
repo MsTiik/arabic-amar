@@ -22,28 +22,28 @@ export default function AboutPage() {
           fatha, kasra, damma, sukun, shadda, and tanween remain visible exactly as written.
         </p>
         <p className="rounded-2xl border border-border bg-card p-4 text-sm">
-          Source content last fetched:{" "}
+          {"Source content last fetched: "}
           <span className="font-medium text-foreground">
             {new Date(fetchedAt).toUTCString()}
           </span>
-          . The site refreshes from the Google Doc on every deploy.
+          {". The site refreshes from the Google Doc on every deploy."}
         </p>
       </div>
 
       <h2 className="mt-10 text-xl font-semibold tracking-tight">Credits</h2>
       <ul className="mt-2 space-y-2 text-sm">
         <li>
-          <span className="text-muted-foreground">Course:</span>{" "}
+          <span className="text-muted-foreground">{"Course: "}</span>
           <strong>{source.name}</strong>
         </li>
         <li>
-          <span className="text-muted-foreground">Contact:</span>{" "}
+          <span className="text-muted-foreground">{"Contact: "}</span>
           <a className="underline" href={`mailto:${source.contactEmail}`}>
             {source.contactEmail}
           </a>
         </li>
         <li>
-          <span className="text-muted-foreground">Instagram:</span>{" "}
+          <span className="text-muted-foreground">{"Instagram: "}</span>
           <a
             className="underline"
             href={`https://instagram.com/${source.instagram.replace(/^@/, "")}`}
@@ -52,7 +52,7 @@ export default function AboutPage() {
           </a>
         </li>
         <li>
-          <span className="text-muted-foreground">Source document:</span>{" "}
+          <span className="text-muted-foreground">{"Source document: "}</span>
           <Link className="underline" href={source.docUrl}>
             Google Doc
           </Link>

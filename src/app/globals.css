@@ -26,10 +26,15 @@
   --card-foreground: oklch(0.22 0.025 270);
   --ring: oklch(0.6 0.13 200 / 50%);
 
-  --font-arabic: var(--font-amiri), "Noto Naskh Arabic", "Scheherazade New",
-    "Traditional Arabic", serif;
-  --font-arabic-display: var(--font-amiri-quran), var(--font-amiri),
-    "Noto Naskh Arabic", serif;
+  /*
+   * Arabic stack uses Noto Naskh Arabic — the traditional book/Quran hand
+   * with full tashkeel coverage. Self-hosted from public/ to guarantee the
+   * exact glyphs render every diacritic at full opacity.
+   */
+  --font-arabic: var(--font-noto-arabic), "Noto Naskh Arabic", "Amiri",
+    "Scheherazade New", system-ui, serif;
+  --font-arabic-display: var(--font-noto-arabic), "Noto Naskh Arabic",
+    "Amiri", "Scheherazade New", system-ui, serif;
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 }
 
@@ -98,20 +103,26 @@ body {
 .font-arabic {
   font-family: var(--font-arabic);
   font-feature-settings: "liga", "calt", "kern";
-  line-height: 2;
+  line-height: 1.9;
   letter-spacing: 0;
   unicode-bidi: isolate;
   direction: rtl;
+  /* Only the Medium (500) weight TTF is loaded; force weight 500 + disable
+   * synthesis so the browser never smears the glyph to fake bold. Synthesized
+   * bold blurs the tashkeel, which defeats the whole point of using Naskh. */
+  font-weight: 500;
+  font-synthesis: none;
 }
 
 .font-arabic-display {
   font-family: var(--font-arabic-display);
   font-feature-settings: "liga", "calt", "kern";
-  line-height: 1.7;
+  line-height: 1.6;
   letter-spacing: 0;
   unicode-bidi: isolate;
   direction: rtl;
-  font-weight: 600;
+  font-weight: 500;
+  font-synthesis: none;
 }
 
 .text-balance {

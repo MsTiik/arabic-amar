@@ -13,6 +13,7 @@ import {
   getVocabForTopic,
   groupVocabByCategory,
 } from "@/lib/content";
+import type { VocabEntry } from "@/lib/types";
 
 export function generateStaticParams() {
   return getSiteContent().topics.map((t) => ({ slug: t.slug }));
@@ -71,9 +72,9 @@ export default async function TopicPage({
                         {group.entries.length} words
                       </span>
                     </header>
-                    <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-3">
+                    <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                       {group.entries.map((entry) => (
-                        <VocabCard key={entry.id} entry={entry} size="lg" />
+                        <VocabCard key={entry.id} entry={entry} size="md" />
                       ))}
                     </div>
                   </section>
@@ -121,11 +122,11 @@ export default async function TopicPage({
                   description="Decide whether each noun is masculine or feminine."
                 />
               ) : null}
-              {(slug === "numbers" || slug === "days-of-the-week") ? (
+              {hasOrderingDeck(slug, vocab) ? (
                 <PracticeLink
                   href={`/practice?topic=${slug}&kind=ordering`}
                   title="Ordering"
-                  description="Drag tiles into the correct numeric / weekday order."
+                  description={orderingCopyFor(slug)}
                 />
               ) : null}
             </div>
@@ -164,4 +165,36 @@ function slugify(s: string): string {
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-+|-+$/g, "");
+}
+
+/**
+ * Surface the Ordering deck wherever the underlying vocab actually has
+ * sequenced data. Mirrors the columns `makeOrderingDeck` understands so we
+ * don't show the deck for a topic where it would have nothing to order.
+ */
+function hasOrderingDeck(slug: string, vocab: VocabEntry[]): boolean {
+  const fields = orderingFieldsFor(slug);
+  if (fields.length === 0) return false;
+  return fields.some((field) =>
+    vocab.filter((v) => typeof v[field] === "number").length >= 4,
+  );
+}
+
+function orderingFieldsFor(
+  slug: string,
+): Array<"numericValue" | "weekdayIndex" | "monthIndex"> {
+  if (slug === "numbers") return ["numericValue"];
+  if (slug === "days-of-the-week") return ["weekdayIndex"];
+  if (slug === "islamic-and-gregorian-months") return ["monthIndex"];
+  return [];
+}
+
+function orderingCopyFor(slug: string): string {
+  if (slug === "islamic-and-gregorian-months") {
+    return "Drag tiles into the correct calendar month order.";
+  }
+  if (slug === "days-of-the-week") {
+    return "Drag tiles into the correct weekday order.";
+  }
+  return "Drag tiles into the correct numeric order.";
 }

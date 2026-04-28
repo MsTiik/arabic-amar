@@ -68,7 +68,7 @@ export function VocabCard({
             {entry.gender === "M" ? "مذكر" : entry.gender === "F" ? "مؤنث" : entry.gender}
           </span>
         ) : null}
-        {entry.subCategory ? (
+        {entry.subCategory && entry.subCategory !== entry.continent ? (
           <span className="rounded-md border border-border bg-background-soft px-2 py-0.5">
             {entry.subCategory}
           </span>
