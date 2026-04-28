@@ -242,7 +242,10 @@ function DeckButton({
 
 function sampleRandom<T>(arr: T[], n: number, seed: number): T[] {
   const a = [...arr];
-  let s = seed || 1;
+  // Reduce the seed into the LCG's range first. Date.now() (~1.78e12 in 2026)
+  // multiplied by 9301 overflows Number.MAX_SAFE_INTEGER (9.0e15) on the
+  // first step, costing precision on the first swap.
+  let s = (seed % 233280) || 1;
   for (let i = a.length - 1; i > 0; i--) {
     s = (s * 9301 + 49297) % 233280;
     const j = Math.floor((s / 233280) * (i + 1));

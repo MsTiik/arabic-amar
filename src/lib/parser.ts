@@ -797,6 +797,34 @@ export async function parseDocxBuffer(
   }
   flushRuleBuffer();
 
+  // Deduplicate vocab/rule IDs BEFORE cross-linking, so lesson.vocabIds /
+  // lesson.ruleIds reference the deduped ids and downstream lookups still
+  // resolve. stableId() drops diacritics, so two distinct entries that share
+  // the same lesson + category + un-diacritised arabic would collide and
+  // break React's keyed reconciliation. Suffix collisions with -2, -3, … so
+  // every entry has a unique id.
+  const vocabIdCounts = new Map<string, number>();
+  for (const v of vocab) {
+    const baseId = v.id;
+    const count = (vocabIdCounts.get(baseId) ?? 0) + 1;
+    vocabIdCounts.set(baseId, count);
+    if (count > 1) {
+      v.id = `${baseId}-${count}`;
+      warn(`Duplicate vocab id collapsed: ${v.id}`);
+    }
+  }
+
+  const ruleIdCounts = new Map<string, number>();
+  for (const r of rules) {
+    const baseId = r.id;
+    const count = (ruleIdCounts.get(baseId) ?? 0) + 1;
+    ruleIdCounts.set(baseId, count);
+    if (count > 1) {
+      r.id = `${baseId}-${count}`;
+      warn(`Duplicate rule id collapsed: ${r.id}`);
+    }
+  }
+
   // Cross-link lesson → vocab/rules ids
   const lessonsById = new Map(lessons.map((l) => [l.id, l]));
   for (const v of vocab) {
@@ -825,32 +853,6 @@ export async function parseDocxBuffer(
   }
 
   const topics = [...topicMap.values()].sort((a, b) => a.order - b.order);
-
-  // Deduplicate vocab IDs: stableId() drops diacritics, so two distinct
-  // entries that share the same lesson + category + un-diacritised arabic
-  // would collide and break React's keyed reconciliation downstream.
-  // Suffix collisions with -2, -3, … so every entry has a unique id.
-  const vocabIdCounts = new Map<string, number>();
-  for (const v of vocab) {
-    const baseId = v.id;
-    const count = (vocabIdCounts.get(baseId) ?? 0) + 1;
-    vocabIdCounts.set(baseId, count);
-    if (count > 1) {
-      v.id = `${baseId}-${count}`;
-      warn(`Duplicate vocab id collapsed: ${v.id}`);
-    }
-  }
-
-  const ruleIdCounts = new Map<string, number>();
-  for (const r of rules) {
-    const baseId = r.id;
-    const count = (ruleIdCounts.get(baseId) ?? 0) + 1;
-    ruleIdCounts.set(baseId, count);
-    if (count > 1) {
-      r.id = `${baseId}-${count}`;
-      warn(`Duplicate rule id collapsed: ${r.id}`);
-    }
-  }
 
   const content: SiteContent = {
     lessons,
