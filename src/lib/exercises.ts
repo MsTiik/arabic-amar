@@ -82,25 +82,43 @@ export function makeMultipleChoiceDeck(
     let prompt = "";
     let promptArabic: string | undefined;
     let promptHint: string | undefined;
-    let optionRender: (e: VocabEntry) => { text: string; isArabic: boolean };
+    let optionRender: (e: VocabEntry) => {
+      text: string;
+      isArabic: boolean;
+      translit?: string;
+    };
 
     if (direction === "en-to-ar") {
       prompt = v.english;
       promptHint = v.pronunciation;
-      optionRender = (e) => ({ text: e.arabic, isArabic: true });
+      optionRender = (e) => ({
+        text: e.arabic,
+        isArabic: true,
+        translit: e.pronunciation,
+      });
     } else if (direction === "ar-to-en") {
       promptArabic = v.arabic;
       prompt = "What does this word mean?";
+      promptHint = v.pronunciation;
       optionRender = (e) => ({ text: e.english, isArabic: false });
     } else {
       prompt = v.pronunciation;
       promptHint = v.english;
-      optionRender = (e) => ({ text: e.arabic, isArabic: true });
+      optionRender = (e) => ({
+        text: e.arabic,
+        isArabic: true,
+        translit: e.pronunciation,
+      });
     }
 
     const options = shuffled.map((e) => {
       const r = optionRender(e);
-      return { id: `opt-${e.id}`, text: r.text, isArabic: r.isArabic };
+      return {
+        id: `opt-${e.id}`,
+        text: r.text,
+        isArabic: r.isArabic,
+        ...(r.translit ? { translit: r.translit } : {}),
+      };
     });
 
     return {
@@ -188,6 +206,7 @@ export function makeOrderingDeck(
       id: `opt-${v.id}`,
       text: v.arabic,
       isArabic: true,
+      translit: v.pronunciation,
     })),
     correctOrder: chunk.map((v) => `opt-${v.id}`),
   }));

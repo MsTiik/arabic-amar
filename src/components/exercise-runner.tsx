@@ -5,6 +5,7 @@ import { ArrowLeft, Check, RotateCcw, X } from "lucide-react";
 
 import { ArabicText } from "@/components/arabic-text";
 import { ProgressRing } from "@/components/progress-ring";
+import { TranslitReveal } from "@/components/translit-reveal";
 import { cn } from "@/lib/cn";
 import { checkFillBlankAnswer, checkOrderingAnswer } from "@/lib/exercises";
 import type { ExerciseDeck, ExerciseQuestion } from "@/lib/types";
@@ -208,6 +209,9 @@ function FlashcardView({
           Tap to flip
         </span>
       </button>
+      {!flipped && question.promptHint ? (
+        <TranslitReveal text={question.promptHint} className="mt-2" />
+      ) : null}
       <div className="mt-6 grid grid-cols-2 gap-3">
         <button
           type="button"
@@ -250,9 +254,7 @@ function MultipleChoiceView({
         ) : null}
         <p className="mt-2 text-base font-medium">{question.prompt}</p>
         {question.promptHint ? (
-          <p className="text-sm italic text-muted-foreground" lang="ar-Latn">
-            {question.promptHint}
-          </p>
+          <TranslitReveal text={question.promptHint} />
         ) : null}
       </div>
 
@@ -267,24 +269,28 @@ function MultipleChoiceView({
             else style = "border-border bg-background-soft opacity-60";
           }
           return (
-            <button
-              key={opt.id}
-              type="button"
-              disabled={selected !== null}
-              onClick={() => setSelected(opt.id)}
-              className={cn(
-                "rounded-2xl border p-4 text-center transition-colors focus-ring",
-                style,
-              )}
-            >
-              {opt.isArabic ? (
-                <ArabicText variant="display" className="text-3xl sm:text-4xl">
-                  {opt.text}
-                </ArabicText>
-              ) : (
-                <span className="text-base font-semibold">{opt.text}</span>
-              )}
-            </button>
+            <div key={opt.id} className="flex flex-col gap-1">
+              <button
+                type="button"
+                disabled={selected !== null}
+                onClick={() => setSelected(opt.id)}
+                className={cn(
+                  "rounded-2xl border p-4 text-center transition-colors focus-ring",
+                  style,
+                )}
+              >
+                {opt.isArabic ? (
+                  <ArabicText variant="display" className="text-3xl sm:text-4xl">
+                    {opt.text}
+                  </ArabicText>
+                ) : (
+                  <span className="text-base font-semibold">{opt.text}</span>
+                )}
+              </button>
+              {opt.isArabic && opt.translit ? (
+                <TranslitReveal text={opt.translit} variant="inline" />
+              ) : null}
+            </div>
           );
         })}
       </div>
@@ -432,9 +438,18 @@ function OrderingView({
               <span className="w-6 text-right text-xs tabular-nums text-muted-foreground">
                 {i + 1}.
               </span>
-              <ArabicText variant="display" className="flex-1 text-3xl">
-                {opt.text}
-              </ArabicText>
+              <div className="flex-1 min-w-0">
+                <ArabicText variant="display" className="text-3xl">
+                  {opt.text}
+                </ArabicText>
+                {opt.translit ? (
+                  <TranslitReveal
+                    text={opt.translit}
+                    variant="inline"
+                    className="mt-0.5 text-left"
+                  />
+                ) : null}
+              </div>
               <button
                 type="button"
                 onClick={() => move(id, -1)}
