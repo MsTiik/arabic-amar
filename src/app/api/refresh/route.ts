@@ -69,7 +69,6 @@ export async function POST(request: Request) {
       },
     );
   }
-  recentTriggers.push(now);
 
   let hookResponse: Response;
   try {
@@ -94,6 +93,9 @@ export async function POST(request: Request) {
     );
   }
 
+  // Only count a slot once the deploy hook accepted the request, so hook
+  // outages or network errors don't lock the admin out of retrying.
+  recentTriggers.push(now);
   return Response.json({ ok: true });
 }
 
