@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 
 const TOKEN_KEY = "arabic-amar:admin-refresh-token";
+const UNLOCK_HASH = "#admin";
 
 type Status =
   | { kind: "idle" }
@@ -11,29 +12,33 @@ type Status =
   | { kind: "error"; message: string };
 
 /**
- * Subtle "Refresh from Google Doc" button gated by a password the admin
- * pastes once into localStorage. Visitors without the password just see the
- * button as a normal element; clicking it opens a prompt for the password.
+ * "Refresh from Google Doc" admin button. Hidden from ordinary visitors.
  *
- * Wired to `POST /api/refresh`, which validates `x-admin-token` against the
- * server-side `ADMIN_REFRESH_TOKEN` env var, then POSTs to the Vercel deploy
- * hook so the site rebuilds (re-running `prebuild` to pull the latest doc).
+ * The button only renders when one of these is true:
+ *   - the admin token is already in localStorage (returning admin on this device), or
+ *   - the page URL hash is `#admin` (first-time unlock from a bookmark).
+ *
+ * Clicking the button prompts for the token (on devices without one stored),
+ * then POSTs to `/api/refresh` with the `x-admin-token` header. The server
+ * validates against the `ADMIN_REFRESH_TOKEN` env var and, on success, POSTs
+ * to the Vercel deploy hook so the site rebuilds (re-running `prebuild` to
+ * pull the latest doc).
  */
 export function RefreshContentButton() {
+  const [mounted, setMounted] = useState(false);
   const [token, setToken] = useState<string | null>(null);
+  const [unlocked, setUnlocked] = useState(false);
   const [status, setStatus] = useState<Status>({ kind: "idle" });
 
   useEffect(() => {
     if (typeof window === "undefined") return;
-    const stored = window.localStorage.getItem(TOKEN_KEY);
-    if (stored) {
-      // Hydration-time read of localStorage. Server-rendered HTML always shows
-      // the no-token state to avoid a hydration mismatch; once mounted on the
-      // client we read the stored token (if any) so the "Forget token" button
-      // can render. This is a one-shot sync, not a cascading state update.
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setToken(stored);
-    }
+    // One-shot hydration-time sync. SSR and first client render both return
+    // null to avoid a mismatch; after mount we reveal the control if the
+    // visitor already has a token or the unlock hash is present.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setMounted(true);
+    setToken(window.localStorage.getItem(TOKEN_KEY));
+    setUnlocked(window.location.hash === UNLOCK_HASH);
   }, []);
 
   async function handleClick() {
@@ -42,8 +47,9 @@ export function RefreshContentButton() {
       const entered = window.prompt(
         "Enter the admin refresh token to enable content refresh on this device. (Set in Vercel as ADMIN_REFRESH_TOKEN.)",
       );
-      if (!entered) return;
-      activeToken = entered.trim();
+      const trimmed = entered?.trim() ?? "";
+      if (!trimmed) return;
+      activeToken = trimmed;
       window.localStorage.setItem(TOKEN_KEY, activeToken);
       setToken(activeToken);
     }
@@ -80,42 +86,51 @@ export function RefreshContentButton() {
     setStatus({ kind: "idle" });
   }
 
+  if (!mounted || (!token && !unlocked)) return null;
+
   return (
-    <div className="rounded-2xl border border-dashed border-border bg-background-soft p-4 text-sm">
-      <div className="flex flex-wrap items-center gap-3">
-        <button
-          type="button"
-          onClick={handleClick}
-          disabled={status.kind === "loading"}
-          className="rounded-full bg-primary px-4 py-2 font-medium text-primary-foreground hover:opacity-90 focus-ring disabled:cursor-not-allowed disabled:opacity-60"
-        >
-          {status.kind === "loading"
-            ? "Triggering deploy…"
-            : "Refresh content from Google Doc"}
-        </button>
-        {token ? (
+    <section className="mt-12">
+      <h2 className="text-lg font-semibold tracking-tight">Admin</h2>
+      <p className="mt-1 mb-3 text-sm text-muted-foreground">
+        Pull the latest content from the source Google Doc on demand. The
+        daily cron also handles this automatically at 04:00 UTC.
+      </p>
+      <div className="rounded-2xl border border-dashed border-border bg-background-soft p-4 text-sm">
+        <div className="flex flex-wrap items-center gap-3">
           <button
             type="button"
-            onClick={handleForget}
-            className="text-xs text-muted-foreground underline hover:text-foreground"
+            onClick={handleClick}
+            disabled={status.kind === "loading"}
+            className="rounded-full bg-primary px-4 py-2 font-medium text-primary-foreground hover:opacity-90 focus-ring disabled:cursor-not-allowed disabled:opacity-60"
           >
-            Forget token on this device
+            {status.kind === "loading"
+              ? "Triggering deploy…"
+              : "Refresh content from Google Doc"}
           </button>
+          {token ? (
+            <button
+              type="button"
+              onClick={handleForget}
+              className="text-xs text-muted-foreground underline hover:text-foreground"
+            >
+              Forget token on this device
+            </button>
+          ) : null}
+        </div>
+        <p className="mt-2 text-xs text-muted-foreground">
+          Triggers a Vercel rebuild that re-pulls the source Google Doc. New content
+          is usually live within ~1 minute. Requires the admin token.
+        </p>
+        {status.kind === "success" ? (
+          <p className="mt-2 text-xs text-emerald-700">
+            Deploy triggered at {new Date(status.at).toLocaleTimeString()}. Refresh
+            this page in a minute or two to see updates.
+          </p>
+        ) : null}
+        {status.kind === "error" ? (
+          <p className="mt-2 text-xs text-red-700">{status.message}</p>
         ) : null}
       </div>
-      <p className="mt-2 text-xs text-muted-foreground">
-        Triggers a Vercel rebuild that re-pulls the source Google Doc. New content
-        is usually live within ~1 minute. Requires the admin token.
-      </p>
-      {status.kind === "success" ? (
-        <p className="mt-2 text-xs text-emerald-700">
-          Deploy triggered at {new Date(status.at).toLocaleTimeString()}. Refresh
-          this page in a minute or two to see updates.
-        </p>
-      ) : null}
-      {status.kind === "error" ? (
-        <p className="mt-2 text-xs text-red-700">{status.message}</p>
-      ) : null}
-    </div>
+    </section>
   );
 }

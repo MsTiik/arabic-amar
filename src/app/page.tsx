@@ -74,14 +74,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="mt-12">
-        <h2 className="text-lg font-semibold tracking-tight">Admin</h2>
-        <p className="mt-1 mb-3 text-sm text-muted-foreground">
-          Pull the latest content from the source Google Doc on demand. The
-          daily cron also handles this automatically at 04:00 UTC.
-        </p>
-        <RefreshContentButton />
-      </section>
+      <RefreshContentButton />
     </div>
   );
 }

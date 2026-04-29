@@ -12,26 +12,34 @@
  * leaves the server.
  */
 
+import { createHmac, randomBytes, timingSafeEqual } from "node:crypto";
+
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
+
+// Per-process HMAC key. Regenerated on every cold start so digests can't be
+// compared across invocations; only used here to normalize both compared
+// values to a fixed-length buffer for `timingSafeEqual`.
+const HMAC_KEY = randomBytes(32);
 
 export async function POST(request: Request) {
   const adminToken = process.env.ADMIN_REFRESH_TOKEN;
   const hookUrl = process.env.VERCEL_DEPLOY_HOOK_URL;
 
   if (!adminToken || !hookUrl) {
+    console.error(
+      "[api/refresh] Missing server env vars:",
+      !adminToken ? "ADMIN_REFRESH_TOKEN" : "",
+      !hookUrl ? "VERCEL_DEPLOY_HOOK_URL" : "",
+    );
     return Response.json(
-      {
-        ok: false,
-        error:
-          "Server is missing ADMIN_REFRESH_TOKEN or VERCEL_DEPLOY_HOOK_URL env var.",
-      },
+      { ok: false, error: "Server is not configured for content refresh." },
       { status: 500 },
     );
   }
 
   const provided = request.headers.get("x-admin-token");
-  if (!provided || !timingSafeEquals(provided, adminToken)) {
+  if (!provided || !safeCompare(provided, adminToken)) {
     return Response.json({ ok: false, error: "Unauthorized." }, { status: 401 });
   }
 
@@ -39,23 +47,21 @@ export async function POST(request: Request) {
   try {
     hookResponse = await fetch(hookUrl, { method: "POST" });
   } catch (err) {
+    console.error("[api/refresh] Deploy hook fetch failed:", err);
     return Response.json(
-      {
-        ok: false,
-        error: `Failed to reach Vercel deploy hook: ${(err as Error).message}`,
-      },
+      { ok: false, error: "Failed to reach Vercel deploy hook." },
       { status: 502 },
     );
   }
 
   if (!hookResponse.ok) {
     const detail = await hookResponse.text().catch(() => "");
+    console.error(
+      `[api/refresh] Deploy hook returned ${hookResponse.status}:`,
+      detail.slice(0, 500),
+    );
     return Response.json(
-      {
-        ok: false,
-        error: `Vercel deploy hook returned ${hookResponse.status}.`,
-        detail: detail.slice(0, 500),
-      },
+      { ok: false, error: `Vercel deploy hook returned ${hookResponse.status}.` },
       { status: 502 },
     );
   }
@@ -63,12 +69,13 @@ export async function POST(request: Request) {
   return Response.json({ ok: true });
 }
 
-/** Constant-time string compare to avoid leaking the token via timing. */
-function timingSafeEquals(a: string, b: string): boolean {
-  if (a.length !== b.length) return false;
-  let diff = 0;
-  for (let i = 0; i < a.length; i++) {
-    diff |= a.charCodeAt(i) ^ b.charCodeAt(i);
-  }
-  return diff === 0;
+/**
+ * Constant-time string compare that avoids leaking length via timing.
+ * Both inputs are HMAC'd to fixed-length digests before comparison, so
+ * `timingSafeEqual` sees buffers of identical length regardless of input.
+ */
+function safeCompare(a: string, b: string): boolean {
+  const aDigest = createHmac("sha256", HMAC_KEY).update(a).digest();
+  const bDigest = createHmac("sha256", HMAC_KEY).update(b).digest();
+  return timingSafeEqual(aDigest, bDigest);
 }
