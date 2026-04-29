@@ -145,6 +145,10 @@ export interface ExerciseOption {
   id: string;
   text: string;
   isArabic?: boolean;
+  /** Latin transliteration of `text` when `isArabic` is true; surfaced via a
+   *  click-to-reveal hint on the option button so the learner can fall back
+   *  to pronunciation if they're stuck reading the Arabic. */
+  translit?: string;
 }
 
 export interface ExerciseQuestion {
