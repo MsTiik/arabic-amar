@@ -22,6 +22,15 @@ export const dynamic = "force-dynamic";
 // values to a fixed-length buffer for `timingSafeEqual`.
 const HMAC_KEY = randomBytes(32);
 
+// Per-instance rate limit: at most `RATE_LIMIT_MAX` successful triggers per
+// `RATE_LIMIT_WINDOW_MS`. A Vercel deploy hook POST is an expensive operation
+// (eats build minutes), so even a leaked token shouldn't be able to burn
+// through the monthly allowance. Serverless instances are per-region and
+// short-lived, so this is a best-effort ceiling, not a hard global cap.
+const RATE_LIMIT_WINDOW_MS = 60_000;
+const RATE_LIMIT_MAX = 3;
+const recentTriggers: number[] = [];
+
 export async function POST(request: Request) {
   const adminToken = process.env.ADMIN_REFRESH_TOKEN;
   const hookUrl = process.env.VERCEL_DEPLOY_HOOK_URL;
@@ -42,6 +51,25 @@ export async function POST(request: Request) {
   if (!provided || !safeCompare(provided, adminToken)) {
     return Response.json({ ok: false, error: "Unauthorized." }, { status: 401 });
   }
+
+  const now = Date.now();
+  while (recentTriggers.length > 0 && now - recentTriggers[0] > RATE_LIMIT_WINDOW_MS) {
+    recentTriggers.shift();
+  }
+  if (recentTriggers.length >= RATE_LIMIT_MAX) {
+    const retryAfterMs = RATE_LIMIT_WINDOW_MS - (now - recentTriggers[0]);
+    return Response.json(
+      {
+        ok: false,
+        error: `Too many refresh requests. Try again in ${Math.ceil(retryAfterMs / 1000)}s.`,
+      },
+      {
+        status: 429,
+        headers: { "retry-after": String(Math.ceil(retryAfterMs / 1000)) },
+      },
+    );
+  }
+  recentTriggers.push(now);
 
   let hookResponse: Response;
   try {

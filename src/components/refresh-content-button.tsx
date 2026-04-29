@@ -5,6 +5,31 @@ import { useEffect, useState } from "react";
 const TOKEN_KEY = "arabic-amar:admin-refresh-token";
 const UNLOCK_HASH = "#admin";
 
+// localStorage throws in sandboxed iframes and some restricted-cookie modes
+// (e.g. Safari private browsing historically). Wrap every access so a thrown
+// SecurityError doesn't blow up the admin panel before the user ever sees it.
+function safeGetItem(key: string): string | null {
+  try {
+    return window.localStorage.getItem(key);
+  } catch {
+    return null;
+  }
+}
+function safeSetItem(key: string, value: string): void {
+  try {
+    window.localStorage.setItem(key, value);
+  } catch {
+    // Token won't persist across reloads, but this session still works.
+  }
+}
+function safeRemoveItem(key: string): void {
+  try {
+    window.localStorage.removeItem(key);
+  } catch {
+    // Nothing we can do; token just stays in memory.
+  }
+}
+
 type Status =
   | { kind: "idle" }
   | { kind: "loading" }
@@ -40,7 +65,7 @@ export function RefreshContentButton() {
     // that clears the stored token) stays visible to the admin.
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setMounted(true);
-    const storedToken = window.localStorage.getItem(TOKEN_KEY);
+    const storedToken = safeGetItem(TOKEN_KEY);
     const isUnlocked = window.location.hash === UNLOCK_HASH;
     setToken(storedToken);
     setUnlocked(isUnlocked);
@@ -56,7 +81,7 @@ export function RefreshContentButton() {
       const trimmed = entered?.trim() ?? "";
       if (!trimmed) return;
       activeToken = trimmed;
-      window.localStorage.setItem(TOKEN_KEY, activeToken);
+      safeSetItem(TOKEN_KEY, activeToken);
       setToken(activeToken);
     }
 
@@ -67,7 +92,7 @@ export function RefreshContentButton() {
         headers: { "x-admin-token": activeToken },
       });
       if (res.status === 401) {
-        window.localStorage.removeItem(TOKEN_KEY);
+        safeRemoveItem(TOKEN_KEY);
         setToken(null);
         setStatus({ kind: "error", message: "Wrong token. Cleared — try again." });
         return;
@@ -87,7 +112,7 @@ export function RefreshContentButton() {
   }
 
   function handleForget() {
-    window.localStorage.removeItem(TOKEN_KEY);
+    safeRemoveItem(TOKEN_KEY);
     setToken(null);
     setStatus({ kind: "idle" });
     // Explicit "forget" hides the panel unless the page is still unlocked
