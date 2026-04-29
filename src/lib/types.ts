@@ -98,6 +98,14 @@ export interface SiteContent {
   vocab: VocabEntry[];
   rules: GrammarRule[];
   conversations: Conversation[];
+  /** Pronouns reference — `/grammar/pronouns`. */
+  pronouns: PronounEntry[];
+  /** Verb conjugations reference — `/grammar/conjugations`. */
+  conjugations: ConjugationEntry[];
+  /** Plural-formation rules — `/grammar/plurals`. */
+  pluralForms: PluralForm[];
+  /** Long-form intro prose for grammar reference pages. */
+  grammarIntros: GrammarIntro[];
   /** Source attribution displayed on About page. */
   source: {
     name: string;
@@ -106,6 +114,77 @@ export interface SiteContent {
     docUrl: string;
   };
   fetchedAt: string;
+}
+
+/** Long-form prose lifted out of vocabulary sections so it can anchor a
+ *  reference page (e.g. the explanation of detached vs. attached pronouns). */
+export interface GrammarIntro {
+  /** Stable section key: "pronouns" | "conjugations" | "plurals". */
+  section: "pronouns" | "conjugations" | "plurals";
+  /** Each paragraph is rendered as its own `<p>`. */
+  paragraphs: string[];
+}
+
+/** A single entry in the detached / attached pronoun reference tables. */
+export interface PronounEntry {
+  id: string;
+  /** "detached" or "attached". */
+  kind: "detached" | "attached";
+  /** "1st person singular", "2nd person plural", … */
+  category: string;
+  arabic: string;
+  arabicFolded: string;
+  pronunciation: string;
+  english: string;
+  /** Inferred from the pronunciation suffix where possible. */
+  gender?: "M" | "F" | "Both";
+  /** Doc's "Usage Note" cell. */
+  usageNote?: string;
+  /** Doc's "Example" cell — usually a Quran or Hadith citation. */
+  example?: PronounExample;
+}
+
+export interface PronounExample {
+  /** Vowelled Arabic ayah / sentence. */
+  arabic: string;
+  /** Latin transliteration. */
+  transliteration?: string;
+  /** English translation. */
+  english?: string;
+  /** Source citation, e.g. "Qur'an 20:14" or "Hadith: Sahih al-Bukhari". */
+  citation?: string;
+}
+
+/** A single conjugation row from the past-tense (Māḍī) or
+ *  present/future-tense (Muḍāriʿ) tables. */
+export interface ConjugationEntry {
+  id: string;
+  tense: "past" | "present-future";
+  /** "1st person singular", "Base form", … */
+  category: string;
+  /** Pattern abstraction, e.g. "(root) + تُ" or "تَ + (root) + ينَ". */
+  patternRule: string;
+  /** Concrete example with the root + ending split, e.g. "ك‑ت‑ب + تُ". */
+  patternExample: string;
+  /** Final concrete Arabic form, e.g. "كَتَبْتُ". */
+  arabic: string;
+  arabicFolded: string;
+  pronunciation: string;
+  english: string;
+  gender?: "M" | "F" | "Both";
+}
+
+/** One row of the "How plurals are formed" reference table. */
+export interface PluralForm {
+  id: string;
+  /** "Sound plural (masculine)" | "Sound plural (feminine)" | "Broken plural". */
+  type: string;
+  /** "add ـونَ (ūna)". */
+  howToForm: string;
+  /** Longer rule body. */
+  rule: string;
+  /** Each example is `{ singular, plural }` Arabic forms with English meaning. */
+  examples: Array<{ arabic: string; english?: string }>;
 }
 
 /** Per-word progress state used by the gamification layer. */

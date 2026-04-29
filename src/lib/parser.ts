@@ -19,10 +19,15 @@ import { parse, HTMLElement } from "node-html-parser";
 
 import { foldForSearch, stripDiacritics } from "./diacritics";
 import {
+  type ConjugationEntry,
   type Conversation,
   type GrammarExample,
+  type GrammarIntro,
   type GrammarRule,
   type Lesson,
+  type PluralForm,
+  type PronounEntry,
+  type PronounExample,
   type SiteContent,
   type Topic,
   type VocabEntry,
@@ -81,6 +86,26 @@ function cellLines(cell: HTMLElement): string[] {
       const trimmed = line.replace(/[ \t]+/g, " ").trim();
       if (trimmed) out.push(trimmed);
     }
+  }
+  return out;
+}
+
+/**
+ * Like `cellLines` but only splits on `<p>` boundaries — `<br>` line breaks
+ * stay glued to their paragraph. Used when we want the doc's logical
+ * paragraphs preserved as units (e.g. plural-form example cells where the
+ * meaning paragraph is "teacher / teachers" with an internal soft break).
+ */
+function cellParagraphs(cell: HTMLElement): string[] {
+  const ps = cell.querySelectorAll("p");
+  const sources = ps.length > 0 ? ps : [cell];
+  const out: string[] = [];
+  for (const src of sources) {
+    // Replace <br> with a separator we can collapse into "/".
+    const html = src.innerHTML.replace(/<br\s*\/?\s*>/gi, " / ");
+    const tmp = parse(`<div>${html}</div>`);
+    const trimmed = tmp.text.replace(/\s+/g, " ").trim();
+    if (trimmed) out.push(trimmed);
   }
   return out;
 }
@@ -202,6 +227,15 @@ interface DocCursor {
     paragraphs: string[];
     examples: GrammarExample[];
   } | null;
+  /** Reference-page bucket the current paragraphs/tables belong to. Set by
+   *  h2/h3 detection (e.g. "Vocabulary (Pronouns)" -> "pronouns") so prose
+   *  paragraphs in vocab sections can be lifted out of the lesson and into
+   *  the dedicated reference pages. */
+  specialSection: "pronouns" | "conjugations" | "plurals" | null;
+  /** Within a `pronouns` specialSection, which sub-table we're inside. */
+  pronounKind: "detached" | "attached" | null;
+  /** Within a `conjugations` specialSection, which tense we're inside. */
+  conjugationTense: "past" | "present-future" | null;
 }
 
 const NUMBER_WORD_TO_VALUE: Record<string, number> = {
@@ -234,17 +268,37 @@ function deriveTopicSlugs(lesson: ParsedLessonHeading): string[] {
 }
 
 interface TableClassification {
-  kind: "vocab" | "rule-table" | "grammar-example" | "countries" | "unknown";
+  kind:
+    | "vocab"
+    | "rule-table"
+    | "grammar-example"
+    | "countries"
+    | "pronouns"
+    | "conjugations"
+    | "plurals"
+    | "unknown";
   arabicCol?: number;
   pronunciationCol?: number;
   englishCol?: number;
   sectionCol?: number;
   numberCol?: number;
   genderCol?: number;
+  /** Pronoun tables: 6th col is the Quranic example. */
+  usageNoteCol?: number;
+  exampleCol?: number;
+  /** Conjugation tables. */
+  patternRuleCol?: number;
+  patternExampleCol?: number;
+  arabicExampleCol?: number;
+  /** Plural-forms tables. */
+  typeCol?: number;
+  howToFormCol?: number;
+  ruleCol?: number;
+  meaningCol?: number;
 }
 
 function classifyTable(headers: string[]): TableClassification {
-  const lower = headers.map((h) => h.toLowerCase());
+  const lower = headers.map((h) => h.toLowerCase().trim());
   const has = (...names: string[]) => names.some((n) => lower.includes(n));
   const indexOf = (name: string) => lower.indexOf(name);
 
@@ -254,6 +308,62 @@ function classifyTable(headers: string[]): TableClassification {
       sectionCol: indexOf("continent"),
       arabicCol: indexOf("arabic"),
       pronunciationCol: indexOf("pronunciation"),
+    };
+  }
+
+  // Pronoun reference shape: Category | Arabic | Pronunciation | English |
+  // Usage Note | Example. Identified by the "usage note" column.
+  if (
+    has("usage note") &&
+    has("arabic") &&
+    has("pronunciation") &&
+    has("english")
+  ) {
+    return {
+      kind: "pronouns",
+      sectionCol: indexOf("category") >= 0 ? indexOf("category") : indexOf("section"),
+      arabicCol: indexOf("arabic"),
+      pronunciationCol: indexOf("pronunciation"),
+      englishCol: indexOf("english"),
+      usageNoteCol: indexOf("usage note"),
+      exampleCol: indexOf("example"),
+    };
+  }
+
+  // Conjugation reference shape: Category | Pattern Rule | Pattern Example |
+  // Arabic Example | Pronunciation | English. Identified by "pattern rule" /
+  // "arabic example" headers.
+  if (
+    (has("pattern rule") || has("pattern example")) &&
+    has("arabic example") &&
+    has("pronunciation") &&
+    has("english")
+  ) {
+    return {
+      kind: "conjugations",
+      sectionCol: indexOf("category") >= 0 ? indexOf("category") : indexOf("section"),
+      patternRuleCol: indexOf("pattern rule"),
+      patternExampleCol: indexOf("pattern example"),
+      arabicExampleCol: indexOf("arabic example"),
+      pronunciationCol: indexOf("pronunciation"),
+      englishCol: indexOf("english"),
+    };
+  }
+
+  // Plural-forms shape: Type | How to form it | Rule | Example (Arabic) | Meaning.
+  // Identified by the "how to form it" column (unique to this table).
+  if (
+    has("how to form it") ||
+    (has("type") && has("rule") && headers.some((h) => h.toLowerCase().includes("example")) && has("meaning"))
+  ) {
+    const exampleIdx = headers.findIndex((h) => h.toLowerCase().includes("example"));
+    return {
+      kind: "plurals",
+      typeCol: indexOf("type"),
+      howToFormCol: indexOf("how to form it"),
+      ruleCol: indexOf("rule"),
+      arabicCol: exampleIdx,
+      meaningCol: indexOf("meaning"),
     };
   }
 
@@ -373,6 +483,18 @@ export async function parseDocxBuffer(
     subSection: null,
     subSubHeading: null,
     ruleBuffer: null,
+    specialSection: null,
+    pronounKind: null,
+    conjugationTense: null,
+  };
+
+  const pronouns: PronounEntry[] = [];
+  const conjugations: ConjugationEntry[] = [];
+  const pluralForms: PluralForm[] = [];
+  const grammarIntroBuffers: Record<"pronouns" | "conjugations" | "plurals", string[]> = {
+    pronouns: [],
+    conjugations: [],
+    plurals: [],
   };
 
   // Walk top-level body children in document order
@@ -740,6 +862,308 @@ export async function parseDocxBuffer(
     return m?.[1].trim();
   }
 
+  /**
+   * Map an h2 / h3 heading to a reference-page bucket (pronouns / conjugations
+   * / plurals). Returns null if the heading isn't part of a reference section.
+   *
+   * The doc structure these match is:
+   *   h2 "7.5 Vocabulary (Pronouns)"     -> pronouns
+   *   h3 "7.51 Detatched Pronouns"       -> pronouns / detached
+   *   h3 "7.52 Attached Pronouns"        -> pronouns / attached
+   *   h2 "7.7 Vocabulary (Tenses)"       -> conjugations
+   *   h3 "7.71 Past Tense (Māḍī)"        -> conjugations / past
+   *   h3 "7.72 Present / Future tense"   -> conjugations / present-future
+   * Plurals are detected by table shape rather than heading because the doc
+   * places that table at the end of a regular vocab section.
+   */
+  function classifySpecialSection(
+    heading: string,
+  ): "pronouns" | "conjugations" | null {
+    const lower = heading.toLowerCase();
+    if (lower.includes("pronoun")) return "pronouns";
+    if (
+      lower.includes("tense") ||
+      lower.includes("māḍī") ||
+      lower.includes("madi") ||
+      lower.includes("muḍāri") ||
+      lower.includes("mudari")
+    ) {
+      return "conjugations";
+    }
+    return null;
+  }
+
+  function classifyPronounKind(heading: string): "detached" | "attached" | null {
+    const lower = heading.toLowerCase();
+    if (lower.includes("attached")) return "attached";
+    // "Detatched" is the doc's spelling.
+    if (lower.includes("detached") || lower.includes("detatched") || lower.includes("independent")) {
+      return "detached";
+    }
+    return null;
+  }
+
+  function classifyTense(heading: string): "past" | "present-future" | null {
+    const lower = heading.toLowerCase();
+    if (lower.includes("past") || lower.includes("māḍī") || lower.includes("madi")) {
+      return "past";
+    }
+    if (
+      lower.includes("present") ||
+      lower.includes("future") ||
+      lower.includes("muḍāri") ||
+      lower.includes("mudari")
+    ) {
+      return "present-future";
+    }
+    return null;
+  }
+
+  function inferGenderFromPronunciation(s: string): "M" | "F" | "Both" | undefined {
+    // Pronoun cells often suffix the latin transliteration with "(m)" / "(f)" / "(m/f)".
+    const m = /\((m\/f|m|f)\)/i.exec(s);
+    if (!m) return undefined;
+    const tag = m[1].toLowerCase();
+    if (tag === "m/f") return "Both";
+    if (tag === "m") return "M";
+    if (tag === "f") return "F";
+    return undefined;
+  }
+
+  function stripGenderTag(s: string): string {
+    return s.replace(/\s*\((m\/f|m|f)\)\s*$/i, "").trim();
+  }
+
+  /** Best-effort split of an "Example" cell into structured fields:
+   *  Arabic ayah, transliteration in parens, English in quotes, citation in
+   *  trailing parens. The doc isn't perfectly consistent so we accept whatever
+   *  we can recover and leave the rest as the raw `arabic` field. */
+  function parsePronounExample(cell: string): PronounExample | undefined {
+    const cleaned = cell.replace(/\s+/g, " ").trim();
+    if (!cleaned) return undefined;
+
+    // Pull the trailing citation: "(Qur'ān 20:14)" or "(Hadith: Sahih ...)"
+    let citation: string | undefined;
+    const citationMatch = /\(([^()]*?(?:Qur['ʼ’]?ān|Quran|Hadith)[^()]*)\)\s*$/i.exec(cleaned);
+    let body = cleaned;
+    if (citationMatch) {
+      citation = citationMatch[1].trim();
+      body = cleaned.slice(0, citationMatch.index).trim();
+    }
+
+    // Pull the english translation from a quoted span: "..." or “...”
+    let english: string | undefined;
+    const quoteMatch = /[“"]([^”"]+)[”"]/.exec(body);
+    if (quoteMatch) english = quoteMatch[1].trim();
+
+    // Pull transliteration from a parenthesised latin block: (innī anā Allāh)
+    let transliteration: string | undefined;
+    const translitMatch = /\(([^()]*[a-zāīūʿʾḍṭṣẓḥ][^()]*)\)/i.exec(body);
+    if (translitMatch) transliteration = translitMatch[1].trim();
+
+    // Strip the english quote, transliteration parens, and a trailing en-dash
+    // separator to leave just the Arabic.
+    let arabic = body;
+    if (quoteMatch) arabic = arabic.replace(quoteMatch[0], "");
+    if (translitMatch) arabic = arabic.replace(translitMatch[0], "");
+    arabic = arabic.replace(/\s*[-–—]\s*$/, "").trim();
+
+    if (!arabic) arabic = cleaned;
+    return { arabic, transliteration, english, citation };
+  }
+
+  function processPronounTable(
+    table: HTMLElement,
+    classification: TableClassification,
+  ): void {
+    if (
+      classification.arabicCol === undefined ||
+      classification.pronunciationCol === undefined ||
+      classification.englishCol === undefined ||
+      classification.usageNoteCol === undefined ||
+      classification.exampleCol === undefined
+    ) {
+      warn("Skipped pronoun table: missing required columns");
+      return;
+    }
+    const matrix = tableToMatrix(table);
+    if (matrix.length < 2) return;
+    const kind = cursor.pronounKind ?? classifyPronounKind(cursor.subSubHeading ?? "");
+    if (!kind) {
+      warn(`Pronoun table without a detached/attached heading: ${cursor.subSubHeading}`);
+      return;
+    }
+    let runningCategory = "";
+    for (const row of matrix.slice(1)) {
+      if (classification.sectionCol !== undefined && classification.sectionCol >= 0) {
+        const cat = row.cells[classification.sectionCol]?.trim();
+        if (cat) runningCategory = cat;
+      }
+      const arabic = row.cells[classification.arabicCol]?.trim();
+      const pronunciationRaw = row.cells[classification.pronunciationCol]?.trim();
+      const english = row.cells[classification.englishCol]?.trim() ?? "";
+      const usageNote = row.cells[classification.usageNoteCol]?.trim() || undefined;
+      const exampleRaw = row.cells[classification.exampleCol]?.trim() || undefined;
+      if (!arabic || !pronunciationRaw) continue;
+      const gender = inferGenderFromPronunciation(pronunciationRaw);
+      const pronunciation = stripGenderTag(pronunciationRaw);
+      const example = exampleRaw ? parsePronounExample(exampleRaw) : undefined;
+      const id = stableId(["pronoun", kind, runningCategory, arabic, pronunciation]);
+      pronouns.push({
+        id,
+        kind,
+        category: runningCategory || "Other",
+        arabic,
+        arabicFolded: foldForSearch(arabic),
+        pronunciation,
+        english,
+        gender,
+        usageNote,
+        example,
+      });
+    }
+  }
+
+  function processConjugationTable(
+    table: HTMLElement,
+    classification: TableClassification,
+  ): void {
+    if (
+      classification.patternRuleCol === undefined ||
+      classification.patternExampleCol === undefined ||
+      classification.arabicExampleCol === undefined ||
+      classification.pronunciationCol === undefined ||
+      classification.englishCol === undefined
+    ) {
+      warn("Skipped conjugation table: missing required columns");
+      return;
+    }
+    const matrix = tableToMatrix(table);
+    if (matrix.length < 2) return;
+    const tense = cursor.conjugationTense ?? classifyTense(cursor.subSubHeading ?? "");
+    if (!tense) {
+      warn(`Conjugation table without a tense heading: ${cursor.subSubHeading}`);
+      return;
+    }
+    let runningCategory = "Base form";
+    for (const row of matrix.slice(1)) {
+      if (classification.sectionCol !== undefined && classification.sectionCol >= 0) {
+        const cat = row.cells[classification.sectionCol]?.trim();
+        if (cat) runningCategory = cat;
+      }
+      const patternRule = row.cells[classification.patternRuleCol]?.trim() ?? "";
+      const patternExample = row.cells[classification.patternExampleCol]?.trim() ?? "";
+      const arabic = row.cells[classification.arabicExampleCol]?.trim();
+      const pronunciationRaw = row.cells[classification.pronunciationCol]?.trim();
+      const english = row.cells[classification.englishCol]?.trim() ?? "";
+      if (!arabic || !pronunciationRaw) continue;
+      const gender = inferGenderFromPronunciation(pronunciationRaw);
+      const pronunciation = stripGenderTag(pronunciationRaw);
+      const id = stableId(["conjugation", tense, runningCategory, pronunciation]);
+      conjugations.push({
+        id,
+        tense,
+        category: runningCategory,
+        patternRule,
+        patternExample,
+        arabic,
+        arabicFolded: foldForSearch(arabic),
+        pronunciation,
+        english,
+        gender,
+      });
+    }
+  }
+
+  function processPluralFormsTable(
+    table: HTMLElement,
+    classification: TableClassification,
+  ): void {
+    const matrix = tableToMatrix(table);
+    if (matrix.length < 2) return;
+    if (
+      classification.typeCol === undefined ||
+      classification.howToFormCol === undefined ||
+      classification.ruleCol === undefined ||
+      classification.arabicCol === undefined
+    ) {
+      warn("Skipped plurals table: missing required columns");
+      return;
+    }
+    let current: PluralForm | null = null;
+    for (const row of matrix.slice(1)) {
+      const type = row.cells[classification.typeCol]?.trim();
+      const howToForm = row.cells[classification.howToFormCol]?.trim();
+      const rule = row.cells[classification.ruleCol]?.trim();
+      const exampleCell = row.cellElements[classification.arabicCol];
+      const meaningCell =
+        classification.meaningCol !== undefined && classification.meaningCol >= 0
+          ? row.cellElements[classification.meaningCol]
+          : undefined;
+      // Split the example & meaning cells on paragraph boundaries so the doc's
+      // multi-line cells (e.g. broken plural with "qalam → aqlām" + "dars →
+      // durūs") become separate examples instead of one mashed-together blob.
+      // Use `cellParagraphs` (splits on <p> only) — internal <br>s become " / "
+      // so meaning cells like "teacher<br>teachers" stay as one entry per row.
+      const exampleLines = exampleCell ? cellParagraphs(exampleCell) : [];
+      const meaningLines = meaningCell ? cellParagraphs(meaningCell) : [];
+      // A new "Type" cell (non-empty after rowspan-fill collisions) marks a new
+      // group. The rowspan handling in tableToMatrix already replicates the
+      // type into every row of the group, so the simplest grouping is by type
+      // value directly.
+      if (type) {
+        if (!current || current.type !== type) {
+          current = {
+            id: stableId(["plural-form", type]),
+            type,
+            howToForm: howToForm ?? "",
+            rule: rule ?? "",
+            examples: [],
+          };
+          pluralForms.push(current);
+        } else {
+          // Top-up rule / how-to-form text on the first row of the group.
+          if (!current.howToForm && howToForm) current.howToForm = howToForm;
+          if (!current.rule && rule) current.rule = rule;
+        }
+      }
+      if (current && exampleLines.length > 0) {
+        // The doc sometimes uses one logical example per arabic line but
+        // splits the matching English across two stacked paragraphs
+        // ("teacher" + "teachers"). When the English has more lines than
+        // the Arabic, group leftover English lines into the previous
+        // example so "teacher / teachers" stays together.
+        for (let i = 0; i < exampleLines.length; i++) {
+          let english: string | undefined;
+          if (
+            i === exampleLines.length - 1 &&
+            meaningLines.length > exampleLines.length
+          ) {
+            // If a previous line already ends with "/", don't double up.
+            // Otherwise insert " / " between the singular and plural meanings.
+            english = meaningLines
+              .slice(i)
+              .reduce<string>(
+                (acc, line) =>
+                  !acc
+                    ? line
+                    : acc.endsWith("/")
+                      ? `${acc}${line}`
+                      : `${acc} / ${line}`,
+                "",
+              );
+          } else {
+            english = meaningLines[i];
+          }
+          current.examples.push({
+            arabic: exampleLines[i],
+            english: english || undefined,
+          });
+        }
+      }
+    }
+  }
+
   function processNode(node: HTMLElement): void {
     const tag = node.tagName?.toLowerCase();
     const text = node.text.replace(/\s+/g, " ").trim();
@@ -778,6 +1202,13 @@ export async function parseDocxBuffer(
       if (!sub) return;
       cursor.subSection = sub;
       cursor.subSubHeading = null;
+      // Vocabulary (Pronouns) / Vocabulary (Tenses) live under h2 with a
+      // bracketed qualifier. Flip on the matching reference-page bucket so
+      // following h3s, paragraphs, and tables are routed to it.
+      const special = classifySpecialSection(sub.qualifier ?? sub.title);
+      cursor.specialSection = special;
+      cursor.pronounKind = null;
+      cursor.conjugationTense = null;
       return;
     }
 
@@ -791,6 +1222,12 @@ export async function parseDocxBuffer(
           examples: [],
         };
       }
+      // Within a pronouns / conjugations section, narrow further by h3.
+      if (cursor.specialSection === "pronouns") {
+        cursor.pronounKind = classifyPronounKind(text);
+      } else if (cursor.specialSection === "conjugations") {
+        cursor.conjugationTense = classifyTense(text);
+      }
       return;
     }
 
@@ -799,6 +1236,16 @@ export async function parseDocxBuffer(
       // While we're in a "rules" section under an h3, accumulate paragraphs as the rule body
       if (cursor.subSection?.kind === "rules" && cursor.ruleBuffer) {
         cursor.ruleBuffer.paragraphs.push(text);
+        return;
+      }
+      // While we're inside a reference-page bucket (pronouns / conjugations
+      // / plurals), buffer the prose so it can anchor the dedicated page
+      // instead of being dropped on the floor.
+      if (cursor.specialSection) {
+        // Skip whitespace-only or table-of-contents page-number paragraphs.
+        if (text.length > 30 && !/^\d+(?:\.\d+)*\s/.test(text)) {
+          grammarIntroBuffers[cursor.specialSection].push(text);
+        }
       }
       return;
     }
@@ -817,6 +1264,20 @@ export async function parseDocxBuffer(
       switch (classification.kind) {
         case "countries":
           processCountriesTable(node);
+          break;
+        case "pronouns":
+          processPronounTable(node, classification);
+          break;
+        case "conjugations":
+          processConjugationTable(node, classification);
+          break;
+        case "plurals":
+          processPluralFormsTable(node, classification);
+          // The plurals table sits inside a regular vocabulary section, but
+          // the prose immediately surrounding it belongs to the plurals page.
+          // Flip the bucket so any following <p> nodes (until the next h2) get
+          // routed correctly.
+          cursor.specialSection = "plurals";
           break;
         case "vocab":
           if (cursor.subSection?.kind === "vocabulary") {
@@ -878,6 +1339,29 @@ export async function parseDocxBuffer(
     }
   }
 
+  // Same dedupe pass for the new reference collections.
+  const pronounIdCounts = new Map<string, number>();
+  for (const p of pronouns) {
+    const baseId = p.id;
+    const count = (pronounIdCounts.get(baseId) ?? 0) + 1;
+    pronounIdCounts.set(baseId, count);
+    if (count > 1) p.id = `${baseId}-${count}`;
+  }
+  const conjugationIdCounts = new Map<string, number>();
+  for (const c of conjugations) {
+    const baseId = c.id;
+    const count = (conjugationIdCounts.get(baseId) ?? 0) + 1;
+    conjugationIdCounts.set(baseId, count);
+    if (count > 1) c.id = `${baseId}-${count}`;
+  }
+  const pluralIdCounts = new Map<string, number>();
+  for (const p of pluralForms) {
+    const baseId = p.id;
+    const count = (pluralIdCounts.get(baseId) ?? 0) + 1;
+    pluralIdCounts.set(baseId, count);
+    if (count > 1) p.id = `${baseId}-${count}`;
+  }
+
   // Cross-link lesson → vocab/rules ids
   const lessonsById = new Map(lessons.map((l) => [l.id, l]));
   for (const v of vocab) {
@@ -907,12 +1391,25 @@ export async function parseDocxBuffer(
 
   const topics = [...topicMap.values()].sort((a, b) => a.order - b.order);
 
+  const grammarIntros: GrammarIntro[] = (
+    ["pronouns", "conjugations", "plurals"] as const
+  )
+    .map((section) => ({
+      section,
+      paragraphs: dedupeAdjacent(grammarIntroBuffers[section]),
+    }))
+    .filter((g) => g.paragraphs.length > 0);
+
   const content: SiteContent = {
     lessons,
     topics,
     vocab,
     rules,
     conversations,
+    pronouns,
+    conjugations,
+    pluralForms,
+    grammarIntros,
     source: {
       name: "AMAR Arabic Programme",
       contactEmail: "majesticmessenger@gmail.com",
@@ -923,4 +1420,14 @@ export async function parseDocxBuffer(
   };
 
   return { content, warnings };
+}
+
+/** Drop consecutive duplicate paragraphs from a buffer (the doc's
+ *  table-of-contents entries can appear adjacent to the real heading). */
+function dedupeAdjacent(paragraphs: string[]): string[] {
+  const out: string[] = [];
+  for (const p of paragraphs) {
+    if (out.length === 0 || out[out.length - 1] !== p) out.push(p);
+  }
+  return out;
 }

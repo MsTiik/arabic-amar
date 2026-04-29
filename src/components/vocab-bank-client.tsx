@@ -5,6 +5,7 @@ import { Search, X } from "lucide-react";
 
 import { ArabicText } from "@/components/arabic-text";
 import { VocabCard } from "@/components/vocab-card";
+import { vocabCardSpansTwoCols } from "@/lib/vocab-card-layout";
 import { foldForSearch } from "@/lib/diacritics";
 import { cn } from "@/lib/cn";
 import type { Topic, VocabEntry } from "@/lib/types";
@@ -147,7 +148,12 @@ export function VocabBankClient({ vocab, topics }: Props) {
             className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
           >
             {filtered.map((entry) => (
-              <VocabCard key={entry.id} entry={entry} size="md" />
+              <VocabCard
+                key={entry.id}
+                entry={entry}
+                size="md"
+                className={vocabCardSpansTwoCols(entry) ? "sm:col-span-2" : undefined}
+              />
             ))}
           </div>
         ) : (
@@ -174,7 +180,12 @@ export function VocabBankClient({ vocab, topics }: Props) {
                   </header>
                   <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                     {entries.map((entry) => (
-                      <VocabCard key={entry.id} entry={entry} size="md" />
+                      <VocabCard
+                        key={entry.id}
+                        entry={entry}
+                        size="md"
+                        className={vocabCardSpansTwoCols(entry) ? "sm:col-span-2" : undefined}
+                      />
                     ))}
                   </div>
                 </section>
