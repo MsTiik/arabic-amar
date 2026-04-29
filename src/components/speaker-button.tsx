@@ -67,11 +67,26 @@ export function SpeakerButton({
     const audio = new Audio(playUrl);
     audio.preload = "auto";
     audioRef.current = audio;
-    audio.addEventListener("playing", () => setState("playing"));
-    audio.addEventListener("ended", () => setState("idle"));
-    audio.addEventListener("pause", () => setState("idle"));
-    audio.addEventListener("error", () => setState("error"));
-    audio.play().catch(() => setState("error"));
+    // Guard each handler against the orphaned-Audio case: pausing the previous
+    // Audio (above) queues an async "pause" event whose listener would reset
+    // state to "idle" after we've already moved on to a new Audio. Only react
+    // to events from the Audio that is *still* the current one.
+    const isCurrent = () => audioRef.current === audio;
+    audio.addEventListener("playing", () => {
+      if (isCurrent()) setState("playing");
+    });
+    audio.addEventListener("ended", () => {
+      if (isCurrent()) setState("idle");
+    });
+    audio.addEventListener("pause", () => {
+      if (isCurrent()) setState("idle");
+    });
+    audio.addEventListener("error", () => {
+      if (isCurrent()) setState("error");
+    });
+    audio.play().catch(() => {
+      if (isCurrent()) setState("error");
+    });
   }
 
   const labelText =
