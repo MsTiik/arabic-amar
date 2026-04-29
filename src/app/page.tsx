@@ -2,6 +2,7 @@ import Link from "next/link";
 
 import { ArabicText } from "@/components/arabic-text";
 import { DashboardHero } from "@/components/dashboard-hero";
+import { RefreshContentButton } from "@/components/refresh-content-button";
 import { TopicCard } from "@/components/topic-card";
 import { getSiteContent } from "@/lib/content";
 import type { VocabEntry } from "@/lib/types";
@@ -72,6 +73,8 @@ export default function Home() {
           </ArabicText>
         </div>
       </section>
+
+      <RefreshContentButton />
     </div>
   );
 }
