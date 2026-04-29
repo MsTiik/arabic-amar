@@ -326,7 +326,7 @@ function classifyTable(headers: string[]): TableClassification {
       pronunciationCol: indexOf("pronunciation"),
       englishCol: indexOf("english"),
       usageNoteCol: indexOf("usage note"),
-      exampleCol: indexOf("example"),
+      exampleCol: indexOf("example") >= 0 ? indexOf("example") : undefined,
     };
   }
 
@@ -342,8 +342,8 @@ function classifyTable(headers: string[]): TableClassification {
     return {
       kind: "conjugations",
       sectionCol: indexOf("category") >= 0 ? indexOf("category") : indexOf("section"),
-      patternRuleCol: indexOf("pattern rule"),
-      patternExampleCol: indexOf("pattern example"),
+      patternRuleCol: indexOf("pattern rule") >= 0 ? indexOf("pattern rule") : undefined,
+      patternExampleCol: indexOf("pattern example") >= 0 ? indexOf("pattern example") : undefined,
       arabicExampleCol: indexOf("arabic example"),
       pronunciationCol: indexOf("pronunciation"),
       englishCol: indexOf("english"),
@@ -360,7 +360,7 @@ function classifyTable(headers: string[]): TableClassification {
     return {
       kind: "plurals",
       typeCol: indexOf("type"),
-      howToFormCol: indexOf("how to form it"),
+      howToFormCol: indexOf("how to form it") >= 0 ? indexOf("how to form it") : undefined,
       ruleCol: indexOf("rule"),
       arabicCol: exampleIdx,
       meaningCol: indexOf("meaning"),
