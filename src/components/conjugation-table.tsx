@@ -4,6 +4,7 @@ import { useState } from "react";
 
 import type { ConjugationEntry } from "@/lib/types";
 import { ArabicText } from "@/components/arabic-text";
+import { SpeakerButton } from "@/components/speaker-button";
 import { cn } from "@/lib/cn";
 
 interface Props {
@@ -129,12 +130,19 @@ function Table({ rows }: { rows: ConjugationEntry[] }) {
                 <PatternCell pattern={r.patternExample} />
               </td>
               <td className="px-3 py-3 text-right">
-                <ArabicText
-                  variant="display"
-                  className="text-2xl text-foreground sm:text-3xl"
-                >
-                  {r.arabic}
-                </ArabicText>
+                <div className="flex items-center justify-end gap-2">
+                  <SpeakerButton
+                    arabic={r.arabic}
+                    label={r.english}
+                    size="sm"
+                  />
+                  <ArabicText
+                    variant="display"
+                    className="text-2xl text-foreground sm:text-3xl"
+                  >
+                    {r.arabic}
+                  </ArabicText>
+                </div>
               </td>
               <td className="px-3 py-3 italic text-foreground-soft" lang="ar-Latn">
                 {r.pronunciation}

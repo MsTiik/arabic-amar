@@ -4,6 +4,8 @@ import { useState } from "react";
 
 import type { PronounEntry } from "@/lib/types";
 import { ArabicText } from "@/components/arabic-text";
+import { SpeakerButton } from "@/components/speaker-button";
+import { getAudioForCitation } from "@/lib/audio";
 import { cn } from "@/lib/cn";
 
 interface Props {
@@ -39,12 +41,19 @@ export function PronounCard({ pronoun, className }: Props) {
       </ArabicText>
 
       <div className="flex flex-col gap-1">
-        <p
-          className="text-base font-medium text-foreground sm:text-lg"
-          lang="ar-Latn"
-        >
-          {pronoun.pronunciation}
-        </p>
+        <div className="flex items-center gap-2">
+          <SpeakerButton
+            arabic={pronoun.arabic}
+            label={pronoun.english}
+            size="sm"
+          />
+          <p
+            className="text-base font-medium text-foreground sm:text-lg"
+            lang="ar-Latn"
+          >
+            {pronoun.pronunciation}
+          </p>
+        </div>
         <p className="text-sm text-foreground-soft sm:text-base">
           {pronoun.english}
         </p>
@@ -69,12 +78,26 @@ export function PronounCard({ pronoun, className }: Props) {
           </button>
           {open ? (
             <div className="mt-2 flex flex-col gap-1 rounded-xl bg-background-soft p-3">
-              <ArabicText
-                variant="body"
-                className="text-2xl leading-loose text-foreground sm:text-3xl"
-              >
-                {pronoun.example!.arabic}
-              </ArabicText>
+              <div className="flex items-start justify-between gap-3">
+                <ArabicText
+                  variant="body"
+                  className="flex-1 text-2xl leading-loose text-foreground sm:text-3xl"
+                >
+                  {pronoun.example!.arabic}
+                </ArabicText>
+                {(() => {
+                  const ayah = getAudioForCitation(pronoun.example!.citation);
+                  return ayah ? (
+                    <SpeakerButton
+                      arabic={pronoun.example!.arabic}
+                      url={ayah.url}
+                      ariaLabel={`Play recitation of ${pronoun.example!.citation} by ${ayah.reciter}`}
+                      size="sm"
+                      className="shrink-0"
+                    />
+                  ) : null;
+                })()}
+              </div>
               {pronoun.example!.transliteration ? (
                 <p
                   className="text-xs italic text-muted-foreground"
