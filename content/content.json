@@ -308,36 +308,6 @@
         "lesson-getting-to-know-each-other__connector-7",
         "lesson-getting-to-know-each-other__connector-8",
         "lesson-getting-to-know-each-other__connector-9",
-        "lesson-getting-to-know-each-other__1st-person-singular",
-        "lesson-getting-to-know-each-other__1st-person-plural",
-        "lesson-getting-to-know-each-other__2nd-person-singular",
-        "lesson-getting-to-know-each-other__2nd-person-singular-2",
-        "lesson-getting-to-know-each-other__2nd-person-plural",
-        "lesson-getting-to-know-each-other__2nd-person-plural-2",
-        "lesson-getting-to-know-each-other__3rd-person-singular",
-        "lesson-getting-to-know-each-other__3rd-person-singular-2",
-        "lesson-getting-to-know-each-other__3rd-person-plural",
-        "lesson-getting-to-know-each-other__3rd-person-plural-2",
-        "lesson-getting-to-know-each-other__1st-person-singular-2",
-        "lesson-getting-to-know-each-other__1st-person-plural-2",
-        "lesson-getting-to-know-each-other__2nd-person-singular-3",
-        "lesson-getting-to-know-each-other__2nd-person-singular-4",
-        "lesson-getting-to-know-each-other__2nd-person-plural-3",
-        "lesson-getting-to-know-each-other__2nd-person-plural-4",
-        "lesson-getting-to-know-each-other__3rd-person-singular-3",
-        "lesson-getting-to-know-each-other__3rd-person-singular-4",
-        "lesson-getting-to-know-each-other__3rd-person-plural-3",
-        "lesson-getting-to-know-each-other__3rd-person-plural-4",
-        "lesson-getting-to-know-each-other__singular-near",
-        "lesson-getting-to-know-each-other__singular-near-2",
-        "lesson-getting-to-know-each-other__singular-far",
-        "lesson-getting-to-know-each-other__singular-far-2",
-        "lesson-getting-to-know-each-other__dual-near",
-        "lesson-getting-to-know-each-other__dual-near-2",
-        "lesson-getting-to-know-each-other__dual-far",
-        "lesson-getting-to-know-each-other__dual-far-2",
-        "lesson-getting-to-know-each-other__plural-near",
-        "lesson-getting-to-know-each-other__plural-far",
         "lesson-getting-to-know-each-other__continents",
         "lesson-getting-to-know-each-other__continents-2",
         "lesson-getting-to-know-each-other__examples",
@@ -419,19 +389,6 @@
         "lesson-getting-to-know-each-other__nationality__brazilian",
         "lesson-getting-to-know-each-other__country__australia",
         "lesson-getting-to-know-each-other__nationality__australian",
-        "lesson-getting-to-know-each-other__prepositions",
-        "lesson-getting-to-know-each-other__prepositions-2",
-        "lesson-getting-to-know-each-other__prepositions-3",
-        "lesson-getting-to-know-each-other__prepositions-4",
-        "lesson-getting-to-know-each-other__prepositions-5",
-        "lesson-getting-to-know-each-other__prepositions-6",
-        "lesson-getting-to-know-each-other__prepositions-7",
-        "lesson-getting-to-know-each-other__prepositions-8",
-        "lesson-getting-to-know-each-other__prepositions-9",
-        "lesson-getting-to-know-each-other__prepositions-10",
-        "lesson-getting-to-know-each-other__prepositions-11",
-        "lesson-getting-to-know-each-other__prepositions-12",
-        "lesson-getting-to-know-each-other__prepositions-13",
         "lesson-getting-to-know-each-other__people",
         "lesson-getting-to-know-each-other__people-2",
         "lesson-getting-to-know-each-other__people-3",
@@ -455,49 +412,33 @@
         "lesson-getting-to-know-each-other__general-verbs-6",
         "lesson-getting-to-know-each-other__general-verbs-7",
         "lesson-getting-to-know-each-other__general-verbs-8",
-        "lesson-getting-to-know-each-other__general-verbs-9"
+        "lesson-getting-to-know-each-other__general-verbs-9",
+        "lesson-getting-to-know-each-other__prepositions",
+        "lesson-getting-to-know-each-other__prepositions-2",
+        "lesson-getting-to-know-each-other__prepositions-3",
+        "lesson-getting-to-know-each-other__prepositions-4",
+        "lesson-getting-to-know-each-other__prepositions-5",
+        "lesson-getting-to-know-each-other__prepositions-6",
+        "lesson-getting-to-know-each-other__prepositions-7",
+        "lesson-getting-to-know-each-other__prepositions-8",
+        "lesson-getting-to-know-each-other__prepositions-9",
+        "lesson-getting-to-know-each-other__prepositions-10",
+        "lesson-getting-to-know-each-other__prepositions-11",
+        "lesson-getting-to-know-each-other__prepositions-12",
+        "lesson-getting-to-know-each-other__prepositions-13"
       ],
-      "ruleIds": [
-        "lesson-getting-to-know-each-other__rule-table__madi-past-tense",
-        "lesson-getting-to-know-each-other__rule-table__mudari-present-or-future",
-        "lesson-getting-to-know-each-other__rule-table__masdar-verbal-noun",
-        "lesson-getting-to-know-each-other__rule-table__how-to-order-a-verb-in-a-sentence",
-        "lesson-getting-to-know-each-other__rule-table__how-to-personally-possess",
-        "lesson-getting-to-know-each-other__rule-table__how-to-ascribe-possession-to-him",
-        "lesson-getting-to-know-each-other__rule-table__how-to-ascribe-possession-to-her",
-        "lesson-getting-to-know-each-other__rule-table__how-to-ascribe-possession-to-them",
-        "lesson-getting-to-know-each-other__rule-table__how-to-make-some-nouns-feminine"
-      ],
+      "ruleIds": [],
       "conversationIds": []
     },
     {
       "id": "lesson-the-classroom",
-      "number": "9-10",
+      "number": "9-11",
       "title": "The Classroom",
       "titleArabic": "حُجْرَةُ الدِّرَاسَةِ",
       "topicSlugs": [
         "the-classroom"
       ],
-      "vocabIds": [
-        "lesson-the-classroom__rooms-places",
-        "lesson-the-classroom__rooms-places-2",
-        "lesson-the-classroom__rooms-places-3",
-        "lesson-the-classroom__rooms-places-4",
-        "lesson-the-classroom__furniture",
-        "lesson-the-classroom__furniture-2",
-        "lesson-the-classroom__learning-tools",
-        "lesson-the-classroom__learning-tools-2",
-        "lesson-the-classroom__learning-tools-3",
-        "lesson-the-classroom__learning-tools-4",
-        "lesson-the-classroom__classroom-items",
-        "lesson-the-classroom__classroom-items-2",
-        "lesson-the-classroom__classroom-items-3",
-        "lesson-the-classroom__classroom-items-4",
-        "lesson-the-classroom__classroom-items-5",
-        "lesson-the-classroom__room-features",
-        "lesson-the-classroom__room-features-2",
-        "lesson-the-classroom__people"
-      ],
+      "vocabIds": [],
       "ruleIds": [],
       "conversationIds": []
     }
@@ -591,8 +532,8 @@
       "lessonIds": [
         "lesson-getting-to-know-each-other"
       ],
-      "vocabCount": 180,
-      "ruleCount": 9,
+      "vocabCount": 150,
+      "ruleCount": 0,
       "conversationCount": 0,
       "notes": []
     },
@@ -604,7 +545,7 @@
       "lessonIds": [
         "lesson-the-classroom"
       ],
-      "vocabCount": 18,
+      "vocabCount": 0,
       "ruleCount": 0,
       "conversationCount": 0,
       "notes": []
@@ -3368,396 +3309,6 @@
       "lessonId": "lesson-getting-to-know-each-other"
     },
     {
-      "id": "lesson-getting-to-know-each-other__1st-person-singular",
-      "arabic": "أَنَا",
-      "arabicFolded": "أنا",
-      "pronunciation": "anā",
-      "english": "I",
-      "category": "1st person singular",
-      "isExtra": false,
-      "topicSlugs": [
-        "getting-to-know-each-other"
-      ],
-      "lessonId": "lesson-getting-to-know-each-other"
-    },
-    {
-      "id": "lesson-getting-to-know-each-other__1st-person-plural",
-      "arabic": "نَحْنُ",
-      "arabicFolded": "نحن",
-      "pronunciation": "naḥnu",
-      "english": "we",
-      "category": "1st person plural",
-      "isExtra": false,
-      "topicSlugs": [
-        "getting-to-know-each-other"
-      ],
-      "lessonId": "lesson-getting-to-know-each-other"
-    },
-    {
-      "id": "lesson-getting-to-know-each-other__2nd-person-singular",
-      "arabic": "أَنتَ",
-      "arabicFolded": "أنت",
-      "pronunciation": "anta (m)",
-      "english": "you",
-      "category": "2nd person singular",
-      "isExtra": false,
-      "topicSlugs": [
-        "getting-to-know-each-other"
-      ],
-      "lessonId": "lesson-getting-to-know-each-other"
-    },
-    {
-      "id": "lesson-getting-to-know-each-other__2nd-person-singular-2",
-      "arabic": "أَنتِ",
-      "arabicFolded": "أنت",
-      "pronunciation": "anti (f)",
-      "english": "you",
-      "category": "2nd person singular",
-      "isExtra": false,
-      "topicSlugs": [
-        "getting-to-know-each-other"
-      ],
-      "lessonId": "lesson-getting-to-know-each-other"
-    },
-    {
-      "id": "lesson-getting-to-know-each-other__2nd-person-plural",
-      "arabic": "أَنتُم",
-      "arabicFolded": "أنتم",
-      "pronunciation": "antum (m)",
-      "english": "you (all)",
-      "category": "2nd person plural",
-      "isExtra": false,
-      "topicSlugs": [
-        "getting-to-know-each-other"
-      ],
-      "lessonId": "lesson-getting-to-know-each-other"
-    },
-    {
-      "id": "lesson-getting-to-know-each-other__2nd-person-plural-2",
-      "arabic": "أَنتُنَّ",
-      "arabicFolded": "أنتن",
-      "pronunciation": "antunna (f)",
-      "english": "you (all)",
-      "category": "2nd person plural",
-      "isExtra": false,
-      "topicSlugs": [
-        "getting-to-know-each-other"
-      ],
-      "lessonId": "lesson-getting-to-know-each-other"
-    },
-    {
-      "id": "lesson-getting-to-know-each-other__3rd-person-singular",
-      "arabic": "هُوَ",
-      "arabicFolded": "هو",
-      "pronunciation": "huwa",
-      "english": "he",
-      "category": "3rd person singular",
-      "isExtra": false,
-      "topicSlugs": [
-        "getting-to-know-each-other"
-      ],
-      "lessonId": "lesson-getting-to-know-each-other"
-    },
-    {
-      "id": "lesson-getting-to-know-each-other__3rd-person-singular-2",
-      "arabic": "هِيَ",
-      "arabicFolded": "هي",
-      "pronunciation": "hiya",
-      "english": "she",
-      "category": "3rd person singular",
-      "isExtra": false,
-      "topicSlugs": [
-        "getting-to-know-each-other"
-      ],
-      "lessonId": "lesson-getting-to-know-each-other"
-    },
-    {
-      "id": "lesson-getting-to-know-each-other__3rd-person-plural",
-      "arabic": "هُمْ",
-      "arabicFolded": "هم",
-      "pronunciation": "hum",
-      "english": "they (all)",
-      "category": "3rd person plural",
-      "isExtra": false,
-      "topicSlugs": [
-        "getting-to-know-each-other"
-      ],
-      "lessonId": "lesson-getting-to-know-each-other"
-    },
-    {
-      "id": "lesson-getting-to-know-each-other__3rd-person-plural-2",
-      "arabic": "هُنَّ",
-      "arabicFolded": "هن",
-      "pronunciation": "hunna",
-      "english": "they (all)",
-      "category": "3rd person plural",
-      "isExtra": false,
-      "topicSlugs": [
-        "getting-to-know-each-other"
-      ],
-      "lessonId": "lesson-getting-to-know-each-other"
-    },
-    {
-      "id": "lesson-getting-to-know-each-other__1st-person-singular-2",
-      "arabic": "ـِي",
-      "arabicFolded": "ي",
-      "pronunciation": "-ī",
-      "english": "my / me",
-      "category": "1st person singular",
-      "isExtra": false,
-      "topicSlugs": [
-        "getting-to-know-each-other"
-      ],
-      "lessonId": "lesson-getting-to-know-each-other"
-    },
-    {
-      "id": "lesson-getting-to-know-each-other__1st-person-plural-2",
-      "arabic": "ـنَا",
-      "arabicFolded": "نا",
-      "pronunciation": "-nā",
-      "english": "our / us",
-      "category": "1st person plural",
-      "isExtra": false,
-      "topicSlugs": [
-        "getting-to-know-each-other"
-      ],
-      "lessonId": "lesson-getting-to-know-each-other"
-    },
-    {
-      "id": "lesson-getting-to-know-each-other__2nd-person-singular-3",
-      "arabic": "ـكَ",
-      "arabicFolded": "ك",
-      "pronunciation": "-ka (m)",
-      "english": "your / you",
-      "category": "2nd person singular",
-      "isExtra": false,
-      "topicSlugs": [
-        "getting-to-know-each-other"
-      ],
-      "lessonId": "lesson-getting-to-know-each-other"
-    },
-    {
-      "id": "lesson-getting-to-know-each-other__2nd-person-singular-4",
-      "arabic": "ـكِ",
-      "arabicFolded": "ك",
-      "pronunciation": "-ki (f)",
-      "english": "your / you",
-      "category": "2nd person singular",
-      "isExtra": false,
-      "topicSlugs": [
-        "getting-to-know-each-other"
-      ],
-      "lessonId": "lesson-getting-to-know-each-other"
-    },
-    {
-      "id": "lesson-getting-to-know-each-other__2nd-person-plural-3",
-      "arabic": "ـكُمْ",
-      "arabicFolded": "كم",
-      "pronunciation": "-kum (m)",
-      "english": "your / you (all)",
-      "category": "2nd person plural",
-      "isExtra": false,
-      "topicSlugs": [
-        "getting-to-know-each-other"
-      ],
-      "lessonId": "lesson-getting-to-know-each-other"
-    },
-    {
-      "id": "lesson-getting-to-know-each-other__2nd-person-plural-4",
-      "arabic": "ـكُنَّ",
-      "arabicFolded": "كن",
-      "pronunciation": "-kunna (f)",
-      "english": "your / you (all)",
-      "category": "2nd person plural",
-      "isExtra": false,
-      "topicSlugs": [
-        "getting-to-know-each-other"
-      ],
-      "lessonId": "lesson-getting-to-know-each-other"
-    },
-    {
-      "id": "lesson-getting-to-know-each-other__3rd-person-singular-3",
-      "arabic": "ـهُ",
-      "arabicFolded": "ه",
-      "pronunciation": "-hu",
-      "english": "his / him",
-      "category": "3rd person singular",
-      "isExtra": false,
-      "topicSlugs": [
-        "getting-to-know-each-other"
-      ],
-      "lessonId": "lesson-getting-to-know-each-other"
-    },
-    {
-      "id": "lesson-getting-to-know-each-other__3rd-person-singular-4",
-      "arabic": "ـهَا",
-      "arabicFolded": "ها",
-      "pronunciation": "-hā",
-      "english": "her / her",
-      "category": "3rd person singular",
-      "isExtra": false,
-      "topicSlugs": [
-        "getting-to-know-each-other"
-      ],
-      "lessonId": "lesson-getting-to-know-each-other"
-    },
-    {
-      "id": "lesson-getting-to-know-each-other__3rd-person-plural-3",
-      "arabic": "ـهُمْ",
-      "arabicFolded": "هم",
-      "pronunciation": "-hum",
-      "english": "their / them",
-      "category": "3rd person plural",
-      "isExtra": false,
-      "topicSlugs": [
-        "getting-to-know-each-other"
-      ],
-      "lessonId": "lesson-getting-to-know-each-other"
-    },
-    {
-      "id": "lesson-getting-to-know-each-other__3rd-person-plural-4",
-      "arabic": "ـهُنَّ",
-      "arabicFolded": "هن",
-      "pronunciation": "-hunna",
-      "english": "their / them",
-      "category": "3rd person plural",
-      "isExtra": false,
-      "topicSlugs": [
-        "getting-to-know-each-other"
-      ],
-      "lessonId": "lesson-getting-to-know-each-other"
-    },
-    {
-      "id": "lesson-getting-to-know-each-other__singular-near",
-      "arabic": "هَذَا",
-      "arabicFolded": "هذا",
-      "pronunciation": "hādhā",
-      "english": "this (m)",
-      "category": "Singular (near)",
-      "isExtra": false,
-      "topicSlugs": [
-        "getting-to-know-each-other"
-      ],
-      "lessonId": "lesson-getting-to-know-each-other"
-    },
-    {
-      "id": "lesson-getting-to-know-each-other__singular-near-2",
-      "arabic": "هَذِهِ",
-      "arabicFolded": "هذه",
-      "pronunciation": "hādhihi",
-      "english": "this (f)",
-      "category": "Singular (near)",
-      "isExtra": false,
-      "topicSlugs": [
-        "getting-to-know-each-other"
-      ],
-      "lessonId": "lesson-getting-to-know-each-other"
-    },
-    {
-      "id": "lesson-getting-to-know-each-other__singular-far",
-      "arabic": "ذَلِكَ",
-      "arabicFolded": "ذلك",
-      "pronunciation": "dhālika",
-      "english": "that (m)",
-      "category": "Singular (far)",
-      "isExtra": false,
-      "topicSlugs": [
-        "getting-to-know-each-other"
-      ],
-      "lessonId": "lesson-getting-to-know-each-other"
-    },
-    {
-      "id": "lesson-getting-to-know-each-other__singular-far-2",
-      "arabic": "تِلْكَ",
-      "arabicFolded": "تلك",
-      "pronunciation": "tilka",
-      "english": "that (f)",
-      "category": "Singular (far)",
-      "isExtra": false,
-      "topicSlugs": [
-        "getting-to-know-each-other"
-      ],
-      "lessonId": "lesson-getting-to-know-each-other"
-    },
-    {
-      "id": "lesson-getting-to-know-each-other__dual-near",
-      "arabic": "هَذَانِ",
-      "arabicFolded": "هذان",
-      "pronunciation": "hādhāni",
-      "english": "these two (m)",
-      "category": "Dual (near)",
-      "isExtra": false,
-      "topicSlugs": [
-        "getting-to-know-each-other"
-      ],
-      "lessonId": "lesson-getting-to-know-each-other"
-    },
-    {
-      "id": "lesson-getting-to-know-each-other__dual-near-2",
-      "arabic": "هَاتَانِ",
-      "arabicFolded": "هاتان",
-      "pronunciation": "hātāni",
-      "english": "these two (f)",
-      "category": "Dual (near)",
-      "isExtra": false,
-      "topicSlugs": [
-        "getting-to-know-each-other"
-      ],
-      "lessonId": "lesson-getting-to-know-each-other"
-    },
-    {
-      "id": "lesson-getting-to-know-each-other__dual-far",
-      "arabic": "ذَانِكَ",
-      "arabicFolded": "ذانك",
-      "pronunciation": "dhānika",
-      "english": "those two (m)",
-      "category": "Dual (far)",
-      "isExtra": false,
-      "topicSlugs": [
-        "getting-to-know-each-other"
-      ],
-      "lessonId": "lesson-getting-to-know-each-other"
-    },
-    {
-      "id": "lesson-getting-to-know-each-other__dual-far-2",
-      "arabic": "تَانِكَ",
-      "arabicFolded": "تانك",
-      "pronunciation": "tānika",
-      "english": "those two (f)",
-      "category": "Dual (far)",
-      "isExtra": false,
-      "topicSlugs": [
-        "getting-to-know-each-other"
-      ],
-      "lessonId": "lesson-getting-to-know-each-other"
-    },
-    {
-      "id": "lesson-getting-to-know-each-other__plural-near",
-      "arabic": "هَؤُلَاءِ",
-      "arabicFolded": "هؤلاء",
-      "pronunciation": "hāʾulāʾ",
-      "english": "these",
-      "category": "Plural (near)",
-      "isExtra": false,
-      "topicSlugs": [
-        "getting-to-know-each-other"
-      ],
-      "lessonId": "lesson-getting-to-know-each-other"
-    },
-    {
-      "id": "lesson-getting-to-know-each-other__plural-far",
-      "arabic": "أُولَٰئِكَ",
-      "arabicFolded": "أولئك",
-      "pronunciation": "ulāʾika",
-      "english": "those",
-      "category": "Plural (far)",
-      "isExtra": false,
-      "topicSlugs": [
-        "getting-to-know-each-other"
-      ],
-      "lessonId": "lesson-getting-to-know-each-other"
-    },
-    {
       "id": "lesson-getting-to-know-each-other__continents",
       "arabic": "قَارَّةٌ",
       "arabicFolded": "قارة",
@@ -5083,6 +4634,318 @@
       "lessonId": "lesson-getting-to-know-each-other"
     },
     {
+      "id": "lesson-getting-to-know-each-other__people",
+      "arabic": "طَالِبٌ",
+      "arabicFolded": "طالب",
+      "pronunciation": "ṭālib",
+      "english": "student",
+      "category": "PEOPLE",
+      "isExtra": false,
+      "topicSlugs": [
+        "getting-to-know-each-other"
+      ],
+      "lessonId": "lesson-getting-to-know-each-other"
+    },
+    {
+      "id": "lesson-getting-to-know-each-other__people-2",
+      "arabic": "مُدَرِّسٌ",
+      "arabicFolded": "مدرس",
+      "pronunciation": "mudarris",
+      "english": "teacher",
+      "category": "PEOPLE",
+      "isExtra": false,
+      "topicSlugs": [
+        "getting-to-know-each-other"
+      ],
+      "lessonId": "lesson-getting-to-know-each-other"
+    },
+    {
+      "id": "lesson-getting-to-know-each-other__people-3",
+      "arabic": "صَدِيقٌ",
+      "arabicFolded": "صديق",
+      "pronunciation": "ṣadīq",
+      "english": "friend",
+      "category": "PEOPLE",
+      "isExtra": false,
+      "topicSlugs": [
+        "getting-to-know-each-other"
+      ],
+      "lessonId": "lesson-getting-to-know-each-other"
+    },
+    {
+      "id": "lesson-getting-to-know-each-other__people-4",
+      "arabic": "عَدُوٌّ",
+      "arabicFolded": "عدو",
+      "pronunciation": "ʿaduww",
+      "english": "enemy",
+      "category": "PEOPLE",
+      "isExtra": false,
+      "topicSlugs": [
+        "getting-to-know-each-other"
+      ],
+      "lessonId": "lesson-getting-to-know-each-other"
+    },
+    {
+      "id": "lesson-getting-to-know-each-other__common-terms-in-excercise-books-and-questions",
+      "arabic": "تَدْرِيبٌ",
+      "arabicFolded": "تدريب",
+      "pronunciation": "tadrīb",
+      "english": "exercise",
+      "category": "COMMON TERMS IN EXCERCISE BOOKS AND QUESTIONS",
+      "isExtra": false,
+      "topicSlugs": [
+        "getting-to-know-each-other"
+      ],
+      "lessonId": "lesson-getting-to-know-each-other"
+    },
+    {
+      "id": "lesson-getting-to-know-each-other__common-terms-in-excercise-books-and-questions-2",
+      "arabic": "قَرَأَ",
+      "arabicFolded": "قرأ",
+      "pronunciation": "qaraʾa",
+      "english": "to read",
+      "category": "COMMON TERMS IN EXCERCISE BOOKS AND QUESTIONS",
+      "isExtra": false,
+      "topicSlugs": [
+        "getting-to-know-each-other"
+      ],
+      "lessonId": "lesson-getting-to-know-each-other"
+    },
+    {
+      "id": "lesson-getting-to-know-each-other__common-terms-in-excercise-books-and-questions-3",
+      "arabic": "كَتَبَ",
+      "arabicFolded": "كتب",
+      "pronunciation": "kataba",
+      "english": "to write",
+      "category": "COMMON TERMS IN EXCERCISE BOOKS AND QUESTIONS",
+      "isExtra": false,
+      "topicSlugs": [
+        "getting-to-know-each-other"
+      ],
+      "lessonId": "lesson-getting-to-know-each-other"
+    },
+    {
+      "id": "lesson-getting-to-know-each-other__common-terms-in-excercise-books-and-questions-4",
+      "arabic": "أَجَابَ",
+      "arabicFolded": "أجاب",
+      "pronunciation": "ajāba",
+      "english": "to answer",
+      "category": "COMMON TERMS IN EXCERCISE BOOKS AND QUESTIONS",
+      "isExtra": false,
+      "topicSlugs": [
+        "getting-to-know-each-other"
+      ],
+      "lessonId": "lesson-getting-to-know-each-other"
+    },
+    {
+      "id": "lesson-getting-to-know-each-other__common-terms-in-excercise-books-and-questions-5",
+      "arabic": "صِلْ",
+      "arabicFolded": "صل",
+      "pronunciation": "sil",
+      "english": "connect",
+      "category": "COMMON TERMS IN EXCERCISE BOOKS AND QUESTIONS",
+      "isExtra": false,
+      "topicSlugs": [
+        "getting-to-know-each-other"
+      ],
+      "lessonId": "lesson-getting-to-know-each-other"
+    },
+    {
+      "id": "lesson-getting-to-know-each-other__common-terms-in-excercise-books-and-questions-6",
+      "arabic": "بَدَّلَ",
+      "arabicFolded": "بدل",
+      "pronunciation": "baddala",
+      "english": "replace",
+      "category": "COMMON TERMS IN EXCERCISE BOOKS AND QUESTIONS",
+      "isExtra": false,
+      "topicSlugs": [
+        "getting-to-know-each-other"
+      ],
+      "lessonId": "lesson-getting-to-know-each-other"
+    },
+    {
+      "id": "lesson-getting-to-know-each-other__common-terms-in-excercise-books-and-questions-7",
+      "arabic": "سُؤَالٌ",
+      "arabicFolded": "سؤال",
+      "pronunciation": "suʾāl",
+      "english": "question",
+      "category": "COMMON TERMS IN EXCERCISE BOOKS AND QUESTIONS",
+      "isExtra": false,
+      "topicSlugs": [
+        "getting-to-know-each-other"
+      ],
+      "lessonId": "lesson-getting-to-know-each-other"
+    },
+    {
+      "id": "lesson-getting-to-know-each-other__common-terms-in-excercise-books-and-questions-8",
+      "arabic": "مِثَالٌ",
+      "arabicFolded": "مثال",
+      "pronunciation": "mithāl",
+      "english": "example",
+      "category": "COMMON TERMS IN EXCERCISE BOOKS AND QUESTIONS",
+      "isExtra": false,
+      "topicSlugs": [
+        "getting-to-know-each-other"
+      ],
+      "lessonId": "lesson-getting-to-know-each-other"
+    },
+    {
+      "id": "lesson-getting-to-know-each-other__common-terms-in-excercise-books-and-questions-9",
+      "arabic": "فِقْرَةٌ",
+      "arabicFolded": "فقرة",
+      "pronunciation": "fiqrah",
+      "english": "paragraph",
+      "category": "COMMON TERMS IN EXCERCISE BOOKS AND QUESTIONS",
+      "isExtra": false,
+      "topicSlugs": [
+        "getting-to-know-each-other"
+      ],
+      "lessonId": "lesson-getting-to-know-each-other"
+    },
+    {
+      "id": "lesson-getting-to-know-each-other__common-terms-in-excercise-books-and-questions-10",
+      "arabic": "عَنْ",
+      "arabicFolded": "عن",
+      "pronunciation": "ʿan",
+      "english": "about",
+      "category": "COMMON TERMS IN EXCERCISE BOOKS AND QUESTIONS",
+      "isExtra": false,
+      "topicSlugs": [
+        "getting-to-know-each-other"
+      ],
+      "lessonId": "lesson-getting-to-know-each-other"
+    },
+    {
+      "id": "lesson-getting-to-know-each-other__common-terms-in-excercise-books-and-questions-11",
+      "arabic": "كَمَا",
+      "arabicFolded": "كما",
+      "pronunciation": "kamā",
+      "english": "like / as",
+      "category": "COMMON TERMS IN EXCERCISE BOOKS AND QUESTIONS",
+      "isExtra": false,
+      "topicSlugs": [
+        "getting-to-know-each-other"
+      ],
+      "lessonId": "lesson-getting-to-know-each-other"
+    },
+    {
+      "id": "lesson-getting-to-know-each-other__general-verbs",
+      "arabic": "دَخَلَ",
+      "arabicFolded": "دخل",
+      "pronunciation": "dakhala",
+      "english": "to enter",
+      "category": "GENERAL VERBS",
+      "isExtra": false,
+      "topicSlugs": [
+        "getting-to-know-each-other"
+      ],
+      "lessonId": "lesson-getting-to-know-each-other"
+    },
+    {
+      "id": "lesson-getting-to-know-each-other__general-verbs-2",
+      "arabic": "طَلَبَ",
+      "arabicFolded": "طلب",
+      "pronunciation": "ṭalaba",
+      "english": "to seek",
+      "category": "GENERAL VERBS",
+      "isExtra": false,
+      "topicSlugs": [
+        "getting-to-know-each-other"
+      ],
+      "lessonId": "lesson-getting-to-know-each-other"
+    },
+    {
+      "id": "lesson-getting-to-know-each-other__general-verbs-3",
+      "arabic": "دَرَسَ",
+      "arabicFolded": "درس",
+      "pronunciation": "darasa",
+      "english": "to study",
+      "category": "GENERAL VERBS",
+      "isExtra": false,
+      "topicSlugs": [
+        "getting-to-know-each-other"
+      ],
+      "lessonId": "lesson-getting-to-know-each-other"
+    },
+    {
+      "id": "lesson-getting-to-know-each-other__general-verbs-4",
+      "arabic": "جَلَسَ",
+      "arabicFolded": "جلس",
+      "pronunciation": "jalasa",
+      "english": "to sit",
+      "category": "GENERAL VERBS",
+      "isExtra": false,
+      "topicSlugs": [
+        "getting-to-know-each-other"
+      ],
+      "lessonId": "lesson-getting-to-know-each-other"
+    },
+    {
+      "id": "lesson-getting-to-know-each-other__general-verbs-5",
+      "arabic": "اِقْرَأْ",
+      "arabicFolded": "اقرأ",
+      "pronunciation": "iqraʾ",
+      "english": "read",
+      "category": "GENERAL VERBS",
+      "isExtra": false,
+      "topicSlugs": [
+        "getting-to-know-each-other"
+      ],
+      "lessonId": "lesson-getting-to-know-each-other"
+    },
+    {
+      "id": "lesson-getting-to-know-each-other__general-verbs-6",
+      "arabic": "اُكْتُبْ",
+      "arabicFolded": "اكتب",
+      "pronunciation": "uktub",
+      "english": "write",
+      "category": "GENERAL VERBS",
+      "isExtra": false,
+      "topicSlugs": [
+        "getting-to-know-each-other"
+      ],
+      "lessonId": "lesson-getting-to-know-each-other"
+    },
+    {
+      "id": "lesson-getting-to-know-each-other__general-verbs-7",
+      "arabic": "أَجِبْ",
+      "arabicFolded": "أجب",
+      "pronunciation": "ajib",
+      "english": "answer",
+      "category": "GENERAL VERBS",
+      "isExtra": false,
+      "topicSlugs": [
+        "getting-to-know-each-other"
+      ],
+      "lessonId": "lesson-getting-to-know-each-other"
+    },
+    {
+      "id": "lesson-getting-to-know-each-other__general-verbs-8",
+      "arabic": "بَدِّلْ",
+      "arabicFolded": "بدل",
+      "pronunciation": "baddil",
+      "english": "replace",
+      "category": "GENERAL VERBS",
+      "isExtra": false,
+      "topicSlugs": [
+        "getting-to-know-each-other"
+      ],
+      "lessonId": "lesson-getting-to-know-each-other"
+    },
+    {
+      "id": "lesson-getting-to-know-each-other__general-verbs-9",
+      "arabic": "اسْأَلْ",
+      "arabicFolded": "اسأل",
+      "pronunciation": "isʾal",
+      "english": "ask",
+      "category": "GENERAL VERBS",
+      "isExtra": false,
+      "topicSlugs": [
+        "getting-to-know-each-other"
+      ],
+      "lessonId": "lesson-getting-to-know-each-other"
+    },
+    {
       "id": "lesson-getting-to-know-each-other__prepositions",
       "arabic": "مِنْ",
       "arabicFolded": "من",
@@ -5250,552 +5113,6 @@
         "getting-to-know-each-other"
       ],
       "lessonId": "lesson-getting-to-know-each-other"
-    },
-    {
-      "id": "lesson-getting-to-know-each-other__people",
-      "arabic": "طَالِبٌ",
-      "arabicFolded": "طالب",
-      "pronunciation": "ṭālib",
-      "english": "student",
-      "category": "PEOPLE",
-      "isExtra": true,
-      "topicSlugs": [
-        "getting-to-know-each-other"
-      ],
-      "lessonId": "lesson-getting-to-know-each-other"
-    },
-    {
-      "id": "lesson-getting-to-know-each-other__people-2",
-      "arabic": "مُدَرِّسٌ",
-      "arabicFolded": "مدرس",
-      "pronunciation": "mudarris",
-      "english": "teacher",
-      "category": "PEOPLE",
-      "isExtra": true,
-      "topicSlugs": [
-        "getting-to-know-each-other"
-      ],
-      "lessonId": "lesson-getting-to-know-each-other"
-    },
-    {
-      "id": "lesson-getting-to-know-each-other__people-3",
-      "arabic": "صَدِيقٌ",
-      "arabicFolded": "صديق",
-      "pronunciation": "ṣadīq",
-      "english": "friend",
-      "category": "PEOPLE",
-      "isExtra": true,
-      "topicSlugs": [
-        "getting-to-know-each-other"
-      ],
-      "lessonId": "lesson-getting-to-know-each-other"
-    },
-    {
-      "id": "lesson-getting-to-know-each-other__people-4",
-      "arabic": "عَدُوٌّ",
-      "arabicFolded": "عدو",
-      "pronunciation": "ʿaduww",
-      "english": "enemy",
-      "category": "PEOPLE",
-      "isExtra": true,
-      "topicSlugs": [
-        "getting-to-know-each-other"
-      ],
-      "lessonId": "lesson-getting-to-know-each-other"
-    },
-    {
-      "id": "lesson-getting-to-know-each-other__common-terms-in-excercise-books-and-questions",
-      "arabic": "تَدْرِيبٌ",
-      "arabicFolded": "تدريب",
-      "pronunciation": "tadrīb",
-      "english": "exercise",
-      "category": "COMMON TERMS IN EXCERCISE BOOKS AND QUESTIONS",
-      "isExtra": true,
-      "topicSlugs": [
-        "getting-to-know-each-other"
-      ],
-      "lessonId": "lesson-getting-to-know-each-other"
-    },
-    {
-      "id": "lesson-getting-to-know-each-other__common-terms-in-excercise-books-and-questions-2",
-      "arabic": "قَرَأَ",
-      "arabicFolded": "قرأ",
-      "pronunciation": "qaraʾa",
-      "english": "to read",
-      "category": "COMMON TERMS IN EXCERCISE BOOKS AND QUESTIONS",
-      "isExtra": true,
-      "topicSlugs": [
-        "getting-to-know-each-other"
-      ],
-      "lessonId": "lesson-getting-to-know-each-other"
-    },
-    {
-      "id": "lesson-getting-to-know-each-other__common-terms-in-excercise-books-and-questions-3",
-      "arabic": "كَتَبَ",
-      "arabicFolded": "كتب",
-      "pronunciation": "kataba",
-      "english": "to write",
-      "category": "COMMON TERMS IN EXCERCISE BOOKS AND QUESTIONS",
-      "isExtra": true,
-      "topicSlugs": [
-        "getting-to-know-each-other"
-      ],
-      "lessonId": "lesson-getting-to-know-each-other"
-    },
-    {
-      "id": "lesson-getting-to-know-each-other__common-terms-in-excercise-books-and-questions-4",
-      "arabic": "أَجَابَ",
-      "arabicFolded": "أجاب",
-      "pronunciation": "ajāba",
-      "english": "to answer",
-      "category": "COMMON TERMS IN EXCERCISE BOOKS AND QUESTIONS",
-      "isExtra": true,
-      "topicSlugs": [
-        "getting-to-know-each-other"
-      ],
-      "lessonId": "lesson-getting-to-know-each-other"
-    },
-    {
-      "id": "lesson-getting-to-know-each-other__common-terms-in-excercise-books-and-questions-5",
-      "arabic": "صِلْ",
-      "arabicFolded": "صل",
-      "pronunciation": "sil",
-      "english": "connect",
-      "category": "COMMON TERMS IN EXCERCISE BOOKS AND QUESTIONS",
-      "isExtra": true,
-      "topicSlugs": [
-        "getting-to-know-each-other"
-      ],
-      "lessonId": "lesson-getting-to-know-each-other"
-    },
-    {
-      "id": "lesson-getting-to-know-each-other__common-terms-in-excercise-books-and-questions-6",
-      "arabic": "بَدَّلَ",
-      "arabicFolded": "بدل",
-      "pronunciation": "baddala",
-      "english": "replace",
-      "category": "COMMON TERMS IN EXCERCISE BOOKS AND QUESTIONS",
-      "isExtra": true,
-      "topicSlugs": [
-        "getting-to-know-each-other"
-      ],
-      "lessonId": "lesson-getting-to-know-each-other"
-    },
-    {
-      "id": "lesson-getting-to-know-each-other__common-terms-in-excercise-books-and-questions-7",
-      "arabic": "سُؤَالٌ",
-      "arabicFolded": "سؤال",
-      "pronunciation": "suʾāl",
-      "english": "question",
-      "category": "COMMON TERMS IN EXCERCISE BOOKS AND QUESTIONS",
-      "isExtra": true,
-      "topicSlugs": [
-        "getting-to-know-each-other"
-      ],
-      "lessonId": "lesson-getting-to-know-each-other"
-    },
-    {
-      "id": "lesson-getting-to-know-each-other__common-terms-in-excercise-books-and-questions-8",
-      "arabic": "مِثَالٌ",
-      "arabicFolded": "مثال",
-      "pronunciation": "mithāl",
-      "english": "example",
-      "category": "COMMON TERMS IN EXCERCISE BOOKS AND QUESTIONS",
-      "isExtra": true,
-      "topicSlugs": [
-        "getting-to-know-each-other"
-      ],
-      "lessonId": "lesson-getting-to-know-each-other"
-    },
-    {
-      "id": "lesson-getting-to-know-each-other__common-terms-in-excercise-books-and-questions-9",
-      "arabic": "فِقْرَةٌ",
-      "arabicFolded": "فقرة",
-      "pronunciation": "fiqrah",
-      "english": "paragraph",
-      "category": "COMMON TERMS IN EXCERCISE BOOKS AND QUESTIONS",
-      "isExtra": true,
-      "topicSlugs": [
-        "getting-to-know-each-other"
-      ],
-      "lessonId": "lesson-getting-to-know-each-other"
-    },
-    {
-      "id": "lesson-getting-to-know-each-other__common-terms-in-excercise-books-and-questions-10",
-      "arabic": "عَنْ",
-      "arabicFolded": "عن",
-      "pronunciation": "ʿan",
-      "english": "about",
-      "category": "COMMON TERMS IN EXCERCISE BOOKS AND QUESTIONS",
-      "isExtra": true,
-      "topicSlugs": [
-        "getting-to-know-each-other"
-      ],
-      "lessonId": "lesson-getting-to-know-each-other"
-    },
-    {
-      "id": "lesson-getting-to-know-each-other__common-terms-in-excercise-books-and-questions-11",
-      "arabic": "كَمَا",
-      "arabicFolded": "كما",
-      "pronunciation": "kamā",
-      "english": "like / as",
-      "category": "COMMON TERMS IN EXCERCISE BOOKS AND QUESTIONS",
-      "isExtra": true,
-      "topicSlugs": [
-        "getting-to-know-each-other"
-      ],
-      "lessonId": "lesson-getting-to-know-each-other"
-    },
-    {
-      "id": "lesson-getting-to-know-each-other__general-verbs",
-      "arabic": "دَخَلَ",
-      "arabicFolded": "دخل",
-      "pronunciation": "dakhala",
-      "english": "to enter",
-      "category": "GENERAL VERBS",
-      "isExtra": true,
-      "topicSlugs": [
-        "getting-to-know-each-other"
-      ],
-      "lessonId": "lesson-getting-to-know-each-other"
-    },
-    {
-      "id": "lesson-getting-to-know-each-other__general-verbs-2",
-      "arabic": "طَلَبَ",
-      "arabicFolded": "طلب",
-      "pronunciation": "ṭalaba",
-      "english": "to seek",
-      "category": "GENERAL VERBS",
-      "isExtra": true,
-      "topicSlugs": [
-        "getting-to-know-each-other"
-      ],
-      "lessonId": "lesson-getting-to-know-each-other"
-    },
-    {
-      "id": "lesson-getting-to-know-each-other__general-verbs-3",
-      "arabic": "دَرَسَ",
-      "arabicFolded": "درس",
-      "pronunciation": "darasa",
-      "english": "to study",
-      "category": "GENERAL VERBS",
-      "isExtra": true,
-      "topicSlugs": [
-        "getting-to-know-each-other"
-      ],
-      "lessonId": "lesson-getting-to-know-each-other"
-    },
-    {
-      "id": "lesson-getting-to-know-each-other__general-verbs-4",
-      "arabic": "جَلَسَ",
-      "arabicFolded": "جلس",
-      "pronunciation": "jalasa",
-      "english": "to sit",
-      "category": "GENERAL VERBS",
-      "isExtra": true,
-      "topicSlugs": [
-        "getting-to-know-each-other"
-      ],
-      "lessonId": "lesson-getting-to-know-each-other"
-    },
-    {
-      "id": "lesson-getting-to-know-each-other__general-verbs-5",
-      "arabic": "اِقْرَأْ",
-      "arabicFolded": "اقرأ",
-      "pronunciation": "iqraʾ",
-      "english": "read",
-      "category": "GENERAL VERBS",
-      "isExtra": true,
-      "topicSlugs": [
-        "getting-to-know-each-other"
-      ],
-      "lessonId": "lesson-getting-to-know-each-other"
-    },
-    {
-      "id": "lesson-getting-to-know-each-other__general-verbs-6",
-      "arabic": "اُكْتُبْ",
-      "arabicFolded": "اكتب",
-      "pronunciation": "uktub",
-      "english": "write",
-      "category": "GENERAL VERBS",
-      "isExtra": true,
-      "topicSlugs": [
-        "getting-to-know-each-other"
-      ],
-      "lessonId": "lesson-getting-to-know-each-other"
-    },
-    {
-      "id": "lesson-getting-to-know-each-other__general-verbs-7",
-      "arabic": "أَجِبْ",
-      "arabicFolded": "أجب",
-      "pronunciation": "ajib",
-      "english": "answer",
-      "category": "GENERAL VERBS",
-      "isExtra": true,
-      "topicSlugs": [
-        "getting-to-know-each-other"
-      ],
-      "lessonId": "lesson-getting-to-know-each-other"
-    },
-    {
-      "id": "lesson-getting-to-know-each-other__general-verbs-8",
-      "arabic": "بَدِّلْ",
-      "arabicFolded": "بدل",
-      "pronunciation": "baddil",
-      "english": "replace",
-      "category": "GENERAL VERBS",
-      "isExtra": true,
-      "topicSlugs": [
-        "getting-to-know-each-other"
-      ],
-      "lessonId": "lesson-getting-to-know-each-other"
-    },
-    {
-      "id": "lesson-getting-to-know-each-other__general-verbs-9",
-      "arabic": "اسْأَلْ",
-      "arabicFolded": "اسأل",
-      "pronunciation": "isʾal",
-      "english": "ask",
-      "category": "GENERAL VERBS",
-      "isExtra": true,
-      "topicSlugs": [
-        "getting-to-know-each-other"
-      ],
-      "lessonId": "lesson-getting-to-know-each-other"
-    },
-    {
-      "id": "lesson-the-classroom__rooms-places",
-      "arabic": "حُجْرَة",
-      "arabicFolded": "حجرة",
-      "pronunciation": "ḥujrah",
-      "english": "room",
-      "category": "Rooms & Places",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-classroom"
-      ],
-      "lessonId": "lesson-the-classroom"
-    },
-    {
-      "id": "lesson-the-classroom__rooms-places-2",
-      "arabic": "حُجْرَةُ الدِّرَاسَةِ",
-      "arabicFolded": "حجرة الدراسة",
-      "pronunciation": "ḥujratu ad-dirāsah",
-      "english": "study room / classroom",
-      "category": "Rooms & Places",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-classroom"
-      ],
-      "lessonId": "lesson-the-classroom"
-    },
-    {
-      "id": "lesson-the-classroom__rooms-places-3",
-      "arabic": "مَكْتَبَة",
-      "arabicFolded": "مكتبة",
-      "pronunciation": "maktabah",
-      "english": "library",
-      "category": "Rooms & Places",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-classroom"
-      ],
-      "lessonId": "lesson-the-classroom"
-    },
-    {
-      "id": "lesson-the-classroom__rooms-places-4",
-      "arabic": "مُخْتَبَر",
-      "arabicFolded": "مختبر",
-      "pronunciation": "mukhtabar",
-      "english": "laboratory",
-      "category": "Rooms & Places",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-classroom"
-      ],
-      "lessonId": "lesson-the-classroom"
-    },
-    {
-      "id": "lesson-the-classroom__furniture",
-      "arabic": "مَكْتَب",
-      "arabicFolded": "مكتب",
-      "pronunciation": "maktab",
-      "english": "desk",
-      "category": "Furniture",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-classroom"
-      ],
-      "lessonId": "lesson-the-classroom"
-    },
-    {
-      "id": "lesson-the-classroom__furniture-2",
-      "arabic": "مَقْعَد",
-      "arabicFolded": "مقعد",
-      "pronunciation": "maqʿad",
-      "english": "bench",
-      "category": "Furniture",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-classroom"
-      ],
-      "lessonId": "lesson-the-classroom"
-    },
-    {
-      "id": "lesson-the-classroom__learning-tools",
-      "arabic": "دَفْتَر",
-      "arabicFolded": "دفتر",
-      "pronunciation": "daftar",
-      "english": "notebook",
-      "category": "Learning Tools",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-classroom"
-      ],
-      "lessonId": "lesson-the-classroom"
-    },
-    {
-      "id": "lesson-the-classroom__learning-tools-2",
-      "arabic": "مِسْطَرَة",
-      "arabicFolded": "مسطرة",
-      "pronunciation": "misṭarah",
-      "english": "ruler",
-      "category": "Learning Tools",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-classroom"
-      ],
-      "lessonId": "lesson-the-classroom"
-    },
-    {
-      "id": "lesson-the-classroom__learning-tools-3",
-      "arabic": "مِمْحَاة",
-      "arabicFolded": "ممحاة",
-      "pronunciation": "mimḥāh",
-      "english": "eraser",
-      "category": "Learning Tools",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-classroom"
-      ],
-      "lessonId": "lesson-the-classroom"
-    },
-    {
-      "id": "lesson-the-classroom__learning-tools-4",
-      "arabic": "مِبْرَاة",
-      "arabicFolded": "مبراة",
-      "pronunciation": "mibrāh",
-      "english": "pencil sharpener",
-      "category": "Learning Tools",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-classroom"
-      ],
-      "lessonId": "lesson-the-classroom"
-    },
-    {
-      "id": "lesson-the-classroom__classroom-items",
-      "arabic": "لَوْحَة",
-      "arabicFolded": "لوحة",
-      "pronunciation": "lawḥah",
-      "english": "slate / board",
-      "category": "Classroom Items",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-classroom"
-      ],
-      "lessonId": "lesson-the-classroom"
-    },
-    {
-      "id": "lesson-the-classroom__classroom-items-2",
-      "arabic": "مَسَّاحَة",
-      "arabicFolded": "مساحة",
-      "pronunciation": "massāḥah",
-      "english": "board wiper",
-      "category": "Classroom Items",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-classroom"
-      ],
-      "lessonId": "lesson-the-classroom"
-    },
-    {
-      "id": "lesson-the-classroom__classroom-items-3",
-      "arabic": "خَرِيطَة",
-      "arabicFolded": "خريطة",
-      "pronunciation": "kharīṭah",
-      "english": "map",
-      "category": "Classroom Items",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-classroom"
-      ],
-      "lessonId": "lesson-the-classroom"
-    },
-    {
-      "id": "lesson-the-classroom__classroom-items-4",
-      "arabic": "صُورَة",
-      "arabicFolded": "صورة",
-      "pronunciation": "ṣūrah",
-      "english": "picture",
-      "category": "Classroom Items",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-classroom"
-      ],
-      "lessonId": "lesson-the-classroom"
-    },
-    {
-      "id": "lesson-the-classroom__classroom-items-5",
-      "arabic": "نُقْطَة",
-      "arabicFolded": "نقطة",
-      "pronunciation": "nuqṭah",
-      "english": "dot / blank",
-      "category": "Classroom Items",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-classroom"
-      ],
-      "lessonId": "lesson-the-classroom"
-    },
-    {
-      "id": "lesson-the-classroom__room-features",
-      "arabic": "نَافِذَة",
-      "arabicFolded": "نافذة",
-      "pronunciation": "nāfidhah",
-      "english": "window",
-      "category": "Room Features",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-classroom"
-      ],
-      "lessonId": "lesson-the-classroom"
-    },
-    {
-      "id": "lesson-the-classroom__room-features-2",
-      "arabic": "مِرْوَحَة",
-      "arabicFolded": "مروحة",
-      "pronunciation": "mirwaḥah",
-      "english": "fan",
-      "category": "Room Features",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-classroom"
-      ],
-      "lessonId": "lesson-the-classroom"
-    },
-    {
-      "id": "lesson-the-classroom__people",
-      "arabic": "مُخْتَبِر",
-      "arabicFolded": "مختبر",
-      "pronunciation": "mukhtabir",
-      "english": "tester / experimenter",
-      "category": "People",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-classroom"
-      ],
-      "lessonId": "lesson-the-classroom"
     }
   ],
   "rules": [
@@ -6466,149 +5783,652 @@
         "time"
       ],
       "lessonId": "lesson-time"
-    },
-    {
-      "id": "lesson-getting-to-know-each-other__rule-table__madi-past-tense",
-      "title": "Māḍī (Past Tense)",
-      "body": "**Rule / Explanation:** Used for actions that already happened",
-      "examples": [
-        {
-          "arabic": "كَتَبَ",
-          "english": "(kataba) – he wrote"
-        }
-      ],
-      "topicSlugs": [
-        "getting-to-know-each-other"
-      ],
-      "lessonId": "lesson-getting-to-know-each-other"
-    },
-    {
-      "id": "lesson-getting-to-know-each-other__rule-table__mudari-present-or-future",
-      "title": "Muḍāriʿ (Present or Future)",
-      "body": "**Rule / Explanation:** Used for actions happening now or in the futureDifferent prefixes show the subject/gender such as a يـ (ya-) at the start if it’s a male or a تـ (ta-) for a female",
-      "examples": [
-        {
-          "arabic": "يَكْتُبُ",
-          "english": "(yaktubu) – he writes"
-        }
-      ],
-      "topicSlugs": [
-        "getting-to-know-each-other"
-      ],
-      "lessonId": "lesson-getting-to-know-each-other"
-    },
-    {
-      "id": "lesson-getting-to-know-each-other__rule-table__masdar-verbal-noun",
-      "title": "Maṣdar (Verbal Noun)",
-      "body": "**Rule / Explanation:** Describes the action in and of itself without ascribing it to a subject or person (e.g. walking)",
-      "examples": [
-        {
-          "arabic": "كِتَابَةٌ",
-          "english": "(kitābah) – writing"
-        }
-      ],
-      "topicSlugs": [
-        "getting-to-know-each-other"
-      ],
-      "lessonId": "lesson-getting-to-know-each-other"
-    },
-    {
-      "id": "lesson-getting-to-know-each-other__rule-table__how-to-order-a-verb-in-a-sentence",
-      "title": "How to order a verb in a sentence",
-      "body": "**Rule / Explanation:** In Arabic, the Verb usually comes before the subject unlike in English where the person comes first then the Verb",
-      "examples": [
-        {
-          "arabic": "يَدْرُسُ زَيْدٌ",
-          "english": "(yadrusu Zaydun) – Zayd studies"
-        }
-      ],
-      "topicSlugs": [
-        "getting-to-know-each-other"
-      ],
-      "lessonId": "lesson-getting-to-know-each-other"
-    },
-    {
-      "id": "lesson-getting-to-know-each-other__rule-table__how-to-personally-possess",
-      "title": "How to personally possess",
-      "body": "**Rule / Explanation:** ـي (-ī) added via the letter يـ (ya-) to a noun means “my”",
-      "examples": [
-        {
-          "arabic": "كِتَابِي",
-          "english": "(kitābī) – my book"
-        }
-      ],
-      "topicSlugs": [
-        "getting-to-know-each-other"
-      ],
-      "lessonId": "lesson-getting-to-know-each-other"
-    },
-    {
-      "id": "lesson-getting-to-know-each-other__rule-table__how-to-ascribe-possession-to-him",
-      "title": "How to ascribe possession to him",
-      "body": "**Rule / Explanation:** ـكَ (-ka) and ـكِ (-ki) mean your male and female",
-      "examples": [
-        {
-          "arabic": "كِتَابُكَ",
-          "english": "(kitābuka) – your book"
-        }
-      ],
-      "topicSlugs": [
-        "getting-to-know-each-other"
-      ],
-      "lessonId": "lesson-getting-to-know-each-other"
-    },
-    {
-      "id": "lesson-getting-to-know-each-other__rule-table__how-to-ascribe-possession-to-her",
-      "title": "How to ascribe possession to her",
-      "body": "**Rule / Explanation:** ـهُ (-hu) and ـها (-hā) mean his and her",
-      "examples": [
-        {
-          "arabic": "كِتَابُهُ",
-          "english": "(kitābuhu) – his book"
-        }
-      ],
-      "topicSlugs": [
-        "getting-to-know-each-other"
-      ],
-      "lessonId": "lesson-getting-to-know-each-other"
-    },
-    {
-      "id": "lesson-getting-to-know-each-other__rule-table__how-to-ascribe-possession-to-them",
-      "title": "How to ascribe possession to them",
-      "body": "**Rule / Explanation:** ـنا (-nā) ـكم (-kum) ـهم (-hum) mean our your their",
-      "examples": [
-        {
-          "arabic": "كِتَابُنَا",
-          "english": "(kitābunā) – our book"
-        }
-      ],
-      "topicSlugs": [
-        "getting-to-know-each-other"
-      ],
-      "lessonId": "lesson-getting-to-know-each-other"
-    },
-    {
-      "id": "lesson-getting-to-know-each-other__rule-table__how-to-make-some-nouns-feminine",
-      "title": "How to make some nouns feminine",
-      "body": "**Rule / Explanation:** ة (tāʾ marbūṭa) often makes a noun feminine",
-      "examples": [
-        {
-          "arabic": "مُدَرِّسَةٌ",
-          "english": "(mudarrisah) – female teacher"
-        }
-      ],
-      "topicSlugs": [
-        "getting-to-know-each-other"
-      ],
-      "lessonId": "lesson-getting-to-know-each-other"
     }
   ],
   "conversations": [],
+  "pronouns": [
+    {
+      "id": "pronoun__detached__1st-person-singular__ana",
+      "kind": "detached",
+      "category": "1st person singular",
+      "arabic": "أَنَا",
+      "arabicFolded": "أنا",
+      "pronunciation": "anā",
+      "english": "I",
+      "usageNote": "One person speaking by himself",
+      "example": {
+        "arabic": "إِنِّي أَنَا اللَّهُ",
+        "transliteration": "innī anā Allāh",
+        "english": "Indeed, I am Allah",
+        "citation": "Qur’ān 20:14"
+      }
+    },
+    {
+      "id": "pronoun__detached__1st-person-plural__nahnu",
+      "kind": "detached",
+      "category": "1st person plural",
+      "arabic": "نَحْنُ",
+      "arabicFolded": "نحن",
+      "pronunciation": "naḥnu",
+      "english": "we",
+      "usageNote": "Two people speaking about themselvesOR sometimes just, one person speaking greatly about themselves",
+      "example": {
+        "arabic": "إِنَّا نَحْنُ نَزَّلْنَا الذِّكْرَ",
+        "transliteration": "innā naḥnu nazzalnā adh-dhikr",
+        "english": "Indeed, We revealed the Reminder",
+        "citation": "Qur’ān 15:9"
+      }
+    },
+    {
+      "id": "pronoun__detached__2nd-person-singular__anta",
+      "kind": "detached",
+      "category": "2nd person singular",
+      "arabic": "أَنتَ",
+      "arabicFolded": "أنت",
+      "pronunciation": "anta",
+      "english": "you",
+      "gender": "M",
+      "usageNote": "Speaking to one other person",
+      "example": {
+        "arabic": "إِنَّكَ أَنتَ العَلِيمُ الحَكِيمُ",
+        "transliteration": "innaka anta al-ʿalīm al-ḥakīm",
+        "english": "Indeed, You are the Knowing, Wise",
+        "citation": "Qur’ān 2:32"
+      }
+    },
+    {
+      "id": "pronoun__detached__2nd-person-singular__anti",
+      "kind": "detached",
+      "category": "2nd person singular",
+      "arabic": "أَنتِ",
+      "arabicFolded": "أنت",
+      "pronunciation": "anti",
+      "english": "you",
+      "gender": "F",
+      "usageNote": "Speaking to one other person",
+      "example": {
+        "arabic": "أَنتِ طَالِبَةٌ",
+        "transliteration": "anti ṭālibah",
+        "english": "You are a female student"
+      }
+    },
+    {
+      "id": "pronoun__detached__2nd-person-plural__antum",
+      "kind": "detached",
+      "category": "2nd person plural",
+      "arabic": "أَنتُم",
+      "arabicFolded": "أنتم",
+      "pronunciation": "antum",
+      "english": "you (all)",
+      "gender": "M",
+      "usageNote": "Speaking to a group of people",
+      "example": {
+        "arabic": "ثُمَّ أَنتُم هَٰؤُلَاءِ تَقْتُلُونَ أَنفُسَكُمْ",
+        "transliteration": "thumma antum hāʾulāʾi taqtulūna anfusakum",
+        "english": "Then you are those who kill yourselves",
+        "citation": "Qur’ān 2:85"
+      }
+    },
+    {
+      "id": "pronoun__detached__2nd-person-plural__antunna",
+      "kind": "detached",
+      "category": "2nd person plural",
+      "arabic": "أَنتُنَّ",
+      "arabicFolded": "أنتن",
+      "pronunciation": "antunna",
+      "english": "you (all)",
+      "gender": "F",
+      "usageNote": "Speaking to a group of people",
+      "example": {
+        "arabic": "أَنتُنَّ طَالِبَاتٌ",
+        "transliteration": "antunna ṭālibāt",
+        "english": "You are female students"
+      }
+    },
+    {
+      "id": "pronoun__detached__3rd-person-singular__huwa",
+      "kind": "detached",
+      "category": "3rd person singular",
+      "arabic": "هُوَ",
+      "arabicFolded": "هو",
+      "pronunciation": "huwa",
+      "english": "he",
+      "gender": "M",
+      "usageNote": "Speaking about one other person or speaking about yourself from another perspective",
+      "example": {
+        "arabic": "قُلْ هُوَ اللَّهُ أَحَدٌ",
+        "transliteration": "qul huwa Allāhu aḥad",
+        "english": "Say: He is Allah, One",
+        "citation": "Qur’ān 112:1"
+      }
+    },
+    {
+      "id": "pronoun__detached__3rd-person-singular__hiya",
+      "kind": "detached",
+      "category": "3rd person singular",
+      "arabic": "هِيَ",
+      "arabicFolded": "هي",
+      "pronunciation": "hiya",
+      "english": "she",
+      "gender": "F",
+      "usageNote": "Speaking about one other person or speaking about yourself from another perspective",
+      "example": {
+        "arabic": "إِنْ هِيَ إِلَّا حَيَاةُنَا الدُّنْيَا",
+        "transliteration": "in hiya illā ḥayātunā ad-dunyā",
+        "english": "It is only our worldly life",
+        "citation": "Qur’ān 23:37"
+      }
+    },
+    {
+      "id": "pronoun__detached__3rd-person-plural__hum",
+      "kind": "detached",
+      "category": "3rd person plural",
+      "arabic": "هُمْ",
+      "arabicFolded": "هم",
+      "pronunciation": "hum",
+      "english": "they (all)",
+      "gender": "M",
+      "usageNote": "Speaking about a group of people",
+      "example": {
+        "arabic": "هُمُ الظَّالِمُونَ",
+        "transliteration": "hum aẓ-ẓālimūn",
+        "english": "They are the wrongdoers",
+        "citation": "Qur’ān 2:254"
+      }
+    },
+    {
+      "id": "pronoun__detached__3rd-person-plural__hunna",
+      "kind": "detached",
+      "category": "3rd person plural",
+      "arabic": "هُنَّ",
+      "arabicFolded": "هن",
+      "pronunciation": "hunna",
+      "english": "they (all)",
+      "gender": "F",
+      "usageNote": "Speaking about a group of people",
+      "example": {
+        "arabic": "هُنَّ لِبَاسٌ لَكُمْ",
+        "transliteration": "hunna libāsun lakum",
+        "english": "They are clothing for you",
+        "citation": "Qur’ān 2:187"
+      }
+    },
+    {
+      "id": "pronoun__attached__1st-person-singular__i",
+      "kind": "attached",
+      "category": "1st person singular",
+      "arabic": "ـِي",
+      "arabicFolded": "ي",
+      "pronunciation": "-ī",
+      "english": "my / me",
+      "usageNote": "One person speaking by himself",
+      "example": {
+        "arabic": "قَالَ رَبِّي اشْرَحْ لِي صَدْرِي",
+        "transliteration": "qāla rabbī ishraḥ lī ṣadrī",
+        "english": "He said: My Lord, expand for me my chest",
+        "citation": "Qur’ān 20:25"
+      }
+    },
+    {
+      "id": "pronoun__attached__1st-person-plural__na",
+      "kind": "attached",
+      "category": "1st person plural",
+      "arabic": "ـنَا",
+      "arabicFolded": "نا",
+      "pronunciation": "-nā",
+      "english": "our / us",
+      "usageNote": "Two people speaking about themselvesOR sometimes just, one person speaking greatly about themselves",
+      "example": {
+        "arabic": "رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً",
+        "transliteration": "rabbanā ātinā fī ad-dunyā ḥasanah",
+        "english": "Our Lord, give us good in this world",
+        "citation": "Qur’ān 2:201"
+      }
+    },
+    {
+      "id": "pronoun__attached__2nd-person-singular__ka",
+      "kind": "attached",
+      "category": "2nd person singular",
+      "arabic": "ـكَ",
+      "arabicFolded": "ك",
+      "pronunciation": "-ka",
+      "english": "your / you",
+      "gender": "M",
+      "usageNote": "Speaking to one other person",
+      "example": {
+        "arabic": "مَا وَدَّعَكَ رَبُّكَ وَمَا قَلَى",
+        "transliteration": "mā waddaʿaka rabbuka wa mā qalā",
+        "english": "Your Lord has not forsaken you",
+        "citation": "Qur’ān 93:3"
+      }
+    },
+    {
+      "id": "pronoun__attached__2nd-person-singular__ki",
+      "kind": "attached",
+      "category": "2nd person singular",
+      "arabic": "ـكِ",
+      "arabicFolded": "ك",
+      "pronunciation": "-ki",
+      "english": "your / you",
+      "gender": "F",
+      "usageNote": "Speaking to one other person",
+      "example": {
+        "arabic": "هَذَا كِتَابُكِ  –  (random example)",
+        "transliteration": "hādhā kitābuki",
+        "english": "This is your book"
+      }
+    },
+    {
+      "id": "pronoun__attached__2nd-person-plural__kum",
+      "kind": "attached",
+      "category": "2nd person plural",
+      "arabic": "ـكُمْ",
+      "arabicFolded": "كم",
+      "pronunciation": "-kum",
+      "english": "your / you (all)",
+      "gender": "M",
+      "usageNote": "Speaking to a group of people",
+      "example": {
+        "arabic": "يَا أَيُّهَا النَّاسُ اعْبُدُوا رَبَّكُمْ",
+        "transliteration": "yā ayyuhā an-nās uʿbudū rabbakum",
+        "english": "O people, worship your Lord",
+        "citation": "Qur’ān 2:21"
+      }
+    },
+    {
+      "id": "pronoun__attached__2nd-person-plural__kunna",
+      "kind": "attached",
+      "category": "2nd person plural",
+      "arabic": "ـكُنَّ",
+      "arabicFolded": "كن",
+      "pronunciation": "-kunna",
+      "english": "your / you (all)",
+      "gender": "F",
+      "usageNote": "Speaking to a group of people",
+      "example": {
+        "arabic": "فَإِنِّي أُرِيتُكُنَّ أَكْثَرَ أَهْلِ النَّارِ",
+        "transliteration": "fa-innī urītukunna akthar ahl an-nār",
+        "english": "I was shown that you (women) are the majority of the people in hell…",
+        "citation": "Hadith: Sahih al-Bukhari / Muslim"
+      }
+    },
+    {
+      "id": "pronoun__attached__3rd-person-singular__hu",
+      "kind": "attached",
+      "category": "3rd person singular",
+      "arabic": "ـهُ",
+      "arabicFolded": "ه",
+      "pronunciation": "-hu",
+      "english": "his / him",
+      "gender": "M",
+      "usageNote": "Speaking about one other person",
+      "example": {
+        "arabic": "مَنْ يَدْعُونِي فَأَسْتَجِيبَ لَهُ، مَنْ يَسْأَلُنِي فَأُعْطِيَهُ، مَنْ يَسْتَغْفِرُنِي فَأَغْفِرَ لَهُ",
+        "transliteration": "man yadʿūnī fa-astajība lahu, man yasʾalunī fa-uʿṭiyahu, man yastaghfirunī fa-aghfira lahu",
+        "english": "Who is calling upon Me so I may respond to him, who is asking Me so I may give him, who is seeking My forgiveness so I may forgive him.",
+        "citation": "Hadith: Sahih al-Bukhari / Muslim"
+      }
+    },
+    {
+      "id": "pronoun__attached__3rd-person-singular__ha",
+      "kind": "attached",
+      "category": "3rd person singular",
+      "arabic": "ـهَا",
+      "arabicFolded": "ها",
+      "pronunciation": "-hā",
+      "english": "her / her",
+      "gender": "F",
+      "usageNote": "Speaking about one other person",
+      "example": {
+        "arabic": "وَلَهَا مِثْلُ الَّذِي عَلَيْهَا",
+        "transliteration": "wa-lahā mithlu alladhī ʿalayhā",
+        "english": "For her is similar to what is upon her",
+        "citation": "Qur’ān 2:228"
+      }
+    },
+    {
+      "id": "pronoun__attached__3rd-person-plural__hum",
+      "kind": "attached",
+      "category": "3rd person plural",
+      "arabic": "ـهُمْ",
+      "arabicFolded": "هم",
+      "pronunciation": "-hum",
+      "english": "their / them",
+      "gender": "M",
+      "usageNote": "Speaking about a group of people",
+      "example": {
+        "arabic": "هُدًى مِّن رَبِّهِمْ",
+        "transliteration": "hudan min rabbihim",
+        "english": "Guidance from their Lord",
+        "citation": "Qur’ān 2:5"
+      }
+    },
+    {
+      "id": "pronoun__attached__3rd-person-plural__hunna",
+      "kind": "attached",
+      "category": "3rd person plural",
+      "arabic": "ـهُنَّ",
+      "arabicFolded": "هن",
+      "pronunciation": "-hunna",
+      "english": "their / them",
+      "gender": "F",
+      "usageNote": "Speaking about a group of people",
+      "example": {
+        "arabic": "وَلَهُنَّ مِثْلُ الَّذِي عَلَيْهِنَّ",
+        "transliteration": "wa-lahunna mithlu alladhī ʿalayhinna",
+        "english": "For them (women) is similar…",
+        "citation": "Qur’ān 2:228"
+      }
+    }
+  ],
+  "conjugations": [
+    {
+      "id": "conjugation__past__base-form__kataba",
+      "tense": "past",
+      "category": "Base form",
+      "patternRule": "(root) + َ",
+      "patternExample": "ك-ت-ب + َ",
+      "arabic": "كَتَبَ",
+      "arabicFolded": "كتب",
+      "pronunciation": "kataba",
+      "english": "he wrote",
+      "gender": "M"
+    },
+    {
+      "id": "conjugation__past__1st-person-singular__katabtu",
+      "tense": "past",
+      "category": "1st person singular",
+      "patternRule": "(root) + تُ",
+      "patternExample": "ك-ت-ب + تُ",
+      "arabic": "كَتَبْتُ",
+      "arabicFolded": "كتبت",
+      "pronunciation": "katabtu",
+      "english": "I wrote",
+      "gender": "Both"
+    },
+    {
+      "id": "conjugation__past__1st-person-plural__katabna",
+      "tense": "past",
+      "category": "1st person plural",
+      "patternRule": "(root) + نَا",
+      "patternExample": "ك-ت-ب + نَا",
+      "arabic": "كَتَبْنَا",
+      "arabicFolded": "كتبنا",
+      "pronunciation": "katabnā",
+      "english": "we wrote",
+      "gender": "Both"
+    },
+    {
+      "id": "conjugation__past__2nd-person-singular__katabta",
+      "tense": "past",
+      "category": "2nd person singular",
+      "patternRule": "(root) + تَ",
+      "patternExample": "ك-ت-ب + تَ",
+      "arabic": "كَتَبْتَ",
+      "arabicFolded": "كتبت",
+      "pronunciation": "katabta",
+      "english": "you wrote",
+      "gender": "M"
+    },
+    {
+      "id": "conjugation__past__2nd-person-singular__katabti",
+      "tense": "past",
+      "category": "2nd person singular",
+      "patternRule": "(root) + تِ",
+      "patternExample": "ك-ت-ب + تِ",
+      "arabic": "كَتَبْتِ",
+      "arabicFolded": "كتبت",
+      "pronunciation": "katabti",
+      "english": "you wrote",
+      "gender": "F"
+    },
+    {
+      "id": "conjugation__past__2nd-person-plural__katabtum",
+      "tense": "past",
+      "category": "2nd person plural",
+      "patternRule": "(root) + تُمْ",
+      "patternExample": "ك-ت-ب + تُمْ",
+      "arabic": "كَتَبْتُمْ",
+      "arabicFolded": "كتبتم",
+      "pronunciation": "katabtum",
+      "english": "you (all) wrote",
+      "gender": "M"
+    },
+    {
+      "id": "conjugation__past__2nd-person-plural__katabtunna",
+      "tense": "past",
+      "category": "2nd person plural",
+      "patternRule": "(root) + تُنَّ",
+      "patternExample": "ك-ت-ب + تُنَّ",
+      "arabic": "كَتَبْتُنَّ",
+      "arabicFolded": "كتبتن",
+      "pronunciation": "katabtunna",
+      "english": "you (all) wrote",
+      "gender": "F"
+    },
+    {
+      "id": "conjugation__past__3rd-person-singular__katabat",
+      "tense": "past",
+      "category": "3rd person singular",
+      "patternRule": "(root) + تْ",
+      "patternExample": "ك-ت-ب + تْ",
+      "arabic": "كَتَبَتْ",
+      "arabicFolded": "كتبت",
+      "pronunciation": "katabat",
+      "english": "she wrote",
+      "gender": "F"
+    },
+    {
+      "id": "conjugation__past__3rd-person-singular__katabu",
+      "tense": "past",
+      "category": "3rd person singular",
+      "patternRule": "(root) + وا",
+      "patternExample": "ك-ت-ب + وا",
+      "arabic": "كَتَبُوا",
+      "arabicFolded": "كتبوا",
+      "pronunciation": "katabū",
+      "english": "they wrote",
+      "gender": "M"
+    },
+    {
+      "id": "conjugation__past__3rd-person-plural__katabna",
+      "tense": "past",
+      "category": "3rd person plural",
+      "patternRule": "(root) + نَ",
+      "patternExample": "ك-ت-ب + نَ",
+      "arabic": "كَتَبْنَ",
+      "arabicFolded": "كتبن",
+      "pronunciation": "katabna",
+      "english": "they wrote",
+      "gender": "F"
+    },
+    {
+      "id": "conjugation__present-future__base-form__yaktubu",
+      "tense": "present-future",
+      "category": "Base form",
+      "patternRule": "يَ + (root)",
+      "patternExample": "يَ + ك-ت-ب",
+      "arabic": "يَكْتُبُ",
+      "arabicFolded": "يكتب",
+      "pronunciation": "yaktubu",
+      "english": "he writes",
+      "gender": "M"
+    },
+    {
+      "id": "conjugation__present-future__1st-person-singular__aktubu",
+      "tense": "present-future",
+      "category": "1st person singular",
+      "patternRule": "أَ + (root)",
+      "patternExample": "أَ + ك-ت-ب",
+      "arabic": "أَكْتُبُ",
+      "arabicFolded": "أكتب",
+      "pronunciation": "aktubu",
+      "english": "I write",
+      "gender": "Both"
+    },
+    {
+      "id": "conjugation__present-future__1st-person-plural__naktubu",
+      "tense": "present-future",
+      "category": "1st person plural",
+      "patternRule": "نَ + (root)",
+      "patternExample": "نَ + ك-ت-ب",
+      "arabic": "نَكْتُبُ",
+      "arabicFolded": "نكتب",
+      "pronunciation": "naktubu",
+      "english": "we write",
+      "gender": "Both"
+    },
+    {
+      "id": "conjugation__present-future__2nd-person-singular__taktubu",
+      "tense": "present-future",
+      "category": "2nd person singular",
+      "patternRule": "تَ + (root)",
+      "patternExample": "تَ + ك-ت-ب",
+      "arabic": "تَكْتُبُ",
+      "arabicFolded": "تكتب",
+      "pronunciation": "taktubu",
+      "english": "you write",
+      "gender": "M"
+    },
+    {
+      "id": "conjugation__present-future__2nd-person-singular__taktubina",
+      "tense": "present-future",
+      "category": "2nd person singular",
+      "patternRule": "تَ + (root) + ينَ",
+      "patternExample": "تَ + ك-ت-ب + ينَ",
+      "arabic": "تَكْتُبِينَ",
+      "arabicFolded": "تكتبين",
+      "pronunciation": "taktubīna",
+      "english": "you write",
+      "gender": "F"
+    },
+    {
+      "id": "conjugation__present-future__2nd-person-plural__taktubuna",
+      "tense": "present-future",
+      "category": "2nd person plural",
+      "patternRule": "تَ + (root) + ونَ",
+      "patternExample": "تَ + ك-ت-ب + ونَ",
+      "arabic": "تَكْتُبُونَ",
+      "arabicFolded": "تكتبون",
+      "pronunciation": "taktubūna",
+      "english": "you (all) write",
+      "gender": "M"
+    },
+    {
+      "id": "conjugation__present-future__2nd-person-plural__taktubna",
+      "tense": "present-future",
+      "category": "2nd person plural",
+      "patternRule": "تَ + (root) + نَ",
+      "patternExample": "تَ + ك-ت-ب + نَ",
+      "arabic": "تَكْتُبْنَ",
+      "arabicFolded": "تكتبن",
+      "pronunciation": "taktubna",
+      "english": "you (all) write",
+      "gender": "F"
+    },
+    {
+      "id": "conjugation__present-future__3rd-person-singular__taktubu",
+      "tense": "present-future",
+      "category": "3rd person singular",
+      "patternRule": "تَ + (root)",
+      "patternExample": "تَ + ك-ت-ب",
+      "arabic": "تَكْتُبُ",
+      "arabicFolded": "تكتب",
+      "pronunciation": "taktubu",
+      "english": "she writes",
+      "gender": "F"
+    },
+    {
+      "id": "conjugation__present-future__3rd-person-singular__yaktubuna",
+      "tense": "present-future",
+      "category": "3rd person singular",
+      "patternRule": "يَ + (root) + ونَ",
+      "patternExample": "يَ + ك-ت-ب + ونَ",
+      "arabic": "يَكْتُبُونَ",
+      "arabicFolded": "يكتبون",
+      "pronunciation": "yaktubūna",
+      "english": "they write",
+      "gender": "M"
+    },
+    {
+      "id": "conjugation__present-future__3rd-person-plural__yaktubna",
+      "tense": "present-future",
+      "category": "3rd person plural",
+      "patternRule": "يَ + (root) + نَ",
+      "patternExample": "يَ + ك-ت-ب + نَ",
+      "arabic": "يَكْتُبْنَ",
+      "arabicFolded": "يكتبن",
+      "pronunciation": "yaktubna",
+      "english": "they write",
+      "gender": "F"
+    }
+  ],
+  "pluralForms": [
+    {
+      "id": "plural-form__sound-plural-masculine",
+      "type": "Sound plural (masculine)",
+      "howToForm": "add ـونَ (ūna)",
+      "rule": "Used for male people / groups",
+      "examples": [
+        {
+          "arabic": "مُدَرِّس (mudarris) → مُدَرِّسُونَ (mudarrisūn)",
+          "english": "teacher/teachers"
+        }
+      ]
+    },
+    {
+      "id": "plural-form__sound-plural-feminine",
+      "type": "Sound plural (feminine)",
+      "howToForm": "add ـات (āt)",
+      "rule": "Used for feminine nouns & many objects",
+      "examples": [
+        {
+          "arabic": "مَكْتَبَة (maktabah) → مَكْتَبَات (maktabāt)",
+          "english": "library/libraries"
+        }
+      ]
+    },
+    {
+      "id": "plural-form__broken-plural",
+      "type": "Broken plural",
+      "howToForm": "change inside the word",
+      "rule": "NO single rule so you must simply memorise the words",
+      "examples": [
+        {
+          "arabic": "قَلَم (qalam) → أَقْلَام (aqlām)",
+          "english": "pen/pens"
+        },
+        {
+          "arabic": "دَرْس (dars) → دُرُوس (durūs)",
+          "english": "lesson/lessons"
+        }
+      ]
+    }
+  ],
+  "grammarIntros": [
+    {
+      "section": "pronouns",
+      "paragraphs": [
+        "In Arabic, there are two main types of pronouns: ‘independent (detached) pronouns’ and ‘attached pronouns’. It may seem complicated at first, but the best approach is to briefly understand this difference and to not overthink it—over time, as you continue your Arabic journey, your brain will naturally begin to recognize and cement how these forms are used.",
+        "Firstly, ‘Independent pronouns’ are full words that can stand on their own, such as ‘أَنَا (anā) – “I”’. They are mainly used when you want to start a sentence, identify someone, or add emphasis. For example, ‘أَنَا طَالِبٌ (anā ṭālibun) – “I am a student”’ and ‘هُوَ المُعَلِّمُ (huwa al-muʿallim) – “He is the teacher”’ both require independent pronouns because they begin the sentence.",
+        "Sometimes, you do not need an independent pronoun, but you can still include it for emphasis. For example, the word ‘رَأَيْتُهُ (raʾaytuhu) – “I saw him”’ already includes “I” because it contains an attached pronoun. However, you can still emphasize it further by adding a detached pronoun: ‘أَنَا رَأَيْتُهُ (anā raʾaytuhu) – “I saw him”’. This simply adds emphasis, making it clear that “I” (and not someone else) performed the action, although it is less concise.",
+        "So ‘Attached pronouns’, are short endings that cannot stand alone and must be connected to a word. They are used much more frequently in everyday Arabic because they are part of normal sentence structure. In many cases, you MUST use the attached form and can not replace it with an independent pronoun. For example, ‘كِتَاب أَنَا (kitāb anā)’, is wrong, it should be ‘كِتَابِي (kitābī) – “my book”’, and ‘رَأَيْتُ هُوَ (raʾaytu huwa)’, is wrong, it should be ‘ رَأَيْتُهُ (raʾaytuhu) – “I saw him”’"
+      ]
+    },
+    {
+      "section": "conjugations",
+      "paragraphs": [
+        "Attached pronouns can attach to nouns to show ownership, like ‘كِتَابِي (kitābī) – “my book”’, or to verbs to show the object, like ‘كَتَبَهُ (katabahu) – “he wrote it/him”’. So attached pronouns are flexible—they tell you “whose?” or “to whom?”. However, Tense endings (like past tense), even though they sometimes use endings that look similar to attached pronouns, are used from a different perspective.",
+        "They are used only with verbs with the intention of telling you who did the action. Not just that, past tense introduces some extra endings that are not part of the attached pronoun system, such as ‘ـتُ (-tu)’, ‘ـتَ (-ta)’, and ‘ـتِ (-ti)’, which are used specifically for verbs.",
+        "So some of the same endings you have to memorise, but you have to memorise it once from an attached pronoun perspective, and once again from a past tense perspective."
+      ]
+    }
+  ],
   "source": {
     "name": "AMAR Arabic Programme",
     "contactEmail": "majesticmessenger@gmail.com",
     "instagram": "@majestic_messenger",
     "docUrl": "https://docs.google.com/document/d/1wqbU7rsLUm0wqCjQPS2PbtCTThZOxnE2CnClxa8DETc/edit"
   },
-  "fetchedAt": "2026-04-28T12:19:33.440Z"
+  "fetchedAt": "2026-04-29T19:59:56.079Z"
 }

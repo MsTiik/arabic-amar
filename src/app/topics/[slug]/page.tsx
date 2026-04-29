@@ -5,6 +5,7 @@ import { CategoryJumpNav } from "@/components/category-jump-nav";
 import { TopicTabs } from "@/components/topic-tabs";
 import { TopicHeader } from "@/components/topic-header";
 import { VocabCard } from "@/components/vocab-card";
+import { vocabCardSpansTwoCols } from "@/lib/vocab-card-layout";
 import { RuleCard } from "@/components/rule-card";
 import {
   getRulesForTopic,
@@ -74,7 +75,12 @@ export default async function TopicPage({
                     </header>
                     <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                       {group.entries.map((entry) => (
-                        <VocabCard key={entry.id} entry={entry} size="md" />
+                        <VocabCard
+                          key={entry.id}
+                          entry={entry}
+                          size="md"
+                          className={vocabCardSpansTwoCols(entry) ? "sm:col-span-2" : undefined}
+                        />
                       ))}
                     </div>
                   </section>

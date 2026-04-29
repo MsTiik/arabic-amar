@@ -19,6 +19,8 @@ interface Props {
   className?: string;
 }
 
+
+
 const SIZE_CLASSES: Record<NonNullable<Props["size"]>, string> = {
   md: "text-3xl sm:text-4xl",
   lg: "text-5xl sm:text-6xl",
