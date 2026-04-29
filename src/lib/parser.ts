@@ -1179,6 +1179,13 @@ export async function parseDocxBuffer(
       cursor.topicSlugs = deriveTopicSlugs(parsed);
       cursor.subSection = null;
       cursor.subSubHeading = null;
+      // Reset reference-page routing on every lesson boundary too — otherwise
+      // if the previous lesson ended inside a "plurals" / "pronouns" /
+      // "conjugations" section, paragraphs between this h1 and its first h2
+      // would leak into the wrong grammar intro buffer.
+      cursor.specialSection = null;
+      cursor.pronounKind = null;
+      cursor.conjugationTense = null;
       const lesson: Lesson = {
         id: cursor.lessonId,
         number: parsed.number,

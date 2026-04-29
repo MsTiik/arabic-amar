@@ -16,6 +16,10 @@ import type { VocabEntry } from "@/lib/types";
 export function vocabCardSpansTwoCols(entry: VocabEntry): boolean {
   if (entry.nationalityArabic) return true;
   if (entry.english && entry.english.length >= 14) return true;
-  if (entry.arabic && entry.arabic.length >= 12) return true;
+  // Use `arabicFolded` so tashkeel (diacritic marks) — which add zero visual
+  // width — don't inflate the apparent length. Counting raw `arabic.length`
+  // catches short words like "أَحَدَ عَشَرَ" (Eleven, length 13 / folded 8)
+  // and over-widens roughly a third of the dataset, killing grid density.
+  if (entry.arabicFolded && entry.arabicFolded.length >= 12) return true;
   return false;
 }
