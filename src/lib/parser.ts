@@ -359,11 +359,11 @@ function classifyTable(headers: string[]): TableClassification {
     const exampleIdx = headers.findIndex((h) => h.toLowerCase().includes("example"));
     return {
       kind: "plurals",
-      typeCol: indexOf("type"),
+      typeCol: indexOf("type") >= 0 ? indexOf("type") : undefined,
       howToFormCol: indexOf("how to form it") >= 0 ? indexOf("how to form it") : undefined,
-      ruleCol: indexOf("rule"),
-      arabicCol: exampleIdx,
-      meaningCol: indexOf("meaning"),
+      ruleCol: indexOf("rule") >= 0 ? indexOf("rule") : undefined,
+      arabicCol: exampleIdx >= 0 ? exampleIdx : undefined,
+      meaningCol: indexOf("meaning") >= 0 ? indexOf("meaning") : undefined,
     };
   }
 
@@ -1028,9 +1028,11 @@ export async function parseDocxBuffer(
     table: HTMLElement,
     classification: TableClassification,
   ): void {
+    // Only the example/pronunciation/english columns are strictly required.
+    // The two pattern columns are optional — `classifyTable` accepts a table
+    // that has either one (the OR check on line ~337) and the per-row reads
+    // below already fall back to "" when the col index is undefined.
     if (
-      classification.patternRuleCol === undefined ||
-      classification.patternExampleCol === undefined ||
       classification.arabicExampleCol === undefined ||
       classification.pronunciationCol === undefined ||
       classification.englishCol === undefined
@@ -1051,8 +1053,14 @@ export async function parseDocxBuffer(
         const cat = row.cells[classification.sectionCol]?.trim();
         if (cat) runningCategory = cat;
       }
-      const patternRule = row.cells[classification.patternRuleCol]?.trim() ?? "";
-      const patternExample = row.cells[classification.patternExampleCol]?.trim() ?? "";
+      const patternRule =
+        classification.patternRuleCol !== undefined
+          ? (row.cells[classification.patternRuleCol]?.trim() ?? "")
+          : "";
+      const patternExample =
+        classification.patternExampleCol !== undefined
+          ? (row.cells[classification.patternExampleCol]?.trim() ?? "")
+          : "";
       const arabic = row.cells[classification.arabicExampleCol]?.trim();
       const pronunciationRaw = row.cells[classification.pronunciationCol]?.trim();
       const english = row.cells[classification.englishCol]?.trim() ?? "";
@@ -1081,10 +1089,13 @@ export async function parseDocxBuffer(
   ): void {
     const matrix = tableToMatrix(table);
     if (matrix.length < 2) return;
+    // Only `typeCol` (used for grouping) and `arabicCol` (the example) are
+    // strictly required. `howToFormCol` is intentionally optional — the
+    // alternative classification branch matches tables that lack it — and
+    // `ruleCol` may also be missing on simpler shapes; both per-row reads
+    // below tolerate undefined column indices.
     if (
       classification.typeCol === undefined ||
-      classification.howToFormCol === undefined ||
-      classification.ruleCol === undefined ||
       classification.arabicCol === undefined
     ) {
       warn("Skipped plurals table: missing required columns");
@@ -1093,8 +1104,14 @@ export async function parseDocxBuffer(
     let current: PluralForm | null = null;
     for (const row of matrix.slice(1)) {
       const type = row.cells[classification.typeCol]?.trim();
-      const howToForm = row.cells[classification.howToFormCol]?.trim();
-      const rule = row.cells[classification.ruleCol]?.trim();
+      const howToForm =
+        classification.howToFormCol !== undefined
+          ? row.cells[classification.howToFormCol]?.trim()
+          : undefined;
+      const rule =
+        classification.ruleCol !== undefined
+          ? row.cells[classification.ruleCol]?.trim()
+          : undefined;
       const exampleCell = row.cellElements[classification.arabicCol];
       const meaningCell =
         classification.meaningCol !== undefined && classification.meaningCol >= 0
