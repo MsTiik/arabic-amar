@@ -28,17 +28,23 @@ export function RefreshContentButton() {
   const [mounted, setMounted] = useState(false);
   const [token, setToken] = useState<string | null>(null);
   const [unlocked, setUnlocked] = useState(false);
+  const [revealed, setRevealed] = useState(false);
   const [status, setStatus] = useState<Status>({ kind: "idle" });
 
   useEffect(() => {
     if (typeof window === "undefined") return;
     // One-shot hydration-time sync. SSR and first client render both return
     // null to avoid a mismatch; after mount we reveal the control if the
-    // visitor already has a token or the unlock hash is present.
+    // visitor already has a token or the unlock hash is present. Once the
+    // panel is revealed we keep it revealed so error feedback (e.g. a 401
+    // that clears the stored token) stays visible to the admin.
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setMounted(true);
-    setToken(window.localStorage.getItem(TOKEN_KEY));
-    setUnlocked(window.location.hash === UNLOCK_HASH);
+    const storedToken = window.localStorage.getItem(TOKEN_KEY);
+    const isUnlocked = window.location.hash === UNLOCK_HASH;
+    setToken(storedToken);
+    setUnlocked(isUnlocked);
+    if (storedToken || isUnlocked) setRevealed(true);
   }, []);
 
   async function handleClick() {
@@ -84,9 +90,12 @@ export function RefreshContentButton() {
     window.localStorage.removeItem(TOKEN_KEY);
     setToken(null);
     setStatus({ kind: "idle" });
+    // Explicit "forget" hides the panel unless the page is still unlocked
+    // via the #admin hash, in which case the admin can re-enter a token.
+    if (!unlocked) setRevealed(false);
   }
 
-  if (!mounted || (!token && !unlocked)) return null;
+  if (!mounted || !revealed) return null;
 
   return (
     <section className="mt-12">
