@@ -7,6 +7,8 @@ import { TopicHeader } from "@/components/topic-header";
 import { VocabCard } from "@/components/vocab-card";
 import { vocabCardSpansTwoCols } from "@/lib/vocab-card-layout";
 import { RuleCard } from "@/components/rule-card";
+import { RuleTableCard } from "@/components/rule-table-card";
+import { isPatternWalkthrough } from "@/lib/rule-table-parser";
 import {
   getRulesForTopic,
   getSiteContent,
@@ -100,7 +102,17 @@ export default async function TopicPage({
                   No grammar rules in this lesson — practice with the vocabulary deck instead.
                 </p>
               ) : (
-                rules.map((rule) => <RuleCard key={rule.id} rule={rule} />)
+                rules.map((rule) =>
+                  isPatternWalkthrough(rule) ? (
+                    <RuleTableCard
+                      key={rule.id}
+                      rule={rule}
+                      className="lg:col-span-2"
+                    />
+                  ) : (
+                    <RuleCard key={rule.id} rule={rule} />
+                  ),
+                )
               )}
             </div>
           ),
