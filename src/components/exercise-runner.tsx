@@ -5,6 +5,7 @@ import { ArrowLeft, Check, RotateCcw, X } from "lucide-react";
 
 import { ArabicText } from "@/components/arabic-text";
 import { ProgressRing } from "@/components/progress-ring";
+import { SpeakerButton } from "@/components/speaker-button";
 import { TranslitReveal } from "@/components/translit-reveal";
 import { cn } from "@/lib/cn";
 import { checkFillBlankAnswer, checkOrderingAnswer } from "@/lib/exercises";
@@ -198,17 +199,28 @@ function FlashcardView({
             ) : null}
           </>
         ) : (
-          <ArabicText
-            variant="display"
-            className="text-7xl sm:text-8xl"
-          >
-            {question.promptArabic}
-          </ArabicText>
+          <div className="flex flex-col items-center gap-2">
+            <ArabicText
+              variant="display"
+              className="text-7xl sm:text-8xl"
+            >
+              {question.promptArabic}
+            </ArabicText>
+          </div>
         )}
         <span className="mt-2 text-xs text-muted-foreground">
           Tap to flip
         </span>
       </button>
+      {!flipped && question.promptArabic ? (
+        <div className="mt-2 flex justify-center">
+          <SpeakerButton
+            arabic={question.promptArabic}
+            label={question.prompt}
+            size="sm"
+          />
+        </div>
+      ) : null}
       {!flipped && question.promptHint ? (
         <TranslitReveal text={question.promptHint} className="mt-2" />
       ) : null}
@@ -248,9 +260,18 @@ function MultipleChoiceView({
     <div className="rounded-3xl border border-border bg-card p-6 sm:p-8">
       <div className="text-center">
         {question.promptArabic ? (
-          <ArabicText variant="display" className="text-6xl sm:text-7xl">
-            {question.promptArabic}
-          </ArabicText>
+          <>
+            <ArabicText variant="display" className="text-6xl sm:text-7xl">
+              {question.promptArabic}
+            </ArabicText>
+            <div className="mt-2 flex justify-center">
+              <SpeakerButton
+                arabic={question.promptArabic}
+                label={question.prompt}
+                size="sm"
+              />
+            </div>
+          </>
         ) : null}
         <p className="mt-2 text-base font-medium">{question.prompt}</p>
         {question.promptHint ? (

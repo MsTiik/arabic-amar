@@ -5,6 +5,7 @@ import { cn } from "@/lib/cn";
 import type { VocabEntry } from "@/lib/types";
 import { ArabicText } from "./arabic-text";
 import { MasteryDots } from "./mastery-dots";
+import { SpeakerButton } from "./speaker-button";
 
 interface Props {
   entry: VocabEntry;
@@ -58,9 +59,16 @@ export function VocabCard({
       </ArabicText>
 
       <div className="flex flex-col gap-1">
-        <p className="text-base font-medium text-foreground sm:text-lg" lang="ar-Latn">
-          {entry.pronunciation}
-        </p>
+        <div className="flex items-center gap-2">
+          <SpeakerButton
+            arabic={entry.arabic}
+            label={entry.english}
+            size="sm"
+          />
+          <p className="text-base font-medium text-foreground sm:text-lg" lang="ar-Latn">
+            {entry.pronunciation}
+          </p>
+        </div>
         <p className="text-sm text-foreground-soft sm:text-base">{entry.english}</p>
       </div>
 

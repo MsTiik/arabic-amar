@@ -10,7 +10,8 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "content:build": "tsx scripts/build-content.ts",
-    "prebuild": "tsx scripts/build-content.ts"
+    "audio:build": "tsx scripts/build-audio-manifest.ts",
+    "prebuild": "tsx scripts/build-content.ts && tsx scripts/build-audio-manifest.ts"
   },
   "dependencies": {
     "class-variance-authority": "^0.7.1",
