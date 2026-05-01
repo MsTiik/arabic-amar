@@ -1,6 +1,7 @@
 import { cn } from "@/lib/cn";
 import type { GrammarRule } from "@/lib/types";
 import { ArabicText } from "./arabic-text";
+import { CollapsibleExamples } from "./collapsible-examples";
 
 interface Props {
   rule: GrammarRule;
@@ -33,7 +34,7 @@ export function RuleCard({ rule, className }: Props) {
           <h4 className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
             Examples
           </h4>
-          <ul className="space-y-2">
+          <CollapsibleExamples className="space-y-2" initialVisible={3}>
             {rule.examples.map((ex, i) => (
               <li
                 key={i}
@@ -56,7 +57,7 @@ export function RuleCard({ rule, className }: Props) {
                 ) : null}
               </li>
             ))}
-          </ul>
+          </CollapsibleExamples>
         </div>
       ) : null}
     </article>

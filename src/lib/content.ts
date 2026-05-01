@@ -30,6 +30,27 @@ export function getRulesForTopic(slug: string) {
   return content.rules.filter((r) => r.topicSlugs.includes(slug));
 }
 
+export function getRulesForLesson(lessonId: string) {
+  return content.rules.filter((r) => r.lessonId === lessonId);
+}
+
+export function getLessonById(id: string): Lesson | undefined {
+  return content.lessons.find((l) => l.id === id);
+}
+
+/**
+ * Slug used in the per-lesson grammar URL `/grammar/lessons/[slug]`. We
+ * reuse the lesson's primary topic slug so links look natural
+ * (`/grammar/lessons/body-parts`).
+ */
+export function grammarLessonSlug(lesson: Lesson): string {
+  return lesson.topicSlugs[0] ?? lesson.id;
+}
+
+export function getLessonByGrammarSlug(slug: string): Lesson | undefined {
+  return content.lessons.find((l) => grammarLessonSlug(l) === slug);
+}
+
 export interface VocabSearchOptions {
   query?: string;
   topicSlug?: string;

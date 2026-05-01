@@ -1,7 +1,6 @@
 import Link from "next/link";
 
-import { RuleCard } from "@/components/rule-card";
-import { getSiteContent } from "@/lib/content";
+import { getRulesForLesson, getSiteContent, grammarLessonSlug } from "@/lib/content";
 
 export const metadata = { title: "Grammar reference" };
 
@@ -38,15 +37,21 @@ export default function GrammarPage() {
 
   return (
     <div className="mx-auto w-full max-w-5xl px-4 py-8 sm:py-10">
-      <header className="mb-6">
+      <header className="mb-8">
         <h1 className="text-3xl font-semibold tracking-tight">Grammar reference</h1>
-        <p className="text-sm text-muted-foreground">
-          Quick reference of every rule and pattern from the AMAR notes — searchable by
-          lesson.
+        <p className="mt-1 text-sm text-muted-foreground">
+          Three big reference tables on top, then per-lesson grammar pages
+          underneath.
         </p>
       </header>
 
-      <section aria-label="Reference pages" className="mb-10">
+      <section aria-labelledby="reference-heading" className="mb-12">
+        <h2
+          id="reference-heading"
+          className="mb-3 text-sm font-semibold uppercase tracking-wider text-muted-foreground"
+        >
+          Reference tables
+        </h2>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {REFERENCE_PAGES.map((p) => (
             <Link
@@ -62,7 +67,7 @@ export default function GrammarPage() {
               >
                 Reference
               </span>
-              <h2 className="text-xl font-semibold tracking-tight">
+              <h3 className="text-xl font-semibold tracking-tight">
                 {p.title}
                 <span
                   lang="ar"
@@ -71,7 +76,7 @@ export default function GrammarPage() {
                 >
                   {p.titleArabic}
                 </span>
-              </h2>
+              </h3>
               <p className="text-sm text-muted-foreground">{p.description}</p>
               <span className="mt-auto text-xs font-medium text-primary group-hover:underline">
                 Open →
@@ -81,55 +86,68 @@ export default function GrammarPage() {
         </div>
       </section>
 
-      <h2 className="mb-3 text-lg font-semibold tracking-tight">
-        Rules by lesson
-      </h2>
-
-      <nav
-        aria-label="Grammar lesson jump"
-        className="sticky top-24 z-10 mb-6 -mx-4 flex flex-wrap gap-1 overflow-x-auto bg-background/85 px-4 py-2 backdrop-blur"
-      >
-        {lessonsWithRules.map((l) => (
-          <a
-            key={l.id}
-            href={`#lesson-${l.id}`}
-            className="rounded-full border border-border bg-background-soft px-3 py-1 text-xs font-medium hover:bg-muted focus-ring"
-          >
-            Lesson {l.number}: {l.title}
-          </a>
-        ))}
-      </nav>
-
-      <div className="space-y-12">
-        {lessonsWithRules.map((lesson) => {
-          const rules = content.rules.filter((r) => r.lessonId === lesson.id);
-          return (
-            <section key={lesson.id} id={`lesson-${lesson.id}`}>
-              <header className="mb-3 flex items-baseline justify-between">
-                <h2 className="text-2xl font-semibold tracking-tight">
-                  Lesson {lesson.number}: {lesson.title}
-                </h2>
-                <Link
-                  href={`/topics/${lesson.topicSlugs[0]}`}
-                  className="text-sm text-primary hover:underline"
-                >
-                  Open lesson →
-                </Link>
-              </header>
-              <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-                {rules.map((r) => (
-                  <RuleCard key={r.id} rule={r} />
-                ))}
-              </div>
-            </section>
-          );
-        })}
+      <section aria-labelledby="lessons-heading">
+        <h2
+          id="lessons-heading"
+          className="mb-3 text-sm font-semibold uppercase tracking-wider text-muted-foreground"
+        >
+          Rules by lesson
+        </h2>
         {lessonsWithRules.length === 0 ? (
           <p className="rounded-2xl border border-border bg-card p-6 text-sm text-muted-foreground">
             No grammar rules captured yet.
           </p>
-        ) : null}
-      </div>
+        ) : (
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {lessonsWithRules.map((lesson) => {
+              const rules = getRulesForLesson(lesson.id);
+              const slug = grammarLessonSlug(lesson);
+              return (
+                <Link
+                  key={lesson.id}
+                  href={`/grammar/lessons/${slug}`}
+                  className="group flex flex-col gap-2 rounded-2xl border border-border bg-card p-5 transition-colors hover:border-foreground/30 hover:bg-muted focus-ring sm:p-6"
+                >
+                  <span className="self-start rounded-full bg-background-soft px-2.5 py-0.5 text-[11px] font-semibold uppercase tracking-wider text-foreground-soft">
+                    Lesson {lesson.number}
+                  </span>
+                  <h3 className="text-xl font-semibold tracking-tight">
+                    {lesson.title}
+                    {lesson.titleArabic ? (
+                      <span
+                        lang="ar"
+                        dir="rtl"
+                        className="ml-2 font-arabic text-base font-normal text-foreground-soft"
+                      >
+                        {lesson.titleArabic}
+                      </span>
+                    ) : null}
+                  </h3>
+                  <p className="text-xs text-muted-foreground">
+                    {rules.length} {rules.length === 1 ? "rule" : "rules"}
+                  </p>
+                  <ul className="mt-1 space-y-1 text-sm text-foreground-soft">
+                    {rules.slice(0, 4).map((r) => (
+                      <li key={r.id} className="flex gap-2 text-pretty">
+                        <span aria-hidden="true" className="text-muted-foreground">•</span>
+                        <span className="line-clamp-1">{r.title}</span>
+                      </li>
+                    ))}
+                    {rules.length > 4 ? (
+                      <li className="text-xs text-muted-foreground">
+                        + {rules.length - 4} more
+                      </li>
+                    ) : null}
+                  </ul>
+                  <span className="mt-auto pt-2 text-xs font-medium text-primary group-hover:underline">
+                    Open lesson grammar →
+                  </span>
+                </Link>
+              );
+            })}
+          </div>
+        )}
+      </section>
     </div>
   );
 }
