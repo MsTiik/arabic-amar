@@ -59,12 +59,14 @@ export default async function GrammarLessonPage({
               </span>
             ) : null}
           </h1>
-          <Link
-            href={`/topics/${lesson.topicSlugs[0]}`}
-            className="text-sm text-primary hover:underline"
-          >
-            Open lesson page →
-          </Link>
+          {lesson.topicSlugs[0] ? (
+            <Link
+              href={`/topics/${lesson.topicSlugs[0]}`}
+              className="text-sm text-primary hover:underline"
+            >
+              Open lesson page →
+            </Link>
+          ) : null}
         </div>
         <p className="mt-1 text-sm text-muted-foreground">
           {rules.length} grammar {rules.length === 1 ? "rule" : "rules"} for this lesson.
