@@ -44,7 +44,7 @@ export function RuleCard({ rule, className }: Props) {
                 className="flex flex-col gap-0.5 rounded-lg border border-border bg-background-soft px-2.5 py-2"
               >
                 {ex.arabic ? (
-                  <ArabicText variant="display" className="text-lg sm:text-xl">
+                  <ArabicText variant="display" className="text-xl sm:text-2xl">
                     {ex.arabic}
                   </ArabicText>
                 ) : null}
