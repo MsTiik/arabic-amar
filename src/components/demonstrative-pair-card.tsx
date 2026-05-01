@@ -1,10 +1,7 @@
-"use client";
-
-import { useState } from "react";
-
 import type { GrammarRule } from "@/lib/types";
 import { leadingArabicWord, stripBodyPrefix } from "@/lib/rule-shape";
 import { ArabicText } from "./arabic-text";
+import { CollapsibleExamples } from "./collapsible-examples";
 import { cn } from "@/lib/cn";
 
 interface Props {
@@ -26,13 +23,10 @@ interface Pair {
  * examples, like body-parts "Masculine = هذا" / "Feminine = هذه".
  *
  * Layout:
- *   - Hero "Pattern" line: (token) + noun = "this is a (noun)"
- *   - One worked example, always visible
- *   - "See all N examples" button reveals the rest as a 2-3 column grid
+ *   - Pattern row: (token) + noun = "this is a (noun)"
+ *   - Examples grid (dense 3-col), all visible up to N=12, expandable beyond
  */
 export function DemonstrativePairCard({ rule, className }: Props) {
-  const [open, setOpen] = useState(false);
-
   const intro = rule.examples.find(
     (ex) => !(ex.arabic ?? "").trim() && (ex.english ?? "").trim(),
   );
@@ -55,8 +49,6 @@ export function DemonstrativePairCard({ rule, className }: Props) {
 
   if (pairs.length === 0) return null;
 
-  const hero = pairs[0];
-  const rest = pairs.slice(1);
   const usageNote = (intro?.english ?? "").trim();
 
   return (
@@ -94,69 +86,34 @@ export function DemonstrativePairCard({ rule, className }: Props) {
         </div>
       </section>
 
-      {/* Worked example */}
-      <section aria-labelledby={`${rule.id}__example`} className="mb-2">
+      {/* Examples */}
+      <section aria-labelledby={`${rule.id}__examples`}>
         <h4
-          id={`${rule.id}__example`}
+          id={`${rule.id}__examples`}
           className="mb-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground"
         >
-          Worked example
+          Examples ({pairs.length})
         </h4>
-        <PairRow pair={hero} highlightNoun />
+        <CollapsibleExamples
+          className="grid grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-3"
+          initialVisible={12}
+        >
+          {pairs.map((pair, i) => (
+            <li
+              key={i}
+              className="flex flex-col gap-0.5 rounded-lg border border-border bg-background-soft px-2.5 py-2"
+            >
+              <ArabicText variant="display" className="text-lg sm:text-xl">
+                {pair.sentence}
+              </ArabicText>
+              {pair.english ? (
+                <p className="text-xs text-muted-foreground">{pair.english}</p>
+              ) : null}
+            </li>
+          ))}
+        </CollapsibleExamples>
       </section>
-
-      {rest.length > 0 ? (
-        <section aria-labelledby={`${rule.id}__more`} className="mt-4">
-          <h4
-            id={`${rule.id}__more`}
-            className="mb-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground"
-          >
-            More examples ({rest.length})
-          </h4>
-          {open ? (
-            <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
-              {rest.map((pair, i) => (
-                <PairRow key={i} pair={pair} />
-              ))}
-            </div>
-          ) : null}
-          <button
-            type="button"
-            aria-expanded={open}
-            onClick={() => setOpen((v) => !v)}
-            className="mt-3 inline-flex items-center gap-1 rounded-full border border-border bg-background-soft px-3 py-1 text-xs font-medium text-foreground-soft hover:bg-muted focus-ring"
-          >
-            {open ? "Show fewer" : `See all ${rest.length} examples`}
-            <span aria-hidden="true">{open ? "↑" : "↓"}</span>
-          </button>
-        </section>
-      ) : null}
     </article>
-  );
-}
-
-function PairRow({ pair, highlightNoun = false }: { pair: Pair; highlightNoun?: boolean }) {
-  return (
-    <div className="rounded-xl border border-border bg-background-soft p-3 sm:p-4">
-      <ArabicText variant="display" className="text-xl sm:text-2xl">
-        {pair.sentence}
-      </ArabicText>
-      <p className="mt-1 text-xs text-muted-foreground sm:text-sm">
-        {pair.english ?? "—"}
-        {highlightNoun && pair.noun ? (
-          <>
-            {" "}
-            <span className="text-foreground-soft">
-              (noun:{" "}
-              <span lang="ar" dir="rtl" className="font-arabic">
-                {pair.noun}
-              </span>
-              )
-            </span>
-          </>
-        ) : null}
-      </p>
-    </div>
   );
 }
 

@@ -34,24 +34,27 @@ export function RuleCard({ rule, className }: Props) {
           <h4 className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
             Examples
           </h4>
-          <CollapsibleExamples className="space-y-2" initialVisible={3}>
+          <CollapsibleExamples
+            className="grid grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-3"
+            initialVisible={12}
+          >
             {rule.examples.map((ex, i) => (
               <li
                 key={i}
-                className="flex flex-col gap-1 rounded-xl border border-border bg-background-soft p-3"
+                className="flex flex-col gap-0.5 rounded-lg border border-border bg-background-soft px-2.5 py-2"
               >
                 {ex.arabic ? (
-                  <ArabicText variant="display" className="text-2xl sm:text-3xl">
+                  <ArabicText variant="display" className="text-lg sm:text-xl">
                     {ex.arabic}
                   </ArabicText>
                 ) : null}
                 {ex.pronunciation ? (
-                  <p className="text-sm text-foreground-soft" lang="ar-Latn">
+                  <p className="text-xs text-foreground-soft" lang="ar-Latn">
                     {ex.pronunciation}
                   </p>
                 ) : null}
                 {ex.english ? (
-                  <p className="text-sm text-muted-foreground">
+                  <p className="text-xs text-muted-foreground">
                     {renderInlineArabic(ex.english)}
                   </p>
                 ) : null}

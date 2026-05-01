@@ -44,19 +44,20 @@ function PatternCell({ pattern }: { pattern: string }) {
           return (
             <span
               key={i}
-              className="rounded-md bg-background-soft px-1.5 py-0.5 font-mono text-xs text-foreground-soft"
+              className="rounded-md bg-background-soft px-2 py-0.5 font-mono text-sm text-foreground-soft sm:text-base"
               lang={trimmed === "(root)" ? "en" : "ar"}
             >
               {trimmed}
             </span>
           );
         }
-        // The rest is the Arabic suffix / prefix.
+        // The rest is the Arabic suffix / prefix. Display-size so the fatha
+        // and other diacritics stay legible inside the pattern pill.
         return (
           <ArabicText
             key={i}
-            variant="inline"
-            className="rounded-md bg-accent-gold-soft px-1.5 py-0.5 text-base text-foreground"
+            variant="display"
+            className="rounded-md bg-accent-gold-soft px-2 py-0.5 text-xl leading-none text-foreground sm:text-2xl"
           >
             {trimmed}
           </ArabicText>
