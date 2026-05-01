@@ -40,23 +40,38 @@ function PatternCell({ pattern }: { pattern: string }) {
             </span>
           );
         }
-        if (trimmed === "(root)" || trimmed === ROOT_LABEL) {
+        if (trimmed === "(root)") {
           return (
             <span
               key={i}
-              className="rounded-md bg-background-soft px-1.5 py-0.5 font-mono text-xs text-foreground-soft"
-              lang={trimmed === "(root)" ? "en" : "ar"}
+              className="rounded-md bg-background-soft px-2 py-0.5 font-mono text-sm text-foreground-soft sm:text-base"
+              lang="en"
             >
               {trimmed}
             </span>
           );
         }
-        // The rest is the Arabic suffix / prefix.
+        if (trimmed === ROOT_LABEL) {
+          // Arabic root marker — render via ArabicText so the letters are
+          // sized like the suffix pills next to it (the user-reported
+          // legibility issue in the Example column).
+          return (
+            <ArabicText
+              key={i}
+              variant="display"
+              className="rounded-md bg-background-soft px-2 py-0.5 text-xl leading-none text-foreground-soft sm:text-2xl"
+            >
+              {trimmed}
+            </ArabicText>
+          );
+        }
+        // The rest is the Arabic suffix / prefix. Display-size so the fatha
+        // and other diacritics stay legible inside the pattern pill.
         return (
           <ArabicText
             key={i}
-            variant="inline"
-            className="rounded-md bg-accent-gold-soft px-1.5 py-0.5 text-base text-foreground"
+            variant="display"
+            className="rounded-md bg-accent-gold-soft px-2 py-0.5 text-xl leading-none text-foreground sm:text-2xl"
           >
             {trimmed}
           </ArabicText>
