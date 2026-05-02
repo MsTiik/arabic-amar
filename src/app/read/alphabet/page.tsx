@@ -3,19 +3,12 @@ import Link from "next/link";
 import { ArabicText } from "@/components/arabic-text";
 import { FoundationsBadge } from "@/components/foundations-badge";
 import { LetterSpeakerButton } from "@/components/letter-speaker-button";
-import { LetterStrokeDemo } from "@/components/letter-stroke-demo";
 import {
   ALPHABET,
   ALPHABET_EXTRAS,
   NON_CONNECTORS,
   type AlphabetExtra,
 } from "@/data/foundations";
-
-/** Letters whose isolated glyph contains one or more dots — used to tell
- *  the stroke-order demo whether to show the "dots go last" hint. */
-const DOTTED_LETTERS = new Set([
-  "ب", "ت", "ث", "ج", "خ", "ذ", "ز", "ش", "ض", "ظ", "غ", "ف", "ق", "ن", "ي",
-]);
 
 export const metadata = { title: "Arabic alphabet · Foundations" };
 
@@ -204,12 +197,6 @@ function LetterCard({ letter }: { letter: (typeof ALPHABET)[number] }) {
           size="sm"
         />
       </div>
-
-      <LetterStrokeDemo
-        glyph={letter.forms.isolated}
-        ariaLabel={`Show how to write ${letter.name}`}
-        hasDots={DOTTED_LETTERS.has(letter.forms.isolated)}
-      />
     </article>
   );
 }
@@ -322,11 +309,6 @@ function ExtraCard({ extra }: { extra: AlphabetExtra }) {
           size="sm"
         />
       </div>
-
-      <LetterStrokeDemo
-        glyph={extra.forms.isolated}
-        ariaLabel={`Show how to write ${extra.name}`}
-      />
     </article>
   );
 }
