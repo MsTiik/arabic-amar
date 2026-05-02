@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useId, useRef, useState } from "react";
+import { useId, useLayoutEffect, useRef, useState } from "react";
 import { Pen, RotateCcw } from "lucide-react";
 
 /**
@@ -80,7 +80,12 @@ function StrokeCanvas({ glyph }: { glyph: string }) {
   const clipId = useId();
   const rectRef = useRef<SVGRectElement | null>(null);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
+    // Use useLayoutEffect (not useEffect) so the initial translateX(200px)
+    // is applied *before* the browser paints. Otherwise there's a one-frame
+    // flash where the rect sits at its un-translated default (covering the
+    // viewBox) and reveals the full glyph. StrokeCanvas only ever mounts
+    // on the client after a user click, so there's no SSR mismatch risk.
     const rect = rectRef.current;
     if (!rect) return;
     // The rect is sized 200×160 at x=0. We translate it off-right
