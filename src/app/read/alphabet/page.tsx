@@ -45,7 +45,10 @@ export default function AlphabetPage() {
         </div>
       </header>
 
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3">
+      <div
+        className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3"
+        dir="rtl"
+      >
         {ALPHABET.map((letter) => (
           <LetterCard key={letter.order} letter={letter} />
         ))}
@@ -100,6 +103,7 @@ function LetterCard({ letter }: { letter: (typeof ALPHABET)[number] }) {
     <article
       className="flex flex-col gap-3 rounded-2xl border border-border bg-card p-5"
       aria-label={`Letter ${letter.name}`}
+      dir="ltr"
     >
       <header className="flex items-start justify-between gap-3">
         <div>
@@ -145,7 +149,7 @@ function LetterCard({ letter }: { letter: (typeof ALPHABET)[number] }) {
           Isolated · Initial · Medial · Final
         </div>
         <div
-          className="grid grid-cols-4 gap-1 text-center"
+          className="grid grid-cols-4 items-end gap-1 text-center"
           lang="ar"
         >
           {(["isolated", "initial", "medial", "final"] as const).map((form) => (
@@ -153,6 +157,7 @@ function LetterCard({ letter }: { letter: (typeof ALPHABET)[number] }) {
               key={form}
               glyph={letter.forms[form]}
               faded={isNonConnector && (form === "initial" || form === "medial")}
+              emphasized={form === "isolated"}
             />
           ))}
         </div>
@@ -188,12 +193,22 @@ function LetterCard({ letter }: { letter: (typeof ALPHABET)[number] }) {
   );
 }
 
-function FormCell({ glyph, faded }: { glyph: string; faded: boolean }) {
+function FormCell({
+  glyph,
+  faded,
+  emphasized,
+}: {
+  glyph: string;
+  faded: boolean;
+  emphasized?: boolean;
+}) {
   return (
     <div
-      className={`rounded-md border border-border bg-card px-1 py-2 font-arabic-display text-2xl ${
-        faded ? "text-foreground-soft" : "text-foreground"
-      }`}
+      className={`rounded-md border px-1 font-arabic-display ${
+        emphasized
+          ? "border-primary/30 bg-primary/5 py-3 text-4xl font-semibold"
+          : "border-border bg-card py-2 text-2xl"
+      } ${faded ? "text-foreground-soft" : "text-foreground"}`}
     >
       {glyph}
     </div>

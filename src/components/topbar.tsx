@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Flame, Target, Sparkles } from "lucide-react";
+import { Flame, Target, BookOpen } from "lucide-react";
 
 import { useProgress, useProgressStorageSync } from "@/lib/progress";
 import { cn } from "@/lib/cn";
@@ -12,10 +12,11 @@ const NAV = [
   { href: "/topics", label: "Lessons" },
   { href: "/vocabulary", label: "Vocabulary" },
   { href: "/grammar", label: "Grammar" },
-  { href: "/read", label: "Read Qur'ān" },
   { href: "/practice", label: "Practice" },
   { href: "/about", label: "About" },
 ];
+
+const READ_QURAN = { href: "/read", label: "Read Qur'ān" };
 
 export function Topbar() {
   useProgressStorageSync();
@@ -31,12 +32,11 @@ export function Topbar() {
       <div className="mx-auto flex w-full max-w-6xl items-center gap-4 px-4 py-3">
         <Link
           href="/"
-          className="flex items-center gap-2 text-lg font-semibold tracking-tight"
+          className="flex shrink-0 items-center whitespace-nowrap text-lg font-semibold tracking-tight"
         >
-          <Sparkles className="h-5 w-5 text-accent-gold" aria-hidden />
           <span>
-            Arabic Amar
-            <span className="ml-2 hidden text-xs font-normal text-muted-foreground sm:inline">
+            Arabic AMAR
+            <span className="ml-2 hidden text-xs font-normal text-muted-foreground lg:inline">
               · Quranic Arabic, gamified
             </span>
           </span>
@@ -53,7 +53,7 @@ export function Topbar() {
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "rounded-md px-3 py-1.5 text-sm transition-colors focus-ring",
+                  "whitespace-nowrap rounded-md px-3 py-1.5 text-sm transition-colors focus-ring",
                   active
                     ? "bg-muted text-foreground"
                     : "text-muted-foreground hover:bg-muted hover:text-foreground",
@@ -66,6 +66,7 @@ export function Topbar() {
         </nav>
 
         <div className="ml-auto flex items-center gap-2 sm:gap-3">
+          <ReadQuranNavLink pathname={pathname} />
           <div
             className={cn(
               "flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-medium",
@@ -101,7 +102,7 @@ export function Topbar() {
               key={item.href}
               href={item.href}
               className={cn(
-                "shrink-0 rounded-md px-3 py-1.5 transition-colors focus-ring",
+                "shrink-0 whitespace-nowrap rounded-md px-3 py-1.5 transition-colors focus-ring",
                 active
                   ? "bg-muted text-foreground"
                   : "text-muted-foreground hover:bg-muted hover:text-foreground",
@@ -111,8 +112,39 @@ export function Topbar() {
             </Link>
           );
         })}
+        <Link
+          href={READ_QURAN.href}
+          className={cn(
+            "ml-auto inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full border px-3 py-1.5 text-sm font-semibold transition-colors focus-ring",
+            pathname.startsWith(READ_QURAN.href)
+              ? "border-accent-gold bg-accent-gold-soft text-foreground"
+              : "border-accent-gold/60 bg-accent-gold-soft/60 text-foreground hover:bg-accent-gold-soft",
+          )}
+        >
+          <BookOpen className="h-3.5 w-3.5 text-accent-gold" aria-hidden />
+          {READ_QURAN.label}
+        </Link>
       </nav>
     </header>
+  );
+}
+
+function ReadQuranNavLink({ pathname }: { pathname: string }) {
+  const active = pathname.startsWith(READ_QURAN.href);
+  return (
+    <Link
+      href={READ_QURAN.href}
+      className={cn(
+        "hidden items-center gap-1.5 whitespace-nowrap rounded-full border px-3 py-1.5 text-sm font-semibold transition-colors focus-ring md:inline-flex",
+        active
+          ? "border-accent-gold bg-accent-gold-soft text-foreground shadow-sm"
+          : "border-accent-gold/60 bg-accent-gold-soft/60 text-foreground hover:bg-accent-gold-soft hover:border-accent-gold",
+      )}
+      title="Quran-reading foundations — independent reference content"
+    >
+      <BookOpen className="h-4 w-4 text-accent-gold" aria-hidden />
+      {READ_QURAN.label}
+    </Link>
   );
 }
 

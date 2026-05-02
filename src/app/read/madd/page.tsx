@@ -51,18 +51,22 @@ export default function MaddPage() {
           {MADD_LETTERS.map((m) => (
             <div
               key={m.slug}
-              className="rounded-xl border border-primary/20 bg-card p-3 text-center"
+              className="rounded-xl border border-primary/20 bg-card p-4 text-center sm:p-5"
             >
-              <div className="mb-1 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
+              <div className="mb-2 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
                 {m.precededBy} +{" "}
-                <ArabicText variant="inline" as="span" className="text-base">
+                <ArabicText variant="inline" as="span" className="text-lg">
                   {m.letter}ْ
                 </ArabicText>
               </div>
-              <div className="font-arabic-display text-2xl" lang="ar" dir="rtl">
+              <div
+                className="font-arabic-display text-5xl leading-tight sm:text-6xl"
+                lang="ar"
+                dir="rtl"
+              >
                 {m.longForm}
               </div>
-              <div className="mt-1 text-xs italic text-foreground-soft">
+              <div className="mt-2 text-sm italic text-foreground-soft">
                 {m.longTranslit} (2 counts)
               </div>
             </div>
