@@ -4,6 +4,7 @@ import {
   checkMatchPairsAnswer,
   checkOrderingAnswer,
   makeClozeDeck,
+  makeConnectingLettersDeck,
   makeMatchPairsDeck,
   makeWhichLetterDeck,
   normalizeAnswers,
@@ -172,6 +173,100 @@ describe("makeClozeDeck", () => {
 
   test("returns nothing when no multi-word phrases exist", () => {
     const deck = makeClozeDeck([], [], { id: "c", title: "Cloze" });
+    expect(deck.questions).toEqual([]);
+  });
+
+  test("filters out examples with whitespace-only english", () => {
+    const rules: GrammarRule[] = [
+      {
+        id: "r1",
+        title: "Whitespace rule",
+        body: "",
+        examples: [
+          { arabic: "هذا رأس", english: "   " },
+          { arabic: "هذا وجه", english: "this is a face" },
+          { arabic: "هذه عين", english: "this is an eye" },
+          { arabic: "هل عين", english: "is this an eye?" },
+          { arabic: "هذا أنف", english: "this is a nose" },
+        ],
+        topicSlugs: [],
+        lessonId: "l1",
+      },
+    ];
+    const deck = makeClozeDeck(rules, [], { id: "c", title: "Cloze" });
+    for (const q of deck.questions) {
+      expect(q.prompt.trim().length).toBeGreaterThan(0);
+    }
+  });
+
+  test("includes promptHint translit when every visible word is in vocab", () => {
+    const rules: GrammarRule[] = [
+      {
+        id: "r1",
+        title: "Test rule",
+        body: "",
+        examples: [
+          { arabic: "هذا رأس", english: "this is a head" },
+          { arabic: "هذا وجه", english: "this is a face" },
+          { arabic: "هذه عين", english: "this is an eye" },
+          { arabic: "هل عين", english: "is this an eye?" },
+        ],
+        topicSlugs: [],
+        lessonId: "l1",
+      },
+    ];
+    const vocab: VocabEntry[] = [
+      { ...vocabFixture("هذا", "this is (m)"), pronunciation: "hādhā" },
+    ];
+    const deck = makeClozeDeck(rules, vocab, { id: "c", title: "Cloze" });
+    const hadhaCloze = deck.questions.find((q) => q.clozeBefore === "هذا");
+    expect(hadhaCloze?.promptHint).toBe("hādhā");
+  });
+});
+
+describe("makeConnectingLettersDeck", () => {
+  const vocab: VocabEntry[] = [
+    vocabFixture("كتاب", "book"),
+    vocabFixture("قلم", "pen"),
+    vocabFixture("بيت", "house"),
+    vocabFixture("ولد", "boy"),
+    vocabFixture("بنت", "girl"),
+    vocabFixture("ماء", "water"),
+  ];
+
+  test("produces multi-letter words with disconnected prompts", () => {
+    const deck = makeConnectingLettersDeck(vocab, {
+      id: "cnx",
+      title: "Connect",
+      count: 4,
+    });
+    expect(deck.questions.length).toBe(4);
+    for (const q of deck.questions) {
+      expect(q.kind).toBe("connecting-letters");
+      // promptArabic is space-separated letter sequence — must contain at
+      // least one space (so the renderer can't shape them together).
+      expect(q.promptArabic).toMatch(/\s/);
+      expect(q.options?.length).toBe(4);
+      expect(q.options?.some((o) => o.id === q.correctAnswerId)).toBe(true);
+    }
+  });
+
+  test("returns nothing with too little vocab", () => {
+    const deck = makeConnectingLettersDeck([], { id: "x", title: "x" });
+    expect(deck.questions).toEqual([]);
+  });
+
+  test("rejects single-letter words", () => {
+    const tinyVocab: VocabEntry[] = [
+      vocabFixture("ا", "alif"),
+      vocabFixture("ب", "ba"),
+      vocabFixture("ت", "ta"),
+      vocabFixture("ث", "tha"),
+    ];
+    const deck = makeConnectingLettersDeck(tinyVocab, {
+      id: "x",
+      title: "x",
+    });
     expect(deck.questions).toEqual([]);
   });
 });

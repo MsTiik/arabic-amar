@@ -6,6 +6,7 @@ import { Suspense, useMemo, useState } from "react";
 
 import {
   makeClozeDeck,
+  makeConnectingLettersDeck,
   makeFillBlankDeck,
   makeFlashcardDeck,
   makeGenderQuizDeck,
@@ -231,14 +232,13 @@ function PracticeInner({ vocab, topics, lessons, rules }: Props) {
             }}
           />
           <DeckButton
-            title="Which letter? (easy)"
-            description="Letters in their isolated form only. Good first round."
+            title="Connecting letters"
+            description="Read disconnected letters; pick the connected word they spell."
             onClick={() => {
               setManualDeck(
-                makeWhichLetterDeck({
-                  id: "deck-which-letter-easy",
-                  title: "Which letter? (easy)",
-                  positions: "isolated",
+                makeConnectingLettersDeck(vocab, {
+                  id: "deck-connecting-letters",
+                  title: "Connecting letters",
                 }),
               );
             }}

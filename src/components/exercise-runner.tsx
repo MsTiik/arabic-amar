@@ -176,6 +176,8 @@ function QuestionView({
       return <MatchPairsView question={question} onAnswer={onAnswer} />;
     case "which-letter":
       return <WhichLetterView question={question} onAnswer={onAnswer} />;
+    case "connecting-letters":
+      return <ConnectingLettersView question={question} onAnswer={onAnswer} />;
     case "cloze":
       return <ClozeView question={question} onAnswer={onAnswer} />;
   }
@@ -712,16 +714,21 @@ function MatchCard({
         onClick={onClick}
         disabled={matched}
         className={cn(
-          "w-full rounded-2xl border p-3 text-center transition-colors focus-ring",
+          // Fixed min-height keeps the Arabic and English columns visually
+          // aligned even though their content (large Arabic glyph vs short
+          // English gloss) has very different intrinsic sizes.
+          "flex h-20 w-full flex-col items-center justify-center rounded-2xl border p-3 text-center transition-colors focus-ring sm:h-24",
           style,
         )}
       >
         {isArabic ? (
-          <ArabicText variant="display" className="text-2xl sm:text-3xl">
+          <ArabicText variant="display" className="text-2xl leading-tight sm:text-3xl">
             {text}
           </ArabicText>
         ) : (
-          <span className="text-sm font-medium">{text}</span>
+          <span className="text-sm font-semibold leading-tight sm:text-base">
+            {text}
+          </span>
         )}
         {translit ? (
           <p className="mt-1 text-[10px] italic text-muted-foreground" lang="ar-Latn">
@@ -840,7 +847,10 @@ function ClozeView({
   return (
     <div className="rounded-3xl border border-border bg-card p-6 sm:p-8">
       <div className="text-center">
-        <p className="text-sm font-medium text-foreground-soft">
+        <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+          Meaning
+        </p>
+        <p className="mt-1 text-base font-semibold text-foreground">
           {question.prompt}
         </p>
         <div className="mt-4">
@@ -862,6 +872,14 @@ function ClozeView({
             {after ? " " : ""}
             {after}
           </ArabicText>
+          {question.promptHint ? (
+            <p
+              className="mt-2 text-sm italic text-muted-foreground"
+              lang="ar-Latn"
+            >
+              {question.promptHint} <span className="opacity-60">…</span>
+            </p>
+          ) : null}
         </div>
       </div>
 
@@ -905,6 +923,101 @@ function ClozeView({
             {correct
               ? "Correct!"
               : `Answer: ${correctOption?.text ?? ""}`}
+          </p>
+          <button
+            type="button"
+            onClick={() => onAnswer(correct)}
+            className="rounded-full bg-primary px-5 py-2 text-sm font-semibold text-primary-foreground hover:opacity-90 focus-ring"
+          >
+            Next →
+          </button>
+        </div>
+      ) : null}
+    </div>
+  );
+}
+
+/**
+ * Connecting letters: shows the prompt as a sequence of *disconnected*
+ * Arabic letters (the deck builder spaced them out so the renderer doesn't
+ * shape them together). The learner picks the correctly-connected word from
+ * 4 Arabic options.
+ */
+function ConnectingLettersView({
+  question,
+  onAnswer,
+}: {
+  question: ExerciseQuestion;
+  onAnswer: (correct: boolean) => void;
+}) {
+  const [selected, setSelected] = useState<string | null>(null);
+  const correct = selected === question.correctAnswerId;
+
+  return (
+    <div className="rounded-3xl border border-border bg-card p-6 sm:p-8">
+      <p className="text-center text-sm font-medium text-foreground-soft">
+        {question.prompt}
+      </p>
+      <div className="mt-4 text-center">
+        <ArabicText
+          variant="display"
+          // tracking-widest plus the explicit spaces inserted by the deck
+          // builder keeps every letter visually isolated from its neighbours
+          // so the renderer can't auto-join them.
+          className="text-5xl tracking-widest sm:text-6xl"
+          dir="rtl"
+        >
+          {question.promptArabic}
+        </ArabicText>
+        {question.promptHint ? (
+          <p className="mt-3 text-sm text-muted-foreground">
+            Hint: <span className="font-medium">{question.promptHint}</span>
+          </p>
+        ) : null}
+      </div>
+
+      <div className="mt-6 grid grid-cols-2 gap-2 sm:grid-cols-2">
+        {question.options?.map((opt) => {
+          const isCorrect = opt.id === question.correctAnswerId;
+          const isSelected = opt.id === selected;
+          let style = "border-border bg-background-soft hover:bg-muted";
+          if (selected) {
+            if (isCorrect) style = "border-success bg-success-soft";
+            else if (isSelected) style = "border-danger bg-danger-soft";
+            else style = "border-border bg-background-soft opacity-60";
+          }
+          return (
+            <div key={opt.id} className="flex flex-col gap-1">
+              <button
+                type="button"
+                disabled={selected !== null}
+                onClick={() => setSelected(opt.id)}
+                className={cn(
+                  "rounded-2xl border p-4 text-center transition-colors focus-ring",
+                  style,
+                )}
+              >
+                <ArabicText variant="display" className="text-3xl sm:text-4xl">
+                  {opt.text}
+                </ArabicText>
+              </button>
+              {opt.translit ? (
+                <TranslitReveal text={opt.translit} variant="inline" />
+              ) : null}
+            </div>
+          );
+        })}
+      </div>
+
+      {selected ? (
+        <div className="mt-6 flex items-center justify-between gap-3">
+          <p
+            className={cn(
+              "text-sm font-medium",
+              correct ? "text-success" : "text-danger",
+            )}
+          >
+            {correct ? "Correct!" : "Not quite — read the letters again."}
           </p>
           <button
             type="button"

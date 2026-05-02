@@ -393,25 +393,126 @@ export function makeWhichLetterDeck(opts: {
   return { ...opts, questions };
 }
 
+/* ---------- Connecting letters ---------- */
+
+/** Strip diacritics (harakat, shadda, sukūn, etc.) so we can decompose the
+ *  word into base letters only. */
+function stripArabicDiacritics(input: string): string {
+  // U+0610–U+061A: Arabic religious / honorific marks
+  // U+064B–U+065F: harakat, sukūn, shaddah, etc.
+  // U+0670: superscript alef
+  // U+06D6–U+06ED: Qur'ānic annotation signs
+  return input.replace(/[\u0610-\u061A\u064B-\u065F\u0670\u06D6-\u06ED]/g, "");
+}
+
+/** Render an Arabic word as a sequence of *disconnected* letters, each
+ *  separated by a small gap so the renderer can't auto-join them. We
+ *  intentionally preserve the original character order (right-to-left when
+ *  rendered) and just space them out. */
+function disconnectArabicWord(input: string): string {
+  const stripped = stripArabicDiacritics(input);
+  // Spread by codepoints (Arabic chars are all in the BMP so .split('') is
+  // safe, but Array.from is more explicit). Skip incidental spaces.
+  return Array.from(stripped)
+    .filter((c) => c.trim().length > 0)
+    .join(" ");
+}
+
+/** Build a connecting-letters deck from vocab. For each card, the prompt is
+ *  a multi-letter Arabic word rendered with its letters disconnected (e.g.
+ *  "ك ت ا ب"), and the options are 4 correctly-connected Arabic words: the
+ *  right answer plus 3 same-length distractors.
+ */
+export function makeConnectingLettersDeck(
+  vocab: VocabEntry[],
+  opts: { id: string; title: string; count?: number },
+): ExerciseDeck {
+  const usable = vocab.filter((v) => {
+    const stripped = stripArabicDiacritics(v.arabic).replace(/\s/g, "");
+    // Need at least 3 letters to make the connecting question interesting,
+    // and the word must be a single token (no spaces) so we don't quiz on
+    // multi-word phrases.
+    if (stripped.length < 3) return false;
+    if (v.arabic.includes(" ")) return false;
+    return true;
+  });
+  if (usable.length < 4) {
+    return { ...opts, questions: [] };
+  }
+
+  const count = opts.count ?? 12;
+  const sampled = shuffle(usable, 79).slice(0, count);
+  const questions: ExerciseQuestion[] = sampled.map((v, idx) => {
+    const targetLen = stripArabicDiacritics(v.arabic).replace(/\s/g, "").length;
+    // Prefer same-length distractors so the question can't be solved by
+    // counting letters; fall back to nearby lengths if we don't have enough.
+    const candidates = usable.filter((c) => c.id !== v.id);
+    const sameLen = candidates.filter(
+      (c) =>
+        stripArabicDiacritics(c.arabic).replace(/\s/g, "").length === targetLen,
+    );
+    let distractorPool = sameLen;
+    if (distractorPool.length < 3) distractorPool = candidates;
+    const distractors = shuffle(distractorPool, idx + 83).slice(0, 3);
+    const optionEntries = shuffle([v, ...distractors], idx + 89);
+    const correctId = `opt-cnx-${idx}-${v.id}`;
+    const options: ExerciseOption[] = optionEntries.map((entry) => ({
+      id: entry.id === v.id ? correctId : `opt-cnx-${idx}-${entry.id}`,
+      text: entry.arabic,
+      isArabic: true,
+      translit: entry.pronunciation,
+    }));
+    return {
+      id: `${opts.id}__cnx_${idx}`,
+      kind: "connecting-letters",
+      wordId: v.id,
+      prompt: "Pick the word these letters spell when they connect.",
+      promptArabic: disconnectArabicWord(v.arabic),
+      promptHint: v.english,
+      options,
+      correctAnswerId: correctId,
+    };
+  });
+  return { ...opts, questions };
+}
+
 /* ---------- Cloze (multi-word fill-in-the-blank) ---------- */
 
 /** Build a cloze deck from grammar rule examples that contain a multi-word
  *  Arabic phrase plus an English translation. We blank out the *last* word of
  *  the phrase (the content word in most "هذا/هذه/هل ___" constructions) and
  *  ask the learner to pick the missing word from 4 options.
+ *
+ *  Per-word transliteration on the visible (non-blanked) words is looked up
+ *  from the vocab dictionary when available.
  */
 export function makeClozeDeck(
   rules: GrammarRule[],
   vocab: VocabEntry[],
   opts: { id: string; title: string },
 ): ExerciseDeck {
+  // Build a vocab-arabic → pronunciation index for per-word translit on the
+  // visible part of the cloze prompt. Both the raw form and a diacritic-folded
+  // form are indexed because grammar examples often vary in their
+  // diacritization compared to the vocab list.
+  const translitIndex = new Map<string, string>();
+  for (const v of vocab) {
+    if (!v.arabic || !v.pronunciation) continue;
+    if (!translitIndex.has(v.arabic)) translitIndex.set(v.arabic, v.pronunciation);
+    if (!translitIndex.has(v.arabicFolded))
+      translitIndex.set(v.arabicFolded, v.pronunciation);
+  }
+
   // Build a pool of candidate phrases: arabic with 2+ words AND a non-empty
-  // english translation.
+  // english translation. `english.trim()` length check guards against
+  // whitespace-only fields slipping through.
   const pool = rules
     .flatMap((r) => r.examples)
     .filter((ex) => {
-      if (!ex.arabic || !ex.english) return false;
-      const words = ex.arabic.trim().split(/\s+/);
+      const arabicTrimmed = (ex.arabic ?? "").trim();
+      const englishTrimmed = (ex.english ?? "").trim();
+      if (!arabicTrimmed || !englishTrimmed) return false;
+      const words = arabicTrimmed.split(/\s+/);
       return words.length >= 2 && words[words.length - 1].length > 0;
     });
   if (pool.length === 0) {
@@ -431,9 +532,12 @@ export function makeClozeDeck(
 
   const sampled = shuffle(pool, 53).slice(0, 12);
   const questions: ExerciseQuestion[] = sampled.flatMap((ex, idx) => {
+    const englishTrimmed = (ex.english ?? "").trim();
+    if (!englishTrimmed) return []; // belt-and-suspenders against the filter above
     const words = ex.arabic.trim().split(/\s+/);
     const blank = words[words.length - 1];
-    const before = words.slice(0, -1).join(" ");
+    const visibleWords = words.slice(0, -1);
+    const before = visibleWords.join(" ");
     const distractors = shuffle(
       Array.from(distractorWords).filter((w) => w !== blank),
       idx + 61,
@@ -446,11 +550,19 @@ export function makeClozeDeck(
       text: w,
       isArabic: true,
     }));
+    // Combine per-word transliterations for visible words; if any word lacks
+    // an entry in the vocab dictionary, omit translit for the whole phrase
+    // rather than ship a half-rendered hint.
+    const translitParts = visibleWords.map((w) => translitIndex.get(w));
+    const translit = translitParts.every((p) => p)
+      ? translitParts.join(" ")
+      : undefined;
     return [
       {
         id: `${opts.id}__cloze_${idx}`,
         kind: "cloze",
-        prompt: ex.english ?? "",
+        prompt: englishTrimmed,
+        promptHint: translit,
         clozeBefore: before,
         clozeAfter: "",
         options,

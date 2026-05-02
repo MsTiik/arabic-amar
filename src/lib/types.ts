@@ -221,6 +221,7 @@ export type ExerciseKind =
   | "ordering"
   | "match-pairs"
   | "which-letter"
+  | "connecting-letters"
   | "cloze";
 
 export interface ExerciseOption {
