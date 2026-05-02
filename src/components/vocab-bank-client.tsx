@@ -65,9 +65,16 @@ export function VocabBankClient({ vocab, topics }: Props) {
 
   const showEmpty = filtered.length === 0;
   const isFiltering = Boolean(query || topicSlug || gender || extraOnly);
+  // Only topics that overflow (more than PREVIEW_COUNT entries) ever render
+  // a per-topic toggle, so "Expand all / Collapse all" only meaningfully
+  // applies to those.
+  const overflowingTopics = useMemo(
+    () => groupedByTopic.filter(([, e]) => e.length > PREVIEW_COUNT),
+    [groupedByTopic],
+  );
   const allExpanded =
-    groupedByTopic.length > 0 &&
-    groupedByTopic.every(([slug]) => expanded.has(slug));
+    overflowingTopics.length > 0 &&
+    overflowingTopics.every(([slug]) => expanded.has(slug));
 
   return (
     <div className="space-y-6">
@@ -127,14 +134,14 @@ export function VocabBankClient({ vocab, topics }: Props) {
             <span className="tabular-nums">
               {filtered.length} / {vocab.length} words
             </span>
-            {!isFiltering && groupedByTopic.length > 0 ? (
+            {!isFiltering && overflowingTopics.length > 0 ? (
               <button
                 type="button"
                 onClick={() => {
                   if (allExpanded) {
                     setExpanded(new Set());
                   } else {
-                    setExpanded(new Set(groupedByTopic.map(([s]) => s)));
+                    setExpanded(new Set(overflowingTopics.map(([s]) => s)));
                   }
                 }}
                 className="rounded-full border border-border bg-background-soft px-3 py-1 hover:text-foreground focus-ring"
