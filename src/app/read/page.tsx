@@ -68,6 +68,15 @@ const CARDS: FoundationCard[] = [
     accent: "bg-[oklch(0.93_0.05_270)] text-[oklch(0.30_0.10_270)]",
     tier: "B",
   },
+  {
+    href: "/read/tajweed",
+    title: "Tajweed basics",
+    titleArabic: "التَّجْوِيد",
+    description:
+      "The pronunciation rules of Qurʼānic recitation — qalqalah, nūn sākinah, tanwīn — in beginner-friendly language. Advanced rules tucked behind a toggle.",
+    accent: "bg-[oklch(0.93_0.05_10)] text-[oklch(0.30_0.10_10)]",
+    tier: "B",
+  },
 ];
 
 export default function ReadQuranPage() {
