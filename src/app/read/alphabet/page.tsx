@@ -57,29 +57,10 @@ export default function AlphabetPage() {
         {ALPHABET.map((letter) => (
           <LetterCard key={letter.order} letter={letter} />
         ))}
+        {ALPHABET_EXTRAS.map((extra) => (
+          <ExtraCard key={extra.slug} extra={extra} />
+        ))}
       </div>
-
-      <section aria-labelledby="beyond-28-heading" className="mt-10">
-        <div className="mb-4 flex items-baseline gap-3">
-          <h2
-            id="beyond-28-heading"
-            className="text-base font-semibold uppercase tracking-wider text-muted-foreground"
-          >
-            Also seen on the page
-          </h2>
-          <span className="text-xs text-muted-foreground">
-            Not part of the 28-letter alphabet.
-          </span>
-        </div>
-        <div
-          className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3"
-          dir="rtl"
-        >
-          {ALPHABET_EXTRAS.map((extra) => (
-            <ExtraCard key={extra.slug} extra={extra} />
-          ))}
-        </div>
-      </section>
 
       <footer className="mt-10 rounded-2xl border border-border bg-card p-6 text-sm text-muted-foreground">
         <h2 className="mb-2 text-base font-semibold text-foreground">

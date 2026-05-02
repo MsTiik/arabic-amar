@@ -609,9 +609,9 @@ export const ALPHABET_EXTRAS: readonly AlphabetExtra[] = [
     },
     nonConnector: true,
     example: {
-      arabic: "لَا إِلَٰهَ إِلَّا ٱللَّٰهُ",
-      translit: "lā ilāha illā-llāh",
-      gloss: "there is no god but Allāh",
+      arabic: "أَوْلَاد",
+      translit: "awlād",
+      gloss: "children",
     },
   },
 ];
