@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Flame, Target, Sparkles } from "lucide-react";
+import { Flame, Target } from "lucide-react";
 
 import { useProgress, useProgressStorageSync } from "@/lib/progress";
 import { cn } from "@/lib/cn";
@@ -15,6 +15,8 @@ const NAV = [
   { href: "/practice", label: "Practice" },
   { href: "/about", label: "About" },
 ];
+
+const FOUNDATIONS = { href: "/read", label: "Foundations" };
 
 export function Topbar() {
   useProgressStorageSync();
@@ -30,12 +32,11 @@ export function Topbar() {
       <div className="mx-auto flex w-full max-w-6xl items-center gap-4 px-4 py-3">
         <Link
           href="/"
-          className="flex items-center gap-2 text-lg font-semibold tracking-tight"
+          className="flex shrink-0 items-center whitespace-nowrap text-lg font-semibold tracking-tight"
         >
-          <Sparkles className="h-5 w-5 text-accent-gold" aria-hidden />
           <span>
-            Arabic Amar
-            <span className="ml-2 hidden text-xs font-normal text-muted-foreground sm:inline">
+            Arabic AMAR
+            <span className="ml-2 hidden text-xs font-normal text-muted-foreground lg:inline">
               · Quranic Arabic, gamified
             </span>
           </span>
@@ -52,7 +53,7 @@ export function Topbar() {
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "rounded-md px-3 py-1.5 text-sm transition-colors focus-ring",
+                  "whitespace-nowrap rounded-md px-3 py-1.5 text-sm transition-colors focus-ring",
                   active
                     ? "bg-muted text-foreground"
                     : "text-muted-foreground hover:bg-muted hover:text-foreground",
@@ -89,6 +90,7 @@ export function Topbar() {
             <span className="hidden sm:inline">streak</span>
           </div>
           <DailyGoalChip seen={seen} goal={goal} ratio={goalRatio} />
+          <FoundationsNavLink pathname={pathname} />
         </div>
       </div>
       <nav className="flex items-center gap-1 overflow-x-auto px-3 py-2 text-sm md:hidden">
@@ -100,7 +102,7 @@ export function Topbar() {
               key={item.href}
               href={item.href}
               className={cn(
-                "shrink-0 rounded-md px-3 py-1.5 transition-colors focus-ring",
+                "shrink-0 whitespace-nowrap rounded-md px-3 py-1.5 transition-colors focus-ring",
                 active
                   ? "bg-muted text-foreground"
                   : "text-muted-foreground hover:bg-muted hover:text-foreground",
@@ -110,8 +112,37 @@ export function Topbar() {
             </Link>
           );
         })}
+        <Link
+          href={FOUNDATIONS.href}
+          className={cn(
+            "ml-auto shrink-0 whitespace-nowrap rounded-md px-3 py-1.5 transition-colors focus-ring",
+            pathname.startsWith(FOUNDATIONS.href)
+              ? "bg-muted text-foreground"
+              : "text-muted-foreground hover:bg-muted hover:text-foreground",
+          )}
+        >
+          {FOUNDATIONS.label}
+        </Link>
       </nav>
     </header>
+  );
+}
+
+function FoundationsNavLink({ pathname }: { pathname: string }) {
+  const active = pathname.startsWith(FOUNDATIONS.href);
+  return (
+    <Link
+      href={FOUNDATIONS.href}
+      className={cn(
+        "hidden whitespace-nowrap rounded-md px-3 py-1.5 text-sm transition-colors focus-ring md:inline-flex",
+        active
+          ? "bg-muted text-foreground"
+          : "text-muted-foreground hover:bg-muted hover:text-foreground",
+      )}
+      title="Alphabet, harakāt, madd, sun/moon — foundations for reading Qurʼān"
+    >
+      {FOUNDATIONS.label}
+    </Link>
   );
 }
 
