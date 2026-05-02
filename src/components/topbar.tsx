@@ -12,6 +12,7 @@ const NAV = [
   { href: "/topics", label: "Lessons" },
   { href: "/vocabulary", label: "Vocabulary" },
   { href: "/grammar", label: "Grammar" },
+  { href: "/read", label: "Read Qur'ān" },
   { href: "/practice", label: "Practice" },
   { href: "/about", label: "About" },
 ];
