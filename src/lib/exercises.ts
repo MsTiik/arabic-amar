@@ -512,6 +512,12 @@ export function makeClozeDeck(
       const arabicTrimmed = (ex.arabic ?? "").trim();
       const englishTrimmed = (ex.english ?? "").trim();
       if (!arabicTrimmed || !englishTrimmed) return false;
+      // Reject doc-parser bullet labels like "=" or "• Hundreds =" that have
+      // characters but aren't real translations. Real translations don't
+      // start with a bullet or equals sign and contain ≥ 3 ASCII letters.
+      if (/^[•=]/.test(englishTrimmed)) return false;
+      const letterCount = (englishTrimmed.match(/[A-Za-z]/g) ?? []).length;
+      if (letterCount < 3) return false;
       const words = arabicTrimmed.split(/\s+/);
       return words.length >= 2 && words[words.length - 1].length > 0;
     });

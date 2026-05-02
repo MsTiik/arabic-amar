@@ -176,6 +176,35 @@ describe("makeClozeDeck", () => {
     expect(deck.questions).toEqual([]);
   });
 
+  test("filters out doc-parser bullet labels masquerading as english", () => {
+    const rules: GrammarRule[] = [
+      {
+        id: "r1",
+        title: "Time rule",
+        body: "",
+        examples: [
+          { arabic: "السَّاعةُ الثَّالِثةُ", english: "=" },
+          { arabic: "السَّاعةُ الرَّابعةُ", english: "• The hour =" },
+          { arabic: "السَّاعةُ الخَامسةُ", english: "• Hundreds =" },
+          { arabic: "هذا رأس", english: "this is a head" },
+          { arabic: "هذا وجه", english: "this is a face" },
+          { arabic: "هذه عين", english: "this is an eye" },
+          { arabic: "هل عين", english: "is this an eye?" },
+        ],
+        topicSlugs: [],
+        lessonId: "l1",
+      },
+    ];
+    const deck = makeClozeDeck(rules, [], { id: "c", title: "Cloze" });
+    for (const q of deck.questions) {
+      // Real English translation must contain ≥ 3 letters.
+      const letters = (q.prompt.match(/[A-Za-z]/g) ?? []).length;
+      expect(letters).toBeGreaterThanOrEqual(3);
+      expect(q.prompt).not.toMatch(/^=/);
+      expect(q.prompt).not.toMatch(/^•/);
+    }
+  });
+
   test("filters out examples with whitespace-only english", () => {
     const rules: GrammarRule[] = [
       {
