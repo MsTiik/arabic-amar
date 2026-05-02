@@ -48,10 +48,17 @@ export function LetterSpeakerButton({
   const wikimediaUrl = entry?.url;
 
   useEffect(() => {
+    const cleanupAudio = () => {
+      audioRef.current?.pause();
+      audioRef.current = null;
+    };
     // Detect Arabic TTS voice availability once voices have loaded.
     if (typeof window === "undefined" || !("speechSynthesis" in window)) {
       const id = requestAnimationFrame(() => setTtsAvailable(false));
-      return () => cancelAnimationFrame(id);
+      return () => {
+        cancelAnimationFrame(id);
+        cleanupAudio();
+      };
     }
     const check = () => {
       const voices = window.speechSynthesis.getVoices();
@@ -62,8 +69,7 @@ export function LetterSpeakerButton({
     return () => {
       cancelAnimationFrame(id);
       window.speechSynthesis.removeEventListener?.("voiceschanged", check);
-      audioRef.current?.pause();
-      audioRef.current = null;
+      cleanupAudio();
       if (utteranceRef.current) {
         window.speechSynthesis.cancel();
         utteranceRef.current = null;
