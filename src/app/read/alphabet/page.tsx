@@ -59,19 +59,22 @@ export default function AlphabetPage() {
         ))}
       </div>
 
-      <section aria-labelledby="beyond-28-heading" className="mt-12">
+      <section aria-labelledby="beyond-28-heading" className="mt-10">
         <div className="mb-4 flex items-baseline gap-3">
           <h2
             id="beyond-28-heading"
-            className="text-xl font-semibold tracking-tight"
+            className="text-base font-semibold uppercase tracking-wider text-muted-foreground"
           >
-            Beyond the 28
+            Also seen on the page
           </h2>
           <span className="text-xs text-muted-foreground">
-            Not counted as letters, but essential for reading.
+            Not part of the 28-letter alphabet.
           </span>
         </div>
-        <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+        <div
+          className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3"
+          dir="rtl"
+        >
           {ALPHABET_EXTRAS.map((extra) => (
             <ExtraCard key={extra.slug} extra={extra} />
           ))}
@@ -242,15 +245,18 @@ function FormCell({
 function ExtraCard({ extra }: { extra: AlphabetExtra }) {
   return (
     <article
-      className="flex flex-col gap-3 rounded-2xl border-2 border-dashed border-accent-gold/50 bg-accent-gold-soft/30 p-5"
+      className="flex flex-col gap-3 rounded-2xl border-2 border-dashed border-accent-gold/60 bg-accent-gold-soft/40 p-5"
       aria-label={extra.name}
       dir="ltr"
     >
       <header className="flex items-start justify-between gap-3">
         <div>
           <div className="flex items-center gap-2">
-            <span className="inline-flex items-center rounded-full border border-accent-gold/60 bg-accent-gold-soft px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-foreground">
-              Extra
+            <span
+              className="inline-flex items-center rounded-full border border-accent-gold/60 bg-accent-gold-soft px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-foreground"
+              title="Not one of the 28 letters"
+            >
+              {extra.tag}
             </span>
             <ArabicText
               variant="display"
@@ -274,34 +280,37 @@ function ExtraCard({ extra }: { extra: AlphabetExtra }) {
         />
       </header>
 
-      <p className="text-sm text-muted-foreground">{extra.summary}</p>
+      <section
+        aria-label="Positional forms"
+        className="rounded-xl bg-background-soft/80 p-3"
+      >
+        <div className="mb-1.5 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
+          Isolated · Initial · Medial · Final
+        </div>
+        <div
+          className="grid grid-cols-4 items-end gap-1 text-center"
+          lang="ar"
+        >
+          {(["isolated", "initial", "medial", "final"] as const).map((form) => (
+            <FormCell
+              key={form}
+              glyph={extra.forms[form]}
+              faded={extra.nonConnector && (form === "initial" || form === "medial")}
+              emphasized={form === "isolated"}
+            />
+          ))}
+        </div>
+        <div className="mt-1 grid grid-cols-4 gap-1 text-center text-[10px] uppercase tracking-wider text-muted-foreground">
+          <span>Iso</span>
+          <span>Init</span>
+          <span>Med</span>
+          <span>Fin</span>
+        </div>
+      </section>
 
-      <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
-        {extra.forms.map((form, idx) => (
-          <div
-            key={idx}
-            className="rounded-md border border-accent-gold/30 bg-card p-2 text-center"
-          >
-            <div
-              className="font-arabic-display text-2xl"
-              lang="ar"
-              dir="rtl"
-            >
-              {form.glyph}
-            </div>
-            <div className="mt-1 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
-              {form.label}
-            </div>
-            {form.note ? (
-              <div className="text-[10px] text-muted-foreground">
-                {form.note}
-              </div>
-            ) : null}
-          </div>
-        ))}
-      </div>
+      <p className="text-xs text-muted-foreground">{extra.pronunciationHint}</p>
 
-      <div className="flex items-center justify-between gap-3 rounded-xl border border-accent-gold/40 bg-card px-3 py-2">
+      <div className="flex items-center justify-between gap-3 rounded-xl border border-accent-gold/30 bg-background-soft/80 px-3 py-2">
         <div>
           <ArabicText variant="display" as="span" className="text-xl">
             {extra.example.arabic}
@@ -313,14 +322,12 @@ function ExtraCard({ extra }: { extra: AlphabetExtra }) {
             — {extra.example.gloss}
           </span>
         </div>
+        <LetterSpeakerButton
+          text={extra.example.arabic}
+          ariaLabel={`Play pronunciation of ${extra.example.translit}`}
+          size="sm"
+        />
       </div>
-
-      <details className="rounded-md bg-background-soft px-3 py-2 text-xs text-muted-foreground">
-        <summary className="cursor-pointer font-semibold text-foreground">
-          {extra.asideTitle}
-        </summary>
-        <p className="mt-2 leading-relaxed">{extra.asideBody}</p>
-      </details>
     </article>
   );
 }
