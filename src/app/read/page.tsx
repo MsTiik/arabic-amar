@@ -77,6 +77,15 @@ const CARDS: FoundationCard[] = [
     accent: "bg-[oklch(0.93_0.05_10)] text-[oklch(0.30_0.10_10)]",
     tier: "B",
   },
+  {
+    href: "/read/surahs",
+    title: "Short surahs · word by word",
+    titleArabic: "السُّوَر القَصِيرَة",
+    description:
+      "Tap any word in Al-Fātiḥah and the short surahs of Juzʼ ʿAmma to see its meaning, root, and grammar tag — plus per-ayah recitation audio.",
+    accent: "bg-[oklch(0.93_0.05_180)] text-[oklch(0.30_0.10_180)]",
+    tier: "B",
+  },
 ];
 
 export default function ReadQuranPage() {
