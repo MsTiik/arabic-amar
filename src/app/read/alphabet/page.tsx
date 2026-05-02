@@ -147,7 +147,6 @@ function LetterCard({ letter }: { letter: (typeof ALPHABET)[number] }) {
         <div
           className="grid grid-cols-4 gap-1 text-center"
           lang="ar"
-          dir="rtl"
         >
           {(["isolated", "initial", "medial", "final"] as const).map((form) => (
             <FormCell
