@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Flame, Target, BookOpen } from "lucide-react";
+import { Flame, Target } from "lucide-react";
 
 import { useProgress, useProgressStorageSync } from "@/lib/progress";
 import { cn } from "@/lib/cn";
@@ -16,7 +16,7 @@ const NAV = [
   { href: "/about", label: "About" },
 ];
 
-const READ_QURAN = { href: "/read", label: "Read Qur'ān" };
+const FOUNDATIONS = { href: "/read", label: "Foundations" };
 
 export function Topbar() {
   useProgressStorageSync();
@@ -66,7 +66,6 @@ export function Topbar() {
         </nav>
 
         <div className="ml-auto flex items-center gap-2 sm:gap-3">
-          <ReadQuranNavLink pathname={pathname} />
           <div
             className={cn(
               "flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-medium",
@@ -91,6 +90,7 @@ export function Topbar() {
             <span className="hidden sm:inline">streak</span>
           </div>
           <DailyGoalChip seen={seen} goal={goal} ratio={goalRatio} />
+          <FoundationsNavLink pathname={pathname} />
         </div>
       </div>
       <nav className="flex items-center gap-1 overflow-x-auto px-3 py-2 text-sm md:hidden">
@@ -113,37 +113,35 @@ export function Topbar() {
           );
         })}
         <Link
-          href={READ_QURAN.href}
+          href={FOUNDATIONS.href}
           className={cn(
-            "ml-auto inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full border px-3 py-1.5 text-sm font-semibold transition-colors focus-ring",
-            pathname.startsWith(READ_QURAN.href)
-              ? "border-accent-gold bg-accent-gold-soft text-foreground"
-              : "border-accent-gold/60 bg-accent-gold-soft/60 text-foreground hover:bg-accent-gold-soft",
+            "ml-auto shrink-0 whitespace-nowrap rounded-md px-3 py-1.5 transition-colors focus-ring",
+            pathname.startsWith(FOUNDATIONS.href)
+              ? "bg-muted text-foreground"
+              : "text-muted-foreground hover:bg-muted hover:text-foreground",
           )}
         >
-          <BookOpen className="h-3.5 w-3.5 text-accent-gold" aria-hidden />
-          {READ_QURAN.label}
+          {FOUNDATIONS.label}
         </Link>
       </nav>
     </header>
   );
 }
 
-function ReadQuranNavLink({ pathname }: { pathname: string }) {
-  const active = pathname.startsWith(READ_QURAN.href);
+function FoundationsNavLink({ pathname }: { pathname: string }) {
+  const active = pathname.startsWith(FOUNDATIONS.href);
   return (
     <Link
-      href={READ_QURAN.href}
+      href={FOUNDATIONS.href}
       className={cn(
-        "hidden items-center gap-1.5 whitespace-nowrap rounded-full border px-3 py-1.5 text-sm font-semibold transition-colors focus-ring md:inline-flex",
+        "hidden whitespace-nowrap rounded-md px-3 py-1.5 text-sm transition-colors focus-ring md:inline-flex",
         active
-          ? "border-accent-gold bg-accent-gold-soft text-foreground shadow-sm"
-          : "border-accent-gold/60 bg-accent-gold-soft/60 text-foreground hover:bg-accent-gold-soft hover:border-accent-gold",
+          ? "bg-muted text-foreground"
+          : "text-muted-foreground hover:bg-muted hover:text-foreground",
       )}
-      title="Quran-reading foundations — independent reference content"
+      title="Alphabet, harakāt, madd, sun/moon — foundations for reading Qurʼān"
     >
-      <BookOpen className="h-4 w-4 text-accent-gold" aria-hidden />
-      {READ_QURAN.label}
+      {FOUNDATIONS.label}
     </Link>
   );
 }

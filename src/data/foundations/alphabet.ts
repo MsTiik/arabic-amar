@@ -525,6 +525,82 @@ export const ALPHABET: AlphabetLetter[] = [
 /** The six letters that never connect to what follows them. */
 export const NON_CONNECTORS: readonly string[] = ["ا", "د", "ذ", "ر", "ز", "و"];
 
+/**
+ * Two characters that aren't counted among the 28 base letters but are
+ * essential for reading — hamza (the glottal stop, written on various
+ * carriers) and alif-lām (the definite article "the", which interacts with
+ * sun/moon letters).
+ */
+export interface AlphabetExtra {
+  slug: "hamza" | "alif-lam";
+  nameArabic: string;
+  name: string;
+  ipa: string;
+  summary: string;
+  /** Forms / realizations to show as small cells. */
+  forms: Array<{
+    glyph: string;
+    label: string;
+    note?: string;
+  }>;
+  example: {
+    arabic: string;
+    translit: string;
+    gloss: string;
+  };
+  /** Short note about why it isn't in the 28. */
+  asideTitle: string;
+  asideBody: string;
+}
+
+export const ALPHABET_EXTRAS: readonly AlphabetExtra[] = [
+  {
+    slug: "hamza",
+    nameArabic: "هَمْزة",
+    name: "hamza",
+    ipa: "/ʔ/",
+    summary:
+      "A glottal stop — the catch in the throat between the two syllables of 'uh-oh'. Hamza almost always sits on a 'seat' (alif, wāw, or yā') rather than standing alone; the seat is chosen by the surrounding vowels.",
+    forms: [
+      { glyph: "ء", label: "Standalone", note: "on the line" },
+      { glyph: "أ", label: "On alif", note: "with fatḥa/ḍamma" },
+      { glyph: "إ", label: "Under alif", note: "with kasra" },
+      { glyph: "ؤ", label: "On wāw", note: "after ḍamma" },
+      { glyph: "ئ", label: "On yā'", note: "after kasra" },
+    ],
+    example: {
+      arabic: "شَيْء",
+      translit: "shay'",
+      gloss: "a thing",
+    },
+    asideTitle: "Why isn't it letter #29?",
+    asideBody:
+      "Hamza represents a sound, not a letter shape — it's written on top of (or underneath) one of the existing letters, so it doesn't take its own alphabetical slot. The standalone glyph ء exists for cases where no carrier is appropriate.",
+  },
+  {
+    slug: "alif-lam",
+    nameArabic: "ال التَّعْرِيف",
+    name: "alif-lām (the definite article)",
+    ipa: "/al-/ or /aʃ-, at-, .../",
+    summary:
+      "Two-letter prefix meaning 'the'. Before a moon letter it's pronounced 'al-' as written. Before a sun letter, the lām is silent and the following letter doubles (shadda) — e.g. اَلشَّمْس is read 'ash-shams', not 'al-shams'.",
+    forms: [
+      { glyph: "الْ", label: "Before moon letter", note: "lām pronounced" },
+      { glyph: "اَلْقَمَر", label: "al-qamar", note: "the moon" },
+      { glyph: "الـّ", label: "Before sun letter", note: "lām silent, shadda" },
+      { glyph: "اَلشَّمْس", label: "ash-shams", note: "the sun" },
+    ],
+    example: {
+      arabic: "اَلْحَمْدُ",
+      translit: "al-ḥamdu",
+      gloss: "the praise",
+    },
+    asideTitle: "Why isn't it a letter?",
+    asideBody:
+      "Alif-lām is a two-letter grammatical prefix, not an alphabet entry. It's listed here because reading the Qur'ān requires recognising when the lām is pronounced and when it's assimilated into the following sun letter. See the full sun/moon rule on its own page.",
+  },
+];
+
 /** Helper: letter lookup by order (1-based). */
 export function getLetter(order: number): AlphabetLetter | undefined {
   return ALPHABET.find((l) => l.order === order);

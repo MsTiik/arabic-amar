@@ -5,7 +5,7 @@ import { FoundationsBadge } from "@/components/foundations-badge";
 import { JoinLettersDemo } from "@/components/join-letters-demo";
 import { ALPHABET, NON_CONNECTORS } from "@/data/foundations";
 
-export const metadata = { title: "Connecting letters · Read Qur’ān" };
+export const metadata = { title: "Connecting letters · Foundations" };
 
 const NON_CONNECTOR_DETAILS = ALPHABET.filter((l) => l.nonConnector);
 
@@ -17,7 +17,7 @@ export default function ConnectingLettersPage() {
           href="/read"
           className="text-sm text-muted-foreground hover:text-foreground focus-ring"
         >
-          ← Back to Read Qur’ān
+          ← Back to Foundations
         </Link>
       </div>
 

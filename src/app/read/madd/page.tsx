@@ -5,7 +5,7 @@ import { FoundationsBadge } from "@/components/foundations-badge";
 import { LetterSpeakerButton } from "@/components/letter-speaker-button";
 import { MADD_LETTERS } from "@/data/foundations";
 
-export const metadata = { title: "Long vowels (Madd) · Read Qur’ān" };
+export const metadata = { title: "Long vowels (Madd) · Foundations" };
 
 export default function MaddPage() {
   return (
@@ -15,7 +15,7 @@ export default function MaddPage() {
           href="/read"
           className="text-sm text-muted-foreground hover:text-foreground focus-ring"
         >
-          ← Back to Read Qur’ān
+          ← Back to Foundations
         </Link>
       </div>
 

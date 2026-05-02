@@ -11,7 +11,7 @@ import {
   type HarakahEntry,
 } from "@/data/foundations";
 
-export const metadata = { title: "Harakāt · Read Qur’ān" };
+export const metadata = { title: "Harakāt · Foundations" };
 
 export default function HarakatPage() {
   return (
@@ -21,7 +21,7 @@ export default function HarakatPage() {
           href="/read"
           className="text-sm text-muted-foreground hover:text-foreground focus-ring"
         >
-          ← Back to Read Qur’ān
+          ← Back to Foundations
         </Link>
       </div>
 

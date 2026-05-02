@@ -3,9 +3,14 @@ import Link from "next/link";
 import { ArabicText } from "@/components/arabic-text";
 import { FoundationsBadge } from "@/components/foundations-badge";
 import { LetterSpeakerButton } from "@/components/letter-speaker-button";
-import { ALPHABET, NON_CONNECTORS } from "@/data/foundations";
+import {
+  ALPHABET,
+  ALPHABET_EXTRAS,
+  NON_CONNECTORS,
+  type AlphabetExtra,
+} from "@/data/foundations";
 
-export const metadata = { title: "Arabic alphabet · Read Qur’ān" };
+export const metadata = { title: "Arabic alphabet · Foundations" };
 
 export default function AlphabetPage() {
   return (
@@ -15,7 +20,7 @@ export default function AlphabetPage() {
           href="/read"
           className="text-sm text-muted-foreground hover:text-foreground focus-ring"
         >
-          ← Back to Read Qur’ān
+          ← Back to Foundations
         </Link>
       </div>
 
@@ -53,6 +58,25 @@ export default function AlphabetPage() {
           <LetterCard key={letter.order} letter={letter} />
         ))}
       </div>
+
+      <section aria-labelledby="beyond-28-heading" className="mt-12">
+        <div className="mb-4 flex items-baseline gap-3">
+          <h2
+            id="beyond-28-heading"
+            className="text-xl font-semibold tracking-tight"
+          >
+            Beyond the 28
+          </h2>
+          <span className="text-xs text-muted-foreground">
+            Not counted as letters, but essential for reading.
+          </span>
+        </div>
+        <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+          {ALPHABET_EXTRAS.map((extra) => (
+            <ExtraCard key={extra.slug} extra={extra} />
+          ))}
+        </div>
+      </section>
 
       <footer className="mt-10 rounded-2xl border border-border bg-card p-6 text-sm text-muted-foreground">
         <h2 className="mb-2 text-base font-semibold text-foreground">
@@ -212,5 +236,91 @@ function FormCell({
     >
       {glyph}
     </div>
+  );
+}
+
+function ExtraCard({ extra }: { extra: AlphabetExtra }) {
+  return (
+    <article
+      className="flex flex-col gap-3 rounded-2xl border-2 border-dashed border-accent-gold/50 bg-accent-gold-soft/30 p-5"
+      aria-label={extra.name}
+      dir="ltr"
+    >
+      <header className="flex items-start justify-between gap-3">
+        <div>
+          <div className="flex items-center gap-2">
+            <span className="inline-flex items-center rounded-full border border-accent-gold/60 bg-accent-gold-soft px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-foreground">
+              Extra
+            </span>
+            <ArabicText
+              variant="display"
+              as="span"
+              className="text-2xl font-medium"
+            >
+              {extra.nameArabic}
+            </ArabicText>
+          </div>
+          <div className="mt-1 text-sm text-foreground">
+            <span className="italic">{extra.name}</span>
+            <span className="ml-2 text-xs text-muted-foreground">
+              {extra.ipa}
+            </span>
+          </div>
+        </div>
+        <LetterSpeakerButton
+          text={extra.example.arabic}
+          ariaLabel={`Play example ${extra.example.translit}`}
+          size="md"
+        />
+      </header>
+
+      <p className="text-sm text-muted-foreground">{extra.summary}</p>
+
+      <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+        {extra.forms.map((form, idx) => (
+          <div
+            key={idx}
+            className="rounded-md border border-accent-gold/30 bg-card p-2 text-center"
+          >
+            <div
+              className="font-arabic-display text-2xl"
+              lang="ar"
+              dir="rtl"
+            >
+              {form.glyph}
+            </div>
+            <div className="mt-1 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
+              {form.label}
+            </div>
+            {form.note ? (
+              <div className="text-[10px] text-muted-foreground">
+                {form.note}
+              </div>
+            ) : null}
+          </div>
+        ))}
+      </div>
+
+      <div className="flex items-center justify-between gap-3 rounded-xl border border-accent-gold/40 bg-card px-3 py-2">
+        <div>
+          <ArabicText variant="display" as="span" className="text-xl">
+            {extra.example.arabic}
+          </ArabicText>
+          <span className="ml-2 text-xs italic text-foreground-soft">
+            {extra.example.translit}
+          </span>
+          <span className="ml-2 text-[11px] text-muted-foreground">
+            — {extra.example.gloss}
+          </span>
+        </div>
+      </div>
+
+      <details className="rounded-md bg-background-soft px-3 py-2 text-xs text-muted-foreground">
+        <summary className="cursor-pointer font-semibold text-foreground">
+          {extra.asideTitle}
+        </summary>
+        <p className="mt-2 leading-relaxed">{extra.asideBody}</p>
+      </details>
+    </article>
   );
 }

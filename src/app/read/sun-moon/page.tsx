@@ -4,7 +4,7 @@ import { FoundationsBadge } from "@/components/foundations-badge";
 import { SunMoonDemo } from "@/components/sun-moon-demo";
 import { SUN_LETTERS, MOON_LETTERS, ALPHABET } from "@/data/foundations";
 
-export const metadata = { title: "Sun & moon letters · Read Qur’ān" };
+export const metadata = { title: "Sun & moon letters · Foundations" };
 
 const lookup = Object.fromEntries(ALPHABET.map((l) => [l.forms.isolated, l]));
 
@@ -16,7 +16,7 @@ export default function SunMoonPage() {
           href="/read"
           className="text-sm text-muted-foreground hover:text-foreground focus-ring"
         >
-          ← Back to Read Qur’ān
+          ← Back to Foundations
         </Link>
       </div>
 

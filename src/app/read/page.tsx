@@ -2,7 +2,7 @@ import Link from "next/link";
 
 import { FoundationsBadge } from "@/components/foundations-badge";
 
-export const metadata = { title: "Read Qur’ān · Foundations" };
+export const metadata = { title: "Foundations · Qur’ān-reading basics" };
 
 interface FoundationCard {
   href: string;
@@ -77,9 +77,12 @@ export default function ReadQuranPage() {
         <div className="mb-3">
           <FoundationsBadge />
         </div>
-        <h1 className="text-3xl font-semibold tracking-tight">Read Qur’ān</h1>
-        <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
-          The reading foundations every beginner needs before picking up a
+        <h1 className="text-3xl font-semibold tracking-tight">Foundations</h1>
+        <p className="mt-1 text-sm font-medium text-foreground-soft">
+          Reading basics for Qurʼānic Arabic.
+        </p>
+        <p className="mt-3 max-w-2xl text-sm text-muted-foreground">
+          The script-level groundwork every beginner needs before picking up a
           muṣḥaf — the alphabet in all four positional shapes, how letters join
           together, the diacritics that shape every syllable, and the
           articulation points that give each letter its unique sound. This
