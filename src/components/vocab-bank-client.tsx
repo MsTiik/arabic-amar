@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState, useDeferredValue } from "react";
-import { Search, X } from "lucide-react";
+import { ChevronDown, Search, X } from "lucide-react";
 
 import { ArabicText } from "@/components/arabic-text";
 import { VocabCard } from "@/components/vocab-card";
@@ -17,12 +17,14 @@ interface Props {
 
 type GenderFilter = "" | "M" | "F" | "Both";
 
+const PREVIEW_COUNT = 6;
+
 export function VocabBankClient({ vocab, topics }: Props) {
   const [query, setQuery] = useState("");
   const [topicSlug, setTopicSlug] = useState("");
   const [gender, setGender] = useState<GenderFilter>("");
   const [extraOnly, setExtraOnly] = useState(false);
-  const [collapsed, setCollapsed] = useState(false);
+  const [expanded, setExpanded] = useState<Set<string>>(() => new Set());
   const deferred = useDeferredValue(query);
 
   const filtered = useMemo(() => {
@@ -63,6 +65,9 @@ export function VocabBankClient({ vocab, topics }: Props) {
 
   const showEmpty = filtered.length === 0;
   const isFiltering = Boolean(query || topicSlug || gender || extraOnly);
+  const allExpanded =
+    groupedByTopic.length > 0 &&
+    groupedByTopic.every(([slug]) => expanded.has(slug));
 
   return (
     <div className="space-y-6">
@@ -122,13 +127,21 @@ export function VocabBankClient({ vocab, topics }: Props) {
             <span className="tabular-nums">
               {filtered.length} / {vocab.length} words
             </span>
-            <button
-              type="button"
-              onClick={() => setCollapsed((c) => !c)}
-              className="rounded-full border border-border bg-background-soft px-3 py-1 hover:text-foreground focus-ring"
-            >
-              {collapsed ? "Expand all" : "Collapse all"}
-            </button>
+            {!isFiltering && groupedByTopic.length > 0 ? (
+              <button
+                type="button"
+                onClick={() => {
+                  if (allExpanded) {
+                    setExpanded(new Set());
+                  } else {
+                    setExpanded(new Set(groupedByTopic.map(([s]) => s)));
+                  }
+                }}
+                className="rounded-full border border-border bg-background-soft px-3 py-1 hover:text-foreground focus-ring"
+              >
+                {allExpanded ? "Collapse all" : "Expand all"}
+              </button>
+            ) : null}
           </div>
         </div>
       </div>
@@ -142,7 +155,7 @@ export function VocabBankClient({ vocab, topics }: Props) {
               <em>rasun</em>).
             </p>
           </div>
-        ) : collapsed || isFiltering ? (
+        ) : isFiltering ? (
           <div
             key="flat-grid"
             className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
@@ -160,9 +173,22 @@ export function VocabBankClient({ vocab, topics }: Props) {
           <div key="grouped" className="space-y-8">
             {groupedByTopic.map(([slug, entries]) => {
               const topic = topics.find((t) => t.slug === slug);
+              const isExpanded = expanded.has(slug);
+              const overflows = entries.length > PREVIEW_COUNT;
+              const visible =
+                overflows && !isExpanded
+                  ? entries.slice(0, PREVIEW_COUNT)
+                  : entries;
+              const toggle = () =>
+                setExpanded((prev) => {
+                  const next = new Set(prev);
+                  if (next.has(slug)) next.delete(slug);
+                  else next.add(slug);
+                  return next;
+                });
               return (
                 <section key={slug}>
-                  <header className="mb-3 flex items-baseline justify-between">
+                  <header className="mb-3 flex items-baseline justify-between gap-3">
                     <h2 className="text-xl font-semibold tracking-tight">
                       {topic?.name ?? slug}
                       {topic?.nameArabic ? (
@@ -174,12 +200,12 @@ export function VocabBankClient({ vocab, topics }: Props) {
                         </ArabicText>
                       ) : null}
                     </h2>
-                    <span className="text-xs text-muted-foreground">
+                    <span className="text-xs text-muted-foreground tabular-nums">
                       {entries.length} words
                     </span>
                   </header>
                   <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                    {entries.map((entry) => (
+                    {visible.map((entry) => (
                       <VocabCard
                         key={entry.id}
                         entry={entry}
@@ -188,6 +214,27 @@ export function VocabBankClient({ vocab, topics }: Props) {
                       />
                     ))}
                   </div>
+                  {overflows ? (
+                    <div className="mt-3">
+                      <button
+                        type="button"
+                        onClick={toggle}
+                        aria-expanded={isExpanded}
+                        className="inline-flex items-center gap-1.5 rounded-full border border-border bg-background-soft px-3 py-1.5 text-sm font-medium text-foreground hover:bg-card focus-ring"
+                      >
+                        <ChevronDown
+                          className={cn(
+                            "h-4 w-4 transition-transform",
+                            isExpanded ? "rotate-180" : "rotate-0",
+                          )}
+                          aria-hidden
+                        />
+                        {isExpanded
+                          ? "Show less"
+                          : `Show all ${entries.length}`}
+                      </button>
+                    </div>
+                  ) : null}
                 </section>
               );
             })}
