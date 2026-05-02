@@ -5,24 +5,34 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useMemo, useState } from "react";
 
 import {
+  makeClozeDeck,
   makeFillBlankDeck,
   makeFlashcardDeck,
   makeGenderQuizDeck,
+  makeMatchPairsDeck,
   makeMultipleChoiceDeck,
   makeOrderingDeck,
+  makeWhichLetterDeck,
 } from "@/lib/exercises";
 import {
   getMistakeWords,
   progressActions,
   useProgress,
 } from "@/lib/progress";
-import type { ExerciseDeck, Lesson, Topic, VocabEntry } from "@/lib/types";
+import type {
+  ExerciseDeck,
+  GrammarRule,
+  Lesson,
+  Topic,
+  VocabEntry,
+} from "@/lib/types";
 import { ExerciseRunner } from "@/components/exercise-runner";
 
 interface Props {
   vocab: VocabEntry[];
   topics: Topic[];
   lessons: Lesson[];
+  rules: GrammarRule[];
 }
 
 export function PracticeClient(props: Props) {
@@ -33,7 +43,7 @@ export function PracticeClient(props: Props) {
   );
 }
 
-function PracticeInner({ vocab, topics, lessons }: Props) {
+function PracticeInner({ vocab, topics, lessons, rules }: Props) {
   const search = useSearchParams();
   const router = useRouter();
   const deckParam = search.get("deck"); // "mistakes" | "today"
@@ -184,6 +194,67 @@ function PracticeInner({ vocab, topics, lessons }: Props) {
               }}
             />
           ) : null}
+        </div>
+      </section>
+
+      <section className="rounded-3xl border border-border bg-card p-6">
+        <h2 className="text-lg font-semibold">Foundations drills</h2>
+        <p className="mt-0.5 text-xs text-muted-foreground">
+          Bite-size warm-ups that drill specific skills. Built for this site —
+          not from the lessons.
+        </p>
+        <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
+          <DeckButton
+            title="Match pairs"
+            description="Tap one Arabic, then its English match. Five rounds of six."
+            onClick={() => {
+              const sample = sampleRandom(vocab, 30, Date.now());
+              setManualDeck(
+                makeMatchPairsDeck(sample, {
+                  id: "deck-match-pairs",
+                  title: "Match pairs",
+                }),
+              );
+            }}
+          />
+          <DeckButton
+            title="Which letter?"
+            description="Spot the Arabic letter and pick its name. 12 cards across all positions."
+            onClick={() => {
+              setManualDeck(
+                makeWhichLetterDeck({
+                  id: "deck-which-letter",
+                  title: "Which letter?",
+                  positions: "all",
+                }),
+              );
+            }}
+          />
+          <DeckButton
+            title="Which letter? (easy)"
+            description="Letters in their isolated form only. Good first round."
+            onClick={() => {
+              setManualDeck(
+                makeWhichLetterDeck({
+                  id: "deck-which-letter-easy",
+                  title: "Which letter? (easy)",
+                  positions: "isolated",
+                }),
+              );
+            }}
+          />
+          <DeckButton
+            title="Fill the blank"
+            description="Pick the missing word in a short Arabic phrase from the lessons."
+            onClick={() => {
+              setManualDeck(
+                makeClozeDeck(rules, vocab, {
+                  id: "deck-cloze",
+                  title: "Fill the blank",
+                }),
+              );
+            }}
+          />
         </div>
       </section>
 

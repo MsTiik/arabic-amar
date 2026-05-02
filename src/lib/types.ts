@@ -218,7 +218,10 @@ export type ExerciseKind =
   | "multiple-choice-translit-to-ar"
   | "fill-blank-translit"
   | "gender-quiz"
-  | "ordering";
+  | "ordering"
+  | "match-pairs"
+  | "which-letter"
+  | "cloze";
 
 export interface ExerciseOption {
   id: string;
@@ -228,6 +231,19 @@ export interface ExerciseOption {
    *  click-to-reveal hint on the option button so the learner can fall back
    *  to pronunciation if they're stuck reading the Arabic. */
   translit?: string;
+}
+
+/** A pair to match in the match-pairs exercise. Each side has an id and a
+ *  text label; the pairing is implicit (the i-th left matches the i-th right
+ *  before shuffling). */
+export interface MatchPair {
+  id: string;
+  leftText: string;
+  leftIsArabic?: boolean;
+  leftTranslit?: string;
+  rightText: string;
+  rightIsArabic?: boolean;
+  rightTranslit?: string;
 }
 
 export interface ExerciseQuestion {
@@ -244,6 +260,13 @@ export interface ExerciseQuestion {
   acceptableAnswers?: string[];
   /** For ordering: the correct sequence of option ids. */
   correctOrder?: string[];
+  /** For match-pairs: the pairs the user must reconnect. */
+  pairs?: MatchPair[];
+  /** For cloze: the full Arabic phrase split into [before, blank, after].
+   *  The renderer joins these with the correct option's text replacing the
+   *  blank when revealing the answer. */
+  clozeBefore?: string;
+  clozeAfter?: string;
 }
 
 export interface ExerciseDeck {

@@ -1,7 +1,11 @@
+import { ALPHABET } from "@/data/foundations";
 import type {
   ExerciseDeck,
   ExerciseKind,
+  ExerciseOption,
   ExerciseQuestion,
+  GrammarRule,
+  MatchPair,
   VocabEntry,
 } from "./types";
 
@@ -260,4 +264,214 @@ export function checkFillBlankAnswer(input: string, accepted: string[]): boolean
 export function checkOrderingAnswer(submitted: string[], correct: string[]): boolean {
   if (submitted.length !== correct.length) return false;
   return submitted.every((id, i) => id === correct[i]);
+}
+
+/* ---------- Match pairs ---------- */
+
+/** Build a match-pairs deck where each "question" presents a small set of
+ *  pairs (default 6) the user must reconnect by tapping. We chunk the input
+ *  vocab into rounds and produce one question per round.
+ */
+export function makeMatchPairsDeck(
+  vocab: VocabEntry[],
+  opts: {
+    id: string;
+    title: string;
+    topicSlug?: string;
+    lessonId?: string;
+    pairsPerRound?: number;
+  },
+): ExerciseDeck {
+  const usable = withEnglish(vocab);
+  const pairsPerRound = opts.pairsPerRound ?? 6;
+  if (usable.length < 2) {
+    return { ...opts, questions: [] };
+  }
+  const shuffled = shuffle(usable, 17);
+  const questions: ExerciseQuestion[] = [];
+  for (let i = 0; i < shuffled.length; i += pairsPerRound) {
+    const chunk = shuffled.slice(i, i + pairsPerRound);
+    if (chunk.length < 2) break; // can't make a meaningful round with 1 pair
+    const pairs: MatchPair[] = chunk.map((v) => ({
+      id: `pair-${v.id}`,
+      leftText: v.arabic,
+      leftIsArabic: true,
+      leftTranslit: v.pronunciation,
+      rightText: v.english,
+    }));
+    questions.push({
+      id: `${opts.id}__match_${i}`,
+      kind: "match-pairs",
+      prompt: "Match each Arabic word with its English meaning.",
+      pairs,
+    });
+  }
+  return { ...opts, questions };
+}
+
+/* ---------- Which letter? ---------- */
+
+/** Map of every Arabic glyph (any positional form) → the letter's transliterated
+ *  name. Used to build the which-letter drill. */
+function buildLetterIndex(): Array<{
+  name: string;
+  nameArabic: string;
+  glyph: string;
+  position: "isolated" | "initial" | "medial" | "final";
+}> {
+  const out: Array<{
+    name: string;
+    nameArabic: string;
+    glyph: string;
+    position: "isolated" | "initial" | "medial" | "final";
+  }> = [];
+  for (const letter of ALPHABET) {
+    for (const position of ["isolated", "initial", "medial", "final"] as const) {
+      const glyph = letter.forms[position];
+      // Skip non-connector duplicates: for non-connectors the
+      // initial==isolated and medial==final visually, so showing them as
+      // separate questions would feel like a trick.
+      if (
+        letter.nonConnector &&
+        (position === "initial" || position === "medial")
+      ) {
+        continue;
+      }
+      out.push({
+        name: letter.name,
+        nameArabic: letter.nameArabic,
+        glyph,
+        position,
+      });
+    }
+  }
+  return out;
+}
+
+/** Build a which-letter deck. Each question shows a glyph (one positional
+ *  form of one letter) and asks the learner to pick the letter's name from
+ *  4 options.
+ */
+export function makeWhichLetterDeck(opts: {
+  id: string;
+  title: string;
+  /** How many cards in the deck. Defaults to 12. */
+  count?: number;
+  /** Bias toward isolated forms (easier) or all positions (harder). */
+  positions?: "isolated" | "all";
+}): ExerciseDeck {
+  const count = opts.count ?? 12;
+  const allEntries = buildLetterIndex().filter((e) =>
+    opts.positions === "isolated" ? e.position === "isolated" : true,
+  );
+  const sampled = shuffle(allEntries, 23).slice(0, count);
+  // Distractor pool: every distinct letter name.
+  const allNames = Array.from(new Set(ALPHABET.map((l) => l.name)));
+  const questions: ExerciseQuestion[] = sampled.map((entry, idx) => {
+    const distractors = shuffle(
+      allNames.filter((n) => n !== entry.name),
+      idx + 31,
+    ).slice(0, 3);
+    const optionList = shuffle([entry.name, ...distractors], idx + 41);
+    const correctId = `opt-name-${entry.name}`;
+    const options: ExerciseOption[] = optionList.map((name) => ({
+      id: `opt-name-${name}`,
+      text: name,
+    }));
+    return {
+      id: `${opts.id}__whichletter_${idx}`,
+      kind: "which-letter",
+      prompt:
+        entry.position === "isolated"
+          ? "Which letter is this?"
+          : `Which letter is this (${entry.position} form)?`,
+      promptArabic: entry.glyph,
+      options,
+      correctAnswerId: correctId,
+    };
+  });
+  return { ...opts, questions };
+}
+
+/* ---------- Cloze (multi-word fill-in-the-blank) ---------- */
+
+/** Build a cloze deck from grammar rule examples that contain a multi-word
+ *  Arabic phrase plus an English translation. We blank out the *last* word of
+ *  the phrase (the content word in most "هذا/هذه/هل ___" constructions) and
+ *  ask the learner to pick the missing word from 4 options.
+ */
+export function makeClozeDeck(
+  rules: GrammarRule[],
+  vocab: VocabEntry[],
+  opts: { id: string; title: string },
+): ExerciseDeck {
+  // Build a pool of candidate phrases: arabic with 2+ words AND a non-empty
+  // english translation.
+  const pool = rules
+    .flatMap((r) => r.examples)
+    .filter((ex) => {
+      if (!ex.arabic || !ex.english) return false;
+      const words = ex.arabic.trim().split(/\s+/);
+      return words.length >= 2 && words[words.length - 1].length > 0;
+    });
+  if (pool.length === 0) {
+    return { ...opts, questions: [] };
+  }
+  // Distractor pool: every Arabic content word from the same examples + vocab.
+  const distractorWords = new Set<string>();
+  for (const ex of pool) {
+    const words = ex.arabic.trim().split(/\s+/);
+    const last = words[words.length - 1];
+    if (last) distractorWords.add(last);
+  }
+  for (const v of vocab) {
+    const w = v.arabic.trim();
+    if (w && !w.includes(" ")) distractorWords.add(w);
+  }
+
+  const sampled = shuffle(pool, 53).slice(0, 12);
+  const questions: ExerciseQuestion[] = sampled.flatMap((ex, idx) => {
+    const words = ex.arabic.trim().split(/\s+/);
+    const blank = words[words.length - 1];
+    const before = words.slice(0, -1).join(" ");
+    const distractors = shuffle(
+      Array.from(distractorWords).filter((w) => w !== blank),
+      idx + 61,
+    ).slice(0, 3);
+    if (distractors.length < 3) return [];
+    const optionList = shuffle([blank, ...distractors], idx + 71);
+    const correctId = `opt-cloze-${idx}-${blank}`;
+    const options: ExerciseOption[] = optionList.map((w) => ({
+      id: `opt-cloze-${idx}-${w}`,
+      text: w,
+      isArabic: true,
+    }));
+    return [
+      {
+        id: `${opts.id}__cloze_${idx}`,
+        kind: "cloze",
+        prompt: ex.english ?? "",
+        clozeBefore: before,
+        clozeAfter: "",
+        options,
+        correctAnswerId: correctId,
+      } satisfies ExerciseQuestion,
+    ];
+  });
+  return { ...opts, questions };
+}
+
+/** Check that the user matched all pairs correctly in a match-pairs question.
+ *  `submitted` is a Record of leftId → rightId chosen by the user. */
+export function checkMatchPairsAnswer(
+  submitted: Record<string, string>,
+  pairs: MatchPair[],
+): boolean {
+  if (Object.keys(submitted).length !== pairs.length) return false;
+  for (const p of pairs) {
+    // Each pair shares the same id on both sides — left option id and right
+    // option id are derived from the same `pair.id`.
+    if (submitted[p.id] !== p.id) return false;
+  }
+  return true;
 }

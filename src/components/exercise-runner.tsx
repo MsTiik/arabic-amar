@@ -8,8 +8,12 @@ import { ProgressRing } from "@/components/progress-ring";
 import { SpeakerButton } from "@/components/speaker-button";
 import { TranslitReveal } from "@/components/translit-reveal";
 import { cn } from "@/lib/cn";
-import { checkFillBlankAnswer, checkOrderingAnswer } from "@/lib/exercises";
-import type { ExerciseDeck, ExerciseQuestion } from "@/lib/types";
+import {
+  checkFillBlankAnswer,
+  checkMatchPairsAnswer,
+  checkOrderingAnswer,
+} from "@/lib/exercises";
+import type { ExerciseDeck, ExerciseQuestion, MatchPair } from "@/lib/types";
 
 interface Props {
   deck: ExerciseDeck;
@@ -168,6 +172,12 @@ function QuestionView({
       return <MultipleChoiceView question={question} onAnswer={onAnswer} />;
     case "ordering":
       return <OrderingView question={question} onAnswer={onAnswer} />;
+    case "match-pairs":
+      return <MatchPairsView question={question} onAnswer={onAnswer} />;
+    case "which-letter":
+      return <WhichLetterView question={question} onAnswer={onAnswer} />;
+    case "cloze":
+      return <ClozeView question={question} onAnswer={onAnswer} />;
   }
 }
 
@@ -534,4 +544,396 @@ function OrderingView({
       )}
     </div>
   );
+}
+
+/**
+ * Tap one Arabic card, then tap an English card to pair them. Wrong matches
+ * flash red and the user keeps trying; the question is "correct" only if
+ * every pair was matched without an error.
+ */
+function MatchPairsView({
+  question,
+  onAnswer,
+}: {
+  question: ExerciseQuestion;
+  onAnswer: (correct: boolean) => void;
+}) {
+  const pairs = useMemo(() => question.pairs ?? [], [question.pairs]);
+
+  // Independently shuffle each side so the matching isn't order-trivial.
+  const leftItems = useMemo(
+    () => deterministicShuffle(pairs, question.id, "L"),
+    [pairs, question.id],
+  );
+  const rightItems = useMemo(
+    () => deterministicShuffle(pairs, question.id, "R"),
+    [pairs, question.id],
+  );
+
+  const [selectedLeft, setSelectedLeft] = useState<string | null>(null);
+  const [selectedRight, setSelectedRight] = useState<string | null>(null);
+  const [matched, setMatched] = useState<Record<string, string>>({});
+  const [wrongPulse, setWrongPulse] = useState<{
+    left?: string;
+    right?: string;
+  }>({});
+  const [errorCount, setErrorCount] = useState(0);
+
+  function tryResolve(leftId: string, rightId: string) {
+    if (leftId === rightId) {
+      // Correct pairing.
+      setMatched((m) => ({ ...m, [leftId]: rightId }));
+      setSelectedLeft(null);
+      setSelectedRight(null);
+    } else {
+      setWrongPulse({ left: leftId, right: rightId });
+      setErrorCount((c) => c + 1);
+      setTimeout(() => {
+        setWrongPulse({});
+        setSelectedLeft(null);
+        setSelectedRight(null);
+      }, 700);
+    }
+  }
+
+  function selectLeft(id: string) {
+    if (matched[id] || wrongPulse.left || wrongPulse.right) return;
+    if (selectedLeft === id) {
+      setSelectedLeft(null);
+      return;
+    }
+    setSelectedLeft(id);
+    if (selectedRight) tryResolve(id, selectedRight);
+  }
+
+  function selectRight(id: string) {
+    if (Object.values(matched).includes(id) || wrongPulse.left || wrongPulse.right)
+      return;
+    if (selectedRight === id) {
+      setSelectedRight(null);
+      return;
+    }
+    setSelectedRight(id);
+    if (selectedLeft) tryResolve(selectedLeft, id);
+  }
+
+  const allMatched = Object.keys(matched).length === pairs.length;
+  const noErrors = errorCount === 0;
+
+  return (
+    <div className="rounded-3xl border border-border bg-card p-6 sm:p-8">
+      <p className="text-base font-medium text-center">{question.prompt}</p>
+      <p className="mt-1 text-center text-xs text-muted-foreground">
+        Tap one from each column.
+      </p>
+
+      <div className="mt-6 grid grid-cols-2 gap-3">
+        <ul className="space-y-2">
+          {leftItems.map((p) => (
+            <MatchCard
+              key={p.id + "L"}
+              pair={p}
+              side="left"
+              selected={selectedLeft === p.id}
+              matched={!!matched[p.id]}
+              wrong={wrongPulse.left === p.id}
+              onClick={() => selectLeft(p.id)}
+            />
+          ))}
+        </ul>
+        <ul className="space-y-2">
+          {rightItems.map((p) => (
+            <MatchCard
+              key={p.id + "R"}
+              pair={p}
+              side="right"
+              selected={selectedRight === p.id}
+              matched={Object.values(matched).includes(p.id)}
+              wrong={wrongPulse.right === p.id}
+              onClick={() => selectRight(p.id)}
+            />
+          ))}
+        </ul>
+      </div>
+
+      {allMatched ? (
+        <div className="mt-6 flex items-center justify-between gap-3">
+          <p
+            className={cn(
+              "text-sm font-medium",
+              noErrors ? "text-success" : "text-foreground-soft",
+            )}
+          >
+            {noErrors
+              ? "All matched on the first try."
+              : `All matched — ${errorCount} miss${errorCount === 1 ? "" : "es"}.`}
+          </p>
+          <button
+            type="button"
+            onClick={() =>
+              onAnswer(checkMatchPairsAnswer(matched, pairs) && noErrors)
+            }
+            className="rounded-full bg-primary px-5 py-2 text-sm font-semibold text-primary-foreground hover:opacity-90 focus-ring"
+          >
+            Next →
+          </button>
+        </div>
+      ) : null}
+    </div>
+  );
+}
+
+function MatchCard({
+  pair,
+  side,
+  selected,
+  matched,
+  wrong,
+  onClick,
+}: {
+  pair: MatchPair;
+  side: "left" | "right";
+  selected: boolean;
+  matched: boolean;
+  wrong: boolean;
+  onClick: () => void;
+}) {
+  const isArabic = side === "left" ? pair.leftIsArabic : pair.rightIsArabic;
+  const text = side === "left" ? pair.leftText : pair.rightText;
+  const translit = side === "left" ? pair.leftTranslit : pair.rightTranslit;
+  let style = "border-border bg-background-soft hover:bg-muted";
+  if (matched) style = "border-success bg-success-soft opacity-80";
+  else if (wrong) style = "border-danger bg-danger-soft animate-pulse";
+  else if (selected) style = "border-primary bg-primary/5";
+  return (
+    <li>
+      <button
+        type="button"
+        onClick={onClick}
+        disabled={matched}
+        className={cn(
+          "w-full rounded-2xl border p-3 text-center transition-colors focus-ring",
+          style,
+        )}
+      >
+        {isArabic ? (
+          <ArabicText variant="display" className="text-2xl sm:text-3xl">
+            {text}
+          </ArabicText>
+        ) : (
+          <span className="text-sm font-medium">{text}</span>
+        )}
+        {translit ? (
+          <p className="mt-1 text-[10px] italic text-muted-foreground" lang="ar-Latn">
+            {translit}
+          </p>
+        ) : null}
+      </button>
+    </li>
+  );
+}
+
+/** Pure UI version of MultipleChoiceView, but the prompt is a large isolated
+ *  Arabic glyph (no English meaning), and the four options are letter names.
+ */
+function WhichLetterView({
+  question,
+  onAnswer,
+}: {
+  question: ExerciseQuestion;
+  onAnswer: (correct: boolean) => void;
+}) {
+  const [selected, setSelected] = useState<string | null>(null);
+  const correct = selected === question.correctAnswerId;
+
+  return (
+    <div className="rounded-3xl border border-border bg-card p-6 sm:p-8">
+      <div className="text-center">
+        <ArabicText
+          variant="display"
+          className="text-7xl sm:text-8xl text-foreground"
+        >
+          {question.promptArabic}
+        </ArabicText>
+        <p className="mt-4 text-base font-medium">{question.prompt}</p>
+      </div>
+
+      <div className="mt-6 grid grid-cols-2 gap-2 sm:grid-cols-4">
+        {question.options?.map((opt) => {
+          const isCorrect = opt.id === question.correctAnswerId;
+          const isSelected = opt.id === selected;
+          let style = "border-border bg-background-soft hover:bg-muted";
+          if (selected) {
+            if (isCorrect) style = "border-success bg-success-soft";
+            else if (isSelected) style = "border-danger bg-danger-soft";
+            else style = "border-border bg-background-soft opacity-60";
+          }
+          return (
+            <button
+              key={opt.id}
+              type="button"
+              disabled={selected !== null}
+              onClick={() => setSelected(opt.id)}
+              className={cn(
+                "rounded-2xl border p-4 text-center transition-colors focus-ring",
+                style,
+              )}
+            >
+              <span className="text-base font-semibold" lang="ar-Latn">
+                {opt.text}
+              </span>
+            </button>
+          );
+        })}
+      </div>
+
+      {selected ? (
+        <div className="mt-6 flex items-center justify-between gap-3">
+          <p
+            className={cn(
+              "text-sm font-medium",
+              correct ? "text-success" : "text-danger",
+            )}
+          >
+            {correct ? "Correct!" : "Not quite — keep going."}
+          </p>
+          <button
+            type="button"
+            onClick={() => onAnswer(correct)}
+            className="rounded-full bg-primary px-5 py-2 text-sm font-semibold text-primary-foreground hover:opacity-90 focus-ring"
+          >
+            Next →
+          </button>
+        </div>
+      ) : null}
+    </div>
+  );
+}
+
+/**
+ * Cloze: the prompt is an English sentence; the Arabic phrase is rendered
+ * with the missing word replaced by a blank (rendered as ____ until the
+ * user picks an option, at which point the blank is filled in).
+ */
+function ClozeView({
+  question,
+  onAnswer,
+}: {
+  question: ExerciseQuestion;
+  onAnswer: (correct: boolean) => void;
+}) {
+  const [selected, setSelected] = useState<string | null>(null);
+  const correctOption = question.options?.find(
+    (o) => o.id === question.correctAnswerId,
+  );
+  const correct = selected === question.correctAnswerId;
+
+  // While unanswered, show the blank as ____. After answering, fill in with
+  // either the user's wrong choice (so they see the mistake) or the right one.
+  const fill =
+    selected === null
+      ? "____"
+      : (question.options?.find((o) => o.id === selected)?.text ?? "____");
+  const before = question.clozeBefore ?? "";
+  const after = question.clozeAfter ?? "";
+
+  return (
+    <div className="rounded-3xl border border-border bg-card p-6 sm:p-8">
+      <div className="text-center">
+        <p className="text-sm font-medium text-foreground-soft">
+          {question.prompt}
+        </p>
+        <div className="mt-4">
+          <ArabicText variant="display" className="text-4xl sm:text-5xl" dir="rtl">
+            {before}
+            {before ? " " : ""}
+            <span
+              className={cn(
+                "rounded-md px-2",
+                selected === null
+                  ? "bg-muted text-foreground-soft"
+                  : correct
+                    ? "bg-success-soft text-success"
+                    : "bg-danger-soft text-danger",
+              )}
+            >
+              {fill}
+            </span>
+            {after ? " " : ""}
+            {after}
+          </ArabicText>
+        </div>
+      </div>
+
+      <div className="mt-6 grid grid-cols-2 gap-2 sm:grid-cols-4">
+        {question.options?.map((opt) => {
+          const isCorrect = opt.id === question.correctAnswerId;
+          const isSelected = opt.id === selected;
+          let style = "border-border bg-background-soft hover:bg-muted";
+          if (selected) {
+            if (isCorrect) style = "border-success bg-success-soft";
+            else if (isSelected) style = "border-danger bg-danger-soft";
+            else style = "border-border bg-background-soft opacity-60";
+          }
+          return (
+            <button
+              key={opt.id}
+              type="button"
+              disabled={selected !== null}
+              onClick={() => setSelected(opt.id)}
+              className={cn(
+                "rounded-2xl border p-3 text-center transition-colors focus-ring",
+                style,
+              )}
+            >
+              <ArabicText variant="display" className="text-2xl">
+                {opt.text}
+              </ArabicText>
+            </button>
+          );
+        })}
+      </div>
+
+      {selected ? (
+        <div className="mt-6 flex items-center justify-between gap-3">
+          <p
+            className={cn(
+              "text-sm font-medium",
+              correct ? "text-success" : "text-danger",
+            )}
+          >
+            {correct
+              ? "Correct!"
+              : `Answer: ${correctOption?.text ?? ""}`}
+          </p>
+          <button
+            type="button"
+            onClick={() => onAnswer(correct)}
+            className="rounded-full bg-primary px-5 py-2 text-sm font-semibold text-primary-foreground hover:opacity-90 focus-ring"
+          >
+            Next →
+          </button>
+        </div>
+      ) : null}
+    </div>
+  );
+}
+
+/** Tiny LCG used to deterministically shuffle a slice without pulling in a
+ *  dependency. The string `salt` parameter mixes into the seed so the same
+ *  array can be shuffled differently in two places (e.g. left vs right
+ *  columns of a matching exercise). */
+function deterministicShuffle<T>(arr: T[], baseSeed: string, salt: string): T[] {
+  const a = [...arr];
+  let s = 0;
+  for (let i = 0; i < baseSeed.length; i++) s = (s * 31 + baseSeed.charCodeAt(i)) | 0;
+  for (let i = 0; i < salt.length; i++) s = (s * 31 + salt.charCodeAt(i)) | 0;
+  s = (s % 233280) || 1;
+  if (s < 0) s += 233280;
+  for (let i = a.length - 1; i > 0; i--) {
+    s = (s * 9301 + 49297) % 233280;
+    const j = Math.floor((s / 233280) * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
 }

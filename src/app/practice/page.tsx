@@ -11,6 +11,7 @@ export default function PracticePage() {
         vocab={content.vocab}
         topics={content.topics}
         lessons={content.lessons}
+        rules={content.rules}
       />
     </div>
   );
