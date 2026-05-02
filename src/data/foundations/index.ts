@@ -5,3 +5,4 @@ export * from "./harakat";
 export * from "./madd";
 export * from "./sun-moon";
 export * from "./makharij";
+export * from "./tajweed";
