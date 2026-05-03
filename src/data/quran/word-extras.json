@@ -902,7 +902,7 @@
   "106:1:1": {
     "lemma": "إِلَٰف",
     "frequency": 2,
-    "inTop125": true
+    "inTop125": false
   },
   "106:1:2": {
     "lemma": "قُرَيْش",
@@ -912,7 +912,7 @@
   "106:2:1": {
     "lemma": "إِلَٰف",
     "frequency": 2,
-    "inTop125": true
+    "inTop125": false
   },
   "106:2:2": {
     "lemma": "رِحْلَة",

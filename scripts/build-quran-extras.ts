@@ -79,7 +79,12 @@ function buckToArabic(s: string): string {
     .join("");
 }
 
-/** Strip diacritics, tatweel, alef-variant marks for normalised comparison. */
+/** Strip diacritics, tatweel, and unify alef/alef-maqsūra/tāʾ-marbūṭa
+ *  variants for forgiving comparison. We deliberately do NOT strip a
+ *  leading "ال" here: QAC lemmas and our top-125 deck both store words
+ *  in their bare form (e.g. "رحمن" not "الرحمن"), and stripping ال would
+ *  also corrupt rare lemmas whose first two letters happen to be ا+ل
+ *  (e.g. إلف → الف → ف, which would falsely collide with the particle فَ). */
 function normalize(s: string): string {
   return s
     .normalize("NFD")
@@ -88,7 +93,6 @@ function normalize(s: string): string {
     .replace(/[إأآٱ]/g, "ا")
     .replace(/ى/g, "ي")
     .replace(/ة/g, "ه")
-    .replace(/^ال/, "")
     .trim();
 }
 
