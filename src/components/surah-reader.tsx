@@ -15,6 +15,37 @@ import type {
 } from "@/data/quran";
 import { ayahAudioUrl, getWordExtras } from "@/data/quran";
 
+/** Strip Arabic diacritics + tatweel for surface↔lemma equality check. */
+function stripDiacritics(s: string): string {
+  return s
+    .normalize("NFD")
+    .replace(/[\u064B-\u065F\u0670\u06D6-\u06ED\u0640]/g, "")
+    .normalize("NFC");
+}
+
+function StatCell({
+  label,
+  tooltip,
+  children,
+}: {
+  label: string;
+  tooltip?: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <div className="flex flex-col items-center justify-center gap-1.5 px-3 py-3 text-center">
+      <p
+        className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground"
+        title={tooltip}
+      >
+        {label}
+        {tooltip ? <span className="ml-1 cursor-help">ⓘ</span> : null}
+      </p>
+      {children}
+    </div>
+  );
+}
+
 const POS_LABEL: Record<QuranWordPos, string> = {
   noun: "Noun",
   "proper-noun": "Proper noun",
@@ -215,7 +246,7 @@ function WordPopup({
           {word.english}
         </p>
 
-        <div className="mt-3 flex flex-wrap items-center gap-2">
+        <div className="mt-3 flex flex-wrap items-center gap-1.5">
           {extras?.inTop125 ? (
             <span
               className="inline-flex items-center gap-1 rounded-full border border-accent-gold bg-accent-gold-soft px-2.5 py-1 text-xs font-semibold text-foreground-soft"
@@ -245,33 +276,44 @@ function WordPopup({
           ) : null}
         </div>
 
-        {extras && (extras.lemma || extras.frequency > 0) ? (
-          <div className="mt-2 flex flex-wrap items-baseline gap-x-3 gap-y-1 text-xs text-muted-foreground">
-            {extras.lemma ? (
-              <span>
-                Dictionary:{" "}
-                <ArabicText
-                  variant="display"
-                  className="text-base text-foreground-soft"
+        {(() => {
+          const showBaseForm =
+            !!extras?.lemma &&
+            stripDiacritics(extras.lemma) !== stripDiacritics(word.arabic);
+          const showFreq = !!extras && extras.frequency > 0;
+          if (!showBaseForm && !showFreq) return null;
+          return (
+            <div className="mt-3 grid grid-cols-2 divide-x divide-border overflow-hidden rounded-xl border border-border bg-background-soft">
+              {showBaseForm ? (
+                <StatCell
+                  label="Base form"
+                  tooltip="The dictionary headword. Most Arabic words in the Qurʾān are inflected (with prefixes, suffixes, or conjugation); the base form is what you would look up in a dictionary."
                 >
-                  {extras.lemma}
-                </ArabicText>
-              </span>
-            ) : null}
-            {extras.frequency > 0 ? (
-              <span>
-                Appears{" "}
-                <span className="font-semibold tabular-nums text-foreground-soft">
-                  {extras.frequency.toLocaleString()}×
-                </span>{" "}
-                in the Qurʾān
-              </span>
-            ) : null}
-          </div>
-        ) : null}
+                  <ArabicText
+                    variant="display"
+                    className="text-2xl leading-none"
+                  >
+                    {extras!.lemma}
+                  </ArabicText>
+                </StatCell>
+              ) : (
+                <div /> // empty cell when only frequency is shown
+              )}
+              {showFreq ? (
+                <StatCell label="Appears in the Qurʾān">
+                  <span className="text-xl font-semibold tabular-nums text-foreground-soft">
+                    {extras!.frequency.toLocaleString()}×
+                  </span>
+                </StatCell>
+              ) : (
+                <div />
+              )}
+            </div>
+          );
+        })()}
 
         {word.note ? (
-          <p className="mt-2 text-xs italic text-muted-foreground">
+          <p className="mt-3 text-xs italic text-muted-foreground">
             {word.note}
           </p>
         ) : null}
