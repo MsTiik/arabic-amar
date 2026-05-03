@@ -104,6 +104,40 @@ describe("regenFreezesOn", () => {
     expect(p.streak.lastFreezeRegenAt).toBe("2025-02-08");
   });
 
+  test("preserves fractional-week credit across calls", () => {
+    const p = makeProgress({
+      freezesAvailable: 0,
+      lastFreezeRegenAt: "2025-02-01",
+    });
+    // 10 elapsed days → 1 grant + 3 days credit. Clock should advance to Feb 8,
+    // not Feb 11, so the next freeze comes 4 more days later.
+    regenFreezesOn(p, "2025-02-11");
+    expect(p.streak.freezesAvailable).toBe(1);
+    expect(p.streak.lastFreezeRegenAt).toBe("2025-02-08");
+  });
+
+  test("advances regen clock even when budget is full (no instant refill bug)", () => {
+    // Repro of a Devin-Review-flagged bug: if `lastFreezeRegenAt` never
+    // advances while at MAX_FREEZES, the timestamp would stay frozen at the
+    // user's first day, so the moment they consume a freeze a huge `elapsed`
+    // would instantly refill it. The fix: clock always advances by
+    // grants * 7 days, so when one is consumed the user still has to wait
+    // a full ~7 days for the next refill.
+    const p = makeProgress({
+      freezesAvailable: MAX_FREEZES,
+      lastFreezeRegenAt: "2025-01-01",
+    });
+    regenFreezesOn(p, "2025-01-31"); // 30 days at full budget
+    expect(p.streak.freezesAvailable).toBe(MAX_FREEZES);
+    // 30 days = 4 full weeks of grants; clock advances 28 days from Jan 1.
+    expect(p.streak.lastFreezeRegenAt).toBe("2025-01-29");
+
+    // Now consume a freeze and check that one day later we don't insta-refill.
+    p.streak.freezesAvailable = MAX_FREEZES - 1;
+    regenFreezesOn(p, "2025-02-01"); // only 3 days since last regen tick
+    expect(p.streak.freezesAvailable).toBe(MAX_FREEZES - 1);
+  });
+
   test("grants multiple freezes for long absences but caps at MAX_FREEZES", () => {
     const p = makeProgress({
       freezesAvailable: 0,
