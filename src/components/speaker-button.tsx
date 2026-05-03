@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Loader2, Volume2, VolumeX } from "lucide-react";
+import { Loader2, Square, Volume2, VolumeX } from "lucide-react";
 
 import { getAudioForWord } from "@/lib/audio";
 import { cn } from "@/lib/cn";
@@ -58,6 +58,16 @@ export function SpeakerButton({
     e.preventDefault();
     e.stopPropagation();
     if (!playUrl) return;
+    // Toggle: a second click on a button that's already loading or playing
+    // stops playback instead of restarting from zero. Matches the user's
+    // mental model of a play/pause button.
+    if (audioRef.current && (state === "playing" || state === "loading")) {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+      audioRef.current = null;
+      setState("idle");
+      return;
+    }
     // Stop any other speaker audio first so two clicks don't overlap.
     if (audioRef.current) {
       audioRef.current.pause();
@@ -97,6 +107,7 @@ export function SpeakerButton({
 
   let Icon = Volume2;
   if (state === "loading") Icon = Loader2;
+  else if (state === "playing") Icon = Square;
   else if (state === "error") Icon = VolumeX;
 
   return (
