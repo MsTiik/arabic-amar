@@ -123,7 +123,7 @@ function FrequencyCard({ word }: { word: QuranFrequencyWord }) {
   return (
     // Fixed minimum height keeps the cards aligned in the grid even though
     // the Arabic glyph and English gloss have different intrinsic sizes.
-    <div className="flex h-32 flex-col rounded-2xl border border-border bg-background-soft px-3 py-2.5">
+    <div className="flex h-32 flex-col rounded-2xl border border-border bg-card px-3 py-2.5">
       <div className="flex items-start justify-between gap-2">
         <ArabicText variant="display" className="text-3xl leading-tight">
           {word.arabic}
