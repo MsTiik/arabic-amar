@@ -56,13 +56,16 @@ export function SurahReader({ surah }: { surah: Surah }) {
 
   return (
     <div className="space-y-5">
-      {surah.ayahs.map((ayah) => (
+      {surah.ayahs.map((ayah, idx) => (
         <AyahCard
           key={ayah.number}
           surah={surah}
           ayah={ayah}
+          // Only the first ayah shows the "Tap any word" affordance hint;
+          // by ayah 2 the reader has already learned the interaction.
+          showTapHint={idx === 0}
           openIndex={open?.ayah === ayah.number ? open.index : null}
-          onOpen={(idx) => setOpen({ ayah: ayah.number, index: idx })}
+          onOpen={(i) => setOpen({ ayah: ayah.number, index: i })}
         />
       ))}
 
@@ -79,17 +82,21 @@ export function SurahReader({ surah }: { surah: Surah }) {
 function AyahCard({
   surah,
   ayah,
+  showTapHint,
   openIndex,
   onOpen,
 }: {
   surah: Surah;
   ayah: QuranAyah;
+  showTapHint: boolean;
   openIndex: number | null;
   onOpen: (idx: number) => void;
 }) {
+  const [showTranslit, setShowTranslit] = useState(false);
+
   return (
     <article className="rounded-3xl border border-border bg-card p-5 sm:p-6">
-      <header className="mb-3 flex items-center gap-3">
+      <header className="mb-3 flex flex-wrap items-center gap-3">
         <span className="inline-flex h-7 min-w-7 items-center justify-center rounded-full border border-border bg-background-soft px-2 text-xs font-semibold tabular-nums text-foreground-soft">
           {ayah.number}
         </span>
@@ -99,7 +106,24 @@ function AyahCard({
           ariaLabel={`Play recitation of surah ${surah.number}, verse ${ayah.number}`}
           size="sm"
         />
-        <span className="text-xs text-muted-foreground">Tap any word</span>
+        <button
+          type="button"
+          onClick={() => setShowTranslit((v) => !v)}
+          aria-pressed={showTranslit}
+          className={cn(
+            "ml-auto rounded-full border px-3 py-1 text-xs font-medium transition-colors focus-ring",
+            showTranslit
+              ? "border-primary bg-primary-soft text-primary"
+              : "border-border bg-background-soft text-muted-foreground hover:text-foreground",
+          )}
+        >
+          {showTranslit ? "Hide transliteration" : "Show transliteration"}
+        </button>
+        {showTapHint ? (
+          <span className="basis-full text-xs text-muted-foreground">
+            Tap any word for its meaning, root, and grammar.
+          </span>
+        ) : null}
       </header>
 
       <div
@@ -112,13 +136,22 @@ function AyahCard({
             type="button"
             onClick={() => onOpen(idx)}
             className={cn(
-              "rounded-lg px-1.5 py-0.5 transition-colors hover:bg-muted focus-ring",
+              "flex flex-col items-center rounded-lg px-1.5 py-0.5 transition-colors hover:bg-muted focus-ring",
               openIndex === idx && "bg-primary-soft text-primary",
             )}
           >
             <ArabicText variant="display" className="text-3xl sm:text-4xl">
               {w.arabic}
             </ArabicText>
+            {showTranslit ? (
+              <span
+                className="mt-1 text-xs italic text-muted-foreground"
+                lang="ar-Latn"
+                dir="ltr"
+              >
+                {w.translit}
+              </span>
+            ) : null}
           </button>
         ))}
       </div>
@@ -170,33 +203,35 @@ function WordPopup({
           </button>
         </div>
 
-        <div className="mt-4 space-y-2">
+        <div className="mt-4 space-y-3">
           <div>
-            <p className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
+            <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
               Meaning
             </p>
-            <p className="text-base">{word.english}</p>
+            <p className="text-lg">{word.english}</p>
           </div>
           <div className="flex flex-wrap items-center gap-2">
             <span
               className={cn(
-                "rounded-full px-2.5 py-0.5 text-[11px] font-semibold",
+                "inline-flex items-center rounded-full px-3 py-1 text-sm font-semibold",
                 POS_TONE[word.pos],
               )}
             >
               {POS_LABEL[word.pos]}
             </span>
             {word.root ? (
-              <span className="rounded-full border border-dashed border-accent-gold bg-accent-gold-soft px-2.5 py-0.5 text-[11px] font-semibold text-foreground-soft">
-                Root&nbsp;
-                <ArabicText variant="inline" className="font-semibold">
+              <span className="inline-flex items-center gap-2 rounded-full border border-dashed border-accent-gold bg-accent-gold-soft px-3 py-1 text-sm font-semibold text-foreground-soft">
+                <span className="text-xs uppercase tracking-wider text-muted-foreground">
+                  Root
+                </span>
+                <ArabicText variant="display" className="text-xl">
                   {word.root}
                 </ArabicText>
               </span>
             ) : null}
           </div>
           {word.note ? (
-            <p className="text-xs text-muted-foreground">{word.note}</p>
+            <p className="text-sm text-muted-foreground">{word.note}</p>
           ) : null}
         </div>
       </div>

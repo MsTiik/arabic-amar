@@ -13,6 +13,10 @@ import type { QuranFrequencyWord } from "@/data/quran/top-frequency";
 const PREVIEW_COUNT = 6;
 
 export function QuranFrequencyDeck() {
+  // Top-level deck is collapsed by default so the lesson vocabulary stays
+  // the main content on /vocabulary. Per-category previews are still
+  // collapsible inside, once the deck is opened.
+  const [deckOpen, setDeckOpen] = useState(false);
   const [expanded, setExpanded] = useState<Set<string>>(() => new Set());
 
   const groups = useMemo(() => {
@@ -26,7 +30,12 @@ export function QuranFrequencyDeck() {
 
   return (
     <section className="rounded-3xl border border-border bg-card p-5 sm:p-6">
-      <header className="mb-4 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+      <button
+        type="button"
+        onClick={() => setDeckOpen((v) => !v)}
+        aria-expanded={deckOpen}
+        className="flex w-full items-start justify-between gap-3 text-left focus-ring rounded-2xl"
+      >
         <div>
           <div className="mb-2">
             <FoundationsBadge />
@@ -38,13 +47,23 @@ export function QuranFrequencyDeck() {
             High-frequency lemmas that account for roughly half of every word
             in the muṣḥaf. Curated, not from the curriculum doc.
           </p>
+          <p className="mt-1 text-xs text-muted-foreground tabular-nums">
+            {TOP_QURAN_WORDS.length} words · {groups.length} categories
+          </p>
         </div>
-        <p className="text-xs text-muted-foreground tabular-nums">
-          {TOP_QURAN_WORDS.length} words · {groups.length} categories
-        </p>
-      </header>
+        <span className="mt-1 inline-flex items-center gap-1 rounded-full border border-border bg-background-soft px-3 py-1 text-xs font-medium text-muted-foreground">
+          {deckOpen ? "Hide" : "Show"}
+          <ChevronDown
+            className={cn(
+              "h-3.5 w-3.5 transition-transform",
+              deckOpen && "rotate-180",
+            )}
+          />
+        </span>
+      </button>
 
-      <div className="space-y-6">
+      {!deckOpen ? null : (
+      <div className="mt-6 space-y-6">
         {groups.map(([category, words]) => {
           const isExpanded = expanded.has(category);
           const overflows = words.length > PREVIEW_COUNT;
@@ -95,15 +114,18 @@ export function QuranFrequencyDeck() {
           );
         })}
       </div>
+      )}
     </section>
   );
 }
 
 function FrequencyCard({ word }: { word: QuranFrequencyWord }) {
   return (
-    <div className="rounded-2xl border border-border bg-background-soft px-3 py-2.5">
+    // Fixed minimum height keeps the cards aligned in the grid even though
+    // the Arabic glyph and English gloss have different intrinsic sizes.
+    <div className="flex h-32 flex-col rounded-2xl border border-border bg-background-soft px-3 py-2.5">
       <div className="flex items-start justify-between gap-2">
-        <ArabicText variant="display" className="text-2xl">
+        <ArabicText variant="display" className="text-3xl leading-tight">
           {word.arabic}
         </ArabicText>
         <SpeakerButton
@@ -113,12 +135,14 @@ function FrequencyCard({ word }: { word: QuranFrequencyWord }) {
         />
       </div>
       <p
-        className="mt-1 text-xs italic text-muted-foreground"
+        className="mt-1 text-sm italic text-muted-foreground"
         lang="ar-Latn"
       >
         {word.pronunciation}
       </p>
-      <p className="text-sm font-medium leading-snug">{word.english}</p>
+      <p className="mt-auto text-sm font-medium leading-snug">
+        {word.english}
+      </p>
       {word.root ? (
         <p className="mt-1 text-[11px] text-muted-foreground">
           Root&nbsp;
