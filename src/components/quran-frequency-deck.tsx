@@ -29,7 +29,7 @@ export function QuranFrequencyDeck() {
   }, []);
 
   return (
-    <section className="rounded-3xl border border-accent-gold/40 bg-accent-gold-soft p-5 sm:p-6">
+    <section className="rounded-3xl border border-accent-gold/25 bg-[oklch(0.975_0.022_85)] p-5 sm:p-6">
       <button
         type="button"
         onClick={() => setDeckOpen((v) => !v)}
