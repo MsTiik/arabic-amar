@@ -1,7 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import { Flame, Target, BookOpen, GraduationCap, Sparkles } from "lucide-react";
+import {
+  BookOpen,
+  Flame,
+  GraduationCap,
+  Snowflake,
+  Sparkles,
+  Target,
+} from "lucide-react";
 
 import { useProgress, summarizeMastery, getMistakeWords, progressActions } from "@/lib/progress";
 import { getSiteContent } from "@/lib/content";
@@ -23,9 +30,23 @@ export function DashboardHero({ totalVocab, totalRules, totalLessons }: Props) {
   const correctToday = progress.daily.today.correct;
   const accuracy = seen > 0 ? Math.round((correctToday / seen) * 100) : null;
   const goalReached = seen >= goal;
+  const freezesAvailable = progress.streak.freezesAvailable ?? 0;
+  const todayIso = new Date().toISOString().slice(0, 10);
+  const freezeJustConsumed =
+    progress.streak.lastFreezeConsumedAt === todayIso;
 
   return (
     <section className="rounded-3xl border border-border bg-card p-6 sm:p-8">
+      {freezeJustConsumed ? (
+        <div className="mb-4 flex items-center gap-2 rounded-2xl border border-primary/40 bg-primary/10 px-4 py-2.5 text-sm">
+          <Snowflake className="h-4 w-4 text-primary" aria-hidden />
+          <span className="text-foreground">
+            <span className="font-semibold">Streak saved.</span> A freeze
+            covered yesterday — your {progress.streak.count}-day streak is
+            still alive.
+          </span>
+        </div>
+      ) : null}
       <div className="grid gap-6 sm:grid-cols-3">
         <div className="sm:col-span-2">
           <p className="text-sm font-medium uppercase tracking-wider text-muted-foreground">
@@ -69,6 +90,16 @@ export function DashboardHero({ totalVocab, totalRules, totalLessons }: Props) {
             label="Streak"
             value={`${progress.streak.count}d`}
             tone={progress.streak.count > 0 ? "gold" : "muted"}
+            sublabel={
+              freezesAvailable > 0
+                ? `${freezesAvailable} freeze${freezesAvailable === 1 ? "" : "s"}`
+                : undefined
+            }
+            sublabelIcon={
+              freezesAvailable > 0 ? (
+                <Snowflake className="h-3 w-3" />
+              ) : undefined
+            }
           />
           <Stat
             icon={<Target className="h-4 w-4" />}
@@ -131,11 +162,15 @@ function Stat({
   label,
   value,
   tone,
+  sublabel,
+  sublabelIcon,
 }: {
   icon: React.ReactNode;
   label: string;
   value: string;
   tone: "primary" | "success" | "gold" | "muted";
+  sublabel?: string;
+  sublabelIcon?: React.ReactNode;
 }) {
   const toneClasses: Record<typeof tone, string> = {
     primary: "border-primary/40 bg-primary/10 text-primary",
@@ -150,6 +185,12 @@ function Stat({
         {label}
       </div>
       <div className="mt-1 text-xl font-semibold tabular-nums">{value}</div>
+      {sublabel ? (
+        <div className="mt-0.5 flex items-center gap-1 text-[10px] font-medium opacity-70">
+          {sublabelIcon}
+          {sublabel}
+        </div>
+      ) : null}
     </div>
   );
 }
