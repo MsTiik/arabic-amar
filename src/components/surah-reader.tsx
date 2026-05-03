@@ -181,7 +181,7 @@ function WordPopup({
           <div className="flex-1">
             <ArabicText
               variant="display"
-              className="text-4xl"
+              className="text-[2.475rem] leading-[1.15]"
               dir="rtl"
             >
               {word.arabic}
@@ -224,7 +224,7 @@ function WordPopup({
                 <span className="text-xs uppercase tracking-wider text-muted-foreground">
                   Root
                 </span>
-                <ArabicText variant="display" className="text-xl">
+                <ArabicText variant="display" className="text-[1.375rem]">
                   {word.root}
                 </ArabicText>
               </span>
