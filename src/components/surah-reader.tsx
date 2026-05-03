@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { X } from "lucide-react";
+import { Sparkles, X } from "lucide-react";
 
 import { ArabicText } from "@/components/arabic-text";
 import { SpeakerButton } from "@/components/speaker-button";
@@ -11,8 +11,9 @@ import type {
   QuranWord,
   QuranWordPos,
   Surah,
+  WordExtras,
 } from "@/data/quran";
-import { ayahAudioUrl } from "@/data/quran";
+import { ayahAudioUrl, getWordExtras } from "@/data/quran";
 
 const POS_LABEL: Record<QuranWordPos, string> = {
   noun: "Noun",
@@ -53,6 +54,10 @@ export function SurahReader({ surah }: { surah: Surah }) {
     open !== null
       ? surah.ayahs[open.ayah - 1]?.words[open.index]
       : undefined;
+  const openExtras =
+    open !== null
+      ? getWordExtras(surah.number, open.ayah, open.index)
+      : undefined;
 
   return (
     <div className="space-y-5">
@@ -72,6 +77,7 @@ export function SurahReader({ surah }: { surah: Surah }) {
       {openWord ? (
         <WordPopup
           word={openWord}
+          extras={openExtras}
           onClose={() => setOpen(null)}
         />
       ) : null}
@@ -165,9 +171,11 @@ function AyahCard({
 
 function WordPopup({
   word,
+  extras,
   onClose,
 }: {
   word: QuranWord;
+  extras: WordExtras | undefined;
   onClose: () => void;
 }) {
   return (
@@ -176,7 +184,7 @@ function WordPopup({
       role="dialog"
       aria-modal="true"
     >
-      <div className="w-full max-w-md rounded-3xl border border-border bg-card p-5 shadow-2xl">
+      <div className="w-full max-w-md rounded-3xl border border-border bg-card p-4 shadow-2xl sm:p-5">
         <div className="flex items-start justify-between gap-3">
           <div className="flex-1">
             <ArabicText
@@ -187,7 +195,7 @@ function WordPopup({
               {word.arabic}
             </ArabicText>
             <p
-              className="mt-1 text-sm text-muted-foreground"
+              className="mt-0.5 text-sm text-muted-foreground"
               lang="ar-Latn"
             >
               {word.translit}
@@ -203,37 +211,70 @@ function WordPopup({
           </button>
         </div>
 
-        <div className="mt-4 space-y-3">
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-              Meaning
-            </p>
-            <p className="text-lg">{word.english}</p>
-          </div>
-          <div className="flex flex-wrap items-center gap-2">
+        <p className="mt-3 text-base font-medium leading-snug">
+          {word.english}
+        </p>
+
+        <div className="mt-3 flex flex-wrap items-center gap-2">
+          {extras?.inTop125 ? (
             <span
-              className={cn(
-                "inline-flex items-center rounded-full px-3 py-1 text-sm font-semibold",
-                POS_TONE[word.pos],
-              )}
+              className="inline-flex items-center gap-1 rounded-full border border-accent-gold bg-accent-gold-soft px-2.5 py-1 text-xs font-semibold text-foreground-soft"
+              title="One of the 125 most-used words in the Qurʾān"
             >
-              {POS_LABEL[word.pos]}
+              <Sparkles className="h-3 w-3 text-accent-gold" />
+              Top 125
             </span>
-            {word.root ? (
-              <span className="inline-flex items-center gap-2 rounded-full border border-dashed border-accent-gold bg-accent-gold-soft px-3 py-1 text-sm font-semibold text-foreground-soft">
-                <span className="text-xs uppercase tracking-wider text-muted-foreground">
-                  Root
-                </span>
-                <ArabicText variant="display" className="text-[1.375rem]">
-                  {word.root}
+          ) : null}
+          <span
+            className={cn(
+              "inline-flex items-center rounded-full px-2.5 py-1 text-xs font-semibold",
+              POS_TONE[word.pos],
+            )}
+          >
+            {POS_LABEL[word.pos]}
+          </span>
+          {word.root ? (
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-dashed border-accent-gold bg-accent-gold-soft px-2.5 py-1 text-xs font-semibold text-foreground-soft">
+              <span className="uppercase tracking-wider text-muted-foreground">
+                Root
+              </span>
+              <ArabicText variant="display" className="text-[1.375rem]">
+                {word.root}
+              </ArabicText>
+            </span>
+          ) : null}
+        </div>
+
+        {extras && (extras.lemma || extras.frequency > 0) ? (
+          <div className="mt-2 flex flex-wrap items-baseline gap-x-3 gap-y-1 text-xs text-muted-foreground">
+            {extras.lemma ? (
+              <span>
+                Dictionary:{" "}
+                <ArabicText
+                  variant="display"
+                  className="text-base text-foreground-soft"
+                >
+                  {extras.lemma}
                 </ArabicText>
               </span>
             ) : null}
+            {extras.frequency > 0 ? (
+              <span>
+                Appears{" "}
+                <span className="font-semibold tabular-nums text-foreground-soft">
+                  {extras.frequency.toLocaleString()}×
+                </span>{" "}
+                in the Qurʾān
+              </span>
+            ) : null}
           </div>
-          {word.note ? (
-            <p className="text-sm text-muted-foreground">{word.note}</p>
-          ) : null}
-        </div>
+        ) : null}
+
+        {word.note ? (
+          <p className="mt-2 text-xs italic text-muted-foreground">
+            {word.note}
+          </p>
+        ) : null}
       </div>
     </div>
   );
