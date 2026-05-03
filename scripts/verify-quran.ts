@@ -13,7 +13,7 @@
  *   - quran.com API (live fetch)
  *
  * Output:
- *   - /home/ubuntu/repos/arabic-amar/verification.md
+ *   - <repo-root>/verification.md
  */
 import { readFileSync, writeFileSync } from "node:fs";
 import { SURAHS } from "../src/data/quran";
@@ -460,7 +460,7 @@ async function main() {
   lines.push("");
 
   writeFileSync(
-    "/home/ubuntu/repos/arabic-amar/verification.md",
+    new URL("../verification.md", import.meta.url),
     lines.join("\n"),
     "utf-8",
   );
