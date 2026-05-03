@@ -1,8 +1,84 @@
 import contentJson from "../../content/content.json";
 import { foldForSearch } from "./diacritics";
-import type { Lesson, SiteContent, Topic, VocabEntry } from "./types";
+import type { GrammarRule, Lesson, SiteContent, Topic, VocabEntry } from "./types";
 
-const content = contentJson as SiteContent;
+const DERIVED_MEMORISED_WORDS: Record<
+  string,
+  Pick<VocabEntry, "pronunciation" | "english" | "gender"> & { idSuffix: string }
+> = {
+  [foldForSearch("هٰذَا")]: {
+    idSuffix: "hadha",
+    pronunciation: "hādhā",
+    english: "this (masculine)",
+    gender: "M",
+  },
+  [foldForSearch("هٰذِهِ")]: {
+    idSuffix: "hadhihi",
+    pronunciation: "hādhihi",
+    english: "this (feminine)",
+    gender: "F",
+  },
+};
+
+const content = addDerivedMemorisationVocab(contentJson as SiteContent);
+
+function addDerivedMemorisationVocab(base: SiteContent): SiteContent {
+  const lessons = base.lessons.map((lesson) => ({
+    ...lesson,
+    vocabIds: [...lesson.vocabIds],
+  }));
+  const topics = base.topics.map((topic) => ({ ...topic }));
+  const vocab = [...base.vocab];
+  const lessonById = new Map(lessons.map((lesson) => [lesson.id, lesson]));
+  const topicBySlug = new Map(topics.map((topic) => [topic.slug, topic]));
+
+  for (const rule of base.rules) {
+    const arabic = memorisedArabicToken(rule);
+    if (!arabic) continue;
+    const arabicFolded = foldForSearch(arabic);
+    const derived = DERIVED_MEMORISED_WORDS[arabicFolded];
+    if (!derived) continue;
+    if (
+      vocab.some(
+        (entry) => entry.lessonId === rule.lessonId && entry.arabicFolded === arabicFolded,
+      )
+    ) {
+      continue;
+    }
+
+    const entry: VocabEntry = {
+      id: `${rule.lessonId}__memorise__${derived.idSuffix}`,
+      arabic,
+      arabicFolded,
+      pronunciation: derived.pronunciation,
+      english: derived.english,
+      category: "Demonstratives",
+      subCategory: "What to memorise",
+      gender: derived.gender,
+      isExtra: false,
+      topicSlugs: [...rule.topicSlugs],
+      lessonId: rule.lessonId,
+    };
+    vocab.push(entry);
+    lessonById.get(rule.lessonId)?.vocabIds.push(entry.id);
+    for (const slug of rule.topicSlugs) {
+      const topic = topicBySlug.get(slug);
+      if (topic) topic.vocabCount += 1;
+    }
+  }
+
+  return { ...base, lessons, topics, vocab };
+}
+
+function memorisedArabicToken(rule: GrammarRule): string | undefined {
+  const body = rule.body.trim();
+  if (body.includes("/") || body.includes("+")) return undefined;
+  const match =
+    /^\*\*What to Memorise:\*\*\s*([\u0600-\u06FF\u064B-\u065F\u0670\u06D6-\u06ED]+)$/u.exec(
+      body,
+    );
+  return match?.[1];
+}
 
 export function getSiteContent(): SiteContent {
   return content;
