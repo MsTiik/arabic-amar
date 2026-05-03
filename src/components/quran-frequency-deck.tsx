@@ -29,7 +29,7 @@ export function QuranFrequencyDeck() {
   }, []);
 
   return (
-    <section className="rounded-3xl border border-border bg-card p-5 sm:p-6">
+    <section className="rounded-3xl border border-accent-gold/40 bg-accent-gold-soft p-5 sm:p-6">
       <button
         type="button"
         onClick={() => setDeckOpen((v) => !v)}
@@ -43,15 +43,15 @@ export function QuranFrequencyDeck() {
           <h2 className="text-2xl font-semibold tracking-tight">
             Top Qur&apos;ānic words
           </h2>
-          <p className="mt-1 max-w-xl text-sm text-muted-foreground">
+          <p className="mt-1 max-w-xl text-sm text-foreground-soft">
             High-frequency lemmas that account for roughly half of every word
-            in the muṣḥaf. Curated, not from the curriculum doc.
+            in the muṣḥaf.
           </p>
-          <p className="mt-1 text-xs text-muted-foreground tabular-nums">
+          <p className="mt-1 text-xs text-foreground-soft/80 tabular-nums">
             {TOP_QURAN_WORDS.length} words · {groups.length} categories
           </p>
         </div>
-        <span className="mt-1 inline-flex items-center gap-1 rounded-full border border-border bg-background-soft px-3 py-1 text-xs font-medium text-muted-foreground">
+        <span className="mt-1 inline-flex items-center gap-1 rounded-full border border-accent-gold/40 bg-card/70 px-3 py-1 text-xs font-medium text-foreground-soft">
           {deckOpen ? "Hide" : "Show"}
           <ChevronDown
             className={cn(
