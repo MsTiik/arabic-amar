@@ -1,6 +1,15 @@
 @import "tailwindcss";
 
 /*
+ * Class-based dark mode. We attach `class="dark"` to <html> via the
+ * theme-toggle component (see ThemeProvider). Tailwind's `dark:` variants
+ * resolve against this class instead of `prefers-color-scheme`, so the user
+ * can override their OS preference. The `:where()` keeps specificity at 0
+ * so it doesn't fight component-level overrides.
+ */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/*
  * Design tokens — warm neutral background with subtle traditional accents.
  * Values are OKLCH for perceptual uniformity. Keeping them on :root so dark mode
  * can override individual tokens cleanly, and so Tailwind v4 `@theme inline` can
@@ -38,27 +47,31 @@
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: oklch(0.18 0.02 270);
-    --background-soft: oklch(0.22 0.02 270);
-    --foreground: oklch(0.95 0.01 90);
-    --foreground-soft: oklch(0.78 0.015 90);
-    --muted: oklch(0.26 0.02 270);
-    --muted-foreground: oklch(0.7 0.015 270);
-    --border: oklch(0.32 0.02 270);
-    --primary: oklch(0.65 0.13 200);
-    --primary-foreground: oklch(0.15 0.02 270);
-    --accent-gold: oklch(0.78 0.13 80);
-    --accent-gold-soft: oklch(0.32 0.06 80);
-    --success: oklch(0.7 0.14 145);
-    --success-soft: oklch(0.3 0.07 145);
-    --danger: oklch(0.7 0.16 25);
-    --danger-soft: oklch(0.32 0.07 25);
-    --card: oklch(0.24 0.02 270);
-    --card-foreground: oklch(0.95 0.01 90);
-    --ring: oklch(0.7 0.14 200 / 60%);
-  }
+/*
+ * Dark theme — applied when the <html> element has class="dark" (controlled
+ * by the theme toggle in the topbar). The theme toggle initialises this
+ * class from localStorage["arabic-amar:theme"], falling back to the user's
+ * OS preference for first-time visitors.
+ */
+:root.dark {
+  --background: oklch(0.18 0.02 270);
+  --background-soft: oklch(0.22 0.02 270);
+  --foreground: oklch(0.95 0.01 90);
+  --foreground-soft: oklch(0.78 0.015 90);
+  --muted: oklch(0.26 0.02 270);
+  --muted-foreground: oklch(0.7 0.015 270);
+  --border: oklch(0.32 0.02 270);
+  --primary: oklch(0.65 0.13 200);
+  --primary-foreground: oklch(0.15 0.02 270);
+  --accent-gold: oklch(0.78 0.13 80);
+  --accent-gold-soft: oklch(0.32 0.06 80);
+  --success: oklch(0.7 0.14 145);
+  --success-soft: oklch(0.3 0.07 145);
+  --danger: oklch(0.7 0.16 25);
+  --danger-soft: oklch(0.32 0.07 25);
+  --card: oklch(0.24 0.02 270);
+  --card-foreground: oklch(0.95 0.01 90);
+  --ring: oklch(0.7 0.14 200 / 60%);
 }
 
 @theme inline {
