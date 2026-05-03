@@ -151,9 +151,18 @@ function defaultWord(): WordProgress {
   };
 }
 
-/** Refill freeze budget by 1 for every FREEZE_REGEN_DAYS that have passed
- *  since the last refill, capped at MAX_FREEZES. Updates `lastFreezeRegenAt`
- *  to today only when at least one freeze was actually granted.
+function addDaysIso(iso: string, days: number): string {
+  const d = new Date(`${iso}T00:00:00Z`);
+  d.setUTCDate(d.getUTCDate() + days);
+  return isoDate(d);
+}
+
+/** Refill freeze budget by 1 for every FREEZE_REGEN_DAYS that have elapsed
+ *  since `lastFreezeRegenAt`, capped at MAX_FREEZES. The regen clock always
+ *  advances by `grants * FREEZE_REGEN_DAYS` days even if the budget was
+ *  full and no freezes were actually added — otherwise a user at MAX_FREEZES
+ *  would build up "hidden" credit and instantly refill the moment they
+ *  consumed a freeze, defeating the 7-day cooldown.
  *
  *  Exported for unit tests; callers in this module use `recordStreakOn`. */
 export function regenFreezesOn(p: UserProgress, today: string): void {
@@ -163,10 +172,8 @@ export function regenFreezesOn(p: UserProgress, today: string): void {
   const grants = Math.floor(elapsed / FREEZE_REGEN_DAYS);
   const current = p.streak.freezesAvailable ?? 0;
   const next = Math.min(MAX_FREEZES, current + grants);
-  if (next > current) {
-    p.streak.freezesAvailable = next;
-    p.streak.lastFreezeRegenAt = today;
-  }
+  p.streak.freezesAvailable = next;
+  p.streak.lastFreezeRegenAt = addDaysIso(last, grants * FREEZE_REGEN_DAYS);
 }
 
 /** Pure (modulo mutation of `p`) streak update for an arbitrary "today".
