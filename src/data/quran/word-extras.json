@@ -1,0 +1,1102 @@
+{
+  "1:1:1": {
+    "lemma": "ٱسْم",
+    "frequency": 39,
+    "inTop125": false
+  },
+  "1:1:2": {
+    "lemma": "ٱللَّه",
+    "frequency": 2699,
+    "inTop125": true
+  },
+  "1:1:3": {
+    "lemma": "رَّحْمَٰن",
+    "frequency": 57,
+    "inTop125": false
+  },
+  "1:1:4": {
+    "lemma": "رَّحِيم",
+    "frequency": 116,
+    "inTop125": false
+  },
+  "1:2:1": {
+    "lemma": "حَمْد",
+    "frequency": 43,
+    "inTop125": false
+  },
+  "1:2:2": {
+    "lemma": "ٱللَّه",
+    "frequency": 2699,
+    "inTop125": true
+  },
+  "1:2:3": {
+    "lemma": "رَبّ",
+    "frequency": 975,
+    "inTop125": true
+  },
+  "1:2:4": {
+    "lemma": "عَٰلَمِين",
+    "frequency": 73,
+    "inTop125": false
+  },
+  "1:3:1": {
+    "lemma": "رَّحْمَٰن",
+    "frequency": 57,
+    "inTop125": false
+  },
+  "1:3:2": {
+    "lemma": "رَّحِيم",
+    "frequency": 116,
+    "inTop125": false
+  },
+  "1:4:1": {
+    "lemma": "مَٰلِك",
+    "frequency": 3,
+    "inTop125": true
+  },
+  "1:4:2": {
+    "lemma": "يَوْم",
+    "frequency": 405,
+    "inTop125": true
+  },
+  "1:4:3": {
+    "lemma": "دِين",
+    "frequency": 92,
+    "inTop125": true
+  },
+  "1:5:1": {
+    "lemma": "إِيَّا",
+    "frequency": 24,
+    "inTop125": false
+  },
+  "1:5:2": {
+    "lemma": "عَبَدَ",
+    "frequency": 122,
+    "inTop125": true
+  },
+  "1:5:3": {
+    "lemma": "إِيَّا",
+    "frequency": 24,
+    "inTop125": false
+  },
+  "1:5:4": {
+    "lemma": "ٱسْتَعِينُ",
+    "frequency": 4,
+    "inTop125": false
+  },
+  "1:6:1": {
+    "lemma": "هَدَى",
+    "frequency": 144,
+    "inTop125": false
+  },
+  "1:6:2": {
+    "lemma": "صِرَٰط",
+    "frequency": 45,
+    "inTop125": false
+  },
+  "1:6:3": {
+    "lemma": "مُّسْتَقِيم",
+    "frequency": 37,
+    "inTop125": false
+  },
+  "1:7:1": {
+    "lemma": "صِرَٰط",
+    "frequency": 45,
+    "inTop125": false
+  },
+  "1:7:2": {
+    "lemma": "ٱلَّذِى",
+    "frequency": 1464,
+    "inTop125": true
+  },
+  "1:7:3": {
+    "lemma": "أَنْعَمَ",
+    "frequency": 17,
+    "inTop125": false
+  },
+  "1:7:4": {
+    "lemma": "عَلَىٰ",
+    "frequency": 1445,
+    "inTop125": true
+  },
+  "1:7:5": {
+    "lemma": "غَيْر",
+    "frequency": 147,
+    "inTop125": false
+  },
+  "1:7:6": {
+    "lemma": "مَغْضُوب",
+    "frequency": 1,
+    "inTop125": false
+  },
+  "1:7:7": {
+    "lemma": "عَلَىٰ",
+    "frequency": 1445,
+    "inTop125": true
+  },
+  "1:7:8": {
+    "lemma": "لَا",
+    "frequency": 1691,
+    "inTop125": true
+  },
+  "1:7:9": {
+    "lemma": "ضَا^لّ",
+    "frequency": 14,
+    "inTop125": false
+  },
+  "114:1:1": {
+    "lemma": "قَالَ",
+    "frequency": 1618,
+    "inTop125": true
+  },
+  "114:1:2": {
+    "lemma": "عُذْ",
+    "frequency": 10,
+    "inTop125": false
+  },
+  "114:1:3": {
+    "lemma": "رَبّ",
+    "frequency": 975,
+    "inTop125": true
+  },
+  "114:1:4": {
+    "lemma": "نَّاس",
+    "frequency": 241,
+    "inTop125": true
+  },
+  "114:2:1": {
+    "lemma": "مَلِك",
+    "frequency": 15,
+    "inTop125": true
+  },
+  "114:2:2": {
+    "lemma": "نَّاس",
+    "frequency": 241,
+    "inTop125": true
+  },
+  "114:3:1": {
+    "lemma": "إِلَٰه",
+    "frequency": 147,
+    "inTop125": true
+  },
+  "114:3:2": {
+    "lemma": "نَّاس",
+    "frequency": 241,
+    "inTop125": true
+  },
+  "114:4:1": {
+    "lemma": "مِن",
+    "frequency": 3226,
+    "inTop125": true
+  },
+  "114:4:2": {
+    "lemma": "شَرّ",
+    "frequency": 30,
+    "inTop125": true
+  },
+  "114:4:3": {
+    "lemma": "وَسْوَاس",
+    "frequency": 1,
+    "inTop125": false
+  },
+  "114:4:4": {
+    "lemma": "خَنَّاس",
+    "frequency": 1,
+    "inTop125": false
+  },
+  "114:5:1": {
+    "lemma": "ٱلَّذِى",
+    "frequency": 1464,
+    "inTop125": true
+  },
+  "114:5:2": {
+    "lemma": "وَسْوَسَ",
+    "frequency": 4,
+    "inTop125": false
+  },
+  "114:5:3": {
+    "lemma": "فِى",
+    "frequency": 1701,
+    "inTop125": true
+  },
+  "114:5:4": {
+    "lemma": "صَدْر",
+    "frequency": 44,
+    "inTop125": false
+  },
+  "114:5:5": {
+    "lemma": "نَّاس",
+    "frequency": 241,
+    "inTop125": true
+  },
+  "114:6:1": {
+    "lemma": "مِن",
+    "frequency": 3226,
+    "inTop125": true
+  },
+  "114:6:2": {
+    "lemma": "جِنَّة",
+    "frequency": 10,
+    "inTop125": true
+  },
+  "114:6:3": {
+    "lemma": "نَّاس",
+    "frequency": 241,
+    "inTop125": true
+  },
+  "113:1:1": {
+    "lemma": "قَالَ",
+    "frequency": 1618,
+    "inTop125": true
+  },
+  "113:1:2": {
+    "lemma": "عُذْ",
+    "frequency": 10,
+    "inTop125": false
+  },
+  "113:1:3": {
+    "lemma": "رَبّ",
+    "frequency": 975,
+    "inTop125": true
+  },
+  "113:1:4": {
+    "lemma": "فَلَق",
+    "frequency": 1,
+    "inTop125": false
+  },
+  "113:2:1": {
+    "lemma": "مِن",
+    "frequency": 3226,
+    "inTop125": true
+  },
+  "113:2:2": {
+    "lemma": "شَرّ",
+    "frequency": 30,
+    "inTop125": true
+  },
+  "113:2:3": {
+    "lemma": "مَا",
+    "frequency": 2177,
+    "inTop125": true
+  },
+  "113:2:4": {
+    "lemma": "خَلَقَ",
+    "frequency": 184,
+    "inTop125": true
+  },
+  "113:3:1": {
+    "lemma": "مِن",
+    "frequency": 3226,
+    "inTop125": true
+  },
+  "113:3:2": {
+    "lemma": "شَرّ",
+    "frequency": 30,
+    "inTop125": true
+  },
+  "113:3:3": {
+    "lemma": "غَاسِق",
+    "frequency": 1,
+    "inTop125": false
+  },
+  "113:3:4": {
+    "lemma": "إِذَا",
+    "frequency": 409,
+    "inTop125": true
+  },
+  "113:3:5": {
+    "lemma": "وَقَبَ",
+    "frequency": 1,
+    "inTop125": false
+  },
+  "113:4:1": {
+    "lemma": "مِن",
+    "frequency": 3226,
+    "inTop125": true
+  },
+  "113:4:2": {
+    "lemma": "شَرّ",
+    "frequency": 30,
+    "inTop125": true
+  },
+  "113:4:3": {
+    "lemma": "نَّفَّٰثَٰت",
+    "frequency": 1,
+    "inTop125": false
+  },
+  "113:4:4": {
+    "lemma": "فِى",
+    "frequency": 1701,
+    "inTop125": true
+  },
+  "113:4:5": {
+    "lemma": "عُقْدَة",
+    "frequency": 4,
+    "inTop125": false
+  },
+  "113:5:1": {
+    "lemma": "مِن",
+    "frequency": 3226,
+    "inTop125": true
+  },
+  "113:5:2": {
+    "lemma": "شَرّ",
+    "frequency": 30,
+    "inTop125": true
+  },
+  "113:5:3": {
+    "lemma": "حَاسِد",
+    "frequency": 1,
+    "inTop125": false
+  },
+  "113:5:4": {
+    "lemma": "إِذَا",
+    "frequency": 409,
+    "inTop125": true
+  },
+  "113:5:5": {
+    "lemma": "حَسَدَ",
+    "frequency": 3,
+    "inTop125": false
+  },
+  "112:1:1": {
+    "lemma": "قَالَ",
+    "frequency": 1618,
+    "inTop125": true
+  },
+  "112:1:3": {
+    "lemma": "ٱللَّه",
+    "frequency": 2699,
+    "inTop125": true
+  },
+  "112:1:4": {
+    "lemma": "أَحَد",
+    "frequency": 74,
+    "inTop125": true
+  },
+  "112:2:1": {
+    "lemma": "ٱللَّه",
+    "frequency": 2699,
+    "inTop125": true
+  },
+  "112:2:2": {
+    "lemma": "صَّمَد",
+    "frequency": 1,
+    "inTop125": false
+  },
+  "112:3:1": {
+    "lemma": "لَم",
+    "frequency": 353,
+    "inTop125": true
+  },
+  "112:3:2": {
+    "lemma": "وَلَدَ",
+    "frequency": 9,
+    "inTop125": false
+  },
+  "112:3:3": {
+    "lemma": "لَم",
+    "frequency": 353,
+    "inTop125": true
+  },
+  "112:3:4": {
+    "lemma": "وَلَدَ",
+    "frequency": 9,
+    "inTop125": false
+  },
+  "112:4:1": {
+    "lemma": "لَم",
+    "frequency": 353,
+    "inTop125": true
+  },
+  "112:4:2": {
+    "lemma": "كَانَ",
+    "frequency": 1358,
+    "inTop125": true
+  },
+  "112:4:4": {
+    "lemma": "كُفُو",
+    "frequency": 1,
+    "inTop125": false
+  },
+  "112:4:5": {
+    "lemma": "أَحَد",
+    "frequency": 74,
+    "inTop125": true
+  },
+  "111:1:1": {
+    "lemma": "تَبَّ",
+    "frequency": 2,
+    "inTop125": false
+  },
+  "111:1:2": {
+    "lemma": "يَد",
+    "frequency": 120,
+    "inTop125": false
+  },
+  "111:1:3": {
+    "lemma": "أَبٌ",
+    "frequency": 46,
+    "inTop125": true
+  },
+  "111:1:4": {
+    "lemma": "لَهَب",
+    "frequency": 3,
+    "inTop125": false
+  },
+  "111:1:5": {
+    "lemma": "تَبَّ",
+    "frequency": 2,
+    "inTop125": false
+  },
+  "111:2:1": {
+    "lemma": "مَا",
+    "frequency": 2177,
+    "inTop125": true
+  },
+  "111:2:2": {
+    "lemma": "أَغْنَىٰ",
+    "frequency": 15,
+    "inTop125": false
+  },
+  "111:2:3": {
+    "lemma": "عَن",
+    "frequency": 465,
+    "inTop125": true
+  },
+  "111:2:4": {
+    "lemma": "مَال",
+    "frequency": 86,
+    "inTop125": false
+  },
+  "111:2:5": {
+    "lemma": "مَا",
+    "frequency": 2177,
+    "inTop125": true
+  },
+  "111:2:6": {
+    "lemma": "كَسَبَ",
+    "frequency": 62,
+    "inTop125": false
+  },
+  "111:3:1": {
+    "lemma": "يَصْلَى",
+    "frequency": 13,
+    "inTop125": false
+  },
+  "111:3:2": {
+    "lemma": "نَار",
+    "frequency": 145,
+    "inTop125": true
+  },
+  "111:3:3": {
+    "lemma": "ذُو",
+    "frequency": 93,
+    "inTop125": false
+  },
+  "111:3:4": {
+    "lemma": "لَهَب",
+    "frequency": 3,
+    "inTop125": false
+  },
+  "111:4:1": {
+    "lemma": "ٱمْرَأَت",
+    "frequency": 26,
+    "inTop125": false
+  },
+  "111:4:2": {
+    "lemma": "حَمَّالَة",
+    "frequency": 1,
+    "inTop125": false
+  },
+  "111:4:3": {
+    "lemma": "حَطَب",
+    "frequency": 2,
+    "inTop125": false
+  },
+  "111:5:1": {
+    "lemma": "فِى",
+    "frequency": 1701,
+    "inTop125": true
+  },
+  "111:5:2": {
+    "lemma": "جِيد",
+    "frequency": 1,
+    "inTop125": false
+  },
+  "111:5:3": {
+    "lemma": "حَبْل",
+    "frequency": 7,
+    "inTop125": false
+  },
+  "111:5:4": {
+    "lemma": "مِن",
+    "frequency": 3226,
+    "inTop125": true
+  },
+  "111:5:5": {
+    "lemma": "مَّسَد",
+    "frequency": 1,
+    "inTop125": false
+  },
+  "110:1:1": {
+    "lemma": "إِذَا",
+    "frequency": 409,
+    "inTop125": true
+  },
+  "110:1:2": {
+    "lemma": "جَا^ءَ",
+    "frequency": 278,
+    "inTop125": false
+  },
+  "110:1:3": {
+    "lemma": "نَصْر",
+    "frequency": 22,
+    "inTop125": false
+  },
+  "110:1:4": {
+    "lemma": "ٱللَّه",
+    "frequency": 2699,
+    "inTop125": true
+  },
+  "110:1:5": {
+    "lemma": "فَتْح",
+    "frequency": 12,
+    "inTop125": false
+  },
+  "110:2:1": {
+    "lemma": "رَءَا",
+    "frequency": 271,
+    "inTop125": false
+  },
+  "110:2:2": {
+    "lemma": "نَّاس",
+    "frequency": 241,
+    "inTop125": true
+  },
+  "110:2:3": {
+    "lemma": "دَخَلَ",
+    "frequency": 76,
+    "inTop125": false
+  },
+  "110:2:4": {
+    "lemma": "فِى",
+    "frequency": 1701,
+    "inTop125": true
+  },
+  "110:2:5": {
+    "lemma": "دِين",
+    "frequency": 92,
+    "inTop125": true
+  },
+  "110:2:6": {
+    "lemma": "ٱللَّه",
+    "frequency": 2699,
+    "inTop125": true
+  },
+  "110:2:7": {
+    "lemma": "فَوْج",
+    "frequency": 5,
+    "inTop125": false
+  },
+  "110:3:1": {
+    "lemma": "سَبَّحَ",
+    "frequency": 42,
+    "inTop125": false
+  },
+  "110:3:2": {
+    "lemma": "حَمْد",
+    "frequency": 43,
+    "inTop125": false
+  },
+  "110:3:3": {
+    "lemma": "رَبّ",
+    "frequency": 975,
+    "inTop125": true
+  },
+  "110:3:4": {
+    "lemma": "ٱسْتَغْفَرَ",
+    "frequency": 40,
+    "inTop125": false
+  },
+  "110:3:5": {
+    "lemma": "إِنّ",
+    "frequency": 1682,
+    "inTop125": true
+  },
+  "110:3:6": {
+    "lemma": "كَانَ",
+    "frequency": 1358,
+    "inTop125": true
+  },
+  "110:3:7": {
+    "lemma": "تَوَّاب",
+    "frequency": 12,
+    "inTop125": false
+  },
+  "109:1:1": {
+    "lemma": "قَالَ",
+    "frequency": 1618,
+    "inTop125": true
+  },
+  "109:1:2": {
+    "lemma": "أَيُّهَا",
+    "frequency": 153,
+    "inTop125": false
+  },
+  "109:1:3": {
+    "lemma": "كَٰفِرُون",
+    "frequency": 129,
+    "inTop125": false
+  },
+  "109:2:1": {
+    "lemma": "لَا",
+    "frequency": 1691,
+    "inTop125": true
+  },
+  "109:2:2": {
+    "lemma": "عَبَدَ",
+    "frequency": 122,
+    "inTop125": true
+  },
+  "109:2:3": {
+    "lemma": "مَا",
+    "frequency": 2177,
+    "inTop125": true
+  },
+  "109:2:4": {
+    "lemma": "عَبَدَ",
+    "frequency": 122,
+    "inTop125": true
+  },
+  "109:3:1": {
+    "lemma": "لَا",
+    "frequency": 1691,
+    "inTop125": true
+  },
+  "109:3:3": {
+    "lemma": "عَابِد",
+    "frequency": 11,
+    "inTop125": false
+  },
+  "109:3:4": {
+    "lemma": "مَا",
+    "frequency": 2177,
+    "inTop125": true
+  },
+  "109:3:5": {
+    "lemma": "عَبَدَ",
+    "frequency": 122,
+    "inTop125": true
+  },
+  "109:4:1": {
+    "lemma": "لَا",
+    "frequency": 1691,
+    "inTop125": true
+  },
+  "109:4:3": {
+    "lemma": "عَابِد",
+    "frequency": 11,
+    "inTop125": false
+  },
+  "109:4:4": {
+    "lemma": "مَا",
+    "frequency": 2177,
+    "inTop125": true
+  },
+  "109:4:5": {
+    "lemma": "عَبَدَ",
+    "frequency": 122,
+    "inTop125": true
+  },
+  "109:5:1": {
+    "lemma": "لَا",
+    "frequency": 1691,
+    "inTop125": true
+  },
+  "109:5:3": {
+    "lemma": "عَابِد",
+    "frequency": 11,
+    "inTop125": false
+  },
+  "109:5:4": {
+    "lemma": "مَا",
+    "frequency": 2177,
+    "inTop125": true
+  },
+  "109:5:5": {
+    "lemma": "عَبَدَ",
+    "frequency": 122,
+    "inTop125": true
+  },
+  "109:6:2": {
+    "lemma": "دِين",
+    "frequency": 92,
+    "inTop125": true
+  },
+  "109:6:4": {
+    "lemma": "دِين",
+    "frequency": 92,
+    "inTop125": true
+  },
+  "108:1:1": {
+    "lemma": "إِنّ",
+    "frequency": 1682,
+    "inTop125": true
+  },
+  "108:1:2": {
+    "lemma": "أَعْطَىٰ",
+    "frequency": 8,
+    "inTop125": false
+  },
+  "108:1:3": {
+    "lemma": "كَوْثَر",
+    "frequency": 1,
+    "inTop125": false
+  },
+  "108:2:1": {
+    "lemma": "صَلَّىٰ",
+    "frequency": 12,
+    "inTop125": false
+  },
+  "108:2:2": {
+    "lemma": "رَبّ",
+    "frequency": 975,
+    "inTop125": true
+  },
+  "108:2:3": {
+    "lemma": "ٱنْحَرْ",
+    "frequency": 1,
+    "inTop125": false
+  },
+  "108:3:1": {
+    "lemma": "إِنّ",
+    "frequency": 1682,
+    "inTop125": true
+  },
+  "108:3:2": {
+    "lemma": "شَانِئ",
+    "frequency": 1,
+    "inTop125": false
+  },
+  "108:3:4": {
+    "lemma": "أَبْتَر",
+    "frequency": 1,
+    "inTop125": false
+  },
+  "107:1:1": {
+    "lemma": "رَءَا",
+    "frequency": 271,
+    "inTop125": false
+  },
+  "107:1:2": {
+    "lemma": "ٱلَّذِى",
+    "frequency": 1464,
+    "inTop125": true
+  },
+  "107:1:3": {
+    "lemma": "كَذَّبَ",
+    "frequency": 176,
+    "inTop125": false
+  },
+  "107:1:4": {
+    "lemma": "دِين",
+    "frequency": 92,
+    "inTop125": true
+  },
+  "107:2:1": {
+    "lemma": "ذَٰلِك",
+    "frequency": 520,
+    "inTop125": true
+  },
+  "107:2:2": {
+    "lemma": "ٱلَّذِى",
+    "frequency": 1464,
+    "inTop125": true
+  },
+  "107:2:3": {
+    "lemma": "يَدُعُّ",
+    "frequency": 2,
+    "inTop125": false
+  },
+  "107:2:4": {
+    "lemma": "يَتِيم",
+    "frequency": 23,
+    "inTop125": false
+  },
+  "107:3:1": {
+    "lemma": "لَا",
+    "frequency": 1691,
+    "inTop125": true
+  },
+  "107:3:2": {
+    "lemma": "يَحُضُّ",
+    "frequency": 2,
+    "inTop125": false
+  },
+  "107:3:3": {
+    "lemma": "عَلَىٰ",
+    "frequency": 1445,
+    "inTop125": true
+  },
+  "107:3:4": {
+    "lemma": "طَعَام",
+    "frequency": 24,
+    "inTop125": false
+  },
+  "107:3:5": {
+    "lemma": "مِسْكِين",
+    "frequency": 23,
+    "inTop125": false
+  },
+  "107:4:1": {
+    "lemma": "وَيْل",
+    "frequency": 40,
+    "inTop125": false
+  },
+  "107:4:2": {
+    "lemma": "مُصَلِّين",
+    "frequency": 3,
+    "inTop125": false
+  },
+  "107:5:1": {
+    "lemma": "ٱلَّذِى",
+    "frequency": 1464,
+    "inTop125": true
+  },
+  "107:5:3": {
+    "lemma": "عَن",
+    "frequency": 465,
+    "inTop125": true
+  },
+  "107:5:4": {
+    "lemma": "صَلَوٰة",
+    "frequency": 83,
+    "inTop125": false
+  },
+  "107:5:5": {
+    "lemma": "سَاهُون",
+    "frequency": 2,
+    "inTop125": false
+  },
+  "107:6:1": {
+    "lemma": "ٱلَّذِى",
+    "frequency": 1464,
+    "inTop125": true
+  },
+  "107:6:3": {
+    "lemma": "يُرَا^ءُ",
+    "frequency": 2,
+    "inTop125": false
+  },
+  "107:7:1": {
+    "lemma": "مَّنَعَ",
+    "frequency": 12,
+    "inTop125": false
+  },
+  "107:7:2": {
+    "lemma": "مَاعُون",
+    "frequency": 1,
+    "inTop125": false
+  },
+  "106:1:1": {
+    "lemma": "إِلَٰف",
+    "frequency": 2,
+    "inTop125": false
+  },
+  "106:1:2": {
+    "lemma": "قُرَيْش",
+    "frequency": 1,
+    "inTop125": false
+  },
+  "106:2:1": {
+    "lemma": "إِلَٰف",
+    "frequency": 2,
+    "inTop125": false
+  },
+  "106:2:2": {
+    "lemma": "رِحْلَة",
+    "frequency": 1,
+    "inTop125": false
+  },
+  "106:2:3": {
+    "lemma": "شِّتَا^ء",
+    "frequency": 1,
+    "inTop125": false
+  },
+  "106:2:4": {
+    "lemma": "صَّيْف",
+    "frequency": 1,
+    "inTop125": false
+  },
+  "106:3:1": {
+    "lemma": "عَبَدَ",
+    "frequency": 122,
+    "inTop125": true
+  },
+  "106:3:2": {
+    "lemma": "رَبّ",
+    "frequency": 975,
+    "inTop125": true
+  },
+  "106:3:3": {
+    "lemma": "هَٰذَا",
+    "frequency": 318,
+    "inTop125": true
+  },
+  "106:3:4": {
+    "lemma": "بَيْت",
+    "frequency": 65,
+    "inTop125": true
+  },
+  "106:4:1": {
+    "lemma": "ٱلَّذِى",
+    "frequency": 1464,
+    "inTop125": true
+  },
+  "106:4:2": {
+    "lemma": "أَطْعَمَ",
+    "frequency": 13,
+    "inTop125": false
+  },
+  "106:4:3": {
+    "lemma": "مِن",
+    "frequency": 3226,
+    "inTop125": true
+  },
+  "106:4:4": {
+    "lemma": "جُوع",
+    "frequency": 4,
+    "inTop125": false
+  },
+  "106:4:5": {
+    "lemma": "ءَامَنَ",
+    "frequency": 537,
+    "inTop125": false
+  },
+  "106:4:6": {
+    "lemma": "مِن",
+    "frequency": 3226,
+    "inTop125": true
+  },
+  "106:4:7": {
+    "lemma": "خَوْف",
+    "frequency": 26,
+    "inTop125": false
+  },
+  "105:1:1": {
+    "lemma": "لَم",
+    "frequency": 353,
+    "inTop125": true
+  },
+  "105:1:2": {
+    "lemma": "رَءَا",
+    "frequency": 271,
+    "inTop125": false
+  },
+  "105:1:3": {
+    "lemma": "كَيْف",
+    "frequency": 83,
+    "inTop125": false
+  },
+  "105:1:4": {
+    "lemma": "فَعَلَ",
+    "frequency": 88,
+    "inTop125": false
+  },
+  "105:1:5": {
+    "lemma": "رَبّ",
+    "frequency": 975,
+    "inTop125": true
+  },
+  "105:1:6": {
+    "lemma": "أَصْحَٰب",
+    "frequency": 78,
+    "inTop125": false
+  },
+  "105:1:7": {
+    "lemma": "فِيل",
+    "frequency": 1,
+    "inTop125": false
+  },
+  "105:2:1": {
+    "lemma": "لَم",
+    "frequency": 353,
+    "inTop125": true
+  },
+  "105:2:2": {
+    "lemma": "جَعَلَ",
+    "frequency": 340,
+    "inTop125": true
+  },
+  "105:2:3": {
+    "lemma": "كَيْد",
+    "frequency": 26,
+    "inTop125": false
+  },
+  "105:2:4": {
+    "lemma": "فِى",
+    "frequency": 1701,
+    "inTop125": true
+  },
+  "105:2:5": {
+    "lemma": "تَضْلِيل",
+    "frequency": 1,
+    "inTop125": false
+  },
+  "105:3:1": {
+    "lemma": "أَرْسَلَ",
+    "frequency": 130,
+    "inTop125": true
+  },
+  "105:3:2": {
+    "lemma": "عَلَىٰ",
+    "frequency": 1445,
+    "inTop125": true
+  },
+  "105:3:3": {
+    "lemma": "طَيْر",
+    "frequency": 19,
+    "inTop125": false
+  },
+  "105:3:4": {
+    "lemma": "أَبَابِيل",
+    "frequency": 1,
+    "inTop125": false
+  },
+  "105:4:1": {
+    "lemma": "رَمَىٰ",
+    "frequency": 9,
+    "inTop125": false
+  },
+  "105:4:2": {
+    "lemma": "حِجَارَة",
+    "frequency": 10,
+    "inTop125": false
+  },
+  "105:4:3": {
+    "lemma": "مِن",
+    "frequency": 3226,
+    "inTop125": true
+  },
+  "105:4:4": {
+    "lemma": "سِجِّيل",
+    "frequency": 3,
+    "inTop125": false
+  },
+  "105:5:1": {
+    "lemma": "جَعَلَ",
+    "frequency": 340,
+    "inTop125": true
+  },
+  "105:5:2": {
+    "lemma": "عَصْف",
+    "frequency": 2,
+    "inTop125": false
+  },
+  "105:5:3": {
+    "lemma": "مَّأْكُول",
+    "frequency": 1,
+    "inTop125": false
+  }
+}
