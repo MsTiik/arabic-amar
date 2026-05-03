@@ -205,8 +205,9 @@ export const SURAH_AL_KAFIRUN: Surah = {
           arabic: "لَكُمْ",
           translit: "lakum",
           english: "for you",
-          pos: "preposition",
-          note: "لِ + 2nd person masculine plural pronoun",
+          pos: "pronoun",
+          note: "preposition لِ + 2nd person masculine plural pronoun",
+
         },
         {
           arabic: "دِينُكُمْ",
@@ -219,8 +220,9 @@ export const SURAH_AL_KAFIRUN: Surah = {
           arabic: "وَلِىَ",
           translit: "wa-liya",
           english: "and for me",
-          pos: "preposition",
-          note: "وَ + لِ + 1st person pronoun",
+          pos: "pronoun",
+          note: "conjunction وَ + preposition لِ + 1st person pronoun",
+
         },
         {
           arabic: "دِينِ",

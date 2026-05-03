@@ -124,8 +124,8 @@ export const SURAH_AL_IKHLAS: Surah = {
           arabic: "لَّهُۥ",
           translit: "lahu",
           english: "to Him",
-          pos: "preposition",
-          note: "لِ + 3rd person masculine pronoun",
+          pos: "pronoun",
+          note: "preposition لِ + 3rd person masculine pronoun",
         },
         {
           arabic: "كُفُوًا",
