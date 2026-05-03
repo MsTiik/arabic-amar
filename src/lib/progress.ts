@@ -6,6 +6,11 @@ import type { Mastery, UserProgress, WordProgress } from "./types";
 const STORAGE_KEY = "arabic-amar:progress:v1";
 const DEFAULT_DAILY_GOAL = 20;
 
+/** Max number of streak freezes the user can have banked at once. */
+export const MAX_FREEZES = 2;
+/** Freeze refills every N days of activity (capped at MAX_FREEZES). */
+const FREEZE_REGEN_DAYS = 7;
+
 function isoDate(d: Date = new Date()): string {
   return d.toISOString().slice(0, 10);
 }
@@ -21,13 +26,19 @@ function daysBetween(a: string, b: string): number {
 
 function defaultProgress(): UserProgress {
   const now = new Date().toISOString();
+  const today = todayIso();
   return {
     version: 1,
     startedAt: now,
-    streak: { count: 0, lastDay: "" },
+    streak: {
+      count: 0,
+      lastDay: "",
+      freezesAvailable: MAX_FREEZES,
+      lastFreezeRegenAt: today,
+    },
     daily: {
       goalCards: DEFAULT_DAILY_GOAL,
-      today: { date: todayIso(), cardsSeen: 0, correct: 0 },
+      today: { date: today, cardsSeen: 0, correct: 0 },
     },
     words: {},
     topics: {},
@@ -44,6 +55,13 @@ function loadFromStorage(): UserProgress {
     // Roll over the per-day counter when a new day begins
     if (parsed.daily.today.date !== todayIso()) {
       parsed.daily.today = { date: todayIso(), cardsSeen: 0, correct: 0 };
+    }
+    // Migrate older v1 records that pre-date the streak-freeze fields.
+    if (parsed.streak.freezesAvailable === undefined) {
+      parsed.streak.freezesAvailable = MAX_FREEZES;
+    }
+    if (!parsed.streak.lastFreezeRegenAt) {
+      parsed.streak.lastFreezeRegenAt = todayIso();
     }
     return parsed;
   } catch {
@@ -133,19 +151,61 @@ function defaultWord(): WordProgress {
   };
 }
 
-function recordStreak(p: UserProgress): void {
-  const today = todayIso();
+/** Refill freeze budget by 1 for every FREEZE_REGEN_DAYS that have passed
+ *  since the last refill, capped at MAX_FREEZES. Updates `lastFreezeRegenAt`
+ *  to today only when at least one freeze was actually granted.
+ *
+ *  Exported for unit tests; callers in this module use `recordStreakOn`. */
+export function regenFreezesOn(p: UserProgress, today: string): void {
+  const last = p.streak.lastFreezeRegenAt || today;
+  const elapsed = Math.max(0, daysBetween(last, today));
+  if (elapsed < FREEZE_REGEN_DAYS) return;
+  const grants = Math.floor(elapsed / FREEZE_REGEN_DAYS);
+  const current = p.streak.freezesAvailable ?? 0;
+  const next = Math.min(MAX_FREEZES, current + grants);
+  if (next > current) {
+    p.streak.freezesAvailable = next;
+    p.streak.lastFreezeRegenAt = today;
+  }
+}
+
+/** Pure (modulo mutation of `p`) streak update for an arbitrary "today".
+ *  Exported for unit tests. The runtime caller passes `todayIso()`. */
+export function recordStreakOn(p: UserProgress, today: string): void {
   if (p.streak.lastDay === today) return;
+
+  regenFreezesOn(p, today);
+
   if (!p.streak.lastDay) {
-    p.streak = { count: 1, lastDay: today };
+    p.streak.count = 1;
+    p.streak.lastDay = today;
     return;
   }
   const gap = daysBetween(p.streak.lastDay, today);
   if (gap === 1) {
-    p.streak = { count: p.streak.count + 1, lastDay: today };
-  } else if (gap > 1) {
-    p.streak = { count: 1, lastDay: today };
+    p.streak.count += 1;
+    p.streak.lastDay = today;
+    return;
   }
+  if (gap > 1) {
+    // A freeze rescues a single missed day. We don't auto-burn multiple
+    // freezes for longer absences — that defeats the "you need to keep
+    // showing up" intent of streaks.
+    const haveFreeze = (p.streak.freezesAvailable ?? 0) > 0;
+    if (gap === 2 && haveFreeze) {
+      p.streak.freezesAvailable = (p.streak.freezesAvailable ?? 0) - 1;
+      p.streak.lastFreezeConsumedAt = today;
+      p.streak.count += 1;
+      p.streak.lastDay = today;
+      return;
+    }
+    p.streak.count = 1;
+    p.streak.lastDay = today;
+  }
+}
+
+function recordStreak(p: UserProgress): void {
+  recordStreakOn(p, todayIso());
 }
 
 export const progressActions = {

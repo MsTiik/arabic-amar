@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import localFont from "next/font/local";
 
 import { Topbar } from "@/components/topbar";
+import { themeBootstrapScript } from "@/lib/theme";
 import "./globals.css";
 
 const inter = Inter({
@@ -40,7 +41,16 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${inter.variable} ${notoArabic.variable} h-full antialiased`}
+      // Bootstrap script and `applyTheme` mutate the className/style here at
+      // runtime, which would otherwise trigger a hydration mismatch warning.
+      suppressHydrationWarning
     >
+      <head>
+        {/* Inline bootstrap so the saved theme class is applied to <html>
+            before paint, preventing a flash of the wrong theme. Must run
+            synchronously before the body renders. */}
+        <script dangerouslySetInnerHTML={{ __html: themeBootstrapScript }} />
+      </head>
       <body className="min-h-full bg-background text-foreground flex flex-col">
         <Topbar />
         <main className="flex-1 flex flex-col">{children}</main>
