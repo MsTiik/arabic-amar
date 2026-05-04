@@ -1,5 +1,5 @@
 import audioManifest from "../../content/audio-manifest.json";
-import { stripDiacritics } from "./diacritics";
+import { audioManifestKey } from "./audio-keys";
 import type { ContentWarning } from "./parser";
 import type { SiteContent, VocabEntry } from "./types";
 
@@ -38,7 +38,7 @@ function exampleVocab(entry: VocabEntry): string {
 }
 
 function stripAudioKey(arabic: string): string {
-  return stripDiacritics(arabic).trim();
+  return audioManifestKey(arabic);
 }
 
 function addIssue(

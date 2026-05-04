@@ -128,4 +128,28 @@ describe("createContentQaReport", () => {
 
     expect(report.issues.find((issue) => issue.code === "missing-audio")).toBeUndefined();
   });
+
+  test("preserves tatweel when checking audio keys", () => {
+    const report = createContentQaReport(
+      baseContent({
+        vocab: [
+          {
+            id: "connector",
+            arabic: "فَـ",
+            arabicFolded: "ف",
+            pronunciation: "fa-",
+            english: "then/so",
+            category: "Connector",
+            isExtra: false,
+            topicSlugs: ["one"],
+            lessonId: "lesson-one",
+          },
+        ],
+      }),
+      [],
+      "2026-01-02T00:00:00.000Z",
+    );
+
+    expect(report.issues.find((issue) => issue.code === "missing-audio")).toBeDefined();
+  });
 });
