@@ -230,6 +230,7 @@ function FlashcardView({
             arabic={question.promptArabic}
             label={question.prompt}
             size="sm"
+            showUnavailable
           />
         </div>
       ) : null}
@@ -281,6 +282,7 @@ function MultipleChoiceView({
                 arabic={question.promptArabic}
                 label={question.prompt}
                 size="sm"
+                showUnavailable
               />
             </div>
           </>

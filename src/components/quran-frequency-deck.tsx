@@ -132,6 +132,7 @@ function FrequencyCard({ word }: { word: QuranFrequencyWord }) {
           arabic={word.arabic}
           label={word.english}
           size="sm"
+          showUnavailable
         />
       </div>
       <p

@@ -9,6 +9,78 @@
     "parserWarnings": 0,
     "issues": 1
   },
+  "audioCoverage": {
+    "vocabTotal": 348,
+    "vocabWithAudio": 245,
+    "vocabMissingAudio": 103,
+    "coveragePercent": 70,
+    "byTopic": [
+      {
+        "slug": "body-parts",
+        "name": "Body Parts",
+        "total": 23,
+        "withAudio": 19,
+        "missingAudio": 4,
+        "coveragePercent": 83
+      },
+      {
+        "slug": "numbers",
+        "name": "Numbers",
+        "total": 39,
+        "withAudio": 30,
+        "missingAudio": 9,
+        "coveragePercent": 77
+      },
+      {
+        "slug": "time",
+        "name": "Time",
+        "total": 22,
+        "withAudio": 6,
+        "missingAudio": 16,
+        "coveragePercent": 27
+      },
+      {
+        "slug": "days-of-the-week",
+        "name": "Days of the Week",
+        "total": 14,
+        "withAudio": 14,
+        "missingAudio": 0,
+        "coveragePercent": 100
+      },
+      {
+        "slug": "islamic-and-gregorian-months",
+        "name": "Islamic and Gregorian Months",
+        "total": 28,
+        "withAudio": 25,
+        "missingAudio": 3,
+        "coveragePercent": 89
+      },
+      {
+        "slug": "entities",
+        "name": "Entities",
+        "total": 45,
+        "withAudio": 34,
+        "missingAudio": 11,
+        "coveragePercent": 76
+      },
+      {
+        "slug": "getting-to-know-each-other",
+        "name": "Getting to know each other",
+        "total": 160,
+        "withAudio": 108,
+        "missingAudio": 52,
+        "coveragePercent": 68
+      },
+      {
+        "slug": "the-classroom",
+        "name": "The Classroom",
+        "total": 17,
+        "withAudio": 9,
+        "missingAudio": 8,
+        "coveragePercent": 53
+      }
+    ]
+  },
   "issues": [
     {
       "code": "missing-audio",

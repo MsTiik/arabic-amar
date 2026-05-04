@@ -44,6 +44,43 @@ export default function ContentHealthPage() {
         Generated: {new Date(report.generatedAt).toUTCString()}
       </p>
 
+      <section className="mt-8 rounded-2xl border border-border bg-card p-5">
+        <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">
+              Audio coverage
+            </p>
+            <h2 className="mt-1 text-xl font-semibold tracking-tight">
+              {report.audioCoverage.vocabWithAudio} of {report.audioCoverage.vocabTotal} words have audio
+            </h2>
+            <p className="mt-1 text-sm text-foreground-soft">
+              {report.audioCoverage.vocabMissingAudio} vocabulary cards currently show an audio unavailable icon.
+            </p>
+          </div>
+          <span className="rounded-full bg-primary-soft px-3 py-1 text-sm font-semibold text-primary">
+            {report.audioCoverage.coveragePercent}%
+          </span>
+        </div>
+        <div className="mt-5 space-y-3">
+          {report.audioCoverage.byTopic.map((topic) => (
+            <div key={topic.slug}>
+              <div className="flex items-center justify-between gap-3 text-sm">
+                <span className="font-medium text-foreground">{topic.name}</span>
+                <span className="text-xs tabular-nums text-muted-foreground">
+                  {topic.withAudio}/{topic.total} · {topic.coveragePercent}%
+                </span>
+              </div>
+              <div className="mt-1 h-2 overflow-hidden rounded-full bg-muted">
+                <div
+                  className="h-full rounded-full bg-primary"
+                  style={{ width: `${topic.coveragePercent}%` }}
+                />
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
       <section className="mt-8 space-y-4">
         {report.issues.length === 0 ? (
           <div className="rounded-2xl border border-emerald-200 bg-emerald-50 p-5 text-sm text-emerald-950">

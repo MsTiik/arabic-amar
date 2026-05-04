@@ -19,11 +19,12 @@ interface Props {
   url?: string;
   /** Override the aria-label entirely (e.g. "Play recitation of Qur'an 20:14"). */
   ariaLabel?: string;
+  /** Keep a disabled icon visible when no vocabulary recording exists. */
+  showUnavailable?: boolean;
 }
 
 /** A small, unobtrusive speaker button that plays a Wikimedia Commons audio
- *  recording of the given Arabic word. Hidden entirely if no recording exists
- *  in the manifest, so cards without coverage stay clean (no broken icons). */
+ *  recording of the given Arabic word. */
 export function SpeakerButton({
   arabic,
   label,
@@ -31,6 +32,7 @@ export function SpeakerButton({
   className,
   url,
   ariaLabel,
+  showUnavailable = false,
 }: Props) {
   const [state, setState] = useState<"idle" | "loading" | "playing" | "error">(
     "idle",
@@ -47,12 +49,34 @@ export function SpeakerButton({
     };
   }, []);
 
-  if (!playUrl) return null;
-
   const sizeClass =
     size === "sm"
       ? "h-6 w-6 rounded-md p-1 text-xs"
       : "h-8 w-8 rounded-lg p-1.5 text-sm";
+
+  const unavailableLabel =
+    label ? `Audio unavailable for ${label}` : "Audio unavailable";
+
+  if (!playUrl) {
+    if (!showUnavailable) return null;
+    return (
+      <span
+        aria-label={unavailableLabel}
+        title={unavailableLabel}
+        className={cn(
+          "inline-flex items-center justify-center border border-dashed border-border bg-background-soft text-muted-foreground/70",
+          sizeClass,
+          className,
+        )}
+        role="img"
+      >
+        <VolumeX
+          className={size === "sm" ? "h-3.5 w-3.5" : "h-4 w-4"}
+          aria-hidden="true"
+        />
+      </span>
+    );
+  }
 
   function play(e: React.MouseEvent) {
     e.preventDefault();

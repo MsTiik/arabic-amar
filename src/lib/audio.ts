@@ -1,5 +1,6 @@
 import audioManifest from "../../content/audio-manifest.json";
 import { audioManifestKey } from "./audio-keys";
+import type { SiteContent } from "./types";
 
 export interface AudioEntry {
   url: string;
@@ -14,6 +15,23 @@ export interface QuranAudioEntry {
   url: string;
   reciter: string;
   license: string;
+}
+
+export interface AudioCoverageTopic {
+  slug: string;
+  name: string;
+  total: number;
+  withAudio: number;
+  missingAudio: number;
+  coveragePercent: number;
+}
+
+export interface AudioCoverageStats {
+  vocabTotal: number;
+  vocabWithAudio: number;
+  vocabMissingAudio: number;
+  coveragePercent: number;
+  byTopic: AudioCoverageTopic[];
 }
 
 interface AudioManifest {
@@ -36,6 +54,10 @@ export function getAudioForWord(arabic: string): AudioEntry | undefined {
   return manifest.entries[key];
 }
 
+export function hasAudioForWord(arabic: string): boolean {
+  return getAudioForWord(arabic) !== undefined;
+}
+
 /** Get audio for a Qur'an citation like "Qur'ān 20:14" or "Qur'an 2:255". */
 export function getAudioForCitation(
   citation: string | undefined,
@@ -56,4 +78,38 @@ export function audioStats() {
     quranAyat: Object.keys(manifest.quran).length,
     missing: manifest.missing.length,
   };
+}
+
+export function createAudioCoverageStats(
+  content: Pick<SiteContent, "vocab" | "topics">,
+): AudioCoverageStats {
+  const vocabWithAudio = content.vocab.filter((entry) =>
+    hasAudioForWord(entry.arabic),
+  ).length;
+  return {
+    vocabTotal: content.vocab.length,
+    vocabWithAudio,
+    vocabMissingAudio: content.vocab.length - vocabWithAudio,
+    coveragePercent: coveragePercent(vocabWithAudio, content.vocab.length),
+    byTopic: content.topics.map((topic) => {
+      const topicVocab = content.vocab.filter((entry) =>
+        entry.topicSlugs.includes(topic.slug),
+      );
+      const topicWithAudio = topicVocab.filter((entry) =>
+        hasAudioForWord(entry.arabic),
+      ).length;
+      return {
+        slug: topic.slug,
+        name: topic.name,
+        total: topicVocab.length,
+        withAudio: topicWithAudio,
+        missingAudio: topicVocab.length - topicWithAudio,
+        coveragePercent: coveragePercent(topicWithAudio, topicVocab.length),
+      };
+    }),
+  };
+}
+
+function coveragePercent(withAudio: number, total: number): number {
+  return total === 0 ? 100 : Math.round((withAudio / total) * 100);
 }
