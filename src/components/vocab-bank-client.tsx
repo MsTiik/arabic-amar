@@ -6,7 +6,7 @@ import { ChevronDown, Search, X } from "lucide-react";
 import { ArabicText } from "@/components/arabic-text";
 import { VocabCard } from "@/components/vocab-card";
 import { vocabCardSpansTwoCols } from "@/lib/vocab-card-layout";
-import { foldForSearch, foldedSearchMatches } from "@/lib/diacritics";
+import { foldForSearch, foldedSearchMatches, isArabicFolded } from "@/lib/diacritics";
 import { cn } from "@/lib/cn";
 import type { Topic, VocabEntry } from "@/lib/types";
 
@@ -29,6 +29,13 @@ export function VocabBankClient({ vocab, topics }: Props) {
 
   const filtered = useMemo(() => {
     const folded = foldForSearch(deferred);
+    const allowArabicPrefix =
+      Boolean(folded && isArabicFolded(folded)) &&
+      !vocab.some((v) =>
+        [v.arabicFolded, foldForSearch(v.arabic)].some((value) =>
+          foldedSearchMatches(value, folded, { exactArabic: true }),
+        ),
+      );
     return vocab.filter((v) => {
       if (topicSlug && !v.topicSlugs.includes(topicSlug)) return false;
       if (gender && v.gender !== gender) return false;
@@ -45,7 +52,7 @@ export function VocabBankClient({ vocab, topics }: Props) {
         ];
         if (
           !haystack.some((value) =>
-            foldedSearchMatches(value, folded, { exactArabic: true, allowArabicPrefix: true }),
+            foldedSearchMatches(value, folded, { exactArabic: true, allowArabicPrefix }),
           )
         ) {
           return false;

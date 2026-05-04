@@ -1,5 +1,5 @@
 import contentJson from "../../content/content.json";
-import { foldForSearch, foldedSearchMatches } from "./diacritics";
+import { foldForSearch, foldedSearchMatches, isArabicFolded } from "./diacritics";
 import type { GrammarRule, Lesson, SiteContent, Topic, VocabEntry } from "./types";
 
 const DERIVED_MEMORISED_WORDS: Record<
@@ -134,6 +134,13 @@ export interface VocabSearchOptions {
 
 export function searchVocab(options: VocabSearchOptions = {}): VocabEntry[] {
   const folded = options.query ? foldForSearch(options.query) : "";
+  const allowArabicPrefix =
+    Boolean(options.allowArabicPrefix && folded && isArabicFolded(folded)) &&
+    !content.vocab.some((v) =>
+      [v.arabicFolded, foldForSearch(v.arabic)].some((value) =>
+        foldedSearchMatches(value, folded, { exactArabic: true }),
+      ),
+    );
   return content.vocab.filter((v) => {
     if (options.topicSlug && !v.topicSlugs.includes(options.topicSlug)) return false;
     if (options.category && v.category !== options.category) return false;
@@ -151,7 +158,7 @@ export function searchVocab(options: VocabSearchOptions = {}): VocabEntry[] {
         !haystack.some((value) =>
           foldedSearchMatches(value, folded, {
             exactArabic: true,
-            allowArabicPrefix: options.allowArabicPrefix,
+            allowArabicPrefix,
           }),
         )
       ) {
