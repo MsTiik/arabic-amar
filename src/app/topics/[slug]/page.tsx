@@ -57,8 +57,7 @@ export default async function TopicPage({
         slug={slug}
         vocabCount={vocab.length}
         ruleCount={rules.length}
-      >
-        {{
+        panels={{
           vocab: (
             <div className="mt-6 flex gap-8">
               <CategoryJumpNav categories={navItems} />
@@ -144,7 +143,7 @@ export default async function TopicPage({
             </div>
           ),
         }}
-      </TopicTabs>
+      />
     </div>
   );
 }

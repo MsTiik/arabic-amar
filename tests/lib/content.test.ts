@@ -56,3 +56,29 @@ describe("content vocabulary search", () => {
     ).toBe(true);
   });
 });
+
+describe("content grammar data", () => {
+  test("labels third-person masculine plural conjugations as plural", () => {
+    const content = getSiteContent();
+
+    const pastTheyMasc = content.conjugations.find(
+      (entry) => entry.pronunciation === "katabū",
+    );
+    const presentTheyMasc = content.conjugations.find(
+      (entry) => entry.pronunciation === "yaktubūna",
+    );
+
+    expect(pastTheyMasc).toMatchObject({
+      tense: "past",
+      category: "3rd person plural",
+      gender: "M",
+      english: "they wrote",
+    });
+    expect(presentTheyMasc).toMatchObject({
+      tense: "present-future",
+      category: "3rd person plural",
+      gender: "M",
+      english: "they write",
+    });
+  });
+});

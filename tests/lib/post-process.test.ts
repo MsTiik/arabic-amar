@@ -1,7 +1,7 @@
 import { describe, expect, test } from "vitest";
 
-import { fillIslamicMonthGlosses } from "../../src/lib/post-process";
-import type { SiteContent, VocabEntry } from "../../src/lib/types";
+import { correctConjugationLabels, fillIslamicMonthGlosses } from "../../src/lib/post-process";
+import type { ConjugationEntry, SiteContent, VocabEntry } from "../../src/lib/types";
 
 function vocab(overrides: Partial<VocabEntry>): VocabEntry {
   return {
@@ -66,5 +66,71 @@ describe("fillIslamicMonthGlosses", () => {
     );
 
     expect(result.vocab[0].english).toBe("Existing gloss");
+  });
+});
+
+function conjugation(overrides: Partial<ConjugationEntry>): ConjugationEntry {
+  return {
+    id: "conjugation__past__3rd-person-singular__katabu",
+    tense: "past",
+    category: "3rd person singular",
+    patternRule: "(root) + وا",
+    patternExample: "ك-ت-ب + وا",
+    arabic: "كَتَبُوا",
+    arabicFolded: "كتبوا",
+    pronunciation: "katabū",
+    english: "they wrote",
+    gender: "M",
+    ...overrides,
+  };
+}
+
+describe("correctConjugationLabels", () => {
+  test("corrects masculine they rows mislabeled as singular", () => {
+    const result = correctConjugationLabels({
+      ...content([]),
+      conjugations: [
+        conjugation({ tense: "past", english: "they wrote", pronunciation: "katabū" }),
+        conjugation({
+          id: "conjugation__present-future__3rd-person-singular__yaktubuna",
+          tense: "present-future",
+          patternRule: "يَ + (root) + ونَ",
+          patternExample: "يَ + ك-ت-ب + ونَ",
+          arabic: "يَكْتُبُونَ",
+          arabicFolded: "يكتبون",
+          pronunciation: "yaktubūna",
+          english: "they write",
+        }),
+      ],
+    });
+
+    expect(result.conjugations.map((entry) => entry.category)).toEqual([
+      "3rd person plural",
+      "3rd person plural",
+    ]);
+    expect(result.conjugations.map((entry) => entry.id)).toEqual([
+      "conjugation__past__3rd-person-plural__katabu",
+      "conjugation__present-future__3rd-person-plural__yaktubuna",
+    ]);
+  });
+
+  test("leaves true singular masculine rows unchanged", () => {
+    const original = conjugation({
+      id: "conjugation__past__base-form__kataba",
+      category: "Base form",
+      patternRule: "(root) + َ",
+      patternExample: "ك-ت-ب + َ",
+      arabic: "كَتَبَ",
+      arabicFolded: "كتب",
+      pronunciation: "kataba",
+      english: "he wrote",
+    });
+
+    const result = correctConjugationLabels({
+      ...content([]),
+      conjugations: [original],
+    });
+
+    expect(result.conjugations[0]).toEqual(original);
   });
 });

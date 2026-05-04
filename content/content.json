@@ -6598,9 +6598,9 @@
       "gender": "F"
     },
     {
-      "id": "conjugation__past__3rd-person-singular__katabu",
+      "id": "conjugation__past__3rd-person-plural__katabu",
       "tense": "past",
-      "category": "3rd person singular",
+      "category": "3rd person plural",
       "patternRule": "(root) + وا",
       "patternExample": "ك-ت-ب + وا",
       "arabic": "كَتَبُوا",
@@ -6718,9 +6718,9 @@
       "gender": "F"
     },
     {
-      "id": "conjugation__present-future__3rd-person-singular__yaktubuna",
+      "id": "conjugation__present-future__3rd-person-plural__yaktubuna",
       "tense": "present-future",
-      "category": "3rd person singular",
+      "category": "3rd person plural",
       "patternRule": "يَ + (root) + ونَ",
       "patternExample": "يَ + ك-ت-ب + ونَ",
       "arabic": "يَكْتُبُونَ",
@@ -6809,5 +6809,5 @@
     "instagram": "@majestic_messenger",
     "docUrl": "https://docs.google.com/document/d/1wqbU7rsLUm0wqCjQPS2PbtCTThZOxnE2CnClxa8DETc/edit"
   },
-  "fetchedAt": "2026-05-04T14:53:54.827Z"
+  "fetchedAt": "2026-05-04T19:45:36.908Z"
 }

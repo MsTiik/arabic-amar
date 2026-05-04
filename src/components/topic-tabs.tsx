@@ -7,15 +7,16 @@ interface Props {
   slug: string;
   vocabCount: number;
   ruleCount: number;
-  children: {
+  panels: {
     vocab: React.ReactNode;
     rules: React.ReactNode;
     practice: React.ReactNode;
   };
 }
 
-export function TopicTabs({ vocabCount, ruleCount, children }: Props) {
+export function TopicTabs({ slug, vocabCount, ruleCount, panels }: Props) {
   const [tab, setTab] = useState<"vocab" | "rules" | "practice">("vocab");
+  const panelId = `${slug}-${tab}-panel`;
   return (
     <div className="mt-8">
       <div
@@ -39,10 +40,10 @@ export function TopicTabs({ vocabCount, ruleCount, children }: Props) {
           label="Practice"
         />
       </div>
-      <div role="tabpanel">
-        {tab === "vocab" && children.vocab}
-        {tab === "rules" && children.rules}
-        {tab === "practice" && children.practice}
+      <div id={panelId} role="tabpanel">
+        {tab === "vocab" && panels.vocab}
+        {tab === "rules" && panels.rules}
+        {tab === "practice" && panels.practice}
       </div>
     </div>
   );

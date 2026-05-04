@@ -84,9 +84,9 @@ function PatternCell({ pattern }: { pattern: string }) {
 function GenderBadge({ gender }: { gender?: "M" | "F" | "Both" }) {
   if (!gender) return null;
   const label =
-    gender === "M" ? "m" : gender === "F" ? "f" : "m / f";
+    gender === "M" ? "masc." : gender === "F" ? "fem." : "masc. / fem.";
   return (
-    <span className="ml-2 inline-flex items-center rounded-full border border-border bg-background-soft px-1.5 text-[10px] font-medium uppercase tracking-wider text-muted-foreground">
+    <span className="ml-2 inline-flex items-center rounded-full border border-border bg-background-soft px-1.5 text-[10px] font-medium tracking-wider text-muted-foreground">
       {label}
     </span>
   );
@@ -106,7 +106,7 @@ function Table({ rows }: { rows: ConjugationEntry[] }) {
         <thead className="text-left">
           <tr className="border-b border-border bg-background-soft">
             <th className="px-3 py-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-              Person
+              Person / number
             </th>
             <th className="px-3 py-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
               Pattern
@@ -224,6 +224,10 @@ export function ConjugationTable({ past, presentFuture }: Props) {
         (write). The Arabic ending in the pattern column is highlighted to make
         the suffix easy to spot — same colour appears at the matching position
         in the example.
+      </p>
+      <p className="text-xs text-muted-foreground">
+        This table reflects the beginner AMAR source rows currently captured by
+        the site; dual forms are not included yet.
       </p>
 
       <Table rows={rows} />
