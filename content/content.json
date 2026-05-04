@@ -1980,10 +1980,10 @@
       "arabic": "١ - مُحَرَّم",
       "arabicFolded": "١ - محرم",
       "pronunciation": "muḥarram",
-      "english": "",
+      "english": "Muḥarram (1st Hijri month)",
       "category": "ISLAMICMONTHS",
       "isExtra": false,
-      "monthIndex": 9,
+      "monthIndex": 1,
       "monthSystem": "hijri",
       "topicSlugs": [
         "islamic-and-gregorian-months"
@@ -1995,10 +1995,10 @@
       "arabic": "٢ - صَفَر",
       "arabicFolded": "٢ - صفر",
       "pronunciation": "ṣafar",
-      "english": "",
+      "english": "Ṣafar (2nd Hijri month)",
       "category": "ISLAMICMONTHS",
       "isExtra": false,
-      "monthIndex": 9,
+      "monthIndex": 2,
       "monthSystem": "hijri",
       "topicSlugs": [
         "islamic-and-gregorian-months"
@@ -2010,10 +2010,10 @@
       "arabic": "٣ - رَبِيع الأَوَّل",
       "arabicFolded": "٣ - ربيع الأول",
       "pronunciation": "rabīʿ al-awwal",
-      "english": "",
+      "english": "Rabīʿ al-awwal (3rd Hijri month)",
       "category": "ISLAMICMONTHS",
       "isExtra": false,
-      "monthIndex": 9,
+      "monthIndex": 3,
       "monthSystem": "hijri",
       "topicSlugs": [
         "islamic-and-gregorian-months"
@@ -2025,10 +2025,10 @@
       "arabic": "٤ - رَبِيع الآخِر / الثَّانِي",
       "arabicFolded": "٤ - ربيع الآخر / الثاني",
       "pronunciation": "rabīʿ al-ākhir / ath-thānī",
-      "english": "",
+      "english": "Rabīʿ al-ākhir / Rabīʿ ath-thānī (4th Hijri month)",
       "category": "ISLAMICMONTHS",
       "isExtra": false,
-      "monthIndex": 9,
+      "monthIndex": 4,
       "monthSystem": "hijri",
       "topicSlugs": [
         "islamic-and-gregorian-months"
@@ -2040,10 +2040,10 @@
       "arabic": "٥ - جُمَادَى الأُولَى",
       "arabicFolded": "٥ - جمادى الأولى",
       "pronunciation": "jumādā al-ūlā",
-      "english": "",
+      "english": "Jumādā al-ūlā (5th Hijri month)",
       "category": "ISLAMICMONTHS",
       "isExtra": false,
-      "monthIndex": 9,
+      "monthIndex": 5,
       "monthSystem": "hijri",
       "topicSlugs": [
         "islamic-and-gregorian-months"
@@ -2055,10 +2055,10 @@
       "arabic": "٦ - جُمَادَى الآخِرَة / الثَّانِيَة",
       "arabicFolded": "٦ - جمادى الآخرة / الثانية",
       "pronunciation": "jumādā al-ākhirah / ath-thaniyah",
-      "english": "",
+      "english": "Jumādā al-ākhirah / Jumādā ath-thāniyah (6th Hijri month)",
       "category": "ISLAMICMONTHS",
       "isExtra": false,
-      "monthIndex": 9,
+      "monthIndex": 6,
       "monthSystem": "hijri",
       "topicSlugs": [
         "islamic-and-gregorian-months"
@@ -2070,10 +2070,10 @@
       "arabic": "٧ - رَجَب",
       "arabicFolded": "٧ - رجب",
       "pronunciation": "rajab",
-      "english": "",
+      "english": "Rajab (7th Hijri month)",
       "category": "ISLAMICMONTHS",
       "isExtra": false,
-      "monthIndex": 9,
+      "monthIndex": 7,
       "monthSystem": "hijri",
       "topicSlugs": [
         "islamic-and-gregorian-months"
@@ -2085,10 +2085,10 @@
       "arabic": "٨ - شَعْبَان",
       "arabicFolded": "٨ - شعبان",
       "pronunciation": "shaʿbān",
-      "english": "",
+      "english": "Shaʿbān (8th Hijri month)",
       "category": "ISLAMICMONTHS",
       "isExtra": false,
-      "monthIndex": 9,
+      "monthIndex": 8,
       "monthSystem": "hijri",
       "topicSlugs": [
         "islamic-and-gregorian-months"
@@ -2100,7 +2100,7 @@
       "arabic": "٩ - رَمَضَان",
       "arabicFolded": "٩ - رمضان",
       "pronunciation": "ramaḍān",
-      "english": "",
+      "english": "Ramaḍān (9th Hijri month)",
       "category": "ISLAMICMONTHS",
       "isExtra": false,
       "monthIndex": 9,
@@ -2115,10 +2115,10 @@
       "arabic": "١٠ - شَوَّال",
       "arabicFolded": "١٠ - شوال",
       "pronunciation": "shawwāl",
-      "english": "",
+      "english": "Shawwāl (10th Hijri month)",
       "category": "ISLAMICMONTHS",
       "isExtra": false,
-      "monthIndex": 9,
+      "monthIndex": 10,
       "monthSystem": "hijri",
       "topicSlugs": [
         "islamic-and-gregorian-months"
@@ -2130,10 +2130,10 @@
       "arabic": "١١ - ذُو القَعْدَة",
       "arabicFolded": "١١ - ذو القعدة",
       "pronunciation": "dhū al-qaʿdah",
-      "english": "",
+      "english": "Dhū al-Qaʿdah (11th Hijri month)",
       "category": "ISLAMICMONTHS",
       "isExtra": false,
-      "monthIndex": 9,
+      "monthIndex": 11,
       "monthSystem": "hijri",
       "topicSlugs": [
         "islamic-and-gregorian-months"
@@ -2145,10 +2145,10 @@
       "arabic": "١٢ - ذُو الحِجَّة",
       "arabicFolded": "١٢ - ذو الحجة",
       "pronunciation": "dhū al-ḥijjah",
-      "english": "",
+      "english": "Dhū al-Ḥijjah (12th Hijri month)",
       "category": "ISLAMICMONTHS",
       "isExtra": false,
-      "monthIndex": 9,
+      "monthIndex": 12,
       "monthSystem": "hijri",
       "topicSlugs": [
         "islamic-and-gregorian-months"
@@ -6809,5 +6809,5 @@
     "instagram": "@majestic_messenger",
     "docUrl": "https://docs.google.com/document/d/1wqbU7rsLUm0wqCjQPS2PbtCTThZOxnE2CnClxa8DETc/edit"
   },
-  "fetchedAt": "2026-05-04T02:18:32.646Z"
+  "fetchedAt": "2026-05-04T14:53:54.827Z"
 }

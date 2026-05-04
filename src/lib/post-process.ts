@@ -8,9 +8,46 @@ const SPELLING_FIXES: Record<string, string> = {
   ERUOPE: "EUROPE",
 };
 
+const HIJRI_MONTH_GLOSSES: Record<number, string> = {
+  1: "Muḥarram (1st Hijri month)",
+  2: "Ṣafar (2nd Hijri month)",
+  3: "Rabīʿ al-awwal (3rd Hijri month)",
+  4: "Rabīʿ al-ākhir / Rabīʿ ath-thānī (4th Hijri month)",
+  5: "Jumādā al-ūlā (5th Hijri month)",
+  6: "Jumādā al-ākhirah / Jumādā ath-thāniyah (6th Hijri month)",
+  7: "Rajab (7th Hijri month)",
+  8: "Shaʿbān (8th Hijri month)",
+  9: "Ramaḍān (9th Hijri month)",
+  10: "Shawwāl (10th Hijri month)",
+  11: "Dhū al-Qaʿdah (11th Hijri month)",
+  12: "Dhū al-Ḥijjah (12th Hijri month)",
+};
+
 function fixSpelling(s: string | undefined): string | undefined {
   if (!s) return s;
   return SPELLING_FIXES[s] ?? s;
+}
+
+function parseArabicMonthNumber(arabic: string): number | undefined {
+  const match = arabic.match(/^\s*([\d\u0660-\u0669\u06F0-\u06F9]+)/u);
+  if (!match) return undefined;
+  const normalized = [...match[1]]
+    .map((char) => {
+      const code = char.charCodeAt(0);
+      if (code >= 0x0660 && code <= 0x0669) return String(code - 0x0660);
+      if (code >= 0x06f0 && code <= 0x06f9) return String(code - 0x06f0);
+      return char;
+    })
+    .join("");
+  const number = Number.parseInt(normalized, 10);
+  return number >= 1 && number <= 12 ? number : undefined;
+}
+
+function isIslamicMonth(vocab: VocabEntry): boolean {
+  return (
+    vocab.lessonId === "lesson-islamic-and-gregorian-months" &&
+    vocab.category.toLowerCase().includes("islamic")
+  );
 }
 
 /**
@@ -85,5 +122,22 @@ export function dedupeLongRepeatedEnglish(content: SiteContent): SiteContent {
     ...content,
     topics: content.topics.map((t) => topicsBySlug.get(t.slug) ?? t),
     vocab: newVocab,
+  };
+}
+
+export function fillIslamicMonthGlosses(content: SiteContent): SiteContent {
+  return {
+    ...content,
+    vocab: content.vocab.map((vocab) => {
+      if (!isIslamicMonth(vocab)) return vocab;
+      const monthIndex = parseArabicMonthNumber(vocab.arabic) ?? vocab.monthIndex;
+      if (!monthIndex) return vocab;
+      return {
+        ...vocab,
+        english: vocab.english || HIJRI_MONTH_GLOSSES[monthIndex],
+        monthIndex,
+        monthSystem: "hijri",
+      };
+    }),
   };
 }
