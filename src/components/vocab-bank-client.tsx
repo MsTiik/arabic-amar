@@ -6,7 +6,7 @@ import { ChevronDown, Search, X } from "lucide-react";
 import { ArabicText } from "@/components/arabic-text";
 import { VocabCard } from "@/components/vocab-card";
 import { vocabCardSpansTwoCols } from "@/lib/vocab-card-layout";
-import { foldForSearch } from "@/lib/diacritics";
+import { foldForSearch, foldedSearchMatches } from "@/lib/diacritics";
 import { cn } from "@/lib/cn";
 import type { Topic, VocabEntry } from "@/lib/types";
 
@@ -42,8 +42,10 @@ export function VocabBankClient({ vocab, topics }: Props) {
           foldForSearch(v.subCategory ?? ""),
           foldForSearch(v.continent ?? ""),
           foldForSearch(v.country ?? ""),
-        ].join(" ");
-        if (!haystack.includes(folded)) return false;
+        ];
+        if (!haystack.some((value) => foldedSearchMatches(value, folded, { exactArabic: true }))) {
+          return false;
+        }
       }
       return true;
     });

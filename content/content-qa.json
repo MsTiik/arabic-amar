@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-29T19:59:56.079Z",
+  "generatedAt": "2026-05-04T01:12:24.691Z",
   "totals": {
     "lessons": 8,
     "topics": 8,
@@ -34,7 +34,7 @@
       "code": "missing-audio",
       "severity": "info",
       "message": "Vocabulary words do not have a matching audio-manifest entry.",
-      "count": 118,
+      "count": 113,
       "examples": [
         "lesson-body-parts: جَبِينٌ / jabīnun / Forehead",
         "lesson-body-parts: أَسْنَانٌ / asnānun / Teeth",

@@ -10,6 +10,7 @@ describe("content vocabulary search", () => {
     const transliterated = searchVocab({ query: "hadha" });
     const english = searchVocab({ query: "this" });
 
+    expect(unvowelled).toHaveLength(1);
     expect(
       unvowelled.some(
         (entry) =>
@@ -18,6 +19,9 @@ describe("content vocabulary search", () => {
           entry.english === "this (m)",
       ),
     ).toBe(true);
+    expect(unvowelled.map((entry) => foldForSearch(entry.arabic))).not.toContain(
+      foldForSearch("هَذَانِ"),
+    );
     expect(vowelled.map((entry) => foldForSearch(entry.arabic))).toContain(foldForSearch("هذا"));
     expect(transliterated.map((entry) => foldForSearch(entry.arabic))).toContain(
       foldForSearch("هذا"),

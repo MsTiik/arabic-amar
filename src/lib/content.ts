@@ -1,5 +1,5 @@
 import contentJson from "../../content/content.json";
-import { foldForSearch } from "./diacritics";
+import { foldForSearch, foldedSearchMatches } from "./diacritics";
 import type { GrammarRule, Lesson, SiteContent, Topic, VocabEntry } from "./types";
 
 const DERIVED_MEMORISED_WORDS: Record<
@@ -146,20 +146,12 @@ export function searchVocab(options: VocabSearchOptions = {}): VocabEntry[] {
         foldForSearch(v.english),
         foldForSearch(v.category),
       ];
-      if (
-        !haystack.some((value) =>
-          isArabicFolded(folded) ? value.split(/\s+/).includes(folded) : value.includes(folded),
-        )
-      ) {
+      if (!haystack.some((value) => foldedSearchMatches(value, folded, { exactArabic: true }))) {
         return false;
       }
     }
     return true;
   });
-}
-
-function isArabicFolded(value: string): boolean {
-  return /[\u0600-\u06FF]/u.test(value);
 }
 
 export interface CategoryGroup {

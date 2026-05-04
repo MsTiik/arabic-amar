@@ -41,3 +41,19 @@ export function foldedIncludes(haystack: string, needle: string): boolean {
   if (!needle) return true;
   return haystack.includes(needle);
 }
+
+export function foldedSearchMatches(
+  value: string,
+  needle: string,
+  options: { exactArabic?: boolean } = {},
+): boolean {
+  if (!needle) return true;
+  if (options.exactArabic && isArabicFolded(needle)) {
+    return value.split(/\s+/).includes(needle);
+  }
+  return value.includes(needle);
+}
+
+export function isArabicFolded(value: string): boolean {
+  return /[\u0600-\u06FF]/u.test(value);
+}
