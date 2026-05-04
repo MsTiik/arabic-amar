@@ -1,4 +1,5 @@
 import audioManifest from "../../content/audio-manifest.json";
+import { audioManifestKey } from "./audio-keys";
 
 export interface AudioEntry {
   url: string;
@@ -25,20 +26,14 @@ interface AudioManifest {
 
 const manifest = audioManifest as AudioManifest;
 
-/** Strip Arabic diacritics (tashkeel) so vocab Arabic forms map to the
- *  unvocalized keys used in the manifest. */
-function stripDiacritics(s: string): string {
-  return s.replace(/[\u064B-\u065F\u0670\u06D6-\u06ED]/g, "");
-}
-
 /** Get a playable audio URL for an Arabic word. Falls back through stripped
  *  variants the same way the build script does, so newly-added words don't
  *  silently break if `arabic` retains diacritics that the key doesn't. */
 export function getAudioForWord(arabic: string): AudioEntry | undefined {
   if (!arabic) return undefined;
-  const stripped = stripDiacritics(arabic).trim();
-  if (!stripped) return undefined;
-  return manifest.entries[stripped];
+  const key = audioManifestKey(arabic);
+  if (!key) return undefined;
+  return manifest.entries[key];
 }
 
 /** Get audio for a Qur'an citation like "Qur'ān 20:14" or "Qur'an 2:255". */

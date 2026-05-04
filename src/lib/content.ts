@@ -1,5 +1,5 @@
 import contentJson from "../../content/content.json";
-import { foldForSearch } from "./diacritics";
+import { foldForSearch, foldedSearchMatches, isArabicFolded } from "./diacritics";
 import type { GrammarRule, Lesson, SiteContent, Topic, VocabEntry } from "./types";
 
 const DERIVED_MEMORISED_WORDS: Record<
@@ -38,11 +38,7 @@ function addDerivedMemorisationVocab(base: SiteContent): SiteContent {
     const arabicFolded = foldForSearch(arabic);
     const derived = DERIVED_MEMORISED_WORDS[arabicFolded];
     if (!derived) continue;
-    if (
-      vocab.some(
-        (entry) => entry.lessonId === rule.lessonId && entry.arabicFolded === arabicFolded,
-      )
-    ) {
+    if (vocab.some((entry) => entry.arabicFolded === arabicFolded)) {
       continue;
     }
 
@@ -133,10 +129,18 @@ export interface VocabSearchOptions {
   category?: string;
   gender?: "M" | "F" | "Both";
   isExtra?: boolean;
+  allowArabicPrefix?: boolean;
 }
 
 export function searchVocab(options: VocabSearchOptions = {}): VocabEntry[] {
   const folded = options.query ? foldForSearch(options.query) : "";
+  const allowArabicPrefix =
+    Boolean(options.allowArabicPrefix && folded && isArabicFolded(folded)) &&
+    !content.vocab.some((v) =>
+      [v.arabicFolded, foldForSearch(v.arabic)].some((value) =>
+        foldedSearchMatches(value, folded, { exactArabic: true }),
+      ),
+    );
   return content.vocab.filter((v) => {
     if (options.topicSlug && !v.topicSlugs.includes(options.topicSlug)) return false;
     if (options.category && v.category !== options.category) return false;
@@ -145,11 +149,21 @@ export function searchVocab(options: VocabSearchOptions = {}): VocabEntry[] {
     if (folded) {
       const haystack = [
         v.arabicFolded,
+        foldForSearch(v.arabic),
         foldForSearch(v.pronunciation),
         foldForSearch(v.english),
         foldForSearch(v.category),
-      ].join(" ");
-      if (!haystack.includes(folded)) return false;
+      ];
+      if (
+        !haystack.some((value) =>
+          foldedSearchMatches(value, folded, {
+            exactArabic: true,
+            allowArabicPrefix,
+          }),
+        )
+      ) {
+        return false;
+      }
     }
     return true;
   });

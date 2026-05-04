@@ -25,6 +25,7 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 
+import { audioManifestKey } from "../src/lib/audio-keys";
 import type { SiteContent } from "../src/lib/types";
 
 const REPO_ROOT = path.resolve(__dirname, "..");
@@ -71,11 +72,6 @@ interface AudioManifest {
   quran: Record<string, QuranAudioEntry>;
   /** Words we tried to find but couldn't — retried only on full rebuilds. */
   missing: string[];
-}
-
-/** Strip Arabic diacritics (tashkeel) but preserve hamza-bearing letters. */
-function stripDiacritics(s: string): string {
-  return s.replace(/[\u064B-\u065F\u0670\u06D6-\u06ED]/g, "");
 }
 
 /** Fold hamza-bearing letters to plain forms — matches Wikimedia files that
@@ -248,7 +244,7 @@ function collectAudioTargets(content: SiteContent): AudioTarget[] {
   const seen = new Map<string, AudioTarget>();
   function add(arabic: string, origin: string) {
     if (!arabic) return;
-    const stripped = stripDiacritics(arabic).trim();
+    const stripped = audioManifestKey(arabic);
     if (!stripped) return;
     if (!seen.has(stripped)) seen.set(stripped, { word: stripped, origin });
   }

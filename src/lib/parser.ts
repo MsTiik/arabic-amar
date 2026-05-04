@@ -40,7 +40,19 @@ export interface ParseOptions {
 
 export interface ParseResult {
   content: SiteContent;
-  warnings: string[];
+  warnings: ContentWarning[];
+}
+
+type ContentWarningSeverity = "info" | "warning" | "error";
+
+export interface ContentWarning {
+  code: string;
+  message: string;
+  severity: ContentWarningSeverity;
+  lesson?: string;
+  subsection?: string;
+  heading?: string;
+  details?: Record<string, string | number | boolean | undefined>;
 }
 
 const ARABIC_TITLE_RE = /^(.*?)\s*[-–—]\s*([\u0600-\u06FF\s\u064B-\u065F\u0670]+)\s*$/u;
@@ -58,6 +70,18 @@ function slugify(s: string): string {
 function stableId(parts: string[]): string {
   return parts
     .map((p) => slugify(stripDiacritics(p)))
+    .filter(Boolean)
+    .join("__");
+}
+
+function stableVocabId(parts: string[]): string {
+  return parts
+    .map((p) =>
+      foldForSearch(p)
+        .replace(/[^\p{Letter}\p{Number}]+/gu, "-")
+        .replace(/^-+|-+$/g, "")
+        .slice(0, 80),
+    )
     .filter(Boolean)
     .join("__");
 }
@@ -273,6 +297,7 @@ interface TableClassification {
     | "rule-table"
     | "grammar-example"
     | "countries"
+    | "paired-vocab"
     | "pronouns"
     | "conjugations"
     | "plurals"
@@ -295,6 +320,8 @@ interface TableClassification {
   howToFormCol?: number;
   ruleCol?: number;
   meaningCol?: number;
+  singularArabicCol?: number;
+  pluralArabicCol?: number;
 }
 
 function classifyTable(headers: string[]): TableClassification {
@@ -315,6 +342,7 @@ function classifyTable(headers: string[]): TableClassification {
   // Usage Note | Example. Identified by the "usage note" column.
   if (
     has("usage note") &&
+    indexOf("example") >= 0 &&
     has("arabic") &&
     has("pronunciation") &&
     has("english")
@@ -327,6 +355,30 @@ function classifyTable(headers: string[]): TableClassification {
       englishCol: indexOf("english"),
       usageNoteCol: indexOf("usage note"),
       exampleCol: indexOf("example") >= 0 ? indexOf("example") : undefined,
+    };
+  }
+
+  if (
+    (has("singular (mufrad)") || has("singular")) &&
+    (has("plural (jam’)") || has("plural (jam')") || has("plural")) &&
+    has("pronunciation") &&
+    has("english")
+  ) {
+    const singularCol =
+      indexOf("singular (mufrad)") >= 0 ? indexOf("singular (mufrad)") : indexOf("singular");
+    const pluralCol =
+      indexOf("plural (jam’)") >= 0
+        ? indexOf("plural (jam’)")
+        : indexOf("plural (jam')") >= 0
+          ? indexOf("plural (jam')")
+          : indexOf("plural");
+    return {
+      kind: "paired-vocab",
+      sectionCol: indexOf("category") >= 0 ? indexOf("category") : indexOf("section"),
+      singularArabicCol: singularCol,
+      pluralArabicCol: pluralCol,
+      pronunciationCol: indexOf("pronunciation"),
+      englishCol: indexOf("english"),
     };
   }
 
@@ -459,10 +511,28 @@ export async function parseDocxBuffer(
   buffer: Buffer | ArrayBuffer | Uint8Array,
   options: ParseOptions = {},
 ): Promise<ParseResult> {
-  const warnings: string[] = [];
-  const warn = (msg: string) => {
-    warnings.push(msg);
-    if (options.verbose) console.warn("[parser]", msg);
+  const warnings: ContentWarning[] = [];
+  const formatWarning = (warning: ContentWarning): string => {
+    const context = [
+      warning.lesson ? `lesson=${warning.lesson}` : undefined,
+      warning.subsection ? `sub=${warning.subsection}` : undefined,
+      warning.heading ? `heading=${warning.heading}` : undefined,
+    ].filter(Boolean);
+    return context.length > 0 ? `${warning.message} (${context.join(" ")})` : warning.message;
+  };
+  const warn = (warning: string | Omit<ContentWarning, "lesson" | "subsection" | "heading">) => {
+    const normalized =
+      typeof warning === "string"
+        ? { code: "parser-warning", message: warning, severity: "warning" as const }
+        : warning;
+    const entry: ContentWarning = {
+      ...normalized,
+      lesson: cursor.lesson?.number,
+      subsection: cursor.subSection?.title,
+      heading: cursor.subSubHeading ?? undefined,
+    };
+    warnings.push(entry);
+    if (options.verbose) console.warn("[parser]", formatWarning(entry));
   };
 
   const result = await mammoth.convertToHtml({
@@ -642,6 +712,61 @@ export async function parseDocxBuffer(
         weekdayIndex,
         monthIndex,
         monthSystem,
+        topicSlugs: [...cursor.topicSlugs],
+        lessonId: cursor.lessonId,
+      });
+    }
+  }
+
+  function processPairedVocabTable(
+    table: HTMLElement,
+    classification: TableClassification,
+  ): void {
+    if (!cursor.lesson) {
+      warn(`Skipped paired vocab table: no current lesson`);
+      return;
+    }
+    if (
+      classification.singularArabicCol === undefined ||
+      classification.pluralArabicCol === undefined ||
+      classification.pronunciationCol === undefined ||
+      classification.englishCol === undefined
+    ) {
+      warn(`Skipped paired vocab table: missing required columns`);
+      return;
+    }
+    const matrix = tableToMatrix(table);
+    if (matrix.length < 2) return;
+
+    let runningCategory = cursor.subSection?.qualifier ?? "General";
+    for (const row of matrix.slice(1)) {
+      if (classification.sectionCol !== undefined) {
+        const sectionCell = row.cells[classification.sectionCol]?.trim();
+        if (sectionCell) runningCategory = sectionCell;
+      }
+
+      const singularArabic = row.cells[classification.singularArabicCol]?.trim();
+      const pluralArabic = row.cells[classification.pluralArabicCol]?.trim();
+      const pronunciation = row.cells[classification.pronunciationCol]?.trim();
+      const english = row.cells[classification.englishCol]?.trim();
+      if (!singularArabic || !pronunciation || !english) continue;
+
+      const id = stableVocabId([
+        cursor.lessonId,
+        runningCategory,
+        singularArabic,
+        pluralArabic ?? "",
+        pronunciation,
+        english,
+      ]);
+      vocab.push({
+        id,
+        arabic: pluralArabic ? `${singularArabic} / ${pluralArabic}` : singularArabic,
+        arabicFolded: foldForSearch(`${singularArabic} ${pluralArabic ?? ""}`),
+        pronunciation,
+        english,
+        category: runningCategory,
+        isExtra: false,
         topicSlugs: [...cursor.topicSlugs],
         lessonId: cursor.lessonId,
       });
@@ -1289,6 +1414,9 @@ export async function parseDocxBuffer(
         case "countries":
           processCountriesTable(node);
           break;
+        case "paired-vocab":
+          processPairedVocabTable(node, classification);
+          break;
         case "pronouns":
           processPronounTable(node, classification);
           break;
@@ -1348,7 +1476,6 @@ export async function parseDocxBuffer(
     vocabIdCounts.set(baseId, count);
     if (count > 1) {
       v.id = `${baseId}-${count}`;
-      warn(`Duplicate vocab id collapsed: ${v.id}`);
     }
   }
 

@@ -9,11 +9,13 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 
+import { createContentQaReport } from "../src/lib/content-qa";
 import { parseDocxBuffer } from "../src/lib/parser";
 import { applySpellingFixes, dedupeLongRepeatedEnglish } from "../src/lib/post-process";
 import { fetchDocxBytes, getDocId, getDocUrl } from "../src/lib/source";
 
 const OUTPUT_PATH = path.resolve(process.cwd(), "content", "content.json");
+const QA_OUTPUT_PATH = path.resolve(process.cwd(), "content", "content-qa.json");
 
 async function loadBuffer(): Promise<Buffer> {
   const localPath = process.env.LOCAL_DOCX_PATH;
@@ -34,7 +36,7 @@ async function main(): Promise<void> {
 
   if (warnings.length > 0) {
     console.warn(`[content] parser produced ${warnings.length} warning(s):`);
-    for (const w of warnings) console.warn("   -", w);
+    for (const warning of warnings) console.warn("   -", warning.message);
   }
 
   console.log(`[content] lessons=${content.lessons.length} topics=${content.topics.length}`);
@@ -46,7 +48,15 @@ async function main(): Promise<void> {
 
   await fs.mkdir(path.dirname(OUTPUT_PATH), { recursive: true });
   await fs.writeFile(OUTPUT_PATH, JSON.stringify(content, null, 2) + "\n", "utf8");
+  const qaReport = createContentQaReport(content, warnings, content.fetchedAt);
+  await fs.writeFile(QA_OUTPUT_PATH, JSON.stringify(qaReport, null, 2) + "\n", "utf8");
   console.log(`[content] wrote ${OUTPUT_PATH}`);
+  console.log(
+    `[content] QA issues=${qaReport.totals.issues} (${qaReport.issues
+      .map((issue) => `${issue.code}:${issue.count}`)
+      .join(", ")})`,
+  );
+  console.log(`[content] wrote ${QA_OUTPUT_PATH}`);
 }
 
 void main().catch((err) => {

@@ -41,3 +41,27 @@ export function foldedIncludes(haystack: string, needle: string): boolean {
   if (!needle) return true;
   return haystack.includes(needle);
 }
+
+export function foldedSearchMatches(
+  value: string,
+  needle: string,
+  options: { exactArabic?: boolean; allowArabicPrefix?: boolean } = {},
+): boolean {
+  if (!needle) return true;
+  if (options.exactArabic && isArabicFolded(needle)) {
+    const needleTokens = needle.split(/\s+/).filter(Boolean);
+    const valueTokens = value.split(/\s+/).filter(Boolean);
+    return valueTokens.some((_, index) =>
+      needleTokens.every((token, offset) => {
+        const valueToken = valueTokens[index + offset];
+        if (!valueToken) return false;
+        return options.allowArabicPrefix ? valueToken.startsWith(token) : valueToken === token;
+      }),
+    );
+  }
+  return value.includes(needle);
+}
+
+export function isArabicFolded(value: string): boolean {
+  return /[\u0600-\u06FF]/u.test(value);
+}
