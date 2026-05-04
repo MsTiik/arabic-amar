@@ -425,7 +425,17 @@
         "lesson-getting-to-know-each-other__prepositions-10",
         "lesson-getting-to-know-each-other__prepositions-11",
         "lesson-getting-to-know-each-other__prepositions-12",
-        "lesson-getting-to-know-each-other__prepositions-13"
+        "lesson-getting-to-know-each-other__prepositions-13",
+        "lesson-getting-to-know-each-other__singular-near",
+        "lesson-getting-to-know-each-other__singular-near-2",
+        "lesson-getting-to-know-each-other__singular-far",
+        "lesson-getting-to-know-each-other__singular-far-2",
+        "lesson-getting-to-know-each-other__dual-near",
+        "lesson-getting-to-know-each-other__dual-near-2",
+        "lesson-getting-to-know-each-other__dual-far",
+        "lesson-getting-to-know-each-other__dual-far-2",
+        "lesson-getting-to-know-each-other__plural-near",
+        "lesson-getting-to-know-each-other__plural-far"
       ],
       "ruleIds": [],
       "conversationIds": []
@@ -438,7 +448,25 @@
       "topicSlugs": [
         "the-classroom"
       ],
-      "vocabIds": [],
+      "vocabIds": [
+        "lesson-the-classroom__rooms-places__حجرة__حجر__hujrah-hujar__room-rooms",
+        "lesson-the-classroom__rooms-places__حجرة-الدراسة__حجر-الدراسة__hujrur-hujrurat-ad-dirasah__study-room-study-rooms",
+        "lesson-the-classroom__rooms-places__مكتبة__مكتبات__maktabah-maktabat__library-libraries",
+        "lesson-the-classroom__rooms-places__مختبر__مختبرات__mukhtabar-mukhtabarat__laboratory-laboratories",
+        "lesson-the-classroom__furniture-features__مكتب__مكاتب__maktab-makatib__desk-desks",
+        "lesson-the-classroom__furniture-features__مقعد__مقاعد__maqad-maqaid__bench-benches",
+        "lesson-the-classroom__furniture-features__نافذة__نوافذ__nafidhah-nawafidh__window-windows",
+        "lesson-the-classroom__furniture-features__مروحة__مراوح__mirwahah-marawih__fan-fans",
+        "lesson-the-classroom__classroomitems__دفتر__دفاتر__daftar-dafatir__notebook-notebooks",
+        "lesson-the-classroom__classroomitems__مسطرة__مساطر__mistarah-masatir__ruler-rulers",
+        "lesson-the-classroom__classroomitems__ممحاة__ممحات__mimhah-mimhat__eraser-erasers",
+        "lesson-the-classroom__classroomitems__مبراة__مبرايات__mibrah-mibrayat__pencil-sharpener-sharpeners",
+        "lesson-the-classroom__classroomitems__لوحة__لوحات__lawhah-lawhat__board-boards",
+        "lesson-the-classroom__classroomitems__ممسحة__ممسحات__mimshah-mimshat__board-wiper-wipers",
+        "lesson-the-classroom__classroomitems__خريطة__خراي-ط__kharitah-kharait__map-maps",
+        "lesson-the-classroom__classroomitems__صورة__صور__surah-suwar__picture-pictures",
+        "lesson-the-classroom__classroomitems__نقطة__نقط__nuqtah-nuqat__dot-dots"
+      ],
       "ruleIds": [],
       "conversationIds": []
     }
@@ -532,7 +560,7 @@
       "lessonIds": [
         "lesson-getting-to-know-each-other"
       ],
-      "vocabCount": 150,
+      "vocabCount": 160,
       "ruleCount": 0,
       "conversationCount": 0,
       "notes": []
@@ -545,7 +573,7 @@
       "lessonIds": [
         "lesson-the-classroom"
       ],
-      "vocabCount": 0,
+      "vocabCount": 17,
       "ruleCount": 0,
       "conversationCount": 0,
       "notes": []
@@ -5113,6 +5141,357 @@
         "getting-to-know-each-other"
       ],
       "lessonId": "lesson-getting-to-know-each-other"
+    },
+    {
+      "id": "lesson-getting-to-know-each-other__singular-near",
+      "arabic": "هَذَا",
+      "arabicFolded": "هذا",
+      "pronunciation": "hādhā",
+      "english": "this (m)",
+      "category": "Singular (near)",
+      "isExtra": false,
+      "topicSlugs": [
+        "getting-to-know-each-other"
+      ],
+      "lessonId": "lesson-getting-to-know-each-other"
+    },
+    {
+      "id": "lesson-getting-to-know-each-other__singular-near-2",
+      "arabic": "هَذِهِ",
+      "arabicFolded": "هذه",
+      "pronunciation": "hādhihi",
+      "english": "this (f)",
+      "category": "Singular (near)",
+      "isExtra": false,
+      "topicSlugs": [
+        "getting-to-know-each-other"
+      ],
+      "lessonId": "lesson-getting-to-know-each-other"
+    },
+    {
+      "id": "lesson-getting-to-know-each-other__singular-far",
+      "arabic": "ذَلِكَ",
+      "arabicFolded": "ذلك",
+      "pronunciation": "dhālika",
+      "english": "that (m)",
+      "category": "Singular (far)",
+      "isExtra": false,
+      "topicSlugs": [
+        "getting-to-know-each-other"
+      ],
+      "lessonId": "lesson-getting-to-know-each-other"
+    },
+    {
+      "id": "lesson-getting-to-know-each-other__singular-far-2",
+      "arabic": "تِلْكَ",
+      "arabicFolded": "تلك",
+      "pronunciation": "tilka",
+      "english": "that (f)",
+      "category": "Singular (far)",
+      "isExtra": false,
+      "topicSlugs": [
+        "getting-to-know-each-other"
+      ],
+      "lessonId": "lesson-getting-to-know-each-other"
+    },
+    {
+      "id": "lesson-getting-to-know-each-other__dual-near",
+      "arabic": "هَذَانِ",
+      "arabicFolded": "هذان",
+      "pronunciation": "hādhāni",
+      "english": "these two (m)",
+      "category": "Dual (near)",
+      "isExtra": false,
+      "topicSlugs": [
+        "getting-to-know-each-other"
+      ],
+      "lessonId": "lesson-getting-to-know-each-other"
+    },
+    {
+      "id": "lesson-getting-to-know-each-other__dual-near-2",
+      "arabic": "هَاتَانِ",
+      "arabicFolded": "هاتان",
+      "pronunciation": "hātāni",
+      "english": "these two (f)",
+      "category": "Dual (near)",
+      "isExtra": false,
+      "topicSlugs": [
+        "getting-to-know-each-other"
+      ],
+      "lessonId": "lesson-getting-to-know-each-other"
+    },
+    {
+      "id": "lesson-getting-to-know-each-other__dual-far",
+      "arabic": "ذَانِكَ",
+      "arabicFolded": "ذانك",
+      "pronunciation": "dhānika",
+      "english": "those two (m)",
+      "category": "Dual (far)",
+      "isExtra": false,
+      "topicSlugs": [
+        "getting-to-know-each-other"
+      ],
+      "lessonId": "lesson-getting-to-know-each-other"
+    },
+    {
+      "id": "lesson-getting-to-know-each-other__dual-far-2",
+      "arabic": "تَانِكَ",
+      "arabicFolded": "تانك",
+      "pronunciation": "tānika",
+      "english": "those two (f)",
+      "category": "Dual (far)",
+      "isExtra": false,
+      "topicSlugs": [
+        "getting-to-know-each-other"
+      ],
+      "lessonId": "lesson-getting-to-know-each-other"
+    },
+    {
+      "id": "lesson-getting-to-know-each-other__plural-near",
+      "arabic": "هَؤُلَاءِ",
+      "arabicFolded": "هؤلاء",
+      "pronunciation": "hāʾulāʾ",
+      "english": "these",
+      "category": "Plural (near)",
+      "isExtra": false,
+      "topicSlugs": [
+        "getting-to-know-each-other"
+      ],
+      "lessonId": "lesson-getting-to-know-each-other"
+    },
+    {
+      "id": "lesson-getting-to-know-each-other__plural-far",
+      "arabic": "أُولَٰئِكَ",
+      "arabicFolded": "أولئك",
+      "pronunciation": "ulāʾika",
+      "english": "those",
+      "category": "Plural (far)",
+      "isExtra": false,
+      "topicSlugs": [
+        "getting-to-know-each-other"
+      ],
+      "lessonId": "lesson-getting-to-know-each-other"
+    },
+    {
+      "id": "lesson-the-classroom__rooms-places__حجرة__حجر__hujrah-hujar__room-rooms",
+      "arabic": "حُجْرَة / حُجُر",
+      "arabicFolded": "حجرة حجر",
+      "pronunciation": "ḥujrah / ḥujar",
+      "english": "room → rooms",
+      "category": "ROOMS & PLACES",
+      "isExtra": false,
+      "topicSlugs": [
+        "the-classroom"
+      ],
+      "lessonId": "lesson-the-classroom"
+    },
+    {
+      "id": "lesson-the-classroom__rooms-places__حجرة-الدراسة__حجر-الدراسة__hujrur-hujrurat-ad-dirasah__study-room-study-rooms",
+      "arabic": "حُجْرَةُ الدِّرَاسَة / حُجَرُ الدِّرَاسَة",
+      "arabicFolded": "حجرة الدراسة حجر الدراسة",
+      "pronunciation": "ḥujrur / ḥujrurat ad-dirāsah",
+      "english": "study room → study rooms",
+      "category": "ROOMS & PLACES",
+      "isExtra": false,
+      "topicSlugs": [
+        "the-classroom"
+      ],
+      "lessonId": "lesson-the-classroom"
+    },
+    {
+      "id": "lesson-the-classroom__rooms-places__مكتبة__مكتبات__maktabah-maktabat__library-libraries",
+      "arabic": "مَكْتَبَة / مَكْتَبَات",
+      "arabicFolded": "مكتبة مكتبات",
+      "pronunciation": "maktabah / maktabāt",
+      "english": "library → libraries",
+      "category": "ROOMS & PLACES",
+      "isExtra": false,
+      "topicSlugs": [
+        "the-classroom"
+      ],
+      "lessonId": "lesson-the-classroom"
+    },
+    {
+      "id": "lesson-the-classroom__rooms-places__مختبر__مختبرات__mukhtabar-mukhtabarat__laboratory-laboratories",
+      "arabic": "مُخْتَبَر / مُخْتَبَرَات",
+      "arabicFolded": "مختبر مختبرات",
+      "pronunciation": "mukhtabar / mukhtabarāt",
+      "english": "laboratory → laboratories",
+      "category": "ROOMS & PLACES",
+      "isExtra": false,
+      "topicSlugs": [
+        "the-classroom"
+      ],
+      "lessonId": "lesson-the-classroom"
+    },
+    {
+      "id": "lesson-the-classroom__furniture-features__مكتب__مكاتب__maktab-makatib__desk-desks",
+      "arabic": "مَكْتَب / مَكَاتِب",
+      "arabicFolded": "مكتب مكاتب",
+      "pronunciation": "maktab / makātib",
+      "english": "desk → desks",
+      "category": "FURNITURE & FEATURES",
+      "isExtra": false,
+      "topicSlugs": [
+        "the-classroom"
+      ],
+      "lessonId": "lesson-the-classroom"
+    },
+    {
+      "id": "lesson-the-classroom__furniture-features__مقعد__مقاعد__maqad-maqaid__bench-benches",
+      "arabic": "مَقْعَد / مَقَاعِد",
+      "arabicFolded": "مقعد مقاعد",
+      "pronunciation": "maqʿad / maqāʿid",
+      "english": "bench → benches",
+      "category": "FURNITURE & FEATURES",
+      "isExtra": false,
+      "topicSlugs": [
+        "the-classroom"
+      ],
+      "lessonId": "lesson-the-classroom"
+    },
+    {
+      "id": "lesson-the-classroom__furniture-features__نافذة__نوافذ__nafidhah-nawafidh__window-windows",
+      "arabic": "نَافِذَة / نَوَافِذ",
+      "arabicFolded": "نافذة نوافذ",
+      "pronunciation": "nāfidhah / nawāfidh",
+      "english": "window → windows",
+      "category": "FURNITURE & FEATURES",
+      "isExtra": false,
+      "topicSlugs": [
+        "the-classroom"
+      ],
+      "lessonId": "lesson-the-classroom"
+    },
+    {
+      "id": "lesson-the-classroom__furniture-features__مروحة__مراوح__mirwahah-marawih__fan-fans",
+      "arabic": "مِرْوَحَة / مَرَاوِح",
+      "arabicFolded": "مروحة مراوح",
+      "pronunciation": "mirwaḥah / marāwiḥ",
+      "english": "fan → fans",
+      "category": "FURNITURE & FEATURES",
+      "isExtra": false,
+      "topicSlugs": [
+        "the-classroom"
+      ],
+      "lessonId": "lesson-the-classroom"
+    },
+    {
+      "id": "lesson-the-classroom__classroomitems__دفتر__دفاتر__daftar-dafatir__notebook-notebooks",
+      "arabic": "دَفْتَر / دَفَاتِر",
+      "arabicFolded": "دفتر دفاتر",
+      "pronunciation": "daftar / dafātir",
+      "english": "notebook → notebooks",
+      "category": "CLASSROOMITEMS",
+      "isExtra": false,
+      "topicSlugs": [
+        "the-classroom"
+      ],
+      "lessonId": "lesson-the-classroom"
+    },
+    {
+      "id": "lesson-the-classroom__classroomitems__مسطرة__مساطر__mistarah-masatir__ruler-rulers",
+      "arabic": "مِسْطَرَة / مَسَاطِر",
+      "arabicFolded": "مسطرة مساطر",
+      "pronunciation": "misṭarah / masāṭir",
+      "english": "ruler → rulers",
+      "category": "CLASSROOMITEMS",
+      "isExtra": false,
+      "topicSlugs": [
+        "the-classroom"
+      ],
+      "lessonId": "lesson-the-classroom"
+    },
+    {
+      "id": "lesson-the-classroom__classroomitems__ممحاة__ممحات__mimhah-mimhat__eraser-erasers",
+      "arabic": "مِمْحَاة / مِمْحَات",
+      "arabicFolded": "ممحاة ممحات",
+      "pronunciation": "mimḥāh / mimḥāt",
+      "english": "eraser → erasers",
+      "category": "CLASSROOMITEMS",
+      "isExtra": false,
+      "topicSlugs": [
+        "the-classroom"
+      ],
+      "lessonId": "lesson-the-classroom"
+    },
+    {
+      "id": "lesson-the-classroom__classroomitems__مبراة__مبرايات__mibrah-mibrayat__pencil-sharpener-sharpeners",
+      "arabic": "مِبْرَاة / مِبْرَايَات",
+      "arabicFolded": "مبراة مبرايات",
+      "pronunciation": "mibrāh / mibrāyāt",
+      "english": "pencil sharpener → sharpeners",
+      "category": "CLASSROOMITEMS",
+      "isExtra": false,
+      "topicSlugs": [
+        "the-classroom"
+      ],
+      "lessonId": "lesson-the-classroom"
+    },
+    {
+      "id": "lesson-the-classroom__classroomitems__لوحة__لوحات__lawhah-lawhat__board-boards",
+      "arabic": "لَوْحَة / لَوْحَات",
+      "arabicFolded": "لوحة لوحات",
+      "pronunciation": "lawḥah / lawḥāt",
+      "english": "board → boards",
+      "category": "CLASSROOMITEMS",
+      "isExtra": false,
+      "topicSlugs": [
+        "the-classroom"
+      ],
+      "lessonId": "lesson-the-classroom"
+    },
+    {
+      "id": "lesson-the-classroom__classroomitems__ممسحة__ممسحات__mimshah-mimshat__board-wiper-wipers",
+      "arabic": "مِمْسَحَة / مِمْسَحَات",
+      "arabicFolded": "ممسحة ممسحات",
+      "pronunciation": "mimsḥah / mimsḥāt",
+      "english": "board wiper → wipers",
+      "category": "CLASSROOMITEMS",
+      "isExtra": false,
+      "topicSlugs": [
+        "the-classroom"
+      ],
+      "lessonId": "lesson-the-classroom"
+    },
+    {
+      "id": "lesson-the-classroom__classroomitems__خريطة__خراي-ط__kharitah-kharait__map-maps",
+      "arabic": "خَرِيطَة / خَرَائِط",
+      "arabicFolded": "خريطة خرائط",
+      "pronunciation": "kharīṭah / kharāʾiṭ",
+      "english": "map → maps",
+      "category": "CLASSROOMITEMS",
+      "isExtra": false,
+      "topicSlugs": [
+        "the-classroom"
+      ],
+      "lessonId": "lesson-the-classroom"
+    },
+    {
+      "id": "lesson-the-classroom__classroomitems__صورة__صور__surah-suwar__picture-pictures",
+      "arabic": "صُورَة / صُوَر",
+      "arabicFolded": "صورة صور",
+      "pronunciation": "ṣūrah / ṣuwar",
+      "english": "picture → pictures",
+      "category": "CLASSROOMITEMS",
+      "isExtra": false,
+      "topicSlugs": [
+        "the-classroom"
+      ],
+      "lessonId": "lesson-the-classroom"
+    },
+    {
+      "id": "lesson-the-classroom__classroomitems__نقطة__نقط__nuqtah-nuqat__dot-dots",
+      "arabic": "نُقْطَة / نُقَط",
+      "arabicFolded": "نقطة نقط",
+      "pronunciation": "nuqṭah / nuqaṭ",
+      "english": "dot → dots",
+      "category": "CLASSROOMITEMS",
+      "isExtra": false,
+      "topicSlugs": [
+        "the-classroom"
+      ],
+      "lessonId": "lesson-the-classroom"
     }
   ],
   "rules": [

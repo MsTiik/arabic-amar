@@ -57,6 +57,12 @@ export default function AboutPage() {
             Google Doc
           </Link>
         </li>
+        <li>
+          <span className="text-muted-foreground">{"Content QA: "}</span>
+          <Link className="underline" href="/admin/content-health">
+            latest build report
+          </Link>
+        </li>
       </ul>
 
       <h2 className="mt-10 text-xl font-semibold tracking-tight">Privacy</h2>

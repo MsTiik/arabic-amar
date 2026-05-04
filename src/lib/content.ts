@@ -38,11 +38,7 @@ function addDerivedMemorisationVocab(base: SiteContent): SiteContent {
     const arabicFolded = foldForSearch(arabic);
     const derived = DERIVED_MEMORISED_WORDS[arabicFolded];
     if (!derived) continue;
-    if (
-      vocab.some(
-        (entry) => entry.lessonId === rule.lessonId && entry.arabicFolded === arabicFolded,
-      )
-    ) {
+    if (vocab.some((entry) => entry.arabicFolded === arabicFolded)) {
       continue;
     }
 
@@ -145,14 +141,25 @@ export function searchVocab(options: VocabSearchOptions = {}): VocabEntry[] {
     if (folded) {
       const haystack = [
         v.arabicFolded,
+        foldForSearch(v.arabic),
         foldForSearch(v.pronunciation),
         foldForSearch(v.english),
         foldForSearch(v.category),
-      ].join(" ");
-      if (!haystack.includes(folded)) return false;
+      ];
+      if (
+        !haystack.some((value) =>
+          isArabicFolded(folded) ? value.split(/\s+/).includes(folded) : value.includes(folded),
+        )
+      ) {
+        return false;
+      }
     }
     return true;
   });
+}
+
+function isArabicFolded(value: string): boolean {
+  return /[\u0600-\u06FF]/u.test(value);
 }
 
 export interface CategoryGroup {
