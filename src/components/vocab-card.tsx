@@ -64,6 +64,7 @@ export function VocabCard({
             arabic={entry.arabic}
             label={entry.english}
             size="sm"
+            showUnavailable
           />
           <p className="text-base font-medium text-foreground sm:text-lg" lang="ar-Latn">
             {entry.pronunciation}

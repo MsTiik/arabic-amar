@@ -1,5 +1,4 @@
-import audioManifest from "../../content/audio-manifest.json";
-import { audioManifestKey } from "./audio-keys";
+import { createAudioCoverageStats, hasAudioForWord, type AudioCoverageStats } from "./audio";
 import type { ContentWarning } from "./parser";
 import type { SiteContent, VocabEntry } from "./types";
 
@@ -24,21 +23,12 @@ export interface ContentQaReport {
     parserWarnings: number;
     issues: number;
   };
+  audioCoverage: AudioCoverageStats;
   issues: ContentQaIssue[];
 }
 
-interface AudioManifest {
-  entries: Record<string, unknown>;
-}
-
-const AUDIO_ENTRIES = (audioManifest as AudioManifest).entries;
-
 function exampleVocab(entry: VocabEntry): string {
   return `${entry.lessonId}: ${entry.arabic} / ${entry.pronunciation} / ${entry.english || "(empty)"}`;
-}
-
-function stripAudioKey(arabic: string): string {
-  return audioManifestKey(arabic);
 }
 
 function addIssue(
@@ -139,7 +129,7 @@ export function createContentQaReport(
     });
   }
 
-  const missingAudio = content.vocab.filter((entry) => !AUDIO_ENTRIES[stripAudioKey(entry.arabic)]);
+  const missingAudio = content.vocab.filter((entry) => !hasAudioForWord(entry.arabic));
   if (missingAudio.length > 0) {
     addIssue(issues, {
       code: "missing-audio",
@@ -186,6 +176,7 @@ export function createContentQaReport(
       parserWarnings: parserWarnings.length,
       issues: issues.length,
     },
+    audioCoverage: createAudioCoverageStats(content),
     issues,
   };
 }

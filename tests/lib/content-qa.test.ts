@@ -100,6 +100,12 @@ describe("createContentQaReport", () => {
 
     expect(report.generatedAt).toBe("2026-01-02T00:00:00.000Z");
     expect(report.totals.parserWarnings).toBe(1);
+    expect(report.audioCoverage).toMatchObject({
+      vocabTotal: 1,
+      vocabWithAudio: 0,
+      vocabMissingAudio: 1,
+      coveragePercent: 0,
+    });
     expect(report.issues.map((issue) => issue.code)).toEqual(
       expect.arrayContaining(["parser-warnings", "empty-lessons", "empty-vocab-english"]),
     );
