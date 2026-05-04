@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-04T02:18:32.646Z",
+  "generatedAt": "2026-05-04T14:53:54.827Z",
   "totals": {
     "lessons": 8,
     "topics": 8,
@@ -7,29 +7,9 @@
     "rules": 15,
     "conversations": 0,
     "parserWarnings": 0,
-    "issues": 2
+    "issues": 1
   },
   "issues": [
-    {
-      "code": "empty-vocab-english",
-      "severity": "warning",
-      "message": "Vocabulary cards are missing English glosses.",
-      "count": 12,
-      "examples": [
-        "lesson-islamic-and-gregorian-months: ١ - مُحَرَّم / muḥarram / (empty)",
-        "lesson-islamic-and-gregorian-months: ٢ - صَفَر / ṣafar / (empty)",
-        "lesson-islamic-and-gregorian-months: ٣ - رَبِيع الأَوَّل / rabīʿ al-awwal / (empty)",
-        "lesson-islamic-and-gregorian-months: ٤ - رَبِيع الآخِر / الثَّانِي / rabīʿ al-ākhir / ath-thānī / (empty)",
-        "lesson-islamic-and-gregorian-months: ٥ - جُمَادَى الأُولَى / jumādā al-ūlā / (empty)",
-        "lesson-islamic-and-gregorian-months: ٦ - جُمَادَى الآخِرَة / الثَّانِيَة / jumādā al-ākhirah / ath-thaniyah / (empty)",
-        "lesson-islamic-and-gregorian-months: ٧ - رَجَب / rajab / (empty)",
-        "lesson-islamic-and-gregorian-months: ٨ - شَعْبَان / shaʿbān / (empty)",
-        "lesson-islamic-and-gregorian-months: ٩ - رَمَضَان / ramaḍān / (empty)",
-        "lesson-islamic-and-gregorian-months: ١٠ - شَوَّال / shawwāl / (empty)",
-        "lesson-islamic-and-gregorian-months: ١١ - ذُو القَعْدَة / dhū al-qaʿdah / (empty)",
-        "lesson-islamic-and-gregorian-months: ١٢ - ذُو الحِجَّة / dhū al-ḥijjah / (empty)"
-      ]
-    },
     {
       "code": "missing-audio",
       "severity": "info",
