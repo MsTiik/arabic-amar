@@ -1,4 +1,4 @@
-import type { SiteContent, Topic, VocabEntry } from "./types";
+import type { ConjugationEntry, SiteContent, Topic, VocabEntry } from "./types";
 
 const NOTE_MIN_CHARS = 60;
 const NOTE_MIN_REPEATS = 3;
@@ -139,5 +139,27 @@ export function fillIslamicMonthGlosses(content: SiteContent): SiteContent {
         monthSystem: "hijri",
       };
     }),
+  };
+}
+
+function correctConjugationCategory(conjugation: ConjugationEntry): ConjugationEntry {
+  if (
+    conjugation.category === "3rd person singular" &&
+    conjugation.gender === "M" &&
+    conjugation.english.trim().toLowerCase().startsWith("they ")
+  ) {
+    return {
+      ...conjugation,
+      id: conjugation.id.replace("__3rd-person-singular__", "__3rd-person-plural__"),
+      category: "3rd person plural",
+    };
+  }
+  return conjugation;
+}
+
+export function correctConjugationLabels(content: SiteContent): SiteContent {
+  return {
+    ...content,
+    conjugations: content.conjugations.map(correctConjugationCategory),
   };
 }
