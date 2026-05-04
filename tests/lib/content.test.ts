@@ -22,6 +22,9 @@ describe("content vocabulary search", () => {
     expect(unvowelled.map((entry) => foldForSearch(entry.arabic))).not.toContain(
       foldForSearch("هَذَانِ"),
     );
+    expect(searchVocab({ query: "هذ", allowArabicPrefix: true }).map((entry) => foldForSearch(entry.arabic))).toEqual(
+      expect.arrayContaining([foldForSearch("هذا"), foldForSearch("هذان")]),
+    );
     expect(vowelled.map((entry) => foldForSearch(entry.arabic))).toContain(foldForSearch("هذا"));
     expect(transliterated.map((entry) => foldForSearch(entry.arabic))).toContain(
       foldForSearch("هذا"),

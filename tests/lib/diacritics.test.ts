@@ -53,6 +53,18 @@ describe("foldedSearchMatches", () => {
     ).toBe(false);
   });
 
+  test("allows Arabic prefix matching only when requested", () => {
+    expect(foldedSearchMatches(foldForSearch("هَذَا"), foldForSearch("هذ"), { exactArabic: true })).toBe(
+      false,
+    );
+    expect(
+      foldedSearchMatches(foldForSearch("هَذَا"), foldForSearch("هذ"), {
+        exactArabic: true,
+        allowArabicPrefix: true,
+      }),
+    ).toBe(true);
+  });
+
   test("keeps substring matching for transliteration and English", () => {
     expect(foldedSearchMatches(foldForSearch("hādhā"), foldForSearch("had"))).toBe(true);
     expect(foldedSearchMatches(foldForSearch("this (m)"), foldForSearch("thi"))).toBe(true);

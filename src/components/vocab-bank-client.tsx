@@ -43,7 +43,11 @@ export function VocabBankClient({ vocab, topics }: Props) {
           foldForSearch(v.continent ?? ""),
           foldForSearch(v.country ?? ""),
         ];
-        if (!haystack.some((value) => foldedSearchMatches(value, folded, { exactArabic: true }))) {
+        if (
+          !haystack.some((value) =>
+            foldedSearchMatches(value, folded, { exactArabic: true, allowArabicPrefix: true }),
+          )
+        ) {
           return false;
         }
       }

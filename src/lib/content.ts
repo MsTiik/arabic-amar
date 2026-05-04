@@ -129,6 +129,7 @@ export interface VocabSearchOptions {
   category?: string;
   gender?: "M" | "F" | "Both";
   isExtra?: boolean;
+  allowArabicPrefix?: boolean;
 }
 
 export function searchVocab(options: VocabSearchOptions = {}): VocabEntry[] {
@@ -146,7 +147,14 @@ export function searchVocab(options: VocabSearchOptions = {}): VocabEntry[] {
         foldForSearch(v.english),
         foldForSearch(v.category),
       ];
-      if (!haystack.some((value) => foldedSearchMatches(value, folded, { exactArabic: true }))) {
+      if (
+        !haystack.some((value) =>
+          foldedSearchMatches(value, folded, {
+            exactArabic: true,
+            allowArabicPrefix: options.allowArabicPrefix,
+          }),
+        )
+      ) {
         return false;
       }
     }
