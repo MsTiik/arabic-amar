@@ -61,19 +61,35 @@ const POS_LABEL: Record<QuranWordPos, string> = {
   vocative: "Vocative particle",
 };
 
+// Per-POS chip palette. Light mode: pastel tint (light bg + dark text).
+// Dark mode: deeper, lower-chroma background with light text so the chips
+// stay legible against a dark canvas without "shouting".
+//
+// Class strings must appear as static literals — Tailwind v4 scans source
+// for these, so building them with template strings would break the build.
 const POS_TONE: Record<QuranWordPos, string> = {
-  noun: "bg-[oklch(0.95_0.04_220)] text-[oklch(0.32_0.10_220)]",
-  "proper-noun": "bg-[oklch(0.95_0.04_280)] text-[oklch(0.32_0.10_280)]",
-  verb: "bg-[oklch(0.95_0.04_145)] text-[oklch(0.32_0.10_145)]",
-  pronoun: "bg-[oklch(0.95_0.04_40)] text-[oklch(0.32_0.10_40)]",
-  particle: "bg-[oklch(0.95_0.04_350)] text-[oklch(0.32_0.10_350)]",
-  preposition: "bg-[oklch(0.95_0.04_350)] text-[oklch(0.32_0.10_350)]",
-  conjunction: "bg-[oklch(0.95_0.04_350)] text-[oklch(0.32_0.10_350)]",
-  demonstrative: "bg-[oklch(0.95_0.04_80)] text-[oklch(0.32_0.10_80)]",
-  relative: "bg-[oklch(0.95_0.04_80)] text-[oklch(0.32_0.10_80)]",
-  interrogative: "bg-[oklch(0.95_0.04_350)] text-[oklch(0.32_0.10_350)]",
-  negation: "bg-[oklch(0.95_0.04_10)] text-[oklch(0.32_0.10_10)]",
-  vocative: "bg-[oklch(0.95_0.04_10)] text-[oklch(0.32_0.10_10)]",
+  noun: "bg-[oklch(0.95_0.04_220)] text-[oklch(0.32_0.10_220)] dark:bg-[oklch(0.30_0.06_220)] dark:text-[oklch(0.85_0.08_220)]",
+  "proper-noun":
+    "bg-[oklch(0.95_0.04_280)] text-[oklch(0.32_0.10_280)] dark:bg-[oklch(0.30_0.06_280)] dark:text-[oklch(0.85_0.08_280)]",
+  verb: "bg-[oklch(0.95_0.04_145)] text-[oklch(0.32_0.10_145)] dark:bg-[oklch(0.30_0.06_145)] dark:text-[oklch(0.85_0.08_145)]",
+  pronoun:
+    "bg-[oklch(0.95_0.04_40)] text-[oklch(0.32_0.10_40)] dark:bg-[oklch(0.30_0.06_40)] dark:text-[oklch(0.85_0.08_40)]",
+  particle:
+    "bg-[oklch(0.95_0.04_350)] text-[oklch(0.32_0.10_350)] dark:bg-[oklch(0.30_0.06_350)] dark:text-[oklch(0.85_0.08_350)]",
+  preposition:
+    "bg-[oklch(0.95_0.04_350)] text-[oklch(0.32_0.10_350)] dark:bg-[oklch(0.30_0.06_350)] dark:text-[oklch(0.85_0.08_350)]",
+  conjunction:
+    "bg-[oklch(0.95_0.04_350)] text-[oklch(0.32_0.10_350)] dark:bg-[oklch(0.30_0.06_350)] dark:text-[oklch(0.85_0.08_350)]",
+  demonstrative:
+    "bg-[oklch(0.95_0.04_80)] text-[oklch(0.32_0.10_80)] dark:bg-[oklch(0.30_0.06_80)] dark:text-[oklch(0.85_0.08_80)]",
+  relative:
+    "bg-[oklch(0.95_0.04_80)] text-[oklch(0.32_0.10_80)] dark:bg-[oklch(0.30_0.06_80)] dark:text-[oklch(0.85_0.08_80)]",
+  interrogative:
+    "bg-[oklch(0.95_0.04_350)] text-[oklch(0.32_0.10_350)] dark:bg-[oklch(0.30_0.06_350)] dark:text-[oklch(0.85_0.08_350)]",
+  negation:
+    "bg-[oklch(0.95_0.04_10)] text-[oklch(0.32_0.10_10)] dark:bg-[oklch(0.30_0.06_10)] dark:text-[oklch(0.85_0.08_10)]",
+  vocative:
+    "bg-[oklch(0.95_0.04_10)] text-[oklch(0.32_0.10_10)] dark:bg-[oklch(0.30_0.06_10)] dark:text-[oklch(0.85_0.08_10)]",
 };
 
 export function SurahReader({ surah }: { surah: Surah }) {

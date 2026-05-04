@@ -2,9 +2,11 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Flame, Target } from "lucide-react";
+import { Flame, Snowflake, Target } from "lucide-react";
 
 import { useProgress, useProgressStorageSync } from "@/lib/progress";
+import { useThemeSync } from "@/lib/theme";
+import { ThemeToggle } from "@/components/theme-toggle";
 import { cn } from "@/lib/cn";
 
 const NAV = [
@@ -20,12 +22,14 @@ const FOUNDATIONS = { href: "/read", label: "Foundations" };
 
 export function Topbar() {
   useProgressStorageSync();
+  useThemeSync();
   const progress = useProgress();
   const pathname = usePathname();
   const goal = progress.daily.goalCards;
   const seen = progress.daily.today.cardsSeen;
   const goalRatio = Math.min(1, seen / Math.max(1, goal));
   const streakActive = progress.streak.count > 0;
+  const freezesAvailable = progress.streak.freezesAvailable ?? 0;
 
   return (
     <header className="sticky top-0 z-30 border-b border-border bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -89,7 +93,9 @@ export function Topbar() {
             <span>{progress.streak.count}</span>
             <span className="hidden sm:inline">streak</span>
           </div>
+          <FreezeChip count={freezesAvailable} />
           <DailyGoalChip seen={seen} goal={goal} ratio={goalRatio} />
+          <ThemeToggle />
           <FoundationsNavLink pathname={pathname} />
         </div>
       </div>
@@ -143,6 +149,19 @@ function FoundationsNavLink({ pathname }: { pathname: string }) {
     >
       {FOUNDATIONS.label}
     </Link>
+  );
+}
+
+function FreezeChip({ count }: { count: number }) {
+  if (count <= 0) return null;
+  return (
+    <div
+      className="hidden items-center gap-1 rounded-full border border-border bg-muted px-2.5 py-1 text-xs font-medium text-foreground sm:inline-flex"
+      title={`${count} streak freeze${count === 1 ? "" : "s"} available — automatically saves your streak if you miss a day. Refills every 7 days.`}
+    >
+      <Snowflake className="h-3.5 w-3.5 text-primary" aria-hidden />
+      <span className="tabular-nums">{count}</span>
+    </div>
   );
 }
 

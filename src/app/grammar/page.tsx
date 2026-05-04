@@ -11,7 +11,8 @@ const REFERENCE_PAGES = [
     titleArabic: "الضمائر",
     description:
       "Detached and attached pronoun tables with usage notes and a Qur'ān example for each.",
-    accent: "bg-[oklch(0.93_0.05_350)] text-[oklch(0.30_0.10_350)]",
+    accent:
+      "bg-[oklch(0.93_0.05_350)] text-[oklch(0.30_0.10_350)] dark:bg-[oklch(0.30_0.06_350)] dark:text-[oklch(0.85_0.08_350)]",
   },
   {
     href: "/grammar/conjugations",
@@ -19,7 +20,8 @@ const REFERENCE_PAGES = [
     titleArabic: "تَصْرِيف الأَفْعَال",
     description:
       "Past (Māḍī) and present / future (Muḍāriʿ) endings for every person and gender, side by side.",
-    accent: "bg-[oklch(0.93_0.05_220)] text-[oklch(0.30_0.10_220)]",
+    accent:
+      "bg-[oklch(0.93_0.05_220)] text-[oklch(0.30_0.10_220)] dark:bg-[oklch(0.30_0.06_220)] dark:text-[oklch(0.85_0.08_220)]",
   },
   {
     href: "/grammar/plurals",
@@ -27,7 +29,8 @@ const REFERENCE_PAGES = [
     titleArabic: "الجَمْع",
     description:
       "Sound masculine, sound feminine, and broken plurals — when each applies and why broken plurals must be memorised.",
-    accent: "bg-[oklch(0.93_0.04_60)] text-[oklch(0.30_0.10_60)]",
+    accent:
+      "bg-[oklch(0.93_0.04_60)] text-[oklch(0.30_0.10_60)] dark:bg-[oklch(0.30_0.06_60)] dark:text-[oklch(0.85_0.08_60)]",
   },
 ] as const;
 

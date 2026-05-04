@@ -202,7 +202,23 @@ export interface WordProgress {
 export interface UserProgress {
   version: 1;
   startedAt: string;
-  streak: { count: number; lastDay: string };
+  streak: {
+    count: number;
+    /** ISO date (YYYY-MM-DD) of the most recent practice day. Empty string
+     *  before the first session. */
+    lastDay: string;
+    /** Streak-freeze budget: capped at MAX_FREEZES, replenished by 1 every
+     *  FREEZE_REGEN_DAYS of activity. A freeze auto-applies when the user
+     *  practices today after a 1-day gap (i.e. they missed exactly one day),
+     *  preserving their streak. Optional for back-compat with v1 progress
+     *  saved before this field existed. */
+    freezesAvailable?: number;
+    /** ISO date the freeze counter was last replenished. */
+    lastFreezeRegenAt?: string;
+    /** ISO date the most recent freeze was consumed (used by the UI to
+     *  surface a one-shot "we saved your streak" toast). */
+    lastFreezeConsumedAt?: string;
+  };
   daily: {
     goalCards: number;
     today: { date: string; cardsSeen: number; correct: number };

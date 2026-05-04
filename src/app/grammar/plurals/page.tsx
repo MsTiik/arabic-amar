@@ -6,11 +6,11 @@ export const metadata = { title: "Plural forms" };
 
 const TYPE_BADGES: Record<string, string> = {
   "Sound plural (masculine)":
-    "bg-[oklch(0.92_0.04_220)] text-[oklch(0.30_0.10_220)]",
+    "bg-[oklch(0.92_0.04_220)] text-[oklch(0.30_0.10_220)] dark:bg-[oklch(0.30_0.06_220)] dark:text-[oklch(0.85_0.08_220)]",
   "Sound plural (feminine)":
-    "bg-[oklch(0.93_0.05_350)] text-[oklch(0.30_0.10_350)]",
+    "bg-[oklch(0.93_0.05_350)] text-[oklch(0.30_0.10_350)] dark:bg-[oklch(0.30_0.06_350)] dark:text-[oklch(0.85_0.08_350)]",
   "Broken plural":
-    "bg-[oklch(0.93_0.04_60)] text-[oklch(0.30_0.10_60)]",
+    "bg-[oklch(0.93_0.04_60)] text-[oklch(0.30_0.10_60)] dark:bg-[oklch(0.30_0.06_60)] dark:text-[oklch(0.85_0.08_60)]",
 };
 
 export default function PluralsPage() {

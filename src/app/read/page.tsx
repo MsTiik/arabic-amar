@@ -20,7 +20,8 @@ const CARDS: FoundationCard[] = [
     titleArabic: "الحُرُوف العَرَبِيَّة",
     description:
       "All 28 letters with their isolated, initial, medial, and final shapes. Speaker button and Qur’ānic example word on every letter.",
-    accent: "bg-[oklch(0.93_0.05_220)] text-[oklch(0.30_0.10_220)]",
+    accent:
+      "bg-[oklch(0.93_0.05_220)] text-[oklch(0.30_0.10_220)] dark:bg-[oklch(0.30_0.06_220)] dark:text-[oklch(0.85_0.08_220)]",
     tier: "A",
   },
   {
@@ -29,7 +30,8 @@ const CARDS: FoundationCard[] = [
     titleArabic: "حُرُوف الاتِّصَال",
     description:
       "How letters join inside a word — and the 6 special letters that never attach to what follows them. Interactive joining demo.",
-    accent: "bg-[oklch(0.93_0.05_40)] text-[oklch(0.30_0.10_40)]",
+    accent:
+      "bg-[oklch(0.93_0.05_40)] text-[oklch(0.30_0.10_40)] dark:bg-[oklch(0.30_0.06_40)] dark:text-[oklch(0.85_0.08_40)]",
     tier: "A",
   },
   {
@@ -38,7 +40,8 @@ const CARDS: FoundationCard[] = [
     titleArabic: "الحَرَكَات",
     description:
       "Fatḥa, kasra, ḍamma, sukūn, tanwīn, and shadda — the marks that turn bare consonants into full syllables.",
-    accent: "bg-[oklch(0.93_0.05_350)] text-[oklch(0.30_0.10_350)]",
+    accent:
+      "bg-[oklch(0.93_0.05_350)] text-[oklch(0.30_0.10_350)] dark:bg-[oklch(0.30_0.06_350)] dark:text-[oklch(0.85_0.08_350)]",
     tier: "A",
   },
   {
@@ -47,7 +50,8 @@ const CARDS: FoundationCard[] = [
     titleArabic: "حُرُوف المَدّ",
     description:
       "Alif, wāw, and yā’ as elongation letters. Short-vs-long vowel pairs side by side.",
-    accent: "bg-[oklch(0.93_0.05_145)] text-[oklch(0.30_0.10_145)]",
+    accent:
+      "bg-[oklch(0.93_0.05_145)] text-[oklch(0.30_0.10_145)] dark:bg-[oklch(0.30_0.06_145)] dark:text-[oklch(0.85_0.08_145)]",
     tier: "B",
   },
   {
@@ -56,7 +60,8 @@ const CARDS: FoundationCard[] = [
     titleArabic: "الحُرُوف الشَّمْسِيَّة وَالقَمَرِيَّة",
     description:
       "The 14/14 split that controls how the definite article ’al-’ is pronounced. Tap any noun to hear the rule in action.",
-    accent: "bg-[oklch(0.93_0.05_80)] text-[oklch(0.30_0.10_80)]",
+    accent:
+      "bg-[oklch(0.93_0.05_80)] text-[oklch(0.30_0.10_80)] dark:bg-[oklch(0.30_0.06_80)] dark:text-[oklch(0.85_0.08_80)]",
     tier: "B",
   },
   {
@@ -65,7 +70,8 @@ const CARDS: FoundationCard[] = [
     titleArabic: "مَخَارِج الحُرُوف",
     description:
       "Where in the mouth and throat each Arabic letter originates — the foundation of tajwīd.",
-    accent: "bg-[oklch(0.93_0.05_270)] text-[oklch(0.30_0.10_270)]",
+    accent:
+      "bg-[oklch(0.93_0.05_270)] text-[oklch(0.30_0.10_270)] dark:bg-[oklch(0.30_0.06_270)] dark:text-[oklch(0.85_0.08_270)]",
     tier: "B",
   },
   {
@@ -74,7 +80,8 @@ const CARDS: FoundationCard[] = [
     titleArabic: "التَّجْوِيد",
     description:
       "The pronunciation rules of Qurʼānic recitation — qalqalah, nūn sākinah, tanwīn — in beginner-friendly language. Advanced rules tucked behind a toggle.",
-    accent: "bg-[oklch(0.93_0.05_10)] text-[oklch(0.30_0.10_10)]",
+    accent:
+      "bg-[oklch(0.93_0.05_10)] text-[oklch(0.30_0.10_10)] dark:bg-[oklch(0.30_0.06_10)] dark:text-[oklch(0.85_0.08_10)]",
     tier: "B",
   },
   {
@@ -83,7 +90,8 @@ const CARDS: FoundationCard[] = [
     titleArabic: "السُّوَر القَصِيرَة",
     description:
       "Tap any word in Al-Fātiḥah and the short surahs of Juzʼ ʿAmma to see its meaning, root, and grammar tag — plus per-ayah recitation audio.",
-    accent: "bg-[oklch(0.93_0.05_180)] text-[oklch(0.30_0.10_180)]",
+    accent:
+      "bg-[oklch(0.93_0.05_180)] text-[oklch(0.30_0.10_180)] dark:bg-[oklch(0.30_0.06_180)] dark:text-[oklch(0.85_0.08_180)]",
     tier: "B",
   },
 ];
