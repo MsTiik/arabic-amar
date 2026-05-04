@@ -43,6 +43,7 @@ export function VocabBankClient({ vocab, topics }: Props) {
       if (folded) {
         const haystack = [
           v.arabicFolded,
+          foldForSearch(v.arabic),
           foldForSearch(v.pronunciation),
           foldForSearch(v.english),
           foldForSearch(v.category),

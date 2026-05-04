@@ -33,6 +33,9 @@ describe("content vocabulary search", () => {
     expect(searchVocab({ query: "حجرة الدراسة" }).map((entry) => foldForSearch(entry.arabic))).toEqual(
       [foldForSearch("حُجْرَةُ الدِّرَاسَة / حُجَرُ الدِّرَاسَة")],
     );
+    expect(searchVocab({ query: "حجرة / حجر" }).map((entry) => foldForSearch(entry.arabic))).toEqual(
+      [foldForSearch("حُجْرَة / حُجُر")],
+    );
     expect(english.map((entry) => foldForSearch(entry.arabic))).toEqual(
       expect.arrayContaining([foldForSearch("هذا"), foldForSearch("هذه")]),
     );
