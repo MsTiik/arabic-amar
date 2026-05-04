@@ -35,6 +35,24 @@ describe("foldedSearchMatches", () => {
     ).toBe(false);
   });
 
+  test("matches multi-word Arabic phrases by adjacent tokens", () => {
+    expect(
+      foldedSearchMatches(foldForSearch("حُجْرَةُ الدِّرَاسَة"), foldForSearch("حجرة الدراسة"), {
+        exactArabic: true,
+      }),
+    ).toBe(true);
+    expect(
+      foldedSearchMatches(foldForSearch("ذُو القَعْدَة"), foldForSearch("ذو القعدة"), {
+        exactArabic: true,
+      }),
+    ).toBe(true);
+    expect(
+      foldedSearchMatches(foldForSearch("هَذَا"), foldForSearch("هذا الدراسة"), {
+        exactArabic: true,
+      }),
+    ).toBe(false);
+  });
+
   test("keeps substring matching for transliteration and English", () => {
     expect(foldedSearchMatches(foldForSearch("hādhā"), foldForSearch("had"))).toBe(true);
     expect(foldedSearchMatches(foldForSearch("this (m)"), foldForSearch("thi"))).toBe(true);

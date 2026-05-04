@@ -49,7 +49,11 @@ export function foldedSearchMatches(
 ): boolean {
   if (!needle) return true;
   if (options.exactArabic && isArabicFolded(needle)) {
-    return value.split(/\s+/).includes(needle);
+    const needleTokens = needle.split(/\s+/).filter(Boolean);
+    const valueTokens = value.split(/\s+/).filter(Boolean);
+    return valueTokens.some((_, index) =>
+      needleTokens.every((token, offset) => valueTokens[index + offset] === token),
+    );
   }
   return value.includes(needle);
 }

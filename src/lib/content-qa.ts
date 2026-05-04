@@ -38,7 +38,7 @@ function exampleVocab(entry: VocabEntry): string {
 }
 
 function stripAudioKey(arabic: string): string {
-  return stripDiacritics(arabic.split("/")[0]).trim();
+  return stripDiacritics(arabic).trim();
 }
 
 function addIssue(

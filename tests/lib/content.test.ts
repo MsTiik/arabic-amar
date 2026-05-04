@@ -26,6 +26,9 @@ describe("content vocabulary search", () => {
     expect(transliterated.map((entry) => foldForSearch(entry.arabic))).toContain(
       foldForSearch("هذا"),
     );
+    expect(searchVocab({ query: "حجرة الدراسة" }).map((entry) => foldForSearch(entry.arabic))).toEqual(
+      [foldForSearch("حُجْرَةُ الدِّرَاسَة / حُجَرُ الدِّرَاسَة")],
+    );
     expect(english.map((entry) => foldForSearch(entry.arabic))).toEqual(
       expect.arrayContaining([foldForSearch("هذا"), foldForSearch("هذه")]),
     );

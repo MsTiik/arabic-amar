@@ -104,4 +104,28 @@ describe("createContentQaReport", () => {
       expect.arrayContaining(["parser-warnings", "empty-lessons", "empty-vocab-english"]),
     );
   });
+
+  test("uses the same audio key shape as runtime lookup for paired vocab", () => {
+    const report = createContentQaReport(
+      baseContent({
+        vocab: [
+          {
+            id: "paired",
+            arabic: "حُجْرَة / حُجُر",
+            arabicFolded: "حجرة حجر",
+            pronunciation: "ḥujrah / ḥujar",
+            english: "room → rooms",
+            category: "Classroom",
+            isExtra: false,
+            topicSlugs: ["one"],
+            lessonId: "lesson-one",
+          },
+        ],
+      }),
+      [],
+      "2026-01-02T00:00:00.000Z",
+    );
+
+    expect(report.issues.find((issue) => issue.code === "missing-audio")).toBeUndefined();
+  });
 });
