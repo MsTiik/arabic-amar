@@ -360,7 +360,7 @@ export function getDueStudyWordIds(progress: UserProgress, vocab: VocabEntry[]):
 export function getWeakWordIds(progress: UserProgress, vocab: VocabEntry[]): string[] {
   return getMistakeWords(
     progress,
-    vocab.map((v) => v.id),
+    activeVocab(vocab).map((v) => v.id),
   );
 }
 
@@ -405,7 +405,7 @@ export function buildDailyPathPlan(
           ? "Repair words you recently missed before adding more."
           : "No weak words right now.",
       count: weakIds.length,
-      href: "/practice?deck=mistakes",
+      href: "/practice?deck=weak",
       status: weakIds.length > 0 ? "ready" : "complete",
     },
     {

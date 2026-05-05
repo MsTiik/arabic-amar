@@ -96,7 +96,7 @@ export function DashboardHero({ totalVocab, totalRules, totalLessons }: Props) {
               </Link>
               {dailyPath.weakCount > 0 ? (
                 <Link
-                  href="/practice?deck=mistakes"
+                  href="/practice?deck=weak"
                   className="inline-flex items-center gap-2 rounded-full border border-danger bg-danger-soft px-4 py-2 text-sm font-semibold text-foreground hover:opacity-90 focus-ring"
                 >
                   Review mistakes ({dailyPath.weakCount})

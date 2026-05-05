@@ -19,6 +19,7 @@ import {
   getDueStudyWordIds,
   getMistakeWords,
   getNewWordIds,
+  getWeakWordIds,
   progressActions,
   useProgress,
 } from "@/lib/progress";
@@ -72,6 +73,15 @@ function buildUrlDeck({
       title: "Review mistakes",
     });
   }
+  if (deckParam === "weak") {
+    const ids = new Set(getWeakWordIds(progress, vocab));
+    const subset = vocab.filter((v) => ids.has(v.id));
+    if (subset.length === 0) return null;
+    return makeMultipleChoiceDeck(subset, vocab, "ar-to-en", {
+      id: "deck-weak",
+      title: "Fix weak words",
+    });
+  }
   if (deckParam === "due") {
     const ids = new Set(getDueStudyWordIds(progress, vocab));
     const subset = vocab.filter((v) => ids.has(v.id)).slice(0, 20);
@@ -102,7 +112,7 @@ function buildUrlDeck({
 
 function PracticeInner({ vocab, topics, lessons, rules }: Props) {
   const search = useSearchParams();
-  const deckParam = search.get("deck"); // "due" | "mistakes" | "new"
+  const deckParam = search.get("deck"); // "due" | "weak" | "mistakes" | "new"
   const topicSlug = search.get("topic") ?? "";
   const rawKindParam = search.get("kind");
   const kindParam = search.get("kind") ?? "mc"; // "flashcard" | "mc" | "fill" | "gender" | "ordering"
