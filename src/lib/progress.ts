@@ -357,6 +357,13 @@ export function getDueStudyWordIds(progress: UserProgress, vocab: VocabEntry[]):
   return getDueWords(progress, activeWordIds).filter((id) => progress.words[id]);
 }
 
+export function getWeakWordIds(progress: UserProgress, vocab: VocabEntry[]): string[] {
+  return getMistakeWords(
+    progress,
+    vocab.map((v) => v.id),
+  );
+}
+
 export function getNextTopic(
   progress: UserProgress,
   vocab: VocabEntry[],
@@ -372,9 +379,8 @@ export function buildDailyPathPlan(
   vocab: VocabEntry[],
   topics: Topic[],
 ): DailyPathPlan {
-  const activeWordIds = activeVocab(vocab).map((v) => v.id);
   const dueIds = getDueStudyWordIds(progress, vocab);
-  const weakIds = getMistakeWords(progress, activeWordIds);
+  const weakIds = getWeakWordIds(progress, vocab);
   const newIds = getNewWordIds(progress, vocab);
   const nextTopic = getNextTopic(progress, vocab, topics);
   const nextTopicNewCount = nextTopic ? topicNewCount(progress, vocab, nextTopic.slug) : 0;

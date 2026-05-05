@@ -46,74 +46,127 @@ export function PracticeClient(props: Props) {
   );
 }
 
+function buildUrlDeck({
+  allWordIds,
+  deckParam,
+  kindParam,
+  progress,
+  topicSlug,
+  topics,
+  vocab,
+}: {
+  allWordIds: string[];
+  deckParam: string | null;
+  kindParam: string;
+  progress: ReturnType<typeof useProgress>;
+  topicSlug: string;
+  topics: Topic[];
+  vocab: VocabEntry[];
+}): ExerciseDeck | null {
+  if (deckParam === "mistakes") {
+    const ids = new Set(getMistakeWords(progress, allWordIds));
+    const subset = vocab.filter((v) => ids.has(v.id));
+    if (subset.length === 0) return null;
+    return makeMultipleChoiceDeck(subset, vocab, "ar-to-en", {
+      id: "deck-mistakes",
+      title: "Review mistakes",
+    });
+  }
+  if (deckParam === "due") {
+    const ids = new Set(getDueStudyWordIds(progress, vocab));
+    const subset = vocab.filter((v) => ids.has(v.id)).slice(0, 20);
+    if (subset.length === 0) return null;
+    return makeMultipleChoiceDeck(subset, vocab, "ar-to-en", {
+      id: "deck-due",
+      title: "Review due cards",
+    });
+  }
+  if (deckParam === "new") {
+    const ids = new Set(getNewWordIds(progress, vocab).slice(0, 10));
+    const subset = vocab.filter((v) => ids.has(v.id));
+    if (subset.length === 0) return null;
+    return makeFlashcardDeck(subset, {
+      id: "deck-new",
+      title: "Add new words",
+    });
+  }
+  if (topicSlug) {
+    const subset = vocab.filter((v) => v.topicSlugs.includes(topicSlug));
+    const topic = topics.find((t) => t.slug === topicSlug);
+    if (subset.length === 0 || !topic) return null;
+    const title = `${topic.name} · ${kindLabel(kindParam)}`;
+    return buildDeck(kindParam, subset, vocab, topicSlug, title);
+  }
+  return null;
+}
+
 function PracticeInner({ vocab, topics, lessons, rules }: Props) {
   const search = useSearchParams();
-  const router = useRouter();
   const deckParam = search.get("deck"); // "due" | "mistakes" | "new"
   const topicSlug = search.get("topic") ?? "";
+  const rawKindParam = search.get("kind");
   const kindParam = search.get("kind") ?? "mc"; // "flashcard" | "mc" | "fill" | "gender" | "ordering"
+  const urlDeckKey = `${deckParam ?? ""}|${topicSlug}|${kindParam}`;
+  const hasUrlParams = Boolean(deckParam || topicSlug || rawKindParam);
+
+  return (
+    <PracticeSession
+      key={urlDeckKey}
+      vocab={vocab}
+      topics={topics}
+      lessons={lessons}
+      rules={rules}
+      deckParam={deckParam}
+      topicSlug={topicSlug}
+      kindParam={kindParam}
+      hasUrlParams={hasUrlParams}
+    />
+  );
+}
+
+function PracticeSession({
+  vocab,
+  topics,
+  lessons,
+  rules,
+  deckParam,
+  topicSlug,
+  kindParam,
+  hasUrlParams,
+}: Props & {
+  deckParam: string | null;
+  topicSlug: string;
+  kindParam: string;
+  hasUrlParams: boolean;
+}) {
+  const router = useRouter();
 
   const progress = useProgress();
   const allWordIds = useMemo(() => vocab.map((v) => v.id), [vocab]);
 
-  // Track whether the user has explicitly exited a URL-driven deck.
-  const [exitedKey, setExitedKey] = useState<string | null>(null);
   // Manually selected deck (from button clicks) takes precedence over the URL deck.
   const [manualDeck, setManualDeck] = useState<ExerciseDeck | null>(null);
+  const [urlDeck, setUrlDeck] = useState<ExerciseDeck | null>(() =>
+    buildUrlDeck({
+      allWordIds,
+      deckParam,
+      kindParam,
+      progress,
+      topicSlug,
+      topics,
+      vocab,
+    }),
+  );
 
-  // Build a deck implied by the URL on every render. Cheap (just data shaping).
-  const urlDeck = useMemo<ExerciseDeck | null>(() => {
-    if (deckParam === "mistakes") {
-      const ids = new Set(getMistakeWords(progress, allWordIds));
-      const subset = vocab.filter((v) => ids.has(v.id));
-      if (subset.length === 0) return null;
-      return makeMultipleChoiceDeck(subset, vocab, "ar-to-en", {
-        id: "deck-mistakes",
-        title: "Review mistakes",
-      });
-    }
-    if (deckParam === "due") {
-      const ids = new Set(getDueStudyWordIds(progress, vocab));
-      const subset = vocab.filter((v) => ids.has(v.id)).slice(0, 20);
-      if (subset.length === 0) return null;
-      return makeMultipleChoiceDeck(subset, vocab, "ar-to-en", {
-        id: "deck-due",
-        title: "Review due cards",
-      });
-    }
-    if (deckParam === "new") {
-      const ids = new Set(getNewWordIds(progress, vocab).slice(0, 10));
-      const subset = vocab.filter((v) => ids.has(v.id));
-      if (subset.length === 0) return null;
-      return makeFlashcardDeck(subset, {
-        id: "deck-new",
-        title: "Add new words",
-      });
-    }
-    if (topicSlug) {
-      const subset = vocab.filter((v) => v.topicSlugs.includes(topicSlug));
-      const topic = topics.find((t) => t.slug === topicSlug);
-      if (subset.length === 0 || !topic) return null;
-      const title = `${topic.name} · ${kindLabel(kindParam)}`;
-      return buildDeck(kindParam, subset, vocab, topicSlug, title);
-    }
-    return null;
-    // We intentionally key off URL params and the static word list. Re-deriving on every
-    // progress change is cheap and keeps the deck stable until the user exits.
-  }, [deckParam, topicSlug, kindParam, vocab, topics, allWordIds, progress]);
-
-  const urlDeckKey = `${deckParam ?? ""}|${topicSlug}|${kindParam}`;
-  const activeDeck =
-    manualDeck ??
-    (urlDeck && exitedKey !== urlDeckKey ? urlDeck : null);
+  const activeDeck = manualDeck ?? urlDeck;
 
   function exitActive() {
     setManualDeck(null);
-    setExitedKey(urlDeckKey);
+    setUrlDeck(null);
     // If we exited a deck that came from URL params, clear them so a refresh
     // doesn't drop the user back into the deck and the address bar reflects
     // the picker view they're now looking at.
-    if (deckParam || topicSlug || search.get("kind")) {
+    if (hasUrlParams) {
       router.replace("/practice");
     }
   }
