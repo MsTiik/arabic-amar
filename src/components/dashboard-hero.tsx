@@ -1,11 +1,21 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import Link from "next/link";
-import { Flame, Target, BookOpen, GraduationCap, Sparkles, Snowflake } from "lucide-react";
+import {
+  BookOpen,
+  Check,
+  ChevronRight,
+  Flame,
+  GraduationCap,
+  Sparkles,
+  Snowflake,
+  Target,
+} from "lucide-react";
 
 import { AppDialog } from "@/components/app-dialog";
-import { useProgress, summarizeMastery, getMistakeWords, progressActions } from "@/lib/progress";
+import type { DailyPathPlan, DailyPathStep } from "@/lib/progress";
+import { buildDailyPathPlan, progressActions, summarizeMastery, useProgress } from "@/lib/progress";
 import { getSiteContent } from "@/lib/content";
 import { cn } from "@/lib/cn";
 
@@ -20,9 +30,10 @@ export function DashboardHero({ totalVocab, totalRules, totalLessons }: Props) {
   const [goalInput, setGoalInput] = useState("");
   const [resetDialogOpen, setResetDialogOpen] = useState(false);
   const progress = useProgress();
-  const allWordIds = getSiteContent().vocab.map((v) => v.id);
+  const content = getSiteContent();
+  const allWordIds = useMemo(() => content.vocab.map((v) => v.id), [content.vocab]);
   const summary = summarizeMastery(progress, allWordIds);
-  const mistakes = getMistakeWords(progress, allWordIds);
+  const dailyPath = buildDailyPathPlan(progress, content.vocab, content.topics);
   const goal = progress.daily.goalCards;
   const seen = progress.daily.today.cardsSeen;
   const correctToday = progress.daily.today.correct;
@@ -77,18 +88,18 @@ export function DashboardHero({ totalVocab, totalRules, totalLessons }: Props) {
             </p>
             <div className="mt-4 flex flex-wrap gap-2">
               <Link
-                href="/practice"
+                href={primaryPathHref(dailyPath)}
                 className="inline-flex items-center gap-2 rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground hover:opacity-90 focus-ring"
               >
                 <Sparkles className="h-4 w-4" />
-                {seen === 0 ? "Start today's session" : "Continue practicing"}
+                {seen === 0 ? "Start today's path" : "Continue today's path"}
               </Link>
-              {mistakes.length > 0 ? (
+              {dailyPath.weakCount > 0 ? (
                 <Link
                   href="/practice?deck=mistakes"
                   className="inline-flex items-center gap-2 rounded-full border border-danger bg-danger-soft px-4 py-2 text-sm font-semibold text-foreground hover:opacity-90 focus-ring"
                 >
-                  Review mistakes ({mistakes.length})
+                  Review mistakes ({dailyPath.weakCount})
                 </Link>
               ) : null}
               <Link
@@ -135,6 +146,36 @@ export function DashboardHero({ totalVocab, totalRules, totalLessons }: Props) {
               value={accuracy === null ? "—" : `${accuracy}%`}
               tone="muted"
             />
+          </div>
+        </div>
+
+        <div className="mt-6 rounded-3xl border border-border bg-background-soft p-4 sm:p-5">
+          <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+            <div className="max-w-2xl">
+              <p className="text-xs font-semibold uppercase tracking-wider text-primary">
+                Today&apos;s path
+              </p>
+              <h2 className="mt-1 text-xl font-semibold tracking-tight">
+                Start with review, then add a little new Arabic.
+              </h2>
+              <p className="mt-1 text-sm text-muted-foreground">
+                Follow these steps in order so due reviews, weak words, and the next
+                lesson stay connected.
+              </p>
+            </div>
+            <Link
+              href={primaryPathHref(dailyPath)}
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground hover:opacity-90 focus-ring"
+            >
+              {seen === 0 ? "Start today's path" : "Continue today's path"}
+              <ChevronRight className="h-4 w-4" />
+            </Link>
+          </div>
+
+          <div className="mt-5 grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-4">
+            {dailyPath.steps.map((step, index) => (
+              <DailyPathStepCard key={step.id} step={step} index={index} />
+            ))}
           </div>
         </div>
 
@@ -266,6 +307,71 @@ function Stat({
         </div>
       ) : null}
     </div>
+  );
+}
+
+function primaryPathHref(plan: DailyPathPlan): string {
+  return plan.steps.find((step) => step.status === "ready")?.href ?? "/practice";
+}
+
+function DailyPathStepCard({
+  step,
+  index,
+}: {
+  step: DailyPathStep;
+  index: number;
+}) {
+  const ready = step.status === "ready";
+  const content = (
+    <>
+      <div className="flex items-start justify-between gap-3">
+        <span
+          className={cn(
+            "inline-flex h-7 w-7 items-center justify-center rounded-full text-xs font-semibold tabular-nums",
+            ready
+              ? "bg-primary text-primary-foreground"
+              : "bg-success-soft text-foreground",
+          )}
+        >
+          {ready ? index + 1 : <Check className="h-3.5 w-3.5" />}
+        </span>
+        <span className="rounded-full bg-background-soft px-2 py-1 text-xs font-semibold tabular-nums text-foreground-soft">
+          {step.count}
+        </span>
+      </div>
+      <h3 className="mt-4 text-sm font-semibold text-foreground">{step.title}</h3>
+      <p className="mt-1 flex-1 text-xs leading-5 text-muted-foreground">
+        {step.description}
+      </p>
+      <span
+        className={cn(
+          "mt-3 inline-flex items-center gap-1 text-xs font-semibold",
+          ready ? "text-primary" : "text-muted-foreground",
+        )}
+      >
+        {ready ? "Open step" : "Complete"}
+        {ready ? (
+          <ChevronRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+        ) : null}
+      </span>
+    </>
+  );
+
+  if (!ready) {
+    return (
+      <div className="flex min-h-36 flex-col rounded-2xl border border-border bg-background p-4 text-muted-foreground">
+        {content}
+      </div>
+    );
+  }
+
+  return (
+    <Link
+      href={step.href}
+      className="group flex min-h-36 flex-col rounded-2xl border border-border bg-card p-4 transition-colors hover:bg-muted focus-ring"
+    >
+      {content}
+    </Link>
   );
 }
 

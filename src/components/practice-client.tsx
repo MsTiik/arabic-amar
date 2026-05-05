@@ -16,7 +16,9 @@ import {
   makeWhichLetterDeck,
 } from "@/lib/exercises";
 import {
+  getDueStudyWordIds,
   getMistakeWords,
+  getNewWordIds,
   progressActions,
   useProgress,
 } from "@/lib/progress";
@@ -47,7 +49,7 @@ export function PracticeClient(props: Props) {
 function PracticeInner({ vocab, topics, lessons, rules }: Props) {
   const search = useSearchParams();
   const router = useRouter();
-  const deckParam = search.get("deck"); // "mistakes" | "today"
+  const deckParam = search.get("deck"); // "due" | "mistakes" | "new"
   const topicSlug = search.get("topic") ?? "";
   const kindParam = search.get("kind") ?? "mc"; // "flashcard" | "mc" | "fill" | "gender" | "ordering"
 
@@ -68,6 +70,24 @@ function PracticeInner({ vocab, topics, lessons, rules }: Props) {
       return makeMultipleChoiceDeck(subset, vocab, "ar-to-en", {
         id: "deck-mistakes",
         title: "Review mistakes",
+      });
+    }
+    if (deckParam === "due") {
+      const ids = new Set(getDueStudyWordIds(progress, vocab));
+      const subset = vocab.filter((v) => ids.has(v.id)).slice(0, 20);
+      if (subset.length === 0) return null;
+      return makeMultipleChoiceDeck(subset, vocab, "ar-to-en", {
+        id: "deck-due",
+        title: "Review due cards",
+      });
+    }
+    if (deckParam === "new") {
+      const ids = new Set(getNewWordIds(progress, vocab).slice(0, 10));
+      const subset = vocab.filter((v) => ids.has(v.id));
+      if (subset.length === 0) return null;
+      return makeFlashcardDeck(subset, {
+        id: "deck-new",
+        title: "Add new words",
       });
     }
     if (topicSlug) {
@@ -111,6 +131,8 @@ function PracticeInner({ vocab, topics, lessons, rules }: Props) {
   }
 
   const mistakeIds = getMistakeWords(progress, allWordIds);
+  const dueIds = getDueStudyWordIds(progress, vocab);
+  const newIds = getNewWordIds(progress, vocab);
 
   return (
     <div className="space-y-6">
@@ -125,6 +147,39 @@ function PracticeInner({ vocab, topics, lessons, rules }: Props) {
       <section className="rounded-3xl border border-border bg-card p-6">
         <h2 className="text-lg font-semibold">Quick decks</h2>
         <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
+          {dueIds.length > 0 ? (
+            <DeckButton
+              title={`Review due cards (${dueIds.length})`}
+              description="Words scheduled for review today."
+              tone="primary"
+              onClick={() => {
+                const ids = new Set(dueIds);
+                const subset = vocab.filter((v) => ids.has(v.id)).slice(0, 20);
+                setManualDeck(
+                  makeMultipleChoiceDeck(subset, vocab, "ar-to-en", {
+                    id: "deck-due",
+                    title: "Review due cards",
+                  }),
+                );
+              }}
+            />
+          ) : null}
+          {newIds.length > 0 ? (
+            <DeckButton
+              title="Add new words"
+              description="Preview 10 unseen words as flashcards."
+              onClick={() => {
+                const ids = new Set(newIds.slice(0, 10));
+                const subset = vocab.filter((v) => ids.has(v.id));
+                setManualDeck(
+                  makeFlashcardDeck(subset, {
+                    id: "deck-new",
+                    title: "Add new words",
+                  }),
+                );
+              }}
+            />
+          ) : null}
           <DeckButton
             title="Mixed multiple choice"
             description="Random 12 words across all lessons (Arabic ↔ English)."
@@ -300,7 +355,7 @@ function DeckButton({
   title: string;
   description: string;
   onClick: () => void;
-  tone?: "default" | "danger";
+  tone?: "default" | "danger" | "primary";
 }) {
   return (
     <button
@@ -309,6 +364,8 @@ function DeckButton({
       className={`group flex flex-col items-start gap-1 rounded-2xl border p-4 text-left transition-colors hover-lift focus-ring ${
         tone === "danger"
           ? "border-danger bg-danger-soft"
+          : tone === "primary"
+            ? "border-primary/40 bg-primary/10"
           : "border-border bg-background-soft hover:bg-muted"
       }`}
     >
