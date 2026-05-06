@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { Suspense, useMemo, useState } from "react";
+import { Suspense, useEffect, useMemo, useState } from "react";
 
 import {
   makeClozeDeck,
@@ -153,11 +153,18 @@ function PracticeSession({
 
   const progress = useProgress();
   const allWordIds = useMemo(() => vocab.map((v) => v.id), [vocab]);
+  const urlDeckKey = `${deckParam ?? ""}|${topicSlug}|${kindParam}`;
 
   // Manually selected deck (from button clicks) takes precedence over the URL deck.
   const [manualDeck, setManualDeck] = useState<ExerciseDeck | null>(null);
-  const [urlDeck, setUrlDeck] = useState<ExerciseDeck | null>(() =>
-    buildUrlDeck({
+  const [urlDeckSnapshot, setUrlDeckSnapshot] = useState<{
+    key: string;
+    deck: ExerciseDeck | null;
+  }>({ key: "", deck: null });
+
+  const nextUrlDeck = useMemo(() => {
+    if (!hasUrlParams) return null;
+    return buildUrlDeck({
       allWordIds,
       deckParam,
       kindParam,
@@ -165,14 +172,26 @@ function PracticeSession({
       topicSlug,
       topics,
       vocab,
-    }),
-  );
+    });
+  }, [allWordIds, deckParam, hasUrlParams, kindParam, progress, topicSlug, topics, vocab]);
 
-  const activeDeck = manualDeck ?? urlDeck;
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setUrlDeckSnapshot((current) => {
+      if (!hasUrlParams) {
+        if (current.key === urlDeckKey && current.deck === null) return current;
+        return { key: urlDeckKey, deck: null };
+      }
+      if (current.key === urlDeckKey && current.deck !== null) return current;
+      if (current.key === urlDeckKey && nextUrlDeck === null) return current;
+      return { key: urlDeckKey, deck: nextUrlDeck };
+    });
+  }, [hasUrlParams, nextUrlDeck, urlDeckKey]);
+
+  const activeDeck = manualDeck ?? urlDeckSnapshot.deck;
 
   function exitActive() {
     setManualDeck(null);
-    setUrlDeck(null);
     // If we exited a deck that came from URL params, clear them so a refresh
     // doesn't drop the user back into the deck and the address bar reflects
     // the picker view they're now looking at.
