@@ -160,7 +160,20 @@ function PracticeSession({
   const [urlDeckSnapshot, setUrlDeckSnapshot] = useState<{
     key: string;
     deck: ExerciseDeck | null;
-  }>({ key: "", deck: null });
+  }>(() => ({
+    key: urlDeckKey,
+    deck: hasUrlParams
+      ? buildUrlDeck({
+          allWordIds,
+          deckParam,
+          kindParam,
+          progress,
+          topicSlug,
+          topics,
+          vocab,
+        })
+      : null,
+  }));
 
   const nextUrlDeck = useMemo(() => {
     if (!hasUrlParams) return null;
@@ -192,6 +205,9 @@ function PracticeSession({
 
   function exitActive() {
     setManualDeck(null);
+    setUrlDeckSnapshot((current) =>
+      current.deck ? { ...current, deck: null } : current,
+    );
     // If we exited a deck that came from URL params, clear them so a refresh
     // doesn't drop the user back into the deck and the address bar reflects
     // the picker view they're now looking at.
