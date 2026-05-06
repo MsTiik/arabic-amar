@@ -99,7 +99,7 @@ export function DashboardHero({ totalVocab, totalRules, totalLessons }: Props) {
                   href="/practice?deck=weak"
                   className="inline-flex items-center gap-2 rounded-full border border-danger bg-danger-soft px-4 py-2 text-sm font-semibold text-foreground hover:opacity-90 focus-ring"
                 >
-                  Review mistakes ({dailyPath.weakCount})
+                  Fix weak words ({dailyPath.weakCount})
                 </Link>
               ) : null}
               <Link
@@ -159,8 +159,8 @@ export function DashboardHero({ totalVocab, totalRules, totalLessons }: Props) {
                 Start with review, then add a little new Arabic.
               </h2>
               <p className="mt-1 text-sm text-muted-foreground">
-                Follow these steps in order so due reviews, weak words, and the next
-                lesson stay connected.
+                Follow these steps in order so due reviews, weak words, new
+                vocabulary, and the next lesson stay connected.
               </p>
             </div>
             <Link

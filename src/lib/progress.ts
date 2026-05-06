@@ -296,7 +296,7 @@ export function topicProgressFraction(
   return Math.min(1, score / wordIds.length);
 }
 
-/** Words whose `nextDue` is at or before now, plus any words ever answered incorrectly more than corrected. */
+/** Word IDs whose saved `nextDue` date is at or before now. */
 export function getDueWords(
   progress: UserProgress,
   allWordIds: string[],
