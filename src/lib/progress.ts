@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useSyncExternalStore } from "react";
-import type { Mastery, UserProgress, WordProgress } from "./types";
+import type { Mastery, Topic, UserProgress, VocabEntry, WordProgress } from "./types";
 
 const STORAGE_KEY = "arabic-amar:progress:v1";
 const DEFAULT_DAILY_GOAL = 20;
@@ -296,7 +296,7 @@ export function topicProgressFraction(
   return Math.min(1, score / wordIds.length);
 }
 
-/** Words whose `nextDue` is at or before now, plus any words ever answered incorrectly more than corrected. */
+/** Word IDs whose saved `nextDue` date is at or before now. */
 export function getDueWords(
   progress: UserProgress,
   allWordIds: string[],
@@ -316,4 +316,128 @@ export function getMistakeWords(progress: UserProgress, allWordIds: string[]): s
     if (!w) return false;
     return w.attempts > 0 && w.streak === 0 && w.mastery < 2;
   });
+}
+
+export interface DailyPathStep {
+  id: "due" | "weak" | "new" | "lesson";
+  title: string;
+  description: string;
+  count: number;
+  href: string;
+  status: "ready" | "complete";
+}
+
+export interface DailyPathPlan {
+  dueCount: number;
+  weakCount: number;
+  newCount: number;
+  nextTopic?: Topic;
+  nextTopicNewCount: number;
+  steps: DailyPathStep[];
+}
+
+function activeVocab(vocab: VocabEntry[]): VocabEntry[] {
+  return vocab.filter((v) => !v.isExtra);
+}
+
+function topicNewCount(progress: UserProgress, vocab: VocabEntry[], topicSlug: string): number {
+  return activeVocab(vocab).filter(
+    (v) => v.topicSlugs.includes(topicSlug) && !progress.words[v.id],
+  ).length;
+}
+
+export function getNewWordIds(progress: UserProgress, vocab: VocabEntry[]): string[] {
+  return activeVocab(vocab)
+    .filter((v) => !progress.words[v.id])
+    .map((v) => v.id);
+}
+
+export function getDueStudyWordIds(progress: UserProgress, vocab: VocabEntry[]): string[] {
+  const activeWordIds = activeVocab(vocab).map((v) => v.id);
+  return getDueWords(progress, activeWordIds).filter((id) => progress.words[id]);
+}
+
+export function getWeakWordIds(progress: UserProgress, vocab: VocabEntry[]): string[] {
+  return getMistakeWords(
+    progress,
+    activeVocab(vocab).map((v) => v.id),
+  );
+}
+
+export function getNextTopic(
+  progress: UserProgress,
+  vocab: VocabEntry[],
+  topics: Topic[],
+): Topic | undefined {
+  return [...topics]
+    .sort((a, b) => a.order - b.order)
+    .find((topic) => topicNewCount(progress, vocab, topic.slug) > 0);
+}
+
+export function buildDailyPathPlan(
+  progress: UserProgress,
+  vocab: VocabEntry[],
+  topics: Topic[],
+): DailyPathPlan {
+  const dueIds = getDueStudyWordIds(progress, vocab);
+  const weakIds = getWeakWordIds(progress, vocab);
+  const newIds = getNewWordIds(progress, vocab);
+  const nextTopic = getNextTopic(progress, vocab, topics);
+  const nextTopicNewCount = nextTopic ? topicNewCount(progress, vocab, nextTopic.slug) : 0;
+
+  const steps: DailyPathStep[] = [
+    {
+      id: "due",
+      title: "Review due cards",
+      description:
+        dueIds.length > 0
+          ? "Start with words scheduled for review today."
+          : "No scheduled reviews yet.",
+      count: dueIds.length,
+      href: "/practice?deck=due",
+      status: dueIds.length > 0 ? "ready" : "complete",
+    },
+    {
+      id: "weak",
+      title: "Fix weak words",
+      description:
+        weakIds.length > 0
+          ? "Repair words you recently missed before adding more."
+          : "No weak words right now.",
+      count: weakIds.length,
+      href: "/practice?deck=weak",
+      status: weakIds.length > 0 ? "ready" : "complete",
+    },
+    {
+      id: "new",
+      title: "Add new words",
+      description:
+        newIds.length > 0
+          ? "Introduce a small set of unseen vocabulary."
+          : "All core words have been introduced.",
+      count: newIds.length,
+      href: "/practice?deck=new",
+      status: newIds.length > 0 ? "ready" : "complete",
+    },
+  ];
+
+  if (nextTopic) {
+    steps.push({
+      id: "lesson",
+      title: `Continue ${nextTopic.name}`,
+      description: `${nextTopicNewCount} new word${nextTopicNewCount === 1 ? "" : "s"} left in this lesson.`,
+      count: nextTopicNewCount,
+      href: `/topics/${nextTopic.slug}`,
+      status: "ready",
+    });
+  }
+
+  return {
+    dueCount: dueIds.length,
+    weakCount: weakIds.length,
+    newCount: newIds.length,
+    nextTopic,
+    nextTopicNewCount,
+    steps,
+  };
 }
