@@ -32,9 +32,9 @@ function emptyProgress(): UserProgress {
 }
 
 describe("Names of Allah data", () => {
-  test("starts with 10 verified entries with required study fields", () => {
-    expect(NAMES_OF_ALLAH).toHaveLength(10);
-    expect(new Set(NAMES_OF_ALLAH.map((name) => name.id)).size).toBe(10);
+  test("includes 99 entries with required study fields and sources", () => {
+    expect(NAMES_OF_ALLAH).toHaveLength(99);
+    expect(new Set(NAMES_OF_ALLAH.map((name) => name.id)).size).toBe(99);
 
     for (const name of NAMES_OF_ALLAH) {
       expect(name.arabic.trim()).not.toBe("");
@@ -42,11 +42,18 @@ describe("Names of Allah data", () => {
       expect(name.shortMeaning.trim()).not.toBe("");
       expect(name.explanation.trim().length).toBeGreaterThan(24);
       expect(name.sources.length).toBeGreaterThan(0);
+      expect(name.sources.some((source) => source.type === "hadith")).toBe(
+        true,
+      );
 
       for (const source of name.sources) {
-        expect(source.type).toBe("quran");
-        expect(source.reference).toMatch(/^Qur'an \d+:\d+$/);
-        expect(source.url).toMatch(/^https:\/\/quran\.com\/\d+\/\d+$/);
+        if (source.type === "quran") {
+          expect(source.reference).toMatch(/^Qur'an \d+:\d+$/);
+          expect(source.url).toMatch(/^https:\/\/quran\.com\/\d+\/\d+$/);
+        } else {
+          expect(source.reference).toBe("Jami' at-Tirmidhi 3507");
+          expect(source.url).toBe("https://www.prophetmuhammad.com/tirmidhi/3507");
+        }
       }
     }
   });
@@ -121,12 +128,12 @@ describe("Names of Allah progress summary", () => {
     };
 
     expect(summarizeNamesOfAllahProgress(progress)).toEqual({
-      total: 10,
+      total: 99,
       known: 2,
       mastered: 1,
       familiar: 1,
       learning: 1,
-      new: 7,
+      new: 96,
     });
   });
 });

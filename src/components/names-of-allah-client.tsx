@@ -24,15 +24,21 @@ export function NamesOfAllahClient() {
           <div>
             <p className="inline-flex items-center gap-1 rounded-full border border-primary/30 bg-card/80 px-2.5 py-1 text-xs font-semibold uppercase tracking-wider text-primary">
               <Sparkles className="h-3.5 w-3.5" aria-hidden />
-              Verified starter set
+              Full 99-name collection
             </p>
             <h1 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">
               Names of Allah
             </h1>
             <p className="mt-2 max-w-2xl text-sm text-foreground-soft sm:text-base">
-              Start with ten names anchored in Qur&apos;ān references. Each card
-              includes Arabic, a pronunciation reveal, a concise meaning, a
-              longer explanation, and sources.
+              Study the 99 names from the well-known Asmā&apos; al-Ḥusnā
+              list, with Qur&apos;ān references where available. Each card
+              includes Arabic, a pronunciation reveal, a concise meaning,
+              a longer explanation, and sources.
+            </p>
+            <p className="mt-2 max-w-2xl text-xs leading-5 text-muted-foreground">
+              Source note: some names are directly cited from Qur&apos;ān verses,
+              while the complete 99-name sequence follows the widely referenced
+              Jami&apos; at-Tirmidhi 3507 enumeration.
             </p>
           </div>
           <div className="grid min-w-64 grid-cols-2 gap-2">
@@ -62,10 +68,10 @@ export function NamesOfAllahClient() {
         <div className="mb-4 flex items-center gap-2">
           <BookOpen className="h-5 w-5 text-primary" aria-hidden />
           <h2 className="text-2xl font-semibold tracking-tight">
-            First 10 verified names
+            99 names of Allah
           </h2>
         </div>
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
           {NAMES_OF_ALLAH.map((name) => {
             const wordId = nameOfAllahWordId(name);
             const mastery = progress.words[wordId]?.mastery ?? 0;

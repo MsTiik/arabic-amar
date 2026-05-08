@@ -310,7 +310,7 @@ function PracticeSession({
           />
           <DeckButton
             title="Names of Allah"
-            description="Practice the verified starter set as Arabic flashcards."
+            description="Practice the full 99-name collection as Arabic flashcards."
             tone="primary"
             onClick={() => {
               setManualDeck(buildNamesOfAllahFlashcardDeck());
