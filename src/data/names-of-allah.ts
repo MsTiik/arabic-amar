@@ -24,8 +24,8 @@ function sourceFromKey(key: SourceKey): NameOfAllahSource {
   if (key === "tirmidhi-3507") {
     return {
       type: "hadith",
-      reference: "Jami' at-Tirmidhi 3507",
-      url: "https://www.prophetmuhammad.com/tirmidhi/3507",
+      reference: "Jami' at-Tirmidhi 3507 enumeration (da'if grade)",
+      url: "https://sunnah.com/tirmidhi:3507",
     };
   }
 

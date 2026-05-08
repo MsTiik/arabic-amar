@@ -30,15 +30,32 @@ export function NamesOfAllahClient() {
               Names of Allah
             </h1>
             <p className="mt-2 max-w-2xl text-sm text-foreground-soft sm:text-base">
-              Study the 99 names from the well-known Asmā&apos; al-Ḥusnā
-              list, with Qur&apos;ān references where available. Each card
-              includes Arabic, a pronunciation reveal, a concise meaning,
-              a longer explanation, and sources.
+              Study the traditional Asmā&apos; al-Ḥusnā 99-name list, with
+              Qur&apos;ān references where the name or closely related attribute
+              wording appears. Each card includes Arabic, a pronunciation
+              reveal, a concise meaning, a longer explanation, and sources.
             </p>
             <p className="mt-2 max-w-2xl text-xs leading-5 text-muted-foreground">
-              Source note: some names are directly cited from Qur&apos;ān verses,
-              while the complete 99-name sequence follows the widely referenced
-              Jami&apos; at-Tirmidhi 3507 enumeration.
+              Source note: the general 99 Names hadith is authentic in{" "}
+              <a
+                href="https://sunnah.com/bukhari:7392"
+                target="_blank"
+                rel="noreferrer"
+                className="font-semibold underline underline-offset-2"
+              >
+                Sahih al-Bukhari 7392
+              </a>
+              . The exact sequence follows the widely taught{" "}
+              <a
+                href="https://sunnah.com/tirmidhi:3507"
+                target="_blank"
+                rel="noreferrer"
+                className="font-semibold underline underline-offset-2"
+              >
+                Jami&apos; at-Tirmidhi 3507
+              </a>{" "}
+              enumeration, which Darussalam grades da&apos;if and scholars
+              discuss, so Qur&apos;ān links are shown separately where available.
             </p>
           </div>
           <div className="grid min-w-64 grid-cols-2 gap-2">

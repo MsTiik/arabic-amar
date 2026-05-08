@@ -51,8 +51,10 @@ describe("Names of Allah data", () => {
           expect(source.reference).toMatch(/^Qur'an \d+:\d+$/);
           expect(source.url).toMatch(/^https:\/\/quran\.com\/\d+\/\d+$/);
         } else {
-          expect(source.reference).toBe("Jami' at-Tirmidhi 3507");
-          expect(source.url).toBe("https://www.prophetmuhammad.com/tirmidhi/3507");
+          expect(source.reference).toBe(
+            "Jami' at-Tirmidhi 3507 enumeration (da'if grade)",
+          );
+          expect(source.url).toBe("https://sunnah.com/tirmidhi:3507");
         }
       }
     }
