@@ -209,6 +209,16 @@ function FlashcardView({
                 {question.promptHint}
               </p>
             ) : null}
+            {question.answerDetail ? (
+              <p className="mt-3 max-w-xl text-sm leading-6 text-foreground-soft">
+                {question.answerDetail}
+              </p>
+            ) : null}
+            {question.sourceLabel ? (
+              <p className="mt-1 text-xs font-medium text-muted-foreground">
+                Source: {question.sourceLabel}
+              </p>
+            ) : null}
           </>
         ) : (
           <div className="flex flex-col items-center gap-2">
@@ -224,7 +234,7 @@ function FlashcardView({
           Tap to flip
         </span>
       </button>
-      {!flipped && question.promptArabic ? (
+      {!flipped && question.promptArabic && question.showAudio !== false ? (
         <div className="mt-2 flex justify-center">
           <SpeakerButton
             arabic={question.promptArabic}
@@ -277,14 +287,16 @@ function MultipleChoiceView({
             <ArabicText variant="display" className="text-6xl sm:text-7xl">
               {question.promptArabic}
             </ArabicText>
-            <div className="mt-2 flex justify-center">
-              <SpeakerButton
-                arabic={question.promptArabic}
-                label={question.prompt}
-                size="sm"
-                showUnavailable
-              />
-            </div>
+            {question.showAudio !== false ? (
+              <div className="mt-2 flex justify-center">
+                <SpeakerButton
+                  arabic={question.promptArabic}
+                  label={question.prompt}
+                  size="sm"
+                  showUnavailable
+                />
+              </div>
+            ) : null}
           </>
         ) : null}
         <p className="mt-2 text-base font-medium">{question.prompt}</p>
