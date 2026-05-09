@@ -1,4 +1,5 @@
 import { QuranFrequencyDeck } from "@/components/quran-frequency-deck";
+import { NamesOfAllahTeaser } from "@/components/names-of-allah-teaser";
 import { VocabBankClient } from "@/components/vocab-bank-client";
 import { getSiteContent } from "@/lib/content";
 
@@ -15,6 +16,7 @@ export default function VocabularyPage() {
           <em>هذا</em> finds <em>هٰذَا</em>; typing <em>rasun</em> finds <em>raʾsun</em>.
         </p>
       </header>
+      <NamesOfAllahTeaser />
       <QuranFrequencyDeck />
       <div>
         <h2 className="mb-3 text-2xl font-semibold tracking-tight">Lesson vocabulary</h2>

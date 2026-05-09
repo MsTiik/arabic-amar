@@ -31,6 +31,7 @@ import type {
   VocabEntry,
 } from "@/lib/types";
 import { ExerciseRunner } from "@/components/exercise-runner";
+import { buildNamesOfAllahFlashcardDeck } from "@/lib/names-of-allah";
 
 interface Props {
   vocab: VocabEntry[];
@@ -99,6 +100,9 @@ function buildUrlDeck({
       id: "deck-new",
       title: "Add new words",
     });
+  }
+  if (deckParam === "names-of-allah") {
+    return buildNamesOfAllahFlashcardDeck();
   }
   if (topicSlug) {
     const subset = vocab.filter((v) => v.topicSlugs.includes(topicSlug));
@@ -302,6 +306,14 @@ function PracticeSession({
                   title: "Mixed flashcards",
                 }),
               );
+            }}
+          />
+          <DeckButton
+            title="Names of Allah"
+            description="Practice the full 99-name collection as Arabic flashcards."
+            tone="primary"
+            onClick={() => {
+              setManualDeck(buildNamesOfAllahFlashcardDeck());
             }}
           />
           <DeckButton

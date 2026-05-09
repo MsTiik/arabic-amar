@@ -196,17 +196,23 @@ function FlashcardView({
       <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
         {flipped ? "English" : "Arabic"}
       </p>
-      <button
-        type="button"
-        onClick={() => setFlipped((f) => !f)}
-        className="mt-6 flex min-h-48 w-full flex-col items-center justify-center gap-3 rounded-2xl border border-border bg-background-soft p-6 hover:bg-muted focus-ring"
-      >
+      <div className="mt-6 flex min-h-48 w-full flex-col items-center justify-center gap-3 rounded-2xl border border-border bg-background-soft p-6">
         {flipped ? (
           <>
             <p className="text-3xl font-semibold sm:text-4xl">{question.prompt}</p>
             {question.promptHint ? (
               <p className="text-sm italic text-muted-foreground" lang="ar-Latn">
                 {question.promptHint}
+              </p>
+            ) : null}
+            {question.answerDetail ? (
+              <p className="mt-3 max-w-xl text-sm leading-6 text-foreground-soft">
+                {question.answerDetail}
+              </p>
+            ) : null}
+            {question.sourceLabel ? (
+              <p className="mt-1 text-xs font-medium text-muted-foreground">
+                Source: {question.sourceLabel}
               </p>
             ) : null}
           </>
@@ -220,11 +226,18 @@ function FlashcardView({
             </ArabicText>
           </div>
         )}
-        <span className="mt-2 text-xs text-muted-foreground">
+        {!flipped && question.promptHint ? (
+          <TranslitReveal text={question.promptHint} className="mt-2" />
+        ) : null}
+        <button
+          type="button"
+          onClick={() => setFlipped((f) => !f)}
+          className="mt-2 rounded px-2 text-xs text-muted-foreground hover:text-foreground focus-ring"
+        >
           Tap to flip
-        </span>
-      </button>
-      {!flipped && question.promptArabic ? (
+        </button>
+      </div>
+      {!flipped && question.promptArabic && question.showAudio !== false ? (
         <div className="mt-2 flex justify-center">
           <SpeakerButton
             arabic={question.promptArabic}
@@ -233,9 +246,6 @@ function FlashcardView({
             showUnavailable
           />
         </div>
-      ) : null}
-      {!flipped && question.promptHint ? (
-        <TranslitReveal text={question.promptHint} className="mt-2" />
       ) : null}
       <div className="mt-6 grid grid-cols-2 gap-3">
         <button
@@ -277,14 +287,16 @@ function MultipleChoiceView({
             <ArabicText variant="display" className="text-6xl sm:text-7xl">
               {question.promptArabic}
             </ArabicText>
-            <div className="mt-2 flex justify-center">
-              <SpeakerButton
-                arabic={question.promptArabic}
-                label={question.prompt}
-                size="sm"
-                showUnavailable
-              />
-            </div>
+            {question.showAudio !== false ? (
+              <div className="mt-2 flex justify-center">
+                <SpeakerButton
+                  arabic={question.promptArabic}
+                  label={question.prompt}
+                  size="sm"
+                  showUnavailable
+                />
+              </div>
+            ) : null}
           </>
         ) : null}
         <p className="mt-2 text-base font-medium">{question.prompt}</p>

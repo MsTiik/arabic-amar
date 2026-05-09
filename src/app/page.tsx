@@ -2,6 +2,7 @@ import Link from "next/link";
 
 import { ArabicText } from "@/components/arabic-text";
 import { DashboardHero } from "@/components/dashboard-hero";
+import { NamesOfAllahTeaser } from "@/components/names-of-allah-teaser";
 import { RefreshContentButton } from "@/components/refresh-content-button";
 import { TopicCard } from "@/components/topic-card";
 import { getSiteContent } from "@/lib/content";
@@ -25,6 +26,10 @@ export default function Home() {
         totalRules={content.rules.length}
         totalLessons={content.lessons.length}
       />
+
+      <div className="mt-8">
+        <NamesOfAllahTeaser />
+      </div>
 
       <section className="mt-10">
         <header className="mb-4 flex items-end justify-between">

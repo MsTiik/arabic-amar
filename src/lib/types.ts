@@ -271,6 +271,9 @@ export interface ExerciseQuestion {
   prompt: string;
   promptArabic?: string;
   promptHint?: string;
+  answerDetail?: string;
+  sourceLabel?: string;
+  showAudio?: boolean;
   options?: ExerciseOption[];
   correctAnswerId?: string;
   /** For fill-in-the-blank: accepted plain-text answers, all lowercased + whitespace-trimmed. */
