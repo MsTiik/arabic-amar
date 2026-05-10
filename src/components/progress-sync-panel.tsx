@@ -20,8 +20,13 @@ export function ProgressSyncPanel() {
   async function submit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (!email.trim()) return;
-    await sync.signIn(email.trim());
-    setSent(true);
+    setSent(false);
+    try {
+      await sync.signIn(email.trim());
+      setSent(true);
+    } catch {
+      setSent(false);
+    }
   }
 
   return (

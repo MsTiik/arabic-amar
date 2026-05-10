@@ -142,8 +142,10 @@ export function ProgressSyncProvider({ children }: { children: ReactNode }) {
           await signInWithEmail(email);
           setStatus("signed-out");
         } catch (err) {
+          const message = err instanceof Error ? err.message : "Sign-in failed.";
           setStatus("error");
-          setError(err instanceof Error ? err.message : "Sign-in failed.");
+          setError(message);
+          throw err instanceof Error ? err : new Error(message);
         }
       },
       signOut: async () => {
