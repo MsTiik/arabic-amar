@@ -9,6 +9,7 @@ Live site: https://arabic-amar.vercel.app
 | Area | Route | Purpose |
 | --- | --- | --- |
 | Home | `/` | Daily practice dashboard, streak/progress summary, lessons, and hidden admin refresh controls. |
+| Progress sync | `/sync` | Optional Supabase sign-in for syncing browser progress across devices. Guest mode still works without it. |
 | Lessons | `/topics` and `/topics/[slug]` | Topic-by-topic curriculum vocabulary, grammar rules, and practice entry points. |
 | Vocabulary bank | `/vocabulary` | Searchable curriculum vocabulary plus built-in Top Qur'ānic words. Arabic search is diacritic-insensitive. |
 | Grammar | `/grammar` | Pronouns, conjugations, plurals, demonstratives, and lesson-linked grammar tables. |
@@ -16,7 +17,7 @@ Live site: https://arabic-amar.vercel.app
 | Foundations | `/read` | Alphabet, harakāt, madd, sun/moon letters, makhārij, tajweed, and surah reading routes. |
 | Content health | `/admin/content-health` | Build-generated parser, QA, and audio coverage report for maintainers. |
 
-All learner progress is stored in `localStorage`; the app does not require accounts or a runtime database.
+Learner progress is stored in `localStorage` by default. Optional Supabase sync can copy that progress between devices when deployment environment variables are configured.
 
 ## Tech stack
 
@@ -44,6 +45,15 @@ npm run dev
 ```
 
 Open http://localhost:3000.
+
+Optional cloud sync environment:
+
+```bash
+NEXT_PUBLIC_SUPABASE_URL="https://YOUR_PROJECT.supabase.co"
+NEXT_PUBLIC_SUPABASE_ANON_KEY="YOUR_SUPABASE_ANON_KEY"
+```
+
+Without these values, `/sync` explains that sync is disabled and the app remains fully usable in guest/local-progress mode.
 
 Useful clean-browser-state reset for progress/admin UI testing:
 
@@ -77,6 +87,48 @@ npm run build
 ```
 
 `npm run build` can emit a workspace-root warning when multiple lockfiles exist above the repo checkout. The warning is environmental; the build is still valid if it exits successfully.
+
+## Optional Supabase progress sync
+
+The sync feature is intentionally optional: no environment variables means no sign-in UI in the main dashboard/topbar, and all progress remains local.
+
+Create this table in Supabase:
+
+```sql
+create table if not exists public.user_progress (
+  user_id uuid primary key references auth.users(id) on delete cascade,
+  progress jsonb not null,
+  updated_at timestamptz not null default now()
+);
+
+alter table public.user_progress enable row level security;
+
+create policy "Users can read their own progress"
+  on public.user_progress for select
+  using (auth.uid() = user_id);
+
+create policy "Users can insert their own progress"
+  on public.user_progress for insert
+  with check (auth.uid() = user_id);
+
+create policy "Users can update their own progress"
+  on public.user_progress for update
+  using (auth.uid() = user_id)
+  with check (auth.uid() = user_id);
+```
+
+Recommended Supabase Auth settings:
+
+- Enable Email OTP / magic-link sign-in.
+- Add the production URL and preview URL patterns to the allowed redirect URLs.
+- Use the public anon key only in `NEXT_PUBLIC_SUPABASE_ANON_KEY`; never commit service-role keys.
+
+Sync behavior:
+
+- Guest mode writes to `localStorage`.
+- Signing in pulls the cloud copy, merges it with local progress, then saves the merged copy back to Supabase.
+- Later practice updates save locally immediately, then sync to Supabase in the background.
+- If two devices changed the same word, the record with the newest `lastSeen` wins; equal timestamps keep stronger mastery.
 
 ## Content pipeline
 

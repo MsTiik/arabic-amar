@@ -6,6 +6,7 @@ import {
   BookOpen,
   Check,
   ChevronRight,
+  Cloud,
   Flame,
   GraduationCap,
   Sparkles,
@@ -14,6 +15,7 @@ import {
 } from "lucide-react";
 
 import { AppDialog } from "@/components/app-dialog";
+import { useProgressSync } from "@/components/progress-sync-provider";
 import type { DailyPathPlan, DailyPathStep } from "@/lib/progress";
 import { buildDailyPathPlan, progressActions, summarizeMastery, useProgress } from "@/lib/progress";
 import { getSiteContent } from "@/lib/content";
@@ -30,6 +32,7 @@ export function DashboardHero({ totalVocab, totalRules, totalLessons }: Props) {
   const [goalInput, setGoalInput] = useState("");
   const [resetDialogOpen, setResetDialogOpen] = useState(false);
   const progress = useProgress();
+  const sync = useProgressSync();
   const content = getSiteContent();
   const allWordIds = useMemo(() => content.vocab.map((v) => v.id), [content.vocab]);
   const summary = summarizeMastery(progress, allWordIds);
@@ -84,7 +87,8 @@ export function DashboardHero({ totalVocab, totalRules, totalLessons }: Props) {
             </h1>
             <p className="mt-2 max-w-xl text-base text-foreground-soft">
               Hit your daily goal, keep your streak alive, and chip away at any words you&apos;ve
-              been getting wrong. Your progress is saved in this browser — no account needed.
+              been getting wrong. Your progress is saved in this browser
+              {sync.configured ? " and can sync when you sign in." : " — no account needed."}
             </p>
             <div className="mt-4 flex flex-wrap gap-2">
               <Link
@@ -108,6 +112,15 @@ export function DashboardHero({ totalVocab, totalRules, totalLessons }: Props) {
               >
                 Vocabulary bank
               </Link>
+              {sync.configured ? (
+                <Link
+                  href="/sync"
+                  className="inline-flex items-center gap-2 rounded-full border border-border bg-background-soft px-4 py-2 text-sm font-medium hover:bg-muted focus-ring"
+                >
+                  <Cloud className="h-4 w-4" />
+                  {sync.user ? "Sync settings" : "Sign in to sync"}
+                </Link>
+              ) : null}
             </div>
           </div>
 

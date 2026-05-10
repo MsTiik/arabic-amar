@@ -4,8 +4,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Flame, Snowflake, Target } from "lucide-react";
 
-import { useProgress, useProgressStorageSync } from "@/lib/progress";
-import { useThemeSync } from "@/lib/theme";
+import { useProgress } from "@/lib/progress";
+import { useProgressSync } from "@/components/progress-sync-provider";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { cn } from "@/lib/cn";
 
@@ -21,9 +21,8 @@ const NAV = [
 const FOUNDATIONS = { href: "/read", label: "Foundations" };
 
 export function Topbar() {
-  useProgressStorageSync();
-  useThemeSync();
   const progress = useProgress();
+  const sync = useProgressSync();
   const pathname = usePathname();
   const goal = progress.daily.goalCards;
   const seen = progress.daily.today.cardsSeen;
@@ -94,6 +93,7 @@ export function Topbar() {
             <span className="hidden sm:inline">streak</span>
           </div>
           <FreezeChip count={freezesAvailable} />
+          {sync.configured ? <SyncChip status={sync.status} signedIn={Boolean(sync.user)} /> : null}
           <DailyGoalChip seen={seen} goal={goal} ratio={goalRatio} />
           <ThemeToggle />
           <FoundationsNavLink pathname={pathname} />
@@ -131,6 +131,28 @@ export function Topbar() {
         </Link>
       </nav>
     </header>
+  );
+}
+
+function SyncChip({ signedIn, status }: { signedIn: boolean; status: string }) {
+  const label = signedIn ? (status === "syncing" ? "syncing" : "synced") : "guest";
+  return (
+    <Link
+      href="/sync"
+      className={cn(
+        "hidden items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-medium hover:bg-muted focus-ring sm:flex",
+        signedIn ? "border-success/40 bg-success/10" : "border-border bg-muted text-muted-foreground",
+      )}
+      title={signedIn ? "Progress sync is enabled." : "Sign in to sync progress across devices."}
+    >
+      <span
+        className={cn(
+          "h-2 w-2 rounded-full",
+          signedIn ? "bg-success" : "bg-muted-foreground",
+        )}
+      />
+      <span>{label}</span>
+    </Link>
   );
 }
 
