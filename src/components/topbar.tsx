@@ -96,7 +96,7 @@ export function Topbar() {
           <FoundationsNavLink pathname={pathname} />
         </div>
       </div>
-      <nav className="flex items-center gap-1 overflow-x-auto px-3 py-2 text-sm md:hidden">
+      <nav className="flex flex-wrap items-center gap-1 px-3 py-2 text-sm md:hidden">
         {NAV.map((item) => {
           const active =
             item.href === "/" ? pathname === "/" : pathname.startsWith(item.href);
@@ -118,7 +118,7 @@ export function Topbar() {
         <Link
           href={FOUNDATIONS.href}
           className={cn(
-            "ml-auto shrink-0 whitespace-nowrap rounded-md px-3 py-1.5 transition-colors focus-ring",
+            "shrink-0 whitespace-nowrap rounded-md px-3 py-1.5 transition-colors focus-ring",
             pathname.startsWith(FOUNDATIONS.href)
               ? "bg-muted text-foreground"
               : "text-muted-foreground hover:bg-muted hover:text-foreground",
