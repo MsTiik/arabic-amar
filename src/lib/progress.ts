@@ -3,7 +3,7 @@
 import { useEffect, useSyncExternalStore } from "react";
 import type { Mastery, Topic, UserProgress, VocabEntry, WordProgress } from "./types";
 
-const STORAGE_KEY = "arabic-amar:progress:v1";
+export const PROGRESS_STORAGE_KEY = "arabic-amar:progress:v1";
 const DEFAULT_DAILY_GOAL = 20;
 
 /** Max number of streak freezes the user can have banked at once. */
@@ -48,7 +48,7 @@ function defaultProgress(): UserProgress {
 function loadFromStorage(): UserProgress {
   if (typeof window === "undefined") return defaultProgress();
   try {
-    const raw = window.localStorage.getItem(STORAGE_KEY);
+    const raw = window.localStorage.getItem(PROGRESS_STORAGE_KEY);
     if (!raw) return defaultProgress();
     const parsed = JSON.parse(raw) as UserProgress;
     if (parsed.version !== 1) return defaultProgress();
@@ -71,7 +71,7 @@ function loadFromStorage(): UserProgress {
 
 function saveToStorage(p: UserProgress): void {
   if (typeof window === "undefined") return;
-  window.localStorage.setItem(STORAGE_KEY, JSON.stringify(p));
+  window.localStorage.setItem(PROGRESS_STORAGE_KEY, JSON.stringify(p));
 }
 
 type Listener = () => void;
@@ -123,7 +123,7 @@ export function useProgressStorageSync(): void {
   useEffect(() => {
     if (typeof window === "undefined") return;
     const handler = (e: StorageEvent) => {
-      if (e.key !== STORAGE_KEY) return;
+      if (e.key !== PROGRESS_STORAGE_KEY) return;
       cached = loadFromStorage();
       for (const l of listeners) l();
     };
@@ -149,6 +149,82 @@ function defaultWord(): WordProgress {
     lastSeen: new Date(0).toISOString(),
     nextDue: new Date().toISOString(),
   };
+}
+
+function dateMax(a: string | undefined, b: string | undefined): string | undefined {
+  if (!a) return b;
+  if (!b) return a;
+  return new Date(a).getTime() >= new Date(b).getTime() ? a : b;
+}
+
+function strongerWordProgress(a: WordProgress, b: WordProgress): WordProgress {
+  const aSeen = new Date(a.lastSeen).getTime();
+  const bSeen = new Date(b.lastSeen).getTime();
+  if (aSeen === bSeen) return a.mastery >= b.mastery ? a : b;
+  return aSeen > bSeen ? a : b;
+}
+
+export function mergeProgress(local: UserProgress, remote: UserProgress): UserProgress {
+  const startedAt =
+    new Date(local.startedAt).getTime() <= new Date(remote.startedAt).getTime()
+      ? local.startedAt
+      : remote.startedAt;
+  const daily =
+    local.daily.today.date === remote.daily.today.date
+      ? {
+          goalCards: local.daily.goalCards,
+          today: {
+            date: local.daily.today.date,
+            cardsSeen: Math.max(local.daily.today.cardsSeen, remote.daily.today.cardsSeen),
+            correct: Math.max(local.daily.today.correct, remote.daily.today.correct),
+          },
+        }
+      : new Date(local.daily.today.date).getTime() >= new Date(remote.daily.today.date).getTime()
+        ? local.daily
+        : remote.daily;
+  const words: UserProgress["words"] = { ...local.words };
+  for (const [id, word] of Object.entries(remote.words)) {
+    words[id] = words[id] ? strongerWordProgress(words[id], word) : word;
+  }
+  const topics: UserProgress["topics"] = { ...local.topics };
+  for (const [slug, remoteTopic] of Object.entries(remote.topics)) {
+    const localTopic = topics[slug];
+    if (
+      !localTopic ||
+      new Date(remoteTopic.lastVisited).getTime() > new Date(localTopic.lastVisited).getTime()
+    ) {
+      topics[slug] = remoteTopic;
+    }
+  }
+  return {
+    version: 1,
+    startedAt,
+    streak: {
+      count: Math.max(local.streak.count, remote.streak.count),
+      lastDay: dateMax(local.streak.lastDay, remote.streak.lastDay) ?? "",
+      freezesAvailable: Math.max(
+        local.streak.freezesAvailable ?? 0,
+        remote.streak.freezesAvailable ?? 0,
+      ),
+      lastFreezeRegenAt: dateMax(
+        local.streak.lastFreezeRegenAt,
+        remote.streak.lastFreezeRegenAt,
+      ),
+      lastFreezeConsumedAt: dateMax(
+        local.streak.lastFreezeConsumedAt,
+        remote.streak.lastFreezeConsumedAt,
+      ),
+    },
+    daily,
+    words,
+    topics,
+  };
+}
+
+export function replaceProgress(next: UserProgress): void {
+  cached = next;
+  saveToStorage(next);
+  for (const l of listeners) l();
 }
 
 function addDaysIso(iso: string, days: number): string {

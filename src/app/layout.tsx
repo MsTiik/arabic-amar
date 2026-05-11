@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import localFont from "next/font/local";
 
+import { ProgressSyncProvider } from "@/components/progress-sync-provider";
 import { Topbar } from "@/components/topbar";
 import { themeBootstrapScript } from "@/lib/theme";
 import "./globals.css";
@@ -52,47 +53,49 @@ export default function RootLayout({
         <script dangerouslySetInnerHTML={{ __html: themeBootstrapScript }} />
       </head>
       <body className="min-h-full bg-background text-foreground flex flex-col">
-        <Topbar />
-        <main className="flex-1 flex flex-col">{children}</main>
-        <footer className="border-t border-border px-4 py-6 text-center text-xs text-muted-foreground">
-          <p>
-            Built from the{" "}
-            <a className="underline hover:text-foreground" href="/about">
-              AMAR Arabic Programme study notes
-            </a>
-            . Tashkeel preserved end-to-end.
-          </p>
-          <p className="mt-1.5 text-muted-foreground/80">
-            Pronunciations from{" "}
-            <a
-              className="underline hover:text-foreground"
-              href="https://lingualibre.org/wiki/LinguaLibre:Main_Page"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Lingua Libre
-            </a>{" "}
-            and{" "}
-            <a
-              className="underline hover:text-foreground"
-              href="https://commons.wikimedia.org/"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Wikimedia Commons
-            </a>{" "}
-            (CC-BY-SA). Qur&apos;ān recitation by Mishary Al-Afasy via{" "}
-            <a
-              className="underline hover:text-foreground"
-              href="https://quran.com/"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Quran.com
-            </a>
-            .
-          </p>
-        </footer>
+        <ProgressSyncProvider>
+          <Topbar />
+          <main className="flex-1 flex flex-col">{children}</main>
+          <footer className="border-t border-border px-4 py-6 text-center text-xs text-muted-foreground">
+            <p>
+              Built from the{" "}
+              <a className="underline hover:text-foreground" href="/about">
+                AMAR Arabic Programme study notes
+              </a>
+              . Tashkeel preserved end-to-end.
+            </p>
+            <p className="mt-1.5 text-muted-foreground/80">
+              Pronunciations from{" "}
+              <a
+                className="underline hover:text-foreground"
+                href="https://lingualibre.org/wiki/LinguaLibre:Main_Page"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Lingua Libre
+              </a>{" "}
+              and{" "}
+              <a
+                className="underline hover:text-foreground"
+                href="https://commons.wikimedia.org/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Wikimedia Commons
+              </a>{" "}
+              (CC-BY-SA). Qur&apos;ān recitation by Mishary Al-Afasy via{" "}
+              <a
+                className="underline hover:text-foreground"
+                href="https://quran.com/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Quran.com
+              </a>
+              .
+            </p>
+          </footer>
+        </ProgressSyncProvider>
       </body>
     </html>
   );
