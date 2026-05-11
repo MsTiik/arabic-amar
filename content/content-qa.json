@@ -1,19 +1,19 @@
 {
-  "generatedAt": "2026-05-04T19:45:36.908Z",
+  "generatedAt": "2026-05-11T13:52:20.879Z",
   "totals": {
-    "lessons": 8,
-    "topics": 8,
-    "vocab": 348,
-    "rules": 15,
+    "lessons": 9,
+    "topics": 9,
+    "vocab": 339,
+    "rules": 25,
     "conversations": 0,
     "parserWarnings": 0,
     "issues": 1
   },
   "audioCoverage": {
-    "vocabTotal": 348,
-    "vocabWithAudio": 245,
-    "vocabMissingAudio": 103,
-    "coveragePercent": 70,
+    "vocabTotal": 339,
+    "vocabWithAudio": 241,
+    "vocabMissingAudio": 98,
+    "coveragePercent": 71,
     "byTopic": [
       {
         "slug": "body-parts",
@@ -66,18 +66,26 @@
       {
         "slug": "getting-to-know-each-other",
         "name": "Getting to know each other",
-        "total": 160,
-        "withAudio": 108,
-        "missingAudio": 52,
-        "coveragePercent": 68
+        "total": 138,
+        "withAudio": 92,
+        "missingAudio": 46,
+        "coveragePercent": 67
       },
       {
-        "slug": "the-classroom",
-        "name": "The Classroom",
-        "total": 17,
-        "withAudio": 9,
-        "missingAudio": 8,
-        "coveragePercent": 53
+        "slug": "nouns-in-the-classroom",
+        "name": "Nouns in the Classroom",
+        "total": 30,
+        "withAudio": 21,
+        "missingAudio": 9,
+        "coveragePercent": 70
+      },
+      {
+        "slug": "verbs-in-the-classroom",
+        "name": "Verbs in the Classroom",
+        "total": 0,
+        "withAudio": 0,
+        "missingAudio": 0,
+        "coveragePercent": 100
       }
     ]
   },
@@ -86,7 +94,7 @@
       "code": "missing-audio",
       "severity": "info",
       "message": "Vocabulary words do not have a matching audio-manifest entry.",
-      "count": 103,
+      "count": 98,
       "examples": [
         "lesson-body-parts: جَبِينٌ / jabīnun / Forehead",
         "lesson-body-parts: أَسْنَانٌ / asnānun / Teeth",

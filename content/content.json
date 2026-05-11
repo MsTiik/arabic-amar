@@ -404,28 +404,6 @@
         "lesson-getting-to-know-each-other__common-terms-in-excercise-books-and-questions-9",
         "lesson-getting-to-know-each-other__common-terms-in-excercise-books-and-questions-10",
         "lesson-getting-to-know-each-other__common-terms-in-excercise-books-and-questions-11",
-        "lesson-getting-to-know-each-other__general-verbs",
-        "lesson-getting-to-know-each-other__general-verbs-2",
-        "lesson-getting-to-know-each-other__general-verbs-3",
-        "lesson-getting-to-know-each-other__general-verbs-4",
-        "lesson-getting-to-know-each-other__general-verbs-5",
-        "lesson-getting-to-know-each-other__general-verbs-6",
-        "lesson-getting-to-know-each-other__general-verbs-7",
-        "lesson-getting-to-know-each-other__general-verbs-8",
-        "lesson-getting-to-know-each-other__general-verbs-9",
-        "lesson-getting-to-know-each-other__prepositions",
-        "lesson-getting-to-know-each-other__prepositions-2",
-        "lesson-getting-to-know-each-other__prepositions-3",
-        "lesson-getting-to-know-each-other__prepositions-4",
-        "lesson-getting-to-know-each-other__prepositions-5",
-        "lesson-getting-to-know-each-other__prepositions-6",
-        "lesson-getting-to-know-each-other__prepositions-7",
-        "lesson-getting-to-know-each-other__prepositions-8",
-        "lesson-getting-to-know-each-other__prepositions-9",
-        "lesson-getting-to-know-each-other__prepositions-10",
-        "lesson-getting-to-know-each-other__prepositions-11",
-        "lesson-getting-to-know-each-other__prepositions-12",
-        "lesson-getting-to-know-each-other__prepositions-13",
         "lesson-getting-to-know-each-other__singular-near",
         "lesson-getting-to-know-each-other__singular-near-2",
         "lesson-getting-to-know-each-other__singular-far",
@@ -441,33 +419,69 @@
       "conversationIds": []
     },
     {
-      "id": "lesson-the-classroom",
+      "id": "lesson-nouns-in-the-classroom",
       "number": "9-11",
-      "title": "The Classroom",
-      "titleArabic": "حُجْرَةُ الدِّرَاسَةِ",
+      "title": "Nouns in the Classroom",
+      "titleArabic": "أَسْمَاءُ حُجْرَةِ الدِّرَاسَةِ",
       "topicSlugs": [
-        "the-classroom"
+        "nouns-in-the-classroom"
       ],
       "vocabIds": [
-        "lesson-the-classroom__rooms-places__حجرة__حجر__hujrah-hujar__room-rooms",
-        "lesson-the-classroom__rooms-places__حجرة-الدراسة__حجر-الدراسة__hujrur-hujrurat-ad-dirasah__study-room-study-rooms",
-        "lesson-the-classroom__rooms-places__مكتبة__مكتبات__maktabah-maktabat__library-libraries",
-        "lesson-the-classroom__rooms-places__مختبر__مختبرات__mukhtabar-mukhtabarat__laboratory-laboratories",
-        "lesson-the-classroom__furniture-features__مكتب__مكاتب__maktab-makatib__desk-desks",
-        "lesson-the-classroom__furniture-features__مقعد__مقاعد__maqad-maqaid__bench-benches",
-        "lesson-the-classroom__furniture-features__نافذة__نوافذ__nafidhah-nawafidh__window-windows",
-        "lesson-the-classroom__furniture-features__مروحة__مراوح__mirwahah-marawih__fan-fans",
-        "lesson-the-classroom__classroomitems__دفتر__دفاتر__daftar-dafatir__notebook-notebooks",
-        "lesson-the-classroom__classroomitems__مسطرة__مساطر__mistarah-masatir__ruler-rulers",
-        "lesson-the-classroom__classroomitems__ممحاة__ممحات__mimhah-mimhat__eraser-erasers",
-        "lesson-the-classroom__classroomitems__مبراة__مبرايات__mibrah-mibrayat__pencil-sharpener-sharpeners",
-        "lesson-the-classroom__classroomitems__لوحة__لوحات__lawhah-lawhat__board-boards",
-        "lesson-the-classroom__classroomitems__ممسحة__ممسحات__mimshah-mimshat__board-wiper-wipers",
-        "lesson-the-classroom__classroomitems__خريطة__خراي-ط__kharitah-kharait__map-maps",
-        "lesson-the-classroom__classroomitems__صورة__صور__surah-suwar__picture-pictures",
-        "lesson-the-classroom__classroomitems__نقطة__نقط__nuqtah-nuqat__dot-dots"
+        "lesson-nouns-in-the-classroom__classroom-singular-and-plural__مكتبة__مكتبات__maktabah-maktabat__library-libraries",
+        "lesson-nouns-in-the-classroom__classroom-singular-and-plural__مختبر__مختبرات__mukhtabar-mukhtabarat__laboratory-laboratories",
+        "lesson-nouns-in-the-classroom__classroom-singular-and-plural__ممحاة__ممحات__mimhah-mimhat__eraser-erasers",
+        "lesson-nouns-in-the-classroom__classroom-singular-and-plural__مبراة__مبرايات__mibrah-mibrayat__sharpener-sharpeners",
+        "lesson-nouns-in-the-classroom__classroom-singular-and-plural__لوحة__لوحات__lawhah-lawhat__board-boards",
+        "lesson-nouns-in-the-classroom__classroom-singular-and-plural__ممسحة__ممسحات__mimsahah-mimsahat__cloth-wiper-cloths-wipers",
+        "lesson-nouns-in-the-classroom__classroom-singular-and-plural__حجرة__حجر__hujrah-hujur__room-rooms",
+        "lesson-nouns-in-the-classroom__classroom-singular-and-plural__حجرة-الدراسة__حجر-الدراسة__hujra-tu-d-dirasah-hujaru-d-dirasah__classroom-classrooms",
+        "lesson-nouns-in-the-classroom__classroom-singular-and-plural__مكتب__مكاتب__maktab-makatib__desk-office-desks-offices",
+        "lesson-nouns-in-the-classroom__classroom-singular-and-plural__مقعد__مقاعد__maqad-maqaid__seat-seats",
+        "lesson-nouns-in-the-classroom__classroom-singular-and-plural__نافذة__نوافذ__nafidhah-nawafidh__window-windows",
+        "lesson-nouns-in-the-classroom__classroom-singular-and-plural__مروحة__مراوح__mirwahah-marawih__fan-fans",
+        "lesson-nouns-in-the-classroom__classroom-singular-and-plural__دفتر__دفاتر__daftar-dafatir__notebook-notebooks",
+        "lesson-nouns-in-the-classroom__classroom-singular-and-plural__مسطرة__مساطر__mistarah-masatir__ruler-rulers",
+        "lesson-nouns-in-the-classroom__classroom-singular-and-plural__خريطة__خراي-ط__kharitah-kharait__map-maps",
+        "lesson-nouns-in-the-classroom__classroom-singular-and-plural__صورة__صور__surah-suwar__picture-pictures",
+        "lesson-nouns-in-the-classroom__classroom-singular-and-plural__نقطة__نقط__nuqtah-nuqat__dot-point-dots-points",
+        "lesson-nouns-in-the-classroom__prepositions",
+        "lesson-nouns-in-the-classroom__prepositions-2",
+        "lesson-nouns-in-the-classroom__prepositions-3",
+        "lesson-nouns-in-the-classroom__prepositions-4",
+        "lesson-nouns-in-the-classroom__prepositions-5",
+        "lesson-nouns-in-the-classroom__prepositions-6",
+        "lesson-nouns-in-the-classroom__prepositions-7",
+        "lesson-nouns-in-the-classroom__prepositions-8",
+        "lesson-nouns-in-the-classroom__prepositions-9",
+        "lesson-nouns-in-the-classroom__prepositions-10",
+        "lesson-nouns-in-the-classroom__prepositions-11",
+        "lesson-nouns-in-the-classroom__prepositions-12",
+        "lesson-nouns-in-the-classroom__prepositions-13"
       ],
       "ruleIds": [],
+      "conversationIds": []
+    },
+    {
+      "id": "lesson-verbs-in-the-classroom",
+      "number": "12-15",
+      "title": "Verbs in the Classroom",
+      "titleArabic": "الأفعال في حُجْرَةِ الدِّرَاسَةِ",
+      "topicSlugs": [
+        "verbs-in-the-classroom"
+      ],
+      "vocabIds": [],
+      "ruleIds": [
+        "lesson-verbs-in-the-classroom__rule__the-verbal-noun",
+        "lesson-verbs-in-the-classroom__term-gloss__the-three-tenses",
+        "lesson-verbs-in-the-classroom__rule__the-three-tenses",
+        "lesson-verbs-in-the-classroom__verb-forms__vocabulary-classroom-actions-and-verbs",
+        "lesson-verbs-in-the-classroom__person-groups__the-grammatical-persons__19",
+        "lesson-verbs-in-the-classroom__person-groups__the-grammatical-persons__20",
+        "lesson-verbs-in-the-classroom__person-groups__the-grammatical-persons__21",
+        "lesson-verbs-in-the-classroom__rule__past-tense-madi",
+        "lesson-verbs-in-the-classroom__rule__present-future-tense-mudari",
+        "lesson-verbs-in-the-classroom__rule__command-amr"
+      ],
       "conversationIds": []
     }
   ],
@@ -560,21 +574,34 @@
       "lessonIds": [
         "lesson-getting-to-know-each-other"
       ],
-      "vocabCount": 160,
+      "vocabCount": 138,
       "ruleCount": 0,
       "conversationCount": 0,
       "notes": []
     },
     {
-      "slug": "the-classroom",
-      "name": "The Classroom",
-      "nameArabic": "حُجْرَةُ الدِّرَاسَةِ",
+      "slug": "nouns-in-the-classroom",
+      "name": "Nouns in the Classroom",
+      "nameArabic": "أَسْمَاءُ حُجْرَةِ الدِّرَاسَةِ",
       "order": 8,
       "lessonIds": [
-        "lesson-the-classroom"
+        "lesson-nouns-in-the-classroom"
       ],
-      "vocabCount": 17,
+      "vocabCount": 30,
       "ruleCount": 0,
+      "conversationCount": 0,
+      "notes": []
+    },
+    {
+      "slug": "verbs-in-the-classroom",
+      "name": "Verbs in the Classroom",
+      "nameArabic": "الأفعال في حُجْرَةِ الدِّرَاسَةِ",
+      "order": 9,
+      "lessonIds": [
+        "lesson-verbs-in-the-classroom"
+      ],
+      "vocabCount": 0,
+      "ruleCount": 10,
       "conversationCount": 0,
       "notes": []
     }
@@ -4857,292 +4884,6 @@
       "lessonId": "lesson-getting-to-know-each-other"
     },
     {
-      "id": "lesson-getting-to-know-each-other__general-verbs",
-      "arabic": "دَخَلَ",
-      "arabicFolded": "دخل",
-      "pronunciation": "dakhala",
-      "english": "to enter",
-      "category": "GENERAL VERBS",
-      "isExtra": false,
-      "topicSlugs": [
-        "getting-to-know-each-other"
-      ],
-      "lessonId": "lesson-getting-to-know-each-other"
-    },
-    {
-      "id": "lesson-getting-to-know-each-other__general-verbs-2",
-      "arabic": "طَلَبَ",
-      "arabicFolded": "طلب",
-      "pronunciation": "ṭalaba",
-      "english": "to seek",
-      "category": "GENERAL VERBS",
-      "isExtra": false,
-      "topicSlugs": [
-        "getting-to-know-each-other"
-      ],
-      "lessonId": "lesson-getting-to-know-each-other"
-    },
-    {
-      "id": "lesson-getting-to-know-each-other__general-verbs-3",
-      "arabic": "دَرَسَ",
-      "arabicFolded": "درس",
-      "pronunciation": "darasa",
-      "english": "to study",
-      "category": "GENERAL VERBS",
-      "isExtra": false,
-      "topicSlugs": [
-        "getting-to-know-each-other"
-      ],
-      "lessonId": "lesson-getting-to-know-each-other"
-    },
-    {
-      "id": "lesson-getting-to-know-each-other__general-verbs-4",
-      "arabic": "جَلَسَ",
-      "arabicFolded": "جلس",
-      "pronunciation": "jalasa",
-      "english": "to sit",
-      "category": "GENERAL VERBS",
-      "isExtra": false,
-      "topicSlugs": [
-        "getting-to-know-each-other"
-      ],
-      "lessonId": "lesson-getting-to-know-each-other"
-    },
-    {
-      "id": "lesson-getting-to-know-each-other__general-verbs-5",
-      "arabic": "اِقْرَأْ",
-      "arabicFolded": "اقرأ",
-      "pronunciation": "iqraʾ",
-      "english": "read",
-      "category": "GENERAL VERBS",
-      "isExtra": false,
-      "topicSlugs": [
-        "getting-to-know-each-other"
-      ],
-      "lessonId": "lesson-getting-to-know-each-other"
-    },
-    {
-      "id": "lesson-getting-to-know-each-other__general-verbs-6",
-      "arabic": "اُكْتُبْ",
-      "arabicFolded": "اكتب",
-      "pronunciation": "uktub",
-      "english": "write",
-      "category": "GENERAL VERBS",
-      "isExtra": false,
-      "topicSlugs": [
-        "getting-to-know-each-other"
-      ],
-      "lessonId": "lesson-getting-to-know-each-other"
-    },
-    {
-      "id": "lesson-getting-to-know-each-other__general-verbs-7",
-      "arabic": "أَجِبْ",
-      "arabicFolded": "أجب",
-      "pronunciation": "ajib",
-      "english": "answer",
-      "category": "GENERAL VERBS",
-      "isExtra": false,
-      "topicSlugs": [
-        "getting-to-know-each-other"
-      ],
-      "lessonId": "lesson-getting-to-know-each-other"
-    },
-    {
-      "id": "lesson-getting-to-know-each-other__general-verbs-8",
-      "arabic": "بَدِّلْ",
-      "arabicFolded": "بدل",
-      "pronunciation": "baddil",
-      "english": "replace",
-      "category": "GENERAL VERBS",
-      "isExtra": false,
-      "topicSlugs": [
-        "getting-to-know-each-other"
-      ],
-      "lessonId": "lesson-getting-to-know-each-other"
-    },
-    {
-      "id": "lesson-getting-to-know-each-other__general-verbs-9",
-      "arabic": "اسْأَلْ",
-      "arabicFolded": "اسأل",
-      "pronunciation": "isʾal",
-      "english": "ask",
-      "category": "GENERAL VERBS",
-      "isExtra": false,
-      "topicSlugs": [
-        "getting-to-know-each-other"
-      ],
-      "lessonId": "lesson-getting-to-know-each-other"
-    },
-    {
-      "id": "lesson-getting-to-know-each-other__prepositions",
-      "arabic": "مِنْ",
-      "arabicFolded": "من",
-      "pronunciation": "min",
-      "english": "from",
-      "category": "PREPOSITIONS",
-      "isExtra": false,
-      "topicSlugs": [
-        "getting-to-know-each-other"
-      ],
-      "lessonId": "lesson-getting-to-know-each-other"
-    },
-    {
-      "id": "lesson-getting-to-know-each-other__prepositions-2",
-      "arabic": "إِلَى",
-      "arabicFolded": "إلى",
-      "pronunciation": "ilā",
-      "english": "to",
-      "category": "PREPOSITIONS",
-      "isExtra": false,
-      "topicSlugs": [
-        "getting-to-know-each-other"
-      ],
-      "lessonId": "lesson-getting-to-know-each-other"
-    },
-    {
-      "id": "lesson-getting-to-know-each-other__prepositions-3",
-      "arabic": "مَعَ",
-      "arabicFolded": "مع",
-      "pronunciation": "maʿa",
-      "english": "with",
-      "category": "PREPOSITIONS",
-      "isExtra": false,
-      "topicSlugs": [
-        "getting-to-know-each-other"
-      ],
-      "lessonId": "lesson-getting-to-know-each-other"
-    },
-    {
-      "id": "lesson-getting-to-know-each-other__prepositions-4",
-      "arabic": "لِ",
-      "arabicFolded": "ل",
-      "pronunciation": "li",
-      "english": "for / to",
-      "category": "PREPOSITIONS",
-      "isExtra": false,
-      "topicSlugs": [
-        "getting-to-know-each-other"
-      ],
-      "lessonId": "lesson-getting-to-know-each-other"
-    },
-    {
-      "id": "lesson-getting-to-know-each-other__prepositions-5",
-      "arabic": "بِ",
-      "arabicFolded": "ب",
-      "pronunciation": "bi",
-      "english": "with / by / using",
-      "category": "PREPOSITIONS",
-      "isExtra": false,
-      "topicSlugs": [
-        "getting-to-know-each-other"
-      ],
-      "lessonId": "lesson-getting-to-know-each-other"
-    },
-    {
-      "id": "lesson-getting-to-know-each-other__prepositions-6",
-      "arabic": "فِي",
-      "arabicFolded": "في",
-      "pronunciation": "fī",
-      "english": "in",
-      "category": "PREPOSITIONS",
-      "isExtra": false,
-      "topicSlugs": [
-        "getting-to-know-each-other"
-      ],
-      "lessonId": "lesson-getting-to-know-each-other"
-    },
-    {
-      "id": "lesson-getting-to-know-each-other__prepositions-7",
-      "arabic": "عَلَى",
-      "arabicFolded": "على",
-      "pronunciation": "ʿalā",
-      "english": "on",
-      "category": "PREPOSITIONS",
-      "isExtra": false,
-      "topicSlugs": [
-        "getting-to-know-each-other"
-      ],
-      "lessonId": "lesson-getting-to-know-each-other"
-    },
-    {
-      "id": "lesson-getting-to-know-each-other__prepositions-8",
-      "arabic": "بَيْنَ",
-      "arabicFolded": "بين",
-      "pronunciation": "bayna",
-      "english": "between",
-      "category": "PREPOSITIONS",
-      "isExtra": false,
-      "topicSlugs": [
-        "getting-to-know-each-other"
-      ],
-      "lessonId": "lesson-getting-to-know-each-other"
-    },
-    {
-      "id": "lesson-getting-to-know-each-other__prepositions-9",
-      "arabic": "تَحْتَ",
-      "arabicFolded": "تحت",
-      "pronunciation": "taḥta",
-      "english": "under",
-      "category": "PREPOSITIONS",
-      "isExtra": false,
-      "topicSlugs": [
-        "getting-to-know-each-other"
-      ],
-      "lessonId": "lesson-getting-to-know-each-other"
-    },
-    {
-      "id": "lesson-getting-to-know-each-other__prepositions-10",
-      "arabic": "فَوْقَ",
-      "arabicFolded": "فوق",
-      "pronunciation": "fawqa",
-      "english": "above",
-      "category": "PREPOSITIONS",
-      "isExtra": false,
-      "topicSlugs": [
-        "getting-to-know-each-other"
-      ],
-      "lessonId": "lesson-getting-to-know-each-other"
-    },
-    {
-      "id": "lesson-getting-to-know-each-other__prepositions-11",
-      "arabic": "أَمَامَ",
-      "arabicFolded": "أمام",
-      "pronunciation": "amāma",
-      "english": "in front",
-      "category": "PREPOSITIONS",
-      "isExtra": false,
-      "topicSlugs": [
-        "getting-to-know-each-other"
-      ],
-      "lessonId": "lesson-getting-to-know-each-other"
-    },
-    {
-      "id": "lesson-getting-to-know-each-other__prepositions-12",
-      "arabic": "وَرَاءَ",
-      "arabicFolded": "وراء",
-      "pronunciation": "warāʾa",
-      "english": "behind",
-      "category": "PREPOSITIONS",
-      "isExtra": false,
-      "topicSlugs": [
-        "getting-to-know-each-other"
-      ],
-      "lessonId": "lesson-getting-to-know-each-other"
-    },
-    {
-      "id": "lesson-getting-to-know-each-other__prepositions-13",
-      "arabic": "عَنْ",
-      "arabicFolded": "عن",
-      "pronunciation": "ʿan",
-      "english": "about",
-      "category": "PREPOSITIONS",
-      "isExtra": false,
-      "topicSlugs": [
-        "getting-to-know-each-other"
-      ],
-      "lessonId": "lesson-getting-to-know-each-other"
-    },
-    {
       "id": "lesson-getting-to-know-each-other__singular-near",
       "arabic": "هَذَا",
       "arabicFolded": "هذا",
@@ -5273,225 +5014,394 @@
       "lessonId": "lesson-getting-to-know-each-other"
     },
     {
-      "id": "lesson-the-classroom__rooms-places__حجرة__حجر__hujrah-hujar__room-rooms",
-      "arabic": "حُجْرَة / حُجُر",
-      "arabicFolded": "حجرة حجر",
-      "pronunciation": "ḥujrah / ḥujar",
-      "english": "room → rooms",
-      "category": "ROOMS & PLACES",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-classroom"
-      ],
-      "lessonId": "lesson-the-classroom"
-    },
-    {
-      "id": "lesson-the-classroom__rooms-places__حجرة-الدراسة__حجر-الدراسة__hujrur-hujrurat-ad-dirasah__study-room-study-rooms",
-      "arabic": "حُجْرَةُ الدِّرَاسَة / حُجَرُ الدِّرَاسَة",
-      "arabicFolded": "حجرة الدراسة حجر الدراسة",
-      "pronunciation": "ḥujrur / ḥujrurat ad-dirāsah",
-      "english": "study room → study rooms",
-      "category": "ROOMS & PLACES",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-classroom"
-      ],
-      "lessonId": "lesson-the-classroom"
-    },
-    {
-      "id": "lesson-the-classroom__rooms-places__مكتبة__مكتبات__maktabah-maktabat__library-libraries",
+      "id": "lesson-nouns-in-the-classroom__classroom-singular-and-plural__مكتبة__مكتبات__maktabah-maktabat__library-libraries",
       "arabic": "مَكْتَبَة / مَكْتَبَات",
       "arabicFolded": "مكتبة مكتبات",
-      "pronunciation": "maktabah / maktabāt",
-      "english": "library → libraries",
-      "category": "ROOMS & PLACES",
+      "pronunciation": "maktabah / maktabat",
+      "english": "library / libraries",
+      "category": "Classroom Singular and Plural",
       "isExtra": false,
       "topicSlugs": [
-        "the-classroom"
+        "nouns-in-the-classroom"
       ],
-      "lessonId": "lesson-the-classroom"
+      "lessonId": "lesson-nouns-in-the-classroom"
     },
     {
-      "id": "lesson-the-classroom__rooms-places__مختبر__مختبرات__mukhtabar-mukhtabarat__laboratory-laboratories",
+      "id": "lesson-nouns-in-the-classroom__classroom-singular-and-plural__مختبر__مختبرات__mukhtabar-mukhtabarat__laboratory-laboratories",
       "arabic": "مُخْتَبَر / مُخْتَبَرَات",
       "arabicFolded": "مختبر مختبرات",
-      "pronunciation": "mukhtabar / mukhtabarāt",
-      "english": "laboratory → laboratories",
-      "category": "ROOMS & PLACES",
+      "pronunciation": "mukhtabar / mukhtabarat",
+      "english": "laboratory / laboratories",
+      "category": "Classroom Singular and Plural",
       "isExtra": false,
       "topicSlugs": [
-        "the-classroom"
+        "nouns-in-the-classroom"
       ],
-      "lessonId": "lesson-the-classroom"
+      "lessonId": "lesson-nouns-in-the-classroom"
     },
     {
-      "id": "lesson-the-classroom__furniture-features__مكتب__مكاتب__maktab-makatib__desk-desks",
-      "arabic": "مَكْتَب / مَكَاتِب",
-      "arabicFolded": "مكتب مكاتب",
-      "pronunciation": "maktab / makātib",
-      "english": "desk → desks",
-      "category": "FURNITURE & FEATURES",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-classroom"
-      ],
-      "lessonId": "lesson-the-classroom"
-    },
-    {
-      "id": "lesson-the-classroom__furniture-features__مقعد__مقاعد__maqad-maqaid__bench-benches",
-      "arabic": "مَقْعَد / مَقَاعِد",
-      "arabicFolded": "مقعد مقاعد",
-      "pronunciation": "maqʿad / maqāʿid",
-      "english": "bench → benches",
-      "category": "FURNITURE & FEATURES",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-classroom"
-      ],
-      "lessonId": "lesson-the-classroom"
-    },
-    {
-      "id": "lesson-the-classroom__furniture-features__نافذة__نوافذ__nafidhah-nawafidh__window-windows",
-      "arabic": "نَافِذَة / نَوَافِذ",
-      "arabicFolded": "نافذة نوافذ",
-      "pronunciation": "nāfidhah / nawāfidh",
-      "english": "window → windows",
-      "category": "FURNITURE & FEATURES",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-classroom"
-      ],
-      "lessonId": "lesson-the-classroom"
-    },
-    {
-      "id": "lesson-the-classroom__furniture-features__مروحة__مراوح__mirwahah-marawih__fan-fans",
-      "arabic": "مِرْوَحَة / مَرَاوِح",
-      "arabicFolded": "مروحة مراوح",
-      "pronunciation": "mirwaḥah / marāwiḥ",
-      "english": "fan → fans",
-      "category": "FURNITURE & FEATURES",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-classroom"
-      ],
-      "lessonId": "lesson-the-classroom"
-    },
-    {
-      "id": "lesson-the-classroom__classroomitems__دفتر__دفاتر__daftar-dafatir__notebook-notebooks",
-      "arabic": "دَفْتَر / دَفَاتِر",
-      "arabicFolded": "دفتر دفاتر",
-      "pronunciation": "daftar / dafātir",
-      "english": "notebook → notebooks",
-      "category": "CLASSROOMITEMS",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-classroom"
-      ],
-      "lessonId": "lesson-the-classroom"
-    },
-    {
-      "id": "lesson-the-classroom__classroomitems__مسطرة__مساطر__mistarah-masatir__ruler-rulers",
-      "arabic": "مِسْطَرَة / مَسَاطِر",
-      "arabicFolded": "مسطرة مساطر",
-      "pronunciation": "misṭarah / masāṭir",
-      "english": "ruler → rulers",
-      "category": "CLASSROOMITEMS",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-classroom"
-      ],
-      "lessonId": "lesson-the-classroom"
-    },
-    {
-      "id": "lesson-the-classroom__classroomitems__ممحاة__ممحات__mimhah-mimhat__eraser-erasers",
+      "id": "lesson-nouns-in-the-classroom__classroom-singular-and-plural__ممحاة__ممحات__mimhah-mimhat__eraser-erasers",
       "arabic": "مِمْحَاة / مِمْحَات",
       "arabicFolded": "ممحاة ممحات",
-      "pronunciation": "mimḥāh / mimḥāt",
-      "english": "eraser → erasers",
-      "category": "CLASSROOMITEMS",
+      "pronunciation": "mimhah / mimhat",
+      "english": "eraser / erasers",
+      "category": "Classroom Singular and Plural",
       "isExtra": false,
       "topicSlugs": [
-        "the-classroom"
+        "nouns-in-the-classroom"
       ],
-      "lessonId": "lesson-the-classroom"
+      "lessonId": "lesson-nouns-in-the-classroom"
     },
     {
-      "id": "lesson-the-classroom__classroomitems__مبراة__مبرايات__mibrah-mibrayat__pencil-sharpener-sharpeners",
+      "id": "lesson-nouns-in-the-classroom__classroom-singular-and-plural__مبراة__مبرايات__mibrah-mibrayat__sharpener-sharpeners",
       "arabic": "مِبْرَاة / مِبْرَايَات",
       "arabicFolded": "مبراة مبرايات",
-      "pronunciation": "mibrāh / mibrāyāt",
-      "english": "pencil sharpener → sharpeners",
-      "category": "CLASSROOMITEMS",
+      "pronunciation": "mibrah / mibrayat",
+      "english": "sharpener / sharpeners",
+      "category": "Classroom Singular and Plural",
       "isExtra": false,
       "topicSlugs": [
-        "the-classroom"
+        "nouns-in-the-classroom"
       ],
-      "lessonId": "lesson-the-classroom"
+      "lessonId": "lesson-nouns-in-the-classroom"
     },
     {
-      "id": "lesson-the-classroom__classroomitems__لوحة__لوحات__lawhah-lawhat__board-boards",
+      "id": "lesson-nouns-in-the-classroom__classroom-singular-and-plural__لوحة__لوحات__lawhah-lawhat__board-boards",
       "arabic": "لَوْحَة / لَوْحَات",
       "arabicFolded": "لوحة لوحات",
-      "pronunciation": "lawḥah / lawḥāt",
-      "english": "board → boards",
-      "category": "CLASSROOMITEMS",
+      "pronunciation": "lawhah / lawhat",
+      "english": "board / boards",
+      "category": "Classroom Singular and Plural",
       "isExtra": false,
       "topicSlugs": [
-        "the-classroom"
+        "nouns-in-the-classroom"
       ],
-      "lessonId": "lesson-the-classroom"
+      "lessonId": "lesson-nouns-in-the-classroom"
     },
     {
-      "id": "lesson-the-classroom__classroomitems__ممسحة__ممسحات__mimshah-mimshat__board-wiper-wipers",
+      "id": "lesson-nouns-in-the-classroom__classroom-singular-and-plural__ممسحة__ممسحات__mimsahah-mimsahat__cloth-wiper-cloths-wipers",
       "arabic": "مِمْسَحَة / مِمْسَحَات",
       "arabicFolded": "ممسحة ممسحات",
-      "pronunciation": "mimsḥah / mimsḥāt",
-      "english": "board wiper → wipers",
-      "category": "CLASSROOMITEMS",
+      "pronunciation": "mimsahah / mimsahat",
+      "english": "cloth/wiper / cloths/wipers",
+      "category": "Classroom Singular and Plural",
       "isExtra": false,
       "topicSlugs": [
-        "the-classroom"
+        "nouns-in-the-classroom"
       ],
-      "lessonId": "lesson-the-classroom"
+      "lessonId": "lesson-nouns-in-the-classroom"
     },
     {
-      "id": "lesson-the-classroom__classroomitems__خريطة__خراي-ط__kharitah-kharait__map-maps",
+      "id": "lesson-nouns-in-the-classroom__classroom-singular-and-plural__حجرة__حجر__hujrah-hujur__room-rooms",
+      "arabic": "حُجْرَة / حُجُر",
+      "arabicFolded": "حجرة حجر",
+      "pronunciation": "hujrah / hujur",
+      "english": "room / rooms",
+      "category": "Classroom Singular and Plural",
+      "isExtra": false,
+      "topicSlugs": [
+        "nouns-in-the-classroom"
+      ],
+      "lessonId": "lesson-nouns-in-the-classroom"
+    },
+    {
+      "id": "lesson-nouns-in-the-classroom__classroom-singular-and-plural__حجرة-الدراسة__حجر-الدراسة__hujra-tu-d-dirasah-hujaru-d-dirasah__classroom-classrooms",
+      "arabic": "حُجْرَةُ الدِّرَاسَة / حُجَرُ الدِّرَاسَة",
+      "arabicFolded": "حجرة الدراسة حجر الدراسة",
+      "pronunciation": "hujra-tu d-dirasah / hujaru d-dirasah",
+      "english": "classroom / classrooms",
+      "category": "Classroom Singular and Plural",
+      "isExtra": false,
+      "topicSlugs": [
+        "nouns-in-the-classroom"
+      ],
+      "lessonId": "lesson-nouns-in-the-classroom"
+    },
+    {
+      "id": "lesson-nouns-in-the-classroom__classroom-singular-and-plural__مكتب__مكاتب__maktab-makatib__desk-office-desks-offices",
+      "arabic": "مَكْتَب / مَكَاتِب",
+      "arabicFolded": "مكتب مكاتب",
+      "pronunciation": "maktab / makatib",
+      "english": "desk/office / desks/offices",
+      "category": "Classroom Singular and Plural",
+      "isExtra": false,
+      "topicSlugs": [
+        "nouns-in-the-classroom"
+      ],
+      "lessonId": "lesson-nouns-in-the-classroom"
+    },
+    {
+      "id": "lesson-nouns-in-the-classroom__classroom-singular-and-plural__مقعد__مقاعد__maqad-maqaid__seat-seats",
+      "arabic": "مَقْعَد / مَقَاعِد",
+      "arabicFolded": "مقعد مقاعد",
+      "pronunciation": "maqʿad / maqaʿid",
+      "english": "seat / seats",
+      "category": "Classroom Singular and Plural",
+      "isExtra": false,
+      "topicSlugs": [
+        "nouns-in-the-classroom"
+      ],
+      "lessonId": "lesson-nouns-in-the-classroom"
+    },
+    {
+      "id": "lesson-nouns-in-the-classroom__classroom-singular-and-plural__نافذة__نوافذ__nafidhah-nawafidh__window-windows",
+      "arabic": "نَافِذَة / نَوَافِذ",
+      "arabicFolded": "نافذة نوافذ",
+      "pronunciation": "nafidhah / nawafidh",
+      "english": "window / windows",
+      "category": "Classroom Singular and Plural",
+      "isExtra": false,
+      "topicSlugs": [
+        "nouns-in-the-classroom"
+      ],
+      "lessonId": "lesson-nouns-in-the-classroom"
+    },
+    {
+      "id": "lesson-nouns-in-the-classroom__classroom-singular-and-plural__مروحة__مراوح__mirwahah-marawih__fan-fans",
+      "arabic": "مِرْوَحَة / مَرَاوِح",
+      "arabicFolded": "مروحة مراوح",
+      "pronunciation": "mirwahah / marawih",
+      "english": "fan / fans",
+      "category": "Classroom Singular and Plural",
+      "isExtra": false,
+      "topicSlugs": [
+        "nouns-in-the-classroom"
+      ],
+      "lessonId": "lesson-nouns-in-the-classroom"
+    },
+    {
+      "id": "lesson-nouns-in-the-classroom__classroom-singular-and-plural__دفتر__دفاتر__daftar-dafatir__notebook-notebooks",
+      "arabic": "دَفْتَر / دَفَاتِر",
+      "arabicFolded": "دفتر دفاتر",
+      "pronunciation": "daftar / dafatir",
+      "english": "notebook / notebooks",
+      "category": "Classroom Singular and Plural",
+      "isExtra": false,
+      "topicSlugs": [
+        "nouns-in-the-classroom"
+      ],
+      "lessonId": "lesson-nouns-in-the-classroom"
+    },
+    {
+      "id": "lesson-nouns-in-the-classroom__classroom-singular-and-plural__مسطرة__مساطر__mistarah-masatir__ruler-rulers",
+      "arabic": "مِسْطَرَة / مَسَاطِر",
+      "arabicFolded": "مسطرة مساطر",
+      "pronunciation": "mistarah / masatir",
+      "english": "ruler / rulers",
+      "category": "Classroom Singular and Plural",
+      "isExtra": false,
+      "topicSlugs": [
+        "nouns-in-the-classroom"
+      ],
+      "lessonId": "lesson-nouns-in-the-classroom"
+    },
+    {
+      "id": "lesson-nouns-in-the-classroom__classroom-singular-and-plural__خريطة__خراي-ط__kharitah-kharait__map-maps",
       "arabic": "خَرِيطَة / خَرَائِط",
       "arabicFolded": "خريطة خرائط",
-      "pronunciation": "kharīṭah / kharāʾiṭ",
-      "english": "map → maps",
-      "category": "CLASSROOMITEMS",
+      "pronunciation": "kharitah / khara’it",
+      "english": "map / maps",
+      "category": "Classroom Singular and Plural",
       "isExtra": false,
       "topicSlugs": [
-        "the-classroom"
+        "nouns-in-the-classroom"
       ],
-      "lessonId": "lesson-the-classroom"
+      "lessonId": "lesson-nouns-in-the-classroom"
     },
     {
-      "id": "lesson-the-classroom__classroomitems__صورة__صور__surah-suwar__picture-pictures",
+      "id": "lesson-nouns-in-the-classroom__classroom-singular-and-plural__صورة__صور__surah-suwar__picture-pictures",
       "arabic": "صُورَة / صُوَر",
       "arabicFolded": "صورة صور",
-      "pronunciation": "ṣūrah / ṣuwar",
-      "english": "picture → pictures",
-      "category": "CLASSROOMITEMS",
+      "pronunciation": "surah / suwar",
+      "english": "picture / pictures",
+      "category": "Classroom Singular and Plural",
       "isExtra": false,
       "topicSlugs": [
-        "the-classroom"
+        "nouns-in-the-classroom"
       ],
-      "lessonId": "lesson-the-classroom"
+      "lessonId": "lesson-nouns-in-the-classroom"
     },
     {
-      "id": "lesson-the-classroom__classroomitems__نقطة__نقط__nuqtah-nuqat__dot-dots",
+      "id": "lesson-nouns-in-the-classroom__classroom-singular-and-plural__نقطة__نقط__nuqtah-nuqat__dot-point-dots-points",
       "arabic": "نُقْطَة / نُقَط",
       "arabicFolded": "نقطة نقط",
-      "pronunciation": "nuqṭah / nuqaṭ",
-      "english": "dot → dots",
-      "category": "CLASSROOMITEMS",
+      "pronunciation": "nuqtah / nuqat",
+      "english": "dot/point / dots/points",
+      "category": "Classroom Singular and Plural",
       "isExtra": false,
       "topicSlugs": [
-        "the-classroom"
+        "nouns-in-the-classroom"
       ],
-      "lessonId": "lesson-the-classroom"
+      "lessonId": "lesson-nouns-in-the-classroom"
+    },
+    {
+      "id": "lesson-nouns-in-the-classroom__prepositions",
+      "arabic": "مِنْ",
+      "arabicFolded": "من",
+      "pronunciation": "min",
+      "english": "from",
+      "category": "PREPOSITIONS",
+      "isExtra": false,
+      "topicSlugs": [
+        "nouns-in-the-classroom"
+      ],
+      "lessonId": "lesson-nouns-in-the-classroom"
+    },
+    {
+      "id": "lesson-nouns-in-the-classroom__prepositions-2",
+      "arabic": "إِلَى",
+      "arabicFolded": "إلى",
+      "pronunciation": "ilā",
+      "english": "to",
+      "category": "PREPOSITIONS",
+      "isExtra": false,
+      "topicSlugs": [
+        "nouns-in-the-classroom"
+      ],
+      "lessonId": "lesson-nouns-in-the-classroom"
+    },
+    {
+      "id": "lesson-nouns-in-the-classroom__prepositions-3",
+      "arabic": "مَعَ",
+      "arabicFolded": "مع",
+      "pronunciation": "maʿa",
+      "english": "with",
+      "category": "PREPOSITIONS",
+      "isExtra": false,
+      "topicSlugs": [
+        "nouns-in-the-classroom"
+      ],
+      "lessonId": "lesson-nouns-in-the-classroom"
+    },
+    {
+      "id": "lesson-nouns-in-the-classroom__prepositions-4",
+      "arabic": "لِ",
+      "arabicFolded": "ل",
+      "pronunciation": "li",
+      "english": "for / to",
+      "category": "PREPOSITIONS",
+      "isExtra": false,
+      "topicSlugs": [
+        "nouns-in-the-classroom"
+      ],
+      "lessonId": "lesson-nouns-in-the-classroom"
+    },
+    {
+      "id": "lesson-nouns-in-the-classroom__prepositions-5",
+      "arabic": "بِ",
+      "arabicFolded": "ب",
+      "pronunciation": "bi",
+      "english": "with / by / using",
+      "category": "PREPOSITIONS",
+      "isExtra": false,
+      "topicSlugs": [
+        "nouns-in-the-classroom"
+      ],
+      "lessonId": "lesson-nouns-in-the-classroom"
+    },
+    {
+      "id": "lesson-nouns-in-the-classroom__prepositions-6",
+      "arabic": "فِي",
+      "arabicFolded": "في",
+      "pronunciation": "fī",
+      "english": "in",
+      "category": "PREPOSITIONS",
+      "isExtra": false,
+      "topicSlugs": [
+        "nouns-in-the-classroom"
+      ],
+      "lessonId": "lesson-nouns-in-the-classroom"
+    },
+    {
+      "id": "lesson-nouns-in-the-classroom__prepositions-7",
+      "arabic": "عَلَى",
+      "arabicFolded": "على",
+      "pronunciation": "ʿalā",
+      "english": "on",
+      "category": "PREPOSITIONS",
+      "isExtra": false,
+      "topicSlugs": [
+        "nouns-in-the-classroom"
+      ],
+      "lessonId": "lesson-nouns-in-the-classroom"
+    },
+    {
+      "id": "lesson-nouns-in-the-classroom__prepositions-8",
+      "arabic": "بَيْنَ",
+      "arabicFolded": "بين",
+      "pronunciation": "bayna",
+      "english": "between",
+      "category": "PREPOSITIONS",
+      "isExtra": false,
+      "topicSlugs": [
+        "nouns-in-the-classroom"
+      ],
+      "lessonId": "lesson-nouns-in-the-classroom"
+    },
+    {
+      "id": "lesson-nouns-in-the-classroom__prepositions-9",
+      "arabic": "تَحْتَ",
+      "arabicFolded": "تحت",
+      "pronunciation": "taḥta",
+      "english": "under",
+      "category": "PREPOSITIONS",
+      "isExtra": false,
+      "topicSlugs": [
+        "nouns-in-the-classroom"
+      ],
+      "lessonId": "lesson-nouns-in-the-classroom"
+    },
+    {
+      "id": "lesson-nouns-in-the-classroom__prepositions-10",
+      "arabic": "فَوْقَ",
+      "arabicFolded": "فوق",
+      "pronunciation": "fawqa",
+      "english": "above",
+      "category": "PREPOSITIONS",
+      "isExtra": false,
+      "topicSlugs": [
+        "nouns-in-the-classroom"
+      ],
+      "lessonId": "lesson-nouns-in-the-classroom"
+    },
+    {
+      "id": "lesson-nouns-in-the-classroom__prepositions-11",
+      "arabic": "أَمَامَ",
+      "arabicFolded": "أمام",
+      "pronunciation": "amāma",
+      "english": "in front",
+      "category": "PREPOSITIONS",
+      "isExtra": false,
+      "topicSlugs": [
+        "nouns-in-the-classroom"
+      ],
+      "lessonId": "lesson-nouns-in-the-classroom"
+    },
+    {
+      "id": "lesson-nouns-in-the-classroom__prepositions-12",
+      "arabic": "وَرَاءَ",
+      "arabicFolded": "وراء",
+      "pronunciation": "warāʾa",
+      "english": "behind",
+      "category": "PREPOSITIONS",
+      "isExtra": false,
+      "topicSlugs": [
+        "nouns-in-the-classroom"
+      ],
+      "lessonId": "lesson-nouns-in-the-classroom"
+    },
+    {
+      "id": "lesson-nouns-in-the-classroom__prepositions-13",
+      "arabic": "عَنْ",
+      "arabicFolded": "عن",
+      "pronunciation": "ʿan",
+      "english": "about",
+      "category": "PREPOSITIONS",
+      "isExtra": false,
+      "topicSlugs": [
+        "nouns-in-the-classroom"
+      ],
+      "lessonId": "lesson-nouns-in-the-classroom"
     }
   ],
   "rules": [
@@ -6162,6 +6072,553 @@
         "time"
       ],
       "lessonId": "lesson-time"
+    },
+    {
+      "id": "lesson-verbs-in-the-classroom__rule__the-verbal-noun",
+      "title": "The Verbal Noun",
+      "body": "To make verbs in Arabic, you need to understand the concept of the Maṣdar (مَصْدَر). This concept is not a tense, but it is usually discussed along with the tenses\n\nThis concept is basically the action or word itself, without any tense involved. It literally represents the base idea of an action before it is placed into a tense or attached to a person.\n\nFrom this action/root idea, different verb forms can then be built based on the tenses\n\nFor example:\n\nThese two words are currently, representing the action itself, in Arabic, this is known as a Masdar. For example “Writing is Fun”, here “Writing” is a noun, as you haven’t attached this noun to someone doing it, only then it would become a verb (Fi’l), which is studied under the tenses",
+      "examples": [],
+      "topicSlugs": [
+        "verbs-in-the-classroom"
+      ],
+      "lessonId": "lesson-verbs-in-the-classroom"
+    },
+    {
+      "id": "lesson-verbs-in-the-classroom__term-gloss__the-three-tenses",
+      "title": "The three Tenses",
+      "body": "",
+      "examples": [
+        {
+          "arabic": "مَاضٍ",
+          "pronunciation": "māḍin",
+          "english": "past tense — Used for actions that already happened"
+        },
+        {
+          "arabic": "مُضَارِع",
+          "pronunciation": "muḍāriʿ",
+          "english": "present/future tense — Used for actions happening now or in the future"
+        },
+        {
+          "arabic": "أَمْر",
+          "pronunciation": "amr",
+          "english": "command form / imperative — Used for giving commands"
+        }
+      ],
+      "topicSlugs": [
+        "verbs-in-the-classroom"
+      ],
+      "lessonId": "lesson-verbs-in-the-classroom"
+    },
+    {
+      "id": "lesson-verbs-in-the-classroom__rule__the-three-tenses",
+      "title": "The three Tenses",
+      "body": "After understanding the Maṣdar, you can then begin understanding how verbs are built from the same action/root idea.\n\nThe difference between the Maṣdar and the Fiʿl (verb) in these tenses is that the Maṣdar represents the action on its own, without being attached to a person or time. The Fiʿl, however, takes that same action and attributes it to someone and a tense. So instead of simply “writing”, it becomes “he wrote”, “he writes”, or “write!”.\n\nThere are three tenses in Arabic:\n\nThis is similar in number to english, because we know that In English, verbs are also divided into 3 main tenses with even around 4 subcategories each making it a total of 12 tenses\n\nThe main difference between the English tenses and Arabic tenses is that, English looks at the “time of that action compared to the current time”. In other words, If the action is complete and not currently happening, it is Past\n\nIf it is currently happening it is Present\n\nIf it is has not happened, but it will happen later on, then it is Future\n\nIf you look carefully, you will notice that these same actions, instead of categorising them based on “current time”, we can also categorise them based on whether they are completed or not\n\nFor example, the Past is something that has already happened, so this is complete. The Present is something that is currently happening, however it has still not bene completed, and if it was completed it would have been past by definition. As the present is still happening, it is therefore incomplete. Lastly the Future tense, it has not happened already, nor is it happening right now, rather it is going to happen, so that is also incomplete\n\nSo as you can see, the same three english tenses of Past, Present, Future can also be categorised into Completed Tenses and Incomplete Tenses\n\nNow, this is exactly what Arabic is, it has these three tenses, but categorised from a different angle, Completed (Paste Tense) and Incomplete Tenses (The Present/Future Tense):\n\nHowever, Arabic introduces a 3rd “tense” to its set of two, and this is known as the Command. So from an english perspective it would be the fourth one of the english three tenses:\n\nFrom the actual Arabic categorisation it would be the third of three categories (As the Present and Future come under one category):\n\nThe command form is less of a “tense”; rather, it is a verb “form” or “mood” (the way a verb is used to express a purpose or function) used to give commands, instructions, or requests.\n\nThe rules, on making verbs within these tenses are discussed later in section “11.1 Formulation Verbs”, for now you should continue reading in order",
+      "examples": [],
+      "topicSlugs": [
+        "verbs-in-the-classroom"
+      ],
+      "lessonId": "lesson-verbs-in-the-classroom"
+    },
+    {
+      "id": "lesson-verbs-in-the-classroom__verb-forms__vocabulary-classroom-actions-and-verbs",
+      "title": "Vocabulary (Classroom Actions and Verbs)",
+      "body": "",
+      "examples": [
+        {
+          "arabic": "",
+          "parts": [
+            {
+              "label": "Māḍī (Past)",
+              "arabic": "كَتَبَ",
+              "english": "kataba — he wrote"
+            },
+            {
+              "label": "Muḍāriʿ (Present/Future)",
+              "arabic": "يَكْتُبُ",
+              "english": "yaktubu — he writes"
+            },
+            {
+              "label": "Amr (Command)",
+              "arabic": "اُكْتُبْ",
+              "english": "uktub — write!"
+            },
+            {
+              "label": "Maṣdar",
+              "arabic": "كِتَابَة",
+              "english": "kitābah — writing"
+            }
+          ]
+        },
+        {
+          "arabic": "",
+          "parts": [
+            {
+              "label": "Māḍī (Past)",
+              "arabic": "دَرَسَ",
+              "english": "darasa — he studied"
+            },
+            {
+              "label": "Muḍāriʿ (Present/Future)",
+              "arabic": "يَدْرُسُ",
+              "english": "yadrusu — he studies"
+            },
+            {
+              "label": "Amr (Command)",
+              "arabic": "اُدْرُسْ",
+              "english": "udrus — study!"
+            },
+            {
+              "label": "Maṣdar",
+              "arabic": "دِرَاسَة",
+              "english": "dirāsah — studying"
+            }
+          ]
+        },
+        {
+          "arabic": "",
+          "parts": [
+            {
+              "label": "Māḍī (Past)",
+              "arabic": "فَهِمَ",
+              "english": "fahima — he understood"
+            },
+            {
+              "label": "Muḍāriʿ (Present/Future)",
+              "arabic": "يَفْهَمُ",
+              "english": "yafhamu — he understands"
+            },
+            {
+              "label": "Amr (Command)",
+              "arabic": "اِفْهَمْ",
+              "english": "ifham — understand!"
+            },
+            {
+              "label": "Maṣdar",
+              "arabic": "فَهْم",
+              "english": "fahm — understanding"
+            }
+          ]
+        },
+        {
+          "arabic": "",
+          "parts": [
+            {
+              "label": "Māḍī (Past)",
+              "arabic": "جَلَسَ",
+              "english": "jalasa — he sat"
+            },
+            {
+              "label": "Muḍāriʿ (Present/Future)",
+              "arabic": "يَجْلِسُ",
+              "english": "yajlisu — he sits"
+            },
+            {
+              "label": "Amr (Command)",
+              "arabic": "اِجْلِسْ",
+              "english": "ijlis — sit!"
+            },
+            {
+              "label": "Maṣdar",
+              "arabic": "جُلُوس",
+              "english": "julūs — sitting"
+            }
+          ]
+        },
+        {
+          "arabic": "",
+          "parts": [
+            {
+              "label": "Māḍī (Past)",
+              "arabic": "فَتَحَ",
+              "english": "fataḥa — he opened"
+            },
+            {
+              "label": "Muḍāriʿ (Present/Future)",
+              "arabic": "يَفْتَحُ",
+              "english": "yaftaḥu — he opens"
+            },
+            {
+              "label": "Amr (Command)",
+              "arabic": "اِفْتَحْ",
+              "english": "iftaḥ — open!"
+            },
+            {
+              "label": "Maṣdar",
+              "arabic": "فَتْح",
+              "english": "fatḥ — opening"
+            }
+          ]
+        },
+        {
+          "arabic": "",
+          "parts": [
+            {
+              "label": "Māḍī (Past)",
+              "arabic": "أَغْلَقَ",
+              "english": "aghlaqa — he closed"
+            },
+            {
+              "label": "Muḍāriʿ (Present/Future)",
+              "arabic": "يُغْلِقُ",
+              "english": "yughliqu — he closes"
+            },
+            {
+              "label": "Amr (Command)",
+              "arabic": "أَغْلِقْ",
+              "english": "aghliq — close!"
+            },
+            {
+              "label": "Maṣdar",
+              "arabic": "إِغْلَاق",
+              "english": "ighlāq — closing"
+            }
+          ]
+        },
+        {
+          "arabic": "",
+          "parts": [
+            {
+              "label": "Māḍī (Past)",
+              "arabic": "دَخَلَ",
+              "english": "dakhala — he entered"
+            },
+            {
+              "label": "Muḍāriʿ (Present/Future)",
+              "arabic": "يَدْخُلُ",
+              "english": "yadkhulu — he enters"
+            },
+            {
+              "label": "Amr (Command)",
+              "arabic": "اُدْخُلْ",
+              "english": "udkhul — enter!"
+            },
+            {
+              "label": "Maṣdar",
+              "arabic": "دُخُول",
+              "english": "dukhūl — entering"
+            }
+          ]
+        },
+        {
+          "arabic": "",
+          "parts": [
+            {
+              "label": "Māḍī (Past)",
+              "arabic": "خَرَجَ",
+              "english": "kharaja — he exited"
+            },
+            {
+              "label": "Muḍāriʿ (Present/Future)",
+              "arabic": "يَخْرُجُ",
+              "english": "yakhruju — he exits"
+            },
+            {
+              "label": "Amr (Command)",
+              "arabic": "اُخْرُجْ",
+              "english": "ukhruj — exit!"
+            },
+            {
+              "label": "Maṣdar",
+              "arabic": "خُرُوج",
+              "english": "khurūj — exiting"
+            }
+          ]
+        },
+        {
+          "arabic": "",
+          "parts": [
+            {
+              "label": "Māḍī (Past)",
+              "arabic": "قَرَأَ",
+              "english": "qara’a — he read"
+            },
+            {
+              "label": "Muḍāriʿ (Present/Future)",
+              "arabic": "يَقْرَأُ",
+              "english": "yaqra’u — he reads"
+            },
+            {
+              "label": "Amr (Command)",
+              "arabic": "اِقْرَأْ",
+              "english": "iqra’ — read!"
+            },
+            {
+              "label": "Maṣdar",
+              "arabic": "قِرَاءَة",
+              "english": "qirā’ah — reading"
+            }
+          ]
+        },
+        {
+          "arabic": "",
+          "parts": [
+            {
+              "label": "Māḍī (Past)",
+              "arabic": "وَقَفَ",
+              "english": "waqafa — he stood"
+            },
+            {
+              "label": "Muḍāriʿ (Present/Future)",
+              "arabic": "يَقِفُ",
+              "english": "yaqifu — he stands"
+            },
+            {
+              "label": "Amr (Command)",
+              "arabic": "قِفْ",
+              "english": "qif — stand!"
+            },
+            {
+              "label": "Maṣdar",
+              "arabic": "وُقُوف",
+              "english": "wuqūf — standing"
+            }
+          ]
+        },
+        {
+          "arabic": "",
+          "parts": [
+            {
+              "label": "Māḍī (Past)",
+              "arabic": "أَخَذَ",
+              "english": "akhadha — he took"
+            },
+            {
+              "label": "Muḍāriʿ (Present/Future)",
+              "arabic": "يَأْخُذُ",
+              "english": "ya’khudhu — he takes"
+            },
+            {
+              "label": "Amr (Command)",
+              "arabic": "خُذْ",
+              "english": "khudh — take!"
+            },
+            {
+              "label": "Maṣdar",
+              "arabic": "أَخْذ",
+              "english": "akhdh — taking"
+            }
+          ]
+        },
+        {
+          "arabic": "",
+          "parts": [
+            {
+              "label": "Māḍī (Past)",
+              "arabic": "مَشَى",
+              "english": "mashā — he walked"
+            },
+            {
+              "label": "Muḍāriʿ (Present/Future)",
+              "arabic": "يَمْشِي",
+              "english": "yamshī — he walks"
+            },
+            {
+              "label": "Amr (Command)",
+              "arabic": "اِمْشِ",
+              "english": "imshi — walk!"
+            },
+            {
+              "label": "Maṣdar",
+              "arabic": "مَشْي",
+              "english": "mashy — walking"
+            }
+          ]
+        },
+        {
+          "arabic": "",
+          "parts": [
+            {
+              "label": "Māḍī (Past)",
+              "arabic": "رَسَمَ",
+              "english": "rasama — he drew"
+            },
+            {
+              "label": "Muḍāriʿ (Present/Future)",
+              "arabic": "يَرْسُمُ",
+              "english": "yarsumu — he draws"
+            },
+            {
+              "label": "Amr (Command)",
+              "arabic": "اُرْسُمْ",
+              "english": "ursum — draw!"
+            },
+            {
+              "label": "Maṣdar",
+              "arabic": "رَسْم",
+              "english": "rasm — drawing"
+            }
+          ]
+        },
+        {
+          "arabic": "",
+          "parts": [
+            {
+              "label": "Māḍī (Past)",
+              "arabic": "عَلَّمَ",
+              "english": "ʿallama — he taught"
+            },
+            {
+              "label": "Muḍāriʿ (Present/Future)",
+              "arabic": "يُعَلِّمُ",
+              "english": "yuʿallimu — he teaches"
+            },
+            {
+              "label": "Amr (Command)",
+              "arabic": "عَلِّمْ",
+              "english": "ʿallim — teach!"
+            },
+            {
+              "label": "Maṣdar",
+              "arabic": "تَعْلِيم",
+              "english": "taʿlīm — teaching"
+            }
+          ]
+        },
+        {
+          "arabic": "",
+          "parts": [
+            {
+              "label": "Māḍī (Past)",
+              "arabic": "تَعَلَّمَ",
+              "english": "taʿallama — he learned"
+            },
+            {
+              "label": "Muḍāriʿ (Present/Future)",
+              "arabic": "يَتَعَلَّمُ",
+              "english": "yataʿallamu — he learns"
+            },
+            {
+              "label": "Amr (Command)",
+              "arabic": "تَعَلَّمْ",
+              "english": "taʿallam — learn!"
+            },
+            {
+              "label": "Maṣdar",
+              "arabic": "تَعَلُّم",
+              "english": "taʿallum — learning"
+            }
+          ]
+        }
+      ],
+      "topicSlugs": [
+        "verbs-in-the-classroom"
+      ],
+      "lessonId": "lesson-verbs-in-the-classroom"
+    },
+    {
+      "id": "lesson-verbs-in-the-classroom__person-groups__the-grammatical-persons__19",
+      "title": "The Grammatical Persons",
+      "body": "",
+      "examples": [
+        {
+          "arabic": "",
+          "english": "1st Person (Talking about Yourself) — Singular — one person talking about themselves"
+        },
+        {
+          "arabic": "",
+          "english": "1st Person (Talking about Yourself) — Plural — a group talking about themselves"
+        }
+      ],
+      "topicSlugs": [
+        "verbs-in-the-classroom"
+      ],
+      "lessonId": "lesson-verbs-in-the-classroom"
+    },
+    {
+      "id": "lesson-verbs-in-the-classroom__person-groups__the-grammatical-persons__20",
+      "title": "The Grammatical Persons",
+      "body": "",
+      "examples": [
+        {
+          "arabic": "",
+          "english": "2nd Person(Talking DIRECTLY TO another Person/Group) — Masculine Singular — one person talking to another male"
+        },
+        {
+          "arabic": "",
+          "english": "2nd Person(Talking DIRECTLY TO another Person/Group) — Feminine Singular — one person talking to another female"
+        },
+        {
+          "arabic": "",
+          "english": "2nd Person(Talking DIRECTLY TO another Person/Group) — Dual — one person talking to two people"
+        },
+        {
+          "arabic": "",
+          "english": "2nd Person(Talking DIRECTLY TO another Person/Group) — Masculine Plural — one person talking to a group of males/mixed"
+        },
+        {
+          "arabic": "",
+          "english": "2nd Person(Talking DIRECTLY TO another Person/Group) — Feminine Plural — one person talking to a group of females"
+        }
+      ],
+      "topicSlugs": [
+        "verbs-in-the-classroom"
+      ],
+      "lessonId": "lesson-verbs-in-the-classroom"
+    },
+    {
+      "id": "lesson-verbs-in-the-classroom__person-groups__the-grammatical-persons__21",
+      "title": "The Grammatical Persons",
+      "body": "",
+      "examples": [
+        {
+          "arabic": "",
+          "english": "3rd Person (Talking ABOUT another Person/Group) — MaleSingular — a group talking about another male"
+        },
+        {
+          "arabic": "",
+          "english": "3rd Person (Talking ABOUT another Person/Group) — Feminine Singular — a group talking about another female"
+        },
+        {
+          "arabic": "",
+          "english": "3rd Person (Talking ABOUT another Person/Group) — Masculine Dual — a group talking about two males"
+        },
+        {
+          "arabic": "",
+          "english": "3rd Person (Talking ABOUT another Person/Group) — Feminine Dual — a group talking about two females"
+        },
+        {
+          "arabic": "",
+          "english": "3rd Person (Talking ABOUT another Person/Group) — Masculine Plural — a group talking about a group of males"
+        },
+        {
+          "arabic": "",
+          "english": "3rd Person (Talking ABOUT another Person/Group) — Feminine Plural — a group talking about a group of females"
+        }
+      ],
+      "topicSlugs": [
+        "verbs-in-the-classroom"
+      ],
+      "lessonId": "lesson-verbs-in-the-classroom"
+    },
+    {
+      "id": "lesson-verbs-in-the-classroom__rule__past-tense-madi",
+      "title": "Past Tense (Māḍī)",
+      "body": "The first of the three tenses is the Past Tense (Māḍī). To make something in this form, you take a root (e.g. ك-ت-ب k-t-b, related to writing), you then usually add Fathas to each letter and pronounce the letters together, so from the root you get the word كَتَبَ (kataba). This is now in the past tense form on its own, just by doing this procedure.\n\nYou can do this to any word:\n\nYou then add prefixes depending on which of the 14 Grammatical Persons you want to refer to",
+      "examples": [],
+      "topicSlugs": [
+        "verbs-in-the-classroom"
+      ],
+      "lessonId": "lesson-verbs-in-the-classroom"
+    },
+    {
+      "id": "lesson-verbs-in-the-classroom__rule__present-future-tense-mudari",
+      "title": "Present / Future tense (Muḍāriʿ)",
+      "body": "The second of the three tenses is the Present/Future tense (Muḍāriʿ). To make something in this form, you take a root (e.g. ك-ت-ب k-t-b, related to writing) and make the base form, which is يَكْتُبُ (yaktubu).\n\nIn regards to the Harkaat you put on the base, there isn’t one set rule, unlike in the past tense where we said that in most cases you can usually add a fatha–fatha–fatha to the base. On the other hand, for the Mudari’, tere are up to 10 + combination of Harakats discussed under concept of Awzān (أَوْزَان), which is a topic for another day. However, the most common are three:\n\nRegardless, when you do get the root you need (which you usually need to memorise), you then add prefixes and suffixes depending on which of the 14 Grammatical Persons you want to refer to",
+      "examples": [],
+      "topicSlugs": [
+        "verbs-in-the-classroom"
+      ],
+      "lessonId": "lesson-verbs-in-the-classroom"
+    },
+    {
+      "id": "lesson-verbs-in-the-classroom__rule__command-amr",
+      "title": "Command (Amr)",
+      "body": "The third of the three tenses/forms is the Command (Amr) form. To make something in this form, you take a root (e.g. ك-ت-ب k-t-b, related to writing), then usually add an alif with a ḍammah at the beginning and adjust the vowel pattern. For example:\n\nThen, depending on which of the 5 grammatical persons you want to refer to, you change the suffix you add.\n\nThere are not 14 grammatical persons for this form. The command form (أَمْر — amr) only exists for the 2nd person, because a command can only be given to someone you are speaking directly to. In other words, commands are naturally directed at “you”. For example:\n\nThere is no true 1st person command form (“I write!”), because you cannot really command yourself grammatically. If you say “I will write” or “I should write”, you are simply making a statement, intention, or decision — not giving yourself a command.\n\nLikewise, there is no true 3rd person command form (“He write!”), because you cannot directly command someone you are only talking about. If the person is not being directly addressed, then it is no longer a true command form. Instead, Arabic uses different sentence structures for meanings like “Let him write” or “Tell him to write”.",
+      "examples": [],
+      "topicSlugs": [
+        "verbs-in-the-classroom"
+      ],
+      "lessonId": "lesson-verbs-in-the-classroom"
     }
   ],
   "conversations": [],
@@ -6392,9 +6849,9 @@
       "gender": "F",
       "usageNote": "Speaking to one other person",
       "example": {
-        "arabic": "هَذَا كِتَابُكِ  –  (random example)",
-        "transliteration": "hādhā kitābuki",
-        "english": "This is your book"
+        "arabic": "قَالَ رَبُّكِ هُوَ عَلَيَّ هَيِّنٌ  -  (Qur’an 19:21)",
+        "transliteration": "Qāla kadhāliki qāla Rabbuki huwa ‘alayya hayyin",
+        "english": "Thus it will be; your Lord says: It is easy for Me..."
       }
     },
     {
@@ -6425,10 +6882,10 @@
       "gender": "F",
       "usageNote": "Speaking to a group of people",
       "example": {
-        "arabic": "فَإِنِّي أُرِيتُكُنَّ أَكْثَرَ أَهْلِ النَّارِ",
-        "transliteration": "fa-innī urītukunna akthar ahl an-nār",
-        "english": "I was shown that you (women) are the majority of the people in hell…",
-        "citation": "Hadith: Sahih al-Bukhari / Muslim"
+        "arabic": "وَقَرْنَ فِى بُيُوتِكُنَّ وَلَا تَبَرَّجْنَ تَبَرُّجَ ٱلْجَـٰهِلِيَّةِ ٱلْأُولَىٰ",
+        "transliteration": "Waqarna fī buyūtikunna walā tabarrajna tabarruja al-jāhiliyyati al-ūlā",
+        "english": "And remain in your houses and do not display yourselves as [was] the display of the former times of ignorance...",
+        "citation": "Qur’ān 33:33"
       }
     },
     {
@@ -6442,10 +6899,9 @@
       "gender": "M",
       "usageNote": "Speaking about one other person",
       "example": {
-        "arabic": "مَنْ يَدْعُونِي فَأَسْتَجِيبَ لَهُ، مَنْ يَسْأَلُنِي فَأُعْطِيَهُ، مَنْ يَسْتَغْفِرُنِي فَأَغْفِرَ لَهُ",
-        "transliteration": "man yadʿūnī fa-astajība lahu, man yasʾalunī fa-uʿṭiyahu, man yastaghfirunī fa-aghfira lahu",
-        "english": "Who is calling upon Me so I may respond to him, who is asking Me so I may give him, who is seeking My forgiveness so I may forgive him.",
-        "citation": "Hadith: Sahih al-Bukhari / Muslim"
+        "arabic": "إِنَّمَا أَمْرُهُ إِذَا أَرَادَ شَيْئًا (Innamā amruhu idhā arāda shay’ā”",
+        "transliteration": "Qur’an 36:82",
+        "english": "His command is only, when He intends a thing..."
       }
     },
     {
@@ -6459,19 +6915,19 @@
       "gender": "F",
       "usageNote": "Speaking about one other person",
       "example": {
-        "arabic": "وَلَهَا مِثْلُ الَّذِي عَلَيْهَا",
-        "transliteration": "wa-lahā mithlu alladhī ʿalayhā",
-        "english": "For her is similar to what is upon her",
-        "citation": "Qur’ān 2:228"
+        "arabic": "وَالشَّمْسِ وَضُحَاهَا",
+        "transliteration": "Wash-shamsi wa duḥāhā",
+        "english": "By the sun and her brightness",
+        "citation": "Qur’ān 91:1"
       }
     },
     {
-      "id": "pronoun__attached__3rd-person-plural__hum",
+      "id": "pronoun__attached__3rd-person-plural__hum-m-can-become-him-due-to-external-grammar-rules",
       "kind": "attached",
       "category": "3rd person plural",
       "arabic": "ـهُمْ",
       "arabicFolded": "هم",
-      "pronunciation": "-hum",
+      "pronunciation": "-hum (m)(can become -him due to external grammar rules)",
       "english": "their / them",
       "gender": "M",
       "usageNote": "Speaking about a group of people",
@@ -6493,9 +6949,9 @@
       "gender": "F",
       "usageNote": "Speaking about a group of people",
       "example": {
-        "arabic": "وَلَهُنَّ مِثْلُ الَّذِي عَلَيْهِنَّ",
-        "transliteration": "wa-lahunna mithlu alladhī ʿalayhinna",
-        "english": "For them (women) is similar…",
+        "arabic": "وَبُعُولَتُهُنَّ أَحَقُّ بِرَدِّهِنَّ",
+        "transliteration": "Wa bu‘ūlatuhunna ahaqqu...",
+        "english": "And their husbands have more right...",
         "citation": "Qur’ān 2:228"
       }
     }
@@ -6740,6 +7196,72 @@
       "pronunciation": "yaktubna",
       "english": "they write",
       "gender": "F"
+    },
+    {
+      "id": "conjugation__command__base-command-form__uktub",
+      "tense": "command",
+      "category": "Base command form",
+      "patternRule": "root + ْ",
+      "patternExample": "اُكْتُبْ",
+      "arabic": "اُكْتُبْ",
+      "arabicFolded": "اكتب",
+      "pronunciation": "uktub",
+      "english": "write!"
+    },
+    {
+      "id": "conjugation__command__2nd-person-masculine-singular__uktub",
+      "tense": "command",
+      "category": "2nd person masculine singular",
+      "patternRule": "base form",
+      "patternExample": "اُكْتُبْ",
+      "arabic": "اُكْتُبْ",
+      "arabicFolded": "اكتب",
+      "pronunciation": "uktub",
+      "english": "write!"
+    },
+    {
+      "id": "conjugation__command__2nd-person-feminine-singular__uktubi",
+      "tense": "command",
+      "category": "2nd person feminine singular",
+      "patternRule": "base + ي",
+      "patternExample": "اُكْتُبْ + ي",
+      "arabic": "اُكْتُبِي",
+      "arabicFolded": "اكتبي",
+      "pronunciation": "uktubī",
+      "english": "write!"
+    },
+    {
+      "id": "conjugation__command__2nd-person-dual__uktuba",
+      "tense": "command",
+      "category": "2nd person dual",
+      "patternRule": "base + ا",
+      "patternExample": "اُكْتُبْ + ا",
+      "arabic": "اُكْتُبَا",
+      "arabicFolded": "اكتبا",
+      "pronunciation": "uktubā",
+      "english": "write, you two!"
+    },
+    {
+      "id": "conjugation__command__2nd-person-masculine-plural__uktubu",
+      "tense": "command",
+      "category": "2nd person masculine plural",
+      "patternRule": "base + وا",
+      "patternExample": "اُكْتُبْ + وا",
+      "arabic": "اُكْتُبُوا",
+      "arabicFolded": "اكتبوا",
+      "pronunciation": "uktubū",
+      "english": "write, all of you!"
+    },
+    {
+      "id": "conjugation__command__2nd-person-feminine-plural__uktubna",
+      "tense": "command",
+      "category": "2nd person feminine plural",
+      "patternRule": "base + نَ",
+      "patternExample": "اُكْتُبْ + نَ",
+      "arabic": "اُكْتُبْنَ",
+      "arabicFolded": "اكتبن",
+      "pronunciation": "uktubna",
+      "english": "write, all of you!"
     }
   ],
   "pluralForms": [
@@ -6788,18 +7310,10 @@
     {
       "section": "pronouns",
       "paragraphs": [
-        "In Arabic, there are two main types of pronouns: ‘independent (detached) pronouns’ and ‘attached pronouns’. It may seem complicated at first, but the best approach is to briefly understand this difference and to not overthink it—over time, as you continue your Arabic journey, your brain will naturally begin to recognize and cement how these forms are used.",
-        "Firstly, ‘Independent pronouns’ are full words that can stand on their own, such as ‘أَنَا (anā) – “I”’. They are mainly used when you want to start a sentence, identify someone, or add emphasis. For example, ‘أَنَا طَالِبٌ (anā ṭālibun) – “I am a student”’ and ‘هُوَ المُعَلِّمُ (huwa al-muʿallim) – “He is the teacher”’ both require independent pronouns because they begin the sentence.",
-        "Sometimes, you do not need an independent pronoun, but you can still include it for emphasis. For example, the word ‘رَأَيْتُهُ (raʾaytuhu) – “I saw him”’ already includes “I” because it contains an attached pronoun. However, you can still emphasize it further by adding a detached pronoun: ‘أَنَا رَأَيْتُهُ (anā raʾaytuhu) – “I saw him”’. This simply adds emphasis, making it clear that “I” (and not someone else) performed the action, although it is less concise.",
-        "So ‘Attached pronouns’, are short endings that cannot stand alone and must be connected to a word. They are used much more frequently in everyday Arabic because they are part of normal sentence structure. In many cases, you MUST use the attached form and can not replace it with an independent pronoun. For example, ‘كِتَاب أَنَا (kitāb anā)’, is wrong, it should be ‘كِتَابِي (kitābī) – “my book”’, and ‘رَأَيْتُ هُوَ (raʾaytu huwa)’, is wrong, it should be ‘ رَأَيْتُهُ (raʾaytuhu) – “I saw him”’"
-      ]
-    },
-    {
-      "section": "conjugations",
-      "paragraphs": [
-        "Attached pronouns can attach to nouns to show ownership, like ‘كِتَابِي (kitābī) – “my book”’, or to verbs to show the object, like ‘كَتَبَهُ (katabahu) – “he wrote it/him”’. So attached pronouns are flexible—they tell you “whose?” or “to whom?”. However, Tense endings (like past tense), even though they sometimes use endings that look similar to attached pronouns, are used from a different perspective.",
-        "They are used only with verbs with the intention of telling you who did the action. Not just that, past tense introduces some extra endings that are not part of the attached pronoun system, such as ‘ـتُ (-tu)’, ‘ـتَ (-ta)’, and ‘ـتِ (-ti)’, which are used specifically for verbs.",
-        "So some of the same endings you have to memorise, but you have to memorise it once from an attached pronoun perspective, and once again from a past tense perspective."
+        "In Arabic, there are two main types of pronouns: ‘Independent (Detached) Pronouns’ and ‘Attached Pronouns’.",
+        "In this Bonus lesson, we are going to list all the (1) Independent Pronouns, so you can talk about yourself in a conversation, we will also go through (2) Attached Pronouns, but only those to do with nouns, so you can talk about classroom items and your belongings when having conversations about your belongings and other peoples belongings",
+        "As a reminder, this table in above is the Attached Pronoun list to show your relationship and possession of nouns (e.g., their book, my book, his book). This specific table is not for showing the relationship between verbs.",
+        "An attached pronoun table also exists for verbs aswell, and that verb table “steals” some similar suffixes, so you may get confused, however you need to remember that there are attached pronoun tables for nouns (E.g. My book, your book) and the relationship to them and a separate table for verbs and the relationship to them (e.g. I saw, you saw). You can find the breakdown of those verb attached pronouns later on in Section 11.2."
       ]
     }
   ],
@@ -6809,5 +7323,5 @@
     "instagram": "@majestic_messenger",
     "docUrl": "https://docs.google.com/document/d/1wqbU7rsLUm0wqCjQPS2PbtCTThZOxnE2CnClxa8DETc/edit"
   },
-  "fetchedAt": "2026-05-04T19:45:36.908Z"
+  "fetchedAt": "2026-05-11T13:52:20.879Z"
 }

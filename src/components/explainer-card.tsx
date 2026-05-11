@@ -2,6 +2,7 @@ import { ArabicText } from "@/components/arabic-text";
 import { cn } from "@/lib/cn";
 import type { GrammarRule } from "@/lib/types";
 import { stripBodyPrefix } from "@/lib/rule-shape";
+import { RuleCard } from "./rule-card";
 
 interface Props {
   rule: GrammarRule;
@@ -44,6 +45,12 @@ export function ExplainerCard({ rule, className }: Props) {
               {renderProseWithCallouts(p)}
             </p>
           ))}
+        </div>
+      ) : null}
+
+      {rule.examples.length > 0 ? (
+        <div className="mt-5">
+          <RuleCard rule={{ ...rule, body: "", title: "Examples" }} />
         </div>
       ) : null}
     </article>

@@ -43,7 +43,30 @@ export function RuleCard({ rule, className }: Props) {
                 key={i}
                 className="flex flex-col gap-0.5 rounded-lg border border-border bg-background-soft px-2.5 py-2"
               >
-                {ex.arabic ? (
+                {ex.parts?.length ? (
+                  <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+                    {ex.parts.map((part, partIndex) => (
+                      <div
+                        key={partIndex}
+                        className="rounded-md border border-border/70 bg-card/70 p-2"
+                      >
+                        <p className="text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">
+                          {part.label}
+                        </p>
+                        {part.arabic ? (
+                          <ArabicText variant="display" className="mt-1 text-xl sm:text-2xl">
+                            {part.arabic}
+                          </ArabicText>
+                        ) : null}
+                        {part.english ? (
+                          <p className="text-xs text-foreground-soft">
+                            {renderInlineArabic(part.english)}
+                          </p>
+                        ) : null}
+                      </div>
+                    ))}
+                  </div>
+                ) : ex.arabic ? (
                   <ArabicText variant="display" className="text-xl sm:text-2xl">
                     {ex.arabic}
                   </ArabicText>

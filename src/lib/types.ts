@@ -159,7 +159,7 @@ export interface PronounExample {
  *  present/future-tense (Muḍāriʿ) tables. */
 export interface ConjugationEntry {
   id: string;
-  tense: "past" | "present-future";
+  tense: "past" | "present-future" | "command";
   /** "1st person singular", "Base form", … */
   category: string;
   /** Pattern abstraction, e.g. "(root) + تُ" or "تَ + (root) + ينَ". */

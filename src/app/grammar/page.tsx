@@ -19,7 +19,7 @@ const REFERENCE_PAGES = [
     title: "Verb conjugations",
     titleArabic: "تَصْرِيف الأَفْعَال",
     description:
-      "Past (Māḍī) and present / future (Muḍāriʿ) endings for every person and gender, side by side.",
+      "Past (Māḍī), present / future (Muḍāriʿ), and command (Amr) forms side by side.",
     accent:
       "bg-[oklch(0.93_0.05_220)] text-[oklch(0.30_0.10_220)] dark:bg-[oklch(0.30_0.06_220)] dark:text-[oklch(0.85_0.08_220)]",
   },
