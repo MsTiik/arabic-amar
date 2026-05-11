@@ -118,6 +118,19 @@ export function Topbar() {
             </Link>
           );
         })}
+        {sync.configured ? (
+          <Link
+            href="/sync"
+            className={cn(
+              "shrink-0 whitespace-nowrap rounded-md px-3 py-1.5 transition-colors focus-ring",
+              pathname.startsWith("/sync")
+                ? "bg-muted text-foreground"
+                : "text-muted-foreground hover:bg-muted hover:text-foreground",
+            )}
+          >
+            Sync
+          </Link>
+        ) : null}
         <Link
           href={FOUNDATIONS.href}
           className={cn(
