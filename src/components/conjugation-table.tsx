@@ -10,9 +10,10 @@ import { cn } from "@/lib/cn";
 interface Props {
   past: ConjugationEntry[];
   presentFuture: ConjugationEntry[];
+  command: ConjugationEntry[];
 }
 
-type Tab = "past" | "present-future";
+type Tab = "past" | "present-future" | "command";
 
 const ROOT_LABEL = "ك‑ت‑ب";
 
@@ -27,7 +28,7 @@ function PatternCell({ pattern }: { pattern: string }) {
   // the rest. Anything that's not the root marker counts as an ending and
   // gets highlighted.
   const normalised = pattern.replace(/ك-ت-ب/g, ROOT_LABEL);
-  const parts = normalised.split(/(\(root\)|ك‑ت‑ب|\+)/g).filter(Boolean);
+  const parts = normalised.split(/(\(root\)|root|ك‑ت‑ب|\+)/gi).filter(Boolean);
   return (
     <span className="inline-flex flex-wrap items-center gap-1" dir="rtl">
       {parts.map((part, i) => {
@@ -40,7 +41,7 @@ function PatternCell({ pattern }: { pattern: string }) {
             </span>
           );
         }
-        if (trimmed === "(root)") {
+        if (trimmed === "(root)" || trimmed.toLowerCase() === "root") {
           return (
             <span
               key={i}
@@ -63,6 +64,17 @@ function PatternCell({ pattern }: { pattern: string }) {
             >
               {trimmed}
             </ArabicText>
+          );
+        }
+        if (!/[\u0600-\u06FF\u064B-\u065F]/.test(trimmed)) {
+          return (
+            <span
+              key={i}
+              className="rounded-md bg-background-soft px-2 py-0.5 font-mono text-sm text-foreground-soft sm:text-base"
+              lang="en"
+            >
+              {trimmed}
+            </span>
           );
         }
         // The rest is the Arabic suffix / prefix. Display-size so the fatha
@@ -171,9 +183,10 @@ function Table({ rows }: { rows: ConjugationEntry[] }) {
   );
 }
 
-export function ConjugationTable({ past, presentFuture }: Props) {
+export function ConjugationTable({ past, presentFuture, command }: Props) {
   const [tab, setTab] = useState<Tab>("past");
-  const rows = tab === "past" ? past : presentFuture;
+  const rows =
+    tab === "past" ? past : tab === "present-future" ? presentFuture : command;
 
   return (
     <div className="flex flex-col gap-3">
@@ -214,6 +227,24 @@ export function ConjugationTable({ past, presentFuture }: Props) {
           </span>
           )
         </button>
+        <button
+          type="button"
+          role="tab"
+          aria-selected={tab === "command"}
+          onClick={() => setTab("command")}
+          className={cn(
+            "rounded-full px-4 py-1.5 text-sm font-medium focus-ring",
+            tab === "command"
+              ? "bg-foreground text-background"
+              : "border border-border bg-background-soft text-foreground-soft hover:bg-muted",
+          )}
+        >
+          Command (
+          <span lang="ar-Latn" className="italic">
+            Amr
+          </span>
+          )
+        </button>
       </div>
 
       <p className="text-xs text-muted-foreground">
@@ -227,7 +258,7 @@ export function ConjugationTable({ past, presentFuture }: Props) {
       </p>
       <p className="text-xs text-muted-foreground">
         This table reflects the beginner AMAR source rows currently captured by
-        the site; dual forms are not included yet.
+        the site.
       </p>
 
       <Table rows={rows} />

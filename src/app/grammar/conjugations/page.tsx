@@ -11,6 +11,7 @@ export default function ConjugationsPage() {
   const presentFuture = content.conjugations.filter(
     (c) => c.tense === "present-future",
   );
+  const command = content.conjugations.filter((c) => c.tense === "command");
   const intro = content.grammarIntros.find((g) => g.section === "conjugations");
 
   return (
@@ -33,10 +34,10 @@ export default function ConjugationsPage() {
           )
         </h1>
         <p className="mt-2 max-w-3xl text-sm text-muted-foreground">
-          Past tense (<span lang="ar-Latn" className="italic">Māḍī</span>) and
+          Past tense (<span lang="ar-Latn" className="italic">Māḍī</span>),
           present / future tense (
-          <span lang="ar-Latn" className="italic">Muḍāriʿ</span>) endings for
-          every person and gender, side by side. Switch tense with the tabs.
+          <span lang="ar-Latn" className="italic">Muḍāriʿ</span>), and command
+          forms. Switch tense with the tabs.
         </p>
       </header>
 
@@ -53,7 +54,7 @@ export default function ConjugationsPage() {
         </section>
       ) : null}
 
-      <ConjugationTable past={past} presentFuture={presentFuture} />
+      <ConjugationTable past={past} presentFuture={presentFuture} command={command} />
     </div>
   );
 }

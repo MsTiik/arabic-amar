@@ -180,6 +180,15 @@ function parseSubSectionHeading(heading: string): SubSection | undefined {
   let kind: SubSection["kind"] = "other";
   if (VOCAB_HEADER_KEYWORDS.some((k) => lower.startsWith(k))) kind = "vocabulary";
   else if (RULES_HEADER_KEYWORDS.some((k) => lower.startsWith(k))) kind = "rules";
+  else if (
+    lower.includes("introducing verbs") ||
+    lower.includes("grammatical persons") ||
+    lower.includes("method of") ||
+    lower.includes("formulating verbs") ||
+    lower.includes("forumlating verbs")
+  ) {
+    kind = "rules";
+  }
   else if (WORKSHEET_KEYWORDS.some((k) => lower.startsWith(k))) kind = "worksheet";
   else if (ANSWERS_KEYWORDS.some((k) => lower.startsWith(k))) kind = "answers";
 
@@ -259,7 +268,7 @@ interface DocCursor {
   /** Within a `pronouns` specialSection, which sub-table we're inside. */
   pronounKind: "detached" | "attached" | null;
   /** Within a `conjugations` specialSection, which tense we're inside. */
-  conjugationTense: "past" | "present-future" | null;
+  conjugationTense: "past" | "present-future" | "command" | null;
 }
 
 const NUMBER_WORD_TO_VALUE: Record<string, number> = {
@@ -301,6 +310,9 @@ interface TableClassification {
     | "pronouns"
     | "conjugations"
     | "plurals"
+    | "term-gloss"
+    | "verb-forms"
+    | "person-groups"
     | "unknown";
   arabicCol?: number;
   pronunciationCol?: number;
@@ -322,6 +334,9 @@ interface TableClassification {
   meaningCol?: number;
   singularArabicCol?: number;
   pluralArabicCol?: number;
+  singularEnglishCol?: number;
+  pluralEnglishCol?: number;
+  pronounKindHint?: "attached" | "detached";
 }
 
 function classifyTable(headers: string[]): TableClassification {
@@ -340,21 +355,33 @@ function classifyTable(headers: string[]): TableClassification {
 
   // Pronoun reference shape: Category | Arabic | Pronunciation | English |
   // Usage Note | Example. Identified by the "usage note" column.
-  if (
-    has("usage note") &&
-    indexOf("example") >= 0 &&
-    has("arabic") &&
-    has("pronunciation") &&
-    has("english")
-  ) {
+  if (has("usage note") && indexOf("example") >= 0 && has("arabic") && has("english")) {
+    const pronunciationCol = has("pronunciation") ? indexOf("pronunciation") : indexOf("method");
+    if (pronunciationCol >= 0) {
     return {
       kind: "pronouns",
       sectionCol: indexOf("category") >= 0 ? indexOf("category") : indexOf("section"),
       arabicCol: indexOf("arabic"),
-      pronunciationCol: indexOf("pronunciation"),
+      pronunciationCol,
       englishCol: indexOf("english"),
       usageNoteCol: indexOf("usage note"),
       exampleCol: indexOf("example") >= 0 ? indexOf("example") : undefined,
+      pronounKindHint: has("method") ? "attached" : undefined,
+    };
+    }
+  }
+
+  if (
+    has("arabic singular") &&
+    has("arabic plural") &&
+    lower.filter((h) => h === "english").length >= 2
+  ) {
+    return {
+      kind: "paired-vocab",
+      singularArabicCol: indexOf("arabic singular"),
+      pluralArabicCol: indexOf("arabic plural"),
+      singularEnglishCol: indexOf("english"),
+      pluralEnglishCol: lower.indexOf("english", indexOf("english") + 1),
     };
   }
 
@@ -379,6 +406,29 @@ function classifyTable(headers: string[]): TableClassification {
       pluralArabicCol: pluralCol,
       pronunciationCol: indexOf("pronunciation"),
       englishCol: indexOf("english"),
+    };
+  }
+
+  if (has("arabic term") && has("transliteration") && has("meaning") && has("explanation")) {
+    return {
+      kind: "term-gloss",
+      arabicCol: indexOf("arabic term"),
+      pronunciationCol: indexOf("transliteration"),
+      englishCol: indexOf("meaning"),
+      exampleCol: indexOf("explanation"),
+    };
+  }
+
+  if (lower.length === 8 && lower.slice(0, 6).every((h) => h === "tenses") && lower[6] === "masdar") {
+    return { kind: "verb-forms" };
+  }
+
+  if (has("category") && has("quantity") && has("description")) {
+    return {
+      kind: "person-groups",
+      sectionCol: indexOf("category"),
+      englishCol: indexOf("quantity"),
+      exampleCol: indexOf("description"),
     };
   }
 
@@ -718,6 +768,13 @@ export async function parseDocxBuffer(
     }
   }
 
+  function splitArabicAndPronunciation(cell: string): { arabic: string; pronunciation?: string } {
+    const trimmed = cell.trim();
+    const match = /^(.+?)\s*\(([^()]+)\)\s*$/.exec(trimmed);
+    if (!match) return { arabic: trimmed };
+    return { arabic: match[1].trim(), pronunciation: match[2].trim() };
+  }
+
   function processPairedVocabTable(
     table: HTMLElement,
     classification: TableClassification,
@@ -726,11 +783,15 @@ export async function parseDocxBuffer(
       warn(`Skipped paired vocab table: no current lesson`);
       return;
     }
+    const hasSplitEnglish =
+      classification.singularEnglishCol !== undefined &&
+      classification.pluralEnglishCol !== undefined;
     if (
       classification.singularArabicCol === undefined ||
       classification.pluralArabicCol === undefined ||
-      classification.pronunciationCol === undefined ||
-      classification.englishCol === undefined
+      (!hasSplitEnglish &&
+        (classification.pronunciationCol === undefined ||
+          classification.englishCol === undefined))
     ) {
       warn(`Skipped paired vocab table: missing required columns`);
       return;
@@ -745,10 +806,25 @@ export async function parseDocxBuffer(
         if (sectionCell) runningCategory = sectionCell;
       }
 
-      const singularArabic = row.cells[classification.singularArabicCol]?.trim();
-      const pluralArabic = row.cells[classification.pluralArabicCol]?.trim();
-      const pronunciation = row.cells[classification.pronunciationCol]?.trim();
-      const english = row.cells[classification.englishCol]?.trim();
+      const singularRaw = row.cells[classification.singularArabicCol]?.trim();
+      const pluralRaw = row.cells[classification.pluralArabicCol]?.trim();
+      if (!singularRaw) continue;
+
+      const singular = splitArabicAndPronunciation(singularRaw);
+      const plural = pluralRaw ? splitArabicAndPronunciation(pluralRaw) : undefined;
+      const singularArabic = singular.arabic;
+      const pluralArabic = plural?.arabic ?? "";
+      const pronunciation = hasSplitEnglish
+        ? [singular.pronunciation, plural?.pronunciation].filter(Boolean).join(" / ")
+        : (row.cells[classification.pronunciationCol!]?.trim() ?? "");
+      const english = hasSplitEnglish
+        ? [
+            row.cells[classification.singularEnglishCol!]?.trim(),
+            row.cells[classification.pluralEnglishCol!]?.trim(),
+          ]
+            .filter(Boolean)
+            .join(" / ")
+        : (row.cells[classification.englishCol!]?.trim() ?? "");
       if (!singularArabic || !pronunciation || !english) continue;
 
       const id = stableVocabId([
@@ -853,6 +929,128 @@ export async function parseDocxBuffer(
         });
       }
     }
+  }
+
+  function processTermGlossTable(
+    table: HTMLElement,
+    classification: TableClassification,
+  ): void {
+    if (!cursor.lesson) return;
+    if (
+      classification.arabicCol === undefined ||
+      classification.pronunciationCol === undefined ||
+      classification.englishCol === undefined ||
+      classification.exampleCol === undefined
+    ) {
+      warn("Skipped term-gloss table: missing required columns");
+      return;
+    }
+    const matrix = tableToMatrix(table);
+    if (matrix.length < 2) return;
+    const examples: GrammarExample[] = [];
+    for (const row of matrix.slice(1)) {
+      const arabic = row.cells[classification.arabicCol]?.trim();
+      const pronunciation = row.cells[classification.pronunciationCol]?.trim();
+      const english = row.cells[classification.englishCol]?.trim();
+      const explanation = row.cells[classification.exampleCol]?.trim();
+      if (!arabic || !english) continue;
+      examples.push({
+        arabic,
+        pronunciation,
+        english: explanation ? `${english} — ${explanation}` : english,
+      });
+    }
+    if (examples.length === 0) return;
+    const title = stripLeadingNumber(cursor.subSubHeading ?? cursor.subSection?.title ?? "Key terms");
+    const id = stableId([cursor.lessonId, "term-gloss", title]);
+    rules.push({
+      id,
+      title,
+      body: "",
+      examples,
+      topicSlugs: [...cursor.topicSlugs],
+      lessonId: cursor.lessonId,
+    });
+  }
+
+  function processPersonGroupsTable(
+    table: HTMLElement,
+    classification: TableClassification,
+  ): void {
+    if (!cursor.lesson) return;
+    if (
+      classification.sectionCol === undefined ||
+      classification.englishCol === undefined ||
+      classification.exampleCol === undefined
+    ) {
+      warn("Skipped grammatical-person table: missing required columns");
+      return;
+    }
+    const matrix = tableToMatrix(table);
+    if (matrix.length < 2) return;
+    const examples: GrammarExample[] = [];
+    let runningCategory = "";
+    for (const row of matrix.slice(1)) {
+      const category = row.cells[classification.sectionCol]?.trim();
+      if (category) runningCategory = category;
+      const quantity = row.cells[classification.englishCol]?.trim();
+      const description = row.cells[classification.exampleCol]?.trim();
+      if (!quantity && !description) continue;
+      examples.push({
+        arabic: "",
+        english: [runningCategory, quantity, description].filter(Boolean).join(" — "),
+      });
+    }
+    if (examples.length === 0) return;
+    const title = stripLeadingNumber(cursor.subSection?.title ?? "Grammatical persons");
+    const id = stableId([cursor.lessonId, "person-groups", title, String(rules.length)]);
+    rules.push({
+      id,
+      title,
+      body: "",
+      examples,
+      topicSlugs: [...cursor.topicSlugs],
+      lessonId: cursor.lessonId,
+    });
+  }
+
+  function processVerbFormsTable(table: HTMLElement): void {
+    if (!cursor.lesson) return;
+    const matrix = tableToMatrix(table);
+    if (matrix.length < 3) return;
+    const examples: GrammarExample[] = [];
+    for (const row of matrix.slice(2)) {
+      const groups = [
+        { label: "Māḍī (Past)", arabicCol: 0, englishCol: 1 },
+        { label: "Muḍāriʿ (Present/Future)", arabicCol: 2, englishCol: 3 },
+        { label: "Amr (Command)", arabicCol: 4, englishCol: 5 },
+        { label: "Maṣdar", arabicCol: 6, englishCol: 7 },
+      ];
+      const parts: NonNullable<GrammarExample["parts"]> = [];
+      for (const group of groups) {
+        const rawArabic = row.cells[group.arabicCol]?.trim();
+        const english = row.cells[group.englishCol]?.trim();
+        if (!rawArabic && !english) continue;
+        const parsed = rawArabic ? splitArabicAndPronunciation(rawArabic) : undefined;
+        parts.push({
+          label: group.label,
+          arabic: parsed?.arabic,
+          english: [parsed?.pronunciation, english].filter(Boolean).join(" — "),
+        });
+      }
+      if (parts.length > 0) examples.push({ arabic: "", parts });
+    }
+    if (examples.length === 0) return;
+    const title = stripLeadingNumber(cursor.subSection?.title ?? "Classroom action forms");
+    const id = stableId([cursor.lessonId, "verb-forms", title]);
+    rules.push({
+      id,
+      title,
+      body: "",
+      examples,
+      topicSlugs: [...cursor.topicSlugs],
+      lessonId: cursor.lessonId,
+    });
   }
 
   function processRuleTable(table: HTMLElement): void {
@@ -1028,7 +1226,7 @@ export async function parseDocxBuffer(
     return null;
   }
 
-  function classifyTense(heading: string): "past" | "present-future" | null {
+  function classifyTense(heading: string): "past" | "present-future" | "command" | null {
     const lower = heading.toLowerCase();
     if (lower.includes("past") || lower.includes("māḍī") || lower.includes("madi")) {
       return "past";
@@ -1041,6 +1239,7 @@ export async function parseDocxBuffer(
     ) {
       return "present-future";
     }
+    if (lower.includes("command") || lower.includes("amr")) return "command";
     return null;
   }
 
@@ -1113,7 +1312,10 @@ export async function parseDocxBuffer(
     }
     const matrix = tableToMatrix(table);
     if (matrix.length < 2) return;
-    const kind = cursor.pronounKind ?? classifyPronounKind(cursor.subSubHeading ?? "");
+    const kind =
+      cursor.pronounKind ??
+      classification.pronounKindHint ??
+      classifyPronounKind(cursor.subSubHeading ?? "");
     if (!kind) {
       warn(`Pronoun table without a detached/attached heading: ${cursor.subSubHeading}`);
       return;
@@ -1126,10 +1328,16 @@ export async function parseDocxBuffer(
       }
       const arabic = row.cells[classification.arabicCol]?.trim();
       const pronunciationRaw = row.cells[classification.pronunciationCol]?.trim();
-      const english = row.cells[classification.englishCol]?.trim() ?? "";
+      let english = row.cells[classification.englishCol]?.trim() ?? "";
       const usageNote = row.cells[classification.usageNoteCol]?.trim() || undefined;
       const exampleRaw = row.cells[classification.exampleCol]?.trim() || undefined;
       if (!arabic || !pronunciationRaw) continue;
+      if (/[\u0600-\u06FF]/.test(english) && row.cells[classification.exampleCol]?.trim()) {
+        const exampleFallback = row.cells[classification.exampleCol]?.trim();
+        if (exampleFallback && !/[\u0600-\u06FF]/.test(exampleFallback)) {
+          english = exampleFallback;
+        }
+      }
       const gender = inferGenderFromPronunciation(pronunciationRaw);
       const pronunciation = stripGenderTag(pronunciationRaw);
       const example = exampleRaw ? parsePronounExample(exampleRaw) : undefined;
@@ -1430,6 +1638,15 @@ export async function parseDocxBuffer(
           // Flip the bucket so any following <p> nodes (until the next h2) get
           // routed correctly.
           cursor.specialSection = "plurals";
+          break;
+        case "term-gloss":
+          processTermGlossTable(node, classification);
+          break;
+        case "verb-forms":
+          processVerbFormsTable(node);
+          break;
+        case "person-groups":
+          processPersonGroupsTable(node, classification);
           break;
         case "vocab":
           if (cursor.subSection?.kind === "vocabulary") {

@@ -9,7 +9,7 @@ import { isPatternWalkthrough } from "./rule-table-parser";
 export type RuleShape =
   | "pattern-walkthrough" // Numbers / Time: Pattern → Worked-example → Result
   | "demonstrative-pair" // body-parts: هذا/هذه + noun template, many parallel examples
-  | "explainer" //          long prose, no examples (e.g. "'This is' in the Arabic Language")
+  | "explainer" //          long prose (e.g. "'This is' in the Arabic Language")
   | "free-form"; //         everything else: short body + flat examples list
 
 /** ≥ this many parallel examples qualifies as a demonstrative-pair shape. */
@@ -33,7 +33,7 @@ export function getRuleShape(rule: GrammarRule): RuleShape {
 
   if (isDemonstrativePair(rule)) return "demonstrative-pair";
 
-  if (rule.examples.length === 0 && (rule.body ?? "").trim().length >= EXPLAINER_MIN_BODY) {
+  if ((rule.body ?? "").trim().length >= EXPLAINER_MIN_BODY) {
     return "explainer";
   }
 
