@@ -1,29 +1,43 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Cloud, CloudOff, RefreshCw } from "lucide-react";
 
 import { useProgressSync } from "@/components/progress-sync-provider";
 import { summarizeMastery, useProgress } from "@/lib/progress";
 import { getSiteContent } from "@/lib/content";
 
+const SIGN_IN_COOLDOWN_SECONDS = 60;
+
 export function ProgressSyncPanel() {
   const sync = useProgressSync();
   const progress = useProgress();
   const [email, setEmail] = useState("");
   const [sent, setSent] = useState(false);
+  const [cooldownUntil, setCooldownUntil] = useState(0);
+  const [now, setNow] = useState(() => Date.now());
   const content = getSiteContent();
   const wordIds = useMemo(() => content.vocab.map((v) => v.id), [content.vocab]);
   const summary = summarizeMastery(progress, wordIds);
   const practiced = summary.learning + summary.familiar + summary.mastered;
+  const cooldownRemaining = Math.max(0, Math.ceil((cooldownUntil - now) / 1000));
+  const emailReady = email.trim().length > 0;
+  const signInDisabled = sync.status === "syncing" || !emailReady || cooldownRemaining > 0;
+
+  useEffect(() => {
+    if (!cooldownUntil) return;
+    const interval = window.setInterval(() => setNow(Date.now()), 1000);
+    return () => window.clearInterval(interval);
+  }, [cooldownUntil]);
 
   async function submit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (!email.trim()) return;
+    if (signInDisabled) return;
     setSent(false);
     try {
       await sync.signIn(email.trim());
       setSent(true);
+      setCooldownUntil(Date.now() + SIGN_IN_COOLDOWN_SECONDS * 1000);
     } catch {
       setSent(false);
     }
@@ -106,14 +120,20 @@ export function ProgressSyncPanel() {
             />
             <button
               type="submit"
-              className="rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground hover:opacity-90 focus-ring"
+              disabled={signInDisabled}
+              className="rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60 focus-ring"
             >
-              Send sign-in link
+              {sync.status === "syncing"
+                ? "Sending…"
+                : cooldownRemaining > 0
+                  ? `Try again in ${cooldownRemaining}s`
+                  : "Send sign-in link"}
             </button>
           </div>
           {sent ? (
             <p className="mt-3 text-sm text-success">
-              Check your email, then open the sign-in link on this device.
+              Check your email, then open the sign-in link on this device. Don&apos;t request
+              another link unless this one expires.
             </p>
           ) : null}
           {sync.error ? <p className="mt-3 text-sm text-danger">{sync.error}</p> : null}

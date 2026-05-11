@@ -35,6 +35,16 @@ interface ProgressSyncContextValue {
   syncNow: () => Promise<void>;
 }
 
+function normalizeSignInError(err: unknown): Error {
+  const message = err instanceof Error ? err.message : "Sign-in failed.";
+  if (/rate limit|too many/i.test(message)) {
+    return new Error(
+      "Too many sign-in emails were requested. Please wait 15–60 minutes before trying again.",
+    );
+  }
+  return err instanceof Error ? err : new Error(message);
+}
+
 const ProgressSyncContext = createContext<ProgressSyncContextValue | null>(null);
 
 export function ProgressSyncProvider({ children }: { children: ReactNode }) {
@@ -142,10 +152,10 @@ export function ProgressSyncProvider({ children }: { children: ReactNode }) {
           await signInWithEmail(email);
           setStatus("signed-out");
         } catch (err) {
-          const message = err instanceof Error ? err.message : "Sign-in failed.";
+          const normalized = normalizeSignInError(err);
           setStatus("error");
-          setError(message);
-          throw err instanceof Error ? err : new Error(message);
+          setError(normalized.message);
+          throw normalized;
         }
       },
       signOut: async () => {
