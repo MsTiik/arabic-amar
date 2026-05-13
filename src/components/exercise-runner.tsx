@@ -191,51 +191,72 @@ function FlashcardView({
   onAnswer: (correct: boolean) => void;
 }) {
   const [flipped, setFlipped] = useState(false);
+  const flipLabel = flipped
+    ? "Flip card to show Arabic"
+    : "Flip card to show English";
+  const flipHint = flipped
+    ? "Tap card to show Arabic"
+    : "Tap card to show English";
+
   return (
     <div className="rounded-3xl border border-border bg-card p-6 text-center sm:p-10">
       <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
         {flipped ? "English" : "Arabic"}
       </p>
-      <div className="mt-6 flex min-h-48 w-full flex-col items-center justify-center gap-3 rounded-2xl border border-border bg-background-soft p-6">
-        {flipped ? (
-          <>
-            <p className="text-3xl font-semibold sm:text-4xl">{question.prompt}</p>
-            {question.promptHint ? (
-              <p className="text-sm italic text-muted-foreground" lang="ar-Latn">
-                {question.promptHint}
-              </p>
-            ) : null}
-            {question.answerDetail ? (
-              <p className="mt-3 max-w-xl text-sm leading-6 text-foreground-soft">
-                {question.answerDetail}
-              </p>
-            ) : null}
-            {question.sourceLabel ? (
-              <p className="mt-1 text-xs font-medium text-muted-foreground">
-                Source: {question.sourceLabel}
-              </p>
-            ) : null}
-          </>
-        ) : (
-          <div className="flex flex-col items-center gap-2">
-            <ArabicText
-              variant="display"
-              className="text-7xl sm:text-8xl"
-            >
-              {question.promptArabic}
-            </ArabicText>
-          </div>
-        )}
-        {!flipped && question.promptHint ? (
-          <TranslitReveal text={question.promptHint} className="mt-2" />
-        ) : null}
+      <div className="relative mt-6 min-h-72 w-full sm:min-h-80">
         <button
           type="button"
+          aria-label={flipLabel}
           onClick={() => setFlipped((f) => !f)}
-          className="mt-2 rounded px-2 text-xs text-muted-foreground hover:text-foreground focus-ring"
-        >
-          Tap to flip
-        </button>
+          className={cn(
+            "absolute inset-0 cursor-pointer rounded-2xl border transition-colors hover:border-primary/50 hover:bg-muted/70 focus-ring",
+            flipped
+              ? "border-primary/30 bg-primary/5"
+              : "border-border bg-background-soft",
+          )}
+        />
+        <div className="pointer-events-none relative z-10 flex min-h-72 flex-col items-center justify-center gap-4 p-6 sm:min-h-80 sm:p-8">
+          {flipped ? (
+            <div className="flex min-h-52 w-full flex-col items-center justify-center gap-3 sm:min-h-60">
+              <p className="text-5xl font-semibold tracking-tight sm:text-7xl">
+                {question.prompt}
+              </p>
+              {question.promptHint ? (
+                <p
+                  className="text-sm italic text-muted-foreground"
+                  lang="ar-Latn"
+                >
+                  {question.promptHint}
+                </p>
+              ) : null}
+              {question.answerDetail ? (
+                <p className="mt-1 max-w-xl text-sm leading-6 text-foreground-soft">
+                  {question.answerDetail}
+                </p>
+              ) : null}
+              {question.sourceLabel ? (
+                <p className="mt-1 text-xs font-medium text-muted-foreground">
+                  Source: {question.sourceLabel}
+                </p>
+              ) : null}
+            </div>
+          ) : (
+            <div className="flex min-h-52 flex-col items-center justify-center gap-2 sm:min-h-60">
+              <ArabicText variant="display" className="text-7xl sm:text-8xl">
+                {question.promptArabic}
+              </ArabicText>
+            </div>
+          )}
+          {!flipped && question.promptHint ? (
+            <TranslitReveal
+              text={question.promptHint}
+              className="pointer-events-auto mt-2"
+            />
+          ) : null}
+          <p className="text-xs font-medium text-muted-foreground">
+            {flipHint}
+          </p>
+        </div>
       </div>
       {!flipped && question.promptArabic && question.showAudio !== false ? (
         <div className="mt-2 flex justify-center">
