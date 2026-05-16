@@ -51,8 +51,22 @@ describe("content vocabulary search", () => {
     );
 
     expect(gettingToKnow?.vocabCount).toBe(topicVocab.length);
+    const marketplace = content.topics.find(
+      (topic) => topic.slug === "the-marketplace-and-colours",
+    );
+    const marketplaceVocab = content.vocab.filter((entry) =>
+      entry.topicSlugs.includes("the-marketplace-and-colours"),
+    );
+
+    expect(marketplace?.vocabCount).toBe(marketplaceVocab.length);
     expect(
-      topicVocab.some((entry) => entry.arabicFolded === foldForSearch("هٰذَا")),
+      marketplaceVocab.some((entry) => entry.arabicFolded === foldForSearch("هٰذَا")),
+    ).toBe(true);
+    expect(
+      marketplaceVocab.some((entry) => entry.arabicFolded === foldForSearch("جَزَّارُون")),
+    ).toBe(true);
+    expect(
+      marketplaceVocab.some((entry) => entry.arabicFolded === foldForSearch("بَيْضَاء")),
     ).toBe(true);
   });
 });

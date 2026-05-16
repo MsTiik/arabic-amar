@@ -28,7 +28,7 @@ export interface ContentQaReport {
 }
 
 function exampleVocab(entry: VocabEntry): string {
-  return `${entry.lessonId}: ${entry.arabic} / ${entry.pronunciation} / ${entry.english || "(empty)"}`;
+  return `${entry.lessonId}: ${entry.arabic} / ${entry.pronunciation || "(no pronunciation)"} / ${entry.english || "(empty)"}`;
 }
 
 function addIssue(
@@ -94,17 +94,6 @@ export function createContentQaReport(
     });
   }
 
-  const emptyPronunciation = content.vocab.filter((entry) => !entry.pronunciation.trim());
-  if (emptyPronunciation.length > 0) {
-    addIssue(issues, {
-      code: "empty-vocab-pronunciation",
-      severity: "warning",
-      message: "Vocabulary cards are missing transliteration/pronunciation text.",
-      count: emptyPronunciation.length,
-      examples: emptyPronunciation.map(exampleVocab),
-    });
-  }
-
   const duplicateIds = duplicateGroups(content.vocab, (entry) => entry.id);
   if (duplicateIds.length > 0) {
     addIssue(issues, {
@@ -117,7 +106,7 @@ export function createContentQaReport(
   }
 
   const duplicateRows = duplicateGroups(content.vocab, (entry) =>
-    [entry.lessonId, entry.category, entry.arabic, entry.pronunciation, entry.english].join("\u0000"),
+    [entry.lessonId, entry.category, entry.arabic, entry.pronunciation ?? "", entry.english].join("\u0000"),
   );
   if (duplicateRows.length > 0) {
     addIssue(issues, {

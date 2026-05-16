@@ -134,6 +134,10 @@ function cellParagraphs(cell: HTMLElement): string[] {
   return out;
 }
 
+function containsArabic(input: string): boolean {
+  return /[\u0600-\u06FF]/u.test(input);
+}
+
 interface ParsedLessonHeading {
   number: string;
   title: string;
@@ -336,6 +340,7 @@ interface TableClassification {
   pluralArabicCol?: number;
   singularEnglishCol?: number;
   pluralEnglishCol?: number;
+  pairedKind?: "separate-singular-plural" | "masculine-feminine";
   pronounKindHint?: "attached" | "detached";
 }
 
@@ -369,6 +374,32 @@ function classifyTable(headers: string[]): TableClassification {
       pronounKindHint: has("method") ? "attached" : undefined,
     };
     }
+  }
+
+  if (
+    has("singular arabic") &&
+    has("meaning") &&
+    has("plural arabic") &&
+    has("plural meaning")
+  ) {
+    return {
+      kind: "paired-vocab",
+      singularArabicCol: indexOf("singular arabic"),
+      pluralArabicCol: indexOf("plural arabic"),
+      singularEnglishCol: indexOf("meaning"),
+      pluralEnglishCol: indexOf("plural meaning"),
+      pairedKind: "separate-singular-plural",
+    };
+  }
+
+  if (has("masculine arabic") && has("feminine arabic") && has("meaning")) {
+    return {
+      kind: "paired-vocab",
+      singularArabicCol: indexOf("masculine arabic"),
+      pluralArabicCol: indexOf("feminine arabic"),
+      englishCol: indexOf("meaning"),
+      pairedKind: "masculine-feminine",
+    };
   }
 
   if (
@@ -775,6 +806,85 @@ export async function parseDocxBuffer(
     return { arabic: match[1].trim(), pronunciation: match[2].trim() };
   }
 
+  function pushVocabEntry(entry: VocabEntry): void {
+    vocab.push(entry);
+  }
+
+  function pushPairedSideVocab(
+    row: RowData,
+    classification: TableClassification,
+    side: "singular" | "plural" | "masculine" | "feminine",
+    runningCategory: string,
+  ): void {
+    const arabicCol =
+      side === "singular" || side === "masculine"
+        ? classification.singularArabicCol
+        : classification.pluralArabicCol;
+    if (arabicCol === undefined) return;
+
+    const raw = row.cells[arabicCol]?.trim();
+    if (!raw) return;
+
+    const parsed = splitArabicAndPronunciation(raw);
+    if (!parsed.arabic) return;
+
+    const english =
+      side === "singular" && classification.singularEnglishCol !== undefined
+        ? row.cells[classification.singularEnglishCol]?.trim()
+        : side === "plural" && classification.pluralEnglishCol !== undefined
+          ? row.cells[classification.pluralEnglishCol]?.trim()
+          : classification.englishCol !== undefined
+            ? row.cells[classification.englishCol]?.trim()
+            : undefined;
+    if (!english) return;
+    const singularRaw =
+      classification.singularArabicCol !== undefined
+        ? row.cells[classification.singularArabicCol]?.trim()
+        : undefined;
+    const singular = singularRaw ? splitArabicAndPronunciation(singularRaw) : undefined;
+    const pronunciation =
+      parsed.pronunciation ??
+      (side === "plural" &&
+      classification.pairedKind === "separate-singular-plural" &&
+      singular?.pronunciation
+        ? `${singular.pronunciation} plural`
+        : undefined);
+    if (pronunciation === undefined && !containsArabic(parsed.arabic)) return;
+
+    const sideLabel =
+      side === "singular"
+        ? "Singular"
+        : side === "plural"
+          ? "Plural"
+          : side === "masculine"
+            ? "Masculine"
+            : "Feminine";
+    const category =
+      classification.pairedKind === "masculine-feminine"
+        ? `${runningCategory} (${sideLabel})`
+        : runningCategory;
+
+    const id = stableVocabId([
+      cursor.lessonId,
+      category,
+      parsed.arabic,
+      pronunciation ?? "",
+      english,
+    ]);
+    pushVocabEntry({
+      id,
+      arabic: parsed.arabic,
+      arabicFolded: foldForSearch(parsed.arabic),
+      pronunciation,
+      english,
+      category,
+      gender: side === "masculine" ? "M" : side === "feminine" ? "F" : undefined,
+      isExtra: false,
+      topicSlugs: [...cursor.topicSlugs],
+      lessonId: cursor.lessonId,
+    });
+  }
+
   function processPairedVocabTable(
     table: HTMLElement,
     classification: TableClassification,
@@ -789,7 +899,9 @@ export async function parseDocxBuffer(
     if (
       classification.singularArabicCol === undefined ||
       classification.pluralArabicCol === undefined ||
-      (!hasSplitEnglish &&
+      (classification.pairedKind === "masculine-feminine"
+        ? classification.englishCol === undefined
+        : !hasSplitEnglish &&
         (classification.pronunciationCol === undefined ||
           classification.englishCol === undefined))
     ) {
@@ -804,6 +916,18 @@ export async function parseDocxBuffer(
       if (classification.sectionCol !== undefined) {
         const sectionCell = row.cells[classification.sectionCol]?.trim();
         if (sectionCell) runningCategory = sectionCell;
+      }
+
+      if (classification.pairedKind === "separate-singular-plural" && hasSplitEnglish) {
+        pushPairedSideVocab(row, classification, "singular", runningCategory);
+        pushPairedSideVocab(row, classification, "plural", runningCategory);
+        continue;
+      }
+
+      if (classification.pairedKind === "masculine-feminine") {
+        pushPairedSideVocab(row, classification, "masculine", runningCategory);
+        pushPairedSideVocab(row, classification, "feminine", runningCategory);
+        continue;
       }
 
       const singularRaw = row.cells[classification.singularArabicCol]?.trim();

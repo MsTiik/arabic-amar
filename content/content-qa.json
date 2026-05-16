@@ -1,19 +1,19 @@
 {
-  "generatedAt": "2026-05-11T13:52:20.879Z",
+  "generatedAt": "2026-05-16T19:00:24.180Z",
   "totals": {
-    "lessons": 9,
-    "topics": 9,
-    "vocab": 339,
-    "rules": 25,
+    "lessons": 10,
+    "topics": 10,
+    "vocab": 487,
+    "rules": 22,
     "conversations": 0,
     "parserWarnings": 0,
     "issues": 1
   },
   "audioCoverage": {
-    "vocabTotal": 339,
-    "vocabWithAudio": 241,
-    "vocabMissingAudio": 98,
-    "coveragePercent": 71,
+    "vocabTotal": 487,
+    "vocabWithAudio": 295,
+    "vocabMissingAudio": 192,
+    "coveragePercent": 61,
     "byTopic": [
       {
         "slug": "body-parts",
@@ -66,10 +66,10 @@
       {
         "slug": "getting-to-know-each-other",
         "name": "Getting to know each other",
-        "total": 138,
-        "withAudio": 92,
-        "missingAudio": 46,
-        "coveragePercent": 67
+        "total": 128,
+        "withAudio": 87,
+        "missingAudio": 41,
+        "coveragePercent": 68
       },
       {
         "slug": "nouns-in-the-classroom",
@@ -86,6 +86,14 @@
         "withAudio": 0,
         "missingAudio": 0,
         "coveragePercent": 100
+      },
+      {
+        "slug": "the-marketplace-and-colours",
+        "name": "The Marketplace and Colours",
+        "total": 158,
+        "withAudio": 59,
+        "missingAudio": 99,
+        "coveragePercent": 37
       }
     ]
   },
@@ -94,7 +102,7 @@
       "code": "missing-audio",
       "severity": "info",
       "message": "Vocabulary words do not have a matching audio-manifest entry.",
-      "count": 98,
+      "count": 192,
       "examples": [
         "lesson-body-parts: جَبِينٌ / jabīnun / Forehead",
         "lesson-body-parts: أَسْنَانٌ / asnānun / Teeth",
