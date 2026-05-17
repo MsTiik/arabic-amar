@@ -6,7 +6,7 @@ export interface VocabEntry {
   arabic: string;
   /** Diacritic-folded version of `arabic` for case/diacritic-insensitive search. */
   arabicFolded: string;
-  pronunciation: string;
+  pronunciation?: string;
   english: string;
   category: string;
   subCategory?: string;

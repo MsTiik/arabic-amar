@@ -66,9 +66,11 @@ export function VocabCard({
             size="sm"
             showUnavailable
           />
-          <p className="text-base font-medium text-foreground sm:text-lg" lang="ar-Latn">
-            {entry.pronunciation}
-          </p>
+          {entry.pronunciation ? (
+            <p className="text-base font-medium text-foreground sm:text-lg" lang="ar-Latn">
+              {entry.pronunciation}
+            </p>
+          ) : null}
         </div>
         <p className="text-sm text-foreground-soft sm:text-base">{entry.english}</p>
       </div>

@@ -46,6 +46,14 @@ function withEnglish(vocab: VocabEntry[]): VocabEntry[] {
   return vocab.filter((v) => v.english && v.english.trim() !== "");
 }
 
+function withPronunciation(vocab: VocabEntry[]): VocabEntry[] {
+  return vocab.filter((v) => v.pronunciation && v.pronunciation.trim() !== "");
+}
+
+function pronunciation(vocab: VocabEntry): string {
+  return vocab.pronunciation ?? "";
+}
+
 export function makeFlashcardDeck(
   vocab: VocabEntry[],
   opts: { id: string; title: string; topicSlug?: string; lessonId?: string },
@@ -76,8 +84,8 @@ export function makeMultipleChoiceDeck(
   // Directions that depend on english need entries (and a distractor pool)
   // that actually have an english gloss; otherwise prompts/options render blank.
   const needsEnglish = direction === "en-to-ar" || direction === "ar-to-en";
-  const sourceVocab = needsEnglish ? withEnglish(vocab) : vocab;
-  const sourcePool = needsEnglish ? withEnglish(pool) : pool;
+  const sourceVocab = needsEnglish ? withEnglish(vocab) : withPronunciation(vocab);
+  const sourcePool = needsEnglish ? withEnglish(pool) : withPronunciation(pool);
   const questions: ExerciseQuestion[] = sourceVocab.map((v, idx) => {
     const distractors = pickDistractors(sourcePool, v, 3, idx + 1);
     const allCandidates = [v, ...distractors];
@@ -106,7 +114,7 @@ export function makeMultipleChoiceDeck(
       promptHint = v.pronunciation;
       optionRender = (e) => ({ text: e.english, isArabic: false });
     } else {
-      prompt = v.pronunciation;
+      prompt = pronunciation(v);
       promptHint = v.english;
       // Intentionally NOT setting `translit` on options here: the prompt IS the
       // transliteration, so a per-option reveal would let the user click each
@@ -142,13 +150,13 @@ export function makeFillBlankDeck(
   vocab: VocabEntry[],
   opts: { id: string; title: string; topicSlug?: string; lessonId?: string },
 ): ExerciseDeck {
-  const questions: ExerciseQuestion[] = withEnglish(vocab).map((v, idx) => ({
+  const questions: ExerciseQuestion[] = withPronunciation(withEnglish(vocab)).map((v, idx) => ({
     id: `${v.id}__fillblank_${idx}`,
     kind: "fill-blank-translit",
     wordId: v.id,
     prompt: v.english,
     promptArabic: v.arabic,
-    acceptableAnswers: normalizeAnswers(v.pronunciation),
+    acceptableAnswers: normalizeAnswers(pronunciation(v)),
   }));
   return { ...opts, questions };
 }
