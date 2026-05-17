@@ -810,75 +810,86 @@ export async function parseDocxBuffer(
     vocab.push(entry);
   }
 
-  function pushPairedSideVocab(
+  function joinDistinct(parts: Array<string | undefined>): string {
+    const out: string[] = [];
+    for (const part of parts) {
+      const trimmed = part?.trim();
+      if (!trimmed) continue;
+      if (!out.some((existing) => existing.toLowerCase() === trimmed.toLowerCase())) {
+        out.push(trimmed);
+      }
+    }
+    return out.join(" / ");
+  }
+
+  function pairedVocabCategory(
+    classification: TableClassification,
+    runningCategory: string,
+  ): string {
+    if (
+      classification.pairedKind === "masculine-feminine" &&
+      cursor.lesson?.title.toLowerCase().includes("colour")
+    ) {
+      return "Colours";
+    }
+    return runningCategory;
+  }
+
+  function pushCombinedPairedVocab(
     row: RowData,
     classification: TableClassification,
-    side: "singular" | "plural" | "masculine" | "feminine",
     runningCategory: string,
   ): void {
-    const arabicCol =
-      side === "singular" || side === "masculine"
-        ? classification.singularArabicCol
-        : classification.pluralArabicCol;
-    if (arabicCol === undefined) return;
+    if (
+      classification.singularArabicCol === undefined ||
+      classification.pluralArabicCol === undefined
+    ) {
+      return;
+    }
 
-    const raw = row.cells[arabicCol]?.trim();
-    if (!raw) return;
+    const firstRaw = row.cells[classification.singularArabicCol]?.trim();
+    const secondRaw = row.cells[classification.pluralArabicCol]?.trim();
+    if (!firstRaw) return;
 
-    const parsed = splitArabicAndPronunciation(raw);
-    if (!parsed.arabic) return;
+    const first = splitArabicAndPronunciation(firstRaw);
+    const second = secondRaw ? splitArabicAndPronunciation(secondRaw) : undefined;
+    if (!first.arabic) return;
 
-    const english =
-      side === "singular" && classification.singularEnglishCol !== undefined
+    const firstEnglish =
+      classification.singularEnglishCol !== undefined
         ? row.cells[classification.singularEnglishCol]?.trim()
-        : side === "plural" && classification.pluralEnglishCol !== undefined
-          ? row.cells[classification.pluralEnglishCol]?.trim()
-          : classification.englishCol !== undefined
-            ? row.cells[classification.englishCol]?.trim()
-            : undefined;
-    if (!english) return;
-    const singularRaw =
-      classification.singularArabicCol !== undefined
-        ? row.cells[classification.singularArabicCol]?.trim()
+        : classification.englishCol !== undefined
+          ? row.cells[classification.englishCol]?.trim()
+          : undefined;
+    const secondEnglish =
+      classification.pluralEnglishCol !== undefined
+        ? row.cells[classification.pluralEnglishCol]?.trim()
         : undefined;
-    const singular = singularRaw ? splitArabicAndPronunciation(singularRaw) : undefined;
-    const pronunciation =
-      parsed.pronunciation ??
-      (side === "plural" &&
-      classification.pairedKind === "separate-singular-plural" &&
-      singular?.pronunciation
-        ? `${singular.pronunciation} plural`
-        : undefined);
-    if (pronunciation === undefined && !containsArabic(parsed.arabic)) return;
+    const english = joinDistinct([firstEnglish, secondEnglish]);
+    if (!english) return;
 
-    const sideLabel =
-      side === "singular"
-        ? "Singular"
-        : side === "plural"
-          ? "Plural"
-          : side === "masculine"
-            ? "Masculine"
-            : "Feminine";
-    const category =
-      classification.pairedKind === "masculine-feminine"
-        ? `${runningCategory} (${sideLabel})`
-        : runningCategory;
+    const arabic = joinDistinct([first.arabic, second?.arabic]);
+    const pronunciation = joinDistinct([first.pronunciation, second?.pronunciation]) || undefined;
+    if (pronunciation === undefined && !containsArabic(arabic)) return;
+
+    const category = pairedVocabCategory(classification, runningCategory);
 
     const id = stableVocabId([
       cursor.lessonId,
       category,
-      parsed.arabic,
+      first.arabic,
+      second?.arabic ?? "",
       pronunciation ?? "",
       english,
     ]);
     pushVocabEntry({
       id,
-      arabic: parsed.arabic,
-      arabicFolded: foldForSearch(parsed.arabic),
+      arabic,
+      arabicFolded: foldForSearch(arabic),
       pronunciation,
       english,
       category,
-      gender: side === "masculine" ? "M" : side === "feminine" ? "F" : undefined,
+      gender: classification.pairedKind === "masculine-feminine" ? "Both" : undefined,
       isExtra: false,
       topicSlugs: [...cursor.topicSlugs],
       lessonId: cursor.lessonId,
@@ -919,14 +930,12 @@ export async function parseDocxBuffer(
       }
 
       if (classification.pairedKind === "separate-singular-plural" && hasSplitEnglish) {
-        pushPairedSideVocab(row, classification, "singular", runningCategory);
-        pushPairedSideVocab(row, classification, "plural", runningCategory);
+        pushCombinedPairedVocab(row, classification, runningCategory);
         continue;
       }
 
       if (classification.pairedKind === "masculine-feminine") {
-        pushPairedSideVocab(row, classification, "masculine", runningCategory);
-        pushPairedSideVocab(row, classification, "feminine", runningCategory);
+        pushCombinedPairedVocab(row, classification, runningCategory);
         continue;
       }
 

@@ -471,176 +471,111 @@
     {
       "id": "lesson-the-marketplace-and-colours",
       "number": "11",
-      "title": "The Marketplace and Colours",
-      "titleArabic": "السُّوقُ التِّجَارِيُّ وَالأَلْوَانُ",
+      "title": "The Marketplace",
+      "titleArabic": "السُّوقُ التِّجَارِيُّ",
       "topicSlugs": [
-        "the-marketplace-and-colours"
+        "the-marketplace"
       ],
       "vocabIds": [
-        "lesson-the-marketplace-and-colours__professions__جزار__jazzar__butcher",
-        "lesson-the-marketplace-and-colours__professions__جزارون__jazzar-plural__butchers",
-        "lesson-the-marketplace-and-colours__professions__محاسب__muhasib__accountant",
-        "lesson-the-marketplace-and-colours__professions__محاسبون__muhasib-plural__accountants",
-        "lesson-the-marketplace-and-colours__professions__باي-ع__bai__seller",
-        "lesson-the-marketplace-and-colours__professions__باي-عون__bai-plural__sellers",
-        "lesson-the-marketplace-and-colours__professions__مشتري__mushtari__customer-buyer",
-        "lesson-the-marketplace-and-colours__professions__مشترون__mushtari-plural__customers-buyers",
-        "lesson-the-marketplace-and-colours__professions__خضري__khudariyy__greengrocer",
-        "lesson-the-marketplace-and-colours__professions__خضريون__khudariyy-plural__greengrocers",
-        "lesson-the-marketplace-and-colours__professions__فاكهي__fakihiyy__fruit-seller",
-        "lesson-the-marketplace-and-colours__professions__فاكهيون__fakihiyy-plural__fruit-sellers",
-        "lesson-the-marketplace-and-colours__foods__بيضة__baydah__egg",
-        "lesson-the-marketplace-and-colours__foods__بيض__baydah-plural__eggs",
-        "lesson-the-marketplace-and-colours__foods__سمكة__samakah__fish",
-        "lesson-the-marketplace-and-colours__foods__سمك__samakah-plural__fish",
-        "lesson-the-marketplace-and-colours__foods__لحم__lahm__meat",
-        "lesson-the-marketplace-and-colours__foods__لحوم__lahm-plural__meats",
-        "lesson-the-marketplace-and-colours__foods__دجاجة__dajajah__chicken",
-        "lesson-the-marketplace-and-colours__foods__دجاج__dajajah-plural__chickens",
-        "lesson-the-marketplace-and-colours__foods__كرنبة__karnabah__cabbage",
-        "lesson-the-marketplace-and-colours__foods__كرانب__karnabah-plural__cabbages",
-        "lesson-the-marketplace-and-colours__foods__بطاطسة__batatisah__potato",
-        "lesson-the-marketplace-and-colours__foods__بطاطس__batatisah-plural__potatoes",
-        "lesson-the-marketplace-and-colours__foods__جزرة__jazarah__carrot",
-        "lesson-the-marketplace-and-colours__foods__جزر__jazarah-plural__carrots",
-        "lesson-the-marketplace-and-colours__foods__خيارة__khiyarah__cucumber",
-        "lesson-the-marketplace-and-colours__foods__خيار__khiyarah-plural__cucumbers",
-        "lesson-the-marketplace-and-colours__foods__قطعة-جبن__qitat-jubn__piece-of-cheese",
-        "lesson-the-marketplace-and-colours__foods__قطع-جبن__qitat-jubn-plural__pieces-of-cheese",
-        "lesson-the-marketplace-and-colours__foods__خبزة__khubzah__loaf-of-bread",
-        "lesson-the-marketplace-and-colours__foods__خبز__khubzah-plural__bread",
-        "lesson-the-marketplace-and-colours__foods__زبادي__zabadiyy__yogurt",
-        "lesson-the-marketplace-and-colours__foods__زباديات__zabadiyy-plural__yogurts",
-        "lesson-the-marketplace-and-colours__foods__لبن__laban__milk",
-        "lesson-the-marketplace-and-colours__foods__ا-لبان__laban-plural__dairy-products",
-        "lesson-the-marketplace-and-colours__foods__عسل__asal__honey",
-        "lesson-the-marketplace-and-colours__foods__ا-عسال__asal-plural__honeys",
-        "lesson-the-marketplace-and-colours__foods__فص-ثوم__fass-thawm__garlic-clove",
-        "lesson-the-marketplace-and-colours__foods__فصوص-ثوم__fass-thawm-plural__garlic-cloves",
-        "lesson-the-marketplace-and-colours__foods__بصلة__basalah__onion",
-        "lesson-the-marketplace-and-colours__foods__بصل__basalah-plural__onions",
-        "lesson-the-marketplace-and-colours__foods__زبدة__zubdah__butter-portion",
-        "lesson-the-marketplace-and-colours__foods__زبد__zubdah-plural__butter",
-        "lesson-the-marketplace-and-colours__foods__زيت__zayt__oil",
-        "lesson-the-marketplace-and-colours__foods__زيوت__zayt-plural__oils",
-        "lesson-the-marketplace-and-colours__foods__زيتونة__zaytunah__olive",
-        "lesson-the-marketplace-and-colours__foods__زيتون__zaytunah-plural__olives",
-        "lesson-the-marketplace-and-colours__foods__خضرة__khadrah__vegetable",
-        "lesson-the-marketplace-and-colours__foods__خضروات__khadrah-plural__vegetables",
-        "lesson-the-marketplace-and-colours__foods__تفاحة__tuffahah__apple",
-        "lesson-the-marketplace-and-colours__foods__تفاح__tuffahah-plural__apples",
-        "lesson-the-marketplace-and-colours__foods__ليمونة__laymunah__lemon",
-        "lesson-the-marketplace-and-colours__foods__ليمون__laymunah-plural__lemons",
-        "lesson-the-marketplace-and-colours__foods__ذرة__dhurah__corn",
-        "lesson-the-marketplace-and-colours__foods__ذرات__dhurah-plural__grains-of-corn",
-        "lesson-the-marketplace-and-colours__foods__حبة-ا-رز__habbat-aruzz__grain-of-rice",
-        "lesson-the-marketplace-and-colours__foods__ا-رز__habbat-aruzz-plural__rice",
-        "lesson-the-marketplace-and-colours__foods__كوب-شاي__kub-shay__cup-of-tea",
-        "lesson-the-marketplace-and-colours__foods__ا-كواب-شاي__kub-shay-plural__cups-of-tea",
-        "lesson-the-marketplace-and-colours__foods__حبة-سكر__habbat-sukkar__sugar-cube",
-        "lesson-the-marketplace-and-colours__foods__حبات-سكر__habbat-sukkar-plural__sugar-cubes",
-        "lesson-the-marketplace-and-colours__foods__حبة-ملح__habbat-milh__grain-of-salt",
-        "lesson-the-marketplace-and-colours__foods__حبات-ملح__habbat-milh-plural__grains-of-salt",
-        "lesson-the-marketplace-and-colours__foods__موزة__mawzah__banana",
-        "lesson-the-marketplace-and-colours__foods__موز__mawzah-plural__bananas",
-        "lesson-the-marketplace-and-colours__foods__حبة-فاصوليا__habbat-fasuliya__bean",
-        "lesson-the-marketplace-and-colours__foods__فاصوليا__habbat-fasuliya-plural__beans",
-        "lesson-the-marketplace-and-colours__foods__حبة-طماطم__habbat-tamatim__tomato",
-        "lesson-the-marketplace-and-colours__foods__طماطم__habbat-tamatim-plural__tomatoes",
-        "lesson-the-marketplace-and-colours__foods__حبة-عنب__habbat-inab__grape",
-        "lesson-the-marketplace-and-colours__foods__عنب__habbat-inab-plural__grapes",
-        "lesson-the-marketplace-and-colours__foods__بطيخة__bittikhah__watermelon",
-        "lesson-the-marketplace-and-colours__foods__بطيخ__bittikhah-plural__watermelons",
-        "lesson-the-marketplace-and-colours__foods__حبة-بازلاء__habbat-bazila__pea",
-        "lesson-the-marketplace-and-colours__foods__بازلاء__habbat-bazila-plural__peas",
-        "lesson-the-marketplace-and-colours__foods__رمانة__rummanah__pomegranate",
-        "lesson-the-marketplace-and-colours__foods__رمان__rummanah-plural__pomegranates",
-        "lesson-the-marketplace-and-colours__foods__تمرة__tamrah__date-fruit",
-        "lesson-the-marketplace-and-colours__foods__تمر__tamrah-plural__dates",
-        "lesson-the-marketplace-and-colours__clothing__ملبس__malbas__clothing-item",
-        "lesson-the-marketplace-and-colours__clothing__ملابس__malbas-plural__clothes",
-        "lesson-the-marketplace-and-colours__clothing__حزام__hizam__belt",
-        "lesson-the-marketplace-and-colours__clothing__ا-حزمة__hizam-plural__belts",
-        "lesson-the-marketplace-and-colours__clothing__معطف__mitaf__coat",
-        "lesson-the-marketplace-and-colours__clothing__معاطف__mitaf-plural__coats",
-        "lesson-the-marketplace-and-colours__clothing__سروال__sirwal__trousers",
-        "lesson-the-marketplace-and-colours__clothing__سراويل__sirwal-plural__trousers",
-        "lesson-the-marketplace-and-colours__clothing__قميص__qamis__shirt",
-        "lesson-the-marketplace-and-colours__clothing__قمص__qamis-plural__shirts",
-        "lesson-the-marketplace-and-colours__household-cleaning__ممسحة__mimsahah__mop",
-        "lesson-the-marketplace-and-colours__household-cleaning__مماسح__mimsahah-plural__mops",
-        "lesson-the-marketplace-and-colours__household-cleaning__جاروف__jaruf__dustpan",
-        "lesson-the-marketplace-and-colours__household-cleaning__جواريف__jaruf-plural__dustpans",
-        "lesson-the-marketplace-and-colours__household-cleaning__دلو__dalw__bucket",
-        "lesson-the-marketplace-and-colours__household-cleaning__دلاء__dalw-plural__buckets",
-        "lesson-the-marketplace-and-colours__household-cleaning__ا-داة-نظافة__adat-nazafah__cleaning-tool",
-        "lesson-the-marketplace-and-colours__household-cleaning__ا-دوات-نظافة__adat-nazafah-plural__cleaning-tools",
-        "lesson-the-marketplace-and-colours__hygiene__معجون-حلاقة__shaving-cream",
-        "lesson-the-marketplace-and-colours__hygiene__معاجين-حلاقة__shaving-creams",
-        "lesson-the-marketplace-and-colours__hygiene__معجون-ا-سنان__toothpaste",
-        "lesson-the-marketplace-and-colours__hygiene__معاجين-ا-سنان__toothpastes",
-        "lesson-the-marketplace-and-colours__hygiene__مسحوق-غسيل__washing-powder",
-        "lesson-the-marketplace-and-colours__hygiene__مساحيق-غسيل__washing-powders",
-        "lesson-the-marketplace-and-colours__hygiene__فرشاة-ا-سنان__toothbrush",
-        "lesson-the-marketplace-and-colours__hygiene__فرش-ا-سنان__toothbrushes",
-        "lesson-the-marketplace-and-colours__hygiene__صابونة__sabunah__soap-bar",
-        "lesson-the-marketplace-and-colours__hygiene__صابون__sabunah-plural__soap",
-        "lesson-the-marketplace-and-colours__general-objects__ميزان__mizan__scale",
-        "lesson-the-marketplace-and-colours__general-objects__موازين__mizan-plural__scales",
-        "lesson-the-marketplace-and-colours__general-objects__ا-داة-مكتبية__stationery-item",
-        "lesson-the-marketplace-and-colours__general-objects__ا-دوات-مكتبية__stationery",
-        "lesson-the-marketplace-and-colours__general-objects__نقد__naqd__money-cash",
-        "lesson-the-marketplace-and-colours__general-objects__نقود__naqd-plural__monies-currencies",
-        "lesson-the-marketplace-and-colours__general-objects__سكين__sikkin__knife",
-        "lesson-the-marketplace-and-colours__general-objects__سكاكين__sikkin-plural__knives",
-        "lesson-the-marketplace-and-colours__general-objects__عود-كبريت__matchstick",
-        "lesson-the-marketplace-and-colours__general-objects__ا-عواد-كبريت__matchsticks",
-        "lesson-the-marketplace-and-colours__general-objects-masculine__ا-بيض__abyad__white",
-        "lesson-the-marketplace-and-colours__general-objects-feminine__بيضاء__bayda__white",
-        "lesson-the-marketplace-and-colours__general-objects-masculine__ا-سود__aswad__black",
-        "lesson-the-marketplace-and-colours__general-objects-feminine__سوداء__sawda__black",
-        "lesson-the-marketplace-and-colours__general-objects-masculine__ا-حمر__ahmar__red",
-        "lesson-the-marketplace-and-colours__general-objects-feminine__حمراء__hamra__red",
-        "lesson-the-marketplace-and-colours__general-objects-masculine__ا-خضر__akhdar__green",
-        "lesson-the-marketplace-and-colours__general-objects-feminine__خضراء__khadra__green",
-        "lesson-the-marketplace-and-colours__general-objects-masculine__ا-زرق__azraq__blue",
-        "lesson-the-marketplace-and-colours__general-objects-feminine__زرقاء__zarqa__blue",
-        "lesson-the-marketplace-and-colours__general-objects-masculine__ا-صفر__asfar__yellow",
-        "lesson-the-marketplace-and-colours__general-objects-feminine__صفراء__safra__yellow",
-        "lesson-the-marketplace-and-colours__general-objects-masculine__بني__bunniyy__brown",
-        "lesson-the-marketplace-and-colours__general-objects-feminine__بنية__bunniyyah__brown",
-        "lesson-the-marketplace-and-colours__general-objects-masculine__برتقالي__burtuqali__orange",
-        "lesson-the-marketplace-and-colours__general-objects-feminine__برتقالية__burtuqaliyyah__orange",
-        "lesson-the-marketplace-and-colours__general-objects-masculine__وردي__wardi__pink",
-        "lesson-the-marketplace-and-colours__general-objects-feminine__وردية__wardiyyah__pink",
-        "lesson-the-marketplace-and-colours__general-objects-masculine__بنفسجي__banafsaji__purple",
-        "lesson-the-marketplace-and-colours__general-objects-feminine__بنفسجية__banafsajiyyah__purple",
-        "lesson-the-marketplace-and-colours__general-objects-masculine__رمادي__ramadi__grey",
-        "lesson-the-marketplace-and-colours__general-objects-feminine__رمادية__ramadiyyah__grey",
-        "lesson-the-marketplace-and-colours__general-objects-masculine__ذهبي__dhahabi__golden",
-        "lesson-the-marketplace-and-colours__general-objects-feminine__ذهبية__dhahabiyyah__golden",
-        "lesson-the-marketplace-and-colours__general-objects-masculine__فضي__fiddi__silver",
-        "lesson-the-marketplace-and-colours__general-objects-feminine__فضية__fiddiyyah__silver",
-        "lesson-the-marketplace-and-colours__general-objects-masculine__كحلي__kuhli__navy-blue",
-        "lesson-the-marketplace-and-colours__general-objects-feminine__كحلية__kuhliyyah__navy-blue",
-        "lesson-the-marketplace-and-colours__general-objects-masculine__سماوي__samawi__sky-blue",
-        "lesson-the-marketplace-and-colours__general-objects-feminine__سماوية__samawiyyah__sky-blue",
-        "lesson-the-marketplace-and-colours__singular-near",
-        "lesson-the-marketplace-and-colours__singular-near-2",
-        "lesson-the-marketplace-and-colours__singular-far",
-        "lesson-the-marketplace-and-colours__singular-far-2",
-        "lesson-the-marketplace-and-colours__dual-near",
-        "lesson-the-marketplace-and-colours__dual-near-2",
-        "lesson-the-marketplace-and-colours__dual-far",
-        "lesson-the-marketplace-and-colours__dual-far-2",
-        "lesson-the-marketplace-and-colours__plural-near",
-        "lesson-the-marketplace-and-colours__plural-far"
+        "lesson-the-marketplace-and-colours__professions__جزار__جزارون__jazzar__butcher-butchers",
+        "lesson-the-marketplace-and-colours__professions__محاسب__محاسبون__muhasib__accountant-accountants",
+        "lesson-the-marketplace-and-colours__professions__باي-ع__باي-عون__bai__seller-sellers",
+        "lesson-the-marketplace-and-colours__professions__مشتري__مشترون__mushtari__customer-buyer-customers-buyers",
+        "lesson-the-marketplace-and-colours__professions__خضري__خضريون__khudariyy__greengrocer-greengrocers",
+        "lesson-the-marketplace-and-colours__professions__فاكهي__فاكهيون__fakihiyy__fruit-seller-fruit-sellers",
+        "lesson-the-marketplace-and-colours__foods__بيضة__بيض__baydah__egg-eggs",
+        "lesson-the-marketplace-and-colours__foods__سمكة__سمك__samakah__fish",
+        "lesson-the-marketplace-and-colours__foods__لحم__لحوم__lahm__meat-meats",
+        "lesson-the-marketplace-and-colours__foods__دجاجة__دجاج__dajajah__chicken-chickens",
+        "lesson-the-marketplace-and-colours__foods__كرنبة__كرانب__karnabah__cabbage-cabbages",
+        "lesson-the-marketplace-and-colours__foods__بطاطسة__بطاطس__batatisah__potato-potatoes",
+        "lesson-the-marketplace-and-colours__foods__جزرة__جزر__jazarah__carrot-carrots",
+        "lesson-the-marketplace-and-colours__foods__خيارة__خيار__khiyarah__cucumber-cucumbers",
+        "lesson-the-marketplace-and-colours__foods__قطعة-جبن__قطع-جبن__qitat-jubn__piece-of-cheese-pieces-of-cheese",
+        "lesson-the-marketplace-and-colours__foods__خبزة__خبز__khubzah__loaf-of-bread-bread",
+        "lesson-the-marketplace-and-colours__foods__زبادي__زباديات__zabadiyy__yogurt-yogurts",
+        "lesson-the-marketplace-and-colours__foods__لبن__ا-لبان__laban__milk-dairy-products",
+        "lesson-the-marketplace-and-colours__foods__عسل__ا-عسال__asal__honey-honeys",
+        "lesson-the-marketplace-and-colours__foods__فص-ثوم__فصوص-ثوم__fass-thawm__garlic-clove-garlic-cloves",
+        "lesson-the-marketplace-and-colours__foods__بصلة__بصل__basalah__onion-onions",
+        "lesson-the-marketplace-and-colours__foods__زبدة__زبد__zubdah__butter-portion-butter",
+        "lesson-the-marketplace-and-colours__foods__زيت__زيوت__zayt__oil-oils",
+        "lesson-the-marketplace-and-colours__foods__زيتونة__زيتون__zaytunah__olive-olives",
+        "lesson-the-marketplace-and-colours__foods__خضرة__خضروات__khadrah__vegetable-vegetables",
+        "lesson-the-marketplace-and-colours__foods__تفاحة__تفاح__tuffahah__apple-apples",
+        "lesson-the-marketplace-and-colours__foods__ليمونة__ليمون__laymunah__lemon-lemons",
+        "lesson-the-marketplace-and-colours__foods__ذرة__ذرات__dhurah__corn-grains-of-corn",
+        "lesson-the-marketplace-and-colours__foods__حبة-ا-رز__ا-رز__habbat-aruzz__grain-of-rice-rice",
+        "lesson-the-marketplace-and-colours__foods__كوب-شاي__ا-كواب-شاي__kub-shay__cup-of-tea-cups-of-tea",
+        "lesson-the-marketplace-and-colours__foods__حبة-سكر__حبات-سكر__habbat-sukkar__sugar-cube-sugar-cubes",
+        "lesson-the-marketplace-and-colours__foods__حبة-ملح__حبات-ملح__habbat-milh__grain-of-salt-grains-of-salt",
+        "lesson-the-marketplace-and-colours__foods__موزة__موز__mawzah__banana-bananas",
+        "lesson-the-marketplace-and-colours__foods__حبة-فاصوليا__فاصوليا__habbat-fasuliya__bean-beans",
+        "lesson-the-marketplace-and-colours__foods__حبة-طماطم__طماطم__habbat-tamatim__tomato-tomatoes",
+        "lesson-the-marketplace-and-colours__foods__حبة-عنب__عنب__habbat-inab__grape-grapes",
+        "lesson-the-marketplace-and-colours__foods__بطيخة__بطيخ__bittikhah__watermelon-watermelons",
+        "lesson-the-marketplace-and-colours__foods__حبة-بازلاء__بازلاء__habbat-bazila__pea-peas",
+        "lesson-the-marketplace-and-colours__foods__رمانة__رمان__rummanah__pomegranate-pomegranates",
+        "lesson-the-marketplace-and-colours__foods__تمرة__تمر__tamrah__date-fruit-dates",
+        "lesson-the-marketplace-and-colours__clothing__ملبس__ملابس__malbas__clothing-item-clothes",
+        "lesson-the-marketplace-and-colours__clothing__حزام__ا-حزمة__hizam__belt-belts",
+        "lesson-the-marketplace-and-colours__clothing__معطف__معاطف__mitaf__coat-coats",
+        "lesson-the-marketplace-and-colours__clothing__سروال__سراويل__sirwal__trousers",
+        "lesson-the-marketplace-and-colours__clothing__قميص__قمص__qamis__shirt-shirts",
+        "lesson-the-marketplace-and-colours__household-cleaning__ممسحة__مماسح__mimsahah__mop-mops",
+        "lesson-the-marketplace-and-colours__household-cleaning__جاروف__جواريف__jaruf__dustpan-dustpans",
+        "lesson-the-marketplace-and-colours__household-cleaning__دلو__دلاء__dalw__bucket-buckets",
+        "lesson-the-marketplace-and-colours__household-cleaning__ا-داة-نظافة__ا-دوات-نظافة__adat-nazafah__cleaning-tool-cleaning-tools",
+        "lesson-the-marketplace-and-colours__hygiene__معجون-حلاقة__معاجين-حلاقة__shaving-cream-shaving-creams",
+        "lesson-the-marketplace-and-colours__hygiene__معجون-ا-سنان__معاجين-ا-سنان__toothpaste-toothpastes",
+        "lesson-the-marketplace-and-colours__hygiene__مسحوق-غسيل__مساحيق-غسيل__washing-powder-washing-powders",
+        "lesson-the-marketplace-and-colours__hygiene__فرشاة-ا-سنان__فرش-ا-سنان__toothbrush-toothbrushes",
+        "lesson-the-marketplace-and-colours__hygiene__صابونة__صابون__sabunah__soap-bar-soap",
+        "lesson-the-marketplace-and-colours__general-objects__ميزان__موازين__mizan__scale-scales",
+        "lesson-the-marketplace-and-colours__general-objects__ا-داة-مكتبية__ا-دوات-مكتبية__stationery-item-stationery",
+        "lesson-the-marketplace-and-colours__general-objects__نقد__نقود__naqd__money-cash-monies-currencies",
+        "lesson-the-marketplace-and-colours__general-objects__سكين__سكاكين__sikkin__knife-knives",
+        "lesson-the-marketplace-and-colours__general-objects__عود-كبريت__ا-عواد-كبريت__matchstick-matchsticks"
       ],
       "ruleIds": [
-        "lesson-the-marketplace-and-colours__person-groups__vocabulary-general-objects__19",
-        "lesson-the-marketplace-and-colours__person-groups__vocabulary-general-objects__20",
-        "lesson-the-marketplace-and-colours__person-groups__vocabulary-general-objects__21"
+        "lesson-the-marketplace-and-colours__person-groups__vocabulary-colours__19",
+        "lesson-the-marketplace-and-colours__person-groups__vocabulary-colours__20",
+        "lesson-the-marketplace-and-colours__person-groups__vocabulary-colours__21"
       ],
+      "conversationIds": []
+    },
+    {
+      "id": "lesson-colours",
+      "number": "11b",
+      "title": "Colours",
+      "titleArabic": "الأَلْوَانُ",
+      "topicSlugs": [
+        "colours"
+      ],
+      "vocabIds": [
+        "lesson-colours__colours__ا-بيض__بيضاء__abyad-bayda__white",
+        "lesson-colours__colours__ا-سود__سوداء__aswad-sawda__black",
+        "lesson-colours__colours__ا-حمر__حمراء__ahmar-hamra__red",
+        "lesson-colours__colours__ا-خضر__خضراء__akhdar-khadra__green",
+        "lesson-colours__colours__ا-زرق__زرقاء__azraq-zarqa__blue",
+        "lesson-colours__colours__ا-صفر__صفراء__asfar-safra__yellow",
+        "lesson-colours__colours__بني__بنية__bunniyy-bunniyyah__brown",
+        "lesson-colours__colours__برتقالي__برتقالية__burtuqali-burtuqaliyyah__orange",
+        "lesson-colours__colours__وردي__وردية__wardi-wardiyyah__pink",
+        "lesson-colours__colours__بنفسجي__بنفسجية__banafsaji-banafsajiyyah__purple",
+        "lesson-colours__colours__رمادي__رمادية__ramadi-ramadiyyah__grey",
+        "lesson-colours__colours__ذهبي__ذهبية__dhahabi-dhahabiyyah__golden",
+        "lesson-colours__colours__فضي__فضية__fiddi-fiddiyyah__silver",
+        "lesson-colours__colours__كحلي__كحلية__kuhli-kuhliyyah__navy-blue",
+        "lesson-colours__colours__سماوي__سماوية__samawi-samawiyyah__sky-blue",
+        "lesson-colours__singular-near",
+        "lesson-colours__singular-far",
+        "lesson-colours__dual-near",
+        "lesson-colours__dual-far",
+        "lesson-colours__plural-near",
+        "lesson-colours__plural-far"
+      ],
+      "ruleIds": [],
       "conversationIds": []
     }
   ],
@@ -765,15 +700,28 @@
       "notes": []
     },
     {
-      "slug": "the-marketplace-and-colours",
-      "name": "The Marketplace and Colours",
-      "nameArabic": "السُّوقُ التِّجَارِيُّ وَالأَلْوَانُ",
+      "slug": "the-marketplace",
+      "name": "The Marketplace",
+      "nameArabic": "السُّوقُ التِّجَارِيُّ",
       "order": 10,
       "lessonIds": [
         "lesson-the-marketplace-and-colours"
       ],
-      "vocabCount": 158,
+      "vocabCount": 59,
       "ruleCount": 3,
+      "conversationCount": 0,
+      "notes": []
+    },
+    {
+      "slug": "colours",
+      "name": "Colours",
+      "nameArabic": "الأَلْوَانُ",
+      "order": 10.1,
+      "lessonIds": [
+        "lesson-colours"
+      ],
+      "vocabCount": 21,
+      "ruleCount": 0,
       "conversationCount": 0,
       "notes": []
     }
@@ -5446,2053 +5394,1034 @@
       "lessonId": "lesson-nouns-in-the-classroom"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__professions__جزار__jazzar__butcher",
-      "arabic": "جَزَّار",
-      "arabicFolded": "جزار",
+      "id": "lesson-the-marketplace-and-colours__professions__جزار__جزارون__jazzar__butcher-butchers",
+      "arabic": "جَزَّار / جَزَّارُون",
+      "arabicFolded": "جزار / جزارون",
       "pronunciation": "jazzār",
-      "english": "butcher",
+      "english": "butcher / butchers",
       "category": "Professions",
       "isExtra": false,
       "topicSlugs": [
-        "the-marketplace-and-colours"
+        "the-marketplace"
       ],
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__professions__جزارون__jazzar-plural__butchers",
-      "arabic": "جَزَّارُون",
-      "arabicFolded": "جزارون",
-      "pronunciation": "jazzār plural",
-      "english": "butchers",
-      "category": "Professions",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-marketplace-and-colours"
-      ],
-      "lessonId": "lesson-the-marketplace-and-colours"
-    },
-    {
-      "id": "lesson-the-marketplace-and-colours__professions__محاسب__muhasib__accountant",
-      "arabic": "مُحَاسِب",
-      "arabicFolded": "محاسب",
+      "id": "lesson-the-marketplace-and-colours__professions__محاسب__محاسبون__muhasib__accountant-accountants",
+      "arabic": "مُحَاسِب / مُحَاسِبُون",
+      "arabicFolded": "محاسب / محاسبون",
       "pronunciation": "muḥāsib",
-      "english": "accountant",
+      "english": "accountant / accountants",
       "category": "Professions",
       "isExtra": false,
       "topicSlugs": [
-        "the-marketplace-and-colours"
+        "the-marketplace"
       ],
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__professions__محاسبون__muhasib-plural__accountants",
-      "arabic": "مُحَاسِبُون",
-      "arabicFolded": "محاسبون",
-      "pronunciation": "muḥāsib plural",
-      "english": "accountants",
-      "category": "Professions",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-marketplace-and-colours"
-      ],
-      "lessonId": "lesson-the-marketplace-and-colours"
-    },
-    {
-      "id": "lesson-the-marketplace-and-colours__professions__باي-ع__bai__seller",
-      "arabic": "بَائِع",
-      "arabicFolded": "بائع",
+      "id": "lesson-the-marketplace-and-colours__professions__باي-ع__باي-عون__bai__seller-sellers",
+      "arabic": "بَائِع / بَائِعُون",
+      "arabicFolded": "بائع / بائعون",
       "pronunciation": "bā’iʿ",
-      "english": "seller",
+      "english": "seller / sellers",
       "category": "Professions",
       "isExtra": false,
       "topicSlugs": [
-        "the-marketplace-and-colours"
+        "the-marketplace"
       ],
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__professions__باي-عون__bai-plural__sellers",
-      "arabic": "بَائِعُون",
-      "arabicFolded": "بائعون",
-      "pronunciation": "bā’iʿ plural",
-      "english": "sellers",
-      "category": "Professions",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-marketplace-and-colours"
-      ],
-      "lessonId": "lesson-the-marketplace-and-colours"
-    },
-    {
-      "id": "lesson-the-marketplace-and-colours__professions__مشتري__mushtari__customer-buyer",
-      "arabic": "مُشْتَرِي",
-      "arabicFolded": "مشتري",
+      "id": "lesson-the-marketplace-and-colours__professions__مشتري__مشترون__mushtari__customer-buyer-customers-buyers",
+      "arabic": "مُشْتَرِي / مُشْتَرُون",
+      "arabicFolded": "مشتري / مشترون",
       "pronunciation": "mushtarī",
-      "english": "customer / buyer",
+      "english": "customer / buyer / customers / buyers",
       "category": "Professions",
       "isExtra": false,
       "topicSlugs": [
-        "the-marketplace-and-colours"
+        "the-marketplace"
       ],
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__professions__مشترون__mushtari-plural__customers-buyers",
-      "arabic": "مُشْتَرُون",
-      "arabicFolded": "مشترون",
-      "pronunciation": "mushtarī plural",
-      "english": "customers / buyers",
-      "category": "Professions",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-marketplace-and-colours"
-      ],
-      "lessonId": "lesson-the-marketplace-and-colours"
-    },
-    {
-      "id": "lesson-the-marketplace-and-colours__professions__خضري__khudariyy__greengrocer",
-      "arabic": "خُضَرِيّ",
-      "arabicFolded": "خضري",
+      "id": "lesson-the-marketplace-and-colours__professions__خضري__خضريون__khudariyy__greengrocer-greengrocers",
+      "arabic": "خُضَرِيّ / خُضَرِيُّون",
+      "arabicFolded": "خضري / خضريون",
       "pronunciation": "khuḍariyy",
-      "english": "greengrocer",
+      "english": "greengrocer / greengrocers",
       "category": "Professions",
       "isExtra": false,
       "topicSlugs": [
-        "the-marketplace-and-colours"
+        "the-marketplace"
       ],
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__professions__خضريون__khudariyy-plural__greengrocers",
-      "arabic": "خُضَرِيُّون",
-      "arabicFolded": "خضريون",
-      "pronunciation": "khuḍariyy plural",
-      "english": "greengrocers",
-      "category": "Professions",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-marketplace-and-colours"
-      ],
-      "lessonId": "lesson-the-marketplace-and-colours"
-    },
-    {
-      "id": "lesson-the-marketplace-and-colours__professions__فاكهي__fakihiyy__fruit-seller",
-      "arabic": "فَاكِهِيّ",
-      "arabicFolded": "فاكهي",
+      "id": "lesson-the-marketplace-and-colours__professions__فاكهي__فاكهيون__fakihiyy__fruit-seller-fruit-sellers",
+      "arabic": "فَاكِهِيّ / فَاكِهِيُّون",
+      "arabicFolded": "فاكهي / فاكهيون",
       "pronunciation": "fākihiyy",
-      "english": "fruit seller",
+      "english": "fruit seller / fruit sellers",
       "category": "Professions",
       "isExtra": false,
       "topicSlugs": [
-        "the-marketplace-and-colours"
+        "the-marketplace"
       ],
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__professions__فاكهيون__fakihiyy-plural__fruit-sellers",
-      "arabic": "فَاكِهِيُّون",
-      "arabicFolded": "فاكهيون",
-      "pronunciation": "fākihiyy plural",
-      "english": "fruit sellers",
-      "category": "Professions",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-marketplace-and-colours"
-      ],
-      "lessonId": "lesson-the-marketplace-and-colours"
-    },
-    {
-      "id": "lesson-the-marketplace-and-colours__foods__بيضة__baydah__egg",
-      "arabic": "بَيْضَة",
-      "arabicFolded": "بيضة",
+      "id": "lesson-the-marketplace-and-colours__foods__بيضة__بيض__baydah__egg-eggs",
+      "arabic": "بَيْضَة / بَيْض",
+      "arabicFolded": "بيضة / بيض",
       "pronunciation": "bayḍah",
-      "english": "egg",
+      "english": "egg / eggs",
       "category": "Foods",
       "isExtra": false,
       "topicSlugs": [
-        "the-marketplace-and-colours"
+        "the-marketplace"
       ],
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__foods__بيض__baydah-plural__eggs",
-      "arabic": "بَيْض",
-      "arabicFolded": "بيض",
-      "pronunciation": "bayḍah plural",
-      "english": "eggs",
-      "category": "Foods",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-marketplace-and-colours"
-      ],
-      "lessonId": "lesson-the-marketplace-and-colours"
-    },
-    {
-      "id": "lesson-the-marketplace-and-colours__foods__سمكة__samakah__fish",
-      "arabic": "سَمَكَة",
-      "arabicFolded": "سمكة",
+      "id": "lesson-the-marketplace-and-colours__foods__سمكة__سمك__samakah__fish",
+      "arabic": "سَمَكَة / سَمَك",
+      "arabicFolded": "سمكة / سمك",
       "pronunciation": "samakah",
       "english": "fish",
       "category": "Foods",
       "isExtra": false,
       "topicSlugs": [
-        "the-marketplace-and-colours"
+        "the-marketplace"
       ],
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__foods__سمك__samakah-plural__fish",
-      "arabic": "سَمَك",
-      "arabicFolded": "سمك",
-      "pronunciation": "samakah plural",
-      "english": "fish",
-      "category": "Foods",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-marketplace-and-colours"
-      ],
-      "lessonId": "lesson-the-marketplace-and-colours"
-    },
-    {
-      "id": "lesson-the-marketplace-and-colours__foods__لحم__lahm__meat",
-      "arabic": "لَحْم",
-      "arabicFolded": "لحم",
+      "id": "lesson-the-marketplace-and-colours__foods__لحم__لحوم__lahm__meat-meats",
+      "arabic": "لَحْم / لُحُوم",
+      "arabicFolded": "لحم / لحوم",
       "pronunciation": "laḥm",
-      "english": "meat",
+      "english": "meat / meats",
       "category": "Foods",
       "isExtra": false,
       "topicSlugs": [
-        "the-marketplace-and-colours"
+        "the-marketplace"
       ],
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__foods__لحوم__lahm-plural__meats",
-      "arabic": "لُحُوم",
-      "arabicFolded": "لحوم",
-      "pronunciation": "laḥm plural",
-      "english": "meats",
-      "category": "Foods",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-marketplace-and-colours"
-      ],
-      "lessonId": "lesson-the-marketplace-and-colours"
-    },
-    {
-      "id": "lesson-the-marketplace-and-colours__foods__دجاجة__dajajah__chicken",
-      "arabic": "دَجَاجَة",
-      "arabicFolded": "دجاجة",
+      "id": "lesson-the-marketplace-and-colours__foods__دجاجة__دجاج__dajajah__chicken-chickens",
+      "arabic": "دَجَاجَة / دَجَاج",
+      "arabicFolded": "دجاجة / دجاج",
       "pronunciation": "dajājah",
-      "english": "chicken",
+      "english": "chicken / chickens",
       "category": "Foods",
       "isExtra": false,
       "topicSlugs": [
-        "the-marketplace-and-colours"
+        "the-marketplace"
       ],
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__foods__دجاج__dajajah-plural__chickens",
-      "arabic": "دَجَاج",
-      "arabicFolded": "دجاج",
-      "pronunciation": "dajājah plural",
-      "english": "chickens",
-      "category": "Foods",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-marketplace-and-colours"
-      ],
-      "lessonId": "lesson-the-marketplace-and-colours"
-    },
-    {
-      "id": "lesson-the-marketplace-and-colours__foods__كرنبة__karnabah__cabbage",
-      "arabic": "كَرْنَبَة",
-      "arabicFolded": "كرنبة",
+      "id": "lesson-the-marketplace-and-colours__foods__كرنبة__كرانب__karnabah__cabbage-cabbages",
+      "arabic": "كَرْنَبَة / كَرَانِب",
+      "arabicFolded": "كرنبة / كرانب",
       "pronunciation": "karnabah",
-      "english": "cabbage",
+      "english": "cabbage / cabbages",
       "category": "Foods",
       "isExtra": false,
       "topicSlugs": [
-        "the-marketplace-and-colours"
+        "the-marketplace"
       ],
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__foods__كرانب__karnabah-plural__cabbages",
-      "arabic": "كَرَانِب",
-      "arabicFolded": "كرانب",
-      "pronunciation": "karnabah plural",
-      "english": "cabbages",
-      "category": "Foods",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-marketplace-and-colours"
-      ],
-      "lessonId": "lesson-the-marketplace-and-colours"
-    },
-    {
-      "id": "lesson-the-marketplace-and-colours__foods__بطاطسة__batatisah__potato",
-      "arabic": "بَطَاطِسَة",
-      "arabicFolded": "بطاطسة",
+      "id": "lesson-the-marketplace-and-colours__foods__بطاطسة__بطاطس__batatisah__potato-potatoes",
+      "arabic": "بَطَاطِسَة / بَطَاطِس",
+      "arabicFolded": "بطاطسة / بطاطس",
       "pronunciation": "baṭāṭisah",
-      "english": "potato",
+      "english": "potato / potatoes",
       "category": "Foods",
       "isExtra": false,
       "topicSlugs": [
-        "the-marketplace-and-colours"
+        "the-marketplace"
       ],
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__foods__بطاطس__batatisah-plural__potatoes",
-      "arabic": "بَطَاطِس",
-      "arabicFolded": "بطاطس",
-      "pronunciation": "baṭāṭisah plural",
-      "english": "potatoes",
-      "category": "Foods",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-marketplace-and-colours"
-      ],
-      "lessonId": "lesson-the-marketplace-and-colours"
-    },
-    {
-      "id": "lesson-the-marketplace-and-colours__foods__جزرة__jazarah__carrot",
-      "arabic": "جَزَرَة",
-      "arabicFolded": "جزرة",
+      "id": "lesson-the-marketplace-and-colours__foods__جزرة__جزر__jazarah__carrot-carrots",
+      "arabic": "جَزَرَة / جَزَر",
+      "arabicFolded": "جزرة / جزر",
       "pronunciation": "jazarah",
-      "english": "carrot",
+      "english": "carrot / carrots",
       "category": "Foods",
       "isExtra": false,
       "topicSlugs": [
-        "the-marketplace-and-colours"
+        "the-marketplace"
       ],
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__foods__جزر__jazarah-plural__carrots",
-      "arabic": "جَزَر",
-      "arabicFolded": "جزر",
-      "pronunciation": "jazarah plural",
-      "english": "carrots",
-      "category": "Foods",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-marketplace-and-colours"
-      ],
-      "lessonId": "lesson-the-marketplace-and-colours"
-    },
-    {
-      "id": "lesson-the-marketplace-and-colours__foods__خيارة__khiyarah__cucumber",
-      "arabic": "خِيَارَة",
-      "arabicFolded": "خيارة",
+      "id": "lesson-the-marketplace-and-colours__foods__خيارة__خيار__khiyarah__cucumber-cucumbers",
+      "arabic": "خِيَارَة / خِيَار",
+      "arabicFolded": "خيارة / خيار",
       "pronunciation": "khiyārah",
-      "english": "cucumber",
+      "english": "cucumber / cucumbers",
       "category": "Foods",
       "isExtra": false,
       "topicSlugs": [
-        "the-marketplace-and-colours"
+        "the-marketplace"
       ],
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__foods__خيار__khiyarah-plural__cucumbers",
-      "arabic": "خِيَار",
-      "arabicFolded": "خيار",
-      "pronunciation": "khiyārah plural",
-      "english": "cucumbers",
-      "category": "Foods",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-marketplace-and-colours"
-      ],
-      "lessonId": "lesson-the-marketplace-and-colours"
-    },
-    {
-      "id": "lesson-the-marketplace-and-colours__foods__قطعة-جبن__qitat-jubn__piece-of-cheese",
-      "arabic": "قِطْعَة جُبْن",
-      "arabicFolded": "قطعة جبن",
+      "id": "lesson-the-marketplace-and-colours__foods__قطعة-جبن__قطع-جبن__qitat-jubn__piece-of-cheese-pieces-of-cheese",
+      "arabic": "قِطْعَة جُبْن / قِطَع جُبْن",
+      "arabicFolded": "قطعة جبن / قطع جبن",
       "pronunciation": "qiṭʿat jubn",
-      "english": "piece of cheese",
+      "english": "piece of cheese / pieces of cheese",
       "category": "Foods",
       "isExtra": false,
       "topicSlugs": [
-        "the-marketplace-and-colours"
+        "the-marketplace"
       ],
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__foods__قطع-جبن__qitat-jubn-plural__pieces-of-cheese",
-      "arabic": "قِطَع جُبْن",
-      "arabicFolded": "قطع جبن",
-      "pronunciation": "qiṭʿat jubn plural",
-      "english": "pieces of cheese",
-      "category": "Foods",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-marketplace-and-colours"
-      ],
-      "lessonId": "lesson-the-marketplace-and-colours"
-    },
-    {
-      "id": "lesson-the-marketplace-and-colours__foods__خبزة__khubzah__loaf-of-bread",
-      "arabic": "خُبْزَة",
-      "arabicFolded": "خبزة",
+      "id": "lesson-the-marketplace-and-colours__foods__خبزة__خبز__khubzah__loaf-of-bread-bread",
+      "arabic": "خُبْزَة / خُبْز",
+      "arabicFolded": "خبزة / خبز",
       "pronunciation": "khubzah",
-      "english": "loaf of bread",
+      "english": "loaf of bread / bread",
       "category": "Foods",
       "isExtra": false,
       "topicSlugs": [
-        "the-marketplace-and-colours"
+        "the-marketplace"
       ],
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__foods__خبز__khubzah-plural__bread",
-      "arabic": "خُبْز",
-      "arabicFolded": "خبز",
-      "pronunciation": "khubzah plural",
-      "english": "bread",
-      "category": "Foods",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-marketplace-and-colours"
-      ],
-      "lessonId": "lesson-the-marketplace-and-colours"
-    },
-    {
-      "id": "lesson-the-marketplace-and-colours__foods__زبادي__zabadiyy__yogurt",
-      "arabic": "زَبَادِيّ",
-      "arabicFolded": "زبادي",
+      "id": "lesson-the-marketplace-and-colours__foods__زبادي__زباديات__zabadiyy__yogurt-yogurts",
+      "arabic": "زَبَادِيّ / زَبَادِيّات",
+      "arabicFolded": "زبادي / زباديات",
       "pronunciation": "zabādiyy",
-      "english": "yogurt",
+      "english": "yogurt / yogurts",
       "category": "Foods",
       "isExtra": false,
       "topicSlugs": [
-        "the-marketplace-and-colours"
+        "the-marketplace"
       ],
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__foods__زباديات__zabadiyy-plural__yogurts",
-      "arabic": "زَبَادِيّات",
-      "arabicFolded": "زباديات",
-      "pronunciation": "zabādiyy plural",
-      "english": "yogurts",
-      "category": "Foods",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-marketplace-and-colours"
-      ],
-      "lessonId": "lesson-the-marketplace-and-colours"
-    },
-    {
-      "id": "lesson-the-marketplace-and-colours__foods__لبن__laban__milk",
-      "arabic": "لَبَن",
-      "arabicFolded": "لبن",
+      "id": "lesson-the-marketplace-and-colours__foods__لبن__ا-لبان__laban__milk-dairy-products",
+      "arabic": "لَبَن / أَلْبَان",
+      "arabicFolded": "لبن / ألبان",
       "pronunciation": "laban",
-      "english": "milk",
+      "english": "milk / dairy products",
       "category": "Foods",
       "isExtra": false,
       "topicSlugs": [
-        "the-marketplace-and-colours"
+        "the-marketplace"
       ],
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__foods__ا-لبان__laban-plural__dairy-products",
-      "arabic": "أَلْبَان",
-      "arabicFolded": "ألبان",
-      "pronunciation": "laban plural",
-      "english": "dairy products",
-      "category": "Foods",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-marketplace-and-colours"
-      ],
-      "lessonId": "lesson-the-marketplace-and-colours"
-    },
-    {
-      "id": "lesson-the-marketplace-and-colours__foods__عسل__asal__honey",
-      "arabic": "عَسَل",
-      "arabicFolded": "عسل",
+      "id": "lesson-the-marketplace-and-colours__foods__عسل__ا-عسال__asal__honey-honeys",
+      "arabic": "عَسَل / أَعْسَال",
+      "arabicFolded": "عسل / أعسال",
       "pronunciation": "ʿasal",
-      "english": "honey",
+      "english": "honey / honeys",
       "category": "Foods",
       "isExtra": false,
       "topicSlugs": [
-        "the-marketplace-and-colours"
+        "the-marketplace"
       ],
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__foods__ا-عسال__asal-plural__honeys",
-      "arabic": "أَعْسَال",
-      "arabicFolded": "أعسال",
-      "pronunciation": "ʿasal plural",
-      "english": "honeys",
-      "category": "Foods",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-marketplace-and-colours"
-      ],
-      "lessonId": "lesson-the-marketplace-and-colours"
-    },
-    {
-      "id": "lesson-the-marketplace-and-colours__foods__فص-ثوم__fass-thawm__garlic-clove",
-      "arabic": "فَصّ ثَوْم",
-      "arabicFolded": "فص ثوم",
+      "id": "lesson-the-marketplace-and-colours__foods__فص-ثوم__فصوص-ثوم__fass-thawm__garlic-clove-garlic-cloves",
+      "arabic": "فَصّ ثَوْم / فُصُوص ثَوْم",
+      "arabicFolded": "فص ثوم / فصوص ثوم",
       "pronunciation": "faṣṣ thawm",
-      "english": "garlic clove",
+      "english": "garlic clove / garlic cloves",
       "category": "Foods",
       "isExtra": false,
       "topicSlugs": [
-        "the-marketplace-and-colours"
+        "the-marketplace"
       ],
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__foods__فصوص-ثوم__fass-thawm-plural__garlic-cloves",
-      "arabic": "فُصُوص ثَوْم",
-      "arabicFolded": "فصوص ثوم",
-      "pronunciation": "faṣṣ thawm plural",
-      "english": "garlic cloves",
-      "category": "Foods",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-marketplace-and-colours"
-      ],
-      "lessonId": "lesson-the-marketplace-and-colours"
-    },
-    {
-      "id": "lesson-the-marketplace-and-colours__foods__بصلة__basalah__onion",
-      "arabic": "بَصَلَة",
-      "arabicFolded": "بصلة",
+      "id": "lesson-the-marketplace-and-colours__foods__بصلة__بصل__basalah__onion-onions",
+      "arabic": "بَصَلَة / بَصَل",
+      "arabicFolded": "بصلة / بصل",
       "pronunciation": "baṣalah",
-      "english": "onion",
+      "english": "onion / onions",
       "category": "Foods",
       "isExtra": false,
       "topicSlugs": [
-        "the-marketplace-and-colours"
+        "the-marketplace"
       ],
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__foods__بصل__basalah-plural__onions",
-      "arabic": "بَصَل",
-      "arabicFolded": "بصل",
-      "pronunciation": "baṣalah plural",
-      "english": "onions",
-      "category": "Foods",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-marketplace-and-colours"
-      ],
-      "lessonId": "lesson-the-marketplace-and-colours"
-    },
-    {
-      "id": "lesson-the-marketplace-and-colours__foods__زبدة__zubdah__butter-portion",
-      "arabic": "زُبْدَة",
-      "arabicFolded": "زبدة",
+      "id": "lesson-the-marketplace-and-colours__foods__زبدة__زبد__zubdah__butter-portion-butter",
+      "arabic": "زُبْدَة / زُبْد",
+      "arabicFolded": "زبدة / زبد",
       "pronunciation": "zubdah",
-      "english": "butter portion",
+      "english": "butter portion / butter",
       "category": "Foods",
       "isExtra": false,
       "topicSlugs": [
-        "the-marketplace-and-colours"
+        "the-marketplace"
       ],
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__foods__زبد__zubdah-plural__butter",
-      "arabic": "زُبْد",
-      "arabicFolded": "زبد",
-      "pronunciation": "zubdah plural",
-      "english": "butter",
-      "category": "Foods",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-marketplace-and-colours"
-      ],
-      "lessonId": "lesson-the-marketplace-and-colours"
-    },
-    {
-      "id": "lesson-the-marketplace-and-colours__foods__زيت__zayt__oil",
-      "arabic": "زَيْت",
-      "arabicFolded": "زيت",
+      "id": "lesson-the-marketplace-and-colours__foods__زيت__زيوت__zayt__oil-oils",
+      "arabic": "زَيْت / زُيُوت",
+      "arabicFolded": "زيت / زيوت",
       "pronunciation": "zayt",
-      "english": "oil",
+      "english": "oil / oils",
       "category": "Foods",
       "isExtra": false,
       "topicSlugs": [
-        "the-marketplace-and-colours"
+        "the-marketplace"
       ],
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__foods__زيوت__zayt-plural__oils",
-      "arabic": "زُيُوت",
-      "arabicFolded": "زيوت",
-      "pronunciation": "zayt plural",
-      "english": "oils",
-      "category": "Foods",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-marketplace-and-colours"
-      ],
-      "lessonId": "lesson-the-marketplace-and-colours"
-    },
-    {
-      "id": "lesson-the-marketplace-and-colours__foods__زيتونة__zaytunah__olive",
-      "arabic": "زَيْتُونَة",
-      "arabicFolded": "زيتونة",
+      "id": "lesson-the-marketplace-and-colours__foods__زيتونة__زيتون__zaytunah__olive-olives",
+      "arabic": "زَيْتُونَة / زَيْتُون",
+      "arabicFolded": "زيتونة / زيتون",
       "pronunciation": "zaytūnah",
-      "english": "olive",
+      "english": "olive / olives",
       "category": "Foods",
       "isExtra": false,
       "topicSlugs": [
-        "the-marketplace-and-colours"
+        "the-marketplace"
       ],
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__foods__زيتون__zaytunah-plural__olives",
-      "arabic": "زَيْتُون",
-      "arabicFolded": "زيتون",
-      "pronunciation": "zaytūnah plural",
-      "english": "olives",
-      "category": "Foods",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-marketplace-and-colours"
-      ],
-      "lessonId": "lesson-the-marketplace-and-colours"
-    },
-    {
-      "id": "lesson-the-marketplace-and-colours__foods__خضرة__khadrah__vegetable",
-      "arabic": "خَضْرَة",
-      "arabicFolded": "خضرة",
+      "id": "lesson-the-marketplace-and-colours__foods__خضرة__خضروات__khadrah__vegetable-vegetables",
+      "arabic": "خَضْرَة / خَضْرَوَات",
+      "arabicFolded": "خضرة / خضروات",
       "pronunciation": "khaḍrah",
-      "english": "vegetable",
+      "english": "vegetable / vegetables",
       "category": "Foods",
       "isExtra": false,
       "topicSlugs": [
-        "the-marketplace-and-colours"
+        "the-marketplace"
       ],
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__foods__خضروات__khadrah-plural__vegetables",
-      "arabic": "خَضْرَوَات",
-      "arabicFolded": "خضروات",
-      "pronunciation": "khaḍrah plural",
-      "english": "vegetables",
-      "category": "Foods",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-marketplace-and-colours"
-      ],
-      "lessonId": "lesson-the-marketplace-and-colours"
-    },
-    {
-      "id": "lesson-the-marketplace-and-colours__foods__تفاحة__tuffahah__apple",
-      "arabic": "تُفَّاحَة",
-      "arabicFolded": "تفاحة",
+      "id": "lesson-the-marketplace-and-colours__foods__تفاحة__تفاح__tuffahah__apple-apples",
+      "arabic": "تُفَّاحَة / تُفَّاح",
+      "arabicFolded": "تفاحة / تفاح",
       "pronunciation": "tuffāḥah",
-      "english": "apple",
+      "english": "apple / apples",
       "category": "Foods",
       "isExtra": false,
       "topicSlugs": [
-        "the-marketplace-and-colours"
+        "the-marketplace"
       ],
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__foods__تفاح__tuffahah-plural__apples",
-      "arabic": "تُفَّاح",
-      "arabicFolded": "تفاح",
-      "pronunciation": "tuffāḥah plural",
-      "english": "apples",
-      "category": "Foods",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-marketplace-and-colours"
-      ],
-      "lessonId": "lesson-the-marketplace-and-colours"
-    },
-    {
-      "id": "lesson-the-marketplace-and-colours__foods__ليمونة__laymunah__lemon",
-      "arabic": "لَيْمُونَة",
-      "arabicFolded": "ليمونة",
+      "id": "lesson-the-marketplace-and-colours__foods__ليمونة__ليمون__laymunah__lemon-lemons",
+      "arabic": "لَيْمُونَة / لَيْمُون",
+      "arabicFolded": "ليمونة / ليمون",
       "pronunciation": "laymūnah",
-      "english": "lemon",
+      "english": "lemon / lemons",
       "category": "Foods",
       "isExtra": false,
       "topicSlugs": [
-        "the-marketplace-and-colours"
+        "the-marketplace"
       ],
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__foods__ليمون__laymunah-plural__lemons",
-      "arabic": "لَيْمُون",
-      "arabicFolded": "ليمون",
-      "pronunciation": "laymūnah plural",
-      "english": "lemons",
-      "category": "Foods",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-marketplace-and-colours"
-      ],
-      "lessonId": "lesson-the-marketplace-and-colours"
-    },
-    {
-      "id": "lesson-the-marketplace-and-colours__foods__ذرة__dhurah__corn",
-      "arabic": "ذُرَة",
-      "arabicFolded": "ذرة",
+      "id": "lesson-the-marketplace-and-colours__foods__ذرة__ذرات__dhurah__corn-grains-of-corn",
+      "arabic": "ذُرَة / ذُرَات",
+      "arabicFolded": "ذرة / ذرات",
       "pronunciation": "dhurah",
-      "english": "corn",
+      "english": "corn / grains of corn",
       "category": "Foods",
       "isExtra": false,
       "topicSlugs": [
-        "the-marketplace-and-colours"
+        "the-marketplace"
       ],
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__foods__ذرات__dhurah-plural__grains-of-corn",
-      "arabic": "ذُرَات",
-      "arabicFolded": "ذرات",
-      "pronunciation": "dhurah plural",
-      "english": "grains of corn",
-      "category": "Foods",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-marketplace-and-colours"
-      ],
-      "lessonId": "lesson-the-marketplace-and-colours"
-    },
-    {
-      "id": "lesson-the-marketplace-and-colours__foods__حبة-ا-رز__habbat-aruzz__grain-of-rice",
-      "arabic": "حَبَّة أَرُز",
-      "arabicFolded": "حبة أرز",
+      "id": "lesson-the-marketplace-and-colours__foods__حبة-ا-رز__ا-رز__habbat-aruzz__grain-of-rice-rice",
+      "arabic": "حَبَّة أَرُز / أَرُز",
+      "arabicFolded": "حبة أرز / أرز",
       "pronunciation": "ḥabbat aruzz",
-      "english": "grain of rice",
+      "english": "grain of rice / rice",
       "category": "Foods",
       "isExtra": false,
       "topicSlugs": [
-        "the-marketplace-and-colours"
+        "the-marketplace"
       ],
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__foods__ا-رز__habbat-aruzz-plural__rice",
-      "arabic": "أَرُز",
-      "arabicFolded": "أرز",
-      "pronunciation": "ḥabbat aruzz plural",
-      "english": "rice",
-      "category": "Foods",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-marketplace-and-colours"
-      ],
-      "lessonId": "lesson-the-marketplace-and-colours"
-    },
-    {
-      "id": "lesson-the-marketplace-and-colours__foods__كوب-شاي__kub-shay__cup-of-tea",
-      "arabic": "كُوب شَاي",
-      "arabicFolded": "كوب شاي",
+      "id": "lesson-the-marketplace-and-colours__foods__كوب-شاي__ا-كواب-شاي__kub-shay__cup-of-tea-cups-of-tea",
+      "arabic": "كُوب شَاي / أَكْوَاب شَاي",
+      "arabicFolded": "كوب شاي / أكواب شاي",
       "pronunciation": "kūb shāy",
-      "english": "cup of tea",
+      "english": "cup of tea / cups of tea",
       "category": "Foods",
       "isExtra": false,
       "topicSlugs": [
-        "the-marketplace-and-colours"
+        "the-marketplace"
       ],
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__foods__ا-كواب-شاي__kub-shay-plural__cups-of-tea",
-      "arabic": "أَكْوَاب شَاي",
-      "arabicFolded": "أكواب شاي",
-      "pronunciation": "kūb shāy plural",
-      "english": "cups of tea",
-      "category": "Foods",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-marketplace-and-colours"
-      ],
-      "lessonId": "lesson-the-marketplace-and-colours"
-    },
-    {
-      "id": "lesson-the-marketplace-and-colours__foods__حبة-سكر__habbat-sukkar__sugar-cube",
-      "arabic": "حَبَّة سُكَّر",
-      "arabicFolded": "حبة سكر",
+      "id": "lesson-the-marketplace-and-colours__foods__حبة-سكر__حبات-سكر__habbat-sukkar__sugar-cube-sugar-cubes",
+      "arabic": "حَبَّة سُكَّر / حَبَّات سُكَّر",
+      "arabicFolded": "حبة سكر / حبات سكر",
       "pronunciation": "ḥabbat sukkar",
-      "english": "sugar cube",
+      "english": "sugar cube / sugar cubes",
       "category": "Foods",
       "isExtra": false,
       "topicSlugs": [
-        "the-marketplace-and-colours"
+        "the-marketplace"
       ],
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__foods__حبات-سكر__habbat-sukkar-plural__sugar-cubes",
-      "arabic": "حَبَّات سُكَّر",
-      "arabicFolded": "حبات سكر",
-      "pronunciation": "ḥabbat sukkar plural",
-      "english": "sugar cubes",
-      "category": "Foods",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-marketplace-and-colours"
-      ],
-      "lessonId": "lesson-the-marketplace-and-colours"
-    },
-    {
-      "id": "lesson-the-marketplace-and-colours__foods__حبة-ملح__habbat-milh__grain-of-salt",
-      "arabic": "حَبَّة مِلْح",
-      "arabicFolded": "حبة ملح",
+      "id": "lesson-the-marketplace-and-colours__foods__حبة-ملح__حبات-ملح__habbat-milh__grain-of-salt-grains-of-salt",
+      "arabic": "حَبَّة مِلْح / حَبَّات مِلْح",
+      "arabicFolded": "حبة ملح / حبات ملح",
       "pronunciation": "ḥabbat milḥ",
-      "english": "grain of salt",
+      "english": "grain of salt / grains of salt",
       "category": "Foods",
       "isExtra": false,
       "topicSlugs": [
-        "the-marketplace-and-colours"
+        "the-marketplace"
       ],
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__foods__حبات-ملح__habbat-milh-plural__grains-of-salt",
-      "arabic": "حَبَّات مِلْح",
-      "arabicFolded": "حبات ملح",
-      "pronunciation": "ḥabbat milḥ plural",
-      "english": "grains of salt",
-      "category": "Foods",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-marketplace-and-colours"
-      ],
-      "lessonId": "lesson-the-marketplace-and-colours"
-    },
-    {
-      "id": "lesson-the-marketplace-and-colours__foods__موزة__mawzah__banana",
-      "arabic": "مَوْزَة",
-      "arabicFolded": "موزة",
+      "id": "lesson-the-marketplace-and-colours__foods__موزة__موز__mawzah__banana-bananas",
+      "arabic": "مَوْزَة / مَوْز",
+      "arabicFolded": "موزة / موز",
       "pronunciation": "mawzah",
-      "english": "banana",
+      "english": "banana / bananas",
       "category": "Foods",
       "isExtra": false,
       "topicSlugs": [
-        "the-marketplace-and-colours"
+        "the-marketplace"
       ],
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__foods__موز__mawzah-plural__bananas",
-      "arabic": "مَوْز",
-      "arabicFolded": "موز",
-      "pronunciation": "mawzah plural",
-      "english": "bananas",
-      "category": "Foods",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-marketplace-and-colours"
-      ],
-      "lessonId": "lesson-the-marketplace-and-colours"
-    },
-    {
-      "id": "lesson-the-marketplace-and-colours__foods__حبة-فاصوليا__habbat-fasuliya__bean",
-      "arabic": "حَبَّة فَاصُولِيَا",
-      "arabicFolded": "حبة فاصوليا",
+      "id": "lesson-the-marketplace-and-colours__foods__حبة-فاصوليا__فاصوليا__habbat-fasuliya__bean-beans",
+      "arabic": "حَبَّة فَاصُولِيَا / فَاصُولِيَا",
+      "arabicFolded": "حبة فاصوليا / فاصوليا",
       "pronunciation": "ḥabbat fāṣūliyā",
-      "english": "bean",
+      "english": "bean / beans",
       "category": "Foods",
       "isExtra": false,
       "topicSlugs": [
-        "the-marketplace-and-colours"
+        "the-marketplace"
       ],
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__foods__فاصوليا__habbat-fasuliya-plural__beans",
-      "arabic": "فَاصُولِيَا",
-      "arabicFolded": "فاصوليا",
-      "pronunciation": "ḥabbat fāṣūliyā plural",
-      "english": "beans",
-      "category": "Foods",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-marketplace-and-colours"
-      ],
-      "lessonId": "lesson-the-marketplace-and-colours"
-    },
-    {
-      "id": "lesson-the-marketplace-and-colours__foods__حبة-طماطم__habbat-tamatim__tomato",
-      "arabic": "حَبَّة طَمَاطِم",
-      "arabicFolded": "حبة طماطم",
+      "id": "lesson-the-marketplace-and-colours__foods__حبة-طماطم__طماطم__habbat-tamatim__tomato-tomatoes",
+      "arabic": "حَبَّة طَمَاطِم / طَمَاطِم",
+      "arabicFolded": "حبة طماطم / طماطم",
       "pronunciation": "ḥabbat ṭamāṭim",
-      "english": "tomato",
+      "english": "tomato / tomatoes",
       "category": "Foods",
       "isExtra": false,
       "topicSlugs": [
-        "the-marketplace-and-colours"
+        "the-marketplace"
       ],
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__foods__طماطم__habbat-tamatim-plural__tomatoes",
-      "arabic": "طَمَاطِم",
-      "arabicFolded": "طماطم",
-      "pronunciation": "ḥabbat ṭamāṭim plural",
-      "english": "tomatoes",
-      "category": "Foods",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-marketplace-and-colours"
-      ],
-      "lessonId": "lesson-the-marketplace-and-colours"
-    },
-    {
-      "id": "lesson-the-marketplace-and-colours__foods__حبة-عنب__habbat-inab__grape",
-      "arabic": "حَبَّة عِنَب",
-      "arabicFolded": "حبة عنب",
+      "id": "lesson-the-marketplace-and-colours__foods__حبة-عنب__عنب__habbat-inab__grape-grapes",
+      "arabic": "حَبَّة عِنَب / عِنَب",
+      "arabicFolded": "حبة عنب / عنب",
       "pronunciation": "ḥabbat ʿinab",
-      "english": "grape",
+      "english": "grape / grapes",
       "category": "Foods",
       "isExtra": false,
       "topicSlugs": [
-        "the-marketplace-and-colours"
+        "the-marketplace"
       ],
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__foods__عنب__habbat-inab-plural__grapes",
-      "arabic": "عِنَب",
-      "arabicFolded": "عنب",
-      "pronunciation": "ḥabbat ʿinab plural",
-      "english": "grapes",
-      "category": "Foods",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-marketplace-and-colours"
-      ],
-      "lessonId": "lesson-the-marketplace-and-colours"
-    },
-    {
-      "id": "lesson-the-marketplace-and-colours__foods__بطيخة__bittikhah__watermelon",
-      "arabic": "بِطِّيخَة",
-      "arabicFolded": "بطيخة",
+      "id": "lesson-the-marketplace-and-colours__foods__بطيخة__بطيخ__bittikhah__watermelon-watermelons",
+      "arabic": "بِطِّيخَة / بِطِّيخ",
+      "arabicFolded": "بطيخة / بطيخ",
       "pronunciation": "biṭṭīkhah",
-      "english": "watermelon",
+      "english": "watermelon / watermelons",
       "category": "Foods",
       "isExtra": false,
       "topicSlugs": [
-        "the-marketplace-and-colours"
+        "the-marketplace"
       ],
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__foods__بطيخ__bittikhah-plural__watermelons",
-      "arabic": "بِطِّيخ",
-      "arabicFolded": "بطيخ",
-      "pronunciation": "biṭṭīkhah plural",
-      "english": "watermelons",
-      "category": "Foods",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-marketplace-and-colours"
-      ],
-      "lessonId": "lesson-the-marketplace-and-colours"
-    },
-    {
-      "id": "lesson-the-marketplace-and-colours__foods__حبة-بازلاء__habbat-bazila__pea",
-      "arabic": "حَبَّة بَازِلَّاء",
-      "arabicFolded": "حبة بازلاء",
+      "id": "lesson-the-marketplace-and-colours__foods__حبة-بازلاء__بازلاء__habbat-bazila__pea-peas",
+      "arabic": "حَبَّة بَازِلَّاء / بَازِلَّاء",
+      "arabicFolded": "حبة بازلاء / بازلاء",
       "pronunciation": "ḥabbat bāzilā’",
-      "english": "pea",
+      "english": "pea / peas",
       "category": "Foods",
       "isExtra": false,
       "topicSlugs": [
-        "the-marketplace-and-colours"
+        "the-marketplace"
       ],
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__foods__بازلاء__habbat-bazila-plural__peas",
-      "arabic": "بَازِلَّاء",
-      "arabicFolded": "بازلاء",
-      "pronunciation": "ḥabbat bāzilā’ plural",
-      "english": "peas",
-      "category": "Foods",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-marketplace-and-colours"
-      ],
-      "lessonId": "lesson-the-marketplace-and-colours"
-    },
-    {
-      "id": "lesson-the-marketplace-and-colours__foods__رمانة__rummanah__pomegranate",
-      "arabic": "رُمَّانَة",
-      "arabicFolded": "رمانة",
+      "id": "lesson-the-marketplace-and-colours__foods__رمانة__رمان__rummanah__pomegranate-pomegranates",
+      "arabic": "رُمَّانَة / رُمَّان",
+      "arabicFolded": "رمانة / رمان",
       "pronunciation": "rummānah",
-      "english": "pomegranate",
+      "english": "pomegranate / pomegranates",
       "category": "Foods",
       "isExtra": false,
       "topicSlugs": [
-        "the-marketplace-and-colours"
+        "the-marketplace"
       ],
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__foods__رمان__rummanah-plural__pomegranates",
-      "arabic": "رُمَّان",
-      "arabicFolded": "رمان",
-      "pronunciation": "rummānah plural",
-      "english": "pomegranates",
-      "category": "Foods",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-marketplace-and-colours"
-      ],
-      "lessonId": "lesson-the-marketplace-and-colours"
-    },
-    {
-      "id": "lesson-the-marketplace-and-colours__foods__تمرة__tamrah__date-fruit",
-      "arabic": "تَمْرَة",
-      "arabicFolded": "تمرة",
+      "id": "lesson-the-marketplace-and-colours__foods__تمرة__تمر__tamrah__date-fruit-dates",
+      "arabic": "تَمْرَة / تَمْر",
+      "arabicFolded": "تمرة / تمر",
       "pronunciation": "tamrah",
-      "english": "date fruit",
+      "english": "date fruit / dates",
       "category": "Foods",
       "isExtra": false,
       "topicSlugs": [
-        "the-marketplace-and-colours"
+        "the-marketplace"
       ],
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__foods__تمر__tamrah-plural__dates",
-      "arabic": "تَمْر",
-      "arabicFolded": "تمر",
-      "pronunciation": "tamrah plural",
-      "english": "dates",
-      "category": "Foods",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-marketplace-and-colours"
-      ],
-      "lessonId": "lesson-the-marketplace-and-colours"
-    },
-    {
-      "id": "lesson-the-marketplace-and-colours__clothing__ملبس__malbas__clothing-item",
-      "arabic": "مَلْبَس",
-      "arabicFolded": "ملبس",
+      "id": "lesson-the-marketplace-and-colours__clothing__ملبس__ملابس__malbas__clothing-item-clothes",
+      "arabic": "مَلْبَس / مَلَابِس",
+      "arabicFolded": "ملبس / ملابس",
       "pronunciation": "malbas",
-      "english": "clothing item",
+      "english": "clothing item / clothes",
       "category": "Clothing",
       "isExtra": false,
       "topicSlugs": [
-        "the-marketplace-and-colours"
+        "the-marketplace"
       ],
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__clothing__ملابس__malbas-plural__clothes",
-      "arabic": "مَلَابِس",
-      "arabicFolded": "ملابس",
-      "pronunciation": "malbas plural",
-      "english": "clothes",
-      "category": "Clothing",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-marketplace-and-colours"
-      ],
-      "lessonId": "lesson-the-marketplace-and-colours"
-    },
-    {
-      "id": "lesson-the-marketplace-and-colours__clothing__حزام__hizam__belt",
-      "arabic": "حِزَام",
-      "arabicFolded": "حزام",
+      "id": "lesson-the-marketplace-and-colours__clothing__حزام__ا-حزمة__hizam__belt-belts",
+      "arabic": "حِزَام / أَحْزِمَة",
+      "arabicFolded": "حزام / أحزمة",
       "pronunciation": "ḥizām",
-      "english": "belt",
+      "english": "belt / belts",
       "category": "Clothing",
       "isExtra": false,
       "topicSlugs": [
-        "the-marketplace-and-colours"
+        "the-marketplace"
       ],
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__clothing__ا-حزمة__hizam-plural__belts",
-      "arabic": "أَحْزِمَة",
-      "arabicFolded": "أحزمة",
-      "pronunciation": "ḥizām plural",
-      "english": "belts",
-      "category": "Clothing",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-marketplace-and-colours"
-      ],
-      "lessonId": "lesson-the-marketplace-and-colours"
-    },
-    {
-      "id": "lesson-the-marketplace-and-colours__clothing__معطف__mitaf__coat",
-      "arabic": "مِعْطَف",
-      "arabicFolded": "معطف",
+      "id": "lesson-the-marketplace-and-colours__clothing__معطف__معاطف__mitaf__coat-coats",
+      "arabic": "مِعْطَف / مَعَاطِف",
+      "arabicFolded": "معطف / معاطف",
       "pronunciation": "miʿṭaf",
-      "english": "coat",
+      "english": "coat / coats",
       "category": "Clothing",
       "isExtra": false,
       "topicSlugs": [
-        "the-marketplace-and-colours"
+        "the-marketplace"
       ],
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__clothing__معاطف__mitaf-plural__coats",
-      "arabic": "مَعَاطِف",
-      "arabicFolded": "معاطف",
-      "pronunciation": "miʿṭaf plural",
-      "english": "coats",
-      "category": "Clothing",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-marketplace-and-colours"
-      ],
-      "lessonId": "lesson-the-marketplace-and-colours"
-    },
-    {
-      "id": "lesson-the-marketplace-and-colours__clothing__سروال__sirwal__trousers",
-      "arabic": "سِرْوَال",
-      "arabicFolded": "سروال",
+      "id": "lesson-the-marketplace-and-colours__clothing__سروال__سراويل__sirwal__trousers",
+      "arabic": "سِرْوَال / سَرَاوِيل",
+      "arabicFolded": "سروال / سراويل",
       "pronunciation": "sirwāl",
       "english": "trousers",
       "category": "Clothing",
       "isExtra": false,
       "topicSlugs": [
-        "the-marketplace-and-colours"
+        "the-marketplace"
       ],
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__clothing__سراويل__sirwal-plural__trousers",
-      "arabic": "سَرَاوِيل",
-      "arabicFolded": "سراويل",
-      "pronunciation": "sirwāl plural",
-      "english": "trousers",
-      "category": "Clothing",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-marketplace-and-colours"
-      ],
-      "lessonId": "lesson-the-marketplace-and-colours"
-    },
-    {
-      "id": "lesson-the-marketplace-and-colours__clothing__قميص__qamis__shirt",
-      "arabic": "قَمِيص",
-      "arabicFolded": "قميص",
+      "id": "lesson-the-marketplace-and-colours__clothing__قميص__قمص__qamis__shirt-shirts",
+      "arabic": "قَمِيص / قُمُص",
+      "arabicFolded": "قميص / قمص",
       "pronunciation": "qamīṣ",
-      "english": "shirt",
+      "english": "shirt / shirts",
       "category": "Clothing",
       "isExtra": false,
       "topicSlugs": [
-        "the-marketplace-and-colours"
+        "the-marketplace"
       ],
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__clothing__قمص__qamis-plural__shirts",
-      "arabic": "قُمُص",
-      "arabicFolded": "قمص",
-      "pronunciation": "qamīṣ plural",
-      "english": "shirts",
-      "category": "Clothing",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-marketplace-and-colours"
-      ],
-      "lessonId": "lesson-the-marketplace-and-colours"
-    },
-    {
-      "id": "lesson-the-marketplace-and-colours__household-cleaning__ممسحة__mimsahah__mop",
-      "arabic": "مِمْسَحَة",
-      "arabicFolded": "ممسحة",
+      "id": "lesson-the-marketplace-and-colours__household-cleaning__ممسحة__مماسح__mimsahah__mop-mops",
+      "arabic": "مِمْسَحَة / مَمَاسِح",
+      "arabicFolded": "ممسحة / مماسح",
       "pronunciation": "mimsaḥah",
-      "english": "mop",
+      "english": "mop / mops",
       "category": "Household & Cleaning",
       "isExtra": false,
       "topicSlugs": [
-        "the-marketplace-and-colours"
+        "the-marketplace"
       ],
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__household-cleaning__مماسح__mimsahah-plural__mops",
-      "arabic": "مَمَاسِح",
-      "arabicFolded": "مماسح",
-      "pronunciation": "mimsaḥah plural",
-      "english": "mops",
-      "category": "Household & Cleaning",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-marketplace-and-colours"
-      ],
-      "lessonId": "lesson-the-marketplace-and-colours"
-    },
-    {
-      "id": "lesson-the-marketplace-and-colours__household-cleaning__جاروف__jaruf__dustpan",
-      "arabic": "جَارُوف",
-      "arabicFolded": "جاروف",
+      "id": "lesson-the-marketplace-and-colours__household-cleaning__جاروف__جواريف__jaruf__dustpan-dustpans",
+      "arabic": "جَارُوف / جَوَارِيف",
+      "arabicFolded": "جاروف / جواريف",
       "pronunciation": "jārūf",
-      "english": "dustpan",
+      "english": "dustpan / dustpans",
       "category": "Household & Cleaning",
       "isExtra": false,
       "topicSlugs": [
-        "the-marketplace-and-colours"
+        "the-marketplace"
       ],
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__household-cleaning__جواريف__jaruf-plural__dustpans",
-      "arabic": "جَوَارِيف",
-      "arabicFolded": "جواريف",
-      "pronunciation": "jārūf plural",
-      "english": "dustpans",
-      "category": "Household & Cleaning",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-marketplace-and-colours"
-      ],
-      "lessonId": "lesson-the-marketplace-and-colours"
-    },
-    {
-      "id": "lesson-the-marketplace-and-colours__household-cleaning__دلو__dalw__bucket",
-      "arabic": "دَلْو",
-      "arabicFolded": "دلو",
+      "id": "lesson-the-marketplace-and-colours__household-cleaning__دلو__دلاء__dalw__bucket-buckets",
+      "arabic": "دَلْو / دِلَاء",
+      "arabicFolded": "دلو / دلاء",
       "pronunciation": "dalw",
-      "english": "bucket",
+      "english": "bucket / buckets",
       "category": "Household & Cleaning",
       "isExtra": false,
       "topicSlugs": [
-        "the-marketplace-and-colours"
+        "the-marketplace"
       ],
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__household-cleaning__دلاء__dalw-plural__buckets",
-      "arabic": "دِلَاء",
-      "arabicFolded": "دلاء",
-      "pronunciation": "dalw plural",
-      "english": "buckets",
-      "category": "Household & Cleaning",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-marketplace-and-colours"
-      ],
-      "lessonId": "lesson-the-marketplace-and-colours"
-    },
-    {
-      "id": "lesson-the-marketplace-and-colours__household-cleaning__ا-داة-نظافة__adat-nazafah__cleaning-tool",
-      "arabic": "أَدَاة نَظَافَة",
-      "arabicFolded": "أداة نظافة",
+      "id": "lesson-the-marketplace-and-colours__household-cleaning__ا-داة-نظافة__ا-دوات-نظافة__adat-nazafah__cleaning-tool-cleaning-tools",
+      "arabic": "أَدَاة نَظَافَة / أَدَوَات نَظَافَة",
+      "arabicFolded": "أداة نظافة / أدوات نظافة",
       "pronunciation": "adāt naẓāfah",
-      "english": "cleaning tool",
+      "english": "cleaning tool / cleaning tools",
       "category": "Household & Cleaning",
       "isExtra": false,
       "topicSlugs": [
-        "the-marketplace-and-colours"
+        "the-marketplace"
       ],
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__household-cleaning__ا-دوات-نظافة__adat-nazafah-plural__cleaning-tools",
-      "arabic": "أَدَوَات نَظَافَة",
-      "arabicFolded": "أدوات نظافة",
-      "pronunciation": "adāt naẓāfah plural",
-      "english": "cleaning tools",
-      "category": "Household & Cleaning",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-marketplace-and-colours"
-      ],
-      "lessonId": "lesson-the-marketplace-and-colours"
-    },
-    {
-      "id": "lesson-the-marketplace-and-colours__hygiene__معجون-حلاقة__shaving-cream",
-      "arabic": "مَعْجُون حِلَاقَة",
-      "arabicFolded": "معجون حلاقة",
-      "english": "shaving cream",
+      "id": "lesson-the-marketplace-and-colours__hygiene__معجون-حلاقة__معاجين-حلاقة__shaving-cream-shaving-creams",
+      "arabic": "مَعْجُون حِلَاقَة / مَعَاجِين حِلَاقَة",
+      "arabicFolded": "معجون حلاقة / معاجين حلاقة",
+      "english": "shaving cream / shaving creams",
       "category": "Hygiene",
       "isExtra": false,
       "topicSlugs": [
-        "the-marketplace-and-colours"
+        "the-marketplace"
       ],
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__hygiene__معاجين-حلاقة__shaving-creams",
-      "arabic": "مَعَاجِين حِلَاقَة",
-      "arabicFolded": "معاجين حلاقة",
-      "english": "shaving creams",
+      "id": "lesson-the-marketplace-and-colours__hygiene__معجون-ا-سنان__معاجين-ا-سنان__toothpaste-toothpastes",
+      "arabic": "مَعْجُون أَسْنَان / مَعَاجِين أَسْنَان",
+      "arabicFolded": "معجون أسنان / معاجين أسنان",
+      "english": "toothpaste / toothpastes",
       "category": "Hygiene",
       "isExtra": false,
       "topicSlugs": [
-        "the-marketplace-and-colours"
+        "the-marketplace"
       ],
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__hygiene__معجون-ا-سنان__toothpaste",
-      "arabic": "مَعْجُون أَسْنَان",
-      "arabicFolded": "معجون أسنان",
-      "english": "toothpaste",
+      "id": "lesson-the-marketplace-and-colours__hygiene__مسحوق-غسيل__مساحيق-غسيل__washing-powder-washing-powders",
+      "arabic": "مَسْحُوق غَسِيل / مَسَاحِيق غَسِيل",
+      "arabicFolded": "مسحوق غسيل / مساحيق غسيل",
+      "english": "washing powder / washing powders",
       "category": "Hygiene",
       "isExtra": false,
       "topicSlugs": [
-        "the-marketplace-and-colours"
+        "the-marketplace"
       ],
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__hygiene__معاجين-ا-سنان__toothpastes",
-      "arabic": "مَعَاجِين أَسْنَان",
-      "arabicFolded": "معاجين أسنان",
-      "english": "toothpastes",
+      "id": "lesson-the-marketplace-and-colours__hygiene__فرشاة-ا-سنان__فرش-ا-سنان__toothbrush-toothbrushes",
+      "arabic": "فُرْشَاة أَسْنَان / فُرَش أَسْنَان",
+      "arabicFolded": "فرشاة أسنان / فرش أسنان",
+      "english": "toothbrush / toothbrushes",
       "category": "Hygiene",
       "isExtra": false,
       "topicSlugs": [
-        "the-marketplace-and-colours"
+        "the-marketplace"
       ],
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__hygiene__مسحوق-غسيل__washing-powder",
-      "arabic": "مَسْحُوق غَسِيل",
-      "arabicFolded": "مسحوق غسيل",
-      "english": "washing powder",
-      "category": "Hygiene",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-marketplace-and-colours"
-      ],
-      "lessonId": "lesson-the-marketplace-and-colours"
-    },
-    {
-      "id": "lesson-the-marketplace-and-colours__hygiene__مساحيق-غسيل__washing-powders",
-      "arabic": "مَسَاحِيق غَسِيل",
-      "arabicFolded": "مساحيق غسيل",
-      "english": "washing powders",
-      "category": "Hygiene",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-marketplace-and-colours"
-      ],
-      "lessonId": "lesson-the-marketplace-and-colours"
-    },
-    {
-      "id": "lesson-the-marketplace-and-colours__hygiene__فرشاة-ا-سنان__toothbrush",
-      "arabic": "فُرْشَاة أَسْنَان",
-      "arabicFolded": "فرشاة أسنان",
-      "english": "toothbrush",
-      "category": "Hygiene",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-marketplace-and-colours"
-      ],
-      "lessonId": "lesson-the-marketplace-and-colours"
-    },
-    {
-      "id": "lesson-the-marketplace-and-colours__hygiene__فرش-ا-سنان__toothbrushes",
-      "arabic": "فُرَش أَسْنَان",
-      "arabicFolded": "فرش أسنان",
-      "english": "toothbrushes",
-      "category": "Hygiene",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-marketplace-and-colours"
-      ],
-      "lessonId": "lesson-the-marketplace-and-colours"
-    },
-    {
-      "id": "lesson-the-marketplace-and-colours__hygiene__صابونة__sabunah__soap-bar",
-      "arabic": "صَابُونَة",
-      "arabicFolded": "صابونة",
+      "id": "lesson-the-marketplace-and-colours__hygiene__صابونة__صابون__sabunah__soap-bar-soap",
+      "arabic": "صَابُونَة / صَابُون",
+      "arabicFolded": "صابونة / صابون",
       "pronunciation": "ṣābūnah",
-      "english": "soap bar",
+      "english": "soap bar / soap",
       "category": "Hygiene",
       "isExtra": false,
       "topicSlugs": [
-        "the-marketplace-and-colours"
+        "the-marketplace"
       ],
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__hygiene__صابون__sabunah-plural__soap",
-      "arabic": "صَابُون",
-      "arabicFolded": "صابون",
-      "pronunciation": "ṣābūnah plural",
-      "english": "soap",
-      "category": "Hygiene",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-marketplace-and-colours"
-      ],
-      "lessonId": "lesson-the-marketplace-and-colours"
-    },
-    {
-      "id": "lesson-the-marketplace-and-colours__general-objects__ميزان__mizan__scale",
-      "arabic": "مِيزَان",
-      "arabicFolded": "ميزان",
+      "id": "lesson-the-marketplace-and-colours__general-objects__ميزان__موازين__mizan__scale-scales",
+      "arabic": "مِيزَان / مَوَازِين",
+      "arabicFolded": "ميزان / موازين",
       "pronunciation": "mīzān",
-      "english": "scale",
+      "english": "scale / scales",
       "category": "General Objects",
       "isExtra": false,
       "topicSlugs": [
-        "the-marketplace-and-colours"
+        "the-marketplace"
       ],
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__general-objects__موازين__mizan-plural__scales",
-      "arabic": "مَوَازِين",
-      "arabicFolded": "موازين",
-      "pronunciation": "mīzān plural",
-      "english": "scales",
+      "id": "lesson-the-marketplace-and-colours__general-objects__ا-داة-مكتبية__ا-دوات-مكتبية__stationery-item-stationery",
+      "arabic": "أَدَاة مَكْتَبِيَّة / أَدَوَات مَكْتَبِيَّة",
+      "arabicFolded": "أداة مكتبية / أدوات مكتبية",
+      "english": "stationery item / stationery",
       "category": "General Objects",
       "isExtra": false,
       "topicSlugs": [
-        "the-marketplace-and-colours"
+        "the-marketplace"
       ],
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__general-objects__ا-داة-مكتبية__stationery-item",
-      "arabic": "أَدَاة مَكْتَبِيَّة",
-      "arabicFolded": "أداة مكتبية",
-      "english": "stationery item",
-      "category": "General Objects",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-marketplace-and-colours"
-      ],
-      "lessonId": "lesson-the-marketplace-and-colours"
-    },
-    {
-      "id": "lesson-the-marketplace-and-colours__general-objects__ا-دوات-مكتبية__stationery",
-      "arabic": "أَدَوَات مَكْتَبِيَّة",
-      "arabicFolded": "أدوات مكتبية",
-      "english": "stationery",
-      "category": "General Objects",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-marketplace-and-colours"
-      ],
-      "lessonId": "lesson-the-marketplace-and-colours"
-    },
-    {
-      "id": "lesson-the-marketplace-and-colours__general-objects__نقد__naqd__money-cash",
-      "arabic": "نَقْد",
-      "arabicFolded": "نقد",
+      "id": "lesson-the-marketplace-and-colours__general-objects__نقد__نقود__naqd__money-cash-monies-currencies",
+      "arabic": "نَقْد / نُقُود",
+      "arabicFolded": "نقد / نقود",
       "pronunciation": "naqd",
-      "english": "money/cash",
+      "english": "money/cash / monies/currencies",
       "category": "General Objects",
       "isExtra": false,
       "topicSlugs": [
-        "the-marketplace-and-colours"
+        "the-marketplace"
       ],
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__general-objects__نقود__naqd-plural__monies-currencies",
-      "arabic": "نُقُود",
-      "arabicFolded": "نقود",
-      "pronunciation": "naqd plural",
-      "english": "monies/currencies",
-      "category": "General Objects",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-marketplace-and-colours"
-      ],
-      "lessonId": "lesson-the-marketplace-and-colours"
-    },
-    {
-      "id": "lesson-the-marketplace-and-colours__general-objects__سكين__sikkin__knife",
-      "arabic": "سِكِّين",
-      "arabicFolded": "سكين",
+      "id": "lesson-the-marketplace-and-colours__general-objects__سكين__سكاكين__sikkin__knife-knives",
+      "arabic": "سِكِّين / سَكَاكِين",
+      "arabicFolded": "سكين / سكاكين",
       "pronunciation": "sikkīn",
-      "english": "knife",
+      "english": "knife / knives",
       "category": "General Objects",
       "isExtra": false,
       "topicSlugs": [
-        "the-marketplace-and-colours"
+        "the-marketplace"
       ],
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__general-objects__سكاكين__sikkin-plural__knives",
-      "arabic": "سَكَاكِين",
-      "arabicFolded": "سكاكين",
-      "pronunciation": "sikkīn plural",
-      "english": "knives",
+      "id": "lesson-the-marketplace-and-colours__general-objects__عود-كبريت__ا-عواد-كبريت__matchstick-matchsticks",
+      "arabic": "عُود كِبْرِيت / أَعْوَاد كِبْرِيت",
+      "arabicFolded": "عود كبريت / أعواد كبريت",
+      "english": "matchstick / matchsticks",
       "category": "General Objects",
       "isExtra": false,
       "topicSlugs": [
-        "the-marketplace-and-colours"
+        "the-marketplace"
       ],
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__general-objects__عود-كبريت__matchstick",
-      "arabic": "عُود كِبْرِيت",
-      "arabicFolded": "عود كبريت",
-      "english": "matchstick",
-      "category": "General Objects",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-marketplace-and-colours"
-      ],
-      "lessonId": "lesson-the-marketplace-and-colours"
-    },
-    {
-      "id": "lesson-the-marketplace-and-colours__general-objects__ا-عواد-كبريت__matchsticks",
-      "arabic": "أَعْوَاد كِبْرِيت",
-      "arabicFolded": "أعواد كبريت",
-      "english": "matchsticks",
-      "category": "General Objects",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-marketplace-and-colours"
-      ],
-      "lessonId": "lesson-the-marketplace-and-colours"
-    },
-    {
-      "id": "lesson-the-marketplace-and-colours__general-objects-masculine__ا-بيض__abyad__white",
-      "arabic": "أَبْيَض",
-      "arabicFolded": "أبيض",
-      "pronunciation": "abyaḍ",
+      "id": "lesson-colours__colours__ا-بيض__بيضاء__abyad-bayda__white",
+      "arabic": "أَبْيَض / بَيْضَاء",
+      "arabicFolded": "أبيض / بيضاء",
+      "pronunciation": "abyaḍ / bayḍāʾ",
       "english": "white",
-      "category": "General Objects (Masculine)",
-      "gender": "M",
+      "category": "Colours",
+      "gender": "Both",
       "isExtra": false,
       "topicSlugs": [
-        "the-marketplace-and-colours"
+        "colours"
       ],
-      "lessonId": "lesson-the-marketplace-and-colours"
+      "lessonId": "lesson-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__general-objects-feminine__بيضاء__bayda__white",
-      "arabic": "بَيْضَاء",
-      "arabicFolded": "بيضاء",
-      "pronunciation": "bayḍāʾ",
-      "english": "white",
-      "category": "General Objects (Feminine)",
-      "gender": "F",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-marketplace-and-colours"
-      ],
-      "lessonId": "lesson-the-marketplace-and-colours"
-    },
-    {
-      "id": "lesson-the-marketplace-and-colours__general-objects-masculine__ا-سود__aswad__black",
-      "arabic": "أَسْوَد",
-      "arabicFolded": "أسود",
-      "pronunciation": "aswad",
+      "id": "lesson-colours__colours__ا-سود__سوداء__aswad-sawda__black",
+      "arabic": "أَسْوَد / سَوْدَاء",
+      "arabicFolded": "أسود / سوداء",
+      "pronunciation": "aswad / sawdāʾ",
       "english": "black",
-      "category": "General Objects (Masculine)",
-      "gender": "M",
+      "category": "Colours",
+      "gender": "Both",
       "isExtra": false,
       "topicSlugs": [
-        "the-marketplace-and-colours"
+        "colours"
       ],
-      "lessonId": "lesson-the-marketplace-and-colours"
+      "lessonId": "lesson-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__general-objects-feminine__سوداء__sawda__black",
-      "arabic": "سَوْدَاء",
-      "arabicFolded": "سوداء",
-      "pronunciation": "sawdāʾ",
-      "english": "black",
-      "category": "General Objects (Feminine)",
-      "gender": "F",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-marketplace-and-colours"
-      ],
-      "lessonId": "lesson-the-marketplace-and-colours"
-    },
-    {
-      "id": "lesson-the-marketplace-and-colours__general-objects-masculine__ا-حمر__ahmar__red",
-      "arabic": "أَحْمَر",
-      "arabicFolded": "أحمر",
-      "pronunciation": "aḥmar",
+      "id": "lesson-colours__colours__ا-حمر__حمراء__ahmar-hamra__red",
+      "arabic": "أَحْمَر / حَمْرَاء",
+      "arabicFolded": "أحمر / حمراء",
+      "pronunciation": "aḥmar / ḥamrāʾ",
       "english": "red",
-      "category": "General Objects (Masculine)",
-      "gender": "M",
+      "category": "Colours",
+      "gender": "Both",
       "isExtra": false,
       "topicSlugs": [
-        "the-marketplace-and-colours"
+        "colours"
       ],
-      "lessonId": "lesson-the-marketplace-and-colours"
+      "lessonId": "lesson-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__general-objects-feminine__حمراء__hamra__red",
-      "arabic": "حَمْرَاء",
-      "arabicFolded": "حمراء",
-      "pronunciation": "ḥamrāʾ",
-      "english": "red",
-      "category": "General Objects (Feminine)",
-      "gender": "F",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-marketplace-and-colours"
-      ],
-      "lessonId": "lesson-the-marketplace-and-colours"
-    },
-    {
-      "id": "lesson-the-marketplace-and-colours__general-objects-masculine__ا-خضر__akhdar__green",
-      "arabic": "أَخْضَر",
-      "arabicFolded": "أخضر",
-      "pronunciation": "akhḍar",
+      "id": "lesson-colours__colours__ا-خضر__خضراء__akhdar-khadra__green",
+      "arabic": "أَخْضَر / خَضْرَاء",
+      "arabicFolded": "أخضر / خضراء",
+      "pronunciation": "akhḍar / khaḍrāʾ",
       "english": "green",
-      "category": "General Objects (Masculine)",
-      "gender": "M",
+      "category": "Colours",
+      "gender": "Both",
       "isExtra": false,
       "topicSlugs": [
-        "the-marketplace-and-colours"
+        "colours"
       ],
-      "lessonId": "lesson-the-marketplace-and-colours"
+      "lessonId": "lesson-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__general-objects-feminine__خضراء__khadra__green",
-      "arabic": "خَضْرَاء",
-      "arabicFolded": "خضراء",
-      "pronunciation": "khaḍrāʾ",
-      "english": "green",
-      "category": "General Objects (Feminine)",
-      "gender": "F",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-marketplace-and-colours"
-      ],
-      "lessonId": "lesson-the-marketplace-and-colours"
-    },
-    {
-      "id": "lesson-the-marketplace-and-colours__general-objects-masculine__ا-زرق__azraq__blue",
-      "arabic": "أَزْرَق",
-      "arabicFolded": "أزرق",
-      "pronunciation": "azraq",
+      "id": "lesson-colours__colours__ا-زرق__زرقاء__azraq-zarqa__blue",
+      "arabic": "أَزْرَق / زَرْقَاء",
+      "arabicFolded": "أزرق / زرقاء",
+      "pronunciation": "azraq / zarqāʾ",
       "english": "blue",
-      "category": "General Objects (Masculine)",
-      "gender": "M",
+      "category": "Colours",
+      "gender": "Both",
       "isExtra": false,
       "topicSlugs": [
-        "the-marketplace-and-colours"
+        "colours"
       ],
-      "lessonId": "lesson-the-marketplace-and-colours"
+      "lessonId": "lesson-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__general-objects-feminine__زرقاء__zarqa__blue",
-      "arabic": "زَرْقَاء",
-      "arabicFolded": "زرقاء",
-      "pronunciation": "zarqāʾ",
-      "english": "blue",
-      "category": "General Objects (Feminine)",
-      "gender": "F",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-marketplace-and-colours"
-      ],
-      "lessonId": "lesson-the-marketplace-and-colours"
-    },
-    {
-      "id": "lesson-the-marketplace-and-colours__general-objects-masculine__ا-صفر__asfar__yellow",
-      "arabic": "أَصْفَر",
-      "arabicFolded": "أصفر",
-      "pronunciation": "aṣfar",
+      "id": "lesson-colours__colours__ا-صفر__صفراء__asfar-safra__yellow",
+      "arabic": "أَصْفَر / صَفْرَاء",
+      "arabicFolded": "أصفر / صفراء",
+      "pronunciation": "aṣfar / ṣafrāʾ",
       "english": "yellow",
-      "category": "General Objects (Masculine)",
-      "gender": "M",
+      "category": "Colours",
+      "gender": "Both",
       "isExtra": false,
       "topicSlugs": [
-        "the-marketplace-and-colours"
+        "colours"
       ],
-      "lessonId": "lesson-the-marketplace-and-colours"
+      "lessonId": "lesson-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__general-objects-feminine__صفراء__safra__yellow",
-      "arabic": "صَفْرَاء",
-      "arabicFolded": "صفراء",
-      "pronunciation": "ṣafrāʾ",
-      "english": "yellow",
-      "category": "General Objects (Feminine)",
-      "gender": "F",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-marketplace-and-colours"
-      ],
-      "lessonId": "lesson-the-marketplace-and-colours"
-    },
-    {
-      "id": "lesson-the-marketplace-and-colours__general-objects-masculine__بني__bunniyy__brown",
-      "arabic": "بُنِّي",
-      "arabicFolded": "بني",
-      "pronunciation": "bunniyy",
+      "id": "lesson-colours__colours__بني__بنية__bunniyy-bunniyyah__brown",
+      "arabic": "بُنِّي / بُنِّيَّة",
+      "arabicFolded": "بني / بنية",
+      "pronunciation": "bunniyy / bunniyyah",
       "english": "brown",
-      "category": "General Objects (Masculine)",
-      "gender": "M",
+      "category": "Colours",
+      "gender": "Both",
       "isExtra": false,
       "topicSlugs": [
-        "the-marketplace-and-colours"
+        "colours"
       ],
-      "lessonId": "lesson-the-marketplace-and-colours"
+      "lessonId": "lesson-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__general-objects-feminine__بنية__bunniyyah__brown",
-      "arabic": "بُنِّيَّة",
-      "arabicFolded": "بنية",
-      "pronunciation": "bunniyyah",
-      "english": "brown",
-      "category": "General Objects (Feminine)",
-      "gender": "F",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-marketplace-and-colours"
-      ],
-      "lessonId": "lesson-the-marketplace-and-colours"
-    },
-    {
-      "id": "lesson-the-marketplace-and-colours__general-objects-masculine__برتقالي__burtuqali__orange",
-      "arabic": "بُرْتُقَالِي",
-      "arabicFolded": "برتقالي",
-      "pronunciation": "burtuqālī",
+      "id": "lesson-colours__colours__برتقالي__برتقالية__burtuqali-burtuqaliyyah__orange",
+      "arabic": "بُرْتُقَالِي / بُرْتُقَالِيَّة",
+      "arabicFolded": "برتقالي / برتقالية",
+      "pronunciation": "burtuqālī / burtuqāliyyah",
       "english": "orange",
-      "category": "General Objects (Masculine)",
-      "gender": "M",
+      "category": "Colours",
+      "gender": "Both",
       "isExtra": false,
       "topicSlugs": [
-        "the-marketplace-and-colours"
+        "colours"
       ],
-      "lessonId": "lesson-the-marketplace-and-colours"
+      "lessonId": "lesson-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__general-objects-feminine__برتقالية__burtuqaliyyah__orange",
-      "arabic": "بُرْتُقَالِيَّة",
-      "arabicFolded": "برتقالية",
-      "pronunciation": "burtuqāliyyah",
-      "english": "orange",
-      "category": "General Objects (Feminine)",
-      "gender": "F",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-marketplace-and-colours"
-      ],
-      "lessonId": "lesson-the-marketplace-and-colours"
-    },
-    {
-      "id": "lesson-the-marketplace-and-colours__general-objects-masculine__وردي__wardi__pink",
-      "arabic": "وَرْدِي",
-      "arabicFolded": "وردي",
-      "pronunciation": "wardī",
+      "id": "lesson-colours__colours__وردي__وردية__wardi-wardiyyah__pink",
+      "arabic": "وَرْدِي / وَرْدِيَّة",
+      "arabicFolded": "وردي / وردية",
+      "pronunciation": "wardī / wardiyyah",
       "english": "pink",
-      "category": "General Objects (Masculine)",
-      "gender": "M",
+      "category": "Colours",
+      "gender": "Both",
       "isExtra": false,
       "topicSlugs": [
-        "the-marketplace-and-colours"
+        "colours"
       ],
-      "lessonId": "lesson-the-marketplace-and-colours"
+      "lessonId": "lesson-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__general-objects-feminine__وردية__wardiyyah__pink",
-      "arabic": "وَرْدِيَّة",
-      "arabicFolded": "وردية",
-      "pronunciation": "wardiyyah",
-      "english": "pink",
-      "category": "General Objects (Feminine)",
-      "gender": "F",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-marketplace-and-colours"
-      ],
-      "lessonId": "lesson-the-marketplace-and-colours"
-    },
-    {
-      "id": "lesson-the-marketplace-and-colours__general-objects-masculine__بنفسجي__banafsaji__purple",
-      "arabic": "بَنَفْسَجِي",
-      "arabicFolded": "بنفسجي",
-      "pronunciation": "banafsajī",
+      "id": "lesson-colours__colours__بنفسجي__بنفسجية__banafsaji-banafsajiyyah__purple",
+      "arabic": "بَنَفْسَجِي / بَنَفْسَجِيَّة",
+      "arabicFolded": "بنفسجي / بنفسجية",
+      "pronunciation": "banafsajī / banafsajiyyah",
       "english": "purple",
-      "category": "General Objects (Masculine)",
-      "gender": "M",
+      "category": "Colours",
+      "gender": "Both",
       "isExtra": false,
       "topicSlugs": [
-        "the-marketplace-and-colours"
+        "colours"
       ],
-      "lessonId": "lesson-the-marketplace-and-colours"
+      "lessonId": "lesson-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__general-objects-feminine__بنفسجية__banafsajiyyah__purple",
-      "arabic": "بَنَفْسَجِيَّة",
-      "arabicFolded": "بنفسجية",
-      "pronunciation": "banafsajiyyah",
-      "english": "purple",
-      "category": "General Objects (Feminine)",
-      "gender": "F",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-marketplace-and-colours"
-      ],
-      "lessonId": "lesson-the-marketplace-and-colours"
-    },
-    {
-      "id": "lesson-the-marketplace-and-colours__general-objects-masculine__رمادي__ramadi__grey",
-      "arabic": "رَمَادِي",
-      "arabicFolded": "رمادي",
-      "pronunciation": "ramādī",
+      "id": "lesson-colours__colours__رمادي__رمادية__ramadi-ramadiyyah__grey",
+      "arabic": "رَمَادِي / رَمَادِيَّة",
+      "arabicFolded": "رمادي / رمادية",
+      "pronunciation": "ramādī / ramādiyyah",
       "english": "grey",
-      "category": "General Objects (Masculine)",
-      "gender": "M",
+      "category": "Colours",
+      "gender": "Both",
       "isExtra": false,
       "topicSlugs": [
-        "the-marketplace-and-colours"
+        "colours"
       ],
-      "lessonId": "lesson-the-marketplace-and-colours"
+      "lessonId": "lesson-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__general-objects-feminine__رمادية__ramadiyyah__grey",
-      "arabic": "رَمَادِيَّة",
-      "arabicFolded": "رمادية",
-      "pronunciation": "ramādiyyah",
-      "english": "grey",
-      "category": "General Objects (Feminine)",
-      "gender": "F",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-marketplace-and-colours"
-      ],
-      "lessonId": "lesson-the-marketplace-and-colours"
-    },
-    {
-      "id": "lesson-the-marketplace-and-colours__general-objects-masculine__ذهبي__dhahabi__golden",
-      "arabic": "ذَهَبِي",
-      "arabicFolded": "ذهبي",
-      "pronunciation": "dhahabī",
+      "id": "lesson-colours__colours__ذهبي__ذهبية__dhahabi-dhahabiyyah__golden",
+      "arabic": "ذَهَبِي / ذَهَبِيَّة",
+      "arabicFolded": "ذهبي / ذهبية",
+      "pronunciation": "dhahabī / dhahabiyyah",
       "english": "golden",
-      "category": "General Objects (Masculine)",
-      "gender": "M",
+      "category": "Colours",
+      "gender": "Both",
       "isExtra": false,
       "topicSlugs": [
-        "the-marketplace-and-colours"
+        "colours"
       ],
-      "lessonId": "lesson-the-marketplace-and-colours"
+      "lessonId": "lesson-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__general-objects-feminine__ذهبية__dhahabiyyah__golden",
-      "arabic": "ذَهَبِيَّة",
-      "arabicFolded": "ذهبية",
-      "pronunciation": "dhahabiyyah",
-      "english": "golden",
-      "category": "General Objects (Feminine)",
-      "gender": "F",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-marketplace-and-colours"
-      ],
-      "lessonId": "lesson-the-marketplace-and-colours"
-    },
-    {
-      "id": "lesson-the-marketplace-and-colours__general-objects-masculine__فضي__fiddi__silver",
-      "arabic": "فِضِّي",
-      "arabicFolded": "فضي",
-      "pronunciation": "fiḍḍī",
+      "id": "lesson-colours__colours__فضي__فضية__fiddi-fiddiyyah__silver",
+      "arabic": "فِضِّي / فِضِّيَّة",
+      "arabicFolded": "فضي / فضية",
+      "pronunciation": "fiḍḍī / fiḍḍiyyah",
       "english": "silver",
-      "category": "General Objects (Masculine)",
-      "gender": "M",
+      "category": "Colours",
+      "gender": "Both",
       "isExtra": false,
       "topicSlugs": [
-        "the-marketplace-and-colours"
+        "colours"
       ],
-      "lessonId": "lesson-the-marketplace-and-colours"
+      "lessonId": "lesson-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__general-objects-feminine__فضية__fiddiyyah__silver",
-      "arabic": "فِضِّيَّة",
-      "arabicFolded": "فضية",
-      "pronunciation": "fiḍḍiyyah",
-      "english": "silver",
-      "category": "General Objects (Feminine)",
-      "gender": "F",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-marketplace-and-colours"
-      ],
-      "lessonId": "lesson-the-marketplace-and-colours"
-    },
-    {
-      "id": "lesson-the-marketplace-and-colours__general-objects-masculine__كحلي__kuhli__navy-blue",
-      "arabic": "كُحْلِي",
-      "arabicFolded": "كحلي",
-      "pronunciation": "kuḥlī",
+      "id": "lesson-colours__colours__كحلي__كحلية__kuhli-kuhliyyah__navy-blue",
+      "arabic": "كُحْلِي / كُحْلِيَّة",
+      "arabicFolded": "كحلي / كحلية",
+      "pronunciation": "kuḥlī / kuḥliyyah",
       "english": "navy blue",
-      "category": "General Objects (Masculine)",
-      "gender": "M",
+      "category": "Colours",
+      "gender": "Both",
       "isExtra": false,
       "topicSlugs": [
-        "the-marketplace-and-colours"
+        "colours"
       ],
-      "lessonId": "lesson-the-marketplace-and-colours"
+      "lessonId": "lesson-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__general-objects-feminine__كحلية__kuhliyyah__navy-blue",
-      "arabic": "كُحْلِيَّة",
-      "arabicFolded": "كحلية",
-      "pronunciation": "kuḥliyyah",
-      "english": "navy blue",
-      "category": "General Objects (Feminine)",
-      "gender": "F",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-marketplace-and-colours"
-      ],
-      "lessonId": "lesson-the-marketplace-and-colours"
-    },
-    {
-      "id": "lesson-the-marketplace-and-colours__general-objects-masculine__سماوي__samawi__sky-blue",
-      "arabic": "سَمَاوِي",
-      "arabicFolded": "سماوي",
-      "pronunciation": "samāwī",
+      "id": "lesson-colours__colours__سماوي__سماوية__samawi-samawiyyah__sky-blue",
+      "arabic": "سَمَاوِي / سَمَاوِيَّة",
+      "arabicFolded": "سماوي / سماوية",
+      "pronunciation": "samāwī / samāwiyyah",
       "english": "sky blue",
-      "category": "General Objects (Masculine)",
-      "gender": "M",
+      "category": "Colours",
+      "gender": "Both",
       "isExtra": false,
       "topicSlugs": [
-        "the-marketplace-and-colours"
+        "colours"
       ],
-      "lessonId": "lesson-the-marketplace-and-colours"
+      "lessonId": "lesson-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__general-objects-feminine__سماوية__samawiyyah__sky-blue",
-      "arabic": "سَمَاوِيَّة",
-      "arabicFolded": "سماوية",
-      "pronunciation": "samāwiyyah",
-      "english": "sky blue",
-      "category": "General Objects (Feminine)",
-      "gender": "F",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-marketplace-and-colours"
-      ],
-      "lessonId": "lesson-the-marketplace-and-colours"
-    },
-    {
-      "id": "lesson-the-marketplace-and-colours__singular-near",
-      "arabic": "هَذَا",
-      "arabicFolded": "هذا",
-      "pronunciation": "hādhā",
-      "english": "this (m)",
+      "id": "lesson-colours__singular-near",
+      "arabic": "هَذَا / هَذِهِ",
+      "arabicFolded": "هذا هذه",
+      "pronunciation": "hādhā / hādhihi",
+      "english": "this (m) / this (f)",
       "category": "Singular (near)",
+      "gender": "Both",
       "isExtra": false,
       "topicSlugs": [
-        "the-marketplace-and-colours"
+        "colours"
       ],
-      "lessonId": "lesson-the-marketplace-and-colours"
+      "lessonId": "lesson-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__singular-near-2",
-      "arabic": "هَذِهِ",
-      "arabicFolded": "هذه",
-      "pronunciation": "hādhihi",
-      "english": "this (f)",
-      "category": "Singular (near)",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-marketplace-and-colours"
-      ],
-      "lessonId": "lesson-the-marketplace-and-colours"
-    },
-    {
-      "id": "lesson-the-marketplace-and-colours__singular-far",
-      "arabic": "ذَلِكَ",
-      "arabicFolded": "ذلك",
-      "pronunciation": "dhālika",
-      "english": "that (m)",
+      "id": "lesson-colours__singular-far",
+      "arabic": "ذَلِكَ / تِلْكَ",
+      "arabicFolded": "ذلك تلك",
+      "pronunciation": "dhālika / tilka",
+      "english": "that (m) / that (f)",
       "category": "Singular (far)",
+      "gender": "Both",
       "isExtra": false,
       "topicSlugs": [
-        "the-marketplace-and-colours"
+        "colours"
       ],
-      "lessonId": "lesson-the-marketplace-and-colours"
+      "lessonId": "lesson-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__singular-far-2",
-      "arabic": "تِلْكَ",
-      "arabicFolded": "تلك",
-      "pronunciation": "tilka",
-      "english": "that (f)",
-      "category": "Singular (far)",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-marketplace-and-colours"
-      ],
-      "lessonId": "lesson-the-marketplace-and-colours"
-    },
-    {
-      "id": "lesson-the-marketplace-and-colours__dual-near",
-      "arabic": "هَذَانِ",
-      "arabicFolded": "هذان",
-      "pronunciation": "hādhāni",
-      "english": "these two (m)",
+      "id": "lesson-colours__dual-near",
+      "arabic": "هَذَانِ / هَاتَانِ",
+      "arabicFolded": "هذان هاتان",
+      "pronunciation": "hādhāni / hātāni",
+      "english": "these two (m) / these two (f)",
       "category": "Dual (near)",
+      "gender": "Both",
       "isExtra": false,
       "topicSlugs": [
-        "the-marketplace-and-colours"
+        "colours"
       ],
-      "lessonId": "lesson-the-marketplace-and-colours"
+      "lessonId": "lesson-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__dual-near-2",
-      "arabic": "هَاتَانِ",
-      "arabicFolded": "هاتان",
-      "pronunciation": "hātāni",
-      "english": "these two (f)",
-      "category": "Dual (near)",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-marketplace-and-colours"
-      ],
-      "lessonId": "lesson-the-marketplace-and-colours"
-    },
-    {
-      "id": "lesson-the-marketplace-and-colours__dual-far",
-      "arabic": "ذَانِكَ",
-      "arabicFolded": "ذانك",
-      "pronunciation": "dhānika",
-      "english": "those two (m)",
+      "id": "lesson-colours__dual-far",
+      "arabic": "ذَانِكَ / تَانِكَ",
+      "arabicFolded": "ذانك تانك",
+      "pronunciation": "dhānika / tānika",
+      "english": "those two (m) / those two (f)",
       "category": "Dual (far)",
+      "gender": "Both",
       "isExtra": false,
       "topicSlugs": [
-        "the-marketplace-and-colours"
+        "colours"
       ],
-      "lessonId": "lesson-the-marketplace-and-colours"
+      "lessonId": "lesson-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__dual-far-2",
-      "arabic": "تَانِكَ",
-      "arabicFolded": "تانك",
-      "pronunciation": "tānika",
-      "english": "those two (f)",
-      "category": "Dual (far)",
-      "isExtra": false,
-      "topicSlugs": [
-        "the-marketplace-and-colours"
-      ],
-      "lessonId": "lesson-the-marketplace-and-colours"
-    },
-    {
-      "id": "lesson-the-marketplace-and-colours__plural-near",
+      "id": "lesson-colours__plural-near",
       "arabic": "هَؤُلَاءِ",
       "arabicFolded": "هؤلاء",
       "pronunciation": "hāʾulāʾ",
@@ -7500,12 +6429,12 @@
       "category": "Plural (near)",
       "isExtra": false,
       "topicSlugs": [
-        "the-marketplace-and-colours"
+        "colours"
       ],
-      "lessonId": "lesson-the-marketplace-and-colours"
+      "lessonId": "lesson-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__plural-far",
+      "id": "lesson-colours__plural-far",
       "arabic": "أُولَٰئِكَ",
       "arabicFolded": "أولئك",
       "pronunciation": "ulāʾika",
@@ -7513,9 +6442,9 @@
       "category": "Plural (far)",
       "isExtra": false,
       "topicSlugs": [
-        "the-marketplace-and-colours"
+        "colours"
       ],
-      "lessonId": "lesson-the-marketplace-and-colours"
+      "lessonId": "lesson-colours"
     }
   ],
   "rules": [
@@ -8620,8 +7549,8 @@
       "lessonId": "lesson-verbs-in-the-classroom"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__person-groups__vocabulary-general-objects__19",
-      "title": "Vocabulary (General Objects)",
+      "id": "lesson-the-marketplace-and-colours__person-groups__vocabulary-colours__19",
+      "title": "Vocabulary (Colours)",
       "body": "",
       "examples": [
         {
@@ -8634,13 +7563,13 @@
         }
       ],
       "topicSlugs": [
-        "the-marketplace-and-colours"
+        "the-marketplace"
       ],
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__person-groups__vocabulary-general-objects__20",
-      "title": "Vocabulary (General Objects)",
+      "id": "lesson-the-marketplace-and-colours__person-groups__vocabulary-colours__20",
+      "title": "Vocabulary (Colours)",
       "body": "",
       "examples": [
         {
@@ -8665,13 +7594,13 @@
         }
       ],
       "topicSlugs": [
-        "the-marketplace-and-colours"
+        "the-marketplace"
       ],
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__person-groups__vocabulary-general-objects__21",
-      "title": "Vocabulary (General Objects)",
+      "id": "lesson-the-marketplace-and-colours__person-groups__vocabulary-colours__21",
+      "title": "Vocabulary (Colours)",
       "body": "",
       "examples": [
         {
@@ -8700,7 +7629,7 @@
         }
       ],
       "topicSlugs": [
-        "the-marketplace-and-colours"
+        "the-marketplace"
       ],
       "lessonId": "lesson-the-marketplace-and-colours"
     }
@@ -9397,5 +8326,5 @@
     "instagram": "@majestic_messenger",
     "docUrl": "https://docs.google.com/document/d/1wqbU7rsLUm0wqCjQPS2PbtCTThZOxnE2CnClxa8DETc/edit"
   },
-  "fetchedAt": "2026-05-16T19:00:24.180Z"
+  "fetchedAt": "2026-05-17T22:25:44.337Z"
 }
