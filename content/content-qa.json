@@ -1,19 +1,19 @@
 {
-  "generatedAt": "2026-05-16T19:00:24.180Z",
+  "generatedAt": "2026-05-17T22:25:44.337Z",
   "totals": {
-    "lessons": 10,
-    "topics": 10,
-    "vocab": 487,
+    "lessons": 11,
+    "topics": 11,
+    "vocab": 409,
     "rules": 22,
     "conversations": 0,
     "parserWarnings": 0,
     "issues": 1
   },
   "audioCoverage": {
-    "vocabTotal": 487,
-    "vocabWithAudio": 295,
-    "vocabMissingAudio": 192,
-    "coveragePercent": 61,
+    "vocabTotal": 409,
+    "vocabWithAudio": 282,
+    "vocabMissingAudio": 127,
+    "coveragePercent": 69,
     "byTopic": [
       {
         "slug": "body-parts",
@@ -88,12 +88,20 @@
         "coveragePercent": 100
       },
       {
-        "slug": "the-marketplace-and-colours",
-        "name": "The Marketplace and Colours",
-        "total": 158,
-        "withAudio": 59,
-        "missingAudio": 99,
-        "coveragePercent": 37
+        "slug": "the-marketplace",
+        "name": "The Marketplace",
+        "total": 59,
+        "withAudio": 32,
+        "missingAudio": 27,
+        "coveragePercent": 54
+      },
+      {
+        "slug": "colours",
+        "name": "Colours",
+        "total": 21,
+        "withAudio": 14,
+        "missingAudio": 7,
+        "coveragePercent": 67
       }
     ]
   },
@@ -102,7 +110,7 @@
       "code": "missing-audio",
       "severity": "info",
       "message": "Vocabulary words do not have a matching audio-manifest entry.",
-      "count": 192,
+      "count": 127,
       "examples": [
         "lesson-body-parts: جَبِينٌ / jabīnun / Forehead",
         "lesson-body-parts: أَسْنَانٌ / asnānun / Teeth",

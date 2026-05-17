@@ -10,23 +10,32 @@ describe("content vocabulary search", () => {
     const transliterated = searchVocab({ query: "hadha" });
     const english = searchVocab({ query: "this" });
 
-    expect(unvowelled).toHaveLength(1);
+    expect(unvowelled).toHaveLength(2);
     expect(
       unvowelled.some(
         (entry) =>
           foldForSearch(entry.arabic) === foldForSearch("هذا") &&
           entry.pronunciation === "hādhā" &&
-          entry.english === "this (m)",
+          entry.english === "this (masculine)",
+      ),
+    ).toBe(true);
+    expect(
+      unvowelled.some(
+        (entry) =>
+          entry.arabicFolded === "هذا هذه" &&
+          entry.pronunciation === "hādhā / hādhihi" &&
+          entry.english === "this (m) / this (f)",
       ),
     ).toBe(true);
     expect(unvowelled.map((entry) => foldForSearch(entry.arabic))).not.toContain(
       foldForSearch("هَذَانِ"),
     );
-    expect(searchVocab({ query: "هذا", allowArabicPrefix: true })).toHaveLength(1);
-    expect(searchVocab({ query: "هذ", allowArabicPrefix: true }).map((entry) => foldForSearch(entry.arabic))).toEqual(
-      expect.arrayContaining([foldForSearch("هذا"), foldForSearch("هذه"), foldForSearch("هذان")]),
+    expect(searchVocab({ query: "هذا", allowArabicPrefix: true })).toHaveLength(2);
+    expect(searchVocab({ query: "هذ", allowArabicPrefix: true }).map((entry) => entry.arabicFolded)).toEqual(
+      expect.arrayContaining(["هذا هذه", "هذان هاتان", foldForSearch("هذا"), foldForSearch("هذه")]),
     );
     expect(vowelled.map((entry) => foldForSearch(entry.arabic))).toContain(foldForSearch("هذا"));
+    expect(vowelled.map((entry) => entry.arabicFolded)).toContain("هذا هذه");
     expect(transliterated.map((entry) => foldForSearch(entry.arabic))).toContain(
       foldForSearch("هذا"),
     );
@@ -35,6 +44,9 @@ describe("content vocabulary search", () => {
     );
     expect(searchVocab({ query: "حجرة / حجر" }).map((entry) => foldForSearch(entry.arabic))).toEqual(
       [foldForSearch("حُجْرَة / حُجُر")],
+    );
+    expect(searchVocab({ query: "جَزَّارُون" }).map((entry) => foldForSearch(entry.arabic))).toContain(
+      foldForSearch("جَزَّار / جَزَّارُون"),
     );
     expect(english.map((entry) => foldForSearch(entry.arabic))).toEqual(
       expect.arrayContaining([foldForSearch("هذا"), foldForSearch("هذه")]),
@@ -51,23 +63,30 @@ describe("content vocabulary search", () => {
     );
 
     expect(gettingToKnow?.vocabCount).toBe(topicVocab.length);
-    const marketplace = content.topics.find(
-      (topic) => topic.slug === "the-marketplace-and-colours",
-    );
+    const marketplace = content.topics.find((topic) => topic.slug === "the-marketplace");
     const marketplaceVocab = content.vocab.filter((entry) =>
-      entry.topicSlugs.includes("the-marketplace-and-colours"),
+      entry.topicSlugs.includes("the-marketplace"),
     );
+    const colours = content.topics.find((topic) => topic.slug === "colours");
+    const coloursVocab = content.vocab.filter((entry) => entry.topicSlugs.includes("colours"));
 
     expect(marketplace?.vocabCount).toBe(marketplaceVocab.length);
+    expect(colours?.vocabCount).toBe(coloursVocab.length);
+    expect(marketplace?.lessonIds).toEqual(["lesson-the-marketplace-and-colours"]);
+    expect(colours?.lessonIds).toEqual(["lesson-colours"]);
+    expect(marketplaceVocab).toHaveLength(59);
+    expect(coloursVocab).toHaveLength(21);
     expect(
       marketplaceVocab.some((entry) => entry.arabicFolded === foldForSearch("هٰذَا")),
-    ).toBe(true);
+    ).toBe(false);
     expect(
-      marketplaceVocab.some((entry) => entry.arabicFolded === foldForSearch("جَزَّارُون")),
+      marketplaceVocab.some((entry) => entry.arabicFolded === foldForSearch("جَزَّار / جَزَّارُون")),
     ).toBe(true);
+    expect(coloursVocab.some((entry) => entry.arabicFolded === "هذا هذه")).toBe(true);
     expect(
-      marketplaceVocab.some((entry) => entry.arabicFolded === foldForSearch("بَيْضَاء")),
+      coloursVocab.some((entry) => entry.arabicFolded === foldForSearch("أَبْيَض / بَيْضَاء")),
     ).toBe(true);
+    expect(coloursVocab.some((entry) => entry.arabicFolded === "هذان هاتان")).toBe(true);
   });
 });
 

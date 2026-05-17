@@ -1,4 +1,5 @@
-import type { ConjugationEntry, SiteContent, Topic, VocabEntry } from "./types";
+import type { ConjugationEntry, ContentTransformResult, Lesson, SiteContent, Topic, VocabEntry } from "./types";
+import { foldForSearch } from "./diacritics";
 
 const NOTE_MIN_CHARS = 60;
 const NOTE_MIN_REPEATS = 3;
@@ -22,6 +23,25 @@ const HIJRI_MONTH_GLOSSES: Record<number, string> = {
   11: "Dhū al-Qaʿdah (11th Hijri month)",
   12: "Dhū al-Ḥijjah (12th Hijri month)",
 };
+
+const MARKETPLACE_LESSON_ID = "lesson-the-marketplace-and-colours";
+const MARKETPLACE_SLUG = "the-marketplace";
+const COLOURS_LESSON_ID = "lesson-colours";
+const COLOURS_SLUG = "colours";
+
+const COLOURS_TITLE = "Colours";
+const COLOURS_TITLE_ARABIC = "الأَلْوَانُ";
+const MARKETPLACE_TITLE = "The Marketplace";
+const MARKETPLACE_TITLE_ARABIC = "السُّوقُ التِّجَارِيُّ";
+const COLOUR_CATEGORIES = new Set(["Colours"]);
+const COLOUR_DEMONSTRATIVE_CATEGORIES = new Set([
+  "Singular (near)",
+  "Singular (far)",
+  "Dual (near)",
+  "Dual (far)",
+  "Plural (near)",
+  "Plural (far)",
+]);
 
 function fixSpelling(s: string | undefined): string | undefined {
   if (!s) return s;
@@ -140,6 +160,193 @@ export function fillIslamicMonthGlosses(content: SiteContent): SiteContent {
       };
     }),
   };
+}
+
+function isColourVocab(vocab: VocabEntry): boolean {
+  return (
+    vocab.lessonId === MARKETPLACE_LESSON_ID &&
+    (COLOUR_CATEGORIES.has(vocab.category) ||
+      COLOUR_DEMONSTRATIVE_CATEGORIES.has(vocab.category))
+  );
+}
+
+function moveToColoursVocab(vocab: VocabEntry): VocabEntry {
+  const id = vocab.id.replace(MARKETPLACE_LESSON_ID, COLOURS_LESSON_ID);
+  return {
+    ...vocab,
+    id,
+    topicSlugs: [COLOURS_SLUG],
+    lessonId: COLOURS_LESSON_ID,
+  };
+}
+
+function slugPart(value: string): string {
+  return value
+    .toLowerCase()
+    .normalize("NFKD")
+    .replace(/[\u0300-\u036F]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+function combineColourDemonstratives(vocab: VocabEntry[]): VocabEntry[] {
+  const grouped = new Map<string, VocabEntry[]>();
+  for (const entry of vocab) {
+    if (
+      entry.lessonId === COLOURS_LESSON_ID &&
+      COLOUR_DEMONSTRATIVE_CATEGORIES.has(entry.category)
+    ) {
+      const group = grouped.get(entry.category) ?? [];
+      group.push(entry);
+      grouped.set(entry.category, group);
+    }
+  }
+
+  const combinedByCategory = new Map<string, VocabEntry>();
+  for (const [category, entries] of grouped) {
+    if (entries.length < 2) continue;
+    const arabic = entries.map((entry) => entry.arabic).join(" / ");
+    const pronunciation = entries
+      .map((entry) => entry.pronunciation)
+      .filter((value): value is string => Boolean(value))
+      .join(" / ");
+    const english = entries.map((entry) => entry.english).join(" / ");
+    combinedByCategory.set(category, {
+      ...entries[0],
+      id: `${COLOURS_LESSON_ID}__${slugPart(category)}`,
+      arabic,
+      arabicFolded: foldForSearch(arabic).replace(/\s*\/\s*/g, " "),
+      pronunciation: pronunciation || undefined,
+      english,
+      gender: "Both",
+    });
+  }
+
+  return vocab.flatMap((entry) => {
+    const combined = combinedByCategory.get(entry.category);
+    if (!combined || entry.lessonId !== COLOURS_LESSON_ID) return [entry];
+    return entry.id === grouped.get(entry.category)?.[0]?.id ? [combined] : [];
+  });
+}
+
+function splitMarketplaceLesson(content: SiteContent): ContentTransformResult {
+  const originalLesson = content.lessons.find((lesson) => lesson.id === MARKETPLACE_LESSON_ID);
+  const originalTopic = content.topics.find((topic) => topic.slug === "the-marketplace-and-colours");
+  if (!originalLesson || !originalTopic) {
+    return { content, warnings: [] };
+  }
+
+  const marketplaceLesson: Lesson = {
+    ...originalLesson,
+    title: MARKETPLACE_TITLE,
+    titleArabic: MARKETPLACE_TITLE_ARABIC,
+    topicSlugs: [MARKETPLACE_SLUG],
+    vocabIds: [],
+    ruleIds: [],
+    conversationIds: [],
+  };
+  const coloursLesson: Lesson = {
+    id: COLOURS_LESSON_ID,
+    number: "11b",
+    title: COLOURS_TITLE,
+    titleArabic: COLOURS_TITLE_ARABIC,
+    topicSlugs: [COLOURS_SLUG],
+    vocabIds: [],
+    ruleIds: [],
+    conversationIds: [],
+  };
+
+  let movedColourCount = 0;
+  const mappedVocab = content.vocab.map((entry) => {
+    if (isColourVocab(entry)) {
+      const moved = moveToColoursVocab(entry);
+      movedColourCount++;
+      return moved;
+    }
+    if (entry.lessonId === MARKETPLACE_LESSON_ID) {
+      return {
+        ...entry,
+        topicSlugs: [MARKETPLACE_SLUG],
+      };
+    }
+    return entry;
+  });
+  const vocab = combineColourDemonstratives(mappedVocab);
+  marketplaceLesson.vocabIds = vocab
+    .filter((entry) => entry.lessonId === MARKETPLACE_LESSON_ID)
+    .map((entry) => entry.id);
+  coloursLesson.vocabIds = vocab
+    .filter((entry) => entry.lessonId === COLOURS_LESSON_ID)
+    .map((entry) => entry.id);
+
+  const rules = content.rules.map((rule) => {
+    if (rule.lessonId !== MARKETPLACE_LESSON_ID) return rule;
+    marketplaceLesson.ruleIds.push(rule.id);
+    return {
+      ...rule,
+      topicSlugs: [MARKETPLACE_SLUG],
+    };
+  });
+
+  const conversations = content.conversations.map((conversation) => {
+    if (conversation.lessonId !== MARKETPLACE_LESSON_ID) return conversation;
+    marketplaceLesson.conversationIds.push(conversation.id);
+    return {
+      ...conversation,
+      topicSlugs: [MARKETPLACE_SLUG],
+    };
+  });
+
+  const lessons = content.lessons.flatMap((lesson) =>
+    lesson.id === MARKETPLACE_LESSON_ID ? [marketplaceLesson, coloursLesson] : [lesson],
+  );
+
+  const marketplaceTopic: Topic = {
+    ...originalTopic,
+    slug: MARKETPLACE_SLUG,
+    name: MARKETPLACE_TITLE,
+    nameArabic: MARKETPLACE_TITLE_ARABIC,
+    lessonIds: [MARKETPLACE_LESSON_ID],
+    vocabCount: marketplaceLesson.vocabIds.length,
+    ruleCount: marketplaceLesson.ruleIds.length,
+    conversationCount: marketplaceLesson.conversationIds.length,
+  };
+  const coloursTopic: Topic = {
+    ...originalTopic,
+    slug: COLOURS_SLUG,
+    name: COLOURS_TITLE,
+    nameArabic: COLOURS_TITLE_ARABIC,
+    order: originalTopic.order + 0.1,
+    lessonIds: [COLOURS_LESSON_ID],
+    vocabCount: coloursLesson.vocabIds.length,
+    ruleCount: coloursLesson.ruleIds.length,
+    conversationCount: coloursLesson.conversationIds.length,
+    notes: originalTopic.notes ? [...originalTopic.notes] : [],
+  };
+  const topics = content.topics.flatMap((topic) =>
+    topic.slug === originalTopic.slug ? [marketplaceTopic, coloursTopic] : [topic],
+  );
+
+  const warnings: string[] = [];
+  if (movedColourCount === 0) {
+    warnings.push("Lesson 11 split found no colour vocabulary to move.");
+  }
+
+  return {
+    content: {
+      ...content,
+      lessons,
+      topics,
+      vocab,
+      rules,
+      conversations,
+    },
+    warnings,
+  };
+}
+
+export function splitMarketplaceAndColours(content: SiteContent): ContentTransformResult {
+  return splitMarketplaceLesson(content);
 }
 
 function correctConjugationCategory(conjugation: ConjugationEntry): ConjugationEntry {

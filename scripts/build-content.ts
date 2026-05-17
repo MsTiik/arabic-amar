@@ -16,6 +16,7 @@ import {
   correctConjugationLabels,
   dedupeLongRepeatedEnglish,
   fillIslamicMonthGlosses,
+  splitMarketplaceAndColours,
 } from "../src/lib/post-process";
 import { fetchDocxBytes, getDocId, getDocUrl } from "../src/lib/source";
 
@@ -37,9 +38,19 @@ async function loadBuffer(): Promise<Buffer> {
 async function main(): Promise<void> {
   const buf = await loadBuffer();
   const { content: raw, warnings } = await parseDocxBuffer(buf, { verbose: true });
-  const content = correctConjugationLabels(
-    fillIslamicMonthGlosses(applySpellingFixes(dedupeLongRepeatedEnglish(raw))),
+  const transformed = splitMarketplaceAndColours(
+    correctConjugationLabels(
+      fillIslamicMonthGlosses(applySpellingFixes(dedupeLongRepeatedEnglish(raw))),
+    ),
   );
+  const content = transformed.content;
+  for (const warning of transformed.warnings) {
+    warnings.push({
+      code: "content-transform-warning",
+      message: warning,
+      severity: "warning",
+    });
+  }
 
   if (warnings.length > 0) {
     console.warn(`[content] parser produced ${warnings.length} warning(s):`);

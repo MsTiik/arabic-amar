@@ -116,6 +116,11 @@ export interface SiteContent {
   fetchedAt: string;
 }
 
+export interface ContentTransformResult {
+  content: SiteContent;
+  warnings: string[];
+}
+
 /** Long-form prose lifted out of vocabulary sections so it can anchor a
  *  reference page (e.g. the explanation of detached vs. attached pronouns). */
 export interface GrammarIntro {

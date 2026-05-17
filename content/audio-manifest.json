@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "fetchedAt": "2026-05-16T18:58:55.434Z",
+  "fetchedAt": "2026-05-17T22:21:46.324Z",
   "entries": {
     "١ - محرم": {
       "url": "https://upload.wikimedia.org/wikipedia/commons/0/0b/LL-Q13955_%28ara%29-Fjmustak-%D9%85%D8%AD%D8%B1%D9%85.wav",
@@ -2049,6 +2049,299 @@
       "title": "File:LL-Q13955 (ara)-Fjmustak-نقود.wav",
       "author": "Fjmustak",
       "license": "CC-BY-SA-4.0"
+    },
+    "أبيض / بيضاء": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/d/db/Ar-%D8%A3%D8%A8%D9%8A%D8%B6.ogg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "source": "ar-x",
+      "title": "File:Ar-أبيض.ogg",
+      "license": "CC-BY-SA-3.0"
+    },
+    "أحمر / حمراء": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/5/53/LL-Q13955_%28ara%29-Fenakhay-%D8%A3%D8%AD%D9%85%D8%B1.wav?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "source": "lingualibre",
+      "title": "File:LL-Q13955 (ara)-Fenakhay-أحمر.wav",
+      "author": "Fenakhay",
+      "license": "CC-BY-SA-4.0"
+    },
+    "أخضر / خضراء": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/d/dc/LL-Q13955_%28ara%29-Fenakhay-%D8%A3%D8%AE%D8%B6%D8%B1.wav?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "source": "lingualibre",
+      "title": "File:LL-Q13955 (ara)-Fenakhay-أخضر.wav",
+      "author": "Fenakhay",
+      "license": "CC-BY-SA-4.0"
+    },
+    "أزرق / زرقاء": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/d/de/LL-Q13955_%28ara%29-Fenakhay-%D8%A3%D8%B2%D8%B1%D9%82.wav?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "source": "lingualibre",
+      "title": "File:LL-Q13955 (ara)-Fenakhay-أزرق.wav",
+      "author": "Fenakhay",
+      "license": "CC-BY-SA-4.0"
+    },
+    "أسود / سوداء": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/0/09/Ar-%D8%A3%D8%B3%D9%88%D8%AF.ogg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "source": "ar-x",
+      "title": "File:Ar-أسود.ogg",
+      "license": "CC-BY-SA-3.0"
+    },
+    "أصفر / صفراء": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/b/b3/Ar-%D8%A3%D8%B5%D9%81%D8%B1.ogg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "source": "ar-x",
+      "title": "File:Ar-أصفر.ogg",
+      "license": "CC-BY-SA-3.0"
+    },
+    "برتقالي / برتقالية": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/e/e5/Ar-%D8%A8%D8%B1%D8%AA%D9%82%D8%A7%D9%84%D9%8A.ogg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "source": "ar-x",
+      "title": "File:Ar-برتقالي.ogg",
+      "license": "CC-BY-SA-3.0"
+    },
+    "بصلة / بصل": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/2/28/LL-Q13955_%28ara%29-Zinou2go-%D8%A8%D8%B5%D9%84.wav?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "source": "lingualibre",
+      "title": "File:LL-Q13955 (ara)-Zinou2go-بصل.wav",
+      "author": "Zinou2go",
+      "license": "CC-BY-SA-4.0"
+    },
+    "بطاطسة / بطاطس": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/5/52/Ar-%D8%A8%D8%B7%D8%A7%D8%B7%D8%B3.ogg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "source": "ar-x",
+      "title": "File:Ar-بطاطس.ogg",
+      "license": "CC-BY-SA-3.0"
+    },
+    "بني / بنية": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/b/b5/Ar-%D8%A8%D9%86%D9%8A.ogg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "source": "ar-x",
+      "title": "File:Ar-بني.ogg",
+      "license": "CC-BY-SA-3.0"
+    },
+    "بيضة / بيض": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/c/c2/Ar-%D8%A8%D9%8A%D8%B6%D8%A9.ogg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "source": "ar-x",
+      "title": "File:Ar-بيضة.ogg",
+      "license": "CC-BY-SA-3.0"
+    },
+    "تفاحة / تفاح": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/0/05/Ar-%D8%AA%D9%81%D8%A7%D8%AD%D8%A9.ogg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "source": "ar-x",
+      "title": "File:Ar-تفاحة.ogg",
+      "license": "CC-BY-SA-3.0"
+    },
+    "تمرة / تمر": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/d/d5/LL-Q13955_%28ara%29-Raghda_%28Akbarali%29-%D8%AA%D9%85%D8%B1%D8%A9.wav?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "source": "lingualibre",
+      "title": "File:LL-Q13955 (ara)-Raghda (Akbarali)-تمرة.wav",
+      "author": "Raghda (Akbarali)",
+      "license": "CC-BY-SA-4.0"
+    },
+    "جزرة / جزر": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/a/a3/LL-Q13955_%28ara%29-Zinou2go-%D8%AC%D8%B2%D8%B1.wav?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "source": "lingualibre",
+      "title": "File:LL-Q13955 (ara)-Zinou2go-جزر.wav",
+      "author": "Zinou2go",
+      "license": "CC-BY-SA-4.0"
+    },
+    "حبة أرز / أرز": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/8/81/LL-Q13955_%28ara%29-Fenakhay-%D8%A3%D8%B1%D8%B2.wav?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "source": "lingualibre",
+      "title": "File:LL-Q13955 (ara)-Fenakhay-أرز.wav",
+      "author": "Fenakhay",
+      "license": "CC-BY-SA-4.0"
+    },
+    "حبة طماطم / طماطم": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/0/0c/LL-Q13955_%28ara%29-Zinou2go-%D8%B7%D9%85%D8%A7%D8%B7%D9%85.wav?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "source": "lingualibre",
+      "title": "File:LL-Q13955 (ara)-Zinou2go-طماطم.wav",
+      "author": "Zinou2go",
+      "license": "CC-BY-SA-4.0"
+    },
+    "حبة عنب / عنب": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/0/01/LL-Q13955_%28ara%29-AlNatiq-%D8%B9%D9%86%D8%A8.wav?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "source": "lingualibre",
+      "title": "File:LL-Q13955 (ara)-AlNatiq-عنب.wav",
+      "author": "AlNatiq",
+      "license": "CC-BY-SA-4.0"
+    },
+    "حزام / أحزمة": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/2/22/LL-Q13955_%28ara%29-Fjmustak-%D8%AD%D8%B2%D8%A7%D9%85.wav?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "source": "lingualibre",
+      "title": "File:LL-Q13955 (ara)-Fjmustak-حزام.wav",
+      "author": "Fjmustak",
+      "license": "CC-BY-SA-4.0"
+    },
+    "خبزة / خبز": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/f/f3/Ar-%D8%AE%D8%A8%D8%B2.ogg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "source": "ar-x",
+      "title": "File:Ar-خبز.ogg",
+      "license": "CC-BY-SA-3.0"
+    },
+    "خيارة / خيار": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/e/ed/Ar-%D8%AE%D9%8A%D8%A7%D8%B1.ogg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "source": "ar-x",
+      "title": "File:Ar-خيار.ogg",
+      "license": "CC-BY-SA-3.0"
+    },
+    "دجاجة / دجاج": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/2/28/Ar-%D8%AF%D8%AC%D8%A7%D8%AC%D8%A9.ogg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "source": "ar-x",
+      "title": "File:Ar-دجاجة.ogg",
+      "license": "CC-BY-SA-3.0"
+    },
+    "دلو / دلاء": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/8/83/LL-Q13955_%28ara%29-Fjmustak-%D8%AF%D9%84%D9%88.wav?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "source": "lingualibre",
+      "title": "File:LL-Q13955 (ara)-Fjmustak-دلو.wav",
+      "author": "Fjmustak",
+      "license": "CC-BY-SA-4.0"
+    },
+    "ذرة / ذرات": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/c/ce/LL-Q13955_%28ara%29-Zinou2go-%D8%B0%D8%B1%D8%A9.wav?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "source": "lingualibre",
+      "title": "File:LL-Q13955 (ara)-Zinou2go-ذرة.wav",
+      "author": "Zinou2go",
+      "license": "CC-BY-SA-4.0"
+    },
+    "ذهبي / ذهبية": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/7/74/Ar-%D8%B0%D9%87%D8%A8%D9%8A.ogg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "source": "ar-x",
+      "title": "File:Ar-ذهبي.ogg",
+      "license": "CC-BY-SA-3.0"
+    },
+    "رمادي / رمادية": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/5/5b/Ar-%D8%B1%D9%85%D8%A7%D8%AF%D9%8A.ogg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "source": "ar-x",
+      "title": "File:Ar-رمادي.ogg",
+      "license": "CC-BY-SA-3.0"
+    },
+    "رمانة / رمان": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/3/34/LL-Q13955_%28ara%29-Fjmustak-%D8%B1%D9%85%D8%A7%D9%86.wav?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "source": "lingualibre",
+      "title": "File:LL-Q13955 (ara)-Fjmustak-رمان.wav",
+      "author": "Fjmustak",
+      "license": "CC-BY-SA-4.0"
+    },
+    "زبدة / زبد": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/1/16/Ar-%D8%B2%D8%A8%D8%AF%D8%A9.ogg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "source": "ar-x",
+      "title": "File:Ar-زبدة.ogg",
+      "license": "CC-BY-SA-3.0"
+    },
+    "زيت / زيوت": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/3/31/Ar-%D8%B2%D9%8A%D8%AA.ogg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "source": "ar-x",
+      "title": "File:Ar-زيت.ogg",
+      "license": "CC-BY-SA-3.0"
+    },
+    "زيتونة / زيتون": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/6/65/LL-Q13955_%28ara%29-Zinou2go-%D8%B2%D9%8A%D8%AA%D9%88%D9%86.wav?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "source": "lingualibre",
+      "title": "File:LL-Q13955 (ara)-Zinou2go-زيتون.wav",
+      "author": "Zinou2go",
+      "license": "CC-BY-SA-4.0"
+    },
+    "سكين / سكاكين": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/7/7a/Ar-%D8%B3%D9%83%D9%8A%D9%86.ogg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "source": "ar-x",
+      "title": "File:Ar-سكين.ogg",
+      "license": "CC-BY-SA-3.0"
+    },
+    "سمكة / سمك": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/1/13/LL-Q13955_%28ara%29-AlNatiq-%D8%B3%D9%85%D9%83%D8%A9.wav?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "source": "lingualibre",
+      "title": "File:LL-Q13955 (ara)-AlNatiq-سمكة.wav",
+      "author": "AlNatiq",
+      "license": "CC-BY-SA-4.0"
+    },
+    "صابونة / صابون": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/9/9a/Ar-%D8%B5%D8%A7%D8%A8%D9%88%D9%86.ogg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "source": "ar-x",
+      "title": "File:Ar-صابون.ogg",
+      "license": "CC-BY-SA-3.0"
+    },
+    "عسل / أعسال": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/7/7c/LL-Q13955_%28ara%29-Fjmustak-%D8%B9%D8%B3%D9%84.wav?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "source": "lingualibre",
+      "title": "File:LL-Q13955 (ara)-Fjmustak-عسل.wav",
+      "author": "Fjmustak",
+      "license": "CC-BY-SA-4.0"
+    },
+    "فضي / فضية": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/9/93/Ar-%D9%81%D8%B6%D9%8A.ogg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "source": "ar-x",
+      "title": "File:Ar-فضي.ogg",
+      "license": "CC-BY-SA-3.0"
+    },
+    "قميص / قمص": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/6/63/LL-Q13955_%28ara%29-Annisa_Tiara_Ramadhani-%D9%82%D9%85%D9%8A%D8%B5.wav?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "source": "lingualibre",
+      "title": "File:LL-Q13955 (ara)-Annisa Tiara Ramadhani-قميص.wav",
+      "author": "Annisa Tiara Ramadhani",
+      "license": "CC-BY-SA-4.0"
+    },
+    "لبن / ألبان": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/3/34/LL-Q13955_%28ara%29-Fjmustak-%D9%84%D8%A8%D9%86.wav?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "source": "lingualibre",
+      "title": "File:LL-Q13955 (ara)-Fjmustak-لبن.wav",
+      "author": "Fjmustak",
+      "license": "CC-BY-SA-4.0"
+    },
+    "لحم / لحوم": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/c/cd/Ar-%D9%84%D8%AD%D9%85.ogg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "source": "ar-x",
+      "title": "File:Ar-لحم.ogg",
+      "license": "CC-BY-SA-3.0"
+    },
+    "ليمونة / ليمون": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/8/83/LL-Q13955_%28ara%29-Zinou2go-%D9%84%D9%8A%D9%85%D9%88%D9%86.wav?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "source": "lingualibre",
+      "title": "File:LL-Q13955 (ara)-Zinou2go-ليمون.wav",
+      "author": "Zinou2go",
+      "license": "CC-BY-SA-4.0"
+    },
+    "معطف / معاطف": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/c/c9/Ar-%D9%85%D8%B9%D8%B7%D9%81.ogg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "source": "ar-x",
+      "title": "File:Ar-معطف.ogg",
+      "license": "CC-BY-SA-3.0"
+    },
+    "ملبس / ملابس": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/9/91/Ar-%D9%85%D9%84%D8%A7%D8%A8%D8%B3.ogg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "source": "ar-x",
+      "title": "File:Ar-ملابس.ogg",
+      "license": "CC-BY-SA-3.0"
+    },
+    "موزة / موز": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/e/ea/LL-Q13955_%28ara%29-Fjmustak-%D9%85%D9%88%D8%B2%D8%A9.wav?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "source": "lingualibre",
+      "title": "File:LL-Q13955 (ara)-Fjmustak-موزة.wav",
+      "author": "Fjmustak",
+      "license": "CC-BY-SA-4.0"
+    },
+    "ميزان / موازين": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/6/6e/Ar-%D9%85%D9%8A%D8%B2%D8%A7%D9%86.ogg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "source": "ar-x",
+      "title": "File:Ar-ميزان.ogg",
+      "license": "CC-BY-SA-3.0"
+    },
+    "نقد / نقود": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/5/5e/LL-Q13955_%28ara%29-Fjmustak-%D9%86%D9%82%D9%88%D8%AF.wav?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "source": "lingualibre",
+      "title": "File:LL-Q13955 (ara)-Fjmustak-نقود.wav",
+      "author": "Fjmustak",
+      "license": "CC-BY-SA-4.0"
+    },
+    "ذلك / تلك": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/f/f0/LL-Q13955_%28ara%29-Fjmustak-%D8%B0%D9%84%D9%83.wav?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "source": "lingualibre",
+      "title": "File:LL-Q13955 (ara)-Fjmustak-ذلك.wav",
+      "author": "Fjmustak",
+      "license": "CC-BY-SA-4.0"
+    },
+    "هذا / هذه": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/8/8a/LL-Q13955_%28ara%29-Reemnaif1413-%D9%87%D8%B0%D8%A7.wav?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "source": "lingualibre",
+      "title": "File:LL-Q13955 (ara)-Reemnaif1413-هذا.wav",
+      "author": "Reemnaif1413",
+      "license": "CC-BY-SA-4.0"
     }
   },
   "quran": {
@@ -2367,6 +2660,39 @@
     "موازين",
     "نقد",
     "وردي",
-    "وردية"
+    "وردية",
+    "أداة مكتبية / أدوات مكتبية",
+    "أداة نظافة / أدوات نظافة",
+    "بائع / بائعون",
+    "بطيخة / بطيخ",
+    "بنفسجي / بنفسجية",
+    "جاروف / جواريف",
+    "جزار / جزارون",
+    "حبة بازلاء / بازلاء",
+    "حبة سكر / حبات سكر",
+    "حبة فاصوليا / فاصوليا",
+    "حبة ملح / حبات ملح",
+    "خضرة / خضروات",
+    "خضري / خضريون",
+    "زبادي / زباديات",
+    "سروال / سراويل",
+    "سماوي / سماوية",
+    "عود كبريت / أعواد كبريت",
+    "فاكهي / فاكهيون",
+    "فرشاة أسنان / فرش أسنان",
+    "فص ثوم / فصوص ثوم",
+    "قطعة جبن / قطع جبن",
+    "كحلي / كحلية",
+    "كرنبة / كرانب",
+    "كوب شاي / أكواب شاي",
+    "محاسب / محاسبون",
+    "مسحوق غسيل / مساحيق غسيل",
+    "مشتري / مشترون",
+    "معجون أسنان / معاجين أسنان",
+    "معجون حلاقة / معاجين حلاقة",
+    "ممسحة / مماسح",
+    "وردي / وردية",
+    "ذانك / تانك",
+    "هذان / هاتان"
   ]
 }
