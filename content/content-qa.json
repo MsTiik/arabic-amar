@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-21T22:50:41.208Z",
+  "generatedAt": "2026-06-21T23:00:58.897Z",
   "totals": {
     "lessons": 12,
     "topics": 12,
@@ -11,9 +11,9 @@
   },
   "audioCoverage": {
     "vocabTotal": 426,
-    "vocabWithAudio": 275,
-    "vocabMissingAudio": 151,
-    "coveragePercent": 65,
+    "vocabWithAudio": 291,
+    "vocabMissingAudio": 135,
+    "coveragePercent": 68,
     "byTopic": [
       {
         "slug": "body-parts",
@@ -91,9 +91,9 @@
         "slug": "the-marketplace",
         "name": "The Marketplace",
         "total": 59,
-        "withAudio": 31,
-        "missingAudio": 28,
-        "coveragePercent": 53
+        "withAudio": 32,
+        "missingAudio": 27,
+        "coveragePercent": 54
       },
       {
         "slug": "colours",
@@ -107,9 +107,9 @@
         "slug": "command-verbs-in-the-qur-an",
         "name": "Command Verbs in the Qur’an",
         "total": 32,
-        "withAudio": 6,
-        "missingAudio": 26,
-        "coveragePercent": 19
+        "withAudio": 21,
+        "missingAudio": 11,
+        "coveragePercent": 66
       }
     ]
   },
@@ -130,7 +130,7 @@
       "code": "missing-audio",
       "severity": "info",
       "message": "Vocabulary words do not have a matching audio-manifest entry.",
-      "count": 151,
+      "count": 135,
       "examples": [
         "lesson-body-parts: جَبِينٌ / jabīnun / Forehead",
         "lesson-body-parts: أَسْنَانٌ / asnānun / Teeth",

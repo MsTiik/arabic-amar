@@ -507,7 +507,7 @@
         "lesson-the-marketplace-and-colours__foods__بطيخة__بطيخ__bittikhah-bittikh__watermelon-watermelons",
         "lesson-the-marketplace-and-colours__foods__حبة-بازلاء__بازلاء__habbat-bazila-bazilla__pea-peas",
         "lesson-the-marketplace-and-colours__foods__رمانة__رمان__rummanah-rumman__pomegranate-pomegranates",
-        "lesson-the-marketplace-and-colours__foods__تمرة__تمرتمر__tamrah-tamr__date-fruit-dates",
+        "lesson-the-marketplace-and-colours__foods__تمرة__تمر__tamrah-tamr__date-fruit-dates",
         "lesson-the-marketplace-and-colours__clothing__ملبس__ملابس__malbas-malabis__clothing-item-clothes",
         "lesson-the-marketplace-and-colours__clothing__حزام__ا-حزمة__hizam-ahzima__belt-belts",
         "lesson-the-marketplace-and-colours__clothing__معطف__معاطف__mitaf-maatif__coat-coats",
@@ -5821,9 +5821,9 @@
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__foods__تمرة__تمرتمر__tamrah-tamr__date-fruit-dates",
-      "arabic": "تَمْرَة / تَمْرتَمْر",
-      "arabicFolded": "تمرة / تمرتمر",
+      "id": "lesson-the-marketplace-and-colours__foods__تمرة__تمر__tamrah-tamr__date-fruit-dates",
+      "arabic": "تَمْرَة / تَمْر",
+      "arabicFolded": "تمرة / تمر",
       "pronunciation": "tamrah / tamr",
       "english": "date fruit / dates",
       "category": "Foods",
@@ -9833,5 +9833,5 @@
     "instagram": "@majestic_messenger",
     "docUrl": "https://docs.google.com/document/d/1wqbU7rsLUm0wqCjQPS2PbtCTThZOxnE2CnClxa8DETc/edit"
   },
-  "fetchedAt": "2026-06-21T22:50:41.208Z"
+  "fetchedAt": "2026-06-21T23:00:58.897Z"
 }

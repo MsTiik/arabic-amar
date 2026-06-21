@@ -806,8 +806,19 @@ export async function parseDocxBuffer(
   function splitArabicAndPronunciation(cell: string): { arabic: string; pronunciation?: string } {
     const trimmed = cell.trim();
     const match = /^(.+?)\s*\(([^()]+)\)\s*$/.exec(trimmed);
-    if (!match) return { arabic: trimmed };
-    return { arabic: match[1].trim(), pronunciation: match[2].trim() };
+    if (!match) return { arabic: dedupeRepeatedArabic(trimmed) };
+    return { arabic: dedupeRepeatedArabic(match[1].trim()), pronunciation: match[2].trim() };
+  }
+
+  function dedupeRepeatedArabic(s: string): string {
+    if (s.length < 2) return s;
+    for (let half = 1; half <= s.length / 2; half++) {
+      const prefix = s.slice(0, half);
+      if (s === prefix.repeat(s.length / half) && s.length % half === 0) {
+        return prefix;
+      }
+    }
+    return s;
   }
 
   function pushVocabEntry(entry: VocabEntry): void {
