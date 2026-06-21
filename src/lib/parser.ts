@@ -145,7 +145,7 @@ interface ParsedLessonHeading {
 }
 
 function parseLessonHeading(heading: string): ParsedLessonHeading | undefined {
-  const m = /^Lesson\s+([\d\s\-–]+):\s*(.*)$/i.exec(heading.trim());
+  const m = /^(?:Lesson|Topic)\s+([\d\s\-–]+):\s*(.*)$/i.exec(heading.trim());
   if (!m) return undefined;
   const number = m[1].replace(/\s+/g, "").replace(/—/g, "-").replace(/–/g, "-");
   const rest = m[2].trim();
@@ -380,14 +380,18 @@ function classifyTable(headers: string[]): TableClassification {
     has("singular arabic") &&
     has("meaning") &&
     has("plural arabic") &&
-    has("plural meaning")
+    (has("plural meaning") ||
+      lower.filter((h) => h === "meaning").length >= 2)
   ) {
+    const pluralEnglishCol = has("plural meaning")
+      ? indexOf("plural meaning")
+      : lower.indexOf("meaning", indexOf("meaning") + 1);
     return {
       kind: "paired-vocab",
       singularArabicCol: indexOf("singular arabic"),
       pluralArabicCol: indexOf("plural arabic"),
       singularEnglishCol: indexOf("meaning"),
-      pluralEnglishCol: indexOf("plural meaning"),
+      pluralEnglishCol,
       pairedKind: "separate-singular-plural",
     };
   }
