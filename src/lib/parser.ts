@@ -1121,47 +1121,6 @@ export async function parseDocxBuffer(
     });
   }
 
-  function processPersonGroupsTable(
-    table: HTMLElement,
-    classification: TableClassification,
-  ): void {
-    if (!cursor.lesson) return;
-    if (
-      classification.sectionCol === undefined ||
-      classification.englishCol === undefined ||
-      classification.exampleCol === undefined
-    ) {
-      warn("Skipped grammatical-person table: missing required columns");
-      return;
-    }
-    const matrix = tableToMatrix(table);
-    if (matrix.length < 2) return;
-    const examples: GrammarExample[] = [];
-    let runningCategory = "";
-    for (const row of matrix.slice(1)) {
-      const category = row.cells[classification.sectionCol]?.trim();
-      if (category) runningCategory = category;
-      const quantity = row.cells[classification.englishCol]?.trim();
-      const description = row.cells[classification.exampleCol]?.trim();
-      if (!quantity && !description) continue;
-      examples.push({
-        arabic: "",
-        english: [runningCategory, quantity, description].filter(Boolean).join(" — "),
-      });
-    }
-    if (examples.length === 0) return;
-    const title = stripLeadingNumber(cursor.subSection?.title ?? "Grammatical persons");
-    const id = stableId([cursor.lessonId, "person-groups", title, String(rules.length)]);
-    rules.push({
-      id,
-      title,
-      body: "",
-      examples,
-      topicSlugs: [...cursor.topicSlugs],
-      lessonId: cursor.lessonId,
-    });
-  }
-
   function processVerbFormsTable(table: HTMLElement): void {
     if (!cursor.lesson) return;
     const matrix = tableToMatrix(table);
@@ -1794,7 +1753,9 @@ export async function parseDocxBuffer(
           processVerbFormsTable(node);
           break;
         case "person-groups":
-          processPersonGroupsTable(node, classification);
+          // Person-group tables contain only English descriptions of grammatical
+          // persons (no Arabic content). Skip emitting them as rules — they add
+          // noise on the Grammar tab without teaching value.
           break;
         case "vocab":
           if (cursor.subSection?.kind === "vocabulary") {

@@ -604,10 +604,7 @@
         "lesson-command-verbs-in-the-qur-an__plural-far"
       ],
       "ruleIds": [
-        "lesson-command-verbs-in-the-qur-an__verb-forms__vocabulary-common-qur-anic-verbs",
-        "lesson-command-verbs-in-the-qur-an__person-groups__vocabulary-common-qur-anic-verbs__21",
-        "lesson-command-verbs-in-the-qur-an__person-groups__vocabulary-common-qur-anic-verbs__22",
-        "lesson-command-verbs-in-the-qur-an__person-groups__vocabulary-common-qur-anic-verbs__23"
+        "lesson-command-verbs-in-the-qur-an__verb-forms__vocabulary-common-qur-anic-verbs"
       ],
       "conversationIds": []
     }
@@ -767,7 +764,7 @@
         "lesson-command-verbs-in-the-qur-an"
       ],
       "vocabCount": 32,
-      "ruleCount": 4,
+      "ruleCount": 1,
       "conversationCount": 0,
       "notes": []
     }
@@ -9054,91 +9051,6 @@
         "command-verbs-in-the-qur-an"
       ],
       "lessonId": "lesson-command-verbs-in-the-qur-an"
-    },
-    {
-      "id": "lesson-command-verbs-in-the-qur-an__person-groups__vocabulary-common-qur-anic-verbs__21",
-      "title": "Vocabulary (Common Qur’anic Verbs)",
-      "body": "",
-      "examples": [
-        {
-          "arabic": "",
-          "english": "1st Person (Talking about Yourself) — Singular — one person talking about themselves"
-        },
-        {
-          "arabic": "",
-          "english": "1st Person (Talking about Yourself) — Plural — a group talking about themselves"
-        }
-      ],
-      "topicSlugs": [
-        "command-verbs-in-the-qur-an"
-      ],
-      "lessonId": "lesson-command-verbs-in-the-qur-an"
-    },
-    {
-      "id": "lesson-command-verbs-in-the-qur-an__person-groups__vocabulary-common-qur-anic-verbs__22",
-      "title": "Vocabulary (Common Qur’anic Verbs)",
-      "body": "",
-      "examples": [
-        {
-          "arabic": "",
-          "english": "2nd Person(Talking DIRECTLY TO another Person/Group) — Masculine Singular — one person talking to another male"
-        },
-        {
-          "arabic": "",
-          "english": "2nd Person(Talking DIRECTLY TO another Person/Group) — Feminine Singular — one person talking to another female"
-        },
-        {
-          "arabic": "",
-          "english": "2nd Person(Talking DIRECTLY TO another Person/Group) — Dual — one person talking to two people"
-        },
-        {
-          "arabic": "",
-          "english": "2nd Person(Talking DIRECTLY TO another Person/Group) — Masculine Plural — one person talking to a group of males/mixed"
-        },
-        {
-          "arabic": "",
-          "english": "2nd Person(Talking DIRECTLY TO another Person/Group) — Feminine Plural — one person talking to a group of females"
-        }
-      ],
-      "topicSlugs": [
-        "command-verbs-in-the-qur-an"
-      ],
-      "lessonId": "lesson-command-verbs-in-the-qur-an"
-    },
-    {
-      "id": "lesson-command-verbs-in-the-qur-an__person-groups__vocabulary-common-qur-anic-verbs__23",
-      "title": "Vocabulary (Common Qur’anic Verbs)",
-      "body": "",
-      "examples": [
-        {
-          "arabic": "",
-          "english": "3rd Person (Talking ABOUT another Person/Group) — MaleSingular — a group talking about another male"
-        },
-        {
-          "arabic": "",
-          "english": "3rd Person (Talking ABOUT another Person/Group) — Feminine Singular — a group talking about another female"
-        },
-        {
-          "arabic": "",
-          "english": "3rd Person (Talking ABOUT another Person/Group) — Masculine Dual — a group talking about two males"
-        },
-        {
-          "arabic": "",
-          "english": "3rd Person (Talking ABOUT another Person/Group) — Feminine Dual — a group talking about two females"
-        },
-        {
-          "arabic": "",
-          "english": "3rd Person (Talking ABOUT another Person/Group) — Masculine Plural — a group talking about a group of males"
-        },
-        {
-          "arabic": "",
-          "english": "3rd Person (Talking ABOUT another Person/Group) — Feminine Plural — a group talking about a group of females"
-        }
-      ],
-      "topicSlugs": [
-        "command-verbs-in-the-qur-an"
-      ],
-      "lessonId": "lesson-command-verbs-in-the-qur-an"
     }
   ],
   "conversations": [],
@@ -9833,5 +9745,5 @@
     "instagram": "@majestic_messenger",
     "docUrl": "https://docs.google.com/document/d/1wqbU7rsLUm0wqCjQPS2PbtCTThZOxnE2CnClxa8DETc/edit"
   },
-  "fetchedAt": "2026-06-21T23:00:58.897Z"
+  "fetchedAt": "2026-06-21T23:57:25.291Z"
 }
