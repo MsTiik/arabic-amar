@@ -66,45 +66,42 @@ export function VerbFormsCard({ rule, className }: Props) {
         <h3 className="text-lg font-semibold text-balance">{rule.title}</h3>
       </header>
 
-      {tenseLabels.length > 0 ? (
-        <div className="mt-4 hidden lg:grid lg:grid-cols-4 gap-3">
-          {tenseLabels.map(({ label, key }, i) => {
-            const style = TENSE_STYLES[key] ?? TENSE_STYLES.masdar;
-            return (
-              <div
-                key={i}
-                className={cn(
-                  "rounded-md px-3 py-1.5 text-center",
-                  style.bg,
-                  "border",
-                  style.border,
-                )}
-              >
-                <p
-                  className={cn(
-                    "text-xs font-bold uppercase tracking-wide",
-                    style.label,
-                  )}
-                >
-                  {label}
-                </p>
-              </div>
-            );
-          })}
-        </div>
-      ) : null}
-
       {rule.examples.length > 0 ? (
-        <div className="mt-3">
+        <div className="mt-4">
+          {tenseLabels.length > 0 ? (
+            <div className="mb-3 hidden lg:grid lg:grid-cols-4 gap-3">
+              {tenseLabels.map(({ label, key }, i) => {
+                const style = TENSE_STYLES[key] ?? TENSE_STYLES.masdar;
+                return (
+                  <div
+                    key={i}
+                    className={cn(
+                      "rounded-md px-3 py-1.5 text-center",
+                      style.bg,
+                      "border",
+                      style.border,
+                    )}
+                  >
+                    <p
+                      className={cn(
+                        "text-xs font-bold uppercase tracking-wide",
+                        style.label,
+                      )}
+                    >
+                      {label}
+                    </p>
+                  </div>
+                );
+              })}
+            </div>
+          ) : null}
+
           <CollapsibleExamples
             className="grid grid-cols-1 gap-3"
             initialVisible={rule.examples.length}
           >
             {rule.examples.map((ex, i) => (
-              <li
-                key={i}
-                className="rounded-lg border border-border bg-background-soft p-3"
-              >
+              <li key={i}>
                 {ex.parts?.length ? (
                   <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
                     {ex.parts.map((part, partIndex) => {
