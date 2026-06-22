@@ -5,6 +5,7 @@ import { DemonstrativePairCard } from "./demonstrative-pair-card";
 import { ExplainerCard } from "./explainer-card";
 import { RuleCard } from "./rule-card";
 import { RuleTableCard } from "./rule-table-card";
+import { VerbFormsCard } from "./verb-forms-card";
 
 interface Props {
   rule: GrammarRule;
@@ -21,6 +22,8 @@ export function RuleRenderer({ rule, className }: Props) {
   switch (shape) {
     case "pattern-walkthrough":
       return <RuleTableCard rule={rule} className={className} />;
+    case "verb-forms":
+      return <VerbFormsCard rule={rule} className={className} />;
     case "demonstrative-pair":
       return <DemonstrativePairCard rule={rule} className={className} />;
     case "explainer":
@@ -34,5 +37,5 @@ export function RuleRenderer({ rule, className }: Props) {
 /** Returns true when the rule renders full-width (spans both columns). */
 export function ruleSpansFullWidth(rule: GrammarRule): boolean {
   const shape = getRuleShape(rule);
-  return shape === "pattern-walkthrough" || shape === "explainer";
+  return shape === "pattern-walkthrough" || shape === "explainer" || shape === "verb-forms";
 }

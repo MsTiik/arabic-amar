@@ -61,24 +61,15 @@
         "lesson-numbers__units-1-9-7",
         "lesson-numbers__units-1-9-8",
         "lesson-numbers__units-1-9-9",
-        "lesson-numbers__ten-10",
-        "lesson-numbers__teens-11-19",
-        "lesson-numbers__teens-11-19-2",
-        "lesson-numbers__teens-11-19-3",
-        "lesson-numbers__teens-11-19-4",
-        "lesson-numbers__teens-11-19-5",
-        "lesson-numbers__teens-11-19-6",
-        "lesson-numbers__teens-11-19-7",
-        "lesson-numbers__teens-11-19-8",
-        "lesson-numbers__teens-11-19-9",
-        "lesson-numbers__tens-20-90",
-        "lesson-numbers__tens-20-90-2",
-        "lesson-numbers__tens-20-90-3",
-        "lesson-numbers__tens-20-90-4",
-        "lesson-numbers__tens-20-90-5",
-        "lesson-numbers__tens-20-90-6",
-        "lesson-numbers__tens-20-90-7",
-        "lesson-numbers__tens-20-90-8",
+        "lesson-numbers__tens-10-90",
+        "lesson-numbers__tens-10-90-2",
+        "lesson-numbers__tens-10-90-3",
+        "lesson-numbers__tens-10-90-4",
+        "lesson-numbers__tens-10-90-5",
+        "lesson-numbers__tens-10-90-6",
+        "lesson-numbers__tens-10-90-7",
+        "lesson-numbers__tens-10-90-8",
+        "lesson-numbers__tens-10-90-9",
         "lesson-numbers__hundreds-100-900",
         "lesson-numbers__hundreds-100-900-2",
         "lesson-numbers__hundreds-100-900-3",
@@ -477,70 +468,68 @@
         "the-marketplace"
       ],
       "vocabIds": [
-        "lesson-the-marketplace-and-colours__professions__جزار__جزارون__jazzar__butcher-butchers",
-        "lesson-the-marketplace-and-colours__professions__محاسب__محاسبون__muhasib__accountant-accountants",
-        "lesson-the-marketplace-and-colours__professions__باي-ع__باي-عون__bai__seller-sellers",
-        "lesson-the-marketplace-and-colours__professions__مشتري__مشترون__mushtari__customer-buyer-customers-buyers",
-        "lesson-the-marketplace-and-colours__professions__خضري__خضريون__khudariyy__greengrocer-greengrocers",
-        "lesson-the-marketplace-and-colours__professions__فاكهي__فاكهيون__fakihiyy__fruit-seller-fruit-sellers",
-        "lesson-the-marketplace-and-colours__foods__بيضة__بيض__baydah__egg-eggs",
-        "lesson-the-marketplace-and-colours__foods__سمكة__سمك__samakah__fish",
-        "lesson-the-marketplace-and-colours__foods__لحم__لحوم__lahm__meat-meats",
-        "lesson-the-marketplace-and-colours__foods__دجاجة__دجاج__dajajah__chicken-chickens",
-        "lesson-the-marketplace-and-colours__foods__كرنبة__كرانب__karnabah__cabbage-cabbages",
-        "lesson-the-marketplace-and-colours__foods__بطاطسة__بطاطس__batatisah__potato-potatoes",
-        "lesson-the-marketplace-and-colours__foods__جزرة__جزر__jazarah__carrot-carrots",
-        "lesson-the-marketplace-and-colours__foods__خيارة__خيار__khiyarah__cucumber-cucumbers",
-        "lesson-the-marketplace-and-colours__foods__قطعة-جبن__قطع-جبن__qitat-jubn__piece-of-cheese-pieces-of-cheese",
-        "lesson-the-marketplace-and-colours__foods__خبزة__خبز__khubzah__loaf-of-bread-bread",
-        "lesson-the-marketplace-and-colours__foods__زبادي__زباديات__zabadiyy__yogurt-yogurts",
-        "lesson-the-marketplace-and-colours__foods__لبن__ا-لبان__laban__milk-dairy-products",
-        "lesson-the-marketplace-and-colours__foods__عسل__ا-عسال__asal__honey-honeys",
-        "lesson-the-marketplace-and-colours__foods__فص-ثوم__فصوص-ثوم__fass-thawm__garlic-clove-garlic-cloves",
-        "lesson-the-marketplace-and-colours__foods__بصلة__بصل__basalah__onion-onions",
-        "lesson-the-marketplace-and-colours__foods__زبدة__زبد__zubdah__butter-portion-butter",
-        "lesson-the-marketplace-and-colours__foods__زيت__زيوت__zayt__oil-oils",
-        "lesson-the-marketplace-and-colours__foods__زيتونة__زيتون__zaytunah__olive-olives",
-        "lesson-the-marketplace-and-colours__foods__خضرة__خضروات__khadrah__vegetable-vegetables",
-        "lesson-the-marketplace-and-colours__foods__تفاحة__تفاح__tuffahah__apple-apples",
-        "lesson-the-marketplace-and-colours__foods__ليمونة__ليمون__laymunah__lemon-lemons",
-        "lesson-the-marketplace-and-colours__foods__ذرة__ذرات__dhurah__corn-grains-of-corn",
-        "lesson-the-marketplace-and-colours__foods__حبة-ا-رز__ا-رز__habbat-aruzz__grain-of-rice-rice",
-        "lesson-the-marketplace-and-colours__foods__كوب-شاي__ا-كواب-شاي__kub-shay__cup-of-tea-cups-of-tea",
-        "lesson-the-marketplace-and-colours__foods__حبة-سكر__حبات-سكر__habbat-sukkar__sugar-cube-sugar-cubes",
-        "lesson-the-marketplace-and-colours__foods__حبة-ملح__حبات-ملح__habbat-milh__grain-of-salt-grains-of-salt",
-        "lesson-the-marketplace-and-colours__foods__موزة__موز__mawzah__banana-bananas",
-        "lesson-the-marketplace-and-colours__foods__حبة-فاصوليا__فاصوليا__habbat-fasuliya__bean-beans",
-        "lesson-the-marketplace-and-colours__foods__حبة-طماطم__طماطم__habbat-tamatim__tomato-tomatoes",
-        "lesson-the-marketplace-and-colours__foods__حبة-عنب__عنب__habbat-inab__grape-grapes",
-        "lesson-the-marketplace-and-colours__foods__بطيخة__بطيخ__bittikhah__watermelon-watermelons",
-        "lesson-the-marketplace-and-colours__foods__حبة-بازلاء__بازلاء__habbat-bazila__pea-peas",
-        "lesson-the-marketplace-and-colours__foods__رمانة__رمان__rummanah__pomegranate-pomegranates",
-        "lesson-the-marketplace-and-colours__foods__تمرة__تمر__tamrah__date-fruit-dates",
-        "lesson-the-marketplace-and-colours__clothing__ملبس__ملابس__malbas__clothing-item-clothes",
-        "lesson-the-marketplace-and-colours__clothing__حزام__ا-حزمة__hizam__belt-belts",
-        "lesson-the-marketplace-and-colours__clothing__معطف__معاطف__mitaf__coat-coats",
-        "lesson-the-marketplace-and-colours__clothing__سروال__سراويل__sirwal__trousers",
-        "lesson-the-marketplace-and-colours__clothing__قميص__قمص__qamis__shirt-shirts",
-        "lesson-the-marketplace-and-colours__household-cleaning__ممسحة__مماسح__mimsahah__mop-mops",
-        "lesson-the-marketplace-and-colours__household-cleaning__جاروف__جواريف__jaruf__dustpan-dustpans",
-        "lesson-the-marketplace-and-colours__household-cleaning__دلو__دلاء__dalw__bucket-buckets",
-        "lesson-the-marketplace-and-colours__household-cleaning__ا-داة-نظافة__ا-دوات-نظافة__adat-nazafah__cleaning-tool-cleaning-tools",
-        "lesson-the-marketplace-and-colours__hygiene__معجون-حلاقة__معاجين-حلاقة__shaving-cream-shaving-creams",
-        "lesson-the-marketplace-and-colours__hygiene__معجون-ا-سنان__معاجين-ا-سنان__toothpaste-toothpastes",
-        "lesson-the-marketplace-and-colours__hygiene__مسحوق-غسيل__مساحيق-غسيل__washing-powder-washing-powders",
-        "lesson-the-marketplace-and-colours__hygiene__فرشاة-ا-سنان__فرش-ا-سنان__toothbrush-toothbrushes",
-        "lesson-the-marketplace-and-colours__hygiene__صابونة__صابون__sabunah__soap-bar-soap",
-        "lesson-the-marketplace-and-colours__general-objects__ميزان__موازين__mizan__scale-scales",
-        "lesson-the-marketplace-and-colours__general-objects__ا-داة-مكتبية__ا-دوات-مكتبية__stationery-item-stationery",
-        "lesson-the-marketplace-and-colours__general-objects__نقد__نقود__naqd__money-cash-monies-currencies",
-        "lesson-the-marketplace-and-colours__general-objects__سكين__سكاكين__sikkin__knife-knives",
-        "lesson-the-marketplace-and-colours__general-objects__عود-كبريت__ا-عواد-كبريت__matchstick-matchsticks"
+        "lesson-the-marketplace-and-colours__professions__جزار__جزارون__jazzar-jazzarun__butcher-butchers",
+        "lesson-the-marketplace-and-colours__professions__محاسب__محاسبون__muhasib-muhasibun__accountant-accountants",
+        "lesson-the-marketplace-and-colours__professions__باي-ع__باي-عون__bai-baiun__seller-sellers",
+        "lesson-the-marketplace-and-colours__professions__مشتري__مشترون__mushtari-mushtarun__customer-buyer-customers-buyers",
+        "lesson-the-marketplace-and-colours__professions__خضري__خضريون__khudariyy-khudariyyun__greengrocer-greengrocers",
+        "lesson-the-marketplace-and-colours__professions__فاكهي__فاكهيون__fakihiyy-fakihiyyun__fruit-seller-fruit-sellers",
+        "lesson-the-marketplace-and-colours__foods__بيضة__بيض__baydah-bayd__egg-eggs",
+        "lesson-the-marketplace-and-colours__foods__سمكة__سمك__samakah-samak__fish",
+        "lesson-the-marketplace-and-colours__foods__لحم__لحوم__lahm-luhum__meat-meats",
+        "lesson-the-marketplace-and-colours__foods__دجاجة__دجاج__dajajah-dajaj__chicken-chickens",
+        "lesson-the-marketplace-and-colours__foods__كرنبة__كرانب__karnabah-karanib__cabbage-cabbages",
+        "lesson-the-marketplace-and-colours__foods__بطاطسة__بطاطس__batatisah-batatis__potato-potatoes",
+        "lesson-the-marketplace-and-colours__foods__جزرة__جزر__jazarah-jazar__carrot-carrots",
+        "lesson-the-marketplace-and-colours__foods__خيارة__خيار__khiyarah-khiyar__cucumber-cucumbers",
+        "lesson-the-marketplace-and-colours__foods__قطعة-جبن__قطع-جبن__qitat-jubn-qita-jubn__piece-of-cheese-pieces-of-cheese",
+        "lesson-the-marketplace-and-colours__foods__خبزة__خبز__khubzah-khubz__loaf-of-bread-bread",
+        "lesson-the-marketplace-and-colours__foods__زبادي__زباديات__zabadiyy-zabadiyyat__yogurt-yogurts",
+        "lesson-the-marketplace-and-colours__foods__لبن__ا-لبان__laban-alban__milk-dairy-products",
+        "lesson-the-marketplace-and-colours__foods__عسل__ا-عسال__asal-asal__honey-honeys",
+        "lesson-the-marketplace-and-colours__foods__فص-ثوم__فصوص-ثوم__fass-thawm-fusus-thawm__garlic-clove-garlic-cloves",
+        "lesson-the-marketplace-and-colours__foods__بصلة__بصل__basalah-basal__onion-onions",
+        "lesson-the-marketplace-and-colours__foods__زبدة__زبد__zubdah-zubd__butter-portion-butter",
+        "lesson-the-marketplace-and-colours__foods__زيت__زيوت__zayt-zuyut__oil-oils",
+        "lesson-the-marketplace-and-colours__foods__زيتونة__زيتون__zaytunah-zaytun__olive-olives",
+        "lesson-the-marketplace-and-colours__foods__خضرة__خضروات__khadrah-khadrawat__vegetable-vegetables",
+        "lesson-the-marketplace-and-colours__foods__تفاحة__تفاح__tuffahah-tuffah__apple-apples",
+        "lesson-the-marketplace-and-colours__foods__ليمونة__ليمون__laymunah-laymun__lemon-lemons",
+        "lesson-the-marketplace-and-colours__foods__ذرة__ذرات__dhurah-dhurat__corn-grains-of-corn",
+        "lesson-the-marketplace-and-colours__foods__حبة-ا-رز__ا-رز__habbat-aruzz-aruzz__grain-of-rice-rice",
+        "lesson-the-marketplace-and-colours__foods__كوب-شاي__ا-كواب-شاي__kub-shay-akwab-shay__cup-of-tea-cups-of-tea",
+        "lesson-the-marketplace-and-colours__foods__حبة-سكر__حبات-سكر__habbat-sukkar-habbat-sukkar__sugar-cube-sugar-cubes",
+        "lesson-the-marketplace-and-colours__foods__حبة-ملح__حبات-ملح__habbat-milh-habbat-milh__grain-of-salt-grains-of-salt",
+        "lesson-the-marketplace-and-colours__foods__موزة__موز__mawzah-mawz__banana-bananas",
+        "lesson-the-marketplace-and-colours__foods__حبة-فاصوليا__فاصوليا__habbat-fasuliya-fasuliya__bean-beans",
+        "lesson-the-marketplace-and-colours__foods__حبة-طماطم__طماطم__habbat-tamatim-tamatim__tomato-tomatoes",
+        "lesson-the-marketplace-and-colours__foods__حبة-عنب__عنب__habbat-inab-inab__grape-grapes",
+        "lesson-the-marketplace-and-colours__foods__بطيخة__بطيخ__bittikhah-bittikh__watermelon-watermelons",
+        "lesson-the-marketplace-and-colours__foods__حبة-بازلاء__بازلاء__habbat-bazila-bazilla__pea-peas",
+        "lesson-the-marketplace-and-colours__foods__رمانة__رمان__rummanah-rumman__pomegranate-pomegranates",
+        "lesson-the-marketplace-and-colours__foods__تمرة__تمر__tamrah-tamr__date-fruit-dates",
+        "lesson-the-marketplace-and-colours__clothing__ملبس__ملابس__malbas-malabis__clothing-item-clothes",
+        "lesson-the-marketplace-and-colours__clothing__حزام__ا-حزمة__hizam-ahzima__belt-belts",
+        "lesson-the-marketplace-and-colours__clothing__معطف__معاطف__mitaf-maatif__coat-coats",
+        "lesson-the-marketplace-and-colours__clothing__سروال__سراويل__sirwal-sarawil__trousers",
+        "lesson-the-marketplace-and-colours__clothing__قميص__قمص__qamis-qumus__shirt-shirts",
+        "lesson-the-marketplace-and-colours__household-cleaning__ممسحة__مماسح__mimsahah-mamasih__mop-mops",
+        "lesson-the-marketplace-and-colours__household-cleaning__جاروف__جواريف__jaruf-jawarif__dustpan-dustpans",
+        "lesson-the-marketplace-and-colours__household-cleaning__دلو__دلاء__dalw-dila__bucket-buckets",
+        "lesson-the-marketplace-and-colours__household-cleaning__ا-داة-نظافة__ا-دوات-نظافة__adat-nazafah-adawat-nazafah__cleaning-tool-cleaning-tools",
+        "lesson-the-marketplace-and-colours__hygiene__معجون-حلاقة__معاجين-حلاقة__majun-hilaqah-maajin-hilaqah__shaving-cream-shaving-creams",
+        "lesson-the-marketplace-and-colours__hygiene__معجون-ا-سنان__معاجين-ا-سنان__majun-asnan-maajin-asnan__toothpaste-toothpastes",
+        "lesson-the-marketplace-and-colours__hygiene__مسحوق-غسيل__مساحيق-غسيل__mashuq-ghasil-masahiq-ghasil__washing-powder-washing-powders",
+        "lesson-the-marketplace-and-colours__hygiene__فرشاة-ا-سنان__فرش-ا-سنان__furshat-asnan-furash-asnan__toothbrush-toothbrushes",
+        "lesson-the-marketplace-and-colours__hygiene__صابونة__صابون__sabunah-sabun__soap-bar-soap",
+        "lesson-the-marketplace-and-colours__general-objects__ميزان__موازين__mizan-mawazin__scale-scales",
+        "lesson-the-marketplace-and-colours__general-objects__ا-داة-مكتبية__ا-دوات-مكتبية__adat-maktabiyyah-adawat-maktabiyyah__stationery-item-stationery",
+        "lesson-the-marketplace-and-colours__general-objects__نقد__نقود__naqd-nuqud__money-cash-monies-currencies",
+        "lesson-the-marketplace-and-colours__general-objects__سكين__سكاكين__sikkin-sakakin__knife-knives",
+        "lesson-the-marketplace-and-colours__general-objects__عود-كبريت__ا-عواد-كبريت__ud-kibrit-awad-kibrit__matchstick-matchsticks"
       ],
       "ruleIds": [
-        "lesson-the-marketplace-and-colours__person-groups__vocabulary-colours__19",
-        "lesson-the-marketplace-and-colours__person-groups__vocabulary-colours__20",
-        "lesson-the-marketplace-and-colours__person-groups__vocabulary-colours__21"
+        "lesson-the-marketplace-and-colours__verb-forms__vocabulary-common-verbs-when-shopping"
       ],
       "conversationIds": []
     },
@@ -567,15 +556,56 @@
         "lesson-colours__colours__ذهبي__ذهبية__dhahabi-dhahabiyyah__golden",
         "lesson-colours__colours__فضي__فضية__fiddi-fiddiyyah__silver",
         "lesson-colours__colours__كحلي__كحلية__kuhli-kuhliyyah__navy-blue",
-        "lesson-colours__colours__سماوي__سماوية__samawi-samawiyyah__sky-blue",
-        "lesson-colours__singular-near",
-        "lesson-colours__singular-far",
-        "lesson-colours__dual-near",
-        "lesson-colours__dual-far",
-        "lesson-colours__plural-near",
-        "lesson-colours__plural-far"
+        "lesson-colours__colours__سماوي__سماوية__samawi-samawiyyah__sky-blue"
       ],
       "ruleIds": [],
+      "conversationIds": []
+    },
+    {
+      "id": "lesson-command-verbs-in-the-qur-an",
+      "number": "12",
+      "title": "Command Verbs in the Qur’an",
+      "titleArabic": "أَفْعَالُ الْأَمْرِ فِي الْقُرْآنِ الْكَرِيمِ",
+      "topicSlugs": [
+        "command-verbs-in-the-qur-an"
+      ],
+      "vocabIds": [
+        "lesson-command-verbs-in-the-qur-an__islamic-identites__ا-مام__ا-ي-مة__imam-aimmah__imam-imams",
+        "lesson-command-verbs-in-the-qur-an__islamic-identites__مسلم__مسلمون-مسلمين__muslim-muslimun-muslimin__muslim-muslims",
+        "lesson-command-verbs-in-the-qur-an__islamic-identites__رب__ا-رباب__rabb-arbab__lord-lords",
+        "lesson-command-verbs-in-the-qur-an__islamic-identites__الله__allah__allah-god",
+        "lesson-command-verbs-in-the-qur-an__islamic-identites__شيطان__شياطين__shaytan-shayatin__devil-devils",
+        "lesson-command-verbs-in-the-qur-an__in-the-mosque__مسجد__مساجد__masjid-masajid__mosque-mosques",
+        "lesson-command-verbs-in-the-qur-an__in-the-mosque__منبر__منابر__minbar-manabir__pulpit-pulpits",
+        "lesson-command-verbs-in-the-qur-an__in-the-mosque__خطبة__خطب__khutbah-khutab__sermon-sermons",
+        "lesson-command-verbs-in-the-qur-an__in-the-mosque__حمد__ا-حماد__hamd-ahmad__praise-praises",
+        "lesson-command-verbs-in-the-qur-an__days__يوم__ا-يام__yawm-ayyam__day-days",
+        "lesson-command-verbs-in-the-qur-an__days__جمعة__جمعات__jumuah-jumuat__friday-fridays",
+        "lesson-command-verbs-in-the-qur-an__days__عالم__عوالم__alam-awalim__world-worlds",
+        "lesson-command-verbs-in-the-qur-an__language__لغة__لغات__lughah-lughat__language-languages",
+        "lesson-command-verbs-in-the-qur-an__language__العربية__al-arabiyyah__arabic-language",
+        "lesson-command-verbs-in-the-qur-an__language__قرا-ن__quran__quran",
+        "lesson-command-verbs-in-the-qur-an__language__فقرة__فقر__fiqrah-fiqar__paragraph-paragraphs",
+        "lesson-command-verbs-in-the-qur-an__language__سو-ال__ا-سي-لة__sual-asilah__question-questions",
+        "lesson-command-verbs-in-the-qur-an__language__تدريب__تدريبات__tadrib-tadribat__exercise-exercises",
+        "lesson-command-verbs-in-the-qur-an__character-and-actions__حسنة__حسنات__hasanah-hasanat__good-deed-good-deeds",
+        "lesson-command-verbs-in-the-qur-an__character-and-actions__سيي-ة__سيي-ات__sayyiah-sayyiat__bad-deed-sin-bad-deeds",
+        "lesson-command-verbs-in-the-qur-an__character-and-actions__ميزان__موازين__mizan-mawazin__scale-balance-scales",
+        "lesson-command-verbs-in-the-qur-an__character-and-actions__قلب__قلوب__qalb-qulub__heart-hearts",
+        "lesson-command-verbs-in-the-qur-an__singular-near",
+        "lesson-command-verbs-in-the-qur-an__singular-near-2",
+        "lesson-command-verbs-in-the-qur-an__singular-far",
+        "lesson-command-verbs-in-the-qur-an__singular-far-2",
+        "lesson-command-verbs-in-the-qur-an__dual-near",
+        "lesson-command-verbs-in-the-qur-an__dual-near-2",
+        "lesson-command-verbs-in-the-qur-an__dual-far",
+        "lesson-command-verbs-in-the-qur-an__dual-far-2",
+        "lesson-command-verbs-in-the-qur-an__plural-near",
+        "lesson-command-verbs-in-the-qur-an__plural-far"
+      ],
+      "ruleIds": [
+        "lesson-command-verbs-in-the-qur-an__verb-forms__vocabulary-common-qur-anic-verbs"
+      ],
       "conversationIds": []
     }
   ],
@@ -601,7 +631,7 @@
       "lessonIds": [
         "lesson-numbers"
       ],
-      "vocabCount": 39,
+      "vocabCount": 30,
       "ruleCount": 5,
       "conversationCount": 0,
       "notes": []
@@ -708,7 +738,7 @@
         "lesson-the-marketplace-and-colours"
       ],
       "vocabCount": 59,
-      "ruleCount": 3,
+      "ruleCount": 1,
       "conversationCount": 0,
       "notes": []
     },
@@ -720,8 +750,21 @@
       "lessonIds": [
         "lesson-colours"
       ],
-      "vocabCount": 21,
+      "vocabCount": 15,
       "ruleCount": 0,
+      "conversationCount": 0,
+      "notes": []
+    },
+    {
+      "slug": "command-verbs-in-the-qur-an",
+      "name": "Command Verbs in the Qur’an",
+      "nameArabic": "أَفْعَالُ الْأَمْرِ فِي الْقُرْآنِ الْكَرِيمِ",
+      "order": 11,
+      "lessonIds": [
+        "lesson-command-verbs-in-the-qur-an"
+      ],
+      "vocabCount": 32,
+      "ruleCount": 1,
       "conversationCount": 0,
       "notes": []
     }
@@ -1069,7 +1112,7 @@
       "arabicFolded": "واحد",
       "pronunciation": "wāḥidun",
       "english": "One",
-      "category": "UNITS (1-9)",
+      "category": "UNITS (1 - 9)",
       "isExtra": false,
       "numericValue": 1,
       "topicSlugs": [
@@ -1083,7 +1126,7 @@
       "arabicFolded": "اثنان",
       "pronunciation": "ithnān(i)",
       "english": "Two",
-      "category": "UNITS (1-9)",
+      "category": "UNITS (1 - 9)",
       "isExtra": false,
       "numericValue": 2,
       "topicSlugs": [
@@ -1097,7 +1140,7 @@
       "arabicFolded": "ثلاثة",
       "pronunciation": "thalāthatun",
       "english": "Three",
-      "category": "UNITS (1-9)",
+      "category": "UNITS (1 - 9)",
       "isExtra": false,
       "numericValue": 3,
       "topicSlugs": [
@@ -1111,7 +1154,7 @@
       "arabicFolded": "أربعة",
       "pronunciation": "arbaʿatun",
       "english": "Four",
-      "category": "UNITS (1-9)",
+      "category": "UNITS (1 - 9)",
       "isExtra": false,
       "numericValue": 4,
       "topicSlugs": [
@@ -1125,7 +1168,7 @@
       "arabicFolded": "خمسة",
       "pronunciation": "khamsatun",
       "english": "Five",
-      "category": "UNITS (1-9)",
+      "category": "UNITS (1 - 9)",
       "isExtra": false,
       "numericValue": 5,
       "topicSlugs": [
@@ -1139,7 +1182,7 @@
       "arabicFolded": "ستة",
       "pronunciation": "sittatun",
       "english": "Six",
-      "category": "UNITS (1-9)",
+      "category": "UNITS (1 - 9)",
       "isExtra": false,
       "numericValue": 6,
       "topicSlugs": [
@@ -1153,7 +1196,7 @@
       "arabicFolded": "سبعة",
       "pronunciation": "sabʿatun",
       "english": "Seven",
-      "category": "UNITS (1-9)",
+      "category": "UNITS (1 - 9)",
       "isExtra": false,
       "numericValue": 7,
       "topicSlugs": [
@@ -1167,7 +1210,7 @@
       "arabicFolded": "ثمانية",
       "pronunciation": "thamāniyatun",
       "english": "Eight",
-      "category": "UNITS (1-9)",
+      "category": "UNITS (1 - 9)",
       "isExtra": false,
       "numericValue": 8,
       "topicSlugs": [
@@ -1181,7 +1224,7 @@
       "arabicFolded": "تسعة",
       "pronunciation": "tisʿatun",
       "english": "Nine",
-      "category": "UNITS (1-9)",
+      "category": "UNITS (1 - 9)",
       "isExtra": false,
       "numericValue": 9,
       "topicSlugs": [
@@ -1190,12 +1233,12 @@
       "lessonId": "lesson-numbers"
     },
     {
-      "id": "lesson-numbers__ten-10",
+      "id": "lesson-numbers__tens-10-90",
       "arabic": "عَشَرَةٌ",
       "arabicFolded": "عشرة",
       "pronunciation": "ʿasharatun",
       "english": "Ten",
-      "category": "TEN(10)",
+      "category": "TENS (10 - 90)",
       "isExtra": false,
       "numericValue": 10,
       "topicSlugs": [
@@ -1204,138 +1247,12 @@
       "lessonId": "lesson-numbers"
     },
     {
-      "id": "lesson-numbers__teens-11-19",
-      "arabic": "أَحَدَ عَشَرَ",
-      "arabicFolded": "أحد عشر",
-      "pronunciation": "aḥada ʿashara",
-      "english": "Eleven",
-      "category": "TEENS (11 - 19)",
-      "isExtra": false,
-      "numericValue": 11,
-      "topicSlugs": [
-        "numbers"
-      ],
-      "lessonId": "lesson-numbers"
-    },
-    {
-      "id": "lesson-numbers__teens-11-19-2",
-      "arabic": "اِثْنَا عَشَرَ",
-      "arabicFolded": "اثنا عشر",
-      "pronunciation": "ithnā ʿashara",
-      "english": "Twelve",
-      "category": "TEENS (11 - 19)",
-      "isExtra": false,
-      "numericValue": 12,
-      "topicSlugs": [
-        "numbers"
-      ],
-      "lessonId": "lesson-numbers"
-    },
-    {
-      "id": "lesson-numbers__teens-11-19-3",
-      "arabic": "ثَلَاثَةَ عَشَرَ",
-      "arabicFolded": "ثلاثة عشر",
-      "pronunciation": "thalāthata ʿashara",
-      "english": "Thirteen",
-      "category": "TEENS (11 - 19)",
-      "isExtra": false,
-      "numericValue": 13,
-      "topicSlugs": [
-        "numbers"
-      ],
-      "lessonId": "lesson-numbers"
-    },
-    {
-      "id": "lesson-numbers__teens-11-19-4",
-      "arabic": "أَرْبَعَةَ عَشَرَ",
-      "arabicFolded": "أربعة عشر",
-      "pronunciation": "arbaʿata ʿashara",
-      "english": "Fourteen",
-      "category": "TEENS (11 - 19)",
-      "isExtra": false,
-      "numericValue": 14,
-      "topicSlugs": [
-        "numbers"
-      ],
-      "lessonId": "lesson-numbers"
-    },
-    {
-      "id": "lesson-numbers__teens-11-19-5",
-      "arabic": "خَمْسَةَ عَشَرَ",
-      "arabicFolded": "خمسة عشر",
-      "pronunciation": "khamsata ʿashara",
-      "english": "Fifteen",
-      "category": "TEENS (11 - 19)",
-      "isExtra": false,
-      "numericValue": 15,
-      "topicSlugs": [
-        "numbers"
-      ],
-      "lessonId": "lesson-numbers"
-    },
-    {
-      "id": "lesson-numbers__teens-11-19-6",
-      "arabic": "سِتَّةَ عَشَرَ",
-      "arabicFolded": "ستة عشر",
-      "pronunciation": "sittata ʿashara",
-      "english": "Sixteen",
-      "category": "TEENS (11 - 19)",
-      "isExtra": false,
-      "numericValue": 16,
-      "topicSlugs": [
-        "numbers"
-      ],
-      "lessonId": "lesson-numbers"
-    },
-    {
-      "id": "lesson-numbers__teens-11-19-7",
-      "arabic": "سَبْعَةَ عَشَرَ",
-      "arabicFolded": "سبعة عشر",
-      "pronunciation": "sabʿata ʿashara",
-      "english": "Seventeen",
-      "category": "TEENS (11 - 19)",
-      "isExtra": false,
-      "numericValue": 17,
-      "topicSlugs": [
-        "numbers"
-      ],
-      "lessonId": "lesson-numbers"
-    },
-    {
-      "id": "lesson-numbers__teens-11-19-8",
-      "arabic": "ثَمَانِيَةَ عَشَرَ",
-      "arabicFolded": "ثمانية عشر",
-      "pronunciation": "thamāniyata ʿashara",
-      "english": "Eighteen",
-      "category": "TEENS (11 - 19)",
-      "isExtra": false,
-      "numericValue": 18,
-      "topicSlugs": [
-        "numbers"
-      ],
-      "lessonId": "lesson-numbers"
-    },
-    {
-      "id": "lesson-numbers__teens-11-19-9",
-      "arabic": "تِسْعَةَ عَشَرَ",
-      "arabicFolded": "تسعة عشر",
-      "pronunciation": "tisʿata ʿashara",
-      "english": "Nineteen",
-      "category": "TEENS (11 - 19)",
-      "isExtra": false,
-      "numericValue": 19,
-      "topicSlugs": [
-        "numbers"
-      ],
-      "lessonId": "lesson-numbers"
-    },
-    {
-      "id": "lesson-numbers__tens-20-90",
+      "id": "lesson-numbers__tens-10-90-2",
       "arabic": "عِشْرُونَ",
       "arabicFolded": "عشرون",
       "pronunciation": "ʿishrūna",
       "english": "Twenty",
-      "category": "TENS (20 - 90)",
+      "category": "TENS (10 - 90)",
       "isExtra": false,
       "numericValue": 20,
       "topicSlugs": [
@@ -1344,12 +1261,12 @@
       "lessonId": "lesson-numbers"
     },
     {
-      "id": "lesson-numbers__tens-20-90-2",
+      "id": "lesson-numbers__tens-10-90-3",
       "arabic": "ثَلَاثُونَ",
       "arabicFolded": "ثلاثون",
       "pronunciation": "thalāthūna",
       "english": "Thirty",
-      "category": "TENS (20 - 90)",
+      "category": "TENS (10 - 90)",
       "isExtra": false,
       "numericValue": 30,
       "topicSlugs": [
@@ -1358,12 +1275,12 @@
       "lessonId": "lesson-numbers"
     },
     {
-      "id": "lesson-numbers__tens-20-90-3",
+      "id": "lesson-numbers__tens-10-90-4",
       "arabic": "أَرْبَعُونَ",
       "arabicFolded": "أربعون",
       "pronunciation": "arbaʿūna",
       "english": "Forty",
-      "category": "TENS (20 - 90)",
+      "category": "TENS (10 - 90)",
       "isExtra": false,
       "numericValue": 40,
       "topicSlugs": [
@@ -1372,12 +1289,12 @@
       "lessonId": "lesson-numbers"
     },
     {
-      "id": "lesson-numbers__tens-20-90-4",
+      "id": "lesson-numbers__tens-10-90-5",
       "arabic": "خَمْسُونَ",
       "arabicFolded": "خمسون",
       "pronunciation": "khamsūna",
       "english": "Fifty",
-      "category": "TENS (20 - 90)",
+      "category": "TENS (10 - 90)",
       "isExtra": false,
       "numericValue": 50,
       "topicSlugs": [
@@ -1386,12 +1303,12 @@
       "lessonId": "lesson-numbers"
     },
     {
-      "id": "lesson-numbers__tens-20-90-5",
+      "id": "lesson-numbers__tens-10-90-6",
       "arabic": "سِتُّونَ",
       "arabicFolded": "ستون",
       "pronunciation": "sittūna",
       "english": "Sixty",
-      "category": "TENS (20 - 90)",
+      "category": "TENS (10 - 90)",
       "isExtra": false,
       "numericValue": 60,
       "topicSlugs": [
@@ -1400,12 +1317,12 @@
       "lessonId": "lesson-numbers"
     },
     {
-      "id": "lesson-numbers__tens-20-90-6",
+      "id": "lesson-numbers__tens-10-90-7",
       "arabic": "سَبْعُونَ",
       "arabicFolded": "سبعون",
       "pronunciation": "sabʿūna",
       "english": "Seventy",
-      "category": "TENS (20 - 90)",
+      "category": "TENS (10 - 90)",
       "isExtra": false,
       "numericValue": 70,
       "topicSlugs": [
@@ -1414,12 +1331,12 @@
       "lessonId": "lesson-numbers"
     },
     {
-      "id": "lesson-numbers__tens-20-90-7",
+      "id": "lesson-numbers__tens-10-90-8",
       "arabic": "ثَمَانُونَ",
       "arabicFolded": "ثمانون",
       "pronunciation": "thamānūna",
       "english": "Eighty",
-      "category": "TENS (20 - 90)",
+      "category": "TENS (10 - 90)",
       "isExtra": false,
       "numericValue": 80,
       "topicSlugs": [
@@ -1428,12 +1345,12 @@
       "lessonId": "lesson-numbers"
     },
     {
-      "id": "lesson-numbers__tens-20-90-8",
+      "id": "lesson-numbers__tens-10-90-9",
       "arabic": "تِسْعُونَ",
       "arabicFolded": "تسعون",
       "pronunciation": "tisʿūna",
       "english": "Ninety",
-      "category": "TENS (20 - 90)",
+      "category": "TENS (10 - 90)",
       "isExtra": false,
       "numericValue": 90,
       "topicSlugs": [
@@ -1473,7 +1390,7 @@
       "id": "lesson-numbers__hundreds-100-900-3",
       "arabic": "ثَلَاثُمِائَةٌ",
       "arabicFolded": "ثلاثمائة",
-      "pronunciation": "thalāthu-miʾa(tin)",
+      "pronunciation": "thalāthu-miʾa(tun)",
       "english": "Three Hundred",
       "category": "HUNDREDS(100 - 900)",
       "isExtra": false,
@@ -1487,7 +1404,7 @@
       "id": "lesson-numbers__hundreds-100-900-4",
       "arabic": "أَرْبَعُمِائَةٌ",
       "arabicFolded": "أربعمائة",
-      "pronunciation": "arbaʿu-miʾa(tin)",
+      "pronunciation": "arbaʿu-miʾa(tun)",
       "english": "Four Hundred",
       "category": "HUNDREDS(100 - 900)",
       "isExtra": false,
@@ -1501,7 +1418,7 @@
       "id": "lesson-numbers__hundreds-100-900-5",
       "arabic": "خَمْسُمِائَةٌ",
       "arabicFolded": "خمسمائة",
-      "pronunciation": "khamsu-miʾa(tin)",
+      "pronunciation": "khamsu-miʾa(tun)",
       "english": "Five Hundred",
       "category": "HUNDREDS(100 - 900)",
       "isExtra": false,
@@ -1515,7 +1432,7 @@
       "id": "lesson-numbers__hundreds-100-900-6",
       "arabic": "سِتُّمِائَةٌ",
       "arabicFolded": "ستمائة",
-      "pronunciation": "sittu-miʾa(tin)",
+      "pronunciation": "sittu-miʾa(tun)",
       "english": "Six Hundred",
       "category": "HUNDREDS(100 - 900)",
       "isExtra": false,
@@ -1529,7 +1446,7 @@
       "id": "lesson-numbers__hundreds-100-900-7",
       "arabic": "سَبْعُمِائَةٌ",
       "arabicFolded": "سبعمائة",
-      "pronunciation": "sabʿu-miʾa(tin)",
+      "pronunciation": "sabʿu-miʾa(tun)",
       "english": "Seven Hundred",
       "category": "HUNDREDS(100 - 900)",
       "isExtra": false,
@@ -1543,7 +1460,7 @@
       "id": "lesson-numbers__hundreds-100-900-8",
       "arabic": "ثَمَانِمِائَةٌ",
       "arabicFolded": "ثمانمائة",
-      "pronunciation": "thamāni-miʾa(tin)",
+      "pronunciation": "thamāni-miʾa(tun)",
       "english": "Eight Hundred",
       "category": "HUNDREDS(100 - 900)",
       "isExtra": false,
@@ -1557,7 +1474,7 @@
       "id": "lesson-numbers__hundreds-100-900-9",
       "arabic": "تِسْعُمِائَةٌ",
       "arabicFolded": "تسعمائة",
-      "pronunciation": "tisʿu-miʾa(tin)",
+      "pronunciation": "tisʿu-miʾa(tun)",
       "english": "Nine Hundred",
       "category": "HUNDREDS(100 - 900)",
       "isExtra": false,
@@ -1612,8 +1529,8 @@
       "id": "lesson-time__general-2",
       "arabic": "دَقيقَة",
       "arabicFolded": "دقيقة",
-      "pronunciation": "daqīqah",
-      "english": "Minute (for 1 and 11-59 minutes past)",
+      "pronunciation": "daqīqah (plural form)",
+      "english": "Minutes Past (for 11-59 minutes past)",
       "category": "GENERAL",
       "isExtra": false,
       "topicSlugs": [
@@ -1623,10 +1540,10 @@
     },
     {
       "id": "lesson-time__general-3",
-      "arabic": "دَقيقَتان",
-      "arabicFolded": "دقيقتان",
-      "pronunciation": "daqīqataan",
-      "english": "Minutes (for 2 minutes past)",
+      "arabic": "دَقائِق",
+      "arabicFolded": "دقائق",
+      "pronunciation": "daqāʾiq (singular form)",
+      "english": "Minute Past (for 1 - 10 minutes past)",
       "category": "GENERAL",
       "isExtra": false,
       "topicSlugs": [
@@ -1636,10 +1553,10 @@
     },
     {
       "id": "lesson-time__general-4",
-      "arabic": "دَقائِق",
-      "arabicFolded": "دقائق",
-      "pronunciation": "daqāʾiq",
-      "english": "Minutes (for 3 - 10 minutes past)",
+      "arabic": "دَقيقَتان",
+      "arabicFolded": "دقيقتان",
+      "pronunciation": "daqīqataan",
+      "english": "“Two minutes past”",
       "category": "GENERAL",
       "isExtra": false,
       "topicSlugs": [
@@ -5394,10 +5311,10 @@
       "lessonId": "lesson-nouns-in-the-classroom"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__professions__جزار__جزارون__jazzar__butcher-butchers",
+      "id": "lesson-the-marketplace-and-colours__professions__جزار__جزارون__jazzar-jazzarun__butcher-butchers",
       "arabic": "جَزَّار / جَزَّارُون",
       "arabicFolded": "جزار / جزارون",
-      "pronunciation": "jazzār",
+      "pronunciation": "jazzār / jazzārūn",
       "english": "butcher / butchers",
       "category": "Professions",
       "isExtra": false,
@@ -5407,10 +5324,10 @@
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__professions__محاسب__محاسبون__muhasib__accountant-accountants",
+      "id": "lesson-the-marketplace-and-colours__professions__محاسب__محاسبون__muhasib-muhasibun__accountant-accountants",
       "arabic": "مُحَاسِب / مُحَاسِبُون",
       "arabicFolded": "محاسب / محاسبون",
-      "pronunciation": "muḥāsib",
+      "pronunciation": "muḥāsib / muḥāsibūn",
       "english": "accountant / accountants",
       "category": "Professions",
       "isExtra": false,
@@ -5420,10 +5337,10 @@
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__professions__باي-ع__باي-عون__bai__seller-sellers",
+      "id": "lesson-the-marketplace-and-colours__professions__باي-ع__باي-عون__bai-baiun__seller-sellers",
       "arabic": "بَائِع / بَائِعُون",
       "arabicFolded": "بائع / بائعون",
-      "pronunciation": "bā’iʿ",
+      "pronunciation": "bā’iʿ / bāʾiʿūn",
       "english": "seller / sellers",
       "category": "Professions",
       "isExtra": false,
@@ -5433,10 +5350,10 @@
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__professions__مشتري__مشترون__mushtari__customer-buyer-customers-buyers",
+      "id": "lesson-the-marketplace-and-colours__professions__مشتري__مشترون__mushtari-mushtarun__customer-buyer-customers-buyers",
       "arabic": "مُشْتَرِي / مُشْتَرُون",
       "arabicFolded": "مشتري / مشترون",
-      "pronunciation": "mushtarī",
+      "pronunciation": "mushtarī / mushtarūn",
       "english": "customer / buyer / customers / buyers",
       "category": "Professions",
       "isExtra": false,
@@ -5446,10 +5363,10 @@
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__professions__خضري__خضريون__khudariyy__greengrocer-greengrocers",
+      "id": "lesson-the-marketplace-and-colours__professions__خضري__خضريون__khudariyy-khudariyyun__greengrocer-greengrocers",
       "arabic": "خُضَرِيّ / خُضَرِيُّون",
       "arabicFolded": "خضري / خضريون",
-      "pronunciation": "khuḍariyy",
+      "pronunciation": "khuḍariyy / khuḍariyyūn",
       "english": "greengrocer / greengrocers",
       "category": "Professions",
       "isExtra": false,
@@ -5459,10 +5376,10 @@
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__professions__فاكهي__فاكهيون__fakihiyy__fruit-seller-fruit-sellers",
+      "id": "lesson-the-marketplace-and-colours__professions__فاكهي__فاكهيون__fakihiyy-fakihiyyun__fruit-seller-fruit-sellers",
       "arabic": "فَاكِهِيّ / فَاكِهِيُّون",
       "arabicFolded": "فاكهي / فاكهيون",
-      "pronunciation": "fākihiyy",
+      "pronunciation": "fākihiyy / fākihiyyūn",
       "english": "fruit seller / fruit sellers",
       "category": "Professions",
       "isExtra": false,
@@ -5472,10 +5389,10 @@
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__foods__بيضة__بيض__baydah__egg-eggs",
+      "id": "lesson-the-marketplace-and-colours__foods__بيضة__بيض__baydah-bayd__egg-eggs",
       "arabic": "بَيْضَة / بَيْض",
       "arabicFolded": "بيضة / بيض",
-      "pronunciation": "bayḍah",
+      "pronunciation": "bayḍah / bayḍ",
       "english": "egg / eggs",
       "category": "Foods",
       "isExtra": false,
@@ -5485,10 +5402,10 @@
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__foods__سمكة__سمك__samakah__fish",
+      "id": "lesson-the-marketplace-and-colours__foods__سمكة__سمك__samakah-samak__fish",
       "arabic": "سَمَكَة / سَمَك",
       "arabicFolded": "سمكة / سمك",
-      "pronunciation": "samakah",
+      "pronunciation": "samakah / samak",
       "english": "fish",
       "category": "Foods",
       "isExtra": false,
@@ -5498,10 +5415,10 @@
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__foods__لحم__لحوم__lahm__meat-meats",
+      "id": "lesson-the-marketplace-and-colours__foods__لحم__لحوم__lahm-luhum__meat-meats",
       "arabic": "لَحْم / لُحُوم",
       "arabicFolded": "لحم / لحوم",
-      "pronunciation": "laḥm",
+      "pronunciation": "laḥm / luḥūm",
       "english": "meat / meats",
       "category": "Foods",
       "isExtra": false,
@@ -5511,10 +5428,10 @@
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__foods__دجاجة__دجاج__dajajah__chicken-chickens",
+      "id": "lesson-the-marketplace-and-colours__foods__دجاجة__دجاج__dajajah-dajaj__chicken-chickens",
       "arabic": "دَجَاجَة / دَجَاج",
       "arabicFolded": "دجاجة / دجاج",
-      "pronunciation": "dajājah",
+      "pronunciation": "dajājah / dajāj",
       "english": "chicken / chickens",
       "category": "Foods",
       "isExtra": false,
@@ -5524,10 +5441,10 @@
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__foods__كرنبة__كرانب__karnabah__cabbage-cabbages",
+      "id": "lesson-the-marketplace-and-colours__foods__كرنبة__كرانب__karnabah-karanib__cabbage-cabbages",
       "arabic": "كَرْنَبَة / كَرَانِب",
       "arabicFolded": "كرنبة / كرانب",
-      "pronunciation": "karnabah",
+      "pronunciation": "karnabah / karānib",
       "english": "cabbage / cabbages",
       "category": "Foods",
       "isExtra": false,
@@ -5537,10 +5454,10 @@
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__foods__بطاطسة__بطاطس__batatisah__potato-potatoes",
+      "id": "lesson-the-marketplace-and-colours__foods__بطاطسة__بطاطس__batatisah-batatis__potato-potatoes",
       "arabic": "بَطَاطِسَة / بَطَاطِس",
       "arabicFolded": "بطاطسة / بطاطس",
-      "pronunciation": "baṭāṭisah",
+      "pronunciation": "baṭāṭisah / baṭāṭis",
       "english": "potato / potatoes",
       "category": "Foods",
       "isExtra": false,
@@ -5550,10 +5467,10 @@
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__foods__جزرة__جزر__jazarah__carrot-carrots",
+      "id": "lesson-the-marketplace-and-colours__foods__جزرة__جزر__jazarah-jazar__carrot-carrots",
       "arabic": "جَزَرَة / جَزَر",
       "arabicFolded": "جزرة / جزر",
-      "pronunciation": "jazarah",
+      "pronunciation": "jazarah / jazar",
       "english": "carrot / carrots",
       "category": "Foods",
       "isExtra": false,
@@ -5563,10 +5480,10 @@
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__foods__خيارة__خيار__khiyarah__cucumber-cucumbers",
+      "id": "lesson-the-marketplace-and-colours__foods__خيارة__خيار__khiyarah-khiyar__cucumber-cucumbers",
       "arabic": "خِيَارَة / خِيَار",
       "arabicFolded": "خيارة / خيار",
-      "pronunciation": "khiyārah",
+      "pronunciation": "khiyārah / khiyār",
       "english": "cucumber / cucumbers",
       "category": "Foods",
       "isExtra": false,
@@ -5576,10 +5493,10 @@
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__foods__قطعة-جبن__قطع-جبن__qitat-jubn__piece-of-cheese-pieces-of-cheese",
+      "id": "lesson-the-marketplace-and-colours__foods__قطعة-جبن__قطع-جبن__qitat-jubn-qita-jubn__piece-of-cheese-pieces-of-cheese",
       "arabic": "قِطْعَة جُبْن / قِطَع جُبْن",
       "arabicFolded": "قطعة جبن / قطع جبن",
-      "pronunciation": "qiṭʿat jubn",
+      "pronunciation": "qiṭʿat jubn / qiṭaʿ jubn",
       "english": "piece of cheese / pieces of cheese",
       "category": "Foods",
       "isExtra": false,
@@ -5589,10 +5506,10 @@
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__foods__خبزة__خبز__khubzah__loaf-of-bread-bread",
+      "id": "lesson-the-marketplace-and-colours__foods__خبزة__خبز__khubzah-khubz__loaf-of-bread-bread",
       "arabic": "خُبْزَة / خُبْز",
       "arabicFolded": "خبزة / خبز",
-      "pronunciation": "khubzah",
+      "pronunciation": "khubzah / khubz",
       "english": "loaf of bread / bread",
       "category": "Foods",
       "isExtra": false,
@@ -5602,10 +5519,10 @@
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__foods__زبادي__زباديات__zabadiyy__yogurt-yogurts",
+      "id": "lesson-the-marketplace-and-colours__foods__زبادي__زباديات__zabadiyy-zabadiyyat__yogurt-yogurts",
       "arabic": "زَبَادِيّ / زَبَادِيّات",
       "arabicFolded": "زبادي / زباديات",
-      "pronunciation": "zabādiyy",
+      "pronunciation": "zabādiyy / zabādiyyāt",
       "english": "yogurt / yogurts",
       "category": "Foods",
       "isExtra": false,
@@ -5615,10 +5532,10 @@
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__foods__لبن__ا-لبان__laban__milk-dairy-products",
+      "id": "lesson-the-marketplace-and-colours__foods__لبن__ا-لبان__laban-alban__milk-dairy-products",
       "arabic": "لَبَن / أَلْبَان",
       "arabicFolded": "لبن / ألبان",
-      "pronunciation": "laban",
+      "pronunciation": "laban / albān",
       "english": "milk / dairy products",
       "category": "Foods",
       "isExtra": false,
@@ -5628,10 +5545,10 @@
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__foods__عسل__ا-عسال__asal__honey-honeys",
+      "id": "lesson-the-marketplace-and-colours__foods__عسل__ا-عسال__asal-asal__honey-honeys",
       "arabic": "عَسَل / أَعْسَال",
       "arabicFolded": "عسل / أعسال",
-      "pronunciation": "ʿasal",
+      "pronunciation": "ʿasal / aʿsāl",
       "english": "honey / honeys",
       "category": "Foods",
       "isExtra": false,
@@ -5641,10 +5558,10 @@
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__foods__فص-ثوم__فصوص-ثوم__fass-thawm__garlic-clove-garlic-cloves",
+      "id": "lesson-the-marketplace-and-colours__foods__فص-ثوم__فصوص-ثوم__fass-thawm-fusus-thawm__garlic-clove-garlic-cloves",
       "arabic": "فَصّ ثَوْم / فُصُوص ثَوْم",
       "arabicFolded": "فص ثوم / فصوص ثوم",
-      "pronunciation": "faṣṣ thawm",
+      "pronunciation": "faṣṣ thawm / fuṣūṣ thawm",
       "english": "garlic clove / garlic cloves",
       "category": "Foods",
       "isExtra": false,
@@ -5654,10 +5571,10 @@
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__foods__بصلة__بصل__basalah__onion-onions",
+      "id": "lesson-the-marketplace-and-colours__foods__بصلة__بصل__basalah-basal__onion-onions",
       "arabic": "بَصَلَة / بَصَل",
       "arabicFolded": "بصلة / بصل",
-      "pronunciation": "baṣalah",
+      "pronunciation": "baṣalah / baṣal",
       "english": "onion / onions",
       "category": "Foods",
       "isExtra": false,
@@ -5667,10 +5584,10 @@
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__foods__زبدة__زبد__zubdah__butter-portion-butter",
+      "id": "lesson-the-marketplace-and-colours__foods__زبدة__زبد__zubdah-zubd__butter-portion-butter",
       "arabic": "زُبْدَة / زُبْد",
       "arabicFolded": "زبدة / زبد",
-      "pronunciation": "zubdah",
+      "pronunciation": "zubdah / zubd",
       "english": "butter portion / butter",
       "category": "Foods",
       "isExtra": false,
@@ -5680,10 +5597,10 @@
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__foods__زيت__زيوت__zayt__oil-oils",
+      "id": "lesson-the-marketplace-and-colours__foods__زيت__زيوت__zayt-zuyut__oil-oils",
       "arabic": "زَيْت / زُيُوت",
       "arabicFolded": "زيت / زيوت",
-      "pronunciation": "zayt",
+      "pronunciation": "zayt / zuyūt",
       "english": "oil / oils",
       "category": "Foods",
       "isExtra": false,
@@ -5693,10 +5610,10 @@
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__foods__زيتونة__زيتون__zaytunah__olive-olives",
+      "id": "lesson-the-marketplace-and-colours__foods__زيتونة__زيتون__zaytunah-zaytun__olive-olives",
       "arabic": "زَيْتُونَة / زَيْتُون",
       "arabicFolded": "زيتونة / زيتون",
-      "pronunciation": "zaytūnah",
+      "pronunciation": "zaytūnah / zaytūn",
       "english": "olive / olives",
       "category": "Foods",
       "isExtra": false,
@@ -5706,10 +5623,10 @@
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__foods__خضرة__خضروات__khadrah__vegetable-vegetables",
+      "id": "lesson-the-marketplace-and-colours__foods__خضرة__خضروات__khadrah-khadrawat__vegetable-vegetables",
       "arabic": "خَضْرَة / خَضْرَوَات",
       "arabicFolded": "خضرة / خضروات",
-      "pronunciation": "khaḍrah",
+      "pronunciation": "khaḍrah / khaḍrawāt",
       "english": "vegetable / vegetables",
       "category": "Foods",
       "isExtra": false,
@@ -5719,10 +5636,10 @@
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__foods__تفاحة__تفاح__tuffahah__apple-apples",
+      "id": "lesson-the-marketplace-and-colours__foods__تفاحة__تفاح__tuffahah-tuffah__apple-apples",
       "arabic": "تُفَّاحَة / تُفَّاح",
       "arabicFolded": "تفاحة / تفاح",
-      "pronunciation": "tuffāḥah",
+      "pronunciation": "tuffāḥah / tuffāḥ",
       "english": "apple / apples",
       "category": "Foods",
       "isExtra": false,
@@ -5732,10 +5649,10 @@
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__foods__ليمونة__ليمون__laymunah__lemon-lemons",
+      "id": "lesson-the-marketplace-and-colours__foods__ليمونة__ليمون__laymunah-laymun__lemon-lemons",
       "arabic": "لَيْمُونَة / لَيْمُون",
       "arabicFolded": "ليمونة / ليمون",
-      "pronunciation": "laymūnah",
+      "pronunciation": "laymūnah / laymūn",
       "english": "lemon / lemons",
       "category": "Foods",
       "isExtra": false,
@@ -5745,10 +5662,10 @@
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__foods__ذرة__ذرات__dhurah__corn-grains-of-corn",
+      "id": "lesson-the-marketplace-and-colours__foods__ذرة__ذرات__dhurah-dhurat__corn-grains-of-corn",
       "arabic": "ذُرَة / ذُرَات",
       "arabicFolded": "ذرة / ذرات",
-      "pronunciation": "dhurah",
+      "pronunciation": "dhurah / dhurāt",
       "english": "corn / grains of corn",
       "category": "Foods",
       "isExtra": false,
@@ -5758,10 +5675,10 @@
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__foods__حبة-ا-رز__ا-رز__habbat-aruzz__grain-of-rice-rice",
+      "id": "lesson-the-marketplace-and-colours__foods__حبة-ا-رز__ا-رز__habbat-aruzz-aruzz__grain-of-rice-rice",
       "arabic": "حَبَّة أَرُز / أَرُز",
       "arabicFolded": "حبة أرز / أرز",
-      "pronunciation": "ḥabbat aruzz",
+      "pronunciation": "ḥabbat aruzz / aruzz",
       "english": "grain of rice / rice",
       "category": "Foods",
       "isExtra": false,
@@ -5771,10 +5688,10 @@
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__foods__كوب-شاي__ا-كواب-شاي__kub-shay__cup-of-tea-cups-of-tea",
+      "id": "lesson-the-marketplace-and-colours__foods__كوب-شاي__ا-كواب-شاي__kub-shay-akwab-shay__cup-of-tea-cups-of-tea",
       "arabic": "كُوب شَاي / أَكْوَاب شَاي",
       "arabicFolded": "كوب شاي / أكواب شاي",
-      "pronunciation": "kūb shāy",
+      "pronunciation": "kūb shāy / akwāb shāy",
       "english": "cup of tea / cups of tea",
       "category": "Foods",
       "isExtra": false,
@@ -5784,10 +5701,10 @@
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__foods__حبة-سكر__حبات-سكر__habbat-sukkar__sugar-cube-sugar-cubes",
+      "id": "lesson-the-marketplace-and-colours__foods__حبة-سكر__حبات-سكر__habbat-sukkar-habbat-sukkar__sugar-cube-sugar-cubes",
       "arabic": "حَبَّة سُكَّر / حَبَّات سُكَّر",
       "arabicFolded": "حبة سكر / حبات سكر",
-      "pronunciation": "ḥabbat sukkar",
+      "pronunciation": "ḥabbat sukkar / ḥabbāt sukkar",
       "english": "sugar cube / sugar cubes",
       "category": "Foods",
       "isExtra": false,
@@ -5797,10 +5714,10 @@
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__foods__حبة-ملح__حبات-ملح__habbat-milh__grain-of-salt-grains-of-salt",
+      "id": "lesson-the-marketplace-and-colours__foods__حبة-ملح__حبات-ملح__habbat-milh-habbat-milh__grain-of-salt-grains-of-salt",
       "arabic": "حَبَّة مِلْح / حَبَّات مِلْح",
       "arabicFolded": "حبة ملح / حبات ملح",
-      "pronunciation": "ḥabbat milḥ",
+      "pronunciation": "ḥabbat milḥ / ḥabbāt milḥ",
       "english": "grain of salt / grains of salt",
       "category": "Foods",
       "isExtra": false,
@@ -5810,10 +5727,10 @@
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__foods__موزة__موز__mawzah__banana-bananas",
+      "id": "lesson-the-marketplace-and-colours__foods__موزة__موز__mawzah-mawz__banana-bananas",
       "arabic": "مَوْزَة / مَوْز",
       "arabicFolded": "موزة / موز",
-      "pronunciation": "mawzah",
+      "pronunciation": "mawzah / mawz",
       "english": "banana / bananas",
       "category": "Foods",
       "isExtra": false,
@@ -5823,10 +5740,10 @@
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__foods__حبة-فاصوليا__فاصوليا__habbat-fasuliya__bean-beans",
+      "id": "lesson-the-marketplace-and-colours__foods__حبة-فاصوليا__فاصوليا__habbat-fasuliya-fasuliya__bean-beans",
       "arabic": "حَبَّة فَاصُولِيَا / فَاصُولِيَا",
       "arabicFolded": "حبة فاصوليا / فاصوليا",
-      "pronunciation": "ḥabbat fāṣūliyā",
+      "pronunciation": "ḥabbat fāṣūliyā / fāṣūliyā",
       "english": "bean / beans",
       "category": "Foods",
       "isExtra": false,
@@ -5836,10 +5753,10 @@
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__foods__حبة-طماطم__طماطم__habbat-tamatim__tomato-tomatoes",
+      "id": "lesson-the-marketplace-and-colours__foods__حبة-طماطم__طماطم__habbat-tamatim-tamatim__tomato-tomatoes",
       "arabic": "حَبَّة طَمَاطِم / طَمَاطِم",
       "arabicFolded": "حبة طماطم / طماطم",
-      "pronunciation": "ḥabbat ṭamāṭim",
+      "pronunciation": "ḥabbat ṭamāṭim / ṭamāṭim",
       "english": "tomato / tomatoes",
       "category": "Foods",
       "isExtra": false,
@@ -5849,10 +5766,10 @@
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__foods__حبة-عنب__عنب__habbat-inab__grape-grapes",
+      "id": "lesson-the-marketplace-and-colours__foods__حبة-عنب__عنب__habbat-inab-inab__grape-grapes",
       "arabic": "حَبَّة عِنَب / عِنَب",
       "arabicFolded": "حبة عنب / عنب",
-      "pronunciation": "ḥabbat ʿinab",
+      "pronunciation": "ḥabbat ʿinab / ʿinab",
       "english": "grape / grapes",
       "category": "Foods",
       "isExtra": false,
@@ -5862,10 +5779,10 @@
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__foods__بطيخة__بطيخ__bittikhah__watermelon-watermelons",
+      "id": "lesson-the-marketplace-and-colours__foods__بطيخة__بطيخ__bittikhah-bittikh__watermelon-watermelons",
       "arabic": "بِطِّيخَة / بِطِّيخ",
       "arabicFolded": "بطيخة / بطيخ",
-      "pronunciation": "biṭṭīkhah",
+      "pronunciation": "biṭṭīkhah / biṭṭīkh",
       "english": "watermelon / watermelons",
       "category": "Foods",
       "isExtra": false,
@@ -5875,10 +5792,10 @@
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__foods__حبة-بازلاء__بازلاء__habbat-bazila__pea-peas",
+      "id": "lesson-the-marketplace-and-colours__foods__حبة-بازلاء__بازلاء__habbat-bazila-bazilla__pea-peas",
       "arabic": "حَبَّة بَازِلَّاء / بَازِلَّاء",
       "arabicFolded": "حبة بازلاء / بازلاء",
-      "pronunciation": "ḥabbat bāzilā’",
+      "pronunciation": "ḥabbat bāzilā’ / bāzillāʾ",
       "english": "pea / peas",
       "category": "Foods",
       "isExtra": false,
@@ -5888,10 +5805,10 @@
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__foods__رمانة__رمان__rummanah__pomegranate-pomegranates",
+      "id": "lesson-the-marketplace-and-colours__foods__رمانة__رمان__rummanah-rumman__pomegranate-pomegranates",
       "arabic": "رُمَّانَة / رُمَّان",
       "arabicFolded": "رمانة / رمان",
-      "pronunciation": "rummānah",
+      "pronunciation": "rummānah / rummān",
       "english": "pomegranate / pomegranates",
       "category": "Foods",
       "isExtra": false,
@@ -5901,10 +5818,10 @@
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__foods__تمرة__تمر__tamrah__date-fruit-dates",
+      "id": "lesson-the-marketplace-and-colours__foods__تمرة__تمر__tamrah-tamr__date-fruit-dates",
       "arabic": "تَمْرَة / تَمْر",
       "arabicFolded": "تمرة / تمر",
-      "pronunciation": "tamrah",
+      "pronunciation": "tamrah / tamr",
       "english": "date fruit / dates",
       "category": "Foods",
       "isExtra": false,
@@ -5914,10 +5831,10 @@
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__clothing__ملبس__ملابس__malbas__clothing-item-clothes",
+      "id": "lesson-the-marketplace-and-colours__clothing__ملبس__ملابس__malbas-malabis__clothing-item-clothes",
       "arabic": "مَلْبَس / مَلَابِس",
       "arabicFolded": "ملبس / ملابس",
-      "pronunciation": "malbas",
+      "pronunciation": "malbas / malābis",
       "english": "clothing item / clothes",
       "category": "Clothing",
       "isExtra": false,
@@ -5927,10 +5844,10 @@
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__clothing__حزام__ا-حزمة__hizam__belt-belts",
+      "id": "lesson-the-marketplace-and-colours__clothing__حزام__ا-حزمة__hizam-ahzima__belt-belts",
       "arabic": "حِزَام / أَحْزِمَة",
       "arabicFolded": "حزام / أحزمة",
-      "pronunciation": "ḥizām",
+      "pronunciation": "ḥizām / aḥzima",
       "english": "belt / belts",
       "category": "Clothing",
       "isExtra": false,
@@ -5940,10 +5857,10 @@
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__clothing__معطف__معاطف__mitaf__coat-coats",
+      "id": "lesson-the-marketplace-and-colours__clothing__معطف__معاطف__mitaf-maatif__coat-coats",
       "arabic": "مِعْطَف / مَعَاطِف",
       "arabicFolded": "معطف / معاطف",
-      "pronunciation": "miʿṭaf",
+      "pronunciation": "miʿṭaf / maʿāṭif",
       "english": "coat / coats",
       "category": "Clothing",
       "isExtra": false,
@@ -5953,10 +5870,10 @@
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__clothing__سروال__سراويل__sirwal__trousers",
+      "id": "lesson-the-marketplace-and-colours__clothing__سروال__سراويل__sirwal-sarawil__trousers",
       "arabic": "سِرْوَال / سَرَاوِيل",
       "arabicFolded": "سروال / سراويل",
-      "pronunciation": "sirwāl",
+      "pronunciation": "sirwāl / sarāwīl",
       "english": "trousers",
       "category": "Clothing",
       "isExtra": false,
@@ -5966,10 +5883,10 @@
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__clothing__قميص__قمص__qamis__shirt-shirts",
+      "id": "lesson-the-marketplace-and-colours__clothing__قميص__قمص__qamis-qumus__shirt-shirts",
       "arabic": "قَمِيص / قُمُص",
       "arabicFolded": "قميص / قمص",
-      "pronunciation": "qamīṣ",
+      "pronunciation": "qamīṣ / qumuṣ",
       "english": "shirt / shirts",
       "category": "Clothing",
       "isExtra": false,
@@ -5979,10 +5896,10 @@
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__household-cleaning__ممسحة__مماسح__mimsahah__mop-mops",
+      "id": "lesson-the-marketplace-and-colours__household-cleaning__ممسحة__مماسح__mimsahah-mamasih__mop-mops",
       "arabic": "مِمْسَحَة / مَمَاسِح",
       "arabicFolded": "ممسحة / مماسح",
-      "pronunciation": "mimsaḥah",
+      "pronunciation": "mimsaḥah / mamāsiḥ",
       "english": "mop / mops",
       "category": "Household & Cleaning",
       "isExtra": false,
@@ -5992,10 +5909,10 @@
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__household-cleaning__جاروف__جواريف__jaruf__dustpan-dustpans",
+      "id": "lesson-the-marketplace-and-colours__household-cleaning__جاروف__جواريف__jaruf-jawarif__dustpan-dustpans",
       "arabic": "جَارُوف / جَوَارِيف",
       "arabicFolded": "جاروف / جواريف",
-      "pronunciation": "jārūf",
+      "pronunciation": "jārūf / jawārīf",
       "english": "dustpan / dustpans",
       "category": "Household & Cleaning",
       "isExtra": false,
@@ -6005,10 +5922,10 @@
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__household-cleaning__دلو__دلاء__dalw__bucket-buckets",
+      "id": "lesson-the-marketplace-and-colours__household-cleaning__دلو__دلاء__dalw-dila__bucket-buckets",
       "arabic": "دَلْو / دِلَاء",
       "arabicFolded": "دلو / دلاء",
-      "pronunciation": "dalw",
+      "pronunciation": "dalw / dilāʾ",
       "english": "bucket / buckets",
       "category": "Household & Cleaning",
       "isExtra": false,
@@ -6018,10 +5935,10 @@
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__household-cleaning__ا-داة-نظافة__ا-دوات-نظافة__adat-nazafah__cleaning-tool-cleaning-tools",
+      "id": "lesson-the-marketplace-and-colours__household-cleaning__ا-داة-نظافة__ا-دوات-نظافة__adat-nazafah-adawat-nazafah__cleaning-tool-cleaning-tools",
       "arabic": "أَدَاة نَظَافَة / أَدَوَات نَظَافَة",
       "arabicFolded": "أداة نظافة / أدوات نظافة",
-      "pronunciation": "adāt naẓāfah",
+      "pronunciation": "adāt naẓāfah / adawāt naẓāfah",
       "english": "cleaning tool / cleaning tools",
       "category": "Household & Cleaning",
       "isExtra": false,
@@ -6031,9 +5948,10 @@
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__hygiene__معجون-حلاقة__معاجين-حلاقة__shaving-cream-shaving-creams",
+      "id": "lesson-the-marketplace-and-colours__hygiene__معجون-حلاقة__معاجين-حلاقة__majun-hilaqah-maajin-hilaqah__shaving-cream-shaving-creams",
       "arabic": "مَعْجُون حِلَاقَة / مَعَاجِين حِلَاقَة",
       "arabicFolded": "معجون حلاقة / معاجين حلاقة",
+      "pronunciation": "maʿjūn ḥilāqah / maʿājīn ḥilāqah",
       "english": "shaving cream / shaving creams",
       "category": "Hygiene",
       "isExtra": false,
@@ -6043,9 +5961,10 @@
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__hygiene__معجون-ا-سنان__معاجين-ا-سنان__toothpaste-toothpastes",
+      "id": "lesson-the-marketplace-and-colours__hygiene__معجون-ا-سنان__معاجين-ا-سنان__majun-asnan-maajin-asnan__toothpaste-toothpastes",
       "arabic": "مَعْجُون أَسْنَان / مَعَاجِين أَسْنَان",
       "arabicFolded": "معجون أسنان / معاجين أسنان",
+      "pronunciation": "maʿjūn asnān / maʿājīn asnān",
       "english": "toothpaste / toothpastes",
       "category": "Hygiene",
       "isExtra": false,
@@ -6055,9 +5974,10 @@
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__hygiene__مسحوق-غسيل__مساحيق-غسيل__washing-powder-washing-powders",
+      "id": "lesson-the-marketplace-and-colours__hygiene__مسحوق-غسيل__مساحيق-غسيل__mashuq-ghasil-masahiq-ghasil__washing-powder-washing-powders",
       "arabic": "مَسْحُوق غَسِيل / مَسَاحِيق غَسِيل",
       "arabicFolded": "مسحوق غسيل / مساحيق غسيل",
+      "pronunciation": "masḥūq ghasīl / masāḥīq ghasīl",
       "english": "washing powder / washing powders",
       "category": "Hygiene",
       "isExtra": false,
@@ -6067,9 +5987,10 @@
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__hygiene__فرشاة-ا-سنان__فرش-ا-سنان__toothbrush-toothbrushes",
+      "id": "lesson-the-marketplace-and-colours__hygiene__فرشاة-ا-سنان__فرش-ا-سنان__furshat-asnan-furash-asnan__toothbrush-toothbrushes",
       "arabic": "فُرْشَاة أَسْنَان / فُرَش أَسْنَان",
       "arabicFolded": "فرشاة أسنان / فرش أسنان",
+      "pronunciation": "furshāt asnān / furash asnān",
       "english": "toothbrush / toothbrushes",
       "category": "Hygiene",
       "isExtra": false,
@@ -6079,10 +6000,10 @@
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__hygiene__صابونة__صابون__sabunah__soap-bar-soap",
+      "id": "lesson-the-marketplace-and-colours__hygiene__صابونة__صابون__sabunah-sabun__soap-bar-soap",
       "arabic": "صَابُونَة / صَابُون",
       "arabicFolded": "صابونة / صابون",
-      "pronunciation": "ṣābūnah",
+      "pronunciation": "ṣābūnah / ṣābūn",
       "english": "soap bar / soap",
       "category": "Hygiene",
       "isExtra": false,
@@ -6092,10 +6013,10 @@
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__general-objects__ميزان__موازين__mizan__scale-scales",
+      "id": "lesson-the-marketplace-and-colours__general-objects__ميزان__موازين__mizan-mawazin__scale-scales",
       "arabic": "مِيزَان / مَوَازِين",
       "arabicFolded": "ميزان / موازين",
-      "pronunciation": "mīzān",
+      "pronunciation": "mīzān / mawāzīn",
       "english": "scale / scales",
       "category": "General Objects",
       "isExtra": false,
@@ -6105,9 +6026,10 @@
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__general-objects__ا-داة-مكتبية__ا-دوات-مكتبية__stationery-item-stationery",
+      "id": "lesson-the-marketplace-and-colours__general-objects__ا-داة-مكتبية__ا-دوات-مكتبية__adat-maktabiyyah-adawat-maktabiyyah__stationery-item-stationery",
       "arabic": "أَدَاة مَكْتَبِيَّة / أَدَوَات مَكْتَبِيَّة",
       "arabicFolded": "أداة مكتبية / أدوات مكتبية",
+      "pronunciation": "adāt maktabiyyah / adawāt maktabiyyah",
       "english": "stationery item / stationery",
       "category": "General Objects",
       "isExtra": false,
@@ -6117,10 +6039,10 @@
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__general-objects__نقد__نقود__naqd__money-cash-monies-currencies",
+      "id": "lesson-the-marketplace-and-colours__general-objects__نقد__نقود__naqd-nuqud__money-cash-monies-currencies",
       "arabic": "نَقْد / نُقُود",
       "arabicFolded": "نقد / نقود",
-      "pronunciation": "naqd",
+      "pronunciation": "naqd / nuqūd",
       "english": "money/cash / monies/currencies",
       "category": "General Objects",
       "isExtra": false,
@@ -6130,10 +6052,10 @@
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__general-objects__سكين__سكاكين__sikkin__knife-knives",
+      "id": "lesson-the-marketplace-and-colours__general-objects__سكين__سكاكين__sikkin-sakakin__knife-knives",
       "arabic": "سِكِّين / سَكَاكِين",
       "arabicFolded": "سكين / سكاكين",
-      "pronunciation": "sikkīn",
+      "pronunciation": "sikkīn / sakākīn",
       "english": "knife / knives",
       "category": "General Objects",
       "isExtra": false,
@@ -6143,9 +6065,10 @@
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__general-objects__عود-كبريت__ا-عواد-كبريت__matchstick-matchsticks",
+      "id": "lesson-the-marketplace-and-colours__general-objects__عود-كبريت__ا-عواد-كبريت__ud-kibrit-awad-kibrit__matchstick-matchsticks",
       "arabic": "عُود كِبْرِيت / أَعْوَاد كِبْرِيت",
       "arabicFolded": "عود كبريت / أعواد كبريت",
+      "pronunciation": "ʿūd kibrīt / aʿwād kibrīt",
       "english": "matchstick / matchsticks",
       "category": "General Objects",
       "isExtra": false,
@@ -6365,63 +6288,397 @@
       "lessonId": "lesson-colours"
     },
     {
-      "id": "lesson-colours__singular-near",
-      "arabic": "هَذَا / هَذِهِ",
-      "arabicFolded": "هذا هذه",
-      "pronunciation": "hādhā / hādhihi",
-      "english": "this (m) / this (f)",
+      "id": "lesson-command-verbs-in-the-qur-an__islamic-identites__ا-مام__ا-ي-مة__imam-aimmah__imam-imams",
+      "arabic": "إِمَام / أَئِمَّة",
+      "arabicFolded": "إمام / أئمة",
+      "pronunciation": "imām / aʾimmah",
+      "english": "imam / imams",
+      "category": "Islamic Identites",
+      "isExtra": false,
+      "topicSlugs": [
+        "command-verbs-in-the-qur-an"
+      ],
+      "lessonId": "lesson-command-verbs-in-the-qur-an"
+    },
+    {
+      "id": "lesson-command-verbs-in-the-qur-an__islamic-identites__مسلم__مسلمون-مسلمين__muslim-muslimun-muslimin__muslim-muslims",
+      "arabic": "مُسْلِم / مُسْلِمُون / مُسْلِمِينَ",
+      "arabicFolded": "مسلم / مسلمون / مسلمين",
+      "pronunciation": "muslim / muslimūn / muslimīn",
+      "english": "Muslim / Muslims",
+      "category": "Islamic Identites",
+      "isExtra": false,
+      "topicSlugs": [
+        "command-verbs-in-the-qur-an"
+      ],
+      "lessonId": "lesson-command-verbs-in-the-qur-an"
+    },
+    {
+      "id": "lesson-command-verbs-in-the-qur-an__islamic-identites__رب__ا-رباب__rabb-arbab__lord-lords",
+      "arabic": "رَبّ / أَرْبَاب",
+      "arabicFolded": "رب / أرباب",
+      "pronunciation": "rabb / arbāb",
+      "english": "Lord / lords",
+      "category": "Islamic Identites",
+      "isExtra": false,
+      "topicSlugs": [
+        "command-verbs-in-the-qur-an"
+      ],
+      "lessonId": "lesson-command-verbs-in-the-qur-an"
+    },
+    {
+      "id": "lesson-command-verbs-in-the-qur-an__islamic-identites__الله__allah__allah-god",
+      "arabic": "اللَّه / —",
+      "arabicFolded": "الله / —",
+      "pronunciation": "Allāh",
+      "english": "Allah / God / —",
+      "category": "Islamic Identites",
+      "isExtra": false,
+      "topicSlugs": [
+        "command-verbs-in-the-qur-an"
+      ],
+      "lessonId": "lesson-command-verbs-in-the-qur-an"
+    },
+    {
+      "id": "lesson-command-verbs-in-the-qur-an__islamic-identites__شيطان__شياطين__shaytan-shayatin__devil-devils",
+      "arabic": "شَيْطَان / شَيَاطِين",
+      "arabicFolded": "شيطان / شياطين",
+      "pronunciation": "shayṭān / shayāṭīn",
+      "english": "devil / devils",
+      "category": "Islamic Identites",
+      "isExtra": false,
+      "topicSlugs": [
+        "command-verbs-in-the-qur-an"
+      ],
+      "lessonId": "lesson-command-verbs-in-the-qur-an"
+    },
+    {
+      "id": "lesson-command-verbs-in-the-qur-an__in-the-mosque__مسجد__مساجد__masjid-masajid__mosque-mosques",
+      "arabic": "مَسْجِد / مَسَاجِد",
+      "arabicFolded": "مسجد / مساجد",
+      "pronunciation": "masjid / masājid",
+      "english": "mosque / mosques",
+      "category": "In the Mosque",
+      "isExtra": false,
+      "topicSlugs": [
+        "command-verbs-in-the-qur-an"
+      ],
+      "lessonId": "lesson-command-verbs-in-the-qur-an"
+    },
+    {
+      "id": "lesson-command-verbs-in-the-qur-an__in-the-mosque__منبر__منابر__minbar-manabir__pulpit-pulpits",
+      "arabic": "مِنْبَر / مَنَابِر",
+      "arabicFolded": "منبر / منابر",
+      "pronunciation": "minbar / manābir",
+      "english": "pulpit / pulpits",
+      "category": "In the Mosque",
+      "isExtra": false,
+      "topicSlugs": [
+        "command-verbs-in-the-qur-an"
+      ],
+      "lessonId": "lesson-command-verbs-in-the-qur-an"
+    },
+    {
+      "id": "lesson-command-verbs-in-the-qur-an__in-the-mosque__خطبة__خطب__khutbah-khutab__sermon-sermons",
+      "arabic": "خُطْبَة / خُطَب",
+      "arabicFolded": "خطبة / خطب",
+      "pronunciation": "khuṭbah / khuṭab",
+      "english": "sermon / sermons",
+      "category": "In the Mosque",
+      "isExtra": false,
+      "topicSlugs": [
+        "command-verbs-in-the-qur-an"
+      ],
+      "lessonId": "lesson-command-verbs-in-the-qur-an"
+    },
+    {
+      "id": "lesson-command-verbs-in-the-qur-an__in-the-mosque__حمد__ا-حماد__hamd-ahmad__praise-praises",
+      "arabic": "حَمْد / أَحْمَاد",
+      "arabicFolded": "حمد / أحماد",
+      "pronunciation": "ḥamd / aḥmād",
+      "english": "praise / praises",
+      "category": "In the Mosque",
+      "isExtra": false,
+      "topicSlugs": [
+        "command-verbs-in-the-qur-an"
+      ],
+      "lessonId": "lesson-command-verbs-in-the-qur-an"
+    },
+    {
+      "id": "lesson-command-verbs-in-the-qur-an__days__يوم__ا-يام__yawm-ayyam__day-days",
+      "arabic": "يَوْم / أَيَّام",
+      "arabicFolded": "يوم / أيام",
+      "pronunciation": "yawm / ayyām",
+      "english": "day / days",
+      "category": "Days",
+      "isExtra": false,
+      "topicSlugs": [
+        "command-verbs-in-the-qur-an"
+      ],
+      "lessonId": "lesson-command-verbs-in-the-qur-an"
+    },
+    {
+      "id": "lesson-command-verbs-in-the-qur-an__days__جمعة__جمعات__jumuah-jumuat__friday-fridays",
+      "arabic": "جُمُعَة / جُمُعَات",
+      "arabicFolded": "جمعة / جمعات",
+      "pronunciation": "jumuʿah / jumuʿāt",
+      "english": "Friday / Fridays",
+      "category": "Days",
+      "isExtra": false,
+      "topicSlugs": [
+        "command-verbs-in-the-qur-an"
+      ],
+      "lessonId": "lesson-command-verbs-in-the-qur-an"
+    },
+    {
+      "id": "lesson-command-verbs-in-the-qur-an__days__عالم__عوالم__alam-awalim__world-worlds",
+      "arabic": "عَالَم / عَوَالِم",
+      "arabicFolded": "عالم / عوالم",
+      "pronunciation": "ʿālam / ʿawālim",
+      "english": "world / worlds",
+      "category": "Days",
+      "isExtra": false,
+      "topicSlugs": [
+        "command-verbs-in-the-qur-an"
+      ],
+      "lessonId": "lesson-command-verbs-in-the-qur-an"
+    },
+    {
+      "id": "lesson-command-verbs-in-the-qur-an__language__لغة__لغات__lughah-lughat__language-languages",
+      "arabic": "لُغَة / لُغَات",
+      "arabicFolded": "لغة / لغات",
+      "pronunciation": "lughah / lughāt",
+      "english": "language / languages",
+      "category": "Language",
+      "isExtra": false,
+      "topicSlugs": [
+        "command-verbs-in-the-qur-an"
+      ],
+      "lessonId": "lesson-command-verbs-in-the-qur-an"
+    },
+    {
+      "id": "lesson-command-verbs-in-the-qur-an__language__العربية__al-arabiyyah__arabic-language",
+      "arabic": "العَرَبِيَّة / —",
+      "arabicFolded": "العربية / —",
+      "pronunciation": "al-ʿarabiyyah",
+      "english": "Arabic language / —",
+      "category": "Language",
+      "isExtra": false,
+      "topicSlugs": [
+        "command-verbs-in-the-qur-an"
+      ],
+      "lessonId": "lesson-command-verbs-in-the-qur-an"
+    },
+    {
+      "id": "lesson-command-verbs-in-the-qur-an__language__قرا-ن__quran__quran",
+      "arabic": "قُرْآن / —",
+      "arabicFolded": "قرآن / —",
+      "pronunciation": "qurʾān",
+      "english": "Qur'an / —",
+      "category": "Language",
+      "isExtra": false,
+      "topicSlugs": [
+        "command-verbs-in-the-qur-an"
+      ],
+      "lessonId": "lesson-command-verbs-in-the-qur-an"
+    },
+    {
+      "id": "lesson-command-verbs-in-the-qur-an__language__فقرة__فقر__fiqrah-fiqar__paragraph-paragraphs",
+      "arabic": "فِقْرَة / فِقَر",
+      "arabicFolded": "فقرة / فقر",
+      "pronunciation": "fiqrah / fiqar",
+      "english": "paragraph / paragraphs",
+      "category": "Language",
+      "isExtra": false,
+      "topicSlugs": [
+        "command-verbs-in-the-qur-an"
+      ],
+      "lessonId": "lesson-command-verbs-in-the-qur-an"
+    },
+    {
+      "id": "lesson-command-verbs-in-the-qur-an__language__سو-ال__ا-سي-لة__sual-asilah__question-questions",
+      "arabic": "سُؤَال / أَسْئِلَة",
+      "arabicFolded": "سؤال / أسئلة",
+      "pronunciation": "suʾāl / asʾilah",
+      "english": "question / questions",
+      "category": "Language",
+      "isExtra": false,
+      "topicSlugs": [
+        "command-verbs-in-the-qur-an"
+      ],
+      "lessonId": "lesson-command-verbs-in-the-qur-an"
+    },
+    {
+      "id": "lesson-command-verbs-in-the-qur-an__language__تدريب__تدريبات__tadrib-tadribat__exercise-exercises",
+      "arabic": "تَدْرِيب / تَدْرِيبَات",
+      "arabicFolded": "تدريب / تدريبات",
+      "pronunciation": "tadrīb / tadrībāt",
+      "english": "exercise / exercises",
+      "category": "Language",
+      "isExtra": false,
+      "topicSlugs": [
+        "command-verbs-in-the-qur-an"
+      ],
+      "lessonId": "lesson-command-verbs-in-the-qur-an"
+    },
+    {
+      "id": "lesson-command-verbs-in-the-qur-an__character-and-actions__حسنة__حسنات__hasanah-hasanat__good-deed-good-deeds",
+      "arabic": "حَسَنَة / حَسَنَات",
+      "arabicFolded": "حسنة / حسنات",
+      "pronunciation": "ḥasanah / ḥasanāt",
+      "english": "good deed / good deeds",
+      "category": "Character and Actions",
+      "isExtra": false,
+      "topicSlugs": [
+        "command-verbs-in-the-qur-an"
+      ],
+      "lessonId": "lesson-command-verbs-in-the-qur-an"
+    },
+    {
+      "id": "lesson-command-verbs-in-the-qur-an__character-and-actions__سيي-ة__سيي-ات__sayyiah-sayyiat__bad-deed-sin-bad-deeds",
+      "arabic": "سَيِّئَة / سَيِّئَات",
+      "arabicFolded": "سيئة / سيئات",
+      "pronunciation": "sayyiʾah / sayyiʾāt",
+      "english": "bad deed / sin / bad deeds",
+      "category": "Character and Actions",
+      "isExtra": false,
+      "topicSlugs": [
+        "command-verbs-in-the-qur-an"
+      ],
+      "lessonId": "lesson-command-verbs-in-the-qur-an"
+    },
+    {
+      "id": "lesson-command-verbs-in-the-qur-an__character-and-actions__ميزان__موازين__mizan-mawazin__scale-balance-scales",
+      "arabic": "مِيزَان / مَوَازِين",
+      "arabicFolded": "ميزان / موازين",
+      "pronunciation": "mīzān / mawāzīn",
+      "english": "scale / balance / scales",
+      "category": "Character and Actions",
+      "isExtra": false,
+      "topicSlugs": [
+        "command-verbs-in-the-qur-an"
+      ],
+      "lessonId": "lesson-command-verbs-in-the-qur-an"
+    },
+    {
+      "id": "lesson-command-verbs-in-the-qur-an__character-and-actions__قلب__قلوب__qalb-qulub__heart-hearts",
+      "arabic": "قَلْب / قُلُوب",
+      "arabicFolded": "قلب / قلوب",
+      "pronunciation": "qalb / qulūb",
+      "english": "heart / hearts",
+      "category": "Character and Actions",
+      "isExtra": false,
+      "topicSlugs": [
+        "command-verbs-in-the-qur-an"
+      ],
+      "lessonId": "lesson-command-verbs-in-the-qur-an"
+    },
+    {
+      "id": "lesson-command-verbs-in-the-qur-an__singular-near",
+      "arabic": "هَذَا",
+      "arabicFolded": "هذا",
+      "pronunciation": "hādhā",
+      "english": "this (m)",
       "category": "Singular (near)",
-      "gender": "Both",
       "isExtra": false,
       "topicSlugs": [
-        "colours"
+        "command-verbs-in-the-qur-an"
       ],
-      "lessonId": "lesson-colours"
+      "lessonId": "lesson-command-verbs-in-the-qur-an"
     },
     {
-      "id": "lesson-colours__singular-far",
-      "arabic": "ذَلِكَ / تِلْكَ",
-      "arabicFolded": "ذلك تلك",
-      "pronunciation": "dhālika / tilka",
-      "english": "that (m) / that (f)",
+      "id": "lesson-command-verbs-in-the-qur-an__singular-near-2",
+      "arabic": "هَذِهِ",
+      "arabicFolded": "هذه",
+      "pronunciation": "hādhihi",
+      "english": "this (f)",
+      "category": "Singular (near)",
+      "isExtra": false,
+      "topicSlugs": [
+        "command-verbs-in-the-qur-an"
+      ],
+      "lessonId": "lesson-command-verbs-in-the-qur-an"
+    },
+    {
+      "id": "lesson-command-verbs-in-the-qur-an__singular-far",
+      "arabic": "ذَلِكَ",
+      "arabicFolded": "ذلك",
+      "pronunciation": "dhālika",
+      "english": "that (m)",
       "category": "Singular (far)",
-      "gender": "Both",
       "isExtra": false,
       "topicSlugs": [
-        "colours"
+        "command-verbs-in-the-qur-an"
       ],
-      "lessonId": "lesson-colours"
+      "lessonId": "lesson-command-verbs-in-the-qur-an"
     },
     {
-      "id": "lesson-colours__dual-near",
-      "arabic": "هَذَانِ / هَاتَانِ",
-      "arabicFolded": "هذان هاتان",
-      "pronunciation": "hādhāni / hātāni",
-      "english": "these two (m) / these two (f)",
+      "id": "lesson-command-verbs-in-the-qur-an__singular-far-2",
+      "arabic": "تِلْكَ",
+      "arabicFolded": "تلك",
+      "pronunciation": "tilka",
+      "english": "that (f)",
+      "category": "Singular (far)",
+      "isExtra": false,
+      "topicSlugs": [
+        "command-verbs-in-the-qur-an"
+      ],
+      "lessonId": "lesson-command-verbs-in-the-qur-an"
+    },
+    {
+      "id": "lesson-command-verbs-in-the-qur-an__dual-near",
+      "arabic": "هَذَانِ",
+      "arabicFolded": "هذان",
+      "pronunciation": "hādhāni",
+      "english": "these two (m)",
       "category": "Dual (near)",
-      "gender": "Both",
       "isExtra": false,
       "topicSlugs": [
-        "colours"
+        "command-verbs-in-the-qur-an"
       ],
-      "lessonId": "lesson-colours"
+      "lessonId": "lesson-command-verbs-in-the-qur-an"
     },
     {
-      "id": "lesson-colours__dual-far",
-      "arabic": "ذَانِكَ / تَانِكَ",
-      "arabicFolded": "ذانك تانك",
-      "pronunciation": "dhānika / tānika",
-      "english": "those two (m) / those two (f)",
+      "id": "lesson-command-verbs-in-the-qur-an__dual-near-2",
+      "arabic": "هَاتَانِ",
+      "arabicFolded": "هاتان",
+      "pronunciation": "hātāni",
+      "english": "these two (f)",
+      "category": "Dual (near)",
+      "isExtra": false,
+      "topicSlugs": [
+        "command-verbs-in-the-qur-an"
+      ],
+      "lessonId": "lesson-command-verbs-in-the-qur-an"
+    },
+    {
+      "id": "lesson-command-verbs-in-the-qur-an__dual-far",
+      "arabic": "ذَانِكَ",
+      "arabicFolded": "ذانك",
+      "pronunciation": "dhānika",
+      "english": "those two (m)",
       "category": "Dual (far)",
-      "gender": "Both",
       "isExtra": false,
       "topicSlugs": [
-        "colours"
+        "command-verbs-in-the-qur-an"
       ],
-      "lessonId": "lesson-colours"
+      "lessonId": "lesson-command-verbs-in-the-qur-an"
     },
     {
-      "id": "lesson-colours__plural-near",
+      "id": "lesson-command-verbs-in-the-qur-an__dual-far-2",
+      "arabic": "تَانِكَ",
+      "arabicFolded": "تانك",
+      "pronunciation": "tānika",
+      "english": "those two (f)",
+      "category": "Dual (far)",
+      "isExtra": false,
+      "topicSlugs": [
+        "command-verbs-in-the-qur-an"
+      ],
+      "lessonId": "lesson-command-verbs-in-the-qur-an"
+    },
+    {
+      "id": "lesson-command-verbs-in-the-qur-an__plural-near",
       "arabic": "هَؤُلَاءِ",
       "arabicFolded": "هؤلاء",
       "pronunciation": "hāʾulāʾ",
@@ -6429,12 +6686,12 @@
       "category": "Plural (near)",
       "isExtra": false,
       "topicSlugs": [
-        "colours"
+        "command-verbs-in-the-qur-an"
       ],
-      "lessonId": "lesson-colours"
+      "lessonId": "lesson-command-verbs-in-the-qur-an"
     },
     {
-      "id": "lesson-colours__plural-far",
+      "id": "lesson-command-verbs-in-the-qur-an__plural-far",
       "arabic": "أُولَٰئِكَ",
       "arabicFolded": "أولئك",
       "pronunciation": "ulāʾika",
@@ -6442,9 +6699,9 @@
       "category": "Plural (far)",
       "isExtra": false,
       "topicSlugs": [
-        "colours"
+        "command-verbs-in-the-qur-an"
       ],
-      "lessonId": "lesson-colours"
+      "lessonId": "lesson-command-verbs-in-the-qur-an"
     }
   ],
   "rules": [
@@ -7549,17 +7806,684 @@
       "lessonId": "lesson-verbs-in-the-classroom"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__person-groups__vocabulary-colours__19",
-      "title": "Vocabulary (Colours)",
+      "id": "lesson-the-marketplace-and-colours__verb-forms__vocabulary-common-verbs-when-shopping",
+      "title": "Vocabulary (Common Verbs when Shopping)",
       "body": "",
       "examples": [
         {
           "arabic": "",
-          "english": "1st Person (Talking about Yourself) — Singular — one person talking about themselves"
+          "parts": [
+            {
+              "label": "Māḍī (Past)",
+              "arabic": "تَسَوَّقَ",
+              "english": "tasawwaqa — he shopped"
+            },
+            {
+              "label": "Muḍāriʿ (Present/Future)",
+              "arabic": "يَتَسَوَّقُ",
+              "english": "yatasawwaqu — he shops"
+            },
+            {
+              "label": "Amr (Command)",
+              "arabic": "تَسَوَّقْ",
+              "english": "tasawwaq — shop!"
+            },
+            {
+              "label": "Maṣdar",
+              "arabic": "تَسَوُّق",
+              "english": "tasawwuq — shopping"
+            }
+          ]
         },
         {
           "arabic": "",
-          "english": "1st Person (Talking about Yourself) — Plural — a group talking about themselves"
+          "parts": [
+            {
+              "label": "Māḍī (Past)",
+              "arabic": "ذَهَبَ",
+              "english": "dhahaba — he went"
+            },
+            {
+              "label": "Muḍāriʿ (Present/Future)",
+              "arabic": "يَذْهَبُ",
+              "english": "yadhhabu — he goes"
+            },
+            {
+              "label": "Amr (Command)",
+              "arabic": "اِذْهَبْ",
+              "english": "idhhab — go!"
+            },
+            {
+              "label": "Maṣdar",
+              "arabic": "ذَهَاب",
+              "english": "dhahāb — going"
+            }
+          ]
+        },
+        {
+          "arabic": "",
+          "parts": [
+            {
+              "label": "Māḍī (Past)",
+              "arabic": "اِشْتَرَى",
+              "english": "ishtarā — he bought"
+            },
+            {
+              "label": "Muḍāriʿ (Present/Future)",
+              "arabic": "يَشْتَرِي",
+              "english": "yashtarī — he buys"
+            },
+            {
+              "label": "Amr (Command)",
+              "arabic": "اِشْتَرِ",
+              "english": "ishtari — buy!"
+            },
+            {
+              "label": "Maṣdar",
+              "arabic": "شِرَاء",
+              "english": "shirāʾ — buying"
+            }
+          ]
+        },
+        {
+          "arabic": "",
+          "parts": [
+            {
+              "label": "Māḍī (Past)",
+              "arabic": "أَرَادَ",
+              "english": "arāda — he wanted"
+            },
+            {
+              "label": "Muḍāriʿ (Present/Future)",
+              "arabic": "يُرِيدُ",
+              "english": "yurīdu — he wants"
+            },
+            {
+              "label": "Amr (Command)",
+              "arabic": "أَرِدْ",
+              "english": "arid — want!"
+            },
+            {
+              "label": "Maṣdar",
+              "arabic": "إِرَادَة",
+              "english": "irādah — wanting/desire"
+            }
+          ]
+        },
+        {
+          "arabic": "",
+          "parts": [
+            {
+              "label": "Māḍī (Past)",
+              "arabic": "بَاعَ",
+              "english": "bāʿa — he sold"
+            },
+            {
+              "label": "Muḍāriʿ (Present/Future)",
+              "arabic": "يَبِيعُ",
+              "english": "yabīʿu — he sells"
+            },
+            {
+              "label": "Amr (Command)",
+              "arabic": "بِعْ",
+              "english": "biʿ — sell!"
+            },
+            {
+              "label": "Maṣdar",
+              "arabic": "بَيْع",
+              "english": "bayʿ — selling"
+            }
+          ]
+        },
+        {
+          "arabic": "",
+          "parts": [
+            {
+              "label": "Māḍī (Past)",
+              "arabic": "دَفَعَ",
+              "english": "dafaʿa — he paid"
+            },
+            {
+              "label": "Muḍāriʿ (Present/Future)",
+              "arabic": "يَدْفَعُ",
+              "english": "yadfaʿu — he pays"
+            },
+            {
+              "label": "Amr (Command)",
+              "arabic": "اِدْفَعْ",
+              "english": "idfaʿ — pay!"
+            },
+            {
+              "label": "Maṣdar",
+              "arabic": "دَفْع",
+              "english": "dafʿ — paying"
+            }
+          ]
+        },
+        {
+          "arabic": "",
+          "parts": [
+            {
+              "label": "Māḍī (Past)",
+              "arabic": "وَزَنَ",
+              "english": "wazana — he weighed"
+            },
+            {
+              "label": "Muḍāriʿ (Present/Future)",
+              "arabic": "يَزِنُ",
+              "english": "yazinu — he weighs"
+            },
+            {
+              "label": "Amr (Command)",
+              "arabic": "زِنْ",
+              "english": "zin — weigh!"
+            },
+            {
+              "label": "Maṣdar",
+              "arabic": "وَزْن",
+              "english": "wazn — weighing"
+            }
+          ]
+        },
+        {
+          "arabic": "",
+          "parts": [
+            {
+              "label": "Māḍī (Past)",
+              "arabic": "أَخَذَ",
+              "english": "akhadha — he took"
+            },
+            {
+              "label": "Muḍāriʿ (Present/Future)",
+              "arabic": "يَأْخُذُ",
+              "english": "yaʾkhudhu — he takes"
+            },
+            {
+              "label": "Amr (Command)",
+              "arabic": "خُذْ",
+              "english": "khudh — take!"
+            },
+            {
+              "label": "Maṣdar",
+              "arabic": "أَخْذ",
+              "english": "akhdh — taking"
+            }
+          ]
+        },
+        {
+          "arabic": "",
+          "parts": [
+            {
+              "label": "Māḍī (Past)",
+              "arabic": "بَقِيَ",
+              "english": "baqiya — he stayed"
+            },
+            {
+              "label": "Muḍāriʿ (Present/Future)",
+              "arabic": "يَبْقَى",
+              "english": "yabqā — he remains"
+            },
+            {
+              "label": "Amr (Command)",
+              "arabic": "اِبْقَ",
+              "english": "ibqa — remain! / stay!"
+            },
+            {
+              "label": "Maṣdar",
+              "arabic": "بَقَاء",
+              "english": "baqāʾ — staying"
+            }
+          ]
+        },
+        {
+          "arabic": "",
+          "parts": [
+            {
+              "label": "Māḍī (Past)",
+              "arabic": "أَعْطَى",
+              "english": "aʿṭā — he gave"
+            },
+            {
+              "label": "Muḍāriʿ (Present/Future)",
+              "arabic": "يُعْطِي",
+              "english": "yuʿṭī — he gives"
+            },
+            {
+              "label": "Amr (Command)",
+              "arabic": "أَعْطِ",
+              "english": "aʿṭi — give!"
+            },
+            {
+              "label": "Maṣdar",
+              "arabic": "إِعْطَاء",
+              "english": "iʿṭāʾ — giving"
+            }
+          ]
+        },
+        {
+          "arabic": "",
+          "parts": [
+            {
+              "label": "Māḍī (Past)",
+              "arabic": "دَخَلَ",
+              "english": "dakhala — he entered"
+            },
+            {
+              "label": "Muḍāriʿ (Present/Future)",
+              "arabic": "يَدْخُلُ",
+              "english": "yadkhulu — he enters"
+            },
+            {
+              "label": "Amr (Command)",
+              "arabic": "اُدْخُلْ",
+              "english": "udkhul — enter!"
+            },
+            {
+              "label": "Maṣdar",
+              "arabic": "دُخُول",
+              "english": "dukhūl — entering"
+            }
+          ]
+        },
+        {
+          "arabic": "",
+          "parts": [
+            {
+              "label": "Māḍī (Past)",
+              "arabic": "خَرَجَ",
+              "english": "kharaja — he exited"
+            },
+            {
+              "label": "Muḍāriʿ (Present/Future)",
+              "arabic": "يَخْرُجُ",
+              "english": "yakhruju — he exits"
+            },
+            {
+              "label": "Amr (Command)",
+              "arabic": "اُخْرُجْ",
+              "english": "ukhruj — exit!"
+            },
+            {
+              "label": "Maṣdar",
+              "arabic": "خُرُوج",
+              "english": "khurūj — exiting"
+            }
+          ]
+        },
+        {
+          "arabic": "",
+          "parts": [
+            {
+              "label": "Māḍī (Past)",
+              "arabic": "اِخْتَارَ",
+              "english": "ikhtāra — he chose"
+            },
+            {
+              "label": "Muḍāriʿ (Present/Future)",
+              "arabic": "يَخْتَارُ",
+              "english": "yakhtāru — he chooses"
+            },
+            {
+              "label": "Amr (Command)",
+              "arabic": "اِخْتَرْ",
+              "english": "ikhtar — choose!"
+            },
+            {
+              "label": "Maṣdar",
+              "arabic": "اِخْتِيَار",
+              "english": "ikhtiyār — choosing"
+            }
+          ]
+        },
+        {
+          "arabic": "",
+          "parts": [
+            {
+              "label": "Māḍī (Past)",
+              "arabic": "بَحَثَ عَنْ",
+              "english": "baḥatha ʿan — he searched for"
+            },
+            {
+              "label": "Muḍāriʿ (Present/Future)",
+              "arabic": "يَبْحَثُ عَنْ",
+              "english": "yabḥathu ʿan — he searches for"
+            },
+            {
+              "label": "Amr (Command)",
+              "arabic": "اِبْحَثْ عَنْ",
+              "english": "ibḥath ʿan — search for!"
+            },
+            {
+              "label": "Maṣdar",
+              "arabic": "بَحْث",
+              "english": "baḥth — searching"
+            }
+          ]
+        },
+        {
+          "arabic": "",
+          "parts": [
+            {
+              "label": "Māḍī (Past)",
+              "arabic": "قَارَنَ",
+              "english": "qārana — he compared"
+            },
+            {
+              "label": "Muḍāriʿ (Present/Future)",
+              "arabic": "يُقَارِنُ",
+              "english": "yuqārinu — he compares"
+            },
+            {
+              "label": "Amr (Command)",
+              "arabic": "قَارِنْ",
+              "english": "qārin — compare!"
+            },
+            {
+              "label": "Maṣdar",
+              "arabic": "مُقَارَنَة",
+              "english": "muqāranah — comparing"
+            }
+          ]
+        },
+        {
+          "arabic": "",
+          "parts": [
+            {
+              "label": "Māḍī (Past)",
+              "arabic": "طَلَبَ",
+              "english": "ṭalaba — he requested/ordered"
+            },
+            {
+              "label": "Muḍāriʿ (Present/Future)",
+              "arabic": "يَطْلُبُ",
+              "english": "yaṭlubu — he requests/orders"
+            },
+            {
+              "label": "Amr (Command)",
+              "arabic": "اُطْلُبْ",
+              "english": "uṭlub — request/order!"
+            },
+            {
+              "label": "Maṣdar",
+              "arabic": "طَلَب",
+              "english": "ṭalab — requesting/ordering"
+            }
+          ]
+        },
+        {
+          "arabic": "",
+          "parts": [
+            {
+              "label": "Māḍī (Past)",
+              "arabic": "حَمَلَ",
+              "english": "ḥamala — he carried"
+            },
+            {
+              "label": "Muḍāriʿ (Present/Future)",
+              "arabic": "يَحْمِلُ",
+              "english": "yaḥmilu — he carries"
+            },
+            {
+              "label": "Amr (Command)",
+              "arabic": "اِحْمِلْ",
+              "english": "iḥmil — carry!"
+            },
+            {
+              "label": "Maṣdar",
+              "arabic": "حَمْل",
+              "english": "ḥaml — carrying"
+            }
+          ]
+        },
+        {
+          "arabic": "",
+          "parts": [
+            {
+              "label": "Māḍī (Past)",
+              "arabic": "فَتَحَ",
+              "english": "fataḥa — he opened"
+            },
+            {
+              "label": "Muḍāriʿ (Present/Future)",
+              "arabic": "يَفْتَحُ",
+              "english": "yaftaḥu — he opens"
+            },
+            {
+              "label": "Amr (Command)",
+              "arabic": "اِفْتَحْ",
+              "english": "iftaḥ — open!"
+            },
+            {
+              "label": "Maṣdar",
+              "arabic": "فَتْح",
+              "english": "fatḥ — opening"
+            }
+          ]
+        },
+        {
+          "arabic": "",
+          "parts": [
+            {
+              "label": "Māḍī (Past)",
+              "arabic": "أَغْلَقَ",
+              "english": "aghlaqa — he closed"
+            },
+            {
+              "label": "Muḍāriʿ (Present/Future)",
+              "arabic": "يُغْلِقُ",
+              "english": "yughliqu — he closes"
+            },
+            {
+              "label": "Amr (Command)",
+              "arabic": "أَغْلِقْ",
+              "english": "aghliq — close!"
+            },
+            {
+              "label": "Maṣdar",
+              "arabic": "إِغْلَاق",
+              "english": "ighlāq — closing"
+            }
+          ]
+        },
+        {
+          "arabic": "",
+          "parts": [
+            {
+              "label": "Māḍī (Past)",
+              "arabic": "عَدَّ",
+              "english": "ʿadda — he counted"
+            },
+            {
+              "label": "Muḍāriʿ (Present/Future)",
+              "arabic": "يَعُدُّ",
+              "english": "yaʿuddu — he counts"
+            },
+            {
+              "label": "Amr (Command)",
+              "arabic": "عُدَّ",
+              "english": "ʿudd — count!"
+            },
+            {
+              "label": "Maṣdar",
+              "arabic": "عَدّ",
+              "english": "ʿadd — counting"
+            }
+          ]
+        },
+        {
+          "arabic": "",
+          "parts": [
+            {
+              "label": "Māḍī (Past)",
+              "arabic": "سَأَلَ",
+              "english": "saʾala — he asked"
+            },
+            {
+              "label": "Muḍāriʿ (Present/Future)",
+              "arabic": "يَسْأَلُ",
+              "english": "yasʾalu — he asks"
+            },
+            {
+              "label": "Amr (Command)",
+              "arabic": "اِسْأَلْ",
+              "english": "isʾal — ask!"
+            },
+            {
+              "label": "Maṣdar",
+              "arabic": "سُؤَال",
+              "english": "suʾāl — asking"
+            }
+          ]
+        },
+        {
+          "arabic": "",
+          "parts": [
+            {
+              "label": "Māḍī (Past)",
+              "arabic": "جَرَّبَ",
+              "english": "jarraba — he tried"
+            },
+            {
+              "label": "Muḍāriʿ (Present/Future)",
+              "arabic": "يُجَرِّبُ",
+              "english": "yujarribu — he tries"
+            },
+            {
+              "label": "Amr (Command)",
+              "arabic": "جَرِّبْ",
+              "english": "jarrib — try!"
+            },
+            {
+              "label": "Maṣdar",
+              "arabic": "تَجْرِبَة",
+              "english": "tajribah — trying/testing"
+            }
+          ]
+        },
+        {
+          "arabic": "",
+          "parts": [
+            {
+              "label": "Māḍī (Past)",
+              "arabic": "اِسْتَلَمَ",
+              "english": "istalama — he received"
+            },
+            {
+              "label": "Muḍāriʿ (Present/Future)",
+              "arabic": "يَسْتَلِمُ",
+              "english": "yastalimu — he receives"
+            },
+            {
+              "label": "Amr (Command)",
+              "arabic": "اِسْتَلِمْ",
+              "english": "istalim — receive!"
+            },
+            {
+              "label": "Maṣdar",
+              "arabic": "اِسْتِلَام",
+              "english": "istilām — receiving"
+            }
+          ]
+        },
+        {
+          "arabic": "",
+          "parts": [
+            {
+              "label": "Māḍī (Past)",
+              "arabic": "اِسْتَعْمَلَ",
+              "english": "istaʿmala — he used"
+            },
+            {
+              "label": "Muḍāriʿ (Present/Future)",
+              "arabic": "يَسْتَعْمِلُ",
+              "english": "yastaʿmilu — he uses"
+            },
+            {
+              "label": "Amr (Command)",
+              "arabic": "اِسْتَعْمِلْ",
+              "english": "istaʿmil — use!"
+            },
+            {
+              "label": "Maṣdar",
+              "arabic": "اِسْتِعْمَال",
+              "english": "istiʿmāl — using"
+            }
+          ]
+        },
+        {
+          "arabic": "",
+          "parts": [
+            {
+              "label": "Māḍī (Past)",
+              "arabic": "حَاسَبَ",
+              "english": "ḥāsaba — he settled the bill"
+            },
+            {
+              "label": "Muḍāriʿ (Present/Future)",
+              "arabic": "يُحَاسِبُ",
+              "english": "yuḥāsibu — he settles the bill"
+            },
+            {
+              "label": "Amr (Command)",
+              "arabic": "حَاسِبْ",
+              "english": "ḥāsib — settle the bill!"
+            },
+            {
+              "label": "Maṣdar",
+              "arabic": "مُحَاسَبَة",
+              "english": "muḥāsabah — billing/accounting"
+            }
+          ]
+        },
+        {
+          "arabic": "",
+          "parts": [
+            {
+              "label": "Māḍī (Past)",
+              "arabic": "خَفَّضَ",
+              "english": "khaffaḍa — he reduced"
+            },
+            {
+              "label": "Muḍāriʿ (Present/Future)",
+              "arabic": "يُخَفِّضُ",
+              "english": "yukhaffiḍu — he reduces"
+            },
+            {
+              "label": "Amr (Command)",
+              "arabic": "خَفِّضْ",
+              "english": "khaffiḍ — reduce!"
+            },
+            {
+              "label": "Maṣdar",
+              "arabic": "تَخْفِيض",
+              "english": "takhfīḍ — reducing/discounting"
+            }
+          ]
+        },
+        {
+          "arabic": "",
+          "parts": [
+            {
+              "label": "Māḍī (Past)",
+              "arabic": "غَلَّفَ",
+              "english": "ghallafa — he wrapped"
+            },
+            {
+              "label": "Muḍāriʿ (Present/Future)",
+              "arabic": "يُغَلِّفُ",
+              "english": "yughallifu — he wraps"
+            },
+            {
+              "label": "Amr (Command)",
+              "arabic": "غَلِّفْ",
+              "english": "ghallif — wrap!"
+            },
+            {
+              "label": "Maṣdar",
+              "arabic": "تَغْلِيف",
+              "english": "taghlīf — wrapping/packaging"
+            }
+          ]
         }
       ],
       "topicSlugs": [
@@ -7568,70 +8492,565 @@
       "lessonId": "lesson-the-marketplace-and-colours"
     },
     {
-      "id": "lesson-the-marketplace-and-colours__person-groups__vocabulary-colours__20",
-      "title": "Vocabulary (Colours)",
+      "id": "lesson-command-verbs-in-the-qur-an__verb-forms__vocabulary-common-qur-anic-verbs",
+      "title": "Vocabulary (Common Qur’anic Verbs)",
       "body": "",
       "examples": [
         {
           "arabic": "",
-          "english": "2nd Person(Talking DIRECTLY TO another Person/Group) — Masculine Singular — one person talking to another male"
+          "parts": [
+            {
+              "label": "Māḍī (Past)",
+              "arabic": "وَقَفَ",
+              "english": "waqafa — he stood"
+            },
+            {
+              "label": "Muḍāriʿ (Present/Future)",
+              "arabic": "يَقِفُ",
+              "english": "yaqifu — he stands"
+            },
+            {
+              "label": "Amr (Command)",
+              "arabic": "قِفْ",
+              "english": "qif — stand!"
+            },
+            {
+              "label": "Maṣdar",
+              "arabic": "وُقُوف",
+              "english": "wuqūf — standing"
+            }
+          ]
         },
         {
           "arabic": "",
-          "english": "2nd Person(Talking DIRECTLY TO another Person/Group) — Feminine Singular — one person talking to another female"
+          "parts": [
+            {
+              "label": "Māḍī (Past)",
+              "arabic": "فَتَحَ",
+              "english": "fataḥa — he opened"
+            },
+            {
+              "label": "Muḍāriʿ (Present/Future)",
+              "arabic": "يَفْتَحُ",
+              "english": "yaftaḥu — he opens"
+            },
+            {
+              "label": "Amr (Command)",
+              "arabic": "اِفْتَحْ",
+              "english": "iftaḥ — open!"
+            },
+            {
+              "label": "Maṣdar",
+              "arabic": "فَتْح",
+              "english": "fatḥ — opening"
+            }
+          ]
         },
         {
           "arabic": "",
-          "english": "2nd Person(Talking DIRECTLY TO another Person/Group) — Dual — one person talking to two people"
+          "parts": [
+            {
+              "label": "Māḍī (Past)",
+              "arabic": "قَرَأَ",
+              "english": "qaraʾa — he read"
+            },
+            {
+              "label": "Muḍāriʿ (Present/Future)",
+              "arabic": "يَقْرَأُ",
+              "english": "yaqraʾu — he reads"
+            },
+            {
+              "label": "Amr (Command)",
+              "arabic": "اِقْرَأْ",
+              "english": "iqraʾ — read!"
+            },
+            {
+              "label": "Maṣdar",
+              "arabic": "قِرَاءَة",
+              "english": "qirāʾah — reading"
+            }
+          ]
         },
         {
           "arabic": "",
-          "english": "2nd Person(Talking DIRECTLY TO another Person/Group) — Masculine Plural — one person talking to a group of males/mixed"
+          "parts": [
+            {
+              "label": "Māḍī (Past)",
+              "arabic": "أَغْلَقَ",
+              "english": "aghlaqa — he closed"
+            },
+            {
+              "label": "Muḍāriʿ (Present/Future)",
+              "arabic": "يُغْلِقُ",
+              "english": "yughliqu — he closes"
+            },
+            {
+              "label": "Amr (Command)",
+              "arabic": "أَغْلِقْ",
+              "english": "aghliq — close!"
+            },
+            {
+              "label": "Maṣdar",
+              "arabic": "إِغْلَاق",
+              "english": "ighlāq — closing"
+            }
+          ]
         },
         {
           "arabic": "",
-          "english": "2nd Person(Talking DIRECTLY TO another Person/Group) — Feminine Plural — one person talking to a group of females"
+          "parts": [
+            {
+              "label": "Māḍī (Past)",
+              "arabic": "مَسَحَ",
+              "english": "masaḥa — he wiped"
+            },
+            {
+              "label": "Muḍāriʿ (Present/Future)",
+              "arabic": "يَمْسَحُ",
+              "english": "yamsaḥu — he wipes"
+            },
+            {
+              "label": "Amr (Command)",
+              "arabic": "اِمْسَحْ",
+              "english": "imsaḥ — wipe!"
+            },
+            {
+              "label": "Maṣdar",
+              "arabic": "مَسْح",
+              "english": "masḥ — wiping"
+            }
+          ]
+        },
+        {
+          "arabic": "",
+          "parts": [
+            {
+              "label": "Māḍī (Past)",
+              "arabic": "جَلَسَ",
+              "english": "jalasa — he sat"
+            },
+            {
+              "label": "Muḍāriʿ (Present/Future)",
+              "arabic": "يَجْلِسُ",
+              "english": "yajlisu — he sits"
+            },
+            {
+              "label": "Amr (Command)",
+              "arabic": "اِجْلِسْ",
+              "english": "ijlis — sit!"
+            },
+            {
+              "label": "Maṣdar",
+              "arabic": "جُلُوس",
+              "english": "julūs — sitting"
+            }
+          ]
+        },
+        {
+          "arabic": "",
+          "parts": [
+            {
+              "label": "Māḍī (Past)",
+              "arabic": "ذَهَبَ",
+              "english": "dhahaba — he went"
+            },
+            {
+              "label": "Muḍāriʿ (Present/Future)",
+              "arabic": "يَذْهَبُ",
+              "english": "yadhhabu — he goes"
+            },
+            {
+              "label": "Amr (Command)",
+              "arabic": "اِذْهَبْ",
+              "english": "idhhab — go!"
+            },
+            {
+              "label": "Maṣdar",
+              "arabic": "ذَهَاب",
+              "english": "dhahāb — going"
+            }
+          ]
+        },
+        {
+          "arabic": "",
+          "parts": [
+            {
+              "label": "Māḍī (Past)",
+              "arabic": "أَحْضَرَ",
+              "english": "aḥḍara — he brought"
+            },
+            {
+              "label": "Muḍāriʿ (Present/Future)",
+              "arabic": "يُحْضِرُ",
+              "english": "yuḥḍiru — he brings"
+            },
+            {
+              "label": "Amr (Command)",
+              "arabic": "أَحْضِرْ",
+              "english": "aḥḍir — bring!"
+            },
+            {
+              "label": "Maṣdar",
+              "arabic": "إِحْضَار",
+              "english": "iḥḍār — bringing"
+            }
+          ]
+        },
+        {
+          "arabic": "",
+          "parts": [
+            {
+              "label": "Māḍī (Past)",
+              "arabic": "تَفَضَّلَ",
+              "english": "tafaḍḍala — he was gracious / proceeded"
+            },
+            {
+              "label": "Muḍāriʿ (Present/Future)",
+              "arabic": "يَتَفَضَّلُ",
+              "english": "yatafaḍḍalu — he proceeds"
+            },
+            {
+              "label": "Amr (Command)",
+              "arabic": "تَفَضَّلْ",
+              "english": "tafaḍḍal — please / go ahead!"
+            },
+            {
+              "label": "Maṣdar",
+              "arabic": "تَفَضُّل",
+              "english": "tafaḍḍul — graciousness"
+            }
+          ]
+        },
+        {
+          "arabic": "",
+          "parts": [
+            {
+              "label": "Māḍī (Past)",
+              "arabic": "سَمِعَ",
+              "english": "samiʿa — he heard"
+            },
+            {
+              "label": "Muḍāriʿ (Present/Future)",
+              "arabic": "يَسْمَعُ",
+              "english": "yasmaʿu — he hears"
+            },
+            {
+              "label": "Amr (Command)",
+              "arabic": "اِسْمَعْ",
+              "english": "ismaʿ — listen!"
+            },
+            {
+              "label": "Maṣdar",
+              "arabic": "سَمَاع",
+              "english": "samāʿ — hearing"
+            }
+          ]
+        },
+        {
+          "arabic": "",
+          "parts": [
+            {
+              "label": "Māḍī (Past)",
+              "arabic": "سَبَّحَ",
+              "english": "sabbaḥa — he glorified"
+            },
+            {
+              "label": "Muḍāriʿ (Present/Future)",
+              "arabic": "يُسَبِّحُ",
+              "english": "yusabbiḥu — he glorifies"
+            },
+            {
+              "label": "Amr (Command)",
+              "arabic": "سَبِّحْ",
+              "english": "sabbiḥ — glorify!"
+            },
+            {
+              "label": "Maṣdar",
+              "arabic": "تَسْبِيح",
+              "english": "tasbīḥ — glorifying"
+            }
+          ]
+        },
+        {
+          "arabic": "",
+          "parts": [
+            {
+              "label": "Māḍī (Past)",
+              "arabic": "اِسْتَغْفَرَ",
+              "english": "istaghfara — he sought forgiveness"
+            },
+            {
+              "label": "Muḍāriʿ (Present/Future)",
+              "arabic": "يَسْتَغْفِرُ",
+              "english": "yastaghfiru — he seeks forgiveness"
+            },
+            {
+              "label": "Amr (Command)",
+              "arabic": "اِسْتَغْفِرْ",
+              "english": "istaghfir — seek forgiveness!"
+            },
+            {
+              "label": "Maṣdar",
+              "arabic": "اِسْتِغْفَار",
+              "english": "istighfār — seeking forgiveness"
+            }
+          ]
+        },
+        {
+          "arabic": "",
+          "parts": [
+            {
+              "label": "Māḍī (Past)",
+              "arabic": "أَجَابَ",
+              "english": "ajāba — he answered"
+            },
+            {
+              "label": "Muḍāriʿ (Present/Future)",
+              "arabic": "يُجِيبُ",
+              "english": "yujību — he answers"
+            },
+            {
+              "label": "Amr (Command)",
+              "arabic": "أَجِبْ",
+              "english": "ajib — answer!"
+            },
+            {
+              "label": "Maṣdar",
+              "arabic": "إِجَابَة",
+              "english": "ijābah — answering"
+            }
+          ]
+        },
+        {
+          "arabic": "",
+          "parts": [
+            {
+              "label": "Māḍī (Past)",
+              "arabic": "خَطَبَ",
+              "english": "khaṭaba — he delivered a sermon"
+            },
+            {
+              "label": "Muḍāriʿ (Present/Future)",
+              "arabic": "يَخْطُبُ",
+              "english": "yakhṭubu — he delivers a sermon"
+            },
+            {
+              "label": "Amr (Command)",
+              "arabic": "اُخْطُبْ",
+              "english": "ukhṭub — deliver a sermon!"
+            },
+            {
+              "label": "Maṣdar",
+              "arabic": "خُطْبَة",
+              "english": "khuṭbah — sermon"
+            }
+          ]
+        },
+        {
+          "arabic": "",
+          "parts": [
+            {
+              "label": "Māḍī (Past)",
+              "arabic": "قَالَ",
+              "english": "qāla — he said"
+            },
+            {
+              "label": "Muḍāriʿ (Present/Future)",
+              "arabic": "يَقُولُ",
+              "english": "yaqūlu — he says"
+            },
+            {
+              "label": "Amr (Command)",
+              "arabic": "قُلْ",
+              "english": "qul — say!"
+            },
+            {
+              "label": "Maṣdar",
+              "arabic": "قَوْل",
+              "english": "qawl — saying"
+            }
+          ]
+        },
+        {
+          "arabic": "",
+          "parts": [
+            {
+              "label": "Māḍī (Past)",
+              "arabic": "تَعَلَّمَ",
+              "english": "taʿallama — he learned"
+            },
+            {
+              "label": "Muḍāriʿ (Present/Future)",
+              "arabic": "يَتَعَلَّمُ",
+              "english": "yataʿallamu — he learns"
+            },
+            {
+              "label": "Amr (Command)",
+              "arabic": "تَعَلَّمْ",
+              "english": "taʿallam — learn!"
+            },
+            {
+              "label": "Maṣdar",
+              "arabic": "تَعَلُّم",
+              "english": "taʿallum — learning"
+            }
+          ]
+        },
+        {
+          "arabic": "",
+          "parts": [
+            {
+              "label": "Māḍī (Past)",
+              "arabic": "فَهِمَ",
+              "english": "fahima — he understood"
+            },
+            {
+              "label": "Muḍāriʿ (Present/Future)",
+              "arabic": "يَفْهَمُ",
+              "english": "yafhamu — he understands"
+            },
+            {
+              "label": "Amr (Command)",
+              "arabic": "اِفْهَمْ",
+              "english": "ifham — understand!"
+            },
+            {
+              "label": "Maṣdar",
+              "arabic": "فَهْم",
+              "english": "fahm — understanding"
+            }
+          ]
+        },
+        {
+          "arabic": "",
+          "parts": [
+            {
+              "label": "Māḍī (Past)",
+              "arabic": "فَعَلَ",
+              "english": "faʿala — he did"
+            },
+            {
+              "label": "Muḍāriʿ (Present/Future)",
+              "arabic": "يَفْعَلُ",
+              "english": "yafʿalu — he does"
+            },
+            {
+              "label": "Amr (Command)",
+              "arabic": "اِفْعَلْ",
+              "english": "ifʿal — do!"
+            },
+            {
+              "label": "Maṣdar",
+              "arabic": "فِعْل",
+              "english": "fiʿl — doing"
+            }
+          ]
+        },
+        {
+          "arabic": "",
+          "parts": [
+            {
+              "label": "Māḍī (Past)",
+              "arabic": "حَضَرَ",
+              "english": "ḥaḍara — he attended / came"
+            },
+            {
+              "label": "Muḍāriʿ (Present/Future)",
+              "arabic": "يَحْضُرُ",
+              "english": "yaḥḍuru — he attends"
+            },
+            {
+              "label": "Amr (Command)",
+              "arabic": "اُحْضُرْ",
+              "english": "uḥḍur — attend!"
+            },
+            {
+              "label": "Maṣdar",
+              "arabic": "حُضُور",
+              "english": "ḥuḍūr — attendance"
+            }
+          ]
+        },
+        {
+          "arabic": "",
+          "parts": [
+            {
+              "label": "Māḍī (Past)",
+              "arabic": "وَزَنَ",
+              "english": "wazana — he weighed"
+            },
+            {
+              "label": "Muḍāriʿ (Present/Future)",
+              "arabic": "يَزِنُ",
+              "english": "yazinu — he weighs"
+            },
+            {
+              "label": "Amr (Command)",
+              "arabic": "زِنْ",
+              "english": "zin — weigh!"
+            },
+            {
+              "label": "Maṣdar",
+              "arabic": "وَزْن",
+              "english": "wazn — weighing"
+            }
+          ]
+        },
+        {
+          "arabic": "",
+          "parts": [
+            {
+              "label": "Māḍī (Past)",
+              "arabic": "حَسَبَ",
+              "english": "ḥasaba — he counted"
+            },
+            {
+              "label": "Muḍāriʿ (Present/Future)",
+              "arabic": "يَحْسِبُ",
+              "english": "yaḥsibu — he counts/calculates"
+            },
+            {
+              "label": "Amr (Command)",
+              "arabic": "اِحْسِبْ",
+              "english": "iḥsib — count!"
+            },
+            {
+              "label": "Maṣdar",
+              "arabic": "حِسَاب",
+              "english": "ḥisāb — counting/calculation"
+            }
+          ]
+        },
+        {
+          "arabic": "",
+          "parts": [
+            {
+              "label": "Māḍī (Past)",
+              "arabic": "دَخَلَ",
+              "english": "dakhala — he entered"
+            },
+            {
+              "label": "Muḍāriʿ (Present/Future)",
+              "arabic": "يَدْخُلُ",
+              "english": "yadkhulu — he enters"
+            },
+            {
+              "label": "Amr (Command)",
+              "arabic": "اُدْخُلْ",
+              "english": "udkhul — enter!"
+            },
+            {
+              "label": "Maṣdar",
+              "arabic": "دُخُول",
+              "english": "dukhūl — entering"
+            }
+          ]
         }
       ],
       "topicSlugs": [
-        "the-marketplace"
+        "command-verbs-in-the-qur-an"
       ],
-      "lessonId": "lesson-the-marketplace-and-colours"
-    },
-    {
-      "id": "lesson-the-marketplace-and-colours__person-groups__vocabulary-colours__21",
-      "title": "Vocabulary (Colours)",
-      "body": "",
-      "examples": [
-        {
-          "arabic": "",
-          "english": "3rd Person (Talking ABOUT another Person/Group) — MaleSingular — a group talking about another male"
-        },
-        {
-          "arabic": "",
-          "english": "3rd Person (Talking ABOUT another Person/Group) — Feminine Singular — a group talking about another female"
-        },
-        {
-          "arabic": "",
-          "english": "3rd Person (Talking ABOUT another Person/Group) — Masculine Dual — a group talking about two males"
-        },
-        {
-          "arabic": "",
-          "english": "3rd Person (Talking ABOUT another Person/Group) — Feminine Dual — a group talking about two females"
-        },
-        {
-          "arabic": "",
-          "english": "3rd Person (Talking ABOUT another Person/Group) — Masculine Plural — a group talking about a group of males"
-        },
-        {
-          "arabic": "",
-          "english": "3rd Person (Talking ABOUT another Person/Group) — Feminine Plural — a group talking about a group of females"
-        }
-      ],
-      "topicSlugs": [
-        "the-marketplace"
-      ],
-      "lessonId": "lesson-the-marketplace-and-colours"
+      "lessonId": "lesson-command-verbs-in-the-qur-an"
     }
   ],
   "conversations": [],
@@ -8326,5 +9745,5 @@
     "instagram": "@majestic_messenger",
     "docUrl": "https://docs.google.com/document/d/1wqbU7rsLUm0wqCjQPS2PbtCTThZOxnE2CnClxa8DETc/edit"
   },
-  "fetchedAt": "2026-05-17T22:25:44.337Z"
+  "fetchedAt": "2026-06-21T23:57:25.291Z"
 }

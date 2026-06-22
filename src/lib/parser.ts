@@ -145,7 +145,7 @@ interface ParsedLessonHeading {
 }
 
 function parseLessonHeading(heading: string): ParsedLessonHeading | undefined {
-  const m = /^Lesson\s+([\d\s\-–]+):\s*(.*)$/i.exec(heading.trim());
+  const m = /^(?:Lesson|Topic)\s+([\d\s\-–]+):\s*(.*)$/i.exec(heading.trim());
   if (!m) return undefined;
   const number = m[1].replace(/\s+/g, "").replace(/—/g, "-").replace(/–/g, "-");
   const rest = m[2].trim();
@@ -380,14 +380,18 @@ function classifyTable(headers: string[]): TableClassification {
     has("singular arabic") &&
     has("meaning") &&
     has("plural arabic") &&
-    has("plural meaning")
+    (has("plural meaning") ||
+      lower.filter((h) => h === "meaning").length >= 2)
   ) {
+    const pluralEnglishCol = has("plural meaning")
+      ? indexOf("plural meaning")
+      : lower.indexOf("meaning", indexOf("meaning") + 1);
     return {
       kind: "paired-vocab",
       singularArabicCol: indexOf("singular arabic"),
       pluralArabicCol: indexOf("plural arabic"),
       singularEnglishCol: indexOf("meaning"),
-      pluralEnglishCol: indexOf("plural meaning"),
+      pluralEnglishCol,
       pairedKind: "separate-singular-plural",
     };
   }
@@ -802,8 +806,19 @@ export async function parseDocxBuffer(
   function splitArabicAndPronunciation(cell: string): { arabic: string; pronunciation?: string } {
     const trimmed = cell.trim();
     const match = /^(.+?)\s*\(([^()]+)\)\s*$/.exec(trimmed);
-    if (!match) return { arabic: trimmed };
-    return { arabic: match[1].trim(), pronunciation: match[2].trim() };
+    if (!match) return { arabic: dedupeRepeatedArabic(trimmed) };
+    return { arabic: dedupeRepeatedArabic(match[1].trim()), pronunciation: match[2].trim() };
+  }
+
+  function dedupeRepeatedArabic(s: string): string {
+    if (s.length < 2) return s;
+    for (let half = 1; half <= s.length / 2; half++) {
+      const prefix = s.slice(0, half);
+      if (s === prefix.repeat(s.length / half) && s.length % half === 0) {
+        return prefix;
+      }
+    }
+    return s;
   }
 
   function pushVocabEntry(entry: VocabEntry): void {
@@ -1096,47 +1111,6 @@ export async function parseDocxBuffer(
     if (examples.length === 0) return;
     const title = stripLeadingNumber(cursor.subSubHeading ?? cursor.subSection?.title ?? "Key terms");
     const id = stableId([cursor.lessonId, "term-gloss", title]);
-    rules.push({
-      id,
-      title,
-      body: "",
-      examples,
-      topicSlugs: [...cursor.topicSlugs],
-      lessonId: cursor.lessonId,
-    });
-  }
-
-  function processPersonGroupsTable(
-    table: HTMLElement,
-    classification: TableClassification,
-  ): void {
-    if (!cursor.lesson) return;
-    if (
-      classification.sectionCol === undefined ||
-      classification.englishCol === undefined ||
-      classification.exampleCol === undefined
-    ) {
-      warn("Skipped grammatical-person table: missing required columns");
-      return;
-    }
-    const matrix = tableToMatrix(table);
-    if (matrix.length < 2) return;
-    const examples: GrammarExample[] = [];
-    let runningCategory = "";
-    for (const row of matrix.slice(1)) {
-      const category = row.cells[classification.sectionCol]?.trim();
-      if (category) runningCategory = category;
-      const quantity = row.cells[classification.englishCol]?.trim();
-      const description = row.cells[classification.exampleCol]?.trim();
-      if (!quantity && !description) continue;
-      examples.push({
-        arabic: "",
-        english: [runningCategory, quantity, description].filter(Boolean).join(" — "),
-      });
-    }
-    if (examples.length === 0) return;
-    const title = stripLeadingNumber(cursor.subSection?.title ?? "Grammatical persons");
-    const id = stableId([cursor.lessonId, "person-groups", title, String(rules.length)]);
     rules.push({
       id,
       title,
@@ -1779,7 +1753,9 @@ export async function parseDocxBuffer(
           processVerbFormsTable(node);
           break;
         case "person-groups":
-          processPersonGroupsTable(node, classification);
+          // Person-group tables contain only English descriptions of grammatical
+          // persons (no Arabic content). Skip emitting them as rules — they add
+          // noise on the Grammar tab without teaching value.
           break;
         case "vocab":
           if (cursor.subSection?.kind === "vocabulary") {

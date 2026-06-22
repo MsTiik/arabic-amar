@@ -1,19 +1,19 @@
 {
-  "generatedAt": "2026-05-17T22:25:44.337Z",
+  "generatedAt": "2026-06-21T23:57:25.291Z",
   "totals": {
-    "lessons": 11,
-    "topics": 11,
-    "vocab": 409,
-    "rules": 22,
+    "lessons": 12,
+    "topics": 12,
+    "vocab": 426,
+    "rules": 21,
     "conversations": 0,
-    "parserWarnings": 0,
-    "issues": 1
+    "parserWarnings": 4,
+    "issues": 2
   },
   "audioCoverage": {
-    "vocabTotal": 409,
-    "vocabWithAudio": 282,
-    "vocabMissingAudio": 127,
-    "coveragePercent": 69,
+    "vocabTotal": 426,
+    "vocabWithAudio": 291,
+    "vocabMissingAudio": 135,
+    "coveragePercent": 68,
     "byTopic": [
       {
         "slug": "body-parts",
@@ -26,10 +26,10 @@
       {
         "slug": "numbers",
         "name": "Numbers",
-        "total": 39,
-        "withAudio": 30,
+        "total": 30,
+        "withAudio": 21,
         "missingAudio": 9,
-        "coveragePercent": 77
+        "coveragePercent": 70
       },
       {
         "slug": "time",
@@ -98,19 +98,39 @@
       {
         "slug": "colours",
         "name": "Colours",
-        "total": 21,
-        "withAudio": 14,
-        "missingAudio": 7,
-        "coveragePercent": 67
+        "total": 15,
+        "withAudio": 11,
+        "missingAudio": 4,
+        "coveragePercent": 73
+      },
+      {
+        "slug": "command-verbs-in-the-qur-an",
+        "name": "Command Verbs in the Qur’an",
+        "total": 32,
+        "withAudio": 21,
+        "missingAudio": 11,
+        "coveragePercent": 66
       }
     ]
   },
   "issues": [
     {
+      "code": "parser-warnings",
+      "severity": "error",
+      "message": "Parser warnings were produced while reading the source document.",
+      "count": 4,
+      "examples": [
+        "Unknown table shape, headers=[Topic Number, Lesson Number, Completed?] in lesson=undefined sub=undefined",
+        "Unknown table shape, headers=[TEENS (11 - 19), ١١, أَحَدَ عَشَرَ, aḥada ʿashara, Eleven] in lesson=2 sub=Vocabulary (Numbers) (lesson=2 sub=Vocabulary (Numbers) heading=2.1.2 Combined Teens)",
+        "Unknown table shape, headers=[300, +, 48] in lesson=2 sub=Vocabulary (Numbers) (lesson=2 sub=Vocabulary (Numbers) heading=2.1.3 Combined Hudreds)",
+        "Unknown table shape, headers=[1000, +, 300, +, 48 (In arabic we say 8 first then 40)] in lesson=2 sub=Vocabulary (Numbers) (lesson=2 sub=Vocabulary (Numbers) heading=2.1.4 Combined Thousands)"
+      ]
+    },
+    {
       "code": "missing-audio",
       "severity": "info",
       "message": "Vocabulary words do not have a matching audio-manifest entry.",
-      "count": 127,
+      "count": 135,
       "examples": [
         "lesson-body-parts: جَبِينٌ / jabīnun / Forehead",
         "lesson-body-parts: أَسْنَانٌ / asnānun / Teeth",
@@ -118,12 +138,12 @@
         "lesson-body-parts: فَخِذٌ / fakhidhun / Thigh",
         "lesson-numbers: مِائَةٌ / miʾa(tun) / Hundred",
         "lesson-numbers: مِائَتَانِ / miʾatāni / Two Hundred",
-        "lesson-numbers: ثَلَاثُمِائَةٌ / thalāthu-miʾa(tin) / Three Hundred",
-        "lesson-numbers: أَرْبَعُمِائَةٌ / arbaʿu-miʾa(tin) / Four Hundred",
-        "lesson-numbers: خَمْسُمِائَةٌ / khamsu-miʾa(tin) / Five Hundred",
-        "lesson-numbers: سِتُّمِائَةٌ / sittu-miʾa(tin) / Six Hundred",
-        "lesson-numbers: سَبْعُمِائَةٌ / sabʿu-miʾa(tin) / Seven Hundred",
-        "lesson-numbers: ثَمَانِمِائَةٌ / thamāni-miʾa(tin) / Eight Hundred"
+        "lesson-numbers: ثَلَاثُمِائَةٌ / thalāthu-miʾa(tun) / Three Hundred",
+        "lesson-numbers: أَرْبَعُمِائَةٌ / arbaʿu-miʾa(tun) / Four Hundred",
+        "lesson-numbers: خَمْسُمِائَةٌ / khamsu-miʾa(tun) / Five Hundred",
+        "lesson-numbers: سِتُّمِائَةٌ / sittu-miʾa(tun) / Six Hundred",
+        "lesson-numbers: سَبْعُمِائَةٌ / sabʿu-miʾa(tun) / Seven Hundred",
+        "lesson-numbers: ثَمَانِمِائَةٌ / thamāni-miʾa(tun) / Eight Hundred"
       ]
     }
   ]

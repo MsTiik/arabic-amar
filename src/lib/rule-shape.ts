@@ -10,6 +10,7 @@ export type RuleShape =
   | "pattern-walkthrough" // Numbers / Time: Pattern → Worked-example → Result
   | "demonstrative-pair" // body-parts: هذا/هذه + noun template, many parallel examples
   | "explainer" //          long prose (e.g. "'This is' in the Arabic Language")
+  | "verb-forms" //         Verb conjugation tables with tense-labelled parts
   | "free-form"; //         everything else: short body + flat examples list
 
 /** ≥ this many parallel examples qualifies as a demonstrative-pair shape. */
@@ -31,6 +32,8 @@ const PAIR_BODY_RE = /\*\*(?:What to Memorise|Pattern to Memorise|Rule):\*\*/i;
 export function getRuleShape(rule: GrammarRule): RuleShape {
   if (isPatternWalkthrough(rule)) return "pattern-walkthrough";
 
+  if (isVerbForms(rule)) return "verb-forms";
+
   if (isDemonstrativePair(rule)) return "demonstrative-pair";
 
   if ((rule.body ?? "").trim().length >= EXPLAINER_MIN_BODY) {
@@ -38,6 +41,18 @@ export function getRuleShape(rule: GrammarRule): RuleShape {
   }
 
   return "free-form";
+}
+
+/**
+ * True when the rule encodes verb conjugation tables where each example has
+ * multi-part tense labels (e.g. Māḍī, Muḍāriʿ, Amr, Maṣdar).
+ */
+export function isVerbForms(rule: GrammarRule): boolean {
+  if (rule.examples.length < 3) return false;
+  const withParts = rule.examples.filter(
+    (ex) => (ex.parts?.length ?? 0) >= 3,
+  );
+  return withParts.length >= 3;
 }
 
 /**

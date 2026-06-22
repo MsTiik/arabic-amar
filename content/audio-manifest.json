@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "fetchedAt": "2026-05-17T22:21:46.324Z",
+  "fetchedAt": "2026-06-21T22:51:23.555Z",
   "entries": {
     "١ - محرم": {
       "url": "https://upload.wikimedia.org/wikipedia/commons/0/0b/LL-Q13955_%28ara%29-Fjmustak-%D9%85%D8%AD%D8%B1%D9%85.wav",
@@ -2342,6 +2342,108 @@
       "title": "File:LL-Q13955 (ara)-Reemnaif1413-هذا.wav",
       "author": "Reemnaif1413",
       "license": "CC-BY-SA-4.0"
+    },
+    "إمام / أئمة": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/6/61/LL-Q13955_%28ara%29-Fjmustak-%D8%A5%D9%85%D8%A7%D9%85.wav",
+      "source": "lingualibre",
+      "title": "File:LL-Q13955 (ara)-Fjmustak-إمام.wav",
+      "author": "Fjmustak",
+      "license": "CC-BY-SA-4.0"
+    },
+    "العربية / —": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/9/90/LL-Q13955_%28ara%29-Kareem_%28Akbarali%29-%D8%A7%D9%84%D8%B9%D8%B1%D8%A8%D9%8A%D8%A9.wav",
+      "source": "lingualibre",
+      "title": "File:LL-Q13955 (ara)-Kareem (Akbarali)-العربية.wav",
+      "author": "Kareem (Akbarali)",
+      "license": "CC-BY-SA-4.0"
+    },
+    "تدريب / تدريبات": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/8/84/Ar-%D8%AA%D8%AF%D8%B1%D9%8A%D8%A8.ogg",
+      "source": "ar-x",
+      "title": "File:Ar-تدريب.ogg",
+      "license": "CC-BY-SA-3.0"
+    },
+    "جمعة / جمعات": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/c/c0/LL-Q13955_%28ara%29-Fjmustak-%D8%AC%D9%85%D8%B9%D8%A9.wav",
+      "source": "lingualibre",
+      "title": "File:LL-Q13955 (ara)-Fjmustak-جمعة.wav",
+      "author": "Fjmustak",
+      "license": "CC-BY-SA-4.0"
+    },
+    "حسنة / حسنات": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/d/d6/LL-Q13955_%28ara%29-Fjmustak-%D8%AD%D8%B3%D9%86%D8%A9.wav",
+      "source": "lingualibre",
+      "title": "File:LL-Q13955 (ara)-Fjmustak-حسنة.wav",
+      "author": "Fjmustak",
+      "license": "CC-BY-SA-4.0"
+    },
+    "رب / أرباب": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/e/e6/LL-Q13955_%28ara%29-Fjmustak-%D8%B1%D8%A8.wav",
+      "source": "lingualibre",
+      "title": "File:LL-Q13955 (ara)-Fjmustak-رب.wav",
+      "author": "Fjmustak",
+      "license": "CC-BY-SA-4.0"
+    },
+    "سؤال / أسئلة": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/3/34/Ar-%D8%B3%D8%A4%D8%A7%D9%84.ogg",
+      "source": "ar-x",
+      "title": "File:Ar-سؤال.ogg",
+      "license": "CC-BY-SA-3.0"
+    },
+    "شيطان / شياطين": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/a/ae/LL-Q13955_%28ara%29-AlNatiq-%D8%B4%D9%8A%D8%B7%D8%A7%D9%86.wav",
+      "source": "lingualibre",
+      "title": "File:LL-Q13955 (ara)-AlNatiq-شيطان.wav",
+      "author": "AlNatiq",
+      "license": "CC-BY-SA-4.0"
+    },
+    "عالم / عوالم": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/9/9e/LL-Q13955_%28ara%29-Fjmustak-%D8%B9%D8%A7%D9%84%D9%85.wav",
+      "source": "lingualibre",
+      "title": "File:LL-Q13955 (ara)-Fjmustak-عالم.wav",
+      "author": "Fjmustak",
+      "license": "CC-BY-SA-4.0"
+    },
+    "قرآن / —": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/1/10/LL-Q13955_%28ara%29-Shahjina-%D9%82%D8%B1%D8%A7%D9%86.wav",
+      "source": "lingualibre",
+      "title": "File:LL-Q13955 (ara)-Shahjina-قران.wav",
+      "author": "Shahjina",
+      "license": "CC-BY-SA-4.0"
+    },
+    "قلب / قلوب": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/5/52/LL-Q13955_%28ara%29-Ov3for-%D9%82%D9%84%D8%A8.wav",
+      "source": "lingualibre",
+      "title": "File:LL-Q13955 (ara)-Ov3for-قلب.wav",
+      "author": "Ov3for",
+      "license": "CC-BY-SA-4.0"
+    },
+    "لغة / لغات": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/1/18/Ar-%D9%84%D8%BA%D8%A9.ogg",
+      "source": "ar-x",
+      "title": "File:Ar-لغة.ogg",
+      "license": "CC-BY-SA-3.0"
+    },
+    "مسجد / مساجد": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/7/71/LL-Q13955_%28ara%29-AlNatiq-%D9%85%D8%B3%D8%AC%D8%AF.wav",
+      "source": "lingualibre",
+      "title": "File:LL-Q13955 (ara)-AlNatiq-مسجد.wav",
+      "author": "AlNatiq",
+      "license": "CC-BY-SA-4.0"
+    },
+    "مسلم / مسلمون / مسلمين": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/d/d2/LL-Q13955_%28ara%29-AlNatiq-%D9%85%D8%B3%D9%84%D9%85.wav",
+      "source": "lingualibre",
+      "title": "File:LL-Q13955 (ara)-AlNatiq-مسلم.wav",
+      "author": "AlNatiq",
+      "license": "CC-BY-SA-4.0"
+    },
+    "يوم / أيام": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/7/7a/LL-Q13955_%28ara%29-Ov3for-%D9%8A%D9%88%D9%85.wav",
+      "source": "lingualibre",
+      "title": "File:LL-Q13955 (ara)-Ov3for-يوم.wav",
+      "author": "Ov3for",
+      "license": "CC-BY-SA-4.0"
     }
   },
   "quran": {
@@ -2693,6 +2795,12 @@
     "ممسحة / مماسح",
     "وردي / وردية",
     "ذانك / تانك",
-    "هذان / هاتان"
+    "هذان / هاتان",
+    "الله / —",
+    "حمد / أحماد",
+    "خطبة / خطب",
+    "سيئة / سيئات",
+    "فقرة / فقر",
+    "منبر / منابر"
   ]
 }
