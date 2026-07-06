@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import { ArabicText } from "@/components/arabic-text";
 import { ProgressRing } from "@/components/progress-ring";
 import { useProgress, progressActions, summarizeMastery, topicProgressFraction } from "@/lib/progress";
+import { getLessonIdentity } from "@/lib/lesson-identity";
 import type { Topic, VocabEntry } from "@/lib/types";
 
 interface Props {
@@ -23,6 +24,8 @@ export function TopicHeader({ topic, vocab, ruleCount }: Props) {
   const ids = vocab.map((v) => v.id);
   const fraction = topicProgressFraction(progress, ids);
   const summary = summarizeMastery(progress, ids);
+  const identity = getLessonIdentity(topic.slug);
+  const Icon = identity.icon;
 
   return (
     <header className="rounded-3xl border border-border bg-card p-6 sm:p-8">
@@ -34,9 +37,16 @@ export function TopicHeader({ topic, vocab, ruleCount }: Props) {
           >
             ← All lessons
           </Link>
-          <h1 className="mt-2 text-3xl font-semibold tracking-tight sm:text-4xl">
-            {topic.name}
-          </h1>
+          <div className="mt-2 flex items-center gap-3">
+            <span
+              className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl ${identity.chip}`}
+            >
+              <Icon className="h-6 w-6" aria-hidden />
+            </span>
+            <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">
+              {topic.name}
+            </h1>
+          </div>
           {topic.nameArabic ? (
             <ArabicText variant="display" className="mt-1 text-3xl text-foreground-soft sm:text-4xl">
               {topic.nameArabic}

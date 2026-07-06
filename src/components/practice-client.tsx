@@ -48,6 +48,7 @@ import type {
 } from "@/lib/types";
 import { ExerciseRunner } from "@/components/exercise-runner";
 import { buildNamesOfAllahFlashcardDeck } from "@/lib/names-of-allah";
+import { getLessonIdentity } from "@/lib/lesson-identity";
 
 interface Props {
   vocab: VocabEntry[];
@@ -529,10 +530,11 @@ function PracticeSession({
           Run through a single lesson’s worth of words.
         </p>
         <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
-          {lessons.map((l, i) => {
+          {lessons.map((l) => {
             const subset = vocab.filter((v) => v.lessonId === l.id);
             if (subset.length === 0) return null;
-            const hue = LESSON_HUES[i % LESSON_HUES.length];
+            const identity = getLessonIdentity(l.topicSlugs[0] ?? "");
+            const LessonIcon = identity.icon;
             const fraction = topicProgressFraction(
               progress,
               subset.map((v) => v.id),
@@ -544,16 +546,18 @@ function PracticeSession({
                 className="btn-chunky flex items-center gap-4 rounded-2xl border-2 border-border bg-card p-4 hover:bg-background-soft focus-ring"
               >
                 <span
-                  className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl text-base font-bold ${HUE_STYLES[hue].chip}`}
+                  className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl ${identity.chip}`}
                 >
-                  {l.number}
+                  <LessonIcon className="h-5 w-5" aria-hidden />
                 </span>
                 <div className="min-w-0 flex-1">
-                  <p className="truncate text-sm font-semibold">{l.title}</p>
+                  <p className="truncate text-sm font-semibold">
+                    <span className="text-muted-foreground">{l.number}.</span> {l.title}
+                  </p>
                   <div className="mt-1.5 flex items-center gap-2">
                     <div className="h-1.5 w-full max-w-40 overflow-hidden rounded-full bg-muted">
                       <div
-                        className={`h-full rounded-full ${HUE_STYLES[hue].bar}`}
+                        className={`h-full rounded-full ${identity.bar}`}
                         style={{ width: `${Math.round(fraction * 100)}%` }}
                       />
                     </div>
@@ -593,7 +597,6 @@ const HUE_STYLES: Record<DeckHue, { chip: string; bar: string }> = {
   },
 };
 
-const LESSON_HUES: DeckHue[] = ["primary", "present", "command", "masdar", "past", "gold"];
 
 function DeckCard({
   title,
