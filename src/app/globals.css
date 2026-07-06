@@ -199,3 +199,194 @@ body {
   outline: 2px solid var(--ring);
   outline-offset: 2px;
 }
+
+/*
+ * Practice "juice" — chunky pressable buttons and feedback animations for the
+ * exercise runner. The press effect uses a hard bottom shadow that collapses
+ * on :active so the button physically sinks, Duolingo-style.
+ */
+.btn-chunky {
+  --chunky-shadow: oklch(from var(--border) calc(l - 0.08) c h);
+  box-shadow: 0 4px 0 0 var(--chunky-shadow);
+  transition:
+    transform 0.08s ease,
+    box-shadow 0.08s ease,
+    background-color 0.15s ease,
+    border-color 0.15s ease;
+}
+.btn-chunky:active:not(:disabled) {
+  transform: translateY(4px);
+  box-shadow: 0 0 0 0 var(--chunky-shadow);
+}
+.btn-chunky:disabled {
+  box-shadow: 0 2px 0 0 var(--chunky-shadow);
+}
+.btn-chunky-primary {
+  --chunky-shadow: oklch(from var(--primary) calc(l - 0.12) c h);
+}
+.btn-chunky-success {
+  --chunky-shadow: oklch(from var(--success) calc(l - 0.12) c h);
+}
+.btn-chunky-danger {
+  --chunky-shadow: oklch(from var(--danger) calc(l - 0.12) c h);
+}
+.btn-chunky-gold {
+  --chunky-shadow: oklch(from var(--accent-gold) calc(l - 0.12) c h);
+}
+
+@keyframes answer-pop {
+  0% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+.answer-pop {
+  animation: answer-pop 0.35s ease;
+}
+
+@keyframes answer-shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(-6px);
+  }
+  40% {
+    transform: translateX(6px);
+  }
+  60% {
+    transform: translateX(-4px);
+  }
+  80% {
+    transform: translateX(4px);
+  }
+}
+.answer-shake {
+  animation: answer-shake 0.4s ease;
+}
+
+@keyframes feedback-slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.feedback-enter {
+  animation: feedback-slide-up 0.25s ease-out both;
+}
+
+@keyframes combo-pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+  60% {
+    transform: scale(1.15);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+.combo-pop {
+  animation: combo-pop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+@keyframes question-enter {
+  from {
+    opacity: 0;
+    transform: translateX(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+.question-enter {
+  animation: question-enter 0.3s ease-out both;
+}
+
+@keyframes confetti-fall {
+  0% {
+    opacity: 1;
+    transform: translateY(-10%) rotate(0deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(420px) rotate(540deg);
+  }
+}
+.confetti-piece {
+  position: absolute;
+  top: 0;
+  width: 8px;
+  height: 14px;
+  border-radius: 2px;
+  animation: confetti-fall 2.6s ease-in both;
+}
+
+@keyframes trophy-pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.3) rotate(-12deg);
+  }
+  60% {
+    transform: scale(1.15) rotate(4deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
+.trophy-pop {
+  animation: trophy-pop 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+/* Flashcard 3D flip */
+.flip-scene {
+  perspective: 1200px;
+}
+.flip-inner {
+  transform-style: preserve-3d;
+  transition: transform 0.5s cubic-bezier(0.4, 0.2, 0.2, 1);
+}
+.flip-inner.is-flipped {
+  transform: rotateY(180deg);
+}
+.flip-face {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+.flip-face-back {
+  transform: rotateY(180deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .answer-pop,
+  .answer-shake,
+  .feedback-enter,
+  .combo-pop,
+  .question-enter,
+  .confetti-piece,
+  .trophy-pop {
+    animation: none;
+  }
+  .flip-inner {
+    transition: none;
+  }
+  .btn-chunky,
+  .btn-chunky:active:not(:disabled) {
+    transform: none;
+    transition: none;
+  }
+}

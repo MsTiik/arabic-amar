@@ -3,6 +3,21 @@
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useMemo, useState } from "react";
+import {
+  AlertTriangle,
+  CalendarClock,
+  Keyboard,
+  Layers,
+  Link2,
+  PenLine,
+  Play,
+  Puzzle,
+  Search,
+  Shuffle,
+  Sparkles,
+  Star,
+  VenusAndMars,
+} from "lucide-react";
 
 import {
   makeClozeDeck,
@@ -21,6 +36,7 @@ import {
   getNewWordIds,
   getWeakWordIds,
   progressActions,
+  topicProgressFraction,
   useProgress,
 } from "@/lib/progress";
 import type {
@@ -236,8 +252,47 @@ function PracticeSession({
   const dueIds = getDueStudyWordIds(progress, vocab);
   const newIds = getNewWordIds(progress, vocab);
 
+  function startTodaysSession() {
+    const picked: VocabEntry[] = [];
+    const seen = new Set<string>();
+    const add = (ids: string[], limit: number) => {
+      const wanted = new Set(ids);
+      for (const v of vocab) {
+        if (picked.length >= 12) return;
+        if (limit <= 0) return;
+        if (!wanted.has(v.id) || seen.has(v.id)) continue;
+        picked.push(v);
+        seen.add(v.id);
+        limit--;
+      }
+    };
+    add(dueIds, 8);
+    add(mistakeIds, 4);
+    add(newIds, 12 - picked.length);
+    if (picked.length < 12) {
+      for (const v of sampleRandom(vocab, 12, Date.now())) {
+        if (picked.length >= 12) break;
+        if (seen.has(v.id)) continue;
+        picked.push(v);
+        seen.add(v.id);
+      }
+    }
+    setManualDeck(
+      makeMultipleChoiceDeck(picked, vocab, "ar-to-en", {
+        id: "deck-todays-session",
+        title: "Today's session",
+      }),
+    );
+  }
+
+  const sessionParts = [
+    dueIds.length > 0 ? `${dueIds.length} due` : null,
+    mistakeIds.length > 0 ? `${mistakeIds.length} to fix` : null,
+    newIds.length > 0 ? `new words` : null,
+  ].filter(Boolean);
+
   return (
-    <div className="space-y-6">
+    <div className="space-y-10">
       <header>
         <h1 className="text-3xl font-semibold tracking-tight">Practice</h1>
         <p className="mt-1 text-sm text-muted-foreground">
@@ -246,14 +301,37 @@ function PracticeSession({
         </p>
       </header>
 
-      <section className="rounded-3xl border border-border bg-card p-6">
+      <section className="relative overflow-hidden rounded-3xl bg-primary p-6 text-primary-foreground sm:p-8">
+        <div className="flex flex-wrap items-center justify-between gap-6">
+          <div className="min-w-0">
+            <h2 className="text-2xl font-bold tracking-tight">Today&apos;s session</h2>
+            <p className="mt-1 text-sm text-primary-foreground/80">
+              {sessionParts.length > 0
+                ? `A 12-card mix picked for you: ${sessionParts.join(" · ")}.`
+                : "A 12-card mix picked from across your lessons."}
+            </p>
+          </div>
+          <button
+            type="button"
+            onClick={startTodaysSession}
+            className="btn-chunky btn-chunky-gold flex shrink-0 items-center gap-2 rounded-full bg-accent-gold px-7 py-3.5 text-base font-bold text-foreground focus-ring"
+          >
+            <Play className="h-5 w-5" aria-hidden />
+            Start today&apos;s session
+          </button>
+        </div>
+      </section>
+
+      <section>
         <h2 className="text-lg font-semibold">Quick decks</h2>
-        <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
+        <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
           {dueIds.length > 0 ? (
-            <DeckButton
-              title={`Review due cards (${dueIds.length})`}
+            <DeckCard
+              title="Review due cards"
               description="Words scheduled for review today."
-              tone="primary"
+              icon={CalendarClock}
+              hue="primary"
+              badge={`${dueIds.length} due`}
               onClick={() => {
                 const ids = new Set(dueIds);
                 const subset = vocab.filter((v) => ids.has(v.id)).slice(0, 20);
@@ -267,9 +345,12 @@ function PracticeSession({
             />
           ) : null}
           {newIds.length > 0 ? (
-            <DeckButton
+            <DeckCard
               title="Add new words"
               description="Preview 10 unseen words as flashcards."
+              icon={Sparkles}
+              hue="gold"
+              badge={`${Math.min(newIds.length, 10)} new`}
               onClick={() => {
                 const ids = new Set(newIds.slice(0, 10));
                 const subset = vocab.filter((v) => ids.has(v.id));
@@ -282,9 +363,11 @@ function PracticeSession({
               }}
             />
           ) : null}
-          <DeckButton
+          <DeckCard
             title="Mixed multiple choice"
             description="Random 12 words across all lessons (Arabic ↔ English)."
+            icon={Shuffle}
+            hue="present"
             onClick={() => {
               const sample = sampleRandom(vocab, 12, Date.now());
               setManualDeck(
@@ -295,9 +378,11 @@ function PracticeSession({
               );
             }}
           />
-          <DeckButton
+          <DeckCard
             title="Flashcards (mixed)"
             description="Tap to flip. Self-rate after each card."
+            icon={Layers}
+            hue="past"
             onClick={() => {
               const sample = sampleRandom(vocab, 15, Date.now());
               setManualDeck(
@@ -308,17 +393,20 @@ function PracticeSession({
               );
             }}
           />
-          <DeckButton
+          <DeckCard
             title="Names of Allah"
             description="Practice the full 99-name collection as Arabic flashcards."
-            tone="primary"
+            icon={Star}
+            hue="gold"
             onClick={() => {
               setManualDeck(buildNamesOfAllahFlashcardDeck());
             }}
           />
-          <DeckButton
+          <DeckCard
             title="Type the transliteration"
             description="Read the Arabic, type the pronunciation."
+            icon={Keyboard}
+            hue="command"
             onClick={() => {
               const sample = sampleRandom(vocab, 10, Date.now());
               setManualDeck(
@@ -329,9 +417,11 @@ function PracticeSession({
               );
             }}
           />
-          <DeckButton
+          <DeckCard
             title="Gender quiz"
             description="Decide masculine or feminine on Body Parts and Entities."
+            icon={VenusAndMars}
+            hue="masdar"
             onClick={() => {
               const candidates = vocab.filter((v) => v.gender === "M" || v.gender === "F");
               const sample = sampleRandom(candidates, 12, Date.now());
@@ -344,10 +434,12 @@ function PracticeSession({
             }}
           />
           {mistakeIds.length > 0 ? (
-            <DeckButton
-              title={`Review mistakes (${mistakeIds.length})`}
+            <DeckCard
+              title="Review mistakes"
               description="Words you've recently gotten wrong."
-              tone="danger"
+              icon={AlertTriangle}
+              hue="danger"
+              badge={`${mistakeIds.length} to fix`}
               onClick={() => {
                 const ids = new Set(mistakeIds);
                 const subset = vocab.filter((v) => ids.has(v.id));
@@ -363,16 +455,18 @@ function PracticeSession({
         </div>
       </section>
 
-      <section className="rounded-3xl border border-border bg-card p-6">
+      <section>
         <h2 className="text-lg font-semibold">Foundations drills</h2>
         <p className="mt-0.5 text-xs text-muted-foreground">
           Bite-size warm-ups that drill specific skills. Built for this site —
           not from the lessons.
         </p>
-        <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
-          <DeckButton
+        <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
+          <DeckCard
             title="Match pairs"
             description="Tap one Arabic, then its English match. Five rounds of six."
+            icon={Puzzle}
+            hue="present"
             onClick={() => {
               const sample = sampleRandom(vocab, 30, Date.now());
               setManualDeck(
@@ -383,9 +477,11 @@ function PracticeSession({
               );
             }}
           />
-          <DeckButton
+          <DeckCard
             title="Which letter?"
             description="Spot the Arabic letter and pick its name. 12 cards across all positions."
+            icon={Search}
+            hue="past"
             onClick={() => {
               setManualDeck(
                 makeWhichLetterDeck({
@@ -396,9 +492,11 @@ function PracticeSession({
               );
             }}
           />
-          <DeckButton
+          <DeckCard
             title="Connecting letters"
             description="Read disconnected letters; pick the connected word they spell."
+            icon={Link2}
+            hue="command"
             onClick={() => {
               setManualDeck(
                 makeConnectingLettersDeck(vocab, {
@@ -408,9 +506,11 @@ function PracticeSession({
               );
             }}
           />
-          <DeckButton
+          <DeckCard
             title="Fill the blank"
             description="Pick the missing word in a short Arabic phrase from the lessons."
+            icon={PenLine}
+            hue="masdar"
             onClick={() => {
               setManualDeck(
                 makeClozeDeck(rules, vocab, {
@@ -423,30 +523,46 @@ function PracticeSession({
         </div>
       </section>
 
-      <section className="rounded-3xl border border-border bg-card p-6">
+      <section>
         <h2 className="text-lg font-semibold">By lesson</h2>
         <p className="text-xs text-muted-foreground">
           Run through a single lesson’s worth of words.
         </p>
-        <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
-          {lessons.map((l) => {
+        <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
+          {lessons.map((l, i) => {
             const subset = vocab.filter((v) => v.lessonId === l.id);
             if (subset.length === 0) return null;
+            const hue = LESSON_HUES[i % LESSON_HUES.length];
+            const fraction = topicProgressFraction(
+              progress,
+              subset.map((v) => v.id),
+            );
             return (
               <Link
                 key={l.id}
                 href={`/practice?topic=${l.topicSlugs[0]}&kind=mc`}
-                className="flex items-center justify-between rounded-2xl border border-border bg-background-soft p-4 hover:bg-muted focus-ring"
+                className="btn-chunky flex items-center gap-4 rounded-2xl border-2 border-border bg-card p-4 hover:bg-background-soft focus-ring"
               >
-                <div>
-                  <p className="text-sm font-semibold">
-                    Lesson {l.number}: {l.title}
-                  </p>
-                  <p className="text-xs text-muted-foreground">
-                    {subset.length} words
-                  </p>
+                <span
+                  className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl text-base font-bold ${HUE_STYLES[hue].chip}`}
+                >
+                  {l.number}
+                </span>
+                <div className="min-w-0 flex-1">
+                  <p className="truncate text-sm font-semibold">{l.title}</p>
+                  <div className="mt-1.5 flex items-center gap-2">
+                    <div className="h-1.5 w-full max-w-40 overflow-hidden rounded-full bg-muted">
+                      <div
+                        className={`h-full rounded-full ${HUE_STYLES[hue].bar}`}
+                        style={{ width: `${Math.round(fraction * 100)}%` }}
+                      />
+                    </div>
+                    <span className="shrink-0 text-xs text-muted-foreground">
+                      {subset.length} words
+                    </span>
+                  </div>
                 </div>
-                <span className="text-sm font-medium text-primary">Start →</span>
+                <span className="shrink-0 text-sm font-bold text-primary">Start →</span>
               </Link>
             );
           })}
@@ -456,31 +572,69 @@ function PracticeSession({
   );
 }
 
-function DeckButton({
+type DeckHue = "primary" | "gold" | "danger" | "past" | "present" | "command" | "masdar";
+
+const HUE_STYLES: Record<DeckHue, { chip: string; bar: string }> = {
+  primary: { chip: "bg-primary/10 text-primary", bar: "bg-primary" },
+  gold: { chip: "bg-accent-gold-soft text-accent-gold", bar: "bg-accent-gold" },
+  danger: { chip: "bg-danger-soft text-danger", bar: "bg-danger" },
+  past: { chip: "bg-tense-past text-tense-past-accent", bar: "bg-tense-past-accent" },
+  present: {
+    chip: "bg-tense-present text-tense-present-accent",
+    bar: "bg-tense-present-accent",
+  },
+  command: {
+    chip: "bg-tense-command text-tense-command-accent",
+    bar: "bg-tense-command-accent",
+  },
+  masdar: {
+    chip: "bg-tense-masdar text-tense-masdar-accent",
+    bar: "bg-tense-masdar-accent",
+  },
+};
+
+const LESSON_HUES: DeckHue[] = ["primary", "present", "command", "masdar", "past", "gold"];
+
+function DeckCard({
   title,
   description,
+  icon: Icon,
+  hue,
+  badge,
   onClick,
-  tone = "default",
 }: {
   title: string;
   description: string;
+  icon: React.ComponentType<{ className?: string; "aria-hidden"?: boolean }>;
+  hue: DeckHue;
+  badge?: string;
   onClick: () => void;
-  tone?: "default" | "danger" | "primary";
 }) {
+  const styles = HUE_STYLES[hue];
   return (
     <button
       type="button"
       onClick={onClick}
-      className={`group flex flex-col items-start gap-1 rounded-2xl border p-4 text-left transition-colors hover-lift focus-ring ${
-        tone === "danger"
-          ? "border-danger bg-danger-soft"
-          : tone === "primary"
-            ? "border-primary/40 bg-primary/10"
-          : "border-border bg-background-soft hover:bg-muted"
-      }`}
+      className="btn-chunky group flex items-start gap-4 rounded-2xl border-2 border-border bg-card p-4 text-left hover:bg-background-soft focus-ring"
     >
-      <p className="text-sm font-semibold">{title}</p>
-      <p className="text-xs text-muted-foreground">{description}</p>
+      <span
+        className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl ${styles.chip}`}
+      >
+        <Icon className="h-5 w-5" aria-hidden />
+      </span>
+      <span className="min-w-0 flex-1">
+        <span className="flex flex-wrap items-center gap-2">
+          <span className="text-sm font-semibold">{title}</span>
+          {badge ? (
+            <span
+              className={`rounded-full px-2 py-0.5 text-[11px] font-bold ${styles.chip}`}
+            >
+              {badge}
+            </span>
+          ) : null}
+        </span>
+        <span className="mt-0.5 block text-xs text-muted-foreground">{description}</span>
+      </span>
     </button>
   );
 }
