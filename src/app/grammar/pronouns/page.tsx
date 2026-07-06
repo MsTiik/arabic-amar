@@ -23,7 +23,7 @@ export default function PronounsPage() {
           </Link>{" "}
           / Pronouns
         </p>
-        <h1 className="mt-1 text-3xl font-semibold tracking-tight">
+        <h1 className="mt-1 text-4xl font-bold tracking-tight">
           Pronouns (الضمائر)
         </h1>
         <p className="mt-2 max-w-3xl text-sm text-muted-foreground">

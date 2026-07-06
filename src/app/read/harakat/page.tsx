@@ -29,7 +29,7 @@ export default function HarakatPage() {
         <div className="mb-3">
           <FoundationsBadge />
         </div>
-        <h1 className="text-3xl font-semibold tracking-tight">
+        <h1 className="text-4xl font-bold tracking-tight">
           Harakāt — the diacritics
           <span
             lang="ar"

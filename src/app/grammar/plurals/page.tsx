@@ -30,7 +30,7 @@ export default function PluralsPage() {
           </Link>{" "}
           / Plural forms
         </p>
-        <h1 className="mt-1 text-3xl font-semibold tracking-tight">
+        <h1 className="mt-1 text-4xl font-bold tracking-tight">
           Plural forms (الجَمْع)
         </h1>
         <p className="mt-2 max-w-3xl text-sm text-muted-foreground">

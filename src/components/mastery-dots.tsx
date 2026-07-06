@@ -10,8 +10,8 @@ const LABELS: Record<Mastery, string> = {
 
 const COLORS: Record<Mastery, string> = {
   0: "bg-border",
-  1: "bg-primary/40",
-  2: "bg-primary/70",
+  1: "bg-accent-gold",
+  2: "bg-primary",
   3: "bg-success",
 };
 
@@ -33,7 +33,7 @@ export function MasteryDots({ mastery, showLabel = false, className }: Props) {
           <span
             key={i}
             className={cn(
-              "h-1.5 w-1.5 rounded-full",
+              "h-2 w-2 rounded-full",
               i <= mastery ? COLORS[mastery] : "bg-border",
             )}
           />

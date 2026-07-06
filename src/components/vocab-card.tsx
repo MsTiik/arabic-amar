@@ -41,7 +41,7 @@ export function VocabCard({
   return (
     <article
       className={cn(
-        "group relative flex flex-col gap-3 rounded-2xl border border-border bg-card p-5 sm:p-6 hover-lift",
+        "group card-raised hover-lift relative flex flex-col gap-3 rounded-2xl p-5 sm:p-6",
         className,
       )}
     >
@@ -77,7 +77,16 @@ export function VocabCard({
 
       <div className="mt-1 flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
         {entry.gender ? (
-          <span className="rounded-md border border-border bg-background-soft px-2 py-0.5 font-medium">
+          <span
+            className={cn(
+              "rounded-md px-2 py-0.5 font-medium",
+              entry.gender === "M" && "bg-accent-sky-soft text-accent-sky",
+              entry.gender === "F" && "bg-accent-rose-soft text-accent-rose",
+              entry.gender !== "M" &&
+                entry.gender !== "F" &&
+                "border border-border bg-background-soft",
+            )}
+          >
             {entry.gender === "M" ? "مذكر" : entry.gender === "F" ? "مؤنث" : entry.gender}
           </span>
         ) : null}

@@ -19,7 +19,7 @@ export default function SurahsIndexPage() {
         >
           ← Back to Foundations
         </Link>
-        <h1 className="text-3xl font-semibold tracking-tight">
+        <h1 className="text-4xl font-bold tracking-tight">
           Short surahs · word by word
         </h1>
         <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
