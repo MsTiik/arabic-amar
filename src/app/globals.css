@@ -230,6 +230,9 @@ body {
 .btn-chunky-danger {
   --chunky-shadow: oklch(from var(--danger) calc(l - 0.12) c h);
 }
+.btn-chunky-gold {
+  --chunky-shadow: oklch(from var(--accent-gold) calc(l - 0.12) c h);
+}
 
 @keyframes answer-pop {
   0% {
