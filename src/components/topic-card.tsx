@@ -4,6 +4,7 @@ import Link from "next/link";
 
 import { useProgress } from "@/lib/progress";
 import { topicProgressFraction, summarizeMastery } from "@/lib/progress";
+import { getLessonIdentity } from "@/lib/lesson-identity";
 import { cn } from "@/lib/cn";
 import type { Topic, VocabEntry } from "@/lib/types";
 import { ArabicText } from "./arabic-text";
@@ -20,6 +21,8 @@ export function TopicCard({ topic, vocab, className }: Props) {
   const ids = vocab.map((v) => v.id);
   const fraction = topicProgressFraction(progress, ids);
   const summary = summarizeMastery(progress, ids);
+  const identity = getLessonIdentity(topic.slug);
+  const Icon = identity.icon;
 
   return (
     <Link
@@ -32,6 +35,14 @@ export function TopicCard({ topic, vocab, className }: Props) {
       <ProgressRing value={fraction} size={72} thickness={8} />
       <div className="min-w-0 flex-1">
         <div className="flex items-center gap-2">
+          <span
+            className={cn(
+              "flex h-8 w-8 shrink-0 items-center justify-center rounded-xl",
+              identity.chip,
+            )}
+          >
+            <Icon className="h-4 w-4" aria-hidden />
+          </span>
           <h3 className="truncate text-lg font-semibold">{topic.name}</h3>
         </div>
         {topic.nameArabic ? (

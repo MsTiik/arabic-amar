@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { getRulesForLesson, getSiteContent, grammarLessonSlug } from "@/lib/content";
+import { getLessonIdentity } from "@/lib/lesson-identity";
 
 export const metadata = { title: "Grammar reference" };
 
@@ -105,13 +106,18 @@ export default function GrammarPage() {
             {lessonsWithRules.map((lesson) => {
               const rules = getRulesForLesson(lesson.id);
               const slug = grammarLessonSlug(lesson);
+              const identity = getLessonIdentity(lesson.topicSlugs[0] ?? "");
+              const Icon = identity.icon;
               return (
                 <Link
                   key={lesson.id}
                   href={`/grammar/lessons/${slug}`}
                   className="group flex flex-col gap-2 rounded-2xl border border-border bg-card p-5 transition-colors hover:border-foreground/30 hover:bg-muted focus-ring sm:p-6"
                 >
-                  <span className="self-start rounded-full bg-background-soft px-2.5 py-0.5 text-[11px] font-semibold uppercase tracking-wider text-foreground-soft">
+                  <span
+                    className={`flex items-center gap-1.5 self-start rounded-full px-2.5 py-0.5 text-[11px] font-semibold uppercase tracking-wider ${identity.chip}`}
+                  >
+                    <Icon className="h-3.5 w-3.5" aria-hidden />
                     Lesson {lesson.number}
                   </span>
                   <h3 className="text-xl font-semibold tracking-tight">
