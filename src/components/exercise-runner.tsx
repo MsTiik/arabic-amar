@@ -1,10 +1,9 @@
 "use client";
 
-import { useMemo, useState } from "react";
-import { ArrowLeft, Check, RotateCcw, X } from "lucide-react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { ArrowLeft, Check, Flame, RotateCcw, Trophy, X } from "lucide-react";
 
 import { ArabicText } from "@/components/arabic-text";
-import { ProgressRing } from "@/components/progress-ring";
 import { SpeakerButton } from "@/components/speaker-button";
 import { TranslitReveal } from "@/components/translit-reveal";
 import { cn } from "@/lib/cn";
@@ -27,6 +26,8 @@ export function ExerciseRunner({ deck, onExit, onAttempt }: Props) {
     correct: 0,
     wrong: 0,
   });
+  const [combo, setCombo] = useState(0);
+  const [bestCombo, setBestCombo] = useState(0);
   const [done, setDone] = useState(false);
 
   const question = deck.questions[index];
@@ -42,7 +43,7 @@ export function ExerciseRunner({ deck, onExit, onAttempt }: Props) {
         <button
           type="button"
           onClick={onExit}
-          className="mt-3 rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground"
+          className="btn-chunky btn-chunky-primary mt-3 rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground focus-ring"
         >
           Back to practice
         </button>
@@ -51,62 +52,22 @@ export function ExerciseRunner({ deck, onExit, onAttempt }: Props) {
   }
 
   if (done) {
-    const accuracy =
-      total > 0 ? Math.round((results.correct / total) * 100) : 0;
     return (
-      <div className="rounded-3xl border border-border bg-card p-8 text-center">
-        <h2 className="text-2xl font-semibold tracking-tight">
-          Session complete
-        </h2>
-        <p className="mt-1 text-sm text-muted-foreground">
-          {deck.title} · {total} cards
-        </p>
-        <div className="mt-6 flex items-center justify-center gap-8">
-          <div className="text-center">
-            <p className="text-3xl font-semibold tabular-nums">{accuracy}%</p>
-            <p className="text-xs uppercase tracking-wider text-muted-foreground">
-              Accuracy
-            </p>
-          </div>
-          <div className="text-center">
-            <p className="text-3xl font-semibold tabular-nums text-success">
-              {results.correct}
-            </p>
-            <p className="text-xs uppercase tracking-wider text-muted-foreground">
-              Correct
-            </p>
-          </div>
-          <div className="text-center">
-            <p className="text-3xl font-semibold tabular-nums text-danger">
-              {results.wrong}
-            </p>
-            <p className="text-xs uppercase tracking-wider text-muted-foreground">
-              Missed
-            </p>
-          </div>
-        </div>
-        <div className="mt-6 flex flex-wrap items-center justify-center gap-2">
-          <button
-            type="button"
-            onClick={() => {
-              setIndex(0);
-              setResults({ correct: 0, wrong: 0 });
-              setDone(false);
-            }}
-            className="rounded-full border border-border bg-background-soft px-4 py-2 text-sm font-medium hover:bg-muted focus-ring"
-          >
-            <RotateCcw className="mr-1 inline h-3.5 w-3.5" />
-            Run again
-          </button>
-          <button
-            type="button"
-            onClick={onExit}
-            className="rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground hover:opacity-90 focus-ring"
-          >
-            Back to practice
-          </button>
-        </div>
-      </div>
+      <CompletionScreen
+        deckTitle={deck.title}
+        total={total}
+        correct={results.correct}
+        wrong={results.wrong}
+        bestCombo={bestCombo}
+        onRunAgain={() => {
+          setIndex(0);
+          setResults({ correct: 0, wrong: 0 });
+          setCombo(0);
+          setBestCombo(0);
+          setDone(false);
+        }}
+        onExit={onExit}
+      />
     );
   }
 
@@ -117,6 +78,15 @@ export function ExerciseRunner({ deck, onExit, onAttempt }: Props) {
         ? { ...r, correct: r.correct + 1 }
         : { ...r, wrong: r.wrong + 1 },
     );
+    if (correct) {
+      setCombo((c) => {
+        const next = c + 1;
+        setBestCombo((b) => Math.max(b, next));
+        return next;
+      });
+    } else {
+      setCombo(0);
+    }
     if (index + 1 >= total) {
       setDone(true);
     } else {
@@ -126,7 +96,7 @@ export function ExerciseRunner({ deck, onExit, onAttempt }: Props) {
 
   return (
     <div className="space-y-4">
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-3">
         <button
           type="button"
           onClick={onExit}
@@ -135,22 +105,299 @@ export function ExerciseRunner({ deck, onExit, onAttempt }: Props) {
         >
           <ArrowLeft className="h-4 w-4" />
         </button>
-        <div className="flex-1">
-          <p className="text-sm font-semibold text-foreground">{deck.title}</p>
-          <p className="text-xs text-muted-foreground">
-            Card {index + 1} of {total}
-          </p>
+        <div className="min-w-0 flex-1">
+          <div className="flex items-baseline justify-between gap-2">
+            <p className="truncate text-sm font-semibold text-foreground">
+              {deck.title}
+            </p>
+            <p className="shrink-0 text-xs tabular-nums text-muted-foreground">
+              {index + 1} / {total}
+            </p>
+          </div>
+          <div
+            className="mt-1.5 h-3 w-full overflow-hidden rounded-full bg-muted"
+            role="progressbar"
+            aria-valuemin={0}
+            aria-valuemax={total}
+            aria-valuenow={index}
+            aria-label="Deck progress"
+          >
+            <div
+              className="h-full rounded-full bg-primary transition-[width] duration-500 ease-out"
+              style={{ width: `${Math.max(ratio * 100, 4)}%` }}
+            />
+          </div>
         </div>
-        <ProgressRing value={ratio} size={48} thickness={6} showLabel={false} />
+        {combo >= 3 ? (
+          <span
+            key={combo}
+            className="combo-pop flex shrink-0 items-center gap-1 rounded-full bg-accent-gold-soft px-3 py-1.5 text-xs font-bold text-foreground"
+          >
+            <Flame className="h-3.5 w-3.5 text-accent-gold" aria-hidden />
+            {combo} in a row!
+          </span>
+        ) : null}
       </div>
 
-      <QuestionView
-        key={question.id}
-        question={question}
-        onAnswer={recordAndAdvance}
-      />
+      <div key={question.id} className="question-enter">
+        <QuestionView question={question} onAnswer={recordAndAdvance} />
+      </div>
     </div>
   );
+}
+
+const CONFETTI_COLORS = [
+  "var(--primary)",
+  "var(--accent-gold)",
+  "var(--success)",
+  "var(--danger)",
+  "var(--tense-masdar-accent)",
+];
+
+function ConfettiBurst({ count = 28 }: { count?: number }) {
+  return (
+    <div
+      aria-hidden
+      className="pointer-events-none absolute inset-0 overflow-hidden"
+    >
+      {Array.from({ length: count }, (_, i) => (
+        <span
+          key={i}
+          className="confetti-piece"
+          style={{
+            left: `${(i * 37 + 13) % 100}%`,
+            backgroundColor: CONFETTI_COLORS[i % CONFETTI_COLORS.length],
+            animationDelay: `${(i % 7) * 0.12}s`,
+            animationDuration: `${2 + (i % 5) * 0.25}s`,
+          }}
+        />
+      ))}
+    </div>
+  );
+}
+
+function CountUpNumber({
+  value,
+  suffix = "",
+  className,
+}: {
+  value: number;
+  suffix?: string;
+  className?: string;
+}) {
+  const [display, setDisplay] = useState(0);
+  const raf = useRef<number | null>(null);
+
+  useEffect(() => {
+    const duration = 800;
+    const start = performance.now();
+    function tick(now: number) {
+      const t = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - t, 3);
+      setDisplay(Math.round(eased * value));
+      if (t < 1) raf.current = requestAnimationFrame(tick);
+    }
+    raf.current = requestAnimationFrame(tick);
+    return () => {
+      if (raf.current !== null) cancelAnimationFrame(raf.current);
+    };
+  }, [value]);
+
+  return (
+    <span className={cn("tabular-nums", className)}>
+      {display}
+      {suffix}
+    </span>
+  );
+}
+
+function CompletionScreen({
+  deckTitle,
+  total,
+  correct,
+  wrong,
+  bestCombo,
+  onRunAgain,
+  onExit,
+}: {
+  deckTitle: string;
+  total: number;
+  correct: number;
+  wrong: number;
+  bestCombo: number;
+  onRunAgain: () => void;
+  onExit: () => void;
+}) {
+  const accuracy = total > 0 ? Math.round((correct / total) * 100) : 0;
+  const perfect = accuracy === 100;
+  const heading = perfect
+    ? "Perfect session!"
+    : accuracy >= 80
+      ? "Great work!"
+      : "Session complete";
+
+  return (
+    <div className="relative overflow-hidden rounded-3xl border border-border bg-card p-8 text-center">
+      {accuracy >= 80 ? <ConfettiBurst count={perfect ? 36 : 24} /> : null}
+      <div
+        className={cn(
+          "trophy-pop mx-auto flex h-16 w-16 items-center justify-center rounded-full",
+          perfect ? "bg-accent-gold-soft" : "bg-primary/10",
+        )}
+      >
+        <Trophy
+          className={cn(
+            "h-8 w-8",
+            perfect ? "text-accent-gold" : "text-primary",
+          )}
+          aria-hidden
+        />
+      </div>
+      <h2 className="mt-4 text-2xl font-bold tracking-tight">{heading}</h2>
+      <p className="mt-1 text-sm text-muted-foreground">
+        {deckTitle} · {total} cards
+      </p>
+      <div className="mt-6 flex items-center justify-center gap-4 sm:gap-6">
+        <div className="min-w-24 rounded-2xl border border-primary/30 bg-primary/5 px-4 py-3 text-center">
+          <p className="text-3xl font-bold text-primary">
+            <CountUpNumber value={accuracy} suffix="%" />
+          </p>
+          <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+            Accuracy
+          </p>
+        </div>
+        <div className="min-w-24 rounded-2xl border border-success/40 bg-success-soft px-4 py-3 text-center">
+          <p className="text-3xl font-bold text-success">
+            <CountUpNumber value={correct} />
+          </p>
+          <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+            Correct
+          </p>
+        </div>
+        <div className="min-w-24 rounded-2xl border border-danger/40 bg-danger-soft px-4 py-3 text-center">
+          <p className="text-3xl font-bold text-danger">
+            <CountUpNumber value={wrong} />
+          </p>
+          <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+            Missed
+          </p>
+        </div>
+      </div>
+      {bestCombo >= 3 ? (
+        <p className="mt-4 inline-flex items-center gap-1 rounded-full bg-accent-gold-soft px-3 py-1.5 text-xs font-bold">
+          <Flame className="h-3.5 w-3.5 text-accent-gold" aria-hidden />
+          Best streak: {bestCombo} in a row
+        </p>
+      ) : null}
+      <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+        <button
+          type="button"
+          onClick={onRunAgain}
+          className="btn-chunky rounded-full border border-border bg-background-soft px-5 py-2.5 text-sm font-semibold hover:bg-muted focus-ring"
+        >
+          <RotateCcw className="mr-1 inline h-3.5 w-3.5" />
+          Run again
+        </button>
+        <button
+          type="button"
+          onClick={onExit}
+          className="btn-chunky btn-chunky-primary rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground focus-ring"
+        >
+          Back to practice
+        </button>
+      </div>
+    </div>
+  );
+}
+
+/**
+ * Slide-up feedback bar shown after answering. The continue button is
+ * auto-focused so Enter/Space advances to the next card.
+ */
+function FeedbackBar({
+  correct,
+  message,
+  detail,
+  onContinue,
+}: {
+  correct: boolean;
+  message?: string;
+  detail?: React.ReactNode;
+  onContinue: () => void;
+}) {
+  const continueRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    continueRef.current?.focus();
+  }, []);
+
+  return (
+    <div
+      className={cn(
+        "feedback-enter mt-6 flex flex-wrap items-center justify-between gap-3 rounded-2xl border p-4",
+        correct
+          ? "border-success/50 bg-success-soft"
+          : "border-danger/50 bg-danger-soft",
+      )}
+      role="status"
+    >
+      <div className="flex items-center gap-3">
+        <span
+          className={cn(
+            "flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-primary-foreground",
+            correct ? "bg-success" : "bg-danger",
+          )}
+        >
+          {correct ? (
+            <Check className="h-5 w-5" aria-hidden />
+          ) : (
+            <X className="h-5 w-5" aria-hidden />
+          )}
+        </span>
+        <div className="min-w-0">
+          <p
+            className={cn(
+              "text-sm font-bold",
+              correct ? "text-success" : "text-danger",
+            )}
+          >
+            {message ?? (correct ? "Correct!" : "Not quite — keep going.")}
+          </p>
+          {detail ? (
+            <div className="text-sm text-foreground-soft">{detail}</div>
+          ) : null}
+        </div>
+      </div>
+      <button
+        ref={continueRef}
+        type="button"
+        onClick={onContinue}
+        className={cn(
+          "btn-chunky rounded-full px-6 py-2.5 text-sm font-bold text-primary-foreground focus-ring",
+          correct
+            ? "btn-chunky-success bg-success"
+            : "btn-chunky-danger bg-danger",
+        )}
+      >
+        Continue →
+      </button>
+    </div>
+  );
+}
+
+/** Shared chunky styling for tappable answer options. */
+function optionClasses(
+  answered: boolean,
+  isCorrect: boolean,
+  isSelected: boolean,
+): string {
+  const base =
+    "btn-chunky rounded-2xl border-2 text-center focus-ring";
+  if (!answered)
+    return cn(base, "border-border bg-background-soft hover:bg-muted");
+  if (isCorrect) return cn(base, "answer-pop border-success bg-success-soft");
+  if (isSelected) return cn(base, "answer-shake border-danger bg-danger-soft");
+  return cn(base, "border-border bg-background-soft opacity-50");
 }
 
 function QuestionView({
@@ -194,85 +441,77 @@ function FlashcardView({
   const flipLabel = flipped
     ? "Flip card to show Arabic"
     : "Flip card to show English";
-  const flipHint = flipped
-    ? "Tap card to show Arabic"
-    : "Tap card to show English";
 
   return (
     <div className="rounded-3xl border border-border bg-card p-6 text-center sm:p-10">
       <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
         {flipped ? "English" : "Arabic"}
       </p>
-      <div className="relative mt-6 min-h-72 w-full sm:min-h-80">
-        <button
-          type="button"
-          aria-label={flipLabel}
-          onClick={() => setFlipped((f) => !f)}
-          className={cn(
-            "absolute inset-0 cursor-pointer rounded-2xl border transition-colors hover:border-primary/50 hover:bg-muted/70 focus-ring",
-            flipped
-              ? "border-primary/30 bg-primary/5"
-              : "border-border bg-background-soft",
-          )}
-        />
-        <div className="pointer-events-none relative z-10 flex min-h-72 flex-col items-center justify-center gap-4 p-6 sm:min-h-80 sm:p-8">
-          {flipped ? (
-            <div className="flex min-h-52 w-full flex-col items-center justify-center gap-3 sm:min-h-60">
-              <p className="text-5xl font-semibold tracking-tight sm:text-7xl">
-                {question.prompt}
+      <div className="flip-scene relative mt-6 h-72 w-full sm:h-80">
+        <div className={cn("flip-inner absolute inset-0", flipped && "is-flipped")}>
+          <button
+            type="button"
+            aria-label={flipLabel}
+            onClick={() => setFlipped(true)}
+            className="flip-face btn-chunky absolute inset-0 flex cursor-pointer flex-col items-center justify-center gap-2 rounded-2xl border-2 border-border bg-background-soft p-6 hover:border-primary/50 hover:bg-muted/70 focus-ring sm:p-8"
+          >
+            <ArabicText variant="display" className="text-7xl sm:text-8xl">
+              {question.promptArabic}
+            </ArabicText>
+            <p className="mt-2 text-xs font-medium text-muted-foreground">
+              Tap card to show English
+            </p>
+          </button>
+          <button
+            type="button"
+            aria-label={flipLabel}
+            onClick={() => setFlipped(false)}
+            className="flip-face flip-face-back btn-chunky btn-chunky-primary absolute inset-0 flex cursor-pointer flex-col items-center justify-center gap-3 rounded-2xl border-2 border-primary/30 bg-primary/5 p-6 focus-ring sm:p-8"
+          >
+            <p className="text-5xl font-semibold tracking-tight sm:text-7xl">
+              {question.prompt}
+            </p>
+            {question.promptHint ? (
+              <p className="text-sm italic text-muted-foreground" lang="ar-Latn">
+                {question.promptHint}
               </p>
-              {question.promptHint ? (
-                <p
-                  className="text-sm italic text-muted-foreground"
-                  lang="ar-Latn"
-                >
-                  {question.promptHint}
-                </p>
-              ) : null}
-              {question.answerDetail ? (
-                <p className="mt-1 max-w-xl text-sm leading-6 text-foreground-soft">
-                  {question.answerDetail}
-                </p>
-              ) : null}
-              {question.sourceLabel ? (
-                <p className="mt-1 text-xs font-medium text-muted-foreground">
-                  Source: {question.sourceLabel}
-                </p>
-              ) : null}
-            </div>
-          ) : (
-            <div className="flex min-h-52 flex-col items-center justify-center gap-2 sm:min-h-60">
-              <ArabicText variant="display" className="text-7xl sm:text-8xl">
-                {question.promptArabic}
-              </ArabicText>
-            </div>
-          )}
-          {!flipped && question.promptHint ? (
-            <TranslitReveal
-              text={question.promptHint}
-              className="pointer-events-auto mt-2"
-            />
-          ) : null}
-          <p className="text-xs font-medium text-muted-foreground">
-            {flipHint}
-          </p>
+            ) : null}
+            {question.answerDetail ? (
+              <p className="mt-1 max-w-xl text-sm leading-6 text-foreground-soft">
+                {question.answerDetail}
+              </p>
+            ) : null}
+            {question.sourceLabel ? (
+              <p className="mt-1 text-xs font-medium text-muted-foreground">
+                Source: {question.sourceLabel}
+              </p>
+            ) : null}
+            <p className="mt-2 text-xs font-medium text-muted-foreground">
+              Tap card to show Arabic
+            </p>
+          </button>
         </div>
       </div>
-      {!flipped && question.promptArabic && question.showAudio !== false ? (
-        <div className="mt-2 flex justify-center">
-          <SpeakerButton
-            arabic={question.promptArabic}
-            label={question.prompt}
-            size="sm"
-            showUnavailable
-          />
+      {!flipped ? (
+        <div className="mt-3 flex items-center justify-center gap-3">
+          {question.promptHint ? (
+            <TranslitReveal text={question.promptHint} />
+          ) : null}
+          {question.promptArabic && question.showAudio !== false ? (
+            <SpeakerButton
+              arabic={question.promptArabic}
+              label={question.prompt}
+              size="sm"
+              showUnavailable
+            />
+          ) : null}
         </div>
       ) : null}
       <div className="mt-6 grid grid-cols-2 gap-3">
         <button
           type="button"
           onClick={() => onAnswer(false)}
-          className="rounded-full border border-danger bg-danger-soft px-4 py-2 text-sm font-semibold text-foreground hover:opacity-90 focus-ring"
+          className="btn-chunky btn-chunky-danger rounded-full border-2 border-danger bg-danger-soft px-4 py-2.5 text-sm font-bold text-foreground focus-ring"
         >
           <X className="mr-1 inline h-4 w-4" />
           Got it wrong
@@ -280,7 +519,7 @@ function FlashcardView({
         <button
           type="button"
           onClick={() => onAnswer(true)}
-          className="rounded-full bg-success px-4 py-2 text-sm font-semibold text-primary-foreground hover:opacity-90 focus-ring"
+          className="btn-chunky btn-chunky-success rounded-full bg-success px-4 py-2.5 text-sm font-bold text-primary-foreground focus-ring"
         >
           <Check className="mr-1 inline h-4 w-4" />
           Got it right
@@ -299,6 +538,9 @@ function MultipleChoiceView({
 }) {
   const [selected, setSelected] = useState<string | null>(null);
   const correct = selected === question.correctAnswerId;
+  const correctOption = question.options?.find(
+    (o) => o.id === question.correctAnswerId,
+  );
 
   return (
     <div className="rounded-3xl border border-border bg-card p-6 sm:p-8">
@@ -337,16 +579,10 @@ function MultipleChoiceView({
         ) : null}
       </div>
 
-      <div className="mt-6 grid grid-cols-1 gap-2 sm:grid-cols-2">
+      <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
         {question.options?.map((opt) => {
           const isCorrect = opt.id === question.correctAnswerId;
           const isSelected = opt.id === selected;
-          let style = "border-border bg-background-soft hover:bg-muted";
-          if (selected) {
-            if (isCorrect) style = "border-success bg-success-soft";
-            else if (isSelected) style = "border-danger bg-danger-soft";
-            else style = "border-border bg-background-soft opacity-60";
-          }
           return (
             <div key={opt.id} className="flex flex-col gap-1">
               <button
@@ -354,8 +590,8 @@ function MultipleChoiceView({
                 disabled={selected !== null}
                 onClick={() => setSelected(opt.id)}
                 className={cn(
-                  "rounded-2xl border p-4 text-center transition-colors focus-ring",
-                  style,
+                  "p-4",
+                  optionClasses(selected !== null, isCorrect, isSelected),
                 )}
               >
                 {opt.isArabic ? (
@@ -375,23 +611,18 @@ function MultipleChoiceView({
       </div>
 
       {selected ? (
-        <div className="mt-6 flex items-center justify-between gap-3">
-          <p
-            className={cn(
-              "text-sm font-medium",
-              correct ? "text-success" : "text-danger",
-            )}
-          >
-            {correct ? "Correct!" : "Not quite — keep going."}
-          </p>
-          <button
-            type="button"
-            onClick={() => onAnswer(correct)}
-            className="rounded-full bg-primary px-5 py-2 text-sm font-semibold text-primary-foreground hover:opacity-90 focus-ring"
-          >
-            Next →
-          </button>
-        </div>
+        <FeedbackBar
+          correct={correct}
+          detail={
+            !correct && correctOption ? (
+              <span>
+                Answer:{" "}
+                <span className="font-semibold">{correctOption.text}</span>
+              </span>
+            ) : undefined
+          }
+          onContinue={() => onAnswer(correct)}
+        />
       ) : null}
     </div>
   );
@@ -425,7 +656,6 @@ function FillBlankView({
         onSubmit={(e) => {
           e.preventDefault();
           if (submitted === null) submit();
-          else onAnswer(submitted);
         }}
         className="mt-6"
       >
@@ -443,31 +673,28 @@ function FillBlankView({
         {submitted === null ? (
           <button
             type="submit"
-            className="mt-4 w-full rounded-full bg-primary py-2 text-sm font-semibold text-primary-foreground hover:opacity-90 focus-ring"
+            className="btn-chunky btn-chunky-primary mt-4 w-full rounded-full bg-primary py-2.5 text-sm font-bold text-primary-foreground focus-ring"
           >
             Submit
           </button>
-        ) : (
-          <div className="mt-4 space-y-3">
-            <p
-              className={cn(
-                "text-center text-sm font-medium",
-                submitted ? "text-success" : "text-danger",
-              )}
-            >
-              {submitted
-                ? "Correct!"
-                : `Answer: ${question.acceptableAnswers?.[0] ?? ""}`}
-            </p>
-            <button
-              type="submit"
-              className="w-full rounded-full bg-primary py-2 text-sm font-semibold text-primary-foreground hover:opacity-90 focus-ring"
-            >
-              Next →
-            </button>
-          </div>
-        )}
+        ) : null}
       </form>
+      {submitted !== null ? (
+        <FeedbackBar
+          correct={submitted}
+          detail={
+            !submitted ? (
+              <span>
+                Answer:{" "}
+                <span className="font-semibold">
+                  {question.acceptableAnswers?.[0] ?? ""}
+                </span>
+              </span>
+            ) : undefined
+          }
+          onContinue={() => onAnswer(submitted)}
+        />
+      ) : null}
     </div>
   );
 }
@@ -556,28 +783,16 @@ function OrderingView({
         <button
           type="button"
           onClick={submit}
-          className="mt-4 w-full rounded-full bg-primary py-2 text-sm font-semibold text-primary-foreground hover:opacity-90 focus-ring"
+          className="btn-chunky btn-chunky-primary mt-4 w-full rounded-full bg-primary py-2.5 text-sm font-bold text-primary-foreground focus-ring"
         >
           Check
         </button>
       ) : (
-        <div className="mt-4 space-y-3">
-          <p
-            className={cn(
-              "text-center text-sm font-medium",
-              submitted ? "text-success" : "text-danger",
-            )}
-          >
-            {submitted ? "Correct!" : "Not quite — order is off."}
-          </p>
-          <button
-            type="button"
-            onClick={() => onAnswer(submitted)}
-            className="w-full rounded-full bg-primary py-2 text-sm font-semibold text-primary-foreground hover:opacity-90 focus-ring"
-          >
-            Next →
-          </button>
-        </div>
+        <FeedbackBar
+          correct={submitted}
+          message={submitted ? "Correct!" : "Not quite — order is off."}
+          onContinue={() => onAnswer(submitted)}
+        />
       )}
     </div>
   );
@@ -694,27 +909,17 @@ function MatchPairsView({
       </div>
 
       {allMatched ? (
-        <div className="mt-6 flex items-center justify-between gap-3">
-          <p
-            className={cn(
-              "text-sm font-medium",
-              noErrors ? "text-success" : "text-foreground-soft",
-            )}
-          >
-            {noErrors
-              ? "All matched on the first try."
-              : `All matched — ${errorCount} miss${errorCount === 1 ? "" : "es"}.`}
-          </p>
-          <button
-            type="button"
-            onClick={() =>
-              onAnswer(checkMatchPairsAnswer(matched, pairs) && noErrors)
-            }
-            className="rounded-full bg-primary px-5 py-2 text-sm font-semibold text-primary-foreground hover:opacity-90 focus-ring"
-          >
-            Next →
-          </button>
-        </div>
+        <FeedbackBar
+          correct={noErrors}
+          message={
+            noErrors
+              ? "All matched on the first try!"
+              : `All matched — ${errorCount} miss${errorCount === 1 ? "" : "es"}.`
+          }
+          onContinue={() =>
+            onAnswer(checkMatchPairsAnswer(matched, pairs) && noErrors)
+          }
+        />
       ) : null}
     </div>
   );
@@ -739,9 +944,9 @@ function MatchCard({
   const text = side === "left" ? pair.leftText : pair.rightText;
   const translit = side === "left" ? pair.leftTranslit : pair.rightTranslit;
   let style = "border-border bg-background-soft hover:bg-muted";
-  if (matched) style = "border-success bg-success-soft opacity-80";
-  else if (wrong) style = "border-danger bg-danger-soft animate-pulse";
-  else if (selected) style = "border-primary bg-primary/5";
+  if (matched) style = "answer-pop border-success bg-success-soft opacity-70";
+  else if (wrong) style = "answer-shake border-danger bg-danger-soft";
+  else if (selected) style = "border-primary bg-primary/10";
   return (
     <li>
       <button
@@ -752,7 +957,7 @@ function MatchCard({
           // Fixed min-height keeps the Arabic and English columns visually
           // aligned even though their content (large Arabic glyph vs short
           // English gloss) has very different intrinsic sizes.
-          "flex h-20 w-full flex-col items-center justify-center rounded-2xl border p-3 text-center transition-colors focus-ring sm:h-24",
+          "btn-chunky flex h-20 w-full flex-col items-center justify-center rounded-2xl border-2 p-3 text-center focus-ring sm:h-24",
           style,
         )}
       >
@@ -787,6 +992,9 @@ function WhichLetterView({
 }) {
   const [selected, setSelected] = useState<string | null>(null);
   const correct = selected === question.correctAnswerId;
+  const correctOption = question.options?.find(
+    (o) => o.id === question.correctAnswerId,
+  );
 
   return (
     <div className="rounded-3xl border border-border bg-card p-6 sm:p-8">
@@ -800,16 +1008,10 @@ function WhichLetterView({
         <p className="mt-4 text-base font-medium">{question.prompt}</p>
       </div>
 
-      <div className="mt-6 grid grid-cols-2 gap-2 sm:grid-cols-4">
+      <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-4">
         {question.options?.map((opt) => {
           const isCorrect = opt.id === question.correctAnswerId;
           const isSelected = opt.id === selected;
-          let style = "border-border bg-background-soft hover:bg-muted";
-          if (selected) {
-            if (isCorrect) style = "border-success bg-success-soft";
-            else if (isSelected) style = "border-danger bg-danger-soft";
-            else style = "border-border bg-background-soft opacity-60";
-          }
           return (
             <button
               key={opt.id}
@@ -817,8 +1019,8 @@ function WhichLetterView({
               disabled={selected !== null}
               onClick={() => setSelected(opt.id)}
               className={cn(
-                "rounded-2xl border p-4 text-center transition-colors focus-ring",
-                style,
+                "p-4",
+                optionClasses(selected !== null, isCorrect, isSelected),
               )}
             >
               <span className="text-base font-semibold" lang="ar-Latn">
@@ -830,23 +1032,20 @@ function WhichLetterView({
       </div>
 
       {selected ? (
-        <div className="mt-6 flex items-center justify-between gap-3">
-          <p
-            className={cn(
-              "text-sm font-medium",
-              correct ? "text-success" : "text-danger",
-            )}
-          >
-            {correct ? "Correct!" : "Not quite — keep going."}
-          </p>
-          <button
-            type="button"
-            onClick={() => onAnswer(correct)}
-            className="rounded-full bg-primary px-5 py-2 text-sm font-semibold text-primary-foreground hover:opacity-90 focus-ring"
-          >
-            Next →
-          </button>
-        </div>
+        <FeedbackBar
+          correct={correct}
+          detail={
+            !correct && correctOption ? (
+              <span>
+                Answer:{" "}
+                <span className="font-semibold" lang="ar-Latn">
+                  {correctOption.text}
+                </span>
+              </span>
+            ) : undefined
+          }
+          onContinue={() => onAnswer(correct)}
+        />
       ) : null}
     </div>
   );
@@ -918,16 +1117,10 @@ function ClozeView({
         </div>
       </div>
 
-      <div className="mt-6 grid grid-cols-2 gap-2 sm:grid-cols-4">
+      <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-4">
         {question.options?.map((opt) => {
           const isCorrect = opt.id === question.correctAnswerId;
           const isSelected = opt.id === selected;
-          let style = "border-border bg-background-soft hover:bg-muted";
-          if (selected) {
-            if (isCorrect) style = "border-success bg-success-soft";
-            else if (isSelected) style = "border-danger bg-danger-soft";
-            else style = "border-border bg-background-soft opacity-60";
-          }
           return (
             <button
               key={opt.id}
@@ -935,8 +1128,8 @@ function ClozeView({
               disabled={selected !== null}
               onClick={() => setSelected(opt.id)}
               className={cn(
-                "rounded-2xl border p-3 text-center transition-colors focus-ring",
-                style,
+                "p-3",
+                optionClasses(selected !== null, isCorrect, isSelected),
               )}
             >
               <ArabicText variant="display" className="text-2xl">
@@ -948,25 +1141,20 @@ function ClozeView({
       </div>
 
       {selected ? (
-        <div className="mt-6 flex items-center justify-between gap-3">
-          <p
-            className={cn(
-              "text-sm font-medium",
-              correct ? "text-success" : "text-danger",
-            )}
-          >
-            {correct
-              ? "Correct!"
-              : `Answer: ${correctOption?.text ?? ""}`}
-          </p>
-          <button
-            type="button"
-            onClick={() => onAnswer(correct)}
-            className="rounded-full bg-primary px-5 py-2 text-sm font-semibold text-primary-foreground hover:opacity-90 focus-ring"
-          >
-            Next →
-          </button>
-        </div>
+        <FeedbackBar
+          correct={correct}
+          detail={
+            !correct && correctOption ? (
+              <span>
+                Answer:{" "}
+                <ArabicText className="text-lg font-semibold">
+                  {correctOption.text}
+                </ArabicText>
+              </span>
+            ) : undefined
+          }
+          onContinue={() => onAnswer(correct)}
+        />
       ) : null}
     </div>
   );
@@ -987,6 +1175,9 @@ function ConnectingLettersView({
 }) {
   const [selected, setSelected] = useState<string | null>(null);
   const correct = selected === question.correctAnswerId;
+  const correctOption = question.options?.find(
+    (o) => o.id === question.correctAnswerId,
+  );
 
   return (
     <div className="rounded-3xl border border-border bg-card p-6 sm:p-8">
@@ -1011,16 +1202,10 @@ function ConnectingLettersView({
         ) : null}
       </div>
 
-      <div className="mt-6 grid grid-cols-2 gap-2 sm:grid-cols-2">
+      <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-2">
         {question.options?.map((opt) => {
           const isCorrect = opt.id === question.correctAnswerId;
           const isSelected = opt.id === selected;
-          let style = "border-border bg-background-soft hover:bg-muted";
-          if (selected) {
-            if (isCorrect) style = "border-success bg-success-soft";
-            else if (isSelected) style = "border-danger bg-danger-soft";
-            else style = "border-border bg-background-soft opacity-60";
-          }
           return (
             <div key={opt.id} className="flex flex-col gap-1">
               <button
@@ -1028,8 +1213,8 @@ function ConnectingLettersView({
                 disabled={selected !== null}
                 onClick={() => setSelected(opt.id)}
                 className={cn(
-                  "rounded-2xl border p-4 text-center transition-colors focus-ring",
-                  style,
+                  "p-4",
+                  optionClasses(selected !== null, isCorrect, isSelected),
                 )}
               >
                 <ArabicText variant="display" className="text-3xl sm:text-4xl">
@@ -1045,23 +1230,21 @@ function ConnectingLettersView({
       </div>
 
       {selected ? (
-        <div className="mt-6 flex items-center justify-between gap-3">
-          <p
-            className={cn(
-              "text-sm font-medium",
-              correct ? "text-success" : "text-danger",
-            )}
-          >
-            {correct ? "Correct!" : "Not quite — read the letters again."}
-          </p>
-          <button
-            type="button"
-            onClick={() => onAnswer(correct)}
-            className="rounded-full bg-primary px-5 py-2 text-sm font-semibold text-primary-foreground hover:opacity-90 focus-ring"
-          >
-            Next →
-          </button>
-        </div>
+        <FeedbackBar
+          correct={correct}
+          message={correct ? "Correct!" : "Not quite — read the letters again."}
+          detail={
+            !correct && correctOption ? (
+              <span>
+                Answer:{" "}
+                <ArabicText className="text-lg font-semibold">
+                  {correctOption.text}
+                </ArabicText>
+              </span>
+            ) : undefined
+          }
+          onContinue={() => onAnswer(correct)}
+        />
       ) : null}
     </div>
   );
