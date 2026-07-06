@@ -28,7 +28,7 @@ export default function AlphabetPage() {
         <div className="mb-3">
           <FoundationsBadge />
         </div>
-        <h1 className="text-3xl font-semibold tracking-tight">
+        <h1 className="text-4xl font-bold tracking-tight">
           The Arabic alphabet
           <span
             lang="ar"

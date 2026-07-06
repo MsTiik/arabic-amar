@@ -11,7 +11,7 @@ export function NamesOfAllahTeaser() {
   const summary = summarizeNamesOfAllahProgress(progress);
 
   return (
-    <section className="rounded-3xl border border-primary/20 bg-primary/10 p-5 sm:p-6">
+    <section className="rounded-3xl bg-gradient-to-br from-primary/15 via-primary/8 to-accent-teal-soft p-5 shadow-sm sm:p-6">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
         <div>
           <p className="inline-flex items-center gap-1 rounded-full border border-primary/30 bg-card/80 px-2.5 py-1 text-xs font-semibold uppercase tracking-wider text-primary">
@@ -26,7 +26,7 @@ export function NamesOfAllahTeaser() {
             meanings, short explanations, and Qur&apos;ān references.
           </p>
         </div>
-        <div className="rounded-2xl border border-border bg-card px-4 py-3 text-center">
+        <div className="card-raised px-4 py-3 text-center">
           <p className="text-2xl font-semibold tabular-nums">
             {summary.known}/{summary.total}
           </p>

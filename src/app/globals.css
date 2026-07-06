@@ -44,6 +44,28 @@
   --ring: oklch(0.6 0.13 200 / 50%);
 
   /*
+   * Accent hue scale — 8 named hues used for lesson/deck/reference colour
+   * coding. Each hue has a strong (text/icon) and a -soft (chip/tile bg)
+   * variant tuned for contrast on the light theme; dark mode overrides both.
+   */
+  --accent-rose: oklch(0.5 0.12 350);
+  --accent-rose-soft: oklch(0.93 0.05 350);
+  --accent-terracotta: oklch(0.5 0.12 40);
+  --accent-terracotta-soft: oklch(0.93 0.05 40);
+  --accent-amber: oklch(0.52 0.12 60);
+  --accent-amber-soft: oklch(0.93 0.04 60);
+  --accent-olive: oklch(0.5 0.11 110);
+  --accent-olive-soft: oklch(0.93 0.05 110);
+  --accent-emerald: oklch(0.48 0.11 145);
+  --accent-emerald-soft: oklch(0.93 0.05 145);
+  --accent-teal: oklch(0.48 0.1 180);
+  --accent-teal-soft: oklch(0.93 0.05 180);
+  --accent-sky: oklch(0.48 0.11 220);
+  --accent-sky-soft: oklch(0.93 0.05 220);
+  --accent-indigo: oklch(0.48 0.11 270);
+  --accent-indigo-soft: oklch(0.93 0.05 270);
+
+  /*
    * Arabic stack uses Noto Naskh Arabic — the traditional book/Quran hand
    * with full tashkeel coverage. Self-hosted from public/ to guarantee the
    * exact glyphs render every diacritic at full opacity.
@@ -88,6 +110,23 @@
   --card: oklch(0.24 0.02 270);
   --card-foreground: oklch(0.95 0.01 90);
   --ring: oklch(0.7 0.14 200 / 60%);
+
+  --accent-rose: oklch(0.82 0.08 350);
+  --accent-rose-soft: oklch(0.3 0.06 350);
+  --accent-terracotta: oklch(0.82 0.08 40);
+  --accent-terracotta-soft: oklch(0.3 0.06 40);
+  --accent-amber: oklch(0.84 0.08 60);
+  --accent-amber-soft: oklch(0.3 0.06 60);
+  --accent-olive: oklch(0.82 0.08 110);
+  --accent-olive-soft: oklch(0.3 0.06 110);
+  --accent-emerald: oklch(0.82 0.08 145);
+  --accent-emerald-soft: oklch(0.3 0.06 145);
+  --accent-teal: oklch(0.82 0.08 180);
+  --accent-teal-soft: oklch(0.3 0.06 180);
+  --accent-sky: oklch(0.82 0.08 220);
+  --accent-sky-soft: oklch(0.3 0.06 220);
+  --accent-indigo: oklch(0.82 0.08 270);
+  --accent-indigo-soft: oklch(0.3 0.06 270);
 }
 
 @theme inline {
@@ -117,6 +156,22 @@
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
   --color-ring: var(--ring);
+  --color-accent-rose: var(--accent-rose);
+  --color-accent-rose-soft: var(--accent-rose-soft);
+  --color-accent-terracotta: var(--accent-terracotta);
+  --color-accent-terracotta-soft: var(--accent-terracotta-soft);
+  --color-accent-amber: var(--accent-amber);
+  --color-accent-amber-soft: var(--accent-amber-soft);
+  --color-accent-olive: var(--accent-olive);
+  --color-accent-olive-soft: var(--accent-olive-soft);
+  --color-accent-emerald: var(--accent-emerald);
+  --color-accent-emerald-soft: var(--accent-emerald-soft);
+  --color-accent-teal: var(--accent-teal);
+  --color-accent-teal-soft: var(--accent-teal-soft);
+  --color-accent-sky: var(--accent-sky);
+  --color-accent-sky-soft: var(--accent-sky-soft);
+  --color-accent-indigo: var(--accent-indigo);
+  --color-accent-indigo-soft: var(--accent-indigo-soft);
   --font-sans: var(--font-sans);
   --font-arabic: var(--font-arabic);
   --font-arabic-display: var(--font-arabic-display);
@@ -178,6 +233,38 @@ body {
   background-repeat: repeat-x;
   background-position: center;
   height: 14px;
+}
+
+/*
+ * Card tiers. Three levels of surface treatment instead of border-on-border
+ * nesting everywhere:
+ *  - card-flat: quiet grouping container (soft bg tint, no border) — for
+ *    filter bars, section wrappers, anything that holds other cards.
+ *  - card-raised: content card (white surface + soft shadow, no border) —
+ *    for the actual tappable/readable items.
+ *  - Hero surfaces (gradient panels) are styled per-component since each
+ *    has its own colourway.
+ */
+.card-flat {
+  background: var(--background-soft);
+  border-radius: 1.5rem;
+}
+.card-raised {
+  background: var(--card);
+  border-radius: 1rem;
+  box-shadow:
+    0 0 0 1px oklch(from var(--foreground) l c h / 4%),
+    0 1px 2px oklch(from var(--foreground) l c h / 5%),
+    0 4px 12px oklch(from var(--foreground) l c h / 5%);
+}
+
+/* Section label — small caps in the primary accent, used above card grids */
+.section-label {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--primary);
 }
 
 /* Hover ring used by topic cards & vocab cards */

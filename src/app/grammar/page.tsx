@@ -12,8 +12,7 @@ const REFERENCE_PAGES = [
     titleArabic: "الضمائر",
     description:
       "Detached and attached pronoun tables with usage notes and a Qur'ān example for each.",
-    accent:
-      "bg-[oklch(0.93_0.05_350)] text-[oklch(0.30_0.10_350)] dark:bg-[oklch(0.30_0.06_350)] dark:text-[oklch(0.85_0.08_350)]",
+    accent: "bg-accent-rose-soft text-accent-rose",
   },
   {
     href: "/grammar/conjugations",
@@ -21,8 +20,7 @@ const REFERENCE_PAGES = [
     titleArabic: "تَصْرِيف الأَفْعَال",
     description:
       "Past (Māḍī), present / future (Muḍāriʿ), and command (Amr) forms side by side.",
-    accent:
-      "bg-[oklch(0.93_0.05_220)] text-[oklch(0.30_0.10_220)] dark:bg-[oklch(0.30_0.06_220)] dark:text-[oklch(0.85_0.08_220)]",
+    accent: "bg-accent-sky-soft text-accent-sky",
   },
   {
     href: "/grammar/plurals",
@@ -30,8 +28,7 @@ const REFERENCE_PAGES = [
     titleArabic: "الجَمْع",
     description:
       "Sound masculine, sound feminine, and broken plurals — when each applies and why broken plurals must be memorised.",
-    accent:
-      "bg-[oklch(0.93_0.04_60)] text-[oklch(0.30_0.10_60)] dark:bg-[oklch(0.30_0.06_60)] dark:text-[oklch(0.85_0.08_60)]",
+    accent: "bg-accent-amber-soft text-accent-amber",
   },
 ] as const;
 
@@ -42,7 +39,7 @@ export default function GrammarPage() {
   return (
     <div className="mx-auto w-full max-w-5xl px-4 py-8 sm:py-10">
       <header className="mb-8">
-        <h1 className="text-3xl font-semibold tracking-tight">Grammar reference</h1>
+        <h1 className="text-4xl font-bold tracking-tight">Grammar reference</h1>
         <p className="mt-1 text-sm text-muted-foreground">
           Three big reference tables on top, then per-lesson grammar pages
           underneath.
@@ -52,7 +49,7 @@ export default function GrammarPage() {
       <section aria-labelledby="reference-heading" className="mb-12">
         <h2
           id="reference-heading"
-          className="mb-3 text-sm font-semibold uppercase tracking-wider text-muted-foreground"
+          className="section-label mb-3"
         >
           Reference tables
         </h2>
@@ -61,7 +58,7 @@ export default function GrammarPage() {
             <Link
               key={p.href}
               href={p.href}
-              className="group flex flex-col gap-2 rounded-2xl border border-border bg-card p-5 transition-colors hover:border-foreground/30 hover:bg-muted focus-ring sm:p-6"
+              className="group card-raised hover-lift flex flex-col gap-2 rounded-2xl p-5 focus-ring sm:p-6"
             >
               <span
                 className={
@@ -93,12 +90,12 @@ export default function GrammarPage() {
       <section aria-labelledby="lessons-heading">
         <h2
           id="lessons-heading"
-          className="mb-3 text-sm font-semibold uppercase tracking-wider text-muted-foreground"
+          className="section-label mb-3"
         >
           Rules by lesson
         </h2>
         {lessonsWithRules.length === 0 ? (
-          <p className="rounded-2xl border border-border bg-card p-6 text-sm text-muted-foreground">
+          <p className="card-raised rounded-2xl p-6 text-sm text-muted-foreground">
             No grammar rules captured yet.
           </p>
         ) : (
@@ -112,7 +109,7 @@ export default function GrammarPage() {
                 <Link
                   key={lesson.id}
                   href={`/grammar/lessons/${slug}`}
-                  className="group flex flex-col gap-2 rounded-2xl border border-border bg-card p-5 transition-colors hover:border-foreground/30 hover:bg-muted focus-ring sm:p-6"
+                  className="group card-raised hover-lift flex flex-col gap-2 rounded-2xl p-5 focus-ring sm:p-6"
                 >
                   <span
                     className={`flex items-center gap-1.5 self-start rounded-full px-2.5 py-0.5 text-[11px] font-semibold uppercase tracking-wider ${identity.chip}`}

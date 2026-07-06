@@ -26,7 +26,7 @@ export default function ConjugationsPage() {
           </Link>{" "}
           / Verb conjugations
         </p>
-        <h1 className="mt-1 text-3xl font-semibold tracking-tight">
+        <h1 className="mt-1 text-4xl font-bold tracking-tight">
           Verb conjugations (
           <span lang="ar" dir="rtl">
             تَصْرِيف الأَفْعَال

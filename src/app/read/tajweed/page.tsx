@@ -25,7 +25,7 @@ export default function TajweedPage() {
         <div className="mb-3">
           <FoundationsBadge />
         </div>
-        <h1 className="text-3xl font-semibold tracking-tight">
+        <h1 className="text-4xl font-bold tracking-tight">
           Tajweed basics
           <span
             lang="ar"
