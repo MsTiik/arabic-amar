@@ -352,6 +352,60 @@ body {
   animation: trophy-pop 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) both;
 }
 
+/* Dashboard hero: streak flame, goal ring, path nodes */
+@keyframes flame-flicker {
+  0%,
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+  30% {
+    transform: scale(1.08) rotate(-2deg);
+  }
+  60% {
+    transform: scale(0.96) rotate(2deg);
+  }
+}
+.flame-lit {
+  animation: flame-flicker 1.6s ease-in-out infinite;
+  transform-origin: 50% 85%;
+}
+
+@keyframes goal-ring-reached {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.08);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+.goal-ring-reached {
+  animation: goal-ring-reached 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+@keyframes path-node-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 color-mix(in oklch, var(--color-primary) 45%, transparent);
+  }
+  50% {
+    box-shadow: 0 0 0 7px color-mix(in oklch, var(--color-primary) 0%, transparent);
+  }
+}
+.path-node-current {
+  animation: path-node-pulse 2s ease-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flame-lit,
+  .goal-ring-reached,
+  .path-node-current {
+    animation: none;
+  }
+}
+
 /* Flashcard 3D flip */
 .flip-scene {
   perspective: 1200px;

@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 
 import { AppDialog } from "@/components/app-dialog";
+import { ProgressRing } from "@/components/progress-ring";
 import { useProgressSync } from "@/components/progress-sync-provider";
 import type { DailyPathPlan, DailyPathStep } from "@/lib/progress";
 import { buildDailyPathPlan, progressActions, summarizeMastery, useProgress } from "@/lib/progress";
@@ -125,28 +126,13 @@ export function DashboardHero({ totalVocab, totalRules, totalLessons }: Props) {
           </div>
 
           <div className="grid grid-cols-2 gap-3">
-            <Stat
-              icon={<Flame className="h-4 w-4" />}
-              label="Streak"
-              value={`${progress.streak.count}d`}
-              tone={progress.streak.count > 0 ? "gold" : "muted"}
-              sublabel={
-                freezesAvailable > 0
-                  ? `${freezesAvailable} freeze${freezesAvailable === 1 ? "" : "s"}`
-                  : undefined
-              }
-              sublabelIcon={
-                freezesAvailable > 0 ? (
-                  <Snowflake className="h-3 w-3" />
-                ) : undefined
-              }
-            />
-            <Stat
-              icon={<Target className="h-4 w-4" />}
-              label="Today"
-              value={`${seen}/${goal}`}
-              tone={goalReached ? "success" : "primary"}
-            />
+            <div className="col-span-2 flex items-center justify-around gap-4 rounded-2xl border border-border bg-background-soft px-4 py-3">
+              <GoalRing seen={seen} goal={goal} reached={goalReached} />
+              <StreakFlame
+                count={progress.streak.count}
+                freezes={freezesAvailable}
+              />
+            </div>
             <Stat
               icon={<GraduationCap className="h-4 w-4" />}
               label="Mastered"
@@ -185,9 +171,15 @@ export function DashboardHero({ totalVocab, totalRules, totalLessons }: Props) {
             </Link>
           </div>
 
-          <div className="mt-5 grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-4">
+          <div className="mt-5 grid grid-cols-1 gap-3 md:grid-cols-2 md:gap-y-5 xl:grid-cols-4">
             {dailyPath.steps.map((step, index) => (
-              <DailyPathStepCard key={step.id} step={step} index={index} />
+              <DailyPathStepCard
+                key={step.id}
+                step={step}
+                index={index}
+                isFirstReady={step.id === firstReadyId(dailyPath)}
+                isLast={index === dailyPath.steps.length - 1}
+              />
             ))}
           </div>
         </div>
@@ -285,6 +277,78 @@ export function DashboardHero({ totalVocab, totalRules, totalLessons }: Props) {
   );
 }
 
+function GoalRing({
+  seen,
+  goal,
+  reached,
+}: {
+  seen: number;
+  goal: number;
+  reached: boolean;
+}) {
+  return (
+    <div className="flex flex-col items-center gap-1">
+      <ProgressRing
+        value={goal > 0 ? seen / goal : 0}
+        size={84}
+        thickness={9}
+        fillClassName={reached ? "stroke-success" : "stroke-primary"}
+        label={
+          reached ? (
+            <Check className="h-6 w-6 text-success" aria-label="Goal reached" />
+          ) : (
+            <span className="text-sm font-bold tabular-nums">
+              {seen}
+              <span className="font-medium text-muted-foreground">/{goal}</span>
+            </span>
+          )
+        }
+        className={reached ? "goal-ring-reached" : undefined}
+      />
+      <span className="flex items-center gap-1 text-[11px] font-medium uppercase tracking-wider text-muted-foreground">
+        <Target className="h-3 w-3" aria-hidden />
+        Daily goal
+      </span>
+    </div>
+  );
+}
+
+function StreakFlame({ count, freezes }: { count: number; freezes: number }) {
+  const lit = count > 0;
+  return (
+    <div className="flex flex-col items-center gap-1">
+      <div className="flex h-[84px] flex-col items-center justify-center">
+        <Flame
+          className={cn(
+            "h-10 w-10",
+            lit
+              ? "flame-lit fill-accent-gold text-accent-gold"
+              : "text-border",
+          )}
+          aria-hidden
+        />
+        <span
+          className={cn(
+            "text-lg font-bold tabular-nums",
+            lit ? "text-foreground" : "text-muted-foreground",
+          )}
+        >
+          {count}d
+        </span>
+      </div>
+      <span className="flex items-center gap-1 text-[11px] font-medium uppercase tracking-wider text-muted-foreground">
+        Streak
+        {freezes > 0 ? (
+          <span className="flex items-center gap-0.5 text-primary">
+            <Snowflake className="h-3 w-3" aria-hidden />
+            {freezes}
+          </span>
+        ) : null}
+      </span>
+    </div>
+  );
+}
+
 function Stat({
   icon,
   label,
@@ -327,27 +391,46 @@ function primaryPathHref(plan: DailyPathPlan): string {
   return plan.steps.find((step) => step.status === "ready")?.href ?? "/practice";
 }
 
+function firstReadyId(plan: DailyPathPlan): DailyPathStep["id"] | undefined {
+  return plan.steps.find((step) => step.status === "ready")?.id;
+}
+
 function DailyPathStepCard({
   step,
   index,
+  isFirstReady,
+  isLast,
 }: {
   step: DailyPathStep;
   index: number;
+  isFirstReady: boolean;
+  isLast: boolean;
 }) {
   const ready = step.status === "ready";
   const content = (
     <>
-      <div className="flex items-start justify-between gap-3">
+      <div className="flex items-center gap-3">
         <span
           className={cn(
-            "inline-flex h-7 w-7 items-center justify-center rounded-full text-xs font-semibold tabular-nums",
-            ready
-              ? "bg-primary text-primary-foreground"
-              : "bg-success-soft text-foreground",
+            "inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-sm font-bold tabular-nums",
+            !ready && "bg-success text-white",
+            ready && isFirstReady && "path-node-current bg-primary text-primary-foreground",
+            ready && !isFirstReady && "border-2 border-border bg-background text-muted-foreground",
           )}
         >
-          {ready ? index + 1 : <Check className="h-3.5 w-3.5" />}
+          {ready ? index + 1 : <Check className="h-5 w-5" />}
         </span>
+        {!isLast ? (
+          <span
+            className={cn(
+              "h-1 flex-1 rounded-full",
+              ready ? "bg-border" : "bg-success/50",
+            )}
+            aria-hidden
+          />
+        ) : (
+          <span className="flex-1" aria-hidden />
+        )}
         <span className="rounded-full bg-background-soft px-2 py-1 text-xs font-semibold tabular-nums text-foreground-soft">
           {step.count}
         </span>
