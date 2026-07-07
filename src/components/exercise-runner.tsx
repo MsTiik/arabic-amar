@@ -458,6 +458,15 @@ function FlashcardView({
   onAnswer: (correct: boolean) => void;
 }) {
   const [flipped, setFlipped] = useState(false);
+  const lastFlipRef = useRef(0);
+  // Absorb double-taps: a second tap while the card is still turning would
+  // reverse the flip and read as "the card didn't flip".
+  function toggleFlip() {
+    const now = Date.now();
+    if (now - lastFlipRef.current < 400) return;
+    lastFlipRef.current = now;
+    setFlipped((f) => !f);
+  }
   const flipLabel = flipped
     ? "Flip card to show Arabic"
     : "Flip card to show English";
@@ -472,7 +481,7 @@ function FlashcardView({
           <button
             type="button"
             aria-label={flipLabel}
-            onClick={() => setFlipped((f) => !f)}
+            onClick={toggleFlip}
             className="flip-face btn-chunky absolute inset-0 flex cursor-pointer flex-col items-center justify-center gap-2 rounded-2xl border-2 border-border bg-background-soft p-6 hover:border-primary/50 hover:bg-muted/70 focus-ring sm:p-8"
           >
             <ArabicText variant="display" className="text-6xl sm:text-8xl">
@@ -485,7 +494,7 @@ function FlashcardView({
           <button
             type="button"
             aria-label={flipLabel}
-            onClick={() => setFlipped((f) => !f)}
+            onClick={toggleFlip}
             className="flip-face flip-face-back btn-chunky btn-chunky-primary absolute inset-0 flex cursor-pointer flex-col items-center justify-center gap-3 rounded-2xl border-2 border-primary/30 bg-primary/5 p-6 focus-ring sm:p-8"
           >
             <p className="text-4xl font-semibold tracking-tight sm:text-7xl">
