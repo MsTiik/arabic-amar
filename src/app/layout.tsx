@@ -1,8 +1,9 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import localFont from "next/font/local";
 
 import { ProgressSyncProvider } from "@/components/progress-sync-provider";
+import { TabBar } from "@/components/tab-bar";
 import { Topbar } from "@/components/topbar";
 import { themeBootstrapScript } from "@/lib/theme";
 import "./globals.css";
@@ -33,6 +34,12 @@ export const metadata: Metadata = {
     "Gamified Quranic Arabic vocabulary practice from the AMAR Arabic Programme study notes.",
 };
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -55,8 +62,8 @@ export default function RootLayout({
       <body className="min-h-full bg-background text-foreground flex flex-col">
         <ProgressSyncProvider>
           <Topbar />
-          <main className="flex-1 flex flex-col">{children}</main>
-          <footer className="border-t border-border px-4 py-6 text-center text-xs text-muted-foreground">
+          <main className="site-main flex-1 flex flex-col">{children}</main>
+          <footer className="site-footer border-t border-border px-4 py-6 text-center text-xs text-muted-foreground">
             <p>
               Built from the{" "}
               <a className="underline hover:text-foreground" href="/about">
@@ -95,6 +102,7 @@ export default function RootLayout({
               .
             </p>
           </footer>
+          <TabBar />
         </ProgressSyncProvider>
       </body>
     </html>

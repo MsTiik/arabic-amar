@@ -21,6 +21,16 @@ interface Props {
 }
 
 export function ExerciseRunner({ deck, onExit, onAttempt }: Props) {
+  // Immersive mode: on phones the site chrome (topbar, tab bar, footer) is
+  // hidden via this body class while a deck is running, so the whole
+  // viewport belongs to the session.
+  const hasQuestions = deck.questions.length > 0;
+  useEffect(() => {
+    if (!hasQuestions) return;
+    document.body.classList.add("session-active");
+    return () => document.body.classList.remove("session-active");
+  }, [hasQuestions]);
+
   const [index, setIndex] = useState(0);
   const [results, setResults] = useState<{ correct: number; wrong: number }>({
     correct: 0,
@@ -95,7 +105,7 @@ export function ExerciseRunner({ deck, onExit, onAttempt }: Props) {
   }
 
   return (
-    <div className="space-y-4">
+    <div className="flex min-h-[calc(100dvh-4.5rem)] flex-col gap-4 sm:min-h-0">
       <div className="flex items-center gap-3">
         <button
           type="button"
@@ -139,7 +149,10 @@ export function ExerciseRunner({ deck, onExit, onAttempt }: Props) {
         ) : null}
       </div>
 
-      <div key={question.id} className="question-enter">
+      <div
+        key={question.id}
+        className="question-enter flex flex-1 flex-col justify-center sm:block"
+      >
         <QuestionView question={question} onAnswer={recordAndAdvance} />
       </div>
     </div>
@@ -332,56 +345,63 @@ function FeedbackBar({
   }, []);
 
   return (
-    <div
-      className={cn(
-        "feedback-enter mt-6 flex flex-wrap items-center justify-between gap-3 rounded-2xl border p-4",
-        correct
-          ? "border-success/50 bg-success-soft"
-          : "border-danger/50 bg-danger-soft",
-      )}
-      role="status"
-    >
-      <div className="flex items-center gap-3">
-        <span
-          className={cn(
-            "flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-primary-foreground",
-            correct ? "bg-success" : "bg-danger",
-          )}
-        >
-          {correct ? (
-            <Check className="h-5 w-5" aria-hidden />
-          ) : (
-            <X className="h-5 w-5" aria-hidden />
-          )}
-        </span>
-        <div className="min-w-0">
-          <p
+    <>
+      {/* Reserves space under the question so the fixed sheet on phones
+          never covers the revealed correct answer. */}
+      <div className="h-32 sm:hidden" aria-hidden />
+      <div
+        className={cn(
+          "feedback-enter flex flex-wrap items-center justify-between gap-3 border p-4",
+          "fixed inset-x-0 bottom-0 z-40 rounded-t-2xl border-x-0 border-b-0 pb-[max(1rem,env(safe-area-inset-bottom))] shadow-[0_-8px_24px_rgb(0_0_0/0.15)]",
+          "sm:static sm:z-auto sm:mt-6 sm:rounded-2xl sm:border sm:pb-4 sm:shadow-none",
+          correct
+            ? "border-success/50 bg-success-soft"
+            : "border-danger/50 bg-danger-soft",
+        )}
+        role="status"
+      >
+        <div className="flex items-center gap-3">
+          <span
             className={cn(
-              "text-sm font-bold",
-              correct ? "text-success" : "text-danger",
+              "flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-primary-foreground",
+              correct ? "bg-success" : "bg-danger",
             )}
           >
-            {message ?? (correct ? "Correct!" : "Not quite — keep going.")}
-          </p>
-          {detail ? (
-            <div className="text-sm text-foreground-soft">{detail}</div>
-          ) : null}
+            {correct ? (
+              <Check className="h-5 w-5" aria-hidden />
+            ) : (
+              <X className="h-5 w-5" aria-hidden />
+            )}
+          </span>
+          <div className="min-w-0">
+            <p
+              className={cn(
+                "text-sm font-bold",
+                correct ? "text-success" : "text-danger",
+              )}
+            >
+              {message ?? (correct ? "Correct!" : "Not quite — keep going.")}
+            </p>
+            {detail ? (
+              <div className="text-sm text-foreground-soft">{detail}</div>
+            ) : null}
+          </div>
         </div>
+        <button
+          ref={continueRef}
+          type="button"
+          onClick={onContinue}
+          className={cn(
+            "btn-chunky rounded-full px-6 py-2.5 text-sm font-bold text-primary-foreground focus-ring",
+            correct
+              ? "btn-chunky-success bg-success"
+              : "btn-chunky-danger bg-danger",
+          )}
+        >
+          Continue →
+        </button>
       </div>
-      <button
-        ref={continueRef}
-        type="button"
-        onClick={onContinue}
-        className={cn(
-          "btn-chunky rounded-full px-6 py-2.5 text-sm font-bold text-primary-foreground focus-ring",
-          correct
-            ? "btn-chunky-success bg-success"
-            : "btn-chunky-danger bg-danger",
-        )}
-      >
-        Continue →
-      </button>
-    </div>
+    </>
   );
 }
 
@@ -438,24 +458,33 @@ function FlashcardView({
   onAnswer: (correct: boolean) => void;
 }) {
   const [flipped, setFlipped] = useState(false);
+  const lastFlipRef = useRef(0);
+  // Absorb double-taps: a second tap while the card is still turning would
+  // reverse the flip and read as "the card didn't flip".
+  function toggleFlip() {
+    const now = Date.now();
+    if (now - lastFlipRef.current < 550) return;
+    lastFlipRef.current = now;
+    setFlipped((f) => !f);
+  }
   const flipLabel = flipped
     ? "Flip card to show Arabic"
     : "Flip card to show English";
 
   return (
-    <div className="rounded-3xl border border-border bg-card p-6 text-center sm:p-10">
+    <div className="rounded-3xl border border-border bg-card p-4 text-center sm:p-10">
       <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
         {flipped ? "English" : "Arabic"}
       </p>
-      <div className="flip-scene relative mt-6 h-72 w-full sm:h-80">
+      <div className="flip-scene relative mt-4 h-56 w-full sm:mt-6 sm:h-80">
         <div className={cn("flip-inner absolute inset-0", flipped && "is-flipped")}>
           <button
             type="button"
             aria-label={flipLabel}
-            onClick={() => setFlipped(true)}
+            onClick={toggleFlip}
             className="flip-face btn-chunky absolute inset-0 flex cursor-pointer flex-col items-center justify-center gap-2 rounded-2xl border-2 border-border bg-background-soft p-6 hover:border-primary/50 hover:bg-muted/70 focus-ring sm:p-8"
           >
-            <ArabicText variant="display" className="text-7xl sm:text-8xl">
+            <ArabicText variant="display" className="text-6xl sm:text-8xl">
               {question.promptArabic}
             </ArabicText>
             <p className="mt-2 text-xs font-medium text-muted-foreground">
@@ -465,10 +494,10 @@ function FlashcardView({
           <button
             type="button"
             aria-label={flipLabel}
-            onClick={() => setFlipped(false)}
+            onClick={toggleFlip}
             className="flip-face flip-face-back btn-chunky btn-chunky-primary absolute inset-0 flex cursor-pointer flex-col items-center justify-center gap-3 rounded-2xl border-2 border-primary/30 bg-primary/5 p-6 focus-ring sm:p-8"
           >
-            <p className="text-5xl font-semibold tracking-tight sm:text-7xl">
+            <p className="text-4xl font-semibold tracking-tight sm:text-7xl">
               {question.prompt}
             </p>
             {question.promptHint ? (
@@ -543,11 +572,11 @@ function MultipleChoiceView({
   );
 
   return (
-    <div className="rounded-3xl border border-border bg-card p-6 sm:p-8">
+    <div className="rounded-3xl border border-border bg-card p-4 sm:p-8">
       <div className="text-center">
         {question.promptArabic ? (
           <>
-            <ArabicText variant="display" className="text-6xl sm:text-7xl">
+            <ArabicText variant="display" className="text-5xl sm:text-7xl">
               {question.promptArabic}
             </ArabicText>
             {question.showAudio !== false ? (
@@ -579,7 +608,7 @@ function MultipleChoiceView({
         ) : null}
       </div>
 
-      <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
+      <div className="mt-4 grid grid-cols-1 gap-2.5 sm:mt-6 sm:grid-cols-2 sm:gap-3">
         {question.options?.map((opt) => {
           const isCorrect = opt.id === question.correctAnswerId;
           const isSelected = opt.id === selected;
@@ -590,7 +619,7 @@ function MultipleChoiceView({
                 disabled={selected !== null}
                 onClick={() => setSelected(opt.id)}
                 className={cn(
-                  "p-4",
+                  "p-3 sm:p-4",
                   optionClasses(selected !== null, isCorrect, isSelected),
                 )}
               >
@@ -644,9 +673,9 @@ function FillBlankView({
   }
 
   return (
-    <div className="rounded-3xl border border-border bg-card p-6 sm:p-8">
+    <div className="rounded-3xl border border-border bg-card p-4 sm:p-8">
       <div className="text-center">
-        <ArabicText variant="display" className="text-6xl sm:text-7xl">
+        <ArabicText variant="display" className="text-5xl sm:text-7xl">
           {question.promptArabic}
         </ArabicText>
         <p className="mt-2 text-base font-medium">{question.prompt}</p>
@@ -731,7 +760,7 @@ function OrderingView({
   const optionMap = new Map(question.options?.map((o) => [o.id, o]));
 
   return (
-    <div className="rounded-3xl border border-border bg-card p-6 sm:p-8">
+    <div className="rounded-3xl border border-border bg-card p-4 sm:p-8">
       <p className="text-base font-medium">{question.prompt}</p>
       <ul className="mt-4 space-y-2">
         {order.map((id, i) => {
@@ -873,7 +902,7 @@ function MatchPairsView({
   const noErrors = errorCount === 0;
 
   return (
-    <div className="rounded-3xl border border-border bg-card p-6 sm:p-8">
+    <div className="rounded-3xl border border-border bg-card p-4 sm:p-8">
       <p className="text-base font-medium text-center">{question.prompt}</p>
       <p className="mt-1 text-center text-xs text-muted-foreground">
         Tap one from each column.
@@ -997,11 +1026,11 @@ function WhichLetterView({
   );
 
   return (
-    <div className="rounded-3xl border border-border bg-card p-6 sm:p-8">
+    <div className="rounded-3xl border border-border bg-card p-4 sm:p-8">
       <div className="text-center">
         <ArabicText
           variant="display"
-          className="text-7xl sm:text-8xl text-foreground"
+          className="text-6xl sm:text-8xl text-foreground"
         >
           {question.promptArabic}
         </ArabicText>
@@ -1079,7 +1108,7 @@ function ClozeView({
   const after = question.clozeAfter ?? "";
 
   return (
-    <div className="rounded-3xl border border-border bg-card p-6 sm:p-8">
+    <div className="rounded-3xl border border-border bg-card p-4 sm:p-8">
       <div className="text-center">
         <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
           Meaning
@@ -1180,7 +1209,7 @@ function ConnectingLettersView({
   );
 
   return (
-    <div className="rounded-3xl border border-border bg-card p-6 sm:p-8">
+    <div className="rounded-3xl border border-border bg-card p-4 sm:p-8">
       <p className="text-center text-sm font-medium text-foreground-soft">
         {question.prompt}
       </p>
@@ -1213,7 +1242,7 @@ function ConnectingLettersView({
                 disabled={selected !== null}
                 onClick={() => setSelected(opt.id)}
                 className={cn(
-                  "p-4",
+                  "p-3 sm:p-4",
                   optionClasses(selected !== null, isCorrect, isSelected),
                 )}
               >
