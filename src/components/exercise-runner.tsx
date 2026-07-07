@@ -105,7 +105,7 @@ export function ExerciseRunner({ deck, onExit, onAttempt }: Props) {
   }
 
   return (
-    <div className="space-y-4">
+    <div className="flex min-h-[calc(100dvh-4.5rem)] flex-col gap-4 sm:min-h-0">
       <div className="flex items-center gap-3">
         <button
           type="button"
@@ -149,7 +149,10 @@ export function ExerciseRunner({ deck, onExit, onAttempt }: Props) {
         ) : null}
       </div>
 
-      <div key={question.id} className="question-enter">
+      <div
+        key={question.id}
+        className="question-enter flex flex-1 flex-col justify-center sm:block"
+      >
         <QuestionView question={question} onAnswer={recordAndAdvance} />
       </div>
     </div>
