@@ -463,7 +463,7 @@ function FlashcardView({
   // reverse the flip and read as "the card didn't flip".
   function toggleFlip() {
     const now = Date.now();
-    if (now - lastFlipRef.current < 400) return;
+    if (now - lastFlipRef.current < 550) return;
     lastFlipRef.current = now;
     setFlipped((f) => !f);
   }
