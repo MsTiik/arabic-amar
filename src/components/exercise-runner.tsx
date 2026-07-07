@@ -24,10 +24,12 @@ export function ExerciseRunner({ deck, onExit, onAttempt }: Props) {
   // Immersive mode: on phones the site chrome (topbar, tab bar, footer) is
   // hidden via this body class while a deck is running, so the whole
   // viewport belongs to the session.
+  const hasQuestions = deck.questions.length > 0;
   useEffect(() => {
+    if (!hasQuestions) return;
     document.body.classList.add("session-active");
     return () => document.body.classList.remove("session-active");
-  }, []);
+  }, [hasQuestions]);
 
   const [index, setIndex] = useState(0);
   const [results, setResults] = useState<{ correct: number; wrong: number }>({
