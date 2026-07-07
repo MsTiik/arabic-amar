@@ -267,6 +267,35 @@ body {
   color: var(--primary);
 }
 
+/* Horizontally scrollable rows without a visible scrollbar (mobile nav) */
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/*
+ * Immersive practice mode — while an exercise deck is running on a phone,
+ * the chrome (topbar, bottom tab bar, footer) is hidden so the whole
+ * viewport belongs to the session. The tab bar also reserves bottom space
+ * for regular pages via .site-main.
+ */
+@media (max-width: 767px) {
+  .site-main {
+    padding-bottom: 4.5rem;
+  }
+  body.session-active .site-topbar,
+  body.session-active .site-tabbar,
+  body.session-active .site-footer {
+    display: none;
+  }
+  body.session-active .site-main {
+    padding-bottom: 0;
+  }
+}
+
 /* Hover ring used by topic cards & vocab cards */
 .hover-lift {
   transition:
@@ -400,7 +429,10 @@ body {
   }
 }
 .question-enter {
-  animation: question-enter 0.3s ease-out both;
+  /* `backwards` (not `both`) so no transform is retained after the
+     animation — a retained transform would become the containing block
+     for the position:fixed feedback sheet inside the question. */
+  animation: question-enter 0.3s ease-out backwards;
 }
 
 @keyframes confetti-fall {

@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
 import { Flame, Snowflake, Target } from "lucide-react";
 
 import { useProgress } from "@/lib/progress";
@@ -20,7 +21,34 @@ const NAV = [
 
 const FOUNDATIONS = { href: "/read", label: "Foundations" };
 
+/**
+ * Hides the topbar while scrolling down and reveals it on scroll up, so
+ * small screens keep the full viewport for content. Always shown near the
+ * top of the page.
+ */
+function useHideOnScroll() {
+  const [hidden, setHidden] = useState(false);
+  const lastY = useRef(0);
+
+  useEffect(() => {
+    function onScroll() {
+      const y = window.scrollY;
+      if (y < 80) {
+        setHidden(false);
+      } else if (Math.abs(y - lastY.current) > 8) {
+        setHidden(y > lastY.current);
+      }
+      lastY.current = y;
+    }
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  return hidden;
+}
+
 export function Topbar() {
+  const hidden = useHideOnScroll();
   const progress = useProgress();
   const sync = useProgressSync();
   const pathname = usePathname();
@@ -31,7 +59,12 @@ export function Topbar() {
   const freezesAvailable = progress.streak.freezesAvailable ?? 0;
 
   return (
-    <header className="sticky top-0 z-30 border-b border-border bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <header
+      className={cn(
+        "site-topbar sticky top-0 z-30 border-b border-border bg-background/80 pt-[env(safe-area-inset-top)] backdrop-blur transition-transform duration-300 supports-[backdrop-filter]:bg-background/60 md:translate-y-0",
+        hidden && "-translate-y-full",
+      )}
+    >
       <div className="mx-auto flex w-full max-w-6xl items-center gap-4 px-4 py-3">
         <Link
           href="/"
@@ -96,7 +129,7 @@ export function Topbar() {
           <FoundationsNavLink pathname={pathname} />
         </div>
       </div>
-      <nav className="flex flex-wrap items-center gap-1 px-3 py-2 text-sm md:hidden">
+      <nav className="no-scrollbar flex items-center gap-1 overflow-x-auto px-3 py-2 text-sm md:hidden">
         {NAV.map((item) => {
           const active =
             item.href === "/" ? pathname === "/" : pathname.startsWith(item.href);
