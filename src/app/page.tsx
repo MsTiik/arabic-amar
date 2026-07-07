@@ -1,6 +1,5 @@
 import Link from "next/link";
 
-import { ArabicText } from "@/components/arabic-text";
 import { DashboardHero } from "@/components/dashboard-hero";
 import { NamesOfAllahTeaser } from "@/components/names-of-allah-teaser";
 import { RefreshContentButton } from "@/components/refresh-content-button";
@@ -54,28 +53,6 @@ export default function Home() {
               vocab={topicVocabIndex.get(topic.slug) ?? []}
             />
           ))}
-        </div>
-      </section>
-
-      <div className="calligraphic-divider my-12" />
-
-      <section>
-        <h2 className="text-2xl font-semibold tracking-tight">A taste of the calligraphy</h2>
-        <p className="text-sm text-muted-foreground">
-          Every Arabic word, phrase, and example on the site keeps its full diacritics
-          (tashkeel). They render at full opacity so fatha, kasra, damma, sukun, shadda,
-          and tanween are easy to read.
-        </p>
-        <div className="mt-6 grid gap-4 rounded-3xl border border-border bg-card p-8 sm:grid-cols-3">
-          <ArabicText variant="display" className="text-center text-6xl sm:text-7xl">
-            بِسْمِ اللهِ
-          </ArabicText>
-          <ArabicText variant="display" className="text-center text-6xl sm:text-7xl">
-            هٰذَا قَلْبٌ
-          </ArabicText>
-          <ArabicText variant="display" className="text-center text-6xl sm:text-7xl">
-            هٰذِهِ يَدٌ
-          </ArabicText>
         </div>
       </section>
 

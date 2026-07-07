@@ -51,7 +51,7 @@ export default function PronounsPage() {
 
       <nav
         aria-label="Pronoun jump"
-        className="sticky top-24 z-10 mb-6 -mx-4 flex flex-wrap gap-1 overflow-x-auto bg-background/85 px-4 py-2 backdrop-blur"
+        className="mb-6 flex flex-wrap gap-1"
       >
         <a
           href="#detached"
