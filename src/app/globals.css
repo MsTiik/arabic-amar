@@ -324,6 +324,7 @@ body {
 .btn-chunky {
   --chunky-shadow: oklch(from var(--border) calc(l - 0.08) c h);
   box-shadow: 0 4px 0 0 var(--chunky-shadow);
+  touch-action: manipulation;
   transition:
     transform 0.08s ease,
     box-shadow 0.08s ease,
@@ -539,6 +540,9 @@ body {
 .flip-face {
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
+  touch-action: manipulation;
+  -webkit-user-select: none;
+  user-select: none;
 }
 .flip-face-back {
   transform: rotateY(180deg);
