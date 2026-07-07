@@ -114,7 +114,7 @@ export function VocabBankClient({ vocab, topics }: Props) {
           ) : null}
         </div>
 
-        <div className="mt-3 flex flex-wrap items-center gap-2">
+        <div className="no-scrollbar mt-3 flex items-center gap-2 overflow-x-auto sm:flex-wrap sm:overflow-visible">
           <Select
             value={topicSlug}
             onChange={setTopicSlug}
@@ -135,7 +135,7 @@ export function VocabBankClient({ vocab, topics }: Props) {
             type="button"
             onClick={() => setExtraOnly((x) => !x)}
             className={cn(
-              "rounded-full border px-3 py-1.5 text-sm font-medium transition-colors focus-ring",
+              "shrink-0 whitespace-nowrap rounded-full border px-3 py-1.5 text-sm font-medium transition-colors focus-ring",
               extraOnly
                 ? "border-accent-gold bg-accent-gold-soft text-foreground"
                 : "border-border bg-background-soft text-muted-foreground hover:text-foreground",
@@ -144,8 +144,8 @@ export function VocabBankClient({ vocab, topics }: Props) {
             Extras only
           </button>
 
-          <div className="ml-auto flex items-center gap-3 text-xs text-muted-foreground">
-            <span className="tabular-nums">
+          <div className="ml-auto flex shrink-0 items-center gap-3 text-xs text-muted-foreground">
+            <span className="tabular-nums whitespace-nowrap">
               {filtered.length} / {vocab.length} words
             </span>
             {!isFiltering && overflowingTopics.length > 0 ? (
@@ -158,7 +158,7 @@ export function VocabBankClient({ vocab, topics }: Props) {
                     setExpanded(new Set(overflowingTopics.map(([s]) => s)));
                   }
                 }}
-                className="rounded-full border border-border bg-background-soft px-3 py-1 hover:text-foreground focus-ring"
+                className="whitespace-nowrap rounded-full border border-border bg-background-soft px-3 py-1 hover:text-foreground focus-ring"
               >
                 {allExpanded ? "Collapse all" : "Expand all"}
               </button>
@@ -281,7 +281,7 @@ function Select({
     <select
       value={value}
       onChange={(e) => onChange(e.target.value)}
-      className="rounded-full border border-border bg-background-soft px-3 py-1.5 text-sm font-medium text-foreground focus-ring"
+      className="max-w-40 shrink-0 rounded-full border border-border bg-background-soft px-3 py-1.5 text-sm font-medium text-foreground focus-ring sm:max-w-none"
     >
       <option value="">{placeholder}</option>
       {options.map((opt) => (

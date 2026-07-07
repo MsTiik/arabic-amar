@@ -113,7 +113,54 @@ function Table({ rows }: { rows: ConjugationEntry[] }) {
     );
   }
   return (
-    <div className="overflow-x-auto rounded-2xl border border-border bg-card">
+    <>
+    <div className="flex flex-col gap-3 md:hidden">
+      {rows.map((r) => (
+        <article
+          key={r.id}
+          className="rounded-2xl border border-border bg-card p-4"
+        >
+          <header className="flex items-center justify-between gap-2">
+            <p className="text-sm font-semibold text-foreground">
+              {r.category}
+              <GenderBadge gender={r.gender} />
+            </p>
+            <div className="flex items-center gap-2">
+              <SpeakerButton arabic={r.arabic} label={r.english} size="sm" />
+              <ArabicText variant="display" className="text-2xl text-foreground">
+                {r.arabic}
+              </ArabicText>
+            </div>
+          </header>
+          <p className="mt-1 text-right text-sm text-muted-foreground">
+            <span lang="ar-Latn" className="italic text-foreground-soft">
+              {r.pronunciation}
+            </span>
+            {r.pronunciation && r.english ? " — " : null}
+            {r.english}
+          </p>
+          <dl className="mt-3 space-y-2 border-t border-border/60 pt-3">
+            <div>
+              <dt className="text-[0.65rem] font-semibold uppercase tracking-wider text-muted-foreground">
+                Pattern
+              </dt>
+              <dd className="mt-1">
+                <PatternCell pattern={r.patternRule} />
+              </dd>
+            </div>
+            <div>
+              <dt className="text-[0.65rem] font-semibold uppercase tracking-wider text-muted-foreground">
+                Example
+              </dt>
+              <dd className="mt-1">
+                <PatternCell pattern={r.patternExample} />
+              </dd>
+            </div>
+          </dl>
+        </article>
+      ))}
+    </div>
+    <div className="hidden overflow-x-auto rounded-2xl border border-border bg-card md:block">
       <table className="w-full border-collapse text-sm">
         <thead className="text-left">
           <tr className="border-b border-border bg-background-soft">
@@ -180,6 +227,7 @@ function Table({ rows }: { rows: ConjugationEntry[] }) {
         </tbody>
       </table>
     </div>
+    </>
   );
 }
 
@@ -190,7 +238,7 @@ export function ConjugationTable({ past, presentFuture, command }: Props) {
 
   return (
     <div className="flex flex-col gap-3">
-      <div role="tablist" className="flex gap-2">
+      <div role="tablist" className="flex flex-wrap gap-2">
         <button
           type="button"
           role="tab"
