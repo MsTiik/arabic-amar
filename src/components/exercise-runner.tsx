@@ -469,7 +469,7 @@ function FlashcardView({
           <button
             type="button"
             aria-label={flipLabel}
-            onClick={() => setFlipped(true)}
+            onClick={() => setFlipped((f) => !f)}
             className="flip-face btn-chunky absolute inset-0 flex cursor-pointer flex-col items-center justify-center gap-2 rounded-2xl border-2 border-border bg-background-soft p-6 hover:border-primary/50 hover:bg-muted/70 focus-ring sm:p-8"
           >
             <ArabicText variant="display" className="text-6xl sm:text-8xl">
@@ -482,7 +482,7 @@ function FlashcardView({
           <button
             type="button"
             aria-label={flipLabel}
-            onClick={() => setFlipped(false)}
+            onClick={() => setFlipped((f) => !f)}
             className="flip-face flip-face-back btn-chunky btn-chunky-primary absolute inset-0 flex cursor-pointer flex-col items-center justify-center gap-3 rounded-2xl border-2 border-primary/30 bg-primary/5 p-6 focus-ring sm:p-8"
           >
             <p className="text-4xl font-semibold tracking-tight sm:text-7xl">
