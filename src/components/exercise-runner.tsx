@@ -97,12 +97,10 @@ export function ExerciseRunner({ deck, onExit, onAttempt }: Props) {
         : { ...r, wrong: r.wrong + 1 },
     );
     if (correct) {
-      setCombo((c) => {
-        const next = c + 1;
-        setBestCombo((b) => Math.max(b, next));
-        if (next === 3 || (next > 3 && next % 5 === 0)) comboFeedback();
-        return next;
-      });
+      const next = combo + 1;
+      setCombo(next);
+      setBestCombo((b) => Math.max(b, next));
+      if (next === 3 || (next > 3 && next % 5 === 0)) comboFeedback();
     } else {
       setCombo(0);
     }
