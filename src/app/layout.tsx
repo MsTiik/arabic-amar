@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import localFont from "next/font/local";
 
 import { ProgressSyncProvider } from "@/components/progress-sync-provider";
+import { PwaSetup } from "@/components/pwa-setup";
 import { TabBar } from "@/components/tab-bar";
 import { Topbar } from "@/components/topbar";
 import { themeBootstrapScript } from "@/lib/theme";
@@ -32,12 +33,22 @@ export const metadata: Metadata = {
   },
   description:
     "Gamified Quranic Arabic vocabulary practice from the AMAR Arabic Programme study notes.",
+  applicationName: "Arabic Amar",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: "Arabic Amar",
+  },
+  icons: {
+    apple: "/apple-touch-icon.png",
+  },
 };
 
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
+  themeColor: "#0e6b7c",
 };
 
 export default function RootLayout({
@@ -103,6 +114,7 @@ export default function RootLayout({
             </p>
           </footer>
           <TabBar />
+          <PwaSetup />
         </ProgressSyncProvider>
       </body>
     </html>
