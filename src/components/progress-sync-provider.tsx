@@ -20,6 +20,7 @@ import {
   saveCloudProgress,
   signInWithEmail,
   signOutOfSync,
+  verifyEmailCode,
   type SyncStatus,
 } from "@/lib/supabase-progress";
 import { mergeProgress, replaceProgress, useProgress, useProgressStorageSync } from "@/lib/progress";
@@ -31,6 +32,7 @@ interface ProgressSyncContextValue {
   status: SyncStatus;
   error: string;
   signIn: (email: string) => Promise<void>;
+  verifyCode: (email: string, code: string) => Promise<void>;
   signOut: () => Promise<void>;
   syncNow: () => Promise<void>;
 }
@@ -158,6 +160,19 @@ export function ProgressSyncProvider({ children }: { children: ReactNode }) {
           throw normalized;
         }
       },
+      verifyCode: async (email: string, code: string) => {
+        setStatus("syncing");
+        setError("");
+        try {
+          await verifyEmailCode(email, code);
+        } catch (err) {
+          const message =
+            err instanceof Error ? err.message : "Code verification failed.";
+          setStatus("error");
+          setError(message);
+          throw err instanceof Error ? err : new Error(message);
+        }
+      },
       signOut: async () => {
         try {
           await signOutOfSync();
@@ -186,6 +201,7 @@ export function useProgressSync(): ProgressSyncContextValue {
       status: "disabled",
       error: "",
       signIn: async () => undefined,
+      verifyCode: async () => undefined,
       signOut: async () => undefined,
       syncNow: async () => undefined,
     };

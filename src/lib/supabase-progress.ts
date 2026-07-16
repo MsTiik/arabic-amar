@@ -55,6 +55,17 @@ export async function signInWithEmail(email: string): Promise<void> {
   if (error) throw error;
 }
 
+export async function verifyEmailCode(email: string, code: string): Promise<void> {
+  const supabase = getSupabaseClient();
+  if (!supabase) throw new Error("Progress sync is not configured.");
+  const { error } = await supabase.auth.verifyOtp({
+    email,
+    token: code,
+    type: "email",
+  });
+  if (error) throw error;
+}
+
 export async function signOutOfSync(): Promise<void> {
   const supabase = getSupabaseClient();
   if (!supabase) return;

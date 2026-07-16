@@ -14,6 +14,8 @@ export function ProgressSyncPanel() {
   const progress = useProgress();
   const [email, setEmail] = useState("");
   const [sent, setSent] = useState(false);
+  const [code, setCode] = useState("");
+  const [verifying, setVerifying] = useState(false);
   const [cooldownUntil, setCooldownUntil] = useState(0);
   const [now, setNow] = useState(() => Date.now());
   const content = getSiteContent();
@@ -23,6 +25,7 @@ export function ProgressSyncPanel() {
   const cooldownRemaining = Math.max(0, Math.ceil((cooldownUntil - now) / 1000));
   const emailReady = email.trim().length > 0;
   const signInDisabled = sync.status === "syncing" || !emailReady || cooldownRemaining > 0;
+  const codeReady = code.trim().length >= 6;
 
   useEffect(() => {
     if (!cooldownUntil) return;
@@ -40,6 +43,20 @@ export function ProgressSyncPanel() {
       setCooldownUntil(Date.now() + SIGN_IN_COOLDOWN_SECONDS * 1000);
     } catch {
       setSent(false);
+    }
+  }
+
+  async function submitCode(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if (!codeReady || verifying) return;
+    setVerifying(true);
+    try {
+      await sync.verifyCode(email.trim(), code.trim());
+      setCode("");
+    } catch {
+      // Error surfaced via sync.error.
+    } finally {
+      setVerifying(false);
     }
   }
 
@@ -132,17 +149,51 @@ export function ProgressSyncPanel() {
           </div>
           {sent ? (
             <p className="mt-3 text-sm text-success">
-              Check your email, then open the sign-in link on this device. Don&apos;t request
-              another link unless this one expires.
+              Check your email, then open the sign-in link on this device — or enter
+              the code from the email below (best for the home-screen app, where
+              email links open in the browser instead).
             </p>
           ) : null}
           {sync.error ? <p className="mt-3 text-sm text-danger">{sync.error}</p> : null}
           <p className="mt-3 text-xs leading-5 text-muted-foreground">
-            This uses passwordless magic-link sign-in. Your practice progress is
+            This uses passwordless email sign-in. Your practice progress is
             merged with the cloud copy after sign-in, then saved after each update.
           </p>
         </form>
       )}
+
+      {sync.configured && !sync.user && sent ? (
+        <form
+          onSubmit={submitCode}
+          className="mt-3 rounded-2xl border border-border bg-background-soft p-4"
+        >
+          <label className="text-sm font-semibold" htmlFor="sync-code">
+            Sign-in code from the email
+          </label>
+          <div className="mt-2 flex flex-col gap-2 sm:flex-row">
+            <input
+              id="sync-code"
+              type="text"
+              inputMode="numeric"
+              autoComplete="one-time-code"
+              value={code}
+              onChange={(event) => setCode(event.target.value)}
+              placeholder="123456"
+              className="min-w-0 flex-1 rounded-full border border-border bg-background px-4 py-2 text-sm tracking-widest focus-ring"
+            />
+            <button
+              type="submit"
+              disabled={!codeReady || verifying}
+              className="rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60 focus-ring"
+            >
+              {verifying ? "Verifying…" : "Verify code"}
+            </button>
+          </div>
+          <p className="mt-3 text-xs leading-5 text-muted-foreground">
+            Entering the code signs you in right here, without leaving the app.
+          </p>
+        </form>
+      ) : null}
     </section>
   );
 }
