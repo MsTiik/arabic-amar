@@ -7,6 +7,7 @@ import { Flame, Snowflake, Target } from "lucide-react";
 
 import { useProgress } from "@/lib/progress";
 import { useProgressSync } from "@/components/progress-sync-provider";
+import { FeedbackToggle } from "@/components/feedback-toggle";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { cn } from "@/lib/cn";
 
@@ -125,6 +126,7 @@ export function Topbar() {
           <FreezeChip count={freezesAvailable} />
           {sync.configured ? <SyncChip status={sync.status} signedIn={Boolean(sync.user)} /> : null}
           <DailyGoalChip seen={seen} goal={goal} ratio={goalRatio} />
+          <FeedbackToggle className="hidden sm:inline-flex" />
           <ThemeToggle />
           <FoundationsNavLink pathname={pathname} />
         </div>
