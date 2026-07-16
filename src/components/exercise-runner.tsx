@@ -4,9 +4,17 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { ArrowLeft, Check, Flame, RotateCcw, Trophy, X } from "lucide-react";
 
 import { ArabicText } from "@/components/arabic-text";
+import { FeedbackToggle } from "@/components/feedback-toggle";
 import { SpeakerButton } from "@/components/speaker-button";
 import { TranslitReveal } from "@/components/translit-reveal";
 import { cn } from "@/lib/cn";
+import {
+  answerFeedback,
+  comboFeedback,
+  completeFeedback,
+  haptic,
+  playSound,
+} from "@/lib/feedback";
 import {
   checkFillBlankAnswer,
   checkMatchPairsAnswer,
@@ -89,11 +97,10 @@ export function ExerciseRunner({ deck, onExit, onAttempt }: Props) {
         : { ...r, wrong: r.wrong + 1 },
     );
     if (correct) {
-      setCombo((c) => {
-        const next = c + 1;
-        setBestCombo((b) => Math.max(b, next));
-        return next;
-      });
+      const next = combo + 1;
+      setCombo(next);
+      setBestCombo((b) => Math.max(b, next));
+      if (next === 3 || (next > 3 && next % 5 === 0)) comboFeedback();
     } else {
       setCombo(0);
     }
@@ -147,6 +154,7 @@ export function ExerciseRunner({ deck, onExit, onAttempt }: Props) {
             {combo} in a row!
           </span>
         ) : null}
+        <FeedbackToggle className="shrink-0" />
       </div>
 
       <div
@@ -243,6 +251,11 @@ function CompletionScreen({
 }) {
   const accuracy = total > 0 ? Math.round((correct / total) * 100) : 0;
   const perfect = accuracy === 100;
+
+  useEffect(() => {
+    completeFeedback();
+  }, []);
+
   const heading = perfect
     ? "Perfect session!"
     : accuracy >= 80
@@ -342,6 +355,9 @@ function FeedbackBar({
 
   useEffect(() => {
     continueRef.current?.focus();
+    answerFeedback(correct);
+    // Feedback should fire exactly once, when the bar first appears.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -539,7 +555,10 @@ function FlashcardView({
       <div className="mt-6 grid grid-cols-2 gap-3">
         <button
           type="button"
-          onClick={() => onAnswer(false)}
+          onClick={() => {
+            answerFeedback(false);
+            onAnswer(false);
+          }}
           className="btn-chunky btn-chunky-danger rounded-full border-2 border-danger bg-danger-soft px-4 py-2.5 text-sm font-bold text-foreground focus-ring"
         >
           <X className="mr-1 inline h-4 w-4" />
@@ -547,7 +566,10 @@ function FlashcardView({
         </button>
         <button
           type="button"
-          onClick={() => onAnswer(true)}
+          onClick={() => {
+            answerFeedback(true);
+            onAnswer(true);
+          }}
           className="btn-chunky btn-chunky-success rounded-full bg-success px-4 py-2.5 text-sm font-bold text-primary-foreground focus-ring"
         >
           <Check className="mr-1 inline h-4 w-4" />
@@ -863,10 +885,14 @@ function MatchPairsView({
   function tryResolve(leftId: string, rightId: string) {
     if (leftId === rightId) {
       // Correct pairing.
+      playSound("match");
+      haptic("tap");
       setMatched((m) => ({ ...m, [leftId]: rightId }));
       setSelectedLeft(null);
       setSelectedRight(null);
     } else {
+      playSound("wrong");
+      haptic("wrong");
       setWrongPulse({ left: leftId, right: rightId });
       setErrorCount((c) => c + 1);
       setTimeout(() => {
