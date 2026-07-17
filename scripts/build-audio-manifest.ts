@@ -189,7 +189,10 @@ async function findLinguaLibre(word: string): Promise<AudioEntry | null> {
     if (!m) continue;
     const author = m[1];
     const recordedWord = m[2];
-    if (recordedWord !== word) continue;
+    // Accept hamza-folded equality too — uploaders often use the looser
+    // spelling (e.g. ا for أ) even when the word itself carries a hamza.
+    if (recordedWord !== word && foldHamza(recordedWord) !== foldHamza(word))
+      continue;
     const directUrl = await resolveFileUrl(h.title);
     if (!directUrl) continue;
     return {
