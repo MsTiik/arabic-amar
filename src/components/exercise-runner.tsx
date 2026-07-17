@@ -4,10 +4,12 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { ArrowLeft, Check, Flame, RotateCcw, Trophy, X } from "lucide-react";
 
 import { ArabicText } from "@/components/arabic-text";
+import { AutoplayToggle } from "@/components/autoplay-toggle";
 import { FeedbackToggle } from "@/components/feedback-toggle";
 import { SpeakerButton } from "@/components/speaker-button";
 import { TranslitReveal } from "@/components/translit-reveal";
 import { cn } from "@/lib/cn";
+import { autoplayWord } from "@/lib/autoplay";
 import {
   answerFeedback,
   comboFeedback,
@@ -154,6 +156,7 @@ export function ExerciseRunner({ deck, onExit, onAttempt }: Props) {
             {combo} in a row!
           </span>
         ) : null}
+        <AutoplayToggle className="shrink-0" />
         <FeedbackToggle className="shrink-0" />
       </div>
 
@@ -344,11 +347,14 @@ function FeedbackBar({
   correct,
   message,
   detail,
+  word,
   onContinue,
 }: {
   correct: boolean;
   message?: string;
   detail?: React.ReactNode;
+  /** Arabic word to pronounce when the answer is revealed (autoplay pref). */
+  word?: string;
   onContinue: () => void;
 }) {
   const continueRef = useRef<HTMLButtonElement>(null);
@@ -356,6 +362,8 @@ function FeedbackBar({
   useEffect(() => {
     continueRef.current?.focus();
     answerFeedback(correct);
+    // Delay slightly so the pronunciation doesn't overlap the answer chime.
+    autoplayWord(word, 450);
     // Feedback should fire exactly once, when the bar first appears.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -481,6 +489,7 @@ function FlashcardView({
     const now = Date.now();
     if (now - lastFlipRef.current < 550) return;
     lastFlipRef.current = now;
+    if (!flipped) autoplayWord(question.promptArabic);
     setFlipped((f) => !f);
   }
   const flipLabel = flipped
@@ -664,6 +673,10 @@ function MultipleChoiceView({
       {selected ? (
         <FeedbackBar
           correct={correct}
+          word={
+            question.promptArabic ??
+            (correctOption?.isArabic ? correctOption.text : undefined)
+          }
           detail={
             !correct && correctOption ? (
               <span>
@@ -733,6 +746,7 @@ function FillBlankView({
       {submitted !== null ? (
         <FeedbackBar
           correct={submitted}
+          word={question.promptArabic}
           detail={
             !submitted ? (
               <span>
@@ -1198,6 +1212,7 @@ function ClozeView({
       {selected ? (
         <FeedbackBar
           correct={correct}
+          word={correctOption?.text}
           detail={
             !correct && correctOption ? (
               <span>
@@ -1287,6 +1302,7 @@ function ConnectingLettersView({
       {selected ? (
         <FeedbackBar
           correct={correct}
+          word={correctOption?.text}
           message={correct ? "Correct!" : "Not quite — read the letters again."}
           detail={
             !correct && correctOption ? (
