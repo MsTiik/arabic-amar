@@ -28,6 +28,14 @@ await page.evaluate(() => {
 ```
 Read counters after each phase and compare against the patterns/note counts in `src/lib/feedback.ts`. Note: word-pronunciation audio (`SpeakerButton`) uses `<audio>` files, not oscillators, so it won't pollute the counter.
 
+## Verifying word-pronunciation autoplay (`src/lib/autoplay.ts`)
+- Preference: `localStorage` key `arabic-amar:autoplay:v1` ("on"/"off", default off), toggled by the audio-lines button in the deck header (`src/components/autoplay-toggle.tsx`). It's independent from the effects toggle.
+- To prove which file played (recordings capture no sound), wrap `window.Audio` and intercept `play()`, logging into `window.__audioLog`. Render an on-screen overlay div showing the last played filename — this makes the evidence visible in screenshots/recordings, which viewers appreciate.
+- CDP `context.addInitScript` may NOT re-apply after a manual page reload when attached via `connectOverCDP` — after any reload, re-run your injection script and confirm `window.__audioProbe` (or equivalent flag) before asserting "no audio played".
+- Many vocab words have no recording (check the disabled/muted speaker button state); autoplay is a silent no-op for them. Pick cards showing an enabled "Play pronunciation" button for positive tests; a few flashcards may need advancing before one appears.
+- Feedback-bar autoplay is delayed ~450 ms after the answer chime — screenshot immediately after answering may show "created" but not yet "PLAYED"; take a second screenshot.
+- Checking `content/audio-manifest.json` URLs in bulk with HEAD requests gets Wikimedia 429 rate limits after a few requests — verify 2-3 URLs slowly (or rely on in-app playback) instead of hammering all of them.
+
 ## Testing PWA behavior (manifest, service worker, offline, iOS hint)
 - The service worker only registers in **production** mode (`src/components/pwa-setup.tsx`). Use `npm run build && PORT=3001 npm run start` — `npm run dev` will never register it.
 - Manifest is served at `/manifest.webmanifest` (generated from `src/app/manifest.ts`); SW is `public/sw.js` with a no-cache header from `next.config.ts`.
