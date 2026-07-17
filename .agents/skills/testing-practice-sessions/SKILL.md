@@ -44,6 +44,33 @@ Read counters after each phase and compare against the patterns/note counts in `
 - iOS install hint: only shows for `iPhone|iPad|iPod` UAs AND when NOT in standalone display mode — it will not appear inside the installed app window, so test it in a normal tab with `Emulation.setUserAgentOverride`. Dismissal is stored at `localStorage arabic-amar:install-hint:v1`.
 - Beware races between automated CDP checks and manual UI clicks: sample state only after the manual action is confirmed on screen.
 
+## Deck selection & URL grammar
+- Practice URLs are query-driven (`src/components/practice-client.tsx`): `/practice?topic=<slug>&kind=<kind>` with kinds `flashcard | mc | fill | gender | ordering`; state decks use `/practice?deck=due|weak|new|names-of-allah`. Slugs come from `content/content.json`.
+- "Mixed multiple choice" (12 questions) is the fastest deck for testing answer feedback, progress bar, combo streaks, and the completion screen in one run.
+- Correct answers are readable from the stripped DOM (option text + Arabic prompt); answer wrong once to test the miss path, then 3+ correct in a row for the combo chip (appears on the NEXT question — combo updates on Continue).
+- State decks (Review due / mistakes / Add new words) only render when localStorage progress has matching words; seed by answering a card wrong, or seed `arabic-amar:progress:v1` directly with low-mastery words and past `nextDue` dates.
+
+## Expected exercise-runner behavior
+- Header: fat progress bar + "N / total" counter; bar grows per answer.
+- Correct: option pops green; green feedback bar with "Correct!" + Continue (auto-focused, Enter advances). Wrong: option shakes red; red bar shows "Answer: <correct>".
+- Combo chip "N in a row!" (gold flame) at 3+ consecutive correct; disappears after a miss.
+- Completion: trophy pop; confetti only if accuracy ≥80%; stat tiles count up (~0.8-1.5s — wait before screenshotting final values); "Best streak" chip if best combo ≥3.
+- Flashcards: after flipping, button positions shift slightly — re-screenshot before clicking Got it right/wrong.
+
+## Progress state control
+- All progress lives in `localStorage` key `arabic-amar:progress:v1` (no auth). Clear it + reload for fresh-learner tests; avoid the UI "Reset progress" during unrelated tests.
+- To force goal-reached non-destructively, lower the daily goal via the "N cards" button to ≤ cards seen, then restore it.
+
+## Mobile layout (immersive mode, tab bar)
+- Simulate a phone by resizing Chrome to ~400-420px wide (Tailwind `sm`=640px), or CDP `Emulation.setDeviceMetricsOverride {width:390,height:844,mobile:true}`; re-maximize with wmctrl afterwards. This doesn't exercise touch scrolling, iOS URL-bar collapse (`100dvh`), or safe-area insets — note that limitation.
+- Phone expectations: fixed 5-tab bottom bar (`src/components/tab-bar.tsx`, `md:hidden`), scrollable topbar nav, topbar auto-hides on scroll down. During a deck, `body.session-active` hides topbar/tab bar/footer; the feedback bar is a fixed bottom sheet on phones (inline in the card ≥sm).
+- Fixed-positioning gotcha: an ancestor retaining a `transform` (e.g. entry animation with `fill-mode: both`) becomes the containing block for `position: fixed` and breaks the bottom sheet; `backwards` is safe.
+
+## Design tokens & lesson identity spot-checks
+- `globals.css` defines named accent hues (`--accent-rose/…/indigo` + `-soft`) with dark-mode overrides, plus `.card-flat`/`.card-raised`/`.section-label`. Always toggle dark mode (theme button left of "Foundations") when verifying token changes.
+- `src/lib/lesson-identity.ts` maps topic slug → Lucide icon + OKLCH hue on 4 surfaces (Home/Topics cards, lesson header, Grammar pills, Practice by-lesson rows). Spot-checks: Body Parts = red hand, Numbers = blue hash, Time = teal clock, Colours = pink palette.
+- Tailwind gotcha: color classes must be full literal strings (no template-literal hue interpolation) or styles silently won't be generated.
+
 ## Gotchas
 - React Strict Mode (dev) double-invokes `useEffect`, so effect-driven sounds (feedback bar, completion fanfare) fire twice in `npm run dev` but once in production builds. Expect ×2 counts in dev; don't report as a bug unless it reproduces in `npm run build && npm run start`.
 - Answering a multiple-choice question shows a feedback bar; feedback sound fires on option click (bar mount), while combo/advance logic fires on the "Continue →" click.
