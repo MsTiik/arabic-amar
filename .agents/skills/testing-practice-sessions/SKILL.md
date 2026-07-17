@@ -1,6 +1,6 @@
 ---
 name: testing-practice-sessions
-description: Test the practice/exercise flow (decks, answer feedback, sounds, haptics) end-to-end in Arabic AMAR. Use when verifying ExerciseRunner, feedback, or gamification changes.
+description: Test the practice/exercise flow (decks, answer feedback, sounds, haptics) and PWA behavior end-to-end in Arabic AMAR. Use when verifying ExerciseRunner, feedback, gamification, or PWA changes.
 ---
 
 # Testing practice sessions (Arabic AMAR)
@@ -27,6 +27,14 @@ await page.evaluate(() => {
 });
 ```
 Read counters after each phase and compare against the patterns/note counts in `src/lib/feedback.ts`. Note: word-pronunciation audio (`SpeakerButton`) uses `<audio>` files, not oscillators, so it won't pollute the counter.
+
+## Testing PWA behavior (manifest, service worker, offline, iOS hint)
+- The service worker only registers in **production** mode (`src/components/pwa-setup.tsx`). Use `npm run build && PORT=3001 npm run start` — `npm run dev` will never register it.
+- Manifest is served at `/manifest.webmanifest` (generated from `src/app/manifest.ts`); SW is `public/sw.js` with a no-cache header from `next.config.ts`.
+- Install test: open the prod URL in Chrome; the install icon appears in the omnibox only if manifest+icons+SW are valid. Installing opens a standalone window.
+- Offline test: attach CDP to the page and `Network.emulateNetworkConditions {offline:true}` then reload — pass if the page renders from cache and `navigator.onLine === false`.
+- iOS install hint: only shows for `iPhone|iPad|iPod` UAs AND when NOT in standalone display mode — it will not appear inside the installed app window, so test it in a normal tab with `Emulation.setUserAgentOverride`. Dismissal is stored at `localStorage arabic-amar:install-hint:v1`.
+- Beware races between automated CDP checks and manual UI clicks: sample state only after the manual action is confirmed on screen.
 
 ## Gotchas
 - React Strict Mode (dev) double-invokes `useEffect`, so effect-driven sounds (feedback bar, completion fanfare) fire twice in `npm run dev` but once in production builds. Expect ×2 counts in dev; don't report as a bug unless it reproduces in `npm run build && npm run start`.
