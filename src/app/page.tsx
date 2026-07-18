@@ -31,6 +31,7 @@ export default function Home() {
       </div>
 
       <section className="mt-10">
+        <hr className="amber-rule mb-6 w-24" />
         <header className="mb-4 flex items-end justify-between">
           <div>
             <h2 className="text-2xl font-semibold tracking-tight">Lessons</h2>

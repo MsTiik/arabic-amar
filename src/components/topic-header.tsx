@@ -28,7 +28,7 @@ export function TopicHeader({ topic, vocab, ruleCount }: Props) {
   const Icon = identity.icon;
 
   return (
-    <header className="rounded-3xl border border-border bg-card p-6 sm:p-8">
+    <header className="brand-pattern rounded-3xl border border-border bg-card p-6 sm:p-8">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <Link
@@ -48,9 +48,11 @@ export function TopicHeader({ topic, vocab, ruleCount }: Props) {
             </h1>
           </div>
           {topic.nameArabic ? (
-            <ArabicText variant="display" className="mt-1 text-3xl text-foreground-soft sm:text-4xl">
-              {topic.nameArabic}
-            </ArabicText>
+            <span className="headword-band mt-1">
+              <ArabicText variant="display" className="text-3xl text-foreground sm:text-4xl">
+                {topic.nameArabic}
+              </ArabicText>
+            </span>
           ) : null}
           <p className="mt-3 text-sm text-muted-foreground">
             {vocab.length} words · {ruleCount} rules

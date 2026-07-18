@@ -228,14 +228,66 @@ body {
   text-wrap: pretty;
 }
 
-/* Subtle calligraphic divider used between sections */
-.calligraphic-divider {
-  --c: oklch(from var(--accent-gold) l c h / 30%);
-  background-image: radial-gradient(circle, var(--c) 1px, transparent 1.5px);
-  background-size: 14px 14px;
-  background-repeat: repeat-x;
-  background-position: center;
-  height: 14px;
+/*
+ * Thin amber rule — the signature horizontal accent from the AMAR cover,
+ * used as a section divider and as the topbar hairline.
+ */
+.amber-rule {
+  height: 2px;
+  border: 0;
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    oklch(from var(--accent-gold) l c h / 85%),
+    oklch(from var(--accent-gold) l c h / 0%)
+  );
+}
+
+/*
+ * Brand texture — oversized, faint calligraphic strokes echoing the AMAR
+ * prospectus cover. Painted through a mask so the stroke colour follows the
+ * theme (teal strokes on cream in light mode, cream strokes on teal in dark).
+ */
+.brand-pattern {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+.brand-pattern::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  pointer-events: none;
+  background-color: var(--primary);
+  opacity: 0.05;
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='480' height='360' viewBox='0 0 480 360' fill='none' stroke='black' stroke-width='10' stroke-linecap='round'%3E%3Cpath d='M40 120 C 120 30 220 30 240 120 C 250 170 190 200 140 180'/%3E%3Cpath d='M300 60 C 300 160 360 160 420 130'/%3E%3Cpath d='M60 280 C 150 330 260 320 320 250'/%3E%3Cpath d='M420 40 C 460 60 460 110 420 120'/%3E%3Crect x='400' y='240' width='20' height='20' transform='rotate(45 410 250)' fill='black' stroke='none'/%3E%3C/svg%3E");
+  mask-repeat: repeat;
+  mask-size: 460px auto;
+}
+:root.dark .brand-pattern::before {
+  background-color: var(--foreground);
+  opacity: 0.06;
+}
+
+/*
+ * Camel band — translucent warm bar behind large Arabic headwords, echoing
+ * the band behind the cover calligraphy.
+ */
+.headword-band {
+  position: relative;
+  isolation: isolate;
+  display: inline-block;
+  padding-inline: 0.3em;
+}
+.headword-band::before {
+  content: "";
+  position: absolute;
+  inset: 32% -0.1em 14% -0.1em;
+  z-index: -1;
+  border-radius: 3px;
+  background: oklch(from var(--accent-gold) l c h / 22%);
 }
 
 /*
