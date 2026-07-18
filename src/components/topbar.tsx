@@ -72,7 +72,7 @@ export function Topbar() {
           className="flex shrink-0 items-center whitespace-nowrap text-lg font-semibold tracking-tight"
         >
           <span>
-            Arabic AMAR
+            Arabic <span className="text-primary">AMAR</span>
           </span>
         </Link>
 
