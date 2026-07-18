@@ -162,7 +162,6 @@ export function Topbar() {
           {FOUNDATIONS.label}
         </Link>
       </nav>
-      <div aria-hidden className="amber-rule absolute inset-x-0 bottom-0" />
     </header>
   );
 }
