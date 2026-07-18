@@ -10,23 +10,24 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 /*
- * Design tokens — warm neutral background with subtle traditional accents.
+ * Design tokens — AMAR brand palette: deep teal-slate, camel, amber glow and
+ * cream, drawn from the AMAR Arabic Programme prospectus cover.
  * Values are OKLCH for perceptual uniformity. Keeping them on :root so dark mode
  * can override individual tokens cleanly, and so Tailwind v4 `@theme inline` can
  * read them.
  */
 :root {
-  --background: oklch(0.985 0.01 90);
-  --background-soft: oklch(0.97 0.015 85);
-  --foreground: oklch(0.22 0.025 270);
-  --foreground-soft: oklch(0.45 0.025 270);
-  --muted: oklch(0.93 0.012 85);
-  --muted-foreground: oklch(0.5 0.02 270);
-  --border: oklch(0.9 0.01 85);
-  --primary: oklch(0.45 0.13 200);
-  --primary-foreground: oklch(0.99 0.005 200);
-  --accent-gold: oklch(0.7 0.13 80);
-  --accent-gold-soft: oklch(0.92 0.07 85);
+  --background: oklch(0.982 0.012 85);
+  --background-soft: oklch(0.965 0.016 82);
+  --foreground: oklch(0.24 0.028 240);
+  --foreground-soft: oklch(0.45 0.028 235);
+  --muted: oklch(0.93 0.014 82);
+  --muted-foreground: oklch(0.5 0.024 235);
+  --border: oklch(0.9 0.012 82);
+  --primary: oklch(0.44 0.065 222);
+  --primary-foreground: oklch(0.98 0.01 85);
+  --accent-gold: oklch(0.62 0.1 68);
+  --accent-gold-soft: oklch(0.92 0.05 75);
   --tense-past: oklch(0.95 0.02 250);
   --tense-present: oklch(0.95 0.02 155);
   --tense-command: oklch(0.95 0.025 80);
@@ -40,8 +41,8 @@
   --danger: oklch(0.6 0.18 25);
   --danger-soft: oklch(0.95 0.05 25);
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.22 0.025 270);
-  --ring: oklch(0.6 0.13 200 / 50%);
+  --card-foreground: oklch(0.24 0.028 240);
+  --ring: oklch(0.55 0.08 222 / 50%);
 
   /*
    * Accent hue scale — 8 named hues used for lesson/deck/reference colour
@@ -84,49 +85,51 @@
  * OS preference for first-time visitors.
  */
 :root.dark {
-  --background: oklch(0.18 0.02 270);
-  --background-soft: oklch(0.22 0.02 270);
-  --foreground: oklch(0.95 0.01 90);
-  --foreground-soft: oklch(0.78 0.015 90);
-  --muted: oklch(0.26 0.02 270);
-  --muted-foreground: oklch(0.7 0.015 270);
-  --border: oklch(0.32 0.02 270);
-  --primary: oklch(0.65 0.13 200);
-  --primary-foreground: oklch(0.15 0.02 270);
-  --accent-gold: oklch(0.78 0.13 80);
-  --accent-gold-soft: oklch(0.32 0.06 80);
-  --tense-past: oklch(0.26 0.025 250);
-  --tense-present: oklch(0.26 0.025 155);
-  --tense-command: oklch(0.28 0.03 80);
-  --tense-masdar: oklch(0.26 0.025 310);
+  /* Dark mode is the "brand mode": cream text on the AMAR deep teal-slate,
+   * a direct translation of the prospectus cover. */
+  --background: oklch(0.34 0.05 222);
+  --background-soft: oklch(0.38 0.05 222);
+  --foreground: oklch(0.96 0.012 85);
+  --foreground-soft: oklch(0.8 0.02 85);
+  --muted: oklch(0.42 0.05 222);
+  --muted-foreground: oklch(0.72 0.02 90);
+  --border: oklch(0.48 0.05 222);
+  --primary: oklch(0.72 0.08 210);
+  --primary-foreground: oklch(0.26 0.045 222);
+  --accent-gold: oklch(0.76 0.11 70);
+  --accent-gold-soft: oklch(0.46 0.06 70);
+  --tense-past: oklch(0.44 0.04 250);
+  --tense-present: oklch(0.44 0.04 155);
+  --tense-command: oklch(0.46 0.045 80);
+  --tense-masdar: oklch(0.44 0.04 310);
   --tense-past-accent: oklch(0.7 0.07 250);
   --tense-present-accent: oklch(0.7 0.07 155);
   --tense-command-accent: oklch(0.72 0.07 80);
   --tense-masdar-accent: oklch(0.7 0.06 310);
-  --success: oklch(0.7 0.14 145);
-  --success-soft: oklch(0.3 0.07 145);
-  --danger: oklch(0.7 0.16 25);
-  --danger-soft: oklch(0.32 0.07 25);
-  --card: oklch(0.24 0.02 270);
-  --card-foreground: oklch(0.95 0.01 90);
-  --ring: oklch(0.7 0.14 200 / 60%);
+  --success: oklch(0.72 0.13 145);
+  --success-soft: oklch(0.45 0.06 145);
+  --danger: oklch(0.72 0.15 25);
+  --danger-soft: oklch(0.46 0.06 25);
+  --card: oklch(0.39 0.05 222);
+  --card-foreground: oklch(0.96 0.012 85);
+  --ring: oklch(0.72 0.09 210 / 60%);
 
   --accent-rose: oklch(0.82 0.08 350);
-  --accent-rose-soft: oklch(0.3 0.06 350);
+  --accent-rose-soft: oklch(0.45 0.05 350);
   --accent-terracotta: oklch(0.82 0.08 40);
-  --accent-terracotta-soft: oklch(0.3 0.06 40);
+  --accent-terracotta-soft: oklch(0.45 0.05 40);
   --accent-amber: oklch(0.84 0.08 60);
-  --accent-amber-soft: oklch(0.3 0.06 60);
+  --accent-amber-soft: oklch(0.45 0.05 60);
   --accent-olive: oklch(0.82 0.08 110);
-  --accent-olive-soft: oklch(0.3 0.06 110);
+  --accent-olive-soft: oklch(0.45 0.05 110);
   --accent-emerald: oklch(0.82 0.08 145);
-  --accent-emerald-soft: oklch(0.3 0.06 145);
+  --accent-emerald-soft: oklch(0.45 0.05 145);
   --accent-teal: oklch(0.82 0.08 180);
-  --accent-teal-soft: oklch(0.3 0.06 180);
+  --accent-teal-soft: oklch(0.45 0.05 180);
   --accent-sky: oklch(0.82 0.08 220);
-  --accent-sky-soft: oklch(0.3 0.06 220);
+  --accent-sky-soft: oklch(0.45 0.05 220);
   --accent-indigo: oklch(0.82 0.08 270);
-  --accent-indigo-soft: oklch(0.3 0.06 270);
+  --accent-indigo-soft: oklch(0.45 0.05 270);
 }
 
 @theme inline {
