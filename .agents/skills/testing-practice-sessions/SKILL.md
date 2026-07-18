@@ -68,6 +68,11 @@ Read counters after each phase and compare against the patterns/note counts in `
 
 ## Design tokens & lesson identity spot-checks
 - `globals.css` defines named accent hues (`--accent-rose/…/indigo` + `-soft`) with dark-mode overrides, plus `.card-flat`/`.card-raised`/`.section-label`. Always toggle dark mode (theme button left of "Foundations") when verifying token changes.
+- The theme toggle cycles System → Light → Dark → System; check the button's `title` attribute in the DOM to know the current mode instead of counting clicks.
+- `.brand-panel` (may exist in `globals.css`): a scoped CSS-variable override that re-themes a whole subtree (e.g. dashboard hero) to the deep-teal brand surface with amber `--primary`. Works because Tailwind v4 `@theme inline` utilities resolve `var(--token)` at the element. When testing: verify children (chips, stats, nested cards) stay legible in BOTH themes, and that portaled dialogs opened from inside the panel are NOT teal (they render outside the subtree).
+- Earlier texture utilities (`.brand-pattern`, `.headword-band`, `.amber-rule`) were added then reverted per user feedback; if a test plan references them, confirm against current `globals.css` first — visual branding treatments churn quickly.
+- Confetti palette lives in `CONFETTI_COLORS` in `src/components/exercise-runner.tsx`; confetti only renders on the completion screen at ≥80% accuracy, so plan a deck run with ≤2 misses on 12 cards. Screenshot quickly — pieces animate away.
+- `curl localhost:3000/manifest.webmanifest` verifies PWA `theme_color`/icons without a prod build; favicon changes need a hard reload (Ctrl+Shift+R) and may fail Next build if the ICO isn't RGBA (regenerate with Pillow `Image.new('RGBA', ...)`).
 - `src/lib/lesson-identity.ts` maps topic slug → Lucide icon + OKLCH hue on 4 surfaces (Home/Topics cards, lesson header, Grammar pills, Practice by-lesson rows). Spot-checks: Body Parts = red hand, Numbers = blue hash, Time = teal clock, Colours = pink palette.
 - Tailwind gotcha: color classes must be full literal strings (no template-literal hue interpolation) or styles silently won't be generated.
 
