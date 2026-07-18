@@ -173,9 +173,9 @@ export function ExerciseRunner({ deck, onExit, onAttempt }: Props) {
 const CONFETTI_COLORS = [
   "var(--primary)",
   "var(--accent-gold)",
-  "var(--success)",
-  "var(--danger)",
-  "var(--tense-masdar-accent)",
+  "var(--accent-amber)",
+  "var(--accent-terracotta)",
+  "var(--accent-teal)",
 ];
 
 function ConfettiBurst({ count = 28 }: { count?: number }) {
