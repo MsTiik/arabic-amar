@@ -39,7 +39,8 @@ export default function GrammarPage() {
   return (
     <div className="mx-auto w-full max-w-5xl px-4 py-8 sm:py-10">
       <header className="mb-8">
-        <h1 className="text-4xl font-bold tracking-tight">Grammar reference</h1>
+        <p className="section-label">Rules & tables</p>
+        <h1 className="mt-1 text-3xl font-semibold tracking-tight sm:text-4xl">Grammar reference</h1>
         <p className="mt-1 text-sm text-muted-foreground">
           Three big reference tables on top, then per-lesson grammar pages
           underneath.

@@ -28,7 +28,7 @@ export function TopicHeader({ topic, vocab, ruleCount }: Props) {
   const Icon = identity.icon;
 
   return (
-    <header className="rounded-3xl border border-border bg-card p-6 sm:p-8">
+    <header className="brand-panel rounded-3xl border border-border p-6 sm:p-8">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <Link

@@ -295,18 +295,19 @@ function PracticeSession({
   return (
     <div className="space-y-10">
       <header>
-        <h1 className="text-3xl font-semibold tracking-tight">Practice</h1>
+        <p className="section-label">Daily training</p>
+        <h1 className="mt-1 text-3xl font-semibold tracking-tight sm:text-4xl">Practice</h1>
         <p className="mt-1 text-sm text-muted-foreground">
           Pick a deck and play. Every answered card counts toward your daily goal and your
           per-word mastery.
         </p>
       </header>
 
-      <section className="relative overflow-hidden rounded-3xl bg-primary p-6 text-primary-foreground sm:p-8">
+      <section className="brand-panel relative overflow-hidden rounded-3xl border border-border p-6 sm:p-8">
         <div className="flex flex-wrap items-center justify-between gap-6">
           <div className="min-w-0">
             <h2 className="text-2xl font-bold tracking-tight">Today&apos;s session</h2>
-            <p className="mt-1 text-sm text-primary-foreground/80">
+            <p className="mt-1 text-sm text-foreground-soft">
               {sessionParts.length > 0
                 ? `A 12-card mix picked for you: ${sessionParts.join(" · ")}.`
                 : "A 12-card mix picked from across your lessons."}
@@ -315,7 +316,7 @@ function PracticeSession({
           <button
             type="button"
             onClick={startTodaysSession}
-            className="btn-chunky btn-chunky-gold flex shrink-0 items-center gap-2 rounded-full bg-accent-gold px-7 py-3.5 text-base font-bold text-foreground focus-ring"
+            className="btn-chunky btn-chunky-primary flex shrink-0 items-center gap-2 rounded-full bg-primary px-7 py-3.5 text-base font-bold text-primary-foreground focus-ring"
           >
             <Play className="h-5 w-5" aria-hidden />
             Start today&apos;s session

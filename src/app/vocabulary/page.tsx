@@ -10,8 +10,9 @@ export default function VocabularyPage() {
   return (
     <div className="mx-auto w-full max-w-6xl space-y-8 px-4 py-8 sm:py-10">
       <header>
-        <h1 className="text-4xl font-bold tracking-tight">Vocabulary bank</h1>
-        <p className="text-sm text-muted-foreground">
+        <p className="section-label">Word bank</p>
+        <h1 className="mt-1 text-3xl font-semibold tracking-tight sm:text-4xl">Vocabulary bank</h1>
+        <p className="mt-1 text-sm text-muted-foreground">
           Search every word from every lesson. Diacritics are matched flexibly — typing{" "}
           <em>هذا</em> finds <em>هٰذَا</em>; typing <em>rasun</em> finds <em>raʾsun</em>.
         </p>
