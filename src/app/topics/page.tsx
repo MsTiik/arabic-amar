@@ -17,8 +17,9 @@ export default function TopicsPage() {
   return (
     <div className="mx-auto w-full max-w-6xl px-4 py-10">
       <header className="mb-6">
-        <h1 className="text-4xl font-bold tracking-tight">Lessons</h1>
-        <p className="text-sm text-muted-foreground">
+        <p className="section-label">Curriculum</p>
+        <h1 className="mt-1 text-3xl font-semibold tracking-tight sm:text-4xl">Lessons</h1>
+        <p className="mt-1 text-sm text-muted-foreground">
           Pick a lesson to see its vocabulary, rules, and practice deck. Your progress ring
           fills as you mark words familiar and mastered.
         </p>

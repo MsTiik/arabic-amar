@@ -95,7 +95,7 @@ export default function ReadQuranPage() {
         <div className="mb-3">
           <FoundationsBadge />
         </div>
-        <h1 className="text-4xl font-bold tracking-tight">Foundations</h1>
+        <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">Foundations</h1>
         <p className="mt-1 text-sm font-medium text-foreground-soft">
           Reading basics for Qurʼānic Arabic.
         </p>
