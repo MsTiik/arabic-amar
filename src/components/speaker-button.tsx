@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { Loader2, Square, Volume2, VolumeX } from "lucide-react";
 
 import { getAudioForWord } from "@/lib/audio";
+import { resolveAudioUrl } from "@/lib/audio-prefetch";
 import { cn } from "@/lib/cn";
 
 interface Props {
@@ -98,7 +99,7 @@ export function SpeakerButton({
       audioRef.current.currentTime = 0;
     }
     setState("loading");
-    const audio = new Audio(playUrl);
+    const audio = new Audio(resolveAudioUrl(playUrl));
     audio.preload = "auto";
     audioRef.current = audio;
     // Guard each handler against the orphaned-Audio case: pausing the previous

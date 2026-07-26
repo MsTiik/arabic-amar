@@ -119,10 +119,20 @@ function getContext(): AudioContext | null {
       return null;
     }
   }
-  if (ctx.state === "suspended") {
-    void ctx.resume().catch(() => {});
-  }
   return ctx;
+}
+
+/**
+ * Create and resume the AudioContext from inside a user gesture. Mobile
+ * browsers (iOS Safari especially) keep the context suspended until a
+ * gesture-driven resume, and re-suspend it on backgrounding — call this from
+ * a pointerdown listener so the first chime of a session isn't swallowed.
+ */
+export function unlockAudio(): void {
+  const audio = getContext();
+  if (audio && audio.state !== "running") {
+    void audio.resume().catch(() => {});
+  }
 }
 
 interface Note {
@@ -136,6 +146,20 @@ interface Note {
 function playNotes(notes: Note[]): void {
   const audio = getContext();
   if (!audio) return;
+  if (audio.state !== "running") {
+    // Scheduling against a suspended context uses a frozen clock: by the
+    // time resume() completes, the envelope start times have passed and the
+    // chime is clipped or silent. Wait for the clock, then schedule.
+    void audio
+      .resume()
+      .then(() => scheduleNotes(audio, notes))
+      .catch(() => {});
+    return;
+  }
+  scheduleNotes(audio, notes);
+}
+
+function scheduleNotes(audio: AudioContext, notes: Note[]): void {
   const now = audio.currentTime;
   for (const note of notes) {
     const osc = audio.createOscillator();

@@ -1,3 +1,4 @@
+import audioLocal from "../../content/audio-local.json";
 import audioManifest from "../../content/audio-manifest.json";
 import { audioManifestKey } from "./audio-keys";
 import type { SiteContent } from "./types";
@@ -42,7 +43,16 @@ interface AudioManifest {
   missing: string[];
 }
 
+interface LocalAudioMap {
+  version: 1;
+  builtAt: string;
+  /** Manifest key → same-origin path under /audio/. */
+  entries: Record<string, string>;
+  quran: Record<string, string>;
+}
+
 const manifest = audioManifest as AudioManifest;
+const local = audioLocal as LocalAudioMap;
 
 /** Get a playable audio URL for an Arabic word. Falls back through stripped
  *  variants the same way the build script does, so newly-added words don't
@@ -51,7 +61,12 @@ export function getAudioForWord(arabic: string): AudioEntry | undefined {
   if (!arabic) return undefined;
   const key = audioManifestKey(arabic);
   if (!key) return undefined;
-  return manifest.entries[key];
+  const entry = manifest.entries[key];
+  if (!entry) return undefined;
+  // Prefer the mirrored same-origin copy (small MP3, CDN + service-worker
+  // cacheable) over streaming from Wikimedia Commons at play time.
+  const localUrl = local.entries[key];
+  return localUrl ? { ...entry, url: localUrl } : entry;
 }
 
 export function hasAudioForWord(arabic: string): boolean {
@@ -67,7 +82,10 @@ export function getAudioForCitation(
   const m = citation.match(/(\d+)\s*:\s*(\d+)/);
   if (!m) return undefined;
   const key = `${m[1]}:${m[2]}`;
-  return manifest.quran[key];
+  const entry = manifest.quran[key];
+  if (!entry) return undefined;
+  const localUrl = local.quran[key];
+  return localUrl ? { ...entry, url: localUrl } : entry;
 }
 
 /** Aggregate counts useful for attribution / debug pages. */

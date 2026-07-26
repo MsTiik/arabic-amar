@@ -9,6 +9,7 @@ import { FeedbackToggle } from "@/components/feedback-toggle";
 import { SpeakerButton } from "@/components/speaker-button";
 import { TranslitReveal } from "@/components/translit-reveal";
 import { cn } from "@/lib/cn";
+import { prefetchWordAudio } from "@/lib/audio-prefetch";
 import { autoplayWord } from "@/lib/autoplay";
 import {
   answerFeedback,
@@ -16,6 +17,7 @@ import {
   completeFeedback,
   haptic,
   playSound,
+  unlockAudio,
 } from "@/lib/feedback";
 import {
   checkFillBlankAnswer,
@@ -40,6 +42,24 @@ export function ExerciseRunner({ deck, onExit, onAttempt }: Props) {
     document.body.classList.add("session-active");
     return () => document.body.classList.remove("session-active");
   }, [hasQuestions]);
+
+  // Resume the (mobile-suspended) AudioContext on every tap so answer chimes
+  // are never swallowed, and warm the deck's pronunciation recordings so
+  // playback is instant instead of waiting on a network fetch.
+  useEffect(() => {
+    if (!hasQuestions) return;
+    window.addEventListener("pointerdown", unlockAudio, { passive: true });
+    return () => window.removeEventListener("pointerdown", unlockAudio);
+  }, [hasQuestions]);
+  useEffect(() => {
+    prefetchWordAudio(
+      deck.questions.flatMap((q) => [
+        q.promptArabic,
+        ...(q.options?.map((o) => o.text) ?? []),
+        ...(q.pairs?.flatMap((p) => [p.leftText, p.rightText]) ?? []),
+      ]),
+    );
+  }, [deck]);
 
   const [index, setIndex] = useState(0);
   const [results, setResults] = useState<{ correct: number; wrong: number }>({
@@ -359,12 +379,15 @@ function FeedbackBar({
 }) {
   const continueRef = useRef<HTMLButtonElement>(null);
 
+  // The chime + haptic fire in the answer tap handler (not here): running
+  // them synchronously inside the user gesture keeps the browser's user-
+  // activation guarantees for audio and vibration and lands the feedback on
+  // the same frame as the press.
   useEffect(() => {
     continueRef.current?.focus();
-    answerFeedback(correct);
     // Delay slightly so the pronunciation doesn't overlap the answer chime.
     autoplayWord(word, 450);
-    // Feedback should fire exactly once, when the bar first appears.
+    // Autoplay should fire exactly once, when the bar first appears.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -648,7 +671,10 @@ function MultipleChoiceView({
               <button
                 type="button"
                 disabled={selected !== null}
-                onClick={() => setSelected(opt.id)}
+                onClick={() => {
+                  answerFeedback(opt.id === question.correctAnswerId);
+                  setSelected(opt.id);
+                }}
                 className={cn(
                   "p-3 sm:p-4",
                   optionClasses(selected !== null, isCorrect, isSelected),
@@ -704,6 +730,7 @@ function FillBlankView({
 
   function submit() {
     const ok = checkFillBlankAnswer(value, question.acceptableAnswers ?? []);
+    answerFeedback(ok);
     setSubmitted(ok);
   }
 
@@ -790,6 +817,7 @@ function OrderingView({
 
   function submit() {
     const ok = checkOrderingAnswer(order, question.correctOrder ?? []);
+    answerFeedback(ok);
     setSubmitted(ok);
   }
 
@@ -898,9 +926,13 @@ function MatchPairsView({
 
   function tryResolve(leftId: string, rightId: string) {
     if (leftId === rightId) {
-      // Correct pairing.
-      playSound("match");
-      haptic("tap");
+      const isLast = Object.keys(matched).length + 1 === pairs.length;
+      if (isLast) {
+        answerFeedback(errorCount === 0);
+      } else {
+        playSound("match");
+        haptic("tap");
+      }
       setMatched((m) => ({ ...m, [leftId]: rightId }));
       setSelectedLeft(null);
       setSelectedRight(null);
@@ -1086,7 +1118,10 @@ function WhichLetterView({
               key={opt.id}
               type="button"
               disabled={selected !== null}
-              onClick={() => setSelected(opt.id)}
+              onClick={() => {
+                answerFeedback(opt.id === question.correctAnswerId);
+                setSelected(opt.id);
+              }}
               className={cn(
                 "p-4",
                 optionClasses(selected !== null, isCorrect, isSelected),
@@ -1195,7 +1230,10 @@ function ClozeView({
               key={opt.id}
               type="button"
               disabled={selected !== null}
-              onClick={() => setSelected(opt.id)}
+              onClick={() => {
+                answerFeedback(opt.id === question.correctAnswerId);
+                setSelected(opt.id);
+              }}
               className={cn(
                 "p-3",
                 optionClasses(selected !== null, isCorrect, isSelected),
@@ -1281,7 +1319,10 @@ function ConnectingLettersView({
               <button
                 type="button"
                 disabled={selected !== null}
-                onClick={() => setSelected(opt.id)}
+                onClick={() => {
+                  answerFeedback(opt.id === question.correctAnswerId);
+                  setSelected(opt.id);
+                }}
                 className={cn(
                   "p-3 sm:p-4",
                   optionClasses(selected !== null, isCorrect, isSelected),

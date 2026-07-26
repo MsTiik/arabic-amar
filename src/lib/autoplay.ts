@@ -3,6 +3,7 @@
 import { useSyncExternalStore } from "react";
 
 import { getAudioForWord } from "@/lib/audio";
+import { resolveAudioUrl } from "@/lib/audio-prefetch";
 
 export const AUTOPLAY_STORAGE_KEY = "arabic-amar:autoplay:v1";
 
@@ -87,7 +88,7 @@ export function autoplayWord(arabic: string | undefined, delayMs = 0): void {
     current.pause();
     current = null;
   }
-  const audio = new Audio(entry.url);
+  const audio = new Audio(resolveAudioUrl(entry.url));
   audio.preload = "auto";
   current = audio;
   const start = () => {
