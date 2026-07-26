@@ -53,3 +53,11 @@ export function prefetchWordAudio(words: Array<string | undefined>): void {
 export function resolveAudioUrl(url: string): string {
   return objectUrls.get(url) ?? url;
 }
+
+/** Release all prefetched recordings (e.g. when a practice session ends). */
+export function releasePrefetchedAudio(): void {
+  for (const objectUrl of objectUrls.values()) {
+    URL.revokeObjectURL(objectUrl);
+  }
+  objectUrls.clear();
+}

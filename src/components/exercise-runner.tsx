@@ -9,7 +9,10 @@ import { FeedbackToggle } from "@/components/feedback-toggle";
 import { SpeakerButton } from "@/components/speaker-button";
 import { TranslitReveal } from "@/components/translit-reveal";
 import { cn } from "@/lib/cn";
-import { prefetchWordAudio } from "@/lib/audio-prefetch";
+import {
+  prefetchWordAudio,
+  releasePrefetchedAudio,
+} from "@/lib/audio-prefetch";
 import { autoplayWord } from "@/lib/autoplay";
 import {
   answerFeedback,
@@ -59,6 +62,7 @@ export function ExerciseRunner({ deck, onExit, onAttempt }: Props) {
         ...(q.pairs?.flatMap((p) => [p.leftText, p.rightText]) ?? []),
       ]),
     );
+    return releasePrefetchedAudio;
   }, [deck]);
 
   const [index, setIndex] = useState(0);
