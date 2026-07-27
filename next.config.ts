@@ -33,7 +33,7 @@ const securityHeaders = [
       "style-src 'self' 'unsafe-inline'",
       "img-src 'self' data: blob:",
       "font-src 'self'",
-      "media-src 'self' https://upload.wikimedia.org",
+      "media-src 'self' blob: https://upload.wikimedia.org",
       "connect-src 'self' https://*.supabase.co",
       "object-src 'none'",
       "base-uri 'self'",
