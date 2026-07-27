@@ -4,7 +4,10 @@ import { useEffect, useRef, useState } from "react";
 import { Loader2, Square, Volume2, VolumeX } from "lucide-react";
 
 import { getAudioForWord } from "@/lib/audio";
-import { resolveAudioUrl } from "@/lib/audio-prefetch";
+import {
+  playWithFallback,
+  teardownAudioElement,
+} from "@/lib/audio-prefetch";
 import { cn } from "@/lib/cn";
 
 interface Props {
@@ -45,7 +48,7 @@ export function SpeakerButton({
 
   useEffect(() => {
     return () => {
-      audioRef.current?.pause();
+      if (audioRef.current) teardownAudioElement(audioRef.current);
       audioRef.current = null;
     };
   }, []);
@@ -89,39 +92,24 @@ export function SpeakerButton({
     if (audioRef.current && (state === "playing" || state === "loading")) {
       audioRef.current.pause();
       audioRef.current.currentTime = 0;
-      audioRef.current = null;
       setState("idle");
       return;
     }
-    // Stop any other speaker audio first so two clicks don't overlap.
-    if (audioRef.current) {
-      audioRef.current.pause();
-      audioRef.current.currentTime = 0;
+    // One reusable element per button: browsers cap live media players per
+    // page, so a fresh Audio per click eventually gets every play() rejected.
+    let audio = audioRef.current;
+    if (!audio) {
+      audio = new Audio();
+      audio.preload = "auto";
+      audioRef.current = audio;
+      audio.addEventListener("playing", () => setState("playing"));
+      audio.addEventListener("ended", () => setState("idle"));
+      audio.addEventListener("pause", () => setState("idle"));
     }
     setState("loading");
-    const audio = new Audio(resolveAudioUrl(playUrl));
-    audio.preload = "auto";
-    audioRef.current = audio;
-    // Guard each handler against the orphaned-Audio case: pausing the previous
-    // Audio (above) queues an async "pause" event whose listener would reset
-    // state to "idle" after we've already moved on to a new Audio. Only react
-    // to events from the Audio that is *still* the current one.
-    const isCurrent = () => audioRef.current === audio;
-    audio.addEventListener("playing", () => {
-      if (isCurrent()) setState("playing");
-    });
-    audio.addEventListener("ended", () => {
-      if (isCurrent()) setState("idle");
-    });
-    audio.addEventListener("pause", () => {
-      if (isCurrent()) setState("idle");
-    });
-    audio.addEventListener("error", () => {
-      if (isCurrent()) setState("error");
-    });
-    audio.play().catch(() => {
-      if (isCurrent()) setState("error");
-    });
+    // Plays the prefetched in-memory copy when available; falls back to the
+    // network URL if the cached blob has been released.
+    playWithFallback(audio, playUrl).catch(() => setState("error"));
   }
 
   const labelText =

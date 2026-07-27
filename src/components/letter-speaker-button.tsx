@@ -4,6 +4,10 @@ import { useEffect, useRef, useState } from "react";
 import { Loader2, Volume2, VolumeX } from "lucide-react";
 
 import { getAudioForWord } from "@/lib/audio";
+import {
+  playWithFallback,
+  teardownAudioElement,
+} from "@/lib/audio-prefetch";
 import { cn } from "@/lib/cn";
 
 interface Props {
@@ -49,7 +53,7 @@ export function LetterSpeakerButton({
 
   useEffect(() => {
     const cleanupAudio = () => {
-      audioRef.current?.pause();
+      if (audioRef.current) teardownAudioElement(audioRef.current);
       audioRef.current = null;
     };
     // Detect Arabic TTS voice availability once voices have loaded.
@@ -109,25 +113,18 @@ export function LetterSpeakerButton({
     setState("loading");
 
     if (wikimediaUrl) {
-      const audio = new Audio(wikimediaUrl);
-      audio.preload = "auto";
-      audioRef.current = audio;
-      const isCurrent = () => audioRef.current === audio;
-      audio.addEventListener("playing", () => {
-        if (isCurrent()) setState("playing");
-      });
-      audio.addEventListener("ended", () => {
-        if (isCurrent()) setState("idle");
-      });
-      audio.addEventListener("pause", () => {
-        if (isCurrent()) setState("idle");
-      });
-      audio.addEventListener("error", () => {
-        if (isCurrent()) setState("error");
-      });
-      audio.play().catch(() => {
-        if (isCurrent()) setState("error");
-      });
+      // One reusable element per button: browsers cap live media players per
+      // page, so a fresh Audio per click eventually gets every play() rejected.
+      let audio = audioRef.current;
+      if (!audio) {
+        audio = new Audio();
+        audio.preload = "auto";
+        audioRef.current = audio;
+        audio.addEventListener("playing", () => setState("playing"));
+        audio.addEventListener("ended", () => setState("idle"));
+        audio.addEventListener("pause", () => setState("idle"));
+      }
+      playWithFallback(audio, wikimediaUrl).catch(() => setState("error"));
       return;
     }
 

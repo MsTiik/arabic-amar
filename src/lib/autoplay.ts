@@ -3,7 +3,7 @@
 import { useSyncExternalStore } from "react";
 
 import { getAudioForWord } from "@/lib/audio";
-import { resolveAudioUrl } from "@/lib/audio-prefetch";
+import { playWithFallback } from "@/lib/audio-prefetch";
 
 export const AUTOPLAY_STORAGE_KEY = "arabic-amar:autoplay:v1";
 
@@ -72,7 +72,12 @@ export function useAutoplayPreference(): AutoplayPreference {
   return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 }
 
-let current: HTMLAudioElement | null = null;
+// A single reusable element: browsers cap the number of live media players
+// per page, so allocating a fresh Audio per word eventually gets every
+// play() rejected mid-session. One element, retargeted via src, never hits
+// the cap.
+let element: HTMLAudioElement | null = null;
+let playToken = 0;
 
 /**
  * Play the recording for an Arabic word if autoplay is enabled and a
@@ -84,16 +89,16 @@ export function autoplayWord(arabic: string | undefined, delayMs = 0): void {
   if (!arabic) return;
   const entry = getAudioForWord(arabic);
   if (!entry) return;
-  if (current) {
-    current.pause();
-    current = null;
+  if (!element) {
+    element = new Audio();
+    element.preload = "auto";
   }
-  const audio = new Audio(resolveAudioUrl(entry.url));
-  audio.preload = "auto";
-  current = audio;
+  const audio = element;
+  audio.pause();
+  const token = ++playToken;
   const start = () => {
-    if (current !== audio) return;
-    audio.play().catch(() => {
+    if (token !== playToken) return;
+    playWithFallback(audio, entry.url).catch(() => {
       /* Autoplay is best-effort; browsers may block before interaction. */
     });
   };
