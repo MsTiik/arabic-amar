@@ -501,6 +501,24 @@ function QuestionView({
   }
 }
 
+/** Scale display text down as it gets longer so long entries (e.g. singular /
+ *  plural pairs or Hijri month names) stay inside the fixed-height card. */
+function arabicDisplaySize(text: string | undefined): string {
+  const len = text?.length ?? 0;
+  if (len <= 12) return "text-6xl sm:text-8xl";
+  if (len <= 22) return "text-5xl sm:text-7xl";
+  if (len <= 32) return "text-4xl sm:text-6xl";
+  return "text-3xl sm:text-5xl";
+}
+
+function englishDisplaySize(text: string | undefined): string {
+  const len = text?.length ?? 0;
+  if (len <= 16) return "text-4xl sm:text-7xl";
+  if (len <= 28) return "text-3xl sm:text-5xl";
+  if (len <= 44) return "text-2xl sm:text-4xl";
+  return "text-xl sm:text-3xl";
+}
+
 function FlashcardView({
   question,
   onAnswer,
@@ -536,7 +554,13 @@ function FlashcardView({
             onClick={toggleFlip}
             className="flip-face btn-chunky absolute inset-0 flex cursor-pointer flex-col items-center justify-center gap-2 rounded-2xl border-2 border-border bg-background-soft p-6 hover:border-primary/50 hover:bg-muted/70 focus-ring sm:p-8"
           >
-            <ArabicText variant="display" className="text-6xl sm:text-8xl">
+            <ArabicText
+              variant="display"
+              className={cn(
+                "max-w-full break-words leading-snug",
+                arabicDisplaySize(question.promptArabic),
+              )}
+            >
               {question.promptArabic}
             </ArabicText>
             <p className="mt-2 text-xs font-medium text-muted-foreground">
@@ -549,7 +573,12 @@ function FlashcardView({
             onClick={toggleFlip}
             className="flip-face flip-face-back btn-chunky btn-chunky-primary absolute inset-0 flex cursor-pointer flex-col items-center justify-center gap-3 rounded-2xl border-2 border-primary/30 bg-primary/5 p-6 focus-ring sm:p-8"
           >
-            <p className="text-4xl font-semibold tracking-tight sm:text-7xl">
+            <p
+              className={cn(
+                "max-w-full break-words font-semibold leading-tight tracking-tight",
+                englishDisplaySize(question.prompt),
+              )}
+            >
               {question.prompt}
             </p>
             {question.promptHint ? (
@@ -634,7 +663,13 @@ function MultipleChoiceView({
       <div className="text-center">
         {question.promptArabic ? (
           <>
-            <ArabicText variant="display" className="text-5xl sm:text-7xl">
+            <ArabicText
+              variant="display"
+              className={cn(
+                "max-w-full break-words leading-snug",
+                arabicDisplaySize(question.promptArabic),
+              )}
+            >
               {question.promptArabic}
             </ArabicText>
             {question.showAudio !== false ? (
@@ -685,7 +720,15 @@ function MultipleChoiceView({
                 )}
               >
                 {opt.isArabic ? (
-                  <ArabicText variant="display" className="text-3xl sm:text-4xl">
+                  <ArabicText
+                    variant="display"
+                    className={cn(
+                      "max-w-full break-words leading-snug",
+                      (opt.text?.length ?? 0) > 24
+                        ? "text-2xl sm:text-3xl"
+                        : "text-3xl sm:text-4xl",
+                    )}
+                  >
                     {opt.text}
                   </ArabicText>
                 ) : (

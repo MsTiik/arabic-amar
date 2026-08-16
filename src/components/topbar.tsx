@@ -131,37 +131,6 @@ export function Topbar() {
           <FoundationsNavLink pathname={pathname} />
         </div>
       </div>
-      <nav className="no-scrollbar flex items-center gap-1 overflow-x-auto px-3 py-2 text-sm md:hidden">
-        {NAV.map((item) => {
-          const active =
-            item.href === "/" ? pathname === "/" : pathname.startsWith(item.href);
-          return (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={cn(
-                "shrink-0 whitespace-nowrap rounded-md px-3 py-1.5 transition-colors focus-ring",
-                active
-                  ? "bg-muted text-foreground"
-                  : "text-muted-foreground hover:bg-muted hover:text-foreground",
-              )}
-            >
-              {item.label}
-            </Link>
-          );
-        })}
-        <Link
-          href={FOUNDATIONS.href}
-          className={cn(
-            "shrink-0 whitespace-nowrap rounded-md px-3 py-1.5 transition-colors focus-ring",
-            pathname.startsWith(FOUNDATIONS.href)
-              ? "bg-muted text-foreground"
-              : "text-muted-foreground hover:bg-muted hover:text-foreground",
-          )}
-        >
-          {FOUNDATIONS.label}
-        </Link>
-      </nav>
     </header>
   );
 }

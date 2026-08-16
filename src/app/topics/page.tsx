@@ -1,3 +1,4 @@
+import { FoundationsCard } from "@/components/foundations-card";
 import { TopicCard } from "@/components/topic-card";
 import { getSiteContent } from "@/lib/content";
 import type { VocabEntry } from "@/lib/types";
@@ -25,6 +26,7 @@ export default function TopicsPage() {
         </p>
       </header>
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <FoundationsCard />
         {content.topics.map((topic) => (
           <TopicCard
             key={topic.slug}

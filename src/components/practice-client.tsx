@@ -101,8 +101,11 @@ function buildUrlDeck({
     });
   }
   if (deckParam === "due") {
-    const ids = new Set(getDueStudyWordIds(progress, vocab));
-    const subset = vocab.filter((v) => ids.has(v.id)).slice(0, 20);
+    const byId = new Map(vocab.map((v) => [v.id, v]));
+    const subset = getDueStudyWordIds(progress, vocab)
+      .map((id) => byId.get(id))
+      .filter((v): v is VocabEntry => Boolean(v))
+      .slice(0, 20);
     if (subset.length === 0) return null;
     return makeMultipleChoiceDeck(subset, vocab, "ar-to-en", {
       id: "deck-due",
@@ -338,8 +341,11 @@ function PracticeSession({
               hue="primary"
               badge={`${dueIds.length} due`}
               onClick={() => {
-                const ids = new Set(dueIds);
-                const subset = vocab.filter((v) => ids.has(v.id)).slice(0, 20);
+                const byId = new Map(vocab.map((v) => [v.id, v]));
+                const subset = dueIds
+                  .map((id) => byId.get(id))
+                  .filter((v): v is VocabEntry => Boolean(v))
+                  .slice(0, 20);
                 setManualDeck(
                   makeMultipleChoiceDeck(subset, vocab, "ar-to-en", {
                     id: "deck-due",
