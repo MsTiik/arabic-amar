@@ -202,6 +202,18 @@ export interface WordProgress {
   mastery: Mastery;
   lastSeen: string; // ISO
   nextDue: string; // ISO — for SRS-lite
+  /** Review interval in days once the word has graduated from the learning
+   *  phase. Grows on each correct review (capped) and shrinks on a lapse.
+   *  Optional for back-compat with records saved before graduated SRS. */
+  intervalDays?: number;
+  /** Number of distinct days the word has been answered correctly while in
+   *  the learning phase. The word graduates to growing review intervals
+   *  once this reaches the graduation threshold. */
+  learningReps?: number;
+  /** ISO date (YYYY-MM-DD) of the most recent correct answer. Used so that
+   *  repeated correct answers within the same day can't fast-forward a word
+   *  through the learning steps or inflate its review interval. */
+  lastCorrectDay?: string;
 }
 
 export interface UserProgress {
@@ -226,7 +238,14 @@ export interface UserProgress {
   };
   daily: {
     goalCards: number;
-    today: { date: string; cardsSeen: number; correct: number };
+    today: {
+      date: string;
+      cardsSeen: number;
+      correct: number;
+      /** Cards answered today from the "Review due cards" deck; counts toward
+       *  the daily review cap. Optional for back-compat. */
+      dueSeen?: number;
+    };
   };
   words: Record<string, WordProgress>;
   topics: Record<string, { lastVisited: string }>;
