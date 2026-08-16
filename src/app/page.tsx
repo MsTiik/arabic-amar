@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { DashboardHero } from "@/components/dashboard-hero";
+import { FoundationsCard } from "@/components/foundations-card";
 import { NamesOfAllahTeaser } from "@/components/names-of-allah-teaser";
 import { RefreshContentButton } from "@/components/refresh-content-button";
 import { TopicCard } from "@/components/topic-card";
@@ -46,6 +47,7 @@ export default function Home() {
           </Link>
         </header>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <FoundationsCard />
           {content.topics.map((topic) => (
             <TopicCard
               key={topic.slug}
