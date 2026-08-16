@@ -6,6 +6,19 @@ import type { Mastery, Topic, UserProgress, VocabEntry, WordProgress } from "./t
 export const PROGRESS_STORAGE_KEY = "arabic-amar:progress:v1";
 const DEFAULT_DAILY_GOAL = 20;
 
+/** Max cards served by the "Review due cards" deck per day. */
+export const DAILY_REVIEW_CAP = 80;
+/** Distinct correct-answer days required before a word graduates from the
+ *  learning phase into growing review intervals. Guards against a single
+ *  lucky multiple-choice guess launching a word into long intervals. */
+export const LEARNING_REPS_TO_GRADUATE = 3;
+/** Interval (days) a word graduates with. */
+const GRADUATING_INTERVAL_DAYS = 4;
+/** Longest a word can disappear for. */
+export const MAX_INTERVAL_DAYS = 90;
+/** On a lapse the interval shrinks to this fraction (not a full reset). */
+const LAPSE_FACTOR = 0.25;
+
 /** Max number of streak freezes the user can have banked at once. */
 export const MAX_FREEZES = 2;
 /** Freeze refills every N days of activity (capped at MAX_FREEZES). */
@@ -148,7 +161,82 @@ function defaultWord(): WordProgress {
     mastery: 0,
     lastSeen: new Date(0).toISOString(),
     nextDue: new Date().toISOString(),
+    intervalDays: 1,
+    learningReps: 0,
   };
+}
+
+/** Derive graduated-SRS fields for records saved before they existed,
+ *  based on the legacy mastery ladder (0/1/3/7-day offsets). */
+function srsOf(word: WordProgress): { intervalDays: number; learningReps: number } {
+  if (word.intervalDays !== undefined && word.learningReps !== undefined) {
+    return { intervalDays: word.intervalDays, learningReps: word.learningReps };
+  }
+  if (word.mastery >= 2) {
+    return {
+      intervalDays: word.mastery === 3 ? 7 : GRADUATING_INTERVAL_DAYS,
+      learningReps: LEARNING_REPS_TO_GRADUATE,
+    };
+  }
+  return { intervalDays: 1, learningReps: word.streak >= 1 ? 1 : 0 };
+}
+
+function isGraduated(word: WordProgress): boolean {
+  return srsOf(word).learningReps >= LEARNING_REPS_TO_GRADUATE;
+}
+
+/** Anki-style scheduling with leniency buffers:
+ *  - Learning phase: a word must be answered correctly on
+ *    LEARNING_REPS_TO_GRADUATE distinct days (1d/2d gaps) before its
+ *    interval starts growing — one lucky guess can't send it away for weeks.
+ *  - Review phase: interval grows ~2× while young, ~2.5× once ≥ 2 weeks,
+ *    capped at MAX_INTERVAL_DAYS. Repeat correct answers on the same day
+ *    never advance steps or grow the interval.
+ *  - Lapse: a wrong answer makes the word due again immediately, shrinks the
+ *    interval to LAPSE_FACTOR of its value, and sends a graduated word back
+ *    through one learning day before its (reduced) interval resumes.
+ *  Exported for unit tests; the runtime caller is `recordAttempt`. */
+export function scheduleWord(word: WordProgress, correct: boolean, now: Date = new Date()): void {
+  const srs = srsOf(word);
+  let { intervalDays, learningReps } = srs;
+  const today = isoDate(now);
+
+  if (!correct) {
+    intervalDays = Math.max(1, Math.round(intervalDays * LAPSE_FACTOR));
+    if (learningReps >= LEARNING_REPS_TO_GRADUATE) {
+      learningReps = LEARNING_REPS_TO_GRADUATE - 1;
+    }
+    word.intervalDays = intervalDays;
+    word.learningReps = learningReps;
+    word.nextDue = now.toISOString();
+    return;
+  }
+
+  const firstCorrectToday = word.lastCorrectDay !== today;
+  if (learningReps < LEARNING_REPS_TO_GRADUATE) {
+    if (firstCorrectToday) learningReps += 1;
+    if (learningReps >= LEARNING_REPS_TO_GRADUATE) {
+      // Graduation: resume at least the graduating interval; a relearned
+      // word keeps its (lapse-reduced) interval if that's larger.
+      intervalDays = Math.max(GRADUATING_INTERVAL_DAYS, intervalDays);
+      word.nextDue = new Date(now.getTime() + intervalDays * 86400000).toISOString();
+    } else {
+      const dueDays = learningReps <= 1 ? 1 : 2;
+      word.nextDue = new Date(now.getTime() + dueDays * 86400000).toISOString();
+    }
+  } else {
+    if (firstCorrectToday) {
+      const growth = intervalDays < 14 ? 2 : 2.5;
+      intervalDays = Math.min(
+        MAX_INTERVAL_DAYS,
+        Math.max(intervalDays + 1, Math.round(intervalDays * growth)),
+      );
+    }
+    word.nextDue = new Date(now.getTime() + intervalDays * 86400000).toISOString();
+  }
+  word.intervalDays = intervalDays;
+  word.learningReps = learningReps;
+  word.lastCorrectDay = today;
 }
 
 function dateMax(a: string | undefined, b: string | undefined): string | undefined {
@@ -177,6 +265,7 @@ export function mergeProgress(local: UserProgress, remote: UserProgress): UserPr
             date: local.daily.today.date,
             cardsSeen: Math.max(local.daily.today.cardsSeen, remote.daily.today.cardsSeen),
             correct: Math.max(local.daily.today.correct, remote.daily.today.correct),
+            dueSeen: Math.max(local.daily.today.dueSeen ?? 0, remote.daily.today.dueSeen ?? 0),
           },
         }
       : new Date(local.daily.today.date).getTime() >= new Date(remote.daily.today.date).getTime()
@@ -292,15 +381,20 @@ function recordStreak(p: UserProgress): void {
 }
 
 export const progressActions = {
-  /** Mark that the user attempted a card. Pass `correct=true` for a correct answer. */
-  recordAttempt(wordId: string, correct: boolean): void {
+  /** Mark that the user attempted a card. Pass `correct=true` for a correct
+   *  answer, and `dueReview=true` when the card came from the due deck so it
+   *  counts toward the daily review cap. */
+  recordAttempt(wordId: string, correct: boolean, opts?: { dueReview?: boolean }): void {
     update((p) => {
       const today = todayIso();
       if (p.daily.today.date !== today) {
-        p.daily.today = { date: today, cardsSeen: 0, correct: 0 };
+        p.daily.today = { date: today, cardsSeen: 0, correct: 0, dueSeen: 0 };
       }
       p.daily.today.cardsSeen += 1;
       if (correct) p.daily.today.correct += 1;
+      if (opts?.dueReview) {
+        p.daily.today.dueSeen = (p.daily.today.dueSeen ?? 0) + 1;
+      }
 
       const word = p.words[wordId] ?? defaultWord();
       word.attempts += 1;
@@ -311,11 +405,8 @@ export const progressActions = {
         word.streak = 0;
       }
       word.lastSeen = new Date().toISOString();
-      // Lightweight SRS-shaped scheduling: 0 = today, 1 = +1 day, 2 = +3 days, 3 = +7 days.
-      const masteryNext = masteryFromProgress(word.streak, word.attempts);
-      word.mastery = masteryNext;
-      const dueOffsetDays = correct ? [0, 1, 3, 7][masteryNext] : 0;
-      word.nextDue = new Date(Date.now() + dueOffsetDays * 86400000).toISOString();
+      word.mastery = masteryFromProgress(word.streak, word.attempts);
+      scheduleWord(word, correct);
       p.words[wordId] = word;
 
       // Streak counter only ticks once per day, when at least one attempt is made.
@@ -428,9 +519,24 @@ export function getNewWordIds(progress: UserProgress, vocab: VocabEntry[]): stri
     .map((v) => v.id);
 }
 
+/** Due words for the review deck, prioritized and capped at
+ *  DAILY_REVIEW_CAP per day: still-learning words first (they're the ones
+ *  actually being acquired), then the most-overdue graduated words. */
 export function getDueStudyWordIds(progress: UserProgress, vocab: VocabEntry[]): string[] {
   const activeWordIds = activeVocab(vocab).map((v) => v.id);
-  return getDueWords(progress, activeWordIds).filter((id) => progress.words[id]);
+  const due = getDueWords(progress, activeWordIds).filter((id) => progress.words[id]);
+  due.sort((a, b) => {
+    const wa = progress.words[a];
+    const wb = progress.words[b];
+    const ga = isGraduated(wa) ? 1 : 0;
+    const gb = isGraduated(wb) ? 1 : 0;
+    if (ga !== gb) return ga - gb;
+    return new Date(wa.nextDue).getTime() - new Date(wb.nextDue).getTime();
+  });
+  const doneToday =
+    progress.daily.today.date === todayIso() ? (progress.daily.today.dueSeen ?? 0) : 0;
+  const remaining = Math.max(0, DAILY_REVIEW_CAP - doneToday);
+  return due.slice(0, remaining);
 }
 
 export function getWeakWordIds(progress: UserProgress, vocab: VocabEntry[]): string[] {

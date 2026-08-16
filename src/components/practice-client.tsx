@@ -243,7 +243,10 @@ function PracticeSession({
         deck={activeDeck}
         onExit={exitActive}
         onAttempt={(wordId, correct) => {
-          if (wordId) progressActions.recordAttempt(wordId, correct);
+          if (wordId)
+            progressActions.recordAttempt(wordId, correct, {
+              dueReview: activeDeck.id === "deck-due",
+            });
         }}
       />
     );
