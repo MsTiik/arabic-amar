@@ -5,6 +5,14 @@ description: Test the practice/exercise flow (decks, answer feedback, sounds, ha
 
 # Testing practice sessions (Arabic AMAR)
 
+## Testing SRS scheduling / progress store
+- Progress lives in localStorage key `arabic-amar:progress:v1` (logic in `src/lib/progress.ts`). To simulate a review backlog, seed it with legacy-format word records (`{attempts, correct, streak, mastery, lastSeen, nextDue}` — omit `intervalDays`/`learningReps` to exercise the legacy-migration path) using real vocab ids from `content/content.json` (`vocab[].id`, filter `!isExtra`). Easiest injection: drop a JSON file into `public/`, `fetch()` it from the browser console into `localStorage`, then delete the file and reload.
+- `recordAttempt` fires on the **Continue** click (or flashcard Got it right/wrong), not when an answer option is clicked — read localStorage only after advancing.
+- The due deck is `/practice?deck=due` (id `deck-due`); only that deck increments `daily.today.dueSeen`, which drives the 80/day review cap (`DAILY_REVIEW_CAP`).
+- Due-deck ordering: `?deck=due` and the "Review due cards" button serve words in `getDueStudyWordIds` priority order (still-learning first, then most overdue), NOT raw vocab order. To test adversarially, seed a still-learning word at a late vocab index and mature overdue words at early indexes — the learning word must be card 1.
+- Long-content sizing: the longest entries for overflow tests are Hijri-months topic card 10 (57-char English back, 35-char Arabic front) and marketplace flashcard 56/59 (43-char Arabic, أَدَاة مَكْتَبِيَّة...). Find indexes via `node -e` over `content/content.json` filtering `v.id.includes('<lesson>')` rather than clicking blindly.
+- Gotcha: URL decks are snapshotted at first render. On a **direct page load** of `/practice?deck=new` the snapshot can be built from the pre-hydration empty progress, so already-seen words may appear in the "new" deck. Navigate via dashboard links (client-side) for accurate deck contents.
+
 ## Run locally
 - `npm run dev` → http://localhost:3000 (usually ready in <10s; verify with curl for HTTP 200).
 - Lint: `npm run lint`; typecheck: `npx tsc --noEmit`.
@@ -63,7 +71,7 @@ Read counters after each phase and compare against the patterns/note counts in `
 
 ## Mobile layout (immersive mode, tab bar)
 - Simulate a phone by resizing Chrome to ~400-420px wide (Tailwind `sm`=640px), or CDP `Emulation.setDeviceMetricsOverride {width:390,height:844,mobile:true}`; re-maximize with wmctrl afterwards. This doesn't exercise touch scrolling, iOS URL-bar collapse (`100dvh`), or safe-area insets — note that limitation.
-- Phone expectations: fixed 5-tab bottom bar (`src/components/tab-bar.tsx`, `md:hidden`), scrollable topbar nav, topbar auto-hides on scroll down. During a deck, `body.session-active` hides topbar/tab bar/footer; the feedback bar is a fixed bottom sheet on phones (inline in the card ≥sm).
+- Phone expectations: fixed 5-tab bottom bar (`src/components/tab-bar.tsx`, `md:hidden`) is the sole primary nav — the topbar's scrollable mobile link row was removed (PR #82); on <768px the topbar shows only logo/streak/theme. Foundations is reached via a gold card at the top of the lesson grids on Home and `/topics` (links to `/read`). During a deck, `body.session-active` hides topbar/tab bar/footer; the feedback bar is a fixed bottom sheet on phones (inline in the card ≥sm).
 - Fixed-positioning gotcha: an ancestor retaining a `transform` (e.g. entry animation with `fill-mode: both`) becomes the containing block for `position: fixed` and breaks the bottom sheet; `backwards` is safe.
 
 ## Design tokens & lesson identity spot-checks
