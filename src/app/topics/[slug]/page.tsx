@@ -111,35 +111,45 @@ export default async function TopicPage({
           ),
           practice: (
             <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
-              <PracticeLink
-                href={`/practice?topic=${slug}&kind=flashcard`}
-                title="Flashcards"
-                description="Tap to flip and self-rate every word in this lesson."
-              />
-              <PracticeLink
-                href={`/practice?topic=${slug}&kind=mc`}
-                title="Multiple choice"
-                description="Mixed Arabic↔English↔transliteration questions."
-              />
-              <PracticeLink
-                href={`/practice?topic=${slug}&kind=fill`}
-                title="Type the transliteration"
-                description="Fill-in-the-blank for pronunciation practice."
-              />
-              {vocab.some((v) => v.gender) ? (
-                <PracticeLink
-                  href={`/practice?topic=${slug}&kind=gender`}
-                  title="Gender quiz"
-                  description="Decide whether each noun is masculine or feminine."
-                />
-              ) : null}
-              {hasOrderingDeck(slug, vocab) ? (
-                <PracticeLink
-                  href={`/practice?topic=${slug}&kind=ordering`}
-                  title="Ordering"
-                  description={orderingCopyFor(slug)}
-                />
-              ) : null}
+              {vocab.length === 0 ? (
+                <p className="col-span-full rounded-2xl border border-border bg-card p-6 text-sm text-muted-foreground">
+                  This lesson currently contains reference tables rather than
+                  individual vocabulary cards, so it does not have a practice
+                  deck yet.
+                </p>
+              ) : (
+                <>
+                  <PracticeLink
+                    href={`/practice?topic=${slug}&kind=flashcard`}
+                    title="Flashcards"
+                    description="Tap to flip and self-rate every word in this lesson."
+                  />
+                  <PracticeLink
+                    href={`/practice?topic=${slug}&kind=mc`}
+                    title="Multiple choice"
+                    description="Mixed Arabic↔English↔transliteration questions."
+                  />
+                  <PracticeLink
+                    href={`/practice?topic=${slug}&kind=fill`}
+                    title="Type the transliteration"
+                    description="Fill-in-the-blank for pronunciation practice."
+                  />
+                  {vocab.some((v) => v.gender) ? (
+                    <PracticeLink
+                      href={`/practice?topic=${slug}&kind=gender`}
+                      title="Gender quiz"
+                      description="Decide whether each noun is masculine or feminine."
+                    />
+                  ) : null}
+                  {hasOrderingDeck(slug, vocab) ? (
+                    <PracticeLink
+                      href={`/practice?topic=${slug}&kind=ordering`}
+                      title="Ordering"
+                      description={orderingCopyFor(slug)}
+                    />
+                  ) : null}
+                </>
+              )}
             </div>
           ),
         }}
@@ -202,10 +212,10 @@ function orderingFieldsFor(
 
 function orderingCopyFor(slug: string): string {
   if (slug === "islamic-and-gregorian-months") {
-    return "Drag tiles into the correct calendar month order.";
+    return "Move the tiles into the correct calendar month order.";
   }
   if (slug === "days-of-the-week") {
-    return "Drag tiles into the correct weekday order.";
+    return "Move the tiles into the correct weekday order.";
   }
-  return "Drag tiles into the correct numeric order.";
+  return "Move the tiles into the correct numeric order.";
 }

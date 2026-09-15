@@ -121,11 +121,14 @@ export function QuranFrequencyDeck() {
 
 function FrequencyCard({ word }: { word: QuranFrequencyWord }) {
   return (
-    // Fixed minimum height keeps the cards aligned in the grid even though
-    // the Arabic glyph and English gloss have different intrinsic sizes.
-    <div className="flex h-32 flex-col rounded-2xl border border-border bg-card px-3 py-2.5">
+    // The grid stretches neighbouring cards to the same row height. Keeping
+    // this as a minimum lets longer glosses grow instead of escaping the card.
+    <div className="flex min-h-36 min-w-0 flex-col rounded-2xl border border-border bg-card px-3 py-2.5">
       <div className="flex items-start justify-between gap-2">
-        <ArabicText variant="display" className="text-3xl leading-tight">
+        <ArabicText
+          variant="display"
+          className="min-w-0 break-words text-3xl leading-relaxed"
+        >
           {word.arabic}
         </ArabicText>
         <SpeakerButton

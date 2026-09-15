@@ -27,6 +27,12 @@ import {
   checkMatchPairsAnswer,
   checkOrderingAnswer,
 } from "@/lib/exercises";
+import {
+  arabicDisplaySize,
+  arabicOptionSize,
+  englishDisplaySize,
+  flashcardSceneSize,
+} from "@/lib/text-layout";
 import type { ExerciseDeck, ExerciseQuestion, MatchPair } from "@/lib/types";
 
 interface Props {
@@ -310,8 +316,8 @@ function CompletionScreen({
       <p className="mt-1 text-sm text-muted-foreground">
         {deckTitle} · {total} cards
       </p>
-      <div className="mt-6 flex items-center justify-center gap-4 sm:gap-6">
-        <div className="min-w-24 rounded-2xl border border-primary/30 bg-primary/5 px-4 py-3 text-center">
+      <div className="mt-6 grid grid-cols-3 gap-2 sm:gap-6">
+        <div className="min-w-0 rounded-2xl border border-primary/30 bg-primary/5 px-2 py-3 text-center sm:px-4">
           <p className="text-3xl font-bold text-primary">
             <CountUpNumber value={accuracy} suffix="%" />
           </p>
@@ -319,7 +325,7 @@ function CompletionScreen({
             Accuracy
           </p>
         </div>
-        <div className="min-w-24 rounded-2xl border border-success/40 bg-success-soft px-4 py-3 text-center">
+        <div className="min-w-0 rounded-2xl border border-success/40 bg-success-soft px-2 py-3 text-center sm:px-4">
           <p className="text-3xl font-bold text-success">
             <CountUpNumber value={correct} />
           </p>
@@ -327,7 +333,7 @@ function CompletionScreen({
             Correct
           </p>
         </div>
-        <div className="min-w-24 rounded-2xl border border-danger/40 bg-danger-soft px-4 py-3 text-center">
+        <div className="min-w-0 rounded-2xl border border-danger/40 bg-danger-soft px-2 py-3 text-center sm:px-4">
           <p className="text-3xl font-bold text-danger">
             <CountUpNumber value={wrong} />
           </p>
@@ -501,24 +507,6 @@ function QuestionView({
   }
 }
 
-/** Scale display text down as it gets longer so long entries (e.g. singular /
- *  plural pairs or Hijri month names) stay inside the fixed-height card. */
-function arabicDisplaySize(text: string | undefined): string {
-  const len = text?.length ?? 0;
-  if (len <= 12) return "text-6xl sm:text-8xl";
-  if (len <= 22) return "text-5xl sm:text-7xl";
-  if (len <= 32) return "text-4xl sm:text-6xl";
-  return "text-3xl sm:text-5xl";
-}
-
-function englishDisplaySize(text: string | undefined): string {
-  const len = text?.length ?? 0;
-  if (len <= 16) return "text-4xl sm:text-7xl";
-  if (len <= 28) return "text-3xl sm:text-5xl";
-  if (len <= 44) return "text-2xl sm:text-4xl";
-  return "text-xl sm:text-3xl";
-}
-
 function FlashcardView({
   question,
   onAnswer,
@@ -546,7 +534,12 @@ function FlashcardView({
       <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
         {flipped ? "English" : "Arabic"}
       </p>
-      <div className="flip-scene relative mt-4 h-56 w-full sm:mt-6 sm:h-80">
+      <div
+        className={cn(
+          "flip-scene relative mt-4 w-full sm:mt-6",
+          flashcardSceneSize(question.promptArabic, question.prompt),
+        )}
+      >
         <div className={cn("flip-inner absolute inset-0", flipped && "is-flipped")}>
           <button
             type="button"
@@ -557,7 +550,7 @@ function FlashcardView({
             <ArabicText
               variant="display"
               className={cn(
-                "max-w-full break-words leading-snug",
+                "w-full max-w-full break-words px-1 leading-relaxed text-balance",
                 arabicDisplaySize(question.promptArabic),
               )}
             >
@@ -575,7 +568,7 @@ function FlashcardView({
           >
             <p
               className={cn(
-                "max-w-full break-words font-semibold leading-tight tracking-tight",
+                "w-full max-w-full break-words px-1 font-semibold leading-snug tracking-tight text-balance",
                 englishDisplaySize(question.prompt),
               )}
             >
@@ -666,7 +659,7 @@ function MultipleChoiceView({
             <ArabicText
               variant="display"
               className={cn(
-                "max-w-full break-words leading-snug",
+                "w-full max-w-full break-words leading-relaxed text-balance",
                 arabicDisplaySize(question.promptArabic),
               )}
             >
@@ -723,10 +716,8 @@ function MultipleChoiceView({
                   <ArabicText
                     variant="display"
                     className={cn(
-                      "max-w-full break-words leading-snug",
-                      (opt.text?.length ?? 0) > 24
-                        ? "text-2xl sm:text-3xl"
-                        : "text-3xl sm:text-4xl",
+                      "w-full max-w-full break-words leading-relaxed text-balance",
+                      arabicOptionSize(opt.text),
                     )}
                   >
                     {opt.text}
@@ -784,7 +775,13 @@ function FillBlankView({
   return (
     <div className="rounded-3xl border border-border bg-card p-4 sm:p-8">
       <div className="text-center">
-        <ArabicText variant="display" className="text-5xl sm:text-7xl">
+        <ArabicText
+          variant="display"
+          className={cn(
+            "w-full break-words leading-relaxed text-balance",
+            arabicDisplaySize(question.promptArabic),
+          )}
+        >
           {question.promptArabic}
         </ArabicText>
         <p className="mt-2 text-base font-medium">{question.prompt}</p>
@@ -885,7 +882,13 @@ function OrderingView({
                 {i + 1}.
               </span>
               <div className="flex-1 min-w-0">
-                <ArabicText variant="display" className="text-3xl">
+                <ArabicText
+                  variant="display"
+                  className={cn(
+                    "w-full break-words leading-relaxed",
+                    arabicOptionSize(opt.text),
+                  )}
+                >
                   {opt.text}
                 </ArabicText>
                 {opt.translit ? (
@@ -1096,30 +1099,38 @@ function MatchCard({
   else if (wrong) style = "answer-shake border-danger bg-danger-soft";
   else if (selected) style = "border-primary bg-primary/10";
   return (
-    <li>
+    <li className="h-full min-w-0">
       <button
         type="button"
         onClick={onClick}
         disabled={matched}
         className={cn(
-          // Fixed min-height keeps the Arabic and English columns visually
-          // aligned even though their content (large Arabic glyph vs short
-          // English gloss) has very different intrinsic sizes.
-          "btn-chunky flex h-20 w-full flex-col items-center justify-center rounded-2xl border-2 p-3 text-center focus-ring sm:h-24",
+          // A shared minimum height keeps the columns visually steady, while
+          // h-full lets a row grow rather than clipping a long paired form.
+          "btn-chunky flex h-full min-h-24 w-full min-w-0 flex-col items-center justify-center rounded-2xl border-2 p-3 text-center focus-ring sm:min-h-28",
           style,
         )}
       >
         {isArabic ? (
-          <ArabicText variant="display" className="text-2xl leading-tight sm:text-3xl">
+          <ArabicText
+            variant="display"
+            className={cn(
+              "w-full break-words leading-relaxed text-balance",
+              arabicOptionSize(text),
+            )}
+          >
             {text}
           </ArabicText>
         ) : (
-          <span className="text-sm font-semibold leading-tight sm:text-base">
+          <span className="w-full min-w-0 break-words text-sm font-semibold leading-snug sm:text-base">
             {text}
           </span>
         )}
         {translit ? (
-          <p className="mt-1 text-[10px] italic text-muted-foreground" lang="ar-Latn">
+          <p
+            className="mt-1 w-full min-w-0 break-words text-[11px] italic leading-snug text-muted-foreground"
+            lang="ar-Latn"
+          >
             {translit}
           </p>
         ) : null}
@@ -1239,7 +1250,11 @@ function ClozeView({
           {question.prompt}
         </p>
         <div className="mt-4">
-          <ArabicText variant="display" className="text-4xl sm:text-5xl" dir="rtl">
+          <ArabicText
+            variant="display"
+            className="w-full break-words text-3xl leading-relaxed text-balance sm:text-5xl"
+            dir="rtl"
+          >
             {before}
             {before ? " " : ""}
             <span
@@ -1286,7 +1301,13 @@ function ClozeView({
                 optionClasses(selected !== null, isCorrect, isSelected),
               )}
             >
-              <ArabicText variant="display" className="text-2xl">
+              <ArabicText
+                variant="display"
+                className={cn(
+                  "w-full break-words leading-relaxed",
+                  arabicOptionSize(opt.text),
+                )}
+              >
                 {opt.text}
               </ArabicText>
             </button>
@@ -1345,7 +1366,10 @@ function ConnectingLettersView({
           // tracking-widest plus the explicit spaces inserted by the deck
           // builder keeps every letter visually isolated from its neighbours
           // so the renderer can't auto-join them.
-          className="text-5xl tracking-widest sm:text-6xl"
+          className={cn(
+            "w-full break-words leading-relaxed tracking-widest",
+            arabicOptionSize(question.promptArabic),
+          )}
           dir="rtl"
         >
           {question.promptArabic}
@@ -1375,7 +1399,13 @@ function ConnectingLettersView({
                   optionClasses(selected !== null, isCorrect, isSelected),
                 )}
               >
-                <ArabicText variant="display" className="text-3xl sm:text-4xl">
+                <ArabicText
+                  variant="display"
+                  className={cn(
+                    "w-full break-words leading-relaxed",
+                    arabicOptionSize(opt.text),
+                  )}
+                >
                   {opt.text}
                 </ArabicText>
               </button>

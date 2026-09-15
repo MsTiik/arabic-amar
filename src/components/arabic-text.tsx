@@ -33,7 +33,11 @@ export function ArabicText({
     <Tag
       lang="ar"
       dir="rtl"
-      className={cn(variantClass, className)}
+      className={cn(
+        variantClass,
+        "min-w-0 max-w-full [overflow-wrap:anywhere]",
+        className,
+      )}
       {...rest}
     >
       {children}

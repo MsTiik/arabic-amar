@@ -95,6 +95,7 @@ export function NamesOfAllahClient() {
             return (
               <article
                 key={name.id}
+                id={name.id}
                 className="rounded-3xl border border-border bg-card p-5 sm:p-6"
               >
                 <div>

@@ -41,7 +41,7 @@ export function VocabCard({
   return (
     <article
       className={cn(
-        "group card-raised hover-lift relative flex flex-col gap-3 rounded-2xl p-5 sm:p-6",
+        "group card-raised hover-lift relative min-w-0 flex flex-col gap-3 rounded-2xl p-5 sm:p-6",
         className,
       )}
     >
@@ -53,13 +53,16 @@ export function VocabCard({
 
       <ArabicText
         variant="display"
-        className={cn(SIZE_CLASSES[size], "text-foreground")}
+        className={cn(
+          SIZE_CLASSES[size],
+          "w-full break-words leading-relaxed text-foreground",
+        )}
       >
         {entry.arabic}
       </ArabicText>
 
       <div className="flex flex-col gap-1">
-        <div className="flex items-center gap-2">
+        <div className="flex min-w-0 items-center gap-2">
           <SpeakerButton
             arabic={entry.arabic}
             label={entry.english}
@@ -67,7 +70,10 @@ export function VocabCard({
             showUnavailable
           />
           {entry.pronunciation ? (
-            <p className="text-base font-medium text-foreground sm:text-lg" lang="ar-Latn">
+            <p
+              className="min-w-0 break-words text-base font-medium text-foreground sm:text-lg"
+              lang="ar-Latn"
+            >
               {entry.pronunciation}
             </p>
           ) : null}

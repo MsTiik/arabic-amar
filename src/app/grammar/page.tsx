@@ -7,6 +7,14 @@ export const metadata = { title: "Grammar reference" };
 
 const REFERENCE_PAGES = [
   {
+    href: "/practice/verb-families",
+    title: "Verb families",
+    titleArabic: "عَائِلَاتُ الأَفْعَال",
+    description:
+      "Explore past, present, command, and verbal noun forms with Qur’anic sentence examples, then practise sorting them.",
+    accent: "bg-tense-command text-tense-command-accent",
+  },
+  {
     href: "/grammar/pronouns",
     title: "Pronouns",
     titleArabic: "الضمائر",
@@ -54,7 +62,7 @@ export default function GrammarPage() {
         >
           Reference tables
         </h2>
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {REFERENCE_PAGES.map((p) => (
             <Link
               key={p.href}
