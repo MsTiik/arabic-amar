@@ -14,13 +14,13 @@ import { cn } from "@/lib/cn";
 const NAV = [
   { href: "/", label: "Home" },
   { href: "/topics", label: "Lessons" },
+  { href: "/read", label: "Foundations" },
   { href: "/vocabulary", label: "Vocabulary" },
   { href: "/grammar", label: "Grammar" },
   { href: "/practice", label: "Practice" },
-  { href: "/about", label: "About" },
 ];
 
-const FOUNDATIONS = { href: "/read", label: "Foundations" };
+const ABOUT = { href: "/about", label: "About" };
 
 /**
  * Hides the topbar while scrolling down and reveals it on scroll up, so
@@ -128,7 +128,7 @@ export function Topbar() {
           <DailyGoalChip seen={seen} goal={goal} ratio={goalRatio} />
           <FeedbackToggle className="hidden sm:inline-flex" />
           <ThemeToggle />
-          <FoundationsNavLink pathname={pathname} />
+          <AboutNavLink pathname={pathname} />
         </div>
       </div>
     </header>
@@ -157,20 +157,20 @@ function SyncChip({ signedIn, status }: { signedIn: boolean; status: string }) {
   );
 }
 
-function FoundationsNavLink({ pathname }: { pathname: string }) {
-  const active = pathname.startsWith(FOUNDATIONS.href);
+function AboutNavLink({ pathname }: { pathname: string }) {
+  const active = pathname.startsWith(ABOUT.href);
   return (
     <Link
-      href={FOUNDATIONS.href}
+      href={ABOUT.href}
       className={cn(
         "hidden whitespace-nowrap rounded-md px-3 py-1.5 text-sm transition-colors focus-ring md:inline-flex",
         active
           ? "bg-muted text-foreground"
           : "text-muted-foreground hover:bg-muted hover:text-foreground",
       )}
-      title="Alphabet, harakāt, madd, sun/moon — foundations for reading Qurʼān"
+      title="About Arabic AMAR"
     >
-      {FOUNDATIONS.label}
+      {ABOUT.label}
     </Link>
   );
 }
