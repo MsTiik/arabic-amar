@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import localFont from "next/font/local";
+import { Analytics } from "@vercel/analytics/next";
 
 import { ProgressSyncProvider } from "@/components/progress-sync-provider";
 import { PwaSetup } from "@/components/pwa-setup";
@@ -116,6 +117,7 @@ export default function RootLayout({
           <TabBar />
           <PwaSetup />
         </ProgressSyncProvider>
+        <Analytics />
       </body>
     </html>
   );

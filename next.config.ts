@@ -50,6 +50,28 @@ const nextConfig: NextConfig = {
   // cross-origin guard. The list is dev-only; production builds ignore it.
   allowedDevOrigins: ["*.devinapps.com"],
 
+  // PostHog's API paths end in a slash; don't redirect them away.
+  skipTrailingSlashRedirect: true,
+
+  // Reverse-proxy PostHog (EU cloud) through our own origin so analytics
+  // stays within the same-origin CSP and isn't dropped by ad blockers.
+  async rewrites() {
+    return [
+      {
+        source: "/ingest/static/:path*",
+        destination: "https://eu-assets.i.posthog.com/static/:path*",
+      },
+      {
+        source: "/ingest/array/:path*",
+        destination: "https://eu-assets.i.posthog.com/array/:path*",
+      },
+      {
+        source: "/ingest/:path*",
+        destination: "https://eu.i.posthog.com/:path*",
+      },
+    ];
+  },
+
   async headers() {
     return [
       {

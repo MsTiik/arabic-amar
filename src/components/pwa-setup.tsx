@@ -3,6 +3,8 @@
 import { useEffect, useSyncExternalStore } from "react";
 import { Share, SquarePlus, X } from "lucide-react";
 
+import { trackEvent } from "@/lib/analytics";
+
 const DISMISS_KEY = "arabic-amar:install-hint:v1";
 
 const listeners = new Set<() => void>();
@@ -44,6 +46,12 @@ export function PwaSetup() {
         // Offline support is progressive enhancement; ignore failures.
       });
     }
+  }, []);
+
+  useEffect(() => {
+    const onInstalled = () => trackEvent("app_installed", {});
+    window.addEventListener("appinstalled", onInstalled);
+    return () => window.removeEventListener("appinstalled", onInstalled);
   }, []);
 
   if (!showHint) return null;

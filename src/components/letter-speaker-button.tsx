@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Loader2, Volume2, VolumeX } from "lucide-react";
 
+import { trackEvent } from "@/lib/analytics";
 import { getAudioForWord } from "@/lib/audio";
 import {
   playWithFallback,
@@ -124,6 +125,7 @@ export function LetterSpeakerButton({
         audio.addEventListener("ended", () => setState("idle"));
         audio.addEventListener("pause", () => setState("idle"));
       }
+      trackEvent("audio_played", { source: "letter", mode: "recording" });
       playWithFallback(audio, wikimediaUrl).catch(() => setState("error"));
       return;
     }
@@ -151,6 +153,7 @@ export function LetterSpeakerButton({
     utterance.onerror = () => {
       if (utteranceRef.current === utterance) setState("error");
     };
+    trackEvent("audio_played", { source: "letter", mode: "tts" });
     window.speechSynthesis.speak(utterance);
   }
 

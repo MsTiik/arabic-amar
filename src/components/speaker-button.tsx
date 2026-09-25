@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Loader2, Square, Volume2, VolumeX } from "lucide-react";
 
+import { trackEvent } from "@/lib/analytics";
 import { getAudioForWord } from "@/lib/audio";
 import {
   playWithFallback,
@@ -107,6 +108,7 @@ export function SpeakerButton({
       audio.addEventListener("pause", () => setState("idle"));
     }
     setState("loading");
+    trackEvent("audio_played", { source: "word", mode: "recording" });
     // Plays the prefetched in-memory copy when available; falls back to the
     // network URL if the cached blob has been released.
     playWithFallback(audio, playUrl).catch(() => setState("error"));
