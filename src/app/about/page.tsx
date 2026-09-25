@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArabicText } from "@/components/arabic-text";
 import { getSiteContent } from "@/lib/content";
+import { SALAHFLOW_URL, SITE_CONTACT_EMAIL } from "@/lib/site";
 
 export const metadata = { title: "About" };
 
@@ -33,23 +34,8 @@ export default function AboutPage() {
       <h2 className="mt-10 text-xl font-semibold tracking-tight">Credits</h2>
       <ul className="mt-2 space-y-2 text-sm">
         <li>
-          <span className="text-muted-foreground">{"Course: "}</span>
+          <span className="text-muted-foreground">{"Course material: "}</span>
           <strong>{source.name}</strong>
-        </li>
-        <li>
-          <span className="text-muted-foreground">{"Contact: "}</span>
-          <a className="underline" href={`mailto:${source.contactEmail}`}>
-            {source.contactEmail}
-          </a>
-        </li>
-        <li>
-          <span className="text-muted-foreground">{"Instagram: "}</span>
-          <a
-            className="underline"
-            href={`https://instagram.com/${source.instagram.replace(/^@/, "")}`}
-          >
-            {source.instagram}
-          </a>
         </li>
         <li>
           <span className="text-muted-foreground">{"Source document: "}</span>
@@ -64,6 +50,23 @@ export default function AboutPage() {
           </Link>
         </li>
       </ul>
+
+      <h2 className="mt-10 text-xl font-semibold tracking-tight">Feedback &amp; contact</h2>
+      <p className="mt-2 text-sm text-foreground-soft">
+        {"Arabic Amar is built and maintained independently. Spotted a mistake, have an idea, or want to say salaam? Email "}
+        <a className="underline" href={`mailto:${SITE_CONTACT_EMAIL}`}>
+          {SITE_CONTACT_EMAIL}
+        </a>
+        .
+      </p>
+
+      <h2 className="mt-10 text-xl font-semibold tracking-tight">Also by me</h2>
+      <p className="mt-2 text-sm text-foreground-soft">
+        <a className="underline" href={SALAHFLOW_URL} target="_blank" rel="noreferrer">
+          SalahFlow
+        </a>
+        {" — a companion app for your daily salah."}
+      </p>
 
       <h2 className="mt-10 text-xl font-semibold tracking-tight">Privacy</h2>
       <p className="mt-2 text-sm text-foreground-soft">

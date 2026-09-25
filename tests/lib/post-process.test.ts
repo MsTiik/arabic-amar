@@ -31,8 +31,6 @@ function content(vocabEntries: VocabEntry[]): SiteContent {
     grammarIntros: [],
     source: {
       name: "Test",
-      contactEmail: "test@example.com",
-      instagram: "@test",
       docUrl: "https://example.com",
     },
     fetchedAt: "2026-01-01T00:00:00.000Z",

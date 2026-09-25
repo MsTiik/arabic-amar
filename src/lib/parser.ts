@@ -1889,8 +1889,6 @@ export async function parseDocxBuffer(
     grammarIntros,
     source: {
       name: "AMAR Arabic Programme",
-      contactEmail: "majesticmessenger@gmail.com",
-      instagram: "@majestic_messenger",
       docUrl: "https://docs.google.com/document/d/1wqbU7rsLUm0wqCjQPS2PbtCTThZOxnE2CnClxa8DETc/edit",
     },
     fetchedAt: new Date().toISOString(),
