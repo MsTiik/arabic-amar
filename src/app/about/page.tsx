@@ -1,8 +1,9 @@
+import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight, Sunrise } from "lucide-react";
+import { ArrowUpRight, Download } from "lucide-react";
 import { ArabicText } from "@/components/arabic-text";
 import { getSiteContent } from "@/lib/content";
-import { SALAHFLOW_URL, SITE_CONTACT_EMAIL } from "@/lib/site";
+import { SALAHFLOW_APP_STORE_URL, SALAHFLOW_URL, SITE_CONTACT_EMAIL } from "@/lib/site";
 
 export const metadata = { title: "About" };
 
@@ -62,29 +63,41 @@ export default function AboutPage() {
       </p>
 
       <h2 className="mt-10 text-xl font-semibold tracking-tight">Also by me</h2>
-      <a
-        href={SALAHFLOW_URL}
-        target="_blank"
-        rel="noreferrer"
-        className="group mt-3 flex items-center gap-4 rounded-2xl border border-brand-salahflow/25 bg-brand-salahflow-soft p-4 transition-colors hover:border-brand-salahflow/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-      >
-        <span
-          aria-hidden
-          className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-brand-salahflow text-background"
-        >
-          <Sunrise className="size-5" />
-        </span>
-        <span className="min-w-0 flex-1">
-          <span className="block font-semibold text-foreground">SalahFlow</span>
-          <span className="block text-sm text-foreground-soft">
-            A companion app for your daily salah.
-          </span>
-        </span>
-        <span className="flex shrink-0 items-center gap-1 text-sm font-medium text-brand-salahflow">
-          <span className="hidden sm:inline">Visit</span>
-          <ArrowUpRight className="size-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-        </span>
-      </a>
+      <div className="mt-3 rounded-2xl border border-brand-salahflow-gold/50 bg-brand-salahflow-soft p-4">
+        <div className="flex items-center gap-4">
+          <Image
+            src="/salahflow-icon.png"
+            alt=""
+            width={56}
+            height={56}
+            className="size-14 shrink-0 rounded-[22.5%] shadow-sm"
+          />
+          <div className="min-w-0">
+            <p className="font-semibold text-foreground">SalahFlow</p>
+            <p className="text-sm text-foreground-soft">A companion app for your daily salah.</p>
+          </div>
+        </div>
+        <div className="mt-4 grid grid-cols-2 gap-2 sm:flex sm:pl-[4.5rem]">
+          <a
+            href={SALAHFLOW_URL}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center justify-center gap-1.5 rounded-full border border-brand-salahflow/30 px-4 py-2 text-sm font-medium text-brand-salahflow transition-colors hover:bg-brand-salahflow/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          >
+            Website
+            <ArrowUpRight aria-hidden className="size-4" />
+          </a>
+          <a
+            href={SALAHFLOW_APP_STORE_URL}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center justify-center gap-1.5 rounded-full bg-brand-salahflow px-4 py-2 text-sm font-medium text-brand-salahflow-soft transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          >
+            <Download aria-hidden className="size-4" />
+            App Store
+          </a>
+        </div>
+      </div>
 
       <h2 className="mt-10 text-xl font-semibold tracking-tight">Privacy</h2>
       <p className="mt-2 text-sm text-foreground-soft">
