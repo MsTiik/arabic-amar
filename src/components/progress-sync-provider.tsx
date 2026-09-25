@@ -23,6 +23,7 @@ import {
   verifyEmailCode,
   type SyncStatus,
 } from "@/lib/supabase-progress";
+import { identifyLearner, resetLearner, trackEvent } from "@/lib/analytics";
 import { mergeProgress, replaceProgress, useProgress, useProgressStorageSync } from "@/lib/progress";
 import { useThemeSync } from "@/lib/theme";
 
@@ -113,6 +114,11 @@ export function ProgressSyncProvider({ children }: { children: ReactNode }) {
     };
   }, [configured]);
 
+  const userId = user?.id;
+  useEffect(() => {
+    if (userId) identifyLearner(userId);
+  }, [userId]);
+
   useEffect(() => {
     if (!configured || !user || bootstrappedRef.current) return;
     bootstrappedRef.current = true;
@@ -152,6 +158,7 @@ export function ProgressSyncProvider({ children }: { children: ReactNode }) {
         setError("");
         try {
           await signInWithEmail(email);
+          trackEvent("sync_code_requested", {});
           setStatus("signed-out");
         } catch (err) {
           const normalized = normalizeSignInError(err);
@@ -165,6 +172,7 @@ export function ProgressSyncProvider({ children }: { children: ReactNode }) {
         setError("");
         try {
           await verifyEmailCode(email, code);
+          trackEvent("sync_signed_in", {});
         } catch (err) {
           const message =
             err instanceof Error ? err.message : "Code verification failed.";
@@ -176,6 +184,8 @@ export function ProgressSyncProvider({ children }: { children: ReactNode }) {
       signOut: async () => {
         try {
           await signOutOfSync();
+          trackEvent("sync_signed_out", {});
+          resetLearner();
           setUser(null);
           setStatus(configured ? "signed-out" : "disabled");
           setError("");

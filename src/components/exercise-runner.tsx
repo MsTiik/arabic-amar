@@ -8,6 +8,7 @@ import { AutoplayToggle } from "@/components/autoplay-toggle";
 import { FeedbackToggle } from "@/components/feedback-toggle";
 import { SpeakerButton } from "@/components/speaker-button";
 import { TranslitReveal } from "@/components/translit-reveal";
+import { trackEvent } from "@/lib/analytics";
 import { cn } from "@/lib/cn";
 import {
   prefetchWordAudio,
@@ -71,6 +72,21 @@ export function ExerciseRunner({ deck, onExit, onAttempt }: Props) {
     return releasePrefetchedAudio;
   }, [deck]);
 
+  const sessionInfo = useMemo(
+    () => ({
+      deck_id: deck.id,
+      deck_title: deck.title,
+      exercise_kind: deck.questions[0]?.kind ?? "none",
+      question_count: deck.questions.length,
+      topic_slug: deck.topicSlug,
+      lesson_id: deck.lessonId,
+    }),
+    [deck],
+  );
+  useEffect(() => {
+    if (hasQuestions) trackEvent("practice_session_started", sessionInfo);
+  }, [hasQuestions, sessionInfo]);
+
   const [index, setIndex] = useState(0);
   const [results, setResults] = useState<{ correct: number; wrong: number }>({
     correct: 0,
@@ -110,6 +126,7 @@ export function ExerciseRunner({ deck, onExit, onAttempt }: Props) {
         wrong={results.wrong}
         bestCombo={bestCombo}
         onRunAgain={() => {
+          trackEvent("practice_session_started", sessionInfo);
           setIndex(0);
           setResults({ correct: 0, wrong: 0 });
           setCombo(0);
@@ -137,6 +154,15 @@ export function ExerciseRunner({ deck, onExit, onAttempt }: Props) {
       setCombo(0);
     }
     if (index + 1 >= total) {
+      const finalCorrect = results.correct + (correct ? 1 : 0);
+      const finalWrong = results.wrong + (correct ? 0 : 1);
+      trackEvent("practice_session_completed", {
+        ...sessionInfo,
+        correct: finalCorrect,
+        wrong: finalWrong,
+        accuracy: total > 0 ? Math.round((finalCorrect / total) * 100) : 0,
+        best_combo: Math.max(bestCombo, correct ? combo + 1 : 0),
+      });
       setDone(true);
     } else {
       setIndex(index + 1);
