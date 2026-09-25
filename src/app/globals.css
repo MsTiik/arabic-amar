@@ -66,6 +66,10 @@
   --accent-indigo: oklch(0.48 0.11 270);
   --accent-indigo-soft: oklch(0.93 0.05 270);
 
+  /* SalahFlow (sister app) brand accent — used only for its cross-promo card. */
+  --brand-salahflow: oklch(0.5 0.11 165);
+  --brand-salahflow-soft: oklch(0.95 0.035 165);
+
   /*
    * Arabic stack uses Noto Naskh Arabic — the traditional book/Quran hand
    * with full tashkeel coverage. Self-hosted from public/ to guarantee the
@@ -124,6 +128,8 @@
   --accent-olive-soft: oklch(0.45 0.05 110);
   --accent-emerald: oklch(0.82 0.08 145);
   --accent-emerald-soft: oklch(0.45 0.05 145);
+  --brand-salahflow: oklch(0.82 0.09 165);
+  --brand-salahflow-soft: oklch(0.44 0.05 175);
   --accent-teal: oklch(0.82 0.08 180);
   --accent-teal-soft: oklch(0.45 0.05 180);
   --accent-sky: oklch(0.82 0.08 220);
@@ -169,6 +175,8 @@
   --color-accent-olive-soft: var(--accent-olive-soft);
   --color-accent-emerald: var(--accent-emerald);
   --color-accent-emerald-soft: var(--accent-emerald-soft);
+  --color-brand-salahflow: var(--brand-salahflow);
+  --color-brand-salahflow-soft: var(--brand-salahflow-soft);
   --color-accent-teal: var(--accent-teal);
   --color-accent-teal-soft: var(--accent-teal-soft);
   --color-accent-sky: var(--accent-sky);

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ArrowUpRight, Sunrise } from "lucide-react";
 import { ArabicText } from "@/components/arabic-text";
 import { getSiteContent } from "@/lib/content";
 import { SALAHFLOW_URL, SITE_CONTACT_EMAIL } from "@/lib/site";
@@ -61,12 +62,29 @@ export default function AboutPage() {
       </p>
 
       <h2 className="mt-10 text-xl font-semibold tracking-tight">Also by me</h2>
-      <p className="mt-2 text-sm text-foreground-soft">
-        <a className="underline" href={SALAHFLOW_URL} target="_blank" rel="noreferrer">
-          SalahFlow
-        </a>
-        {" — a companion app for your daily salah."}
-      </p>
+      <a
+        href={SALAHFLOW_URL}
+        target="_blank"
+        rel="noreferrer"
+        className="group mt-3 flex items-center gap-4 rounded-2xl border border-brand-salahflow/25 bg-brand-salahflow-soft p-4 transition-colors hover:border-brand-salahflow/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+      >
+        <span
+          aria-hidden
+          className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-brand-salahflow text-background"
+        >
+          <Sunrise className="size-5" />
+        </span>
+        <span className="min-w-0 flex-1">
+          <span className="block font-semibold text-foreground">SalahFlow</span>
+          <span className="block text-sm text-foreground-soft">
+            A companion app for your daily salah.
+          </span>
+        </span>
+        <span className="flex shrink-0 items-center gap-1 text-sm font-medium text-brand-salahflow">
+          <span className="hidden sm:inline">Visit</span>
+          <ArrowUpRight className="size-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+        </span>
+      </a>
 
       <h2 className="mt-10 text-xl font-semibold tracking-tight">Privacy</h2>
       <p className="mt-2 text-sm text-foreground-soft">
