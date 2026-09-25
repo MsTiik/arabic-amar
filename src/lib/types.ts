@@ -106,11 +106,10 @@ export interface SiteContent {
   pluralForms: PluralForm[];
   /** Long-form intro prose for grammar reference pages. */
   grammarIntros: GrammarIntro[];
-  /** Source attribution displayed on About page. */
+  /** Course attribution displayed on About page. Site contact details live in
+   *  `src/lib/site.ts`, not here. */
   source: {
     name: string;
-    contactEmail: string;
-    instagram: string;
     docUrl: string;
   };
   fetchedAt: string;

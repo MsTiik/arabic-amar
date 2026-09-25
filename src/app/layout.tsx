@@ -7,6 +7,7 @@ import { ProgressSyncProvider } from "@/components/progress-sync-provider";
 import { PwaSetup } from "@/components/pwa-setup";
 import { TabBar } from "@/components/tab-bar";
 import { Topbar } from "@/components/topbar";
+import { SALAHFLOW_URL, SITE_CONTACT_EMAIL } from "@/lib/site";
 import { themeBootstrapScript } from "@/lib/theme";
 import "./globals.css";
 
@@ -112,6 +113,22 @@ export default function RootLayout({
                 Quran.com
               </a>
               .
+            </p>
+            <p className="mt-1.5 text-muted-foreground/80">
+              Feedback?{" "}
+              <a className="underline hover:text-foreground" href={`mailto:${SITE_CONTACT_EMAIL}`}>
+                Get in touch
+              </a>
+              {" · Also try "}
+              <a
+                className="underline hover:text-foreground"
+                href={SALAHFLOW_URL}
+                target="_blank"
+                rel="noreferrer"
+              >
+                SalahFlow
+              </a>
+              {" for your daily salah."}
             </p>
           </footer>
           <TabBar />
