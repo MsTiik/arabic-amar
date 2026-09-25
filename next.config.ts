@@ -34,7 +34,7 @@ const securityHeaders = [
       "img-src 'self' data: blob:",
       "font-src 'self'",
       "media-src 'self' blob: https://upload.wikimedia.org",
-      "connect-src 'self' https://*.supabase.co",
+      "connect-src 'self' https://*.supabase.co https://vitals.vercel-analytics.com",
       "object-src 'none'",
       "base-uri 'self'",
       "form-action 'self'",
