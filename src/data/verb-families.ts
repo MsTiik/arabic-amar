@@ -9,7 +9,7 @@ export interface VerbForm {
 }
 
 export interface VerbSourceExample {
-  kind: "quran" | "hadith";
+  kind: "quran" | "hadith" | "class";
   reference: string;
   /** Hadith grade as reported by the linked collection; omitted for Qur'an. */
   grade?: string;
@@ -18,7 +18,7 @@ export interface VerbSourceExample {
   english: string;
   /** The inflected form learners should notice inside the example. */
   focusArabic: string;
-  url: string;
+  url?: string;
   note?: string;
 }
 
@@ -27,6 +27,13 @@ export interface VerbFamily {
   root: string;
   meaning: string;
   forms: Record<VerbFormKey, VerbForm>;
+  /** Optional nouns or participles recorded alongside the four core forms. */
+  relatedForms?: Array<VerbForm & { label: string }>;
+  /** Display order for the five families introduced in the Level 2 notes. */
+  levelTwoOrder?: number;
+  /** Page and review state in the supplied Level 2 notes. */
+  levelTwoSourcePage?: number;
+  levelTwoReviewStatus?: "confirmed" | "normalised";
   /** Opposites are optional: not every verb has one natural, useful opposite. */
   opposite?: {
     arabic: string;
@@ -52,7 +59,226 @@ export interface VerbFamily {
  * The English renderings below are concise learning glosses written for this
  * site rather than copied verse translations.
  */
-export const VERB_FAMILIES: VerbFamily[] = [
+const VERB_FAMILY_DECK: VerbFamily[] = [
+  {
+    id: "kataba",
+    root: "ك-ت-ب",
+    meaning: "to write",
+    levelTwoOrder: 1,
+    levelTwoSourcePage: 16,
+    levelTwoReviewStatus: "confirmed",
+    forms: {
+      past: { arabic: "كَتَبَ", transliteration: "kataba", english: "he wrote" },
+      present: { arabic: "يَكْتُبُ", transliteration: "yaktubu", english: "he writes" },
+      command: { arabic: "اُكْتُبْ", transliteration: "uktub", english: "write!" },
+      masdar: { arabic: "كِتَابَة", transliteration: "kitābah", english: "writing" },
+    },
+    relatedForms: [
+      { label: "Related noun", arabic: "كِتَاب", transliteration: "kitāb", english: "book" },
+      { label: "Related noun", arabic: "مَكْتَب", transliteration: "maktab", english: "desk / office" },
+      { label: "Related noun", arabic: "مَكْتَبَة", transliteration: "maktabah", english: "library" },
+    ],
+    examples: [
+      {
+        kind: "class",
+        reference: "AMAR Level 2 · page 16",
+        arabic: "كَتَبَ الْمُدَرِّسُ بِالْقَلَمِ عَلَى السَّبُّورَةِ.",
+        transliteration: "kataba al-mudarrisu bi-l-qalami ʿalā as-sabbūrati",
+        english: "The teacher wrote on the board with the pen.",
+        focusArabic: "كَتَبَ",
+      },
+      {
+        kind: "class",
+        reference: "AMAR Level 2 · page 16",
+        arabic: "تَكْتُبُ الْمَلَائِكَةُ الْكَلَامَ.",
+        transliteration: "taktubu al-malāʾikatu al-kalāma",
+        english: "The angels write down speech.",
+        focusArabic: "تَكْتُبُ",
+        note: "A class grammar example, not a Qur’anic quotation.",
+      },
+      {
+        kind: "class",
+        reference: "AMAR Level 2 · page 16",
+        arabic: "يَا أَخِي، اُكْتُبِ الدَّرْسَ.",
+        transliteration: "yā akhī, uktubi ad-darsa",
+        english: "My brother, write the lesson.",
+        focusArabic: "اُكْتُبِ",
+      },
+      {
+        kind: "class",
+        reference: "AMAR Level 2 · page 16 · safe teaching replacement",
+        arabic: "الْقِرَاءَةُ وَالْكِتَابَةُ مُهِمَّتَانِ.",
+        transliteration: "al-qirāʾatu wa-l-kitābatu muhimmatāni",
+        english: "Reading and writing are important.",
+        focusArabic: "الْكِتَابَةُ",
+        note: "This clear teaching sentence replaces an ambiguous claim in the handwritten notes; the original remains preserved in the audit.",
+      },
+      {
+        kind: "class",
+        reference: "AMAR Level 2 · page 16",
+        arabic: "الْكُتُبُ فِي الْمَكْتَبَةِ. الْقُرْآنُ كِتَابُ اللهِ.",
+        transliteration: "al-kutubu fī al-maktabati. al-qurʾānu kitābu Allāhi",
+        english: "Books are in the library. The Qur’an is the Book of Allah.",
+        focusArabic: "كِتَابُ",
+      },
+    ],
+  },
+  {
+    id: "sharaha",
+    root: "ش-ر-ح",
+    meaning: "to explain",
+    levelTwoOrder: 3,
+    levelTwoSourcePage: 18,
+    levelTwoReviewStatus: "confirmed",
+    forms: {
+      past: { arabic: "شَرَحَ", transliteration: "sharaḥa", english: "he explained" },
+      present: { arabic: "يَشْرَحُ", transliteration: "yashraḥu", english: "he explains" },
+      command: { arabic: "اِشْرَحْ", transliteration: "ishraḥ", english: "explain!" },
+      masdar: { arabic: "شَرْح", transliteration: "sharḥ", english: "explanation" },
+    },
+    examples: [
+      {
+        kind: "class",
+        reference: "AMAR Level 2 · page 18",
+        arabic: "شَرَحَ الْمُدَرِّسُ الدَّرْسَ.",
+        transliteration: "sharaḥa al-mudarrisu ad-darsa",
+        english: "The teacher explained the lesson.",
+        focusArabic: "شَرَحَ",
+      },
+      {
+        kind: "class",
+        reference: "AMAR Level 2 · page 18",
+        arabic: "يَشْرَحُ الْمُهَنْدِسُ كَيْفَ تَسِيرُ السَّيَّارَةُ.",
+        transliteration: "yashraḥu al-muhandisu kayfa tasīru as-sayyāratu",
+        english: "The engineer explains how the car works.",
+        focusArabic: "يَشْرَحُ",
+      },
+      {
+        kind: "class",
+        reference: "AMAR Level 2 · page 18",
+        arabic: "مِنْ فَضْلِكَ، اِشْرَحْ لِي الدَّرْسَ.",
+        transliteration: "min faḍlika, ishraḥ lī ad-darsa",
+        english: "Please explain the lesson to me.",
+        focusArabic: "اِشْرَحْ",
+      },
+      {
+        kind: "class",
+        reference: "AMAR Level 2 · page 18",
+        arabic: "شَرْحُ الْأُسْتَاذِ جَيِّد.",
+        transliteration: "sharḥu al-ustādhi jayyidun",
+        english: "The teacher’s explanation is good.",
+        focusArabic: "شَرْحُ",
+      },
+    ],
+  },
+  {
+    id: "fahima",
+    root: "ف-ه-م",
+    meaning: "to understand",
+    levelTwoOrder: 4,
+    levelTwoSourcePage: 19,
+    levelTwoReviewStatus: "confirmed",
+    forms: {
+      past: { arabic: "فَهِمَ", transliteration: "fahima", english: "he understood" },
+      present: { arabic: "يَفْهَمُ", transliteration: "yafhamu", english: "he understands" },
+      command: { arabic: "اِفْهَمْ", transliteration: "ifham", english: "understand!" },
+      masdar: { arabic: "فَهْم", transliteration: "fahm", english: "understanding" },
+    },
+    examples: [
+      {
+        kind: "class",
+        reference: "AMAR Level 2 · page 19",
+        arabic: "فَهِمَ الطَّالِبُ الدَّرْسَ.",
+        transliteration: "fahima aṭ-ṭālibu ad-darsa",
+        english: "The student understood the lesson.",
+        focusArabic: "فَهِمَ",
+      },
+      {
+        kind: "class",
+        reference: "AMAR Level 2 · page 19",
+        arabic: "يَفْهَمُ الطُّلَّابُ شَرْحَ الْأُسْتَاذِ.",
+        transliteration: "yafhamu aṭ-ṭullābu sharḥa al-ustādhi",
+        english: "The students understand the teacher’s explanation.",
+        focusArabic: "يَفْهَمُ",
+      },
+      {
+        kind: "class",
+        reference: "AMAR Level 2 · page 19",
+        arabic: "يَا طُلَّابُ، اِفْهَمُوا كَلَامَ الْأُسْتَاذِ جَيِّدًا.",
+        transliteration: "yā ṭullābu, ifhamū kalāma al-ustādhi jayyidan",
+        english: "Students, understand the teacher’s words well.",
+        focusArabic: "اِفْهَمُوا",
+        note: "The plural command agrees with the plural address.",
+      },
+      {
+        kind: "class",
+        reference: "AMAR Level 2 · page 19",
+        arabic: "أُرِيدُ فَهْمَ الْقُرْآنِ.",
+        transliteration: "urīdu fahma al-qurʾāni",
+        english: "I want to understand the Qur’an.",
+        focusArabic: "فَهْمَ",
+      },
+    ],
+  },
+  {
+    id: "waqafa",
+    root: "و-ق-ف",
+    meaning: "to stand; to stop",
+    levelTwoOrder: 5,
+    levelTwoSourcePage: 20,
+    levelTwoReviewStatus: "confirmed",
+    forms: {
+      past: { arabic: "وَقَفَ", transliteration: "waqafa", english: "he stood / stopped" },
+      present: { arabic: "يَقِفُ", transliteration: "yaqifu", english: "he stands / stops" },
+      command: { arabic: "قِفْ", transliteration: "qif", english: "stand! / stop!" },
+      masdar: { arabic: "وُقُوف", transliteration: "wuqūf", english: "standing / stopping" },
+    },
+    relatedForms: [
+      { label: "Active participle", arabic: "وَاقِف", transliteration: "wāqif", english: "standing / one who stands" },
+    ],
+    examples: [
+      {
+        kind: "class",
+        reference: "AMAR Level 2 · page 20",
+        arabic: "وَقَفَ الطَّالِبُ احْتِرَامًا لِلْمُدَرِّسِ.",
+        transliteration: "waqafa aṭ-ṭālibu iḥtirāman li-l-mudarrisi",
+        english: "The student stood out of respect for the teacher.",
+        focusArabic: "وَقَفَ",
+      },
+      {
+        kind: "class",
+        reference: "AMAR Level 2 · page 20",
+        arabic: "يَقِفُ الْحَاجُّ بِعَرَفَاتٍ.",
+        transliteration: "yaqifu al-ḥājju bi-ʿarafātin",
+        english: "The pilgrim stands at ʿArafāt.",
+        focusArabic: "يَقِفُ",
+      },
+      {
+        kind: "class",
+        reference: "AMAR Level 2 · page 20",
+        arabic: "يَا أَخِي، قِفْ احْتِرَامًا لِلْمُدَرِّسِ.",
+        transliteration: "yā akhī, qif iḥtirāman li-l-mudarrisi",
+        english: "My brother, stand out of respect for the teacher.",
+        focusArabic: "قِفْ",
+      },
+      {
+        kind: "class",
+        reference: "AMAR Level 2 · page 20",
+        arabic: "يَوْمُ الْقِيَامَةِ يَوْمُ الْوُقُوفِ أَمَامَ اللهِ تَعَالَى.",
+        transliteration: "yawmu al-qiyāmati yawmu al-wuqūfi amāma Allāhi taʿālā",
+        english: "The Day of Resurrection is the day of standing before Allah Most High.",
+        focusArabic: "الْوُقُوفِ",
+      },
+      {
+        kind: "class",
+        reference: "AMAR Level 2 · page 20",
+        arabic: "الْإِمَامُ وَاقِفٌ عَلَى الْمِنْبَرِ يَوْمَ الْجُمُعَةِ.",
+        transliteration: "al-imāmu wāqifun ʿalā al-minbari yawma al-jumuʿati",
+        english: "The imam is standing on the pulpit on Friday.",
+        focusArabic: "وَاقِفٌ",
+      },
+    ],
+  },
   {
     id: "tafaddala",
     root: "ف-ض-ل",
@@ -180,13 +406,45 @@ export const VERB_FAMILIES: VerbFamily[] = [
     id: "qaraa",
     root: "ق-ر-أ",
     meaning: "to read; to recite",
+    levelTwoOrder: 2,
+    levelTwoSourcePage: 17,
+    levelTwoReviewStatus: "confirmed",
     forms: {
       past: { arabic: "قَرَأَ", transliteration: "qaraʾa", english: "he read / recited" },
       present: { arabic: "يَقْرَأُ", transliteration: "yaqraʾu", english: "he reads / recites" },
       command: { arabic: "اِقْرَأْ", transliteration: "iqraʾ", english: "read! / recite!" },
       masdar: { arabic: "قِرَاءَة", transliteration: "qirāʾah", english: "reading / recitation" },
     },
+    relatedForms: [
+      { label: "Active participle", arabic: "قَارِئ", transliteration: "qāriʾ", english: "reader / reciter" },
+    ],
     examples: [
+      {
+        kind: "class",
+        reference: "AMAR Level 2 · page 17",
+        arabic: "قَرَأَ الْمُسْلِمُ الْقُرْآنَ.",
+        transliteration: "qaraʾa al-muslimu al-qurʾāna",
+        english: "The Muslim recited the Qur’an.",
+        focusArabic: "قَرَأَ",
+      },
+      {
+        kind: "class",
+        reference: "AMAR Level 2 · page 17",
+        arabic: "يَقْرَأُ الْمُسْلِمُ الْقُرْآنَ فِي الصَّلَاةِ.",
+        transliteration: "yaqraʾu al-muslimu al-qurʾāna fī aṣ-ṣalāti",
+        english: "The Muslim recites the Qur’an in prayer.",
+        focusArabic: "يَقْرَأُ",
+      },
+      {
+        kind: "quran",
+        reference: "Qur’an 96:1",
+        arabic: "ٱقۡرَأۡ بِٱسۡمِ رَبِّكَ ٱلَّذِي خَلَقَ",
+        transliteration: "iqraʾ bi-smi rabbika alladhī khalaqa",
+        english: "Read in the name of your Lord who created.",
+        focusArabic: "ٱقۡرَأۡ",
+        url: "https://quran.com/96/1",
+        note: "Qur’anic orthography is preserved from the linked verse source.",
+      },
       {
         kind: "quran",
         reference: "Qur’an 16:98",
@@ -195,6 +453,14 @@ export const VERB_FAMILIES: VerbFamily[] = [
         english: "When you recite the Qur’an, seek refuge in Allah from Satan, the accursed.",
         focusArabic: "قَرَأْتَ",
         url: "https://quran.com/16/98",
+      },
+      {
+        kind: "class",
+        reference: "AMAR Level 2 · page 17",
+        arabic: "قِرَاءَةُ الْقُرْآنِ عِبَادَة.",
+        transliteration: "qirāʾatu al-qurʾāni ʿibādatun",
+        english: "Reciting the Qur’an is an act of worship.",
+        focusArabic: "قِرَاءَةُ",
       },
     ],
   },
@@ -356,3 +622,9 @@ export const VERB_FAMILIES: VerbFamily[] = [
     ],
   },
 ];
+
+export const VERB_FAMILIES: VerbFamily[] = [...VERB_FAMILY_DECK].sort(
+  (left, right) =>
+    (left.levelTwoOrder ?? Number.POSITIVE_INFINITY) -
+    (right.levelTwoOrder ?? Number.POSITIVE_INFINITY),
+);

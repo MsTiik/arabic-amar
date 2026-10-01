@@ -19,15 +19,19 @@ export default function VerbFamiliesPage() {
         </h1>
         <p className="mt-2 max-w-3xl text-sm leading-relaxed text-muted-foreground sm:text-base">
           Learn each verb as one connected family—past, present, command, and
-          verbal noun—then sort its shuffled forms. Qur’anic examples show how
-          the same root changes inside a real sentence.
+          verbal noun—then sort its shuffled forms. Level 2 and Qur’anic
+          examples show how the same root changes inside a real sentence.
         </p>
-        <div className="mt-4 rounded-2xl border border-accent-amber/40 bg-accent-amber-soft p-4 text-sm leading-relaxed text-foreground-soft">
-          The reference family uses <strong>he</strong> for past and present,
-          and <strong>you, masculine singular</strong> for the command. The
-          Qur’an examples may use a different person or number, so the form in
-          each verse is identified explicitly.
-        </div>
+        <details className="mt-4 max-w-3xl rounded-2xl border border-border bg-background-soft p-4 text-sm leading-relaxed text-foreground-soft">
+          <summary className="cursor-pointer font-semibold text-primary focus-ring">
+            How the reference forms work
+          </summary>
+          <p className="mt-2">
+            The reference family uses <strong>he</strong> for past and present,
+            and <strong>you, masculine singular</strong> for the command. Examples
+            can use a different person or number, so the relevant form is highlighted.
+          </p>
+        </details>
       </header>
 
       <VerbFamiliesClient />

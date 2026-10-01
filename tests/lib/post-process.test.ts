@@ -1,6 +1,10 @@
 import { describe, expect, test } from "vitest";
 
-import { correctConjugationLabels, fillIslamicMonthGlosses } from "../../src/lib/post-process";
+import {
+  correctConjugationLabels,
+  correctKnownVocabulary,
+  fillIslamicMonthGlosses,
+} from "../../src/lib/post-process";
 import type { ConjugationEntry, SiteContent, VocabEntry } from "../../src/lib/types";
 
 function vocab(overrides: Partial<VocabEntry>): VocabEntry {
@@ -64,6 +68,61 @@ describe("fillIslamicMonthGlosses", () => {
     );
 
     expect(result.vocab[0].english).toBe("Existing gloss");
+  });
+});
+
+describe("correctKnownVocabulary", () => {
+  test("uses attested broken plurals and preserves the established progress IDs", () => {
+    const source = content([
+        vocab({
+          id: "new-eraser-id",
+          lessonId: "lesson-nouns-in-the-classroom",
+          arabic: "مِمْحَاة / مَمَاحٍ",
+          arabicFolded: "ممحاة مماح",
+          pronunciation: "mimhah / mamaahin",
+          english: "eraser / erasers",
+        }),
+        vocab({
+          id: "new-sharpener-id",
+          lessonId: "lesson-nouns-in-the-classroom",
+          arabic: "مِبْرَاة / مَبَارٍ",
+          arabicFolded: "مبراة مبار",
+          pronunciation: "mibrah / Mabārin",
+          english: "sharpener / sharpeners",
+        }),
+      ]);
+    source.lessons = [
+      {
+        id: "lesson-nouns-in-the-classroom",
+        number: "8",
+        title: "Nouns in the Classroom",
+        topicSlugs: ["nouns-in-the-classroom"],
+        vocabIds: ["new-eraser-id", "new-sharpener-id"],
+        ruleIds: [],
+        conversationIds: [],
+      },
+    ];
+
+    const result = correctKnownVocabulary(source);
+
+    expect(result.vocab).toEqual([
+      expect.objectContaining({
+        id: "lesson-nouns-in-the-classroom__classroom-singular-and-plural__ممحاة__ممحات__mimhah-mimhat__eraser-erasers",
+        arabic: "مِمْحَاة / مَمَاحٍ",
+        arabicFolded: "ممحاة مماح",
+        pronunciation: "mimḥāh / mamāḥin",
+      }),
+      expect.objectContaining({
+        id: "lesson-nouns-in-the-classroom__classroom-singular-and-plural__مبراة__مبرايات__mibrah-mibrayat__sharpener-sharpeners",
+        arabic: "مِبْرَاة / مَبَارٍ",
+        arabicFolded: "مبراة مبار",
+        pronunciation: "mibrāh / mabārin",
+      }),
+    ]);
+    expect(result.lessons[0].vocabIds).toEqual([
+      "lesson-nouns-in-the-classroom__classroom-singular-and-plural__ممحاة__ممحات__mimhah-mimhat__eraser-erasers",
+      "lesson-nouns-in-the-classroom__classroom-singular-and-plural__مبراة__مبرايات__mibrah-mibrayat__sharpener-sharpeners",
+    ]);
   });
 });
 

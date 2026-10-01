@@ -10,6 +10,7 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "content:build": "tsx scripts/build-content.ts",
+    "content:level2:validate": "tsx scripts/validate-level-two.ts",
     "audio:build": "tsx scripts/build-audio-manifest.ts",
     "prebuild": "tsx scripts/build-content.ts && tsx scripts/build-audio-manifest.ts",
     "audio:mirror": "tsx scripts/mirror-audio.ts"

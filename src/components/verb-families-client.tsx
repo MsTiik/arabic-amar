@@ -1,11 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import {
   ArrowRight,
   Check,
   CheckCircle2,
+  ChevronLeft,
+  ChevronRight,
   ExternalLink,
   RefreshCcw,
   Shuffle,
@@ -75,6 +77,7 @@ export function VerbFamiliesClient() {
 
       {mode === "explore" ? (
         <ExploreMode
+          key={VERB_FAMILIES[familyIndex].id}
           family={VERB_FAMILIES[familyIndex]}
           familyIndex={familyIndex}
           onSelect={setFamilyIndex}
@@ -121,39 +124,71 @@ function ExploreMode({
   familyIndex: number;
   onSelect: (index: number) => void;
 }) {
+  const pickerRef = useRef<HTMLDivElement>(null);
+
+  function scrollPicker(direction: "left" | "right") {
+    pickerRef.current?.scrollBy({
+      left: direction === "left" ? -360 : 360,
+      behavior: "smooth",
+    });
+  }
+
   return (
     <div className="space-y-6">
       <section aria-labelledby="family-picker-heading">
-        <div className="mb-3 flex items-baseline justify-between gap-3">
-          <h2 id="family-picker-heading" className="text-lg font-semibold">
-            Choose a verb
-          </h2>
-          <p className="text-xs text-muted-foreground">
+        <div className="mb-3 flex flex-wrap items-end justify-between gap-3">
+          <div>
+            <h2 id="family-picker-heading" className="text-lg font-semibold">
+              Choose a verb
+            </h2>
+            <p className="mt-0.5 text-xs text-muted-foreground">
+              Use the arrow buttons to browse all {VERB_FAMILIES.length} verbs.
+            </p>
+          </div>
+          <p className="text-xs font-semibold text-muted-foreground">
             {familyIndex + 1} of {VERB_FAMILIES.length}
           </p>
         </div>
-        <div className="flex gap-2 overflow-x-auto pb-2">
-          {VERB_FAMILIES.map((item, index) => (
-            <button
-              key={item.id}
-              type="button"
-              onClick={() => onSelect(index)}
-              aria-pressed={index === familyIndex}
-              className={cn(
-                "min-w-28 shrink-0 rounded-2xl border px-3 py-2 text-center transition-colors focus-ring",
-                index === familyIndex
-                  ? "border-primary bg-primary-soft"
-                  : "border-border bg-card hover:bg-muted",
-              )}
-            >
-              <ArabicText variant="display" className="text-2xl leading-tight">
-                {item.forms.past.arabic}
-              </ArabicText>
-              <span className="mt-1 block text-xs text-muted-foreground">
-                {item.meaning}
-              </span>
-            </button>
-          ))}
+        <div className="grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-2">
+          <button
+            type="button"
+            onClick={() => scrollPicker("left")}
+            aria-label="Show earlier verbs"
+            className="flex h-11 w-11 items-center justify-center rounded-full border border-border bg-card text-foreground shadow-sm transition-colors hover:bg-muted focus-ring"
+          >
+            <ChevronLeft className="h-5 w-5" aria-hidden />
+          </button>
+          <div ref={pickerRef} className="flex gap-2 overflow-x-auto scroll-smooth pb-2">
+            {VERB_FAMILIES.map((item, index) => (
+              <button
+                key={item.id}
+                type="button"
+                onClick={() => onSelect(index)}
+                aria-pressed={index === familyIndex}
+                className={cn(
+                  "min-w-32 shrink-0 rounded-2xl border px-3 py-2 text-center transition-colors focus-ring",
+                  index === familyIndex
+                    ? "border-primary bg-primary-soft shadow-sm"
+                    : "border-border bg-card hover:bg-muted",
+                )}
+              >
+                <ArabicText variant="display" className="text-3xl leading-tight">
+                  {item.forms.past.arabic}
+                </ArabicText>
+                <span className="mt-1 block text-xs text-muted-foreground">
+                  {item.meaning}
+                </span>
+              </button>
+            ))}
+          </div>
+          <button
+            type="button"
+            onClick={() => scrollPicker("right")}
+            aria-label="Show more verbs"
+            className="flex h-11 w-11 items-center justify-center rounded-full border border-primary/30 bg-primary-soft text-primary shadow-sm transition-colors hover:bg-primary/10 focus-ring"
+          >
+            <ChevronRight className="h-5 w-5" aria-hidden />
+          </button>
         </div>
       </section>
 
@@ -186,56 +221,45 @@ function ExploreMode({
           ))}
         </div>
 
-        <div className="grid gap-4 border-t border-border bg-background-soft p-4 sm:p-6 lg:grid-cols-[minmax(0,1fr)_minmax(15rem,0.42fr)]">
-          <div className="space-y-3">
-            <h3 className="flex items-center gap-2 text-sm font-semibold">
-              <Sparkles className="h-4 w-4 text-accent-gold" aria-hidden />
-              In context
-            </h3>
-            {family.examples.map((example) => (
-              <div key={`${family.id}-${example.reference}`} className="rounded-2xl border border-border bg-card p-4 sm:p-5">
-                <div className="flex items-center justify-between gap-3">
-                  <span className="flex flex-wrap items-center gap-2">
-                    <span className="rounded-full bg-primary-soft px-2.5 py-1 text-xs font-bold text-primary">
-                      {example.kind === "quran" ? "Qur’an" : "Hadith"}
-                    </span>
-                    {example.grade ? (
-                      <span className="text-xs font-medium text-muted-foreground">
-                        {example.grade}
-                      </span>
-                    ) : null}
-                  </span>
-                  <a
-                    href={example.url}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex items-center gap-1 text-xs font-semibold text-primary hover:underline focus-ring"
-                  >
-                    {example.reference}
-                    <ExternalLink className="h-3.5 w-3.5" aria-hidden />
-                  </a>
-                </div>
-                <ArabicText variant="display" className="mt-4 text-right text-3xl leading-[1.8] sm:text-4xl">
-                  {example.arabic}
-                </ArabicText>
-                <p lang="ar-Latn" className="mt-2 text-sm italic leading-relaxed text-foreground-soft">
-                  {example.transliteration}
-                </p>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                  {example.english}
-                </p>
-                <div className="mt-3 flex flex-wrap items-baseline gap-1.5 text-xs font-semibold text-primary">
-                  <span>Form in the verse:</span>
-                  <ArabicText className="text-lg">{example.focusArabic}</ArabicText>
-                </div>
-                {example.note ? (
-                  <p className="mt-3 rounded-xl bg-accent-amber-soft px-3 py-2 text-xs leading-relaxed text-foreground-soft">
-                    {example.note}
+        {family.relatedForms?.length ? (
+          <details className="group border-t border-border px-4 py-5 sm:px-6">
+            <summary className="flex cursor-pointer list-none items-center justify-between gap-3 focus-ring">
+              <span className="flex flex-wrap items-baseline gap-2 text-sm font-semibold">
+                Related form{family.relatedForms.length === 1 ? "" : "s"}
+                <ArabicText as="span" className="text-xl text-foreground-soft">صِيغَة أُخْرَى</ArabicText>
+              </span>
+              <span className="inline-flex items-center gap-1 text-xs font-semibold text-primary">
+                Show
+                <ChevronRight className="h-4 w-4 transition-transform group-open:rotate-90" aria-hidden />
+              </span>
+            </summary>
+            <div className="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+              {family.relatedForms.map((form) => (
+                <div key={`${form.label}-${form.arabic}`} className="rounded-2xl border border-border bg-background-soft p-4">
+                  <p className="text-[11px] font-bold uppercase tracking-wide text-muted-foreground">
+                    {form.label}
                   </p>
-                ) : null}
-              </div>
-            ))}
-          </div>
+                  <ArabicText variant="display" className="mt-2 text-3xl">
+                    {form.arabic}
+                  </ArabicText>
+                  <p lang="ar-Latn" className="mt-1 text-sm italic text-foreground-soft">
+                    {form.transliteration}
+                  </p>
+                  <p className="mt-1 text-xs text-muted-foreground">{form.english}</p>
+                </div>
+              ))}
+            </div>
+          </details>
+        ) : null}
+
+        <div
+          className={cn(
+            "grid gap-4 border-t border-border bg-background-soft p-4 sm:p-6",
+            (family.opposite || family.relatedNameOfAllah) &&
+              "lg:grid-cols-[minmax(0,1fr)_minmax(15rem,0.42fr)]",
+          )}
+        >
+          <ContextCarousel family={family} />
 
           <div className="space-y-3">
             {family.opposite ? (
@@ -295,6 +319,145 @@ function ExploreMode({
         </div>
       </article>
     </div>
+  );
+}
+
+function ContextCarousel({ family }: { family: VerbFamily }) {
+  const [exampleIndex, setExampleIndex] = useState(0);
+  const example = family.examples[exampleIndex] ?? family.examples[0];
+  if (!example) return null;
+  const hasSourceMeta =
+    example.kind !== "class" || Boolean(example.grade) || Boolean(example.url);
+
+  function move(direction: -1 | 1) {
+    setExampleIndex((current) =>
+      (current + direction + family.examples.length) % family.examples.length,
+    );
+  }
+
+  return (
+    <section className="space-y-3" aria-labelledby={`${family.id}-context-heading`}>
+      <div className="flex items-center justify-between gap-3">
+        <h3 id={`${family.id}-context-heading`} className="flex items-center gap-2 text-sm font-semibold">
+          <Sparkles className="h-4 w-4 text-accent-gold" aria-hidden />
+          Examples
+        </h3>
+        <span className="text-xs font-semibold text-muted-foreground">
+          {exampleIndex + 1} of {family.examples.length}
+        </span>
+      </div>
+
+      <div className="rounded-2xl border border-border bg-card p-4 sm:p-6">
+        {hasSourceMeta ? (
+          <div className="flex items-center justify-between gap-3">
+            <span className="flex flex-wrap items-center gap-2">
+              {example.kind !== "class" ? (
+                <span className="rounded-full bg-primary-soft px-2.5 py-1 text-xs font-bold text-primary">
+                  {example.kind === "quran" ? "Qur’an" : "Hadith"}
+                </span>
+              ) : null}
+              {example.grade ? (
+                <span className="text-xs font-medium text-muted-foreground">{example.grade}</span>
+              ) : null}
+            </span>
+            {example.url ? (
+              <a
+                href={example.url}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-1 text-xs font-semibold text-primary hover:underline focus-ring"
+              >
+                {example.reference}
+                <ExternalLink className="h-3.5 w-3.5" aria-hidden />
+              </a>
+            ) : null}
+          </div>
+        ) : null}
+
+        <HighlightedArabicExample
+          arabic={example.arabic}
+          focusArabic={example.focusArabic}
+          className={hasSourceMeta ? "mt-5" : "mt-1"}
+        />
+        <p lang="ar-Latn" className="mt-2 text-sm italic leading-relaxed text-foreground-soft">
+          {example.transliteration}
+        </p>
+        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{example.english}</p>
+        {example.note ? (
+          <details className="mt-3 rounded-xl border border-border bg-background-soft px-3 py-2 text-xs leading-relaxed text-foreground-soft">
+            <summary className="cursor-pointer font-semibold text-primary focus-ring">Why this example?</summary>
+            <p className="mt-2">{example.note}</p>
+          </details>
+        ) : null}
+
+        {family.examples.length > 1 ? (
+          <div className="mt-5 flex items-center justify-between border-t border-border pt-4">
+            <button
+              type="button"
+              onClick={() => move(-1)}
+              className="inline-flex items-center gap-1 rounded-full border border-border bg-background-soft px-3 py-2 text-xs font-semibold hover:bg-muted focus-ring"
+            >
+              <ChevronLeft className="h-4 w-4" aria-hidden />
+              Previous
+            </button>
+            <div className="flex gap-1.5" aria-hidden>
+              {family.examples.map((_, index) => (
+                <span
+                  key={index}
+                  className={cn(
+                    "h-2 rounded-full transition-all",
+                    index === exampleIndex ? "w-6 bg-primary" : "w-2 bg-border",
+                  )}
+                />
+              ))}
+            </div>
+            <button
+              type="button"
+              onClick={() => move(1)}
+              className="inline-flex items-center gap-1 rounded-full bg-primary px-3 py-2 text-xs font-semibold text-primary-foreground hover:opacity-90 focus-ring"
+            >
+              Next
+              <ChevronRight className="h-4 w-4" aria-hidden />
+            </button>
+          </div>
+        ) : null}
+      </div>
+    </section>
+  );
+}
+
+function HighlightedArabicExample({
+  arabic,
+  focusArabic,
+  className,
+}: {
+  arabic: string;
+  focusArabic: string;
+  className?: string;
+}) {
+  const focusIndex = arabic.indexOf(focusArabic);
+  if (focusIndex < 0) {
+    return (
+      <ArabicText
+        variant="display"
+        className={cn("text-right text-4xl leading-[1.9] sm:text-5xl", className)}
+      >
+        {arabic}
+      </ArabicText>
+    );
+  }
+
+  return (
+    <ArabicText
+      variant="display"
+      className={cn("text-right text-4xl leading-[1.9] sm:text-5xl", className)}
+    >
+      {arabic.slice(0, focusIndex)}
+      <span className="rounded-lg bg-primary-soft px-1 text-primary">
+        {focusArabic}
+      </span>
+      {arabic.slice(focusIndex + focusArabic.length)}
+    </ArabicText>
   );
 }
 

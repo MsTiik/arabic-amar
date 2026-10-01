@@ -27,7 +27,12 @@ describe("verb families", () => {
         expect(example.arabic).toContain(example.focusArabic);
         expect(example.transliteration).toBeTruthy();
         expect(example.english).toBeTruthy();
-        expect(example.url).toMatch(/^https:\/\//);
+        if (example.kind === "class") {
+          expect(example.reference).toMatch(/^AMAR Level 2/);
+          expect(example.url).toBeUndefined();
+        } else {
+          expect(example.url).toMatch(/^https:\/\//);
+        }
       }
     }
   });
@@ -35,6 +40,30 @@ describe("verb families", () => {
   test("includes the requested courtesy and remaining families", () => {
     expect(VERB_FAMILIES.some((family) => family.id === "tafaddala")).toBe(true);
     expect(VERB_FAMILIES.some((family) => family.id === "baqiya")).toBe(true);
+  });
+
+  test("places the five Level 2 class-note families first and preserves related forms", () => {
+    const levelTwoFamilies = VERB_FAMILIES.slice(0, 5);
+    expect(levelTwoFamilies.map((family) => family.id)).toEqual([
+      "kataba",
+      "qaraa",
+      "sharaha",
+      "fahima",
+      "waqafa",
+    ]);
+    expect(levelTwoFamilies.map((family) => family.levelTwoSourcePage)).toEqual([
+      16, 17, 18, 19, 20,
+    ]);
+    expect(levelTwoFamilies.every((family) => family.levelTwoReviewStatus === "confirmed")).toBe(true);
+    expect(VERB_FAMILIES.find((family) => family.id === "qaraa")?.relatedForms).toEqual(
+      expect.arrayContaining([expect.objectContaining({ arabic: "قَارِئ" })]),
+    );
+    expect(VERB_FAMILIES.find((family) => family.id === "waqafa")?.relatedForms).toEqual(
+      expect.arrayContaining([expect.objectContaining({ arabic: "وَاقِف" })]),
+    );
+    expect(
+      Object.fromEntries(levelTwoFamilies.map((family) => [family.id, family.examples.length])),
+    ).toEqual({ kataba: 5, qaraa: 5, sharaha: 4, fahima: 4, waqafa: 5 });
   });
 
   test("shuffles every form exactly once and stays deterministic", () => {

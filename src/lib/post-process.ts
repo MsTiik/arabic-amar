@@ -9,6 +9,32 @@ const SPELLING_FIXES: Record<string, string> = {
   ERUOPE: "EUROPE",
 };
 
+type KnownVocabularyCorrection = Pick<
+  VocabEntry,
+  "id" | "arabic" | "pronunciation" | "english"
+>;
+
+const ERASER_CORRECTION: KnownVocabularyCorrection = {
+  id: "lesson-nouns-in-the-classroom__classroom-singular-and-plural__ممحاة__ممحات__mimhah-mimhat__eraser-erasers",
+  arabic: "مِمْحَاة / مَمَاحٍ",
+  pronunciation: "mimḥāh / mamāḥin",
+  english: "eraser / erasers",
+};
+
+const SHARPENER_CORRECTION: KnownVocabularyCorrection = {
+  id: "lesson-nouns-in-the-classroom__classroom-singular-and-plural__مبراة__مبرايات__mibrah-mibrayat__sharpener-sharpeners",
+  arabic: "مِبْرَاة / مَبَارٍ",
+  pronunciation: "mibrāh / mabārin",
+  english: "sharpener / sharpeners",
+};
+
+const KNOWN_VOCABULARY_CORRECTIONS: Record<string, KnownVocabularyCorrection> = {
+  "lesson-nouns-in-the-classroom\u0000ممحاة ممحات": ERASER_CORRECTION,
+  "lesson-nouns-in-the-classroom\u0000ممحاة مماح": ERASER_CORRECTION,
+  "lesson-nouns-in-the-classroom\u0000مبراة مبرايات": SHARPENER_CORRECTION,
+  "lesson-nouns-in-the-classroom\u0000مبراة مبار": SHARPENER_CORRECTION,
+};
+
 const HIJRI_MONTH_GLOSSES: Record<number, string> = {
   1: "Muḥarram (1st Hijri month)",
   2: "Ṣafar (2nd Hijri month)",
@@ -82,6 +108,37 @@ export function applySpellingFixes(content: SiteContent): SiteContent {
       ...v,
       continent: fixSpelling(v.continent),
       subCategory: fixSpelling(v.subCategory),
+    })),
+  };
+}
+
+/**
+ * Correct a small number of source-document forms that were regularised as
+ * sound plurals even though standard Arabic uses established broken plurals.
+ * Stable canonical IDs preserve existing learner progress when the source
+ * document itself is corrected and the parser would otherwise generate a new
+ * identity from the changed Arabic or transliteration.
+ */
+export function correctKnownVocabulary(content: SiteContent): SiteContent {
+  const idRemaps = new Map<string, string>();
+  const vocab = content.vocab.map((entry) => {
+    const key = `${entry.lessonId}\u0000${entry.arabicFolded}`;
+    const correction = KNOWN_VOCABULARY_CORRECTIONS[key];
+    if (!correction) return entry;
+    idRemaps.set(entry.id, correction.id);
+    return {
+      ...entry,
+      ...correction,
+      arabicFolded: foldForSearch(correction.arabic).replace(/\s*\/\s*/g, " "),
+    };
+  });
+
+  return {
+    ...content,
+    vocab,
+    lessons: content.lessons.map((lesson) => ({
+      ...lesson,
+      vocabIds: lesson.vocabIds.map((id) => idRemaps.get(id) ?? id),
     })),
   };
 }

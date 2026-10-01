@@ -14,6 +14,7 @@ import { parseDocxBuffer } from "../src/lib/parser";
 import {
   applySpellingFixes,
   correctConjugationLabels,
+  correctKnownVocabulary,
   dedupeLongRepeatedEnglish,
   fillIslamicMonthGlosses,
   splitMarketplaceAndColours,
@@ -40,7 +41,9 @@ async function main(): Promise<void> {
   const { content: raw, warnings } = await parseDocxBuffer(buf, { verbose: true });
   const transformed = splitMarketplaceAndColours(
     correctConjugationLabels(
-      fillIslamicMonthGlosses(applySpellingFixes(dedupeLongRepeatedEnglish(raw))),
+      correctKnownVocabulary(
+        fillIslamicMonthGlosses(applySpellingFixes(dedupeLongRepeatedEnglish(raw))),
+      ),
     ),
   );
   const content = transformed.content;

@@ -76,6 +76,21 @@ describe("content vocabulary search", () => {
     expect(
       coloursVocab.some((entry) => entry.arabicFolded === foldForSearch("أَبْيَض / بَيْضَاء")),
     ).toBe(true);
+    const classroomVocab = content.vocab.filter((entry) =>
+      entry.topicSlugs.includes("nouns-in-the-classroom"),
+    );
+    expect(classroomVocab).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          arabic: "مِمْحَاة / مَمَاحٍ",
+          pronunciation: "mimḥāh / mamāḥin",
+        }),
+        expect.objectContaining({
+          arabic: "مِبْرَاة / مَبَارٍ",
+          pronunciation: "mibrāh / mabārin",
+        }),
+      ]),
+    );
   });
 });
 
