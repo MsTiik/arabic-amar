@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-21T23:57:25.291Z",
+  "generatedAt": "2026-10-01T17:22:22.327Z",
   "totals": {
     "lessons": 12,
     "topics": 12,
@@ -11,33 +11,33 @@
   },
   "audioCoverage": {
     "vocabTotal": 426,
-    "vocabWithAudio": 291,
-    "vocabMissingAudio": 135,
-    "coveragePercent": 68,
+    "vocabWithAudio": 304,
+    "vocabMissingAudio": 122,
+    "coveragePercent": 71,
     "byTopic": [
       {
         "slug": "body-parts",
         "name": "Body Parts",
         "total": 23,
-        "withAudio": 19,
-        "missingAudio": 4,
-        "coveragePercent": 83
+        "withAudio": 20,
+        "missingAudio": 3,
+        "coveragePercent": 87
       },
       {
         "slug": "numbers",
         "name": "Numbers",
         "total": 30,
-        "withAudio": 21,
-        "missingAudio": 9,
-        "coveragePercent": 70
+        "withAudio": 22,
+        "missingAudio": 8,
+        "coveragePercent": 73
       },
       {
         "slug": "time",
         "name": "Time",
         "total": 22,
-        "withAudio": 6,
-        "missingAudio": 16,
-        "coveragePercent": 27
+        "withAudio": 7,
+        "missingAudio": 15,
+        "coveragePercent": 32
       },
       {
         "slug": "days-of-the-week",
@@ -59,17 +59,17 @@
         "slug": "entities",
         "name": "Entities",
         "total": 45,
-        "withAudio": 34,
-        "missingAudio": 11,
-        "coveragePercent": 76
+        "withAudio": 36,
+        "missingAudio": 9,
+        "coveragePercent": 80
       },
       {
         "slug": "getting-to-know-each-other",
         "name": "Getting to know each other",
         "total": 128,
-        "withAudio": 87,
-        "missingAudio": 41,
-        "coveragePercent": 68
+        "withAudio": 93,
+        "missingAudio": 35,
+        "coveragePercent": 73
       },
       {
         "slug": "nouns-in-the-classroom",
@@ -91,9 +91,9 @@
         "slug": "the-marketplace",
         "name": "The Marketplace",
         "total": 59,
-        "withAudio": 32,
-        "missingAudio": 27,
-        "coveragePercent": 54
+        "withAudio": 33,
+        "missingAudio": 26,
+        "coveragePercent": 56
       },
       {
         "slug": "colours",
@@ -107,9 +107,9 @@
         "slug": "command-verbs-in-the-qur-an",
         "name": "Command Verbs in the Qur’an",
         "total": 32,
-        "withAudio": 21,
-        "missingAudio": 11,
-        "coveragePercent": 66
+        "withAudio": 22,
+        "missingAudio": 10,
+        "coveragePercent": 69
       }
     ]
   },
@@ -130,20 +130,20 @@
       "code": "missing-audio",
       "severity": "info",
       "message": "Vocabulary words do not have a matching audio-manifest entry.",
-      "count": 135,
+      "count": 122,
       "examples": [
         "lesson-body-parts: جَبِينٌ / jabīnun / Forehead",
         "lesson-body-parts: أَسْنَانٌ / asnānun / Teeth",
         "lesson-body-parts: كَتِفٌ / katifun / Shoulder",
-        "lesson-body-parts: فَخِذٌ / fakhidhun / Thigh",
-        "lesson-numbers: مِائَةٌ / miʾa(tun) / Hundred",
         "lesson-numbers: مِائَتَانِ / miʾatāni / Two Hundred",
         "lesson-numbers: ثَلَاثُمِائَةٌ / thalāthu-miʾa(tun) / Three Hundred",
         "lesson-numbers: أَرْبَعُمِائَةٌ / arbaʿu-miʾa(tun) / Four Hundred",
         "lesson-numbers: خَمْسُمِائَةٌ / khamsu-miʾa(tun) / Five Hundred",
         "lesson-numbers: سِتُّمِائَةٌ / sittu-miʾa(tun) / Six Hundred",
         "lesson-numbers: سَبْعُمِائَةٌ / sabʿu-miʾa(tun) / Seven Hundred",
-        "lesson-numbers: ثَمَانِمِائَةٌ / thamāni-miʾa(tun) / Eight Hundred"
+        "lesson-numbers: ثَمَانِمِائَةٌ / thamāni-miʾa(tun) / Eight Hundred",
+        "lesson-numbers: تِسْعُمِائَةٌ / tisʿu-miʾa(tun) / Nine Hundred",
+        "lesson-time: دَقائِق / daqāʾiq / Minute Past (for 1 - 10 minutes past)"
       ]
     }
   ]

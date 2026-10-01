@@ -413,9 +413,9 @@
         "lesson-nouns-in-the-classroom__classroom-singular-and-plural__ممحاة__ممحات__mimhah-mimhat__eraser-erasers",
         "lesson-nouns-in-the-classroom__classroom-singular-and-plural__مبراة__مبرايات__mibrah-mibrayat__sharpener-sharpeners",
         "lesson-nouns-in-the-classroom__classroom-singular-and-plural__لوحة__لوحات__lawhah-lawhat__board-boards",
-        "lesson-nouns-in-the-classroom__classroom-singular-and-plural__ممسحة__ممسحات__mimsahah-mimsahat__cloth-wiper-cloths-wipers",
-        "lesson-nouns-in-the-classroom__classroom-singular-and-plural__حجرة__حجر__hujrah-hujur__room-rooms",
-        "lesson-nouns-in-the-classroom__classroom-singular-and-plural__حجرة-الدراسة__حجر-الدراسة__hujra-tu-d-dirasah-hujaru-d-dirasah__classroom-classrooms",
+        "lesson-nouns-in-the-classroom__classroom-singular-and-plural__ممسحة__مماسح__mimsahah-mamasih__cloth-wiper-cloths-wipers",
+        "lesson-nouns-in-the-classroom__classroom-singular-and-plural__حجرة__حجرات__hujrah-hujurat__room-rooms",
+        "lesson-nouns-in-the-classroom__classroom-singular-and-plural__حجرة-الدراسة__حجرات-الدراسة__hujra-tu-d-dirasah-hujuratu-ad-dirasah__classroom-classrooms",
         "lesson-nouns-in-the-classroom__classroom-singular-and-plural__مكتب__مكاتب__maktab-makatib__desk-office-desks-offices",
         "lesson-nouns-in-the-classroom__classroom-singular-and-plural__مقعد__مقاعد__maqad-maqaid__seat-seats",
         "lesson-nouns-in-the-classroom__classroom-singular-and-plural__نافذة__نوافذ__nafidhah-nawafidh__window-windows",
@@ -833,7 +833,7 @@
       "pronunciation": "ḥājibun",
       "english": "Eyebrow",
       "category": "HEAD",
-      "gender": "M",
+      "gender": "F",
       "isExtra": false,
       "topicSlugs": [
         "body-parts"
@@ -945,7 +945,7 @@
       "pronunciation": "katifun",
       "english": "Shoulder",
       "category": "UPPER BODY",
-      "gender": "M",
+      "gender": "F",
       "isExtra": false,
       "topicSlugs": [
         "body-parts"
@@ -959,7 +959,7 @@
       "pronunciation": "dhirāʿun",
       "english": "Arm / Forearm",
       "category": "UPPER BODY",
-      "gender": "M",
+      "gender": "F",
       "isExtra": false,
       "topicSlugs": [
         "body-parts"
@@ -1029,7 +1029,7 @@
       "pronunciation": "fakhidhun",
       "english": "Thigh",
       "category": "LOWER BODY",
-      "gender": "M",
+      "gender": "F",
       "isExtra": false,
       "topicSlugs": [
         "body-parts"
@@ -1529,7 +1529,7 @@
       "id": "lesson-time__general-2",
       "arabic": "دَقيقَة",
       "arabicFolded": "دقيقة",
-      "pronunciation": "daqīqah (plural form)",
+      "pronunciation": "daqīqah",
       "english": "Minutes Past (for 11-59 minutes past)",
       "category": "GENERAL",
       "isExtra": false,
@@ -1542,7 +1542,7 @@
       "id": "lesson-time__general-3",
       "arabic": "دَقائِق",
       "arabicFolded": "دقائق",
-      "pronunciation": "daqāʾiq (singular form)",
+      "pronunciation": "daqāʾiq",
       "english": "Minute Past (for 1 - 10 minutes past)",
       "category": "GENERAL",
       "isExtra": false,
@@ -1556,7 +1556,7 @@
       "arabic": "دَقيقَتان",
       "arabicFolded": "دقيقتان",
       "pronunciation": "daqīqataan",
-      "english": "“Two minutes past”",
+      "english": "(exactly) “Two minutes past”",
       "category": "GENERAL",
       "isExtra": false,
       "topicSlugs": [
@@ -2015,9 +2015,9 @@
     },
     {
       "id": "lesson-islamic-and-gregorian-months__general-3",
-      "arabic": "السَّنَة",
-      "arabicFolded": "السنة",
-      "pronunciation": "as-sanah",
+      "arabic": "سَنَة",
+      "arabicFolded": "سنة",
+      "pronunciation": "sanah",
       "english": "year",
       "category": "GENERAL",
       "isExtra": false,
@@ -2937,7 +2937,7 @@
       "arabic": "لُعْبَةٌ",
       "arabicFolded": "لعبة",
       "pronunciation": "luʿbah",
-      "english": "toys",
+      "english": "toy",
       "category": "OBJECTS",
       "isExtra": false,
       "topicSlugs": [
@@ -4986,10 +4986,10 @@
       "lessonId": "lesson-nouns-in-the-classroom"
     },
     {
-      "id": "lesson-nouns-in-the-classroom__classroom-singular-and-plural__ممسحة__ممسحات__mimsahah-mimsahat__cloth-wiper-cloths-wipers",
-      "arabic": "مِمْسَحَة / مِمْسَحَات",
-      "arabicFolded": "ممسحة ممسحات",
-      "pronunciation": "mimsahah / mimsahat",
+      "id": "lesson-nouns-in-the-classroom__classroom-singular-and-plural__ممسحة__مماسح__mimsahah-mamasih__cloth-wiper-cloths-wipers",
+      "arabic": "مِمْسَحَة / مَمَاسِح",
+      "arabicFolded": "ممسحة مماسح",
+      "pronunciation": "mimsahah / Mamāsiḥ",
       "english": "cloth/wiper / cloths/wipers",
       "category": "Classroom Singular and Plural",
       "isExtra": false,
@@ -4999,10 +4999,10 @@
       "lessonId": "lesson-nouns-in-the-classroom"
     },
     {
-      "id": "lesson-nouns-in-the-classroom__classroom-singular-and-plural__حجرة__حجر__hujrah-hujur__room-rooms",
-      "arabic": "حُجْرَة / حُجُر",
-      "arabicFolded": "حجرة حجر",
-      "pronunciation": "hujrah / hujur",
+      "id": "lesson-nouns-in-the-classroom__classroom-singular-and-plural__حجرة__حجرات__hujrah-hujurat__room-rooms",
+      "arabic": "حُجْرَة / حُجُرَات",
+      "arabicFolded": "حجرة حجرات",
+      "pronunciation": "hujrah / Ḥujurāt",
       "english": "room / rooms",
       "category": "Classroom Singular and Plural",
       "isExtra": false,
@@ -5012,10 +5012,10 @@
       "lessonId": "lesson-nouns-in-the-classroom"
     },
     {
-      "id": "lesson-nouns-in-the-classroom__classroom-singular-and-plural__حجرة-الدراسة__حجر-الدراسة__hujra-tu-d-dirasah-hujaru-d-dirasah__classroom-classrooms",
-      "arabic": "حُجْرَةُ الدِّرَاسَة / حُجَرُ الدِّرَاسَة",
-      "arabicFolded": "حجرة الدراسة حجر الدراسة",
-      "pronunciation": "hujra-tu d-dirasah / hujaru d-dirasah",
+      "id": "lesson-nouns-in-the-classroom__classroom-singular-and-plural__حجرة-الدراسة__حجرات-الدراسة__hujra-tu-d-dirasah-hujuratu-ad-dirasah__classroom-classrooms",
+      "arabic": "حُجْرَةُ الدِّرَاسَة / حُجُرَاتُ الدِّرَاسَة",
+      "arabicFolded": "حجرة الدراسة حجرات الدراسة",
+      "pronunciation": "hujra-tu d-dirasah / Ḥujurātu ad-dirāsah",
       "english": "classroom / classrooms",
       "category": "Classroom Singular and Plural",
       "isExtra": false,
@@ -6759,14 +6759,14 @@
           ]
         },
         {
-          "arabic": "سَاعَةٌ",
-          "pronunciation": "sāʿatun",
-          "english": "Hour",
+          "arabic": "قَدَمٌ",
+          "pronunciation": "qadamun",
+          "english": "Foot",
           "parts": [
             {
               "label": "Feminine (ـة)",
-              "arabic": "سَاعَةٌ",
-              "english": "Hour"
+              "arabic": "قَدَمٌ",
+              "english": "Foot"
             }
           ]
         },
@@ -9743,5 +9743,5 @@
     "name": "AMAR Arabic Programme",
     "docUrl": "https://docs.google.com/document/d/1wqbU7rsLUm0wqCjQPS2PbtCTThZOxnE2CnClxa8DETc/edit"
   },
-  "fetchedAt": "2026-06-21T23:57:25.291Z"
+  "fetchedAt": "2026-10-01T17:22:22.327Z"
 }

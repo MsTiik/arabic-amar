@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "fetchedAt": "2026-07-17T12:59:38.747Z",
+  "fetchedAt": "2026-10-01T17:22:30.706Z",
   "entries": {
     "١ - محرم": {
       "url": "https://upload.wikimedia.org/wikipedia/commons/0/0b/LL-Q13955_%28ara%29-Fjmustak-%D9%85%D8%AD%D8%B1%D9%85.wav",
@@ -2556,6 +2556,20 @@
       "title": "File:LL-Q13955 (ara)-Rashed Aljahdali-ياباني.wav",
       "author": "Rashed Aljahdali",
       "license": "CC-BY-SA-4.0"
+    },
+    "حجرة / حجرات": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/5/54/LL-Q13955_%28ara%29-Fjmustak-%D8%AD%D8%AC%D8%B1%D8%A9.wav?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "source": "lingualibre",
+      "title": "File:LL-Q13955 (ara)-Fjmustak-حجرة.wav",
+      "author": "Fjmustak",
+      "license": "CC-BY-SA-4.0"
+    },
+    "سنة": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/7/71/LL-Q13955_%28ara%29-Zinou2go-%D8%B3%D9%86%D8%A9.wav?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "source": "lingualibre",
+      "title": "File:LL-Q13955 (ara)-Zinou2go-سنة.wav",
+      "author": "Zinou2go",
+      "license": "CC-BY-SA-4.0"
     }
   },
   "quran": {
@@ -2897,6 +2911,7 @@
     "فقرة / فقر",
     "منبر / منابر",
     "ممحاة / مماح",
-    "مبراة / مبار"
+    "مبراة / مبار",
+    "حجرة الدراسة / حجرات الدراسة"
   ]
 }
