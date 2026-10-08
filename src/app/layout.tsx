@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import localFont from "next/font/local";
@@ -50,7 +51,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
-  themeColor: "#3e5f6d",
+  themeColor: "#1f4451",
 };
 
 export default function RootLayout({
@@ -76,7 +77,29 @@ export default function RootLayout({
         <ProgressSyncProvider>
           <Topbar />
           <main className="site-main flex-1 flex flex-col">{children}</main>
-          <footer className="site-footer border-t border-border px-4 py-6 text-center text-xs text-muted-foreground">
+          <footer className="site-footer border-t border-border px-4 py-8 text-center text-xs text-muted-foreground">
+            <div className="mx-auto mb-5 flex max-w-6xl flex-col items-center gap-3 sm:flex-row sm:justify-between">
+              <Link
+                href="/"
+                className="inline-flex items-center gap-2 text-sm font-semibold tracking-tight text-foreground"
+              >
+                <span
+                  className="brand-panel flex h-7 w-7 items-center justify-center rounded-md font-arabic-display text-base leading-none text-accent-gold"
+                  aria-hidden
+                >
+                  ع
+                </span>
+                Arabic <span className="text-primary">AMAR</span>
+              </Link>
+              <nav aria-label="Footer" className="flex flex-wrap justify-center gap-x-4 gap-y-1 text-xs font-medium">
+                <Link className="hover:text-foreground" href="/topics">Lessons</Link>
+                <Link className="hover:text-foreground" href="/read">Foundations</Link>
+                <Link className="hover:text-foreground" href="/vocabulary">Vocabulary</Link>
+                <Link className="hover:text-foreground" href="/grammar">Grammar</Link>
+                <Link className="hover:text-foreground" href="/practice">Practice</Link>
+                <Link className="hover:text-foreground" href="/about">About</Link>
+              </nav>
+            </div>
             <p>
               Built from the{" "}
               <a className="underline hover:text-foreground" href="/about">

@@ -12,6 +12,7 @@ import {
   Sparkles,
   Snowflake,
   Target,
+  Trophy,
 } from "lucide-react";
 
 import { AppDialog } from "@/components/app-dialog";
@@ -20,6 +21,7 @@ import { useProgressSync } from "@/components/progress-sync-provider";
 import type { DailyPathPlan, DailyPathStep } from "@/lib/progress";
 import { buildDailyPathPlan, progressActions, summarizeMastery, useProgress } from "@/lib/progress";
 import { getSiteContent } from "@/lib/content";
+import { getLearnerLevel } from "@/lib/learner-level";
 import { cn } from "@/lib/cn";
 
 interface Props {
@@ -37,6 +39,7 @@ export function DashboardHero({ totalVocab, totalRules, totalLessons }: Props) {
   const content = getSiteContent();
   const allWordIds = useMemo(() => content.vocab.map((v) => v.id), [content.vocab]);
   const summary = summarizeMastery(progress, allWordIds);
+  const learnerLevel = getLearnerLevel(summary.mastered);
   const dailyPath = buildDailyPathPlan(progress, content.vocab, content.topics);
   const goal = progress.daily.goalCards;
   const seen = progress.daily.today.cardsSeen;
@@ -145,6 +148,12 @@ export function DashboardHero({ totalVocab, totalRules, totalLessons }: Props) {
               value={accuracy === null ? "—" : `${accuracy}%`}
               tone="muted"
             />
+            <LevelCard
+              level={learnerLevel.level}
+              title={learnerLevel.title}
+              progress={learnerLevel.progress}
+              remaining={learnerLevel.remaining}
+            />
           </div>
         </div>
 
@@ -164,7 +173,7 @@ export function DashboardHero({ totalVocab, totalRules, totalLessons }: Props) {
             </div>
             <Link
               href={primaryPathHref(dailyPath)}
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground hover:opacity-90 focus-ring"
+              className="cta-glow inline-flex items-center justify-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition hover:brightness-105 active:translate-y-0.5 focus-ring"
             >
               {seen === 0 ? "Start today's path" : "Continue today's path"}
               <ChevronRight className="h-4 w-4" />
@@ -185,9 +194,9 @@ export function DashboardHero({ totalVocab, totalRules, totalLessons }: Props) {
         </div>
 
         <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-3">
-          <Pill label="Words" value={totalVocab} />
-          <Pill label="Grammar rules" value={totalRules} />
-          <Pill label="Lessons" value={totalLessons} />
+          <Pill label="Words" value={totalVocab} href="/vocabulary" />
+          <Pill label="Grammar rules" value={totalRules} href="/grammar" />
+          <Pill label="Lessons" value={totalLessons} href="/topics" />
         </div>
 
         <div className="mt-4 flex flex-wrap items-center justify-between gap-2 text-xs text-muted-foreground">
@@ -471,11 +480,72 @@ function DailyPathStepCard({
   );
 }
 
-function Pill({ label, value }: { label: string; value: number }) {
+function Pill({ label, value, href }: { label: string; value: number; href: string }) {
   return (
-    <div className="flex items-center justify-between rounded-2xl border border-border bg-background-soft px-4 py-3">
-      <span className="text-sm text-muted-foreground">{label}</span>
-      <span className="text-lg font-semibold tabular-nums">{value}</span>
+    <Link
+      href={href}
+      className="group flex items-center justify-between rounded-2xl border border-border bg-background-soft px-4 py-3 transition-colors hover:border-primary/30 hover:bg-muted focus-ring"
+    >
+      <span className="text-sm text-muted-foreground group-hover:text-foreground">{label}</span>
+      <span className="flex items-center gap-1.5 text-lg font-semibold tabular-nums">
+        {value}
+        <ChevronRight className="h-4 w-4 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100" />
+      </span>
+    </Link>
+  );
+}
+
+function LevelCard({
+  level,
+  title,
+  progress,
+  remaining,
+}: {
+  level: number;
+  title: string;
+  progress: number;
+  remaining: number;
+}) {
+  const topLevel = remaining === 0;
+  return (
+    <div
+      className="col-span-2 rounded-2xl border border-accent-gold/40 bg-accent-gold-soft p-3"
+      title={
+        topLevel
+          ? "You've reached the top level."
+          : `Master ${remaining} more word${remaining === 1 ? "" : "s"} to reach level ${level + 1}.`
+      }
+    >
+      <div className="flex items-center justify-between gap-3">
+        <div className="flex items-center gap-2">
+          <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-accent-gold text-sm font-bold tabular-nums text-white shadow-sm">
+            {level}
+          </span>
+          <div className="leading-tight">
+            <div className="text-[11px] font-medium uppercase tracking-wider text-foreground-soft">
+              Level {level}
+            </div>
+            <div className="text-sm font-semibold text-foreground">{title}</div>
+          </div>
+        </div>
+        <span className="flex items-center gap-1 text-[11px] font-medium text-foreground-soft">
+          <Trophy className="h-3.5 w-3.5 text-accent-gold" aria-hidden />
+          {topLevel ? "Top level" : `${remaining} to go`}
+        </span>
+      </div>
+      <div
+        className="mt-2 h-2 overflow-hidden rounded-full bg-accent-gold/20"
+        role="progressbar"
+        aria-valuemin={0}
+        aria-valuemax={100}
+        aria-valuenow={Math.round(progress * 100)}
+        aria-label={`Progress to level ${level + 1}`}
+      >
+        <div
+          className="h-full rounded-full bg-accent-gold transition-[width] duration-500"
+          style={{ width: `${Math.round(progress * 100)}%` }}
+        />
+      </div>
     </div>
   );
 }
