@@ -302,17 +302,17 @@ function PracticeSession({
     <div className="space-y-10">
       <header>
         <p className="section-label">Daily training</p>
-        <h1 className="mt-1 text-3xl font-semibold tracking-tight sm:text-4xl">Practice</h1>
+        <h1 className="mt-1 page-title">Practice</h1>
         <p className="mt-1 text-sm text-muted-foreground">
           Pick a deck and play. Every answered card counts toward your daily goal and your
           per-word mastery.
         </p>
       </header>
 
-      <section className="brand-panel relative overflow-hidden rounded-3xl border border-border p-6 sm:p-8">
+      <section className="brand-panel relative overflow-hidden rounded-[18px] p-6 sm:p-8 shadow-[var(--shadow-md),inset_0_1px_0_oklch(1_0_0/8%)]">
         <div className="flex flex-wrap items-center justify-between gap-6">
           <div className="min-w-0">
-            <h2 className="text-2xl font-bold tracking-tight">Today&apos;s session</h2>
+            <h2 className="section-title">Today&apos;s session</h2>
             <p className="mt-1 text-sm text-foreground-soft">
               {sessionParts.length > 0
                 ? `A 12-card mix picked for you: ${sessionParts.join(" · ")}.`
@@ -322,7 +322,7 @@ function PracticeSession({
           <button
             type="button"
             onClick={startTodaysSession}
-            className="btn-chunky btn-chunky-primary flex shrink-0 items-center gap-2 rounded-full bg-primary px-7 py-3.5 text-base font-bold text-primary-foreground focus-ring"
+            className="btn-chunky btn-chunky-primary flex shrink-0 items-center gap-2 rounded-[12px] bg-primary px-7 py-3.5 text-base font-bold text-primary-foreground focus-ring"
           >
             <Play className="h-5 w-5" aria-hidden />
             Start today&apos;s session
@@ -331,7 +331,7 @@ function PracticeSession({
       </section>
 
       <section>
-        <h2 className="text-lg font-semibold">Quick decks</h2>
+        <h2 className="text-lg font-display">Quick decks</h2>
         <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
           {dueIds.length > 0 ? (
             <DeckCard
@@ -467,7 +467,7 @@ function PracticeSession({
       </section>
 
       <section>
-        <h2 className="text-lg font-semibold">Foundations drills</h2>
+        <h2 className="text-lg font-display">Foundations drills</h2>
         <p className="mt-0.5 text-xs text-muted-foreground">
           Bite-size warm-ups that drill specific skills. Built for this site —
           not from the lessons.
@@ -475,9 +475,9 @@ function PracticeSession({
         <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
           <Link
             href="/practice/verb-families"
-            className="btn-chunky group flex items-start gap-4 rounded-2xl border-2 border-border bg-card p-4 text-left hover:bg-background-soft focus-ring"
+            className="btn-chunky group flex items-start gap-4 rounded-[12px] border-2 border-hairline bg-card p-4 text-left hover:bg-background-soft focus-ring"
           >
-            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-tense-command text-tense-command-accent">
+            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[10px] bg-tense-command text-tense-command-accent">
               <Shuffle className="h-5 w-5" aria-hidden />
             </span>
             <span className="min-w-0 flex-1">
@@ -549,7 +549,7 @@ function PracticeSession({
       </section>
 
       <section>
-        <h2 className="text-lg font-semibold">By lesson</h2>
+        <h2 className="text-lg font-display">By lesson</h2>
         <p className="text-xs text-muted-foreground">
           Run through a single lesson’s worth of words.
         </p>
@@ -567,10 +567,10 @@ function PracticeSession({
               <Link
                 key={l.id}
                 href={`/practice?topic=${l.topicSlugs[0]}&kind=mc`}
-                className="btn-chunky flex items-center gap-4 rounded-2xl border-2 border-border bg-card p-4 hover:bg-background-soft focus-ring"
+                className="btn-chunky flex items-center gap-4 rounded-[12px] border-2 border-hairline bg-card p-4 hover:bg-background-soft focus-ring"
               >
                 <span
-                  className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl ${identity.chip}`}
+                  className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-[10px] ${identity.chip}`}
                 >
                   <LessonIcon className="h-5 w-5" aria-hidden />
                 </span>
@@ -642,10 +642,10 @@ function DeckCard({
     <button
       type="button"
       onClick={onClick}
-      className="btn-chunky group flex items-start gap-4 rounded-2xl border-2 border-border bg-card p-4 text-left hover:bg-background-soft focus-ring"
+      className="btn-chunky group flex items-start gap-4 rounded-[12px] border-2 border-hairline bg-card p-4 text-left hover:bg-background-soft focus-ring"
     >
       <span
-        className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl ${styles.chip}`}
+        className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-[10px] ${styles.chip}`}
       >
         <Icon className="h-5 w-5" aria-hidden />
       </span>
@@ -654,7 +654,7 @@ function DeckCard({
           <span className="text-sm font-semibold">{title}</span>
           {badge ? (
             <span
-              className={`rounded-full px-2 py-0.5 text-[11px] font-bold ${styles.chip}`}
+              className={`chip px-2 py-0.5 text-[11px] font-bold ${styles.chip}`}
             >
               {badge}
             </span>
