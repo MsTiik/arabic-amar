@@ -16,7 +16,6 @@ import {
 } from "@/lib/audio-prefetch";
 import { autoplayWord } from "@/lib/autoplay";
 import { getSiteContent } from "@/lib/content";
-import { getLearnerLevel } from "@/lib/learner-level";
 import { summarizeMastery, useProgress } from "@/lib/progress";
 import {
   answerFeedback,
@@ -378,7 +377,7 @@ function CompletionScreen({
             Best streak: {bestCombo} in a row
           </p>
         ) : null}
-        <LearnerLevelChip />
+        <MasteryChip />
       </div>
       <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
         <button
@@ -401,24 +400,20 @@ function CompletionScreen({
   );
 }
 
-/** Current learner level with words-to-next, derived from overall mastery. */
-function LearnerLevelChip() {
+/** Words mastered across the vocabulary bank, derived from existing progress. */
+function MasteryChip() {
   const progress = useProgress();
-  const allWordIds = useMemo(() => getSiteContent().vocab.map((v) => v.id), []);
+  const allWordIds = useMemo(
+    () => getSiteContent().vocab.filter((v) => !v.isExtra).map((v) => v.id),
+    [],
+  );
   const summary = summarizeMastery(progress, allWordIds);
-  const level = getLearnerLevel(summary.mastered);
   return (
     <p
-      className="inline-flex items-center gap-1.5 rounded-full border border-border bg-background-soft px-3 py-1.5 text-xs font-semibold text-foreground"
-      title={`${summary.mastered} words mastered`}
+      className="inline-flex items-center gap-1.5 rounded-full border border-border bg-background-soft px-3 py-1.5 text-xs font-semibold text-foreground tabular-nums"
+      title="Mastered means answered correctly often enough to reach the top mastery rating."
     >
-      <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-accent-gold text-[10px] font-bold text-white">
-        {level.level}
-      </span>
-      {level.title}
-      <span className="font-medium text-muted-foreground">
-        · {level.remaining === 0 ? "top level" : `${level.remaining} to next level`}
-      </span>
+      {summary.mastered} / {summary.total} words mastered
     </p>
   );
 }
