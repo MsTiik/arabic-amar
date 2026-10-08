@@ -39,7 +39,7 @@ export function ThemeToggle({ className }: { className?: string }) {
       title={`Theme: ${STATE_LABEL[pref]}. ${NEXT_LABEL[pref]}.`}
       aria-label={NEXT_LABEL[pref]}
       className={cn(
-        "inline-flex h-8 w-8 items-center justify-center rounded-full border border-border bg-card text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-ring",
+        "icon-btn focus-ring",
         className,
       )}
     >

@@ -16,6 +16,12 @@ interface Props {
   className?: string;
 }
 
+/** Arabic-Indic numeral shown as a large watermark on each level card. */
+const LEVEL_NUMERAL: Record<string, string> = {
+  "level-1": "١",
+  "level-2": "٢",
+};
+
 export function CurriculumLevelCard({ level, vocab, className }: Props) {
   const progress = useProgress();
   const ids = [...new Set(vocab.map((entry) => entry.id))];
@@ -27,22 +33,26 @@ export function CurriculumLevelCard({ level, vocab, className }: Props) {
     <Link
       href={`/levels/${level.slug}`}
       className={cn(
-        "group relative flex min-h-48 flex-col overflow-hidden rounded-2xl border border-border bg-card p-5 hover-lift focus-ring",
+        "surface group relative flex min-h-48 flex-col overflow-hidden p-5 hover-lift focus-ring",
         className,
       )}
     >
-      <span
-        className={cn(
-          "pointer-events-none absolute -right-8 -top-10 h-32 w-32 rounded-full transition-transform duration-300 group-hover:scale-110",
-          level.slug === "level-1" ? "bg-primary/10" : "bg-accent-gold/10",
-        )}
-        aria-hidden
-      />
+      {LEVEL_NUMERAL[level.slug] ? (
+        <span
+          className={cn(
+            "glyph-watermark right-6 top-12 text-[9rem] transition-transform duration-500 group-hover:-translate-y-1",
+            level.slug === "level-1" ? "text-primary/[0.07]" : "text-accent-gold/[0.1]",
+          )}
+          aria-hidden
+        >
+          {LEVEL_NUMERAL[level.slug]}
+        </span>
+      ) : null}
 
       <div className="relative flex items-start justify-between gap-3">
         <span
           className={cn(
-            "flex h-11 w-11 shrink-0 items-center justify-center rounded-xl ring-1 ring-inset",
+            "flex h-10 w-10 shrink-0 items-center justify-center rounded-[10px] ring-1 ring-inset",
             level.slug === "level-1"
               ? "bg-primary-soft text-primary ring-primary/20"
               : "bg-accent-gold/15 text-accent-gold ring-accent-gold/25",
@@ -51,21 +61,21 @@ export function CurriculumLevelCard({ level, vocab, className }: Props) {
           <Layers3 className="h-5 w-5" aria-hidden />
         </span>
         {inProgress ? (
-          <span className="inline-flex items-center gap-1.5 rounded-full bg-accent-gold/15 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-accent-gold ring-1 ring-inset ring-accent-gold/20">
+          <span className="inline-flex items-center gap-1.5 rounded-md bg-accent-gold/15 px-2 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-accent-gold ring-1 ring-inset ring-accent-gold/20">
             <Sparkles className="h-3 w-3" aria-hidden />
             Growing course
           </span>
         ) : (
-          <ProgressRing value={fraction} size={48} thickness={6} />
+          <ProgressRing value={fraction} size={44} thickness={5} trackClassName="stroke-muted" className="text-xs" />
         )}
       </div>
 
       <div className="relative mt-4">
-        <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+        <p className="eyebrow">
           {level.stage}
         </p>
         <div className="mt-1 flex flex-wrap items-baseline gap-x-2">
-          <h3 className="text-xl font-semibold tracking-tight">{level.title}</h3>
+          <h3 className="font-display text-[1.4rem] leading-tight">{level.title}</h3>
           <ArabicText className="text-xl text-foreground-soft">
             {level.titleArabic}
           </ArabicText>

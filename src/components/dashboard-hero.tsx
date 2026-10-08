@@ -71,10 +71,12 @@ export function DashboardHero({ totalVocab, totalRules, totalLessons }: Props) {
 
   return (
     <>
-      <section className="rounded-3xl border border-border bg-card p-4 sm:p-5">
+      <section>
         {freezeJustConsumed ? (
-          <div className="mb-4 flex items-center gap-2 rounded-2xl border border-primary/40 bg-primary/10 px-4 py-2.5 text-sm">
-            <Snowflake className="h-4 w-4 text-primary" aria-hidden />
+          <div className="surface mb-4 flex items-center gap-2.5 px-4 py-2.5 text-sm">
+            <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-primary-soft text-primary">
+              <Snowflake className="h-3.5 w-3.5" aria-hidden />
+            </span>
             <span className="text-foreground">
               <span className="font-semibold">Streak saved.</span> A freeze
               covered yesterday — your {progress.streak.count}-day streak is
@@ -82,46 +84,32 @@ export function DashboardHero({ totalVocab, totalRules, totalLessons }: Props) {
             </span>
           </div>
         ) : null}
-        <div className="grid gap-4 sm:grid-cols-3">
-          <div className="sm:col-span-2">
-            <p className="text-sm font-medium uppercase tracking-wider text-muted-foreground">
-              Welcome back
-            </p>
-            <h1 className="mt-0.5 text-2xl font-semibold tracking-tight sm:text-3xl">
+        <div className="grid gap-5 lg:grid-cols-[minmax(0,1fr)_360px]">
+          <div>
+            <p className="eyebrow">Welcome back</p>
+            <h1 className="font-display mt-1 text-[2rem] leading-[1.05] text-foreground sm:text-[2.6rem]">
               Today&apos;s practice
             </h1>
-            <p className="mt-1.5 max-w-xl text-sm text-foreground-soft sm:text-[15px]">
+            <p className="mt-2 max-w-xl text-sm leading-relaxed text-foreground-soft sm:text-[15px]">
               Hit your daily goal, keep your streak alive, and chip away at any words you&apos;ve
               been getting wrong. Your progress is saved in this browser
               {sync.configured ? " and can sync when you sign in." : " — no account needed."}
             </p>
-            <div className="mt-3 flex flex-wrap gap-2">
-              <Link
-                href={primaryPathHref(dailyPath)}
-                className="inline-flex items-center gap-2 rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground hover:opacity-90 focus-ring"
-              >
+            <div className="mt-4 flex flex-wrap gap-2.5">
+              <Link href={primaryPathHref(dailyPath)} className="btn btn-primary focus-ring">
                 <Sparkles className="h-4 w-4" />
                 {seen === 0 ? "Start today's path" : "Continue today's path"}
               </Link>
               {dailyPath.weakCount > 0 ? (
-                <Link
-                  href="/practice?deck=weak"
-                  className="inline-flex items-center gap-2 rounded-full border border-danger bg-danger-soft px-4 py-2 text-sm font-semibold text-foreground hover:opacity-90 focus-ring"
-                >
+                <Link href="/practice?deck=weak" className="btn btn-danger-soft focus-ring">
                   Fix weak words ({dailyPath.weakCount})
                 </Link>
               ) : null}
-              <Link
-                href="/vocabulary"
-                className="inline-flex items-center gap-2 rounded-full border border-border bg-background-soft px-4 py-2 text-sm font-medium hover:bg-muted focus-ring"
-              >
+              <Link href="/vocabulary" className="btn btn-secondary focus-ring">
                 Vocabulary bank
               </Link>
               {sync.configured ? (
-                <Link
-                  href="/sync"
-                  className="inline-flex items-center gap-2 rounded-full border border-border bg-background-soft px-4 py-2 text-sm font-medium hover:bg-muted focus-ring"
-                >
+                <Link href="/sync" className="btn btn-secondary focus-ring">
                   <Cloud className="h-4 w-4" />
                   {sync.user ? "Sync settings" : "Sign in to sync"}
                 </Link>
@@ -130,36 +118,36 @@ export function DashboardHero({ totalVocab, totalRules, totalLessons }: Props) {
             <CourseProgressCard course={course} />
           </div>
 
-          <div className="grid grid-cols-2 gap-3">
-            <div className="col-span-2 flex items-center justify-around gap-4 rounded-2xl border border-border bg-background-soft px-4 py-2.5">
+          <div className="surface grid grid-cols-2 grid-rows-[1fr_auto]">
+            <div className="col-span-2 flex items-center justify-around gap-4 border-b border-hairline px-4 py-3">
               <GoalRing seen={seen} goal={goal} reached={goalReached} />
+              <span className="h-14 w-px bg-hairline lg:h-20" aria-hidden />
               <StreakFlame
                 count={progress.streak.count}
                 freezes={freezesAvailable}
               />
             </div>
             <Stat
-              icon={<GraduationCap className="h-4 w-4" />}
+              icon={<GraduationCap className="h-3.5 w-3.5" />}
               label="Mastered"
               value={`${summary.mastered}/${summary.total}`}
               tone="success"
             />
             <Stat
-              icon={<BookOpen className="h-4 w-4" />}
+              icon={<BookOpen className="h-3.5 w-3.5" />}
               label="Accuracy"
               value={accuracy === null ? "—" : `${accuracy}%`}
               tone="muted"
+              className="border-l border-hairline"
             />
           </div>
         </div>
 
-        <div className="brand-panel mt-4 rounded-3xl border border-border p-4">
+        <div className="brand-panel mt-5 overflow-hidden rounded-[18px] p-4 shadow-[var(--shadow-md),inset_0_1px_0_oklch(1_0_0/8%)] sm:p-5">
           <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
             <div className="max-w-2xl">
-              <p className="text-xs font-semibold uppercase tracking-wider text-primary">
-                Today&apos;s path
-              </p>
-              <h2 className="mt-0.5 text-lg font-semibold tracking-tight">
+              <p className="eyebrow !text-primary">Today&apos;s path</p>
+              <h2 className="font-display mt-1 text-xl leading-tight sm:text-[1.4rem]">
                 Start with review, then add a little new Arabic.
               </h2>
               <p className="mt-1 text-sm text-muted-foreground">
@@ -169,14 +157,14 @@ export function DashboardHero({ totalVocab, totalRules, totalLessons }: Props) {
             </div>
             <Link
               href={primaryPathHref(dailyPath)}
-              className="cta-glow inline-flex items-center justify-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition hover:brightness-105 active:translate-y-0.5 focus-ring"
+              className="btn btn-primary btn-lg focus-ring"
             >
               {seen === 0 ? "Start today's path" : "Continue today's path"}
               <ChevronRight className="h-4 w-4" />
             </Link>
           </div>
 
-          <div className="mt-4 grid grid-cols-1 gap-3 md:grid-cols-2 md:gap-y-4 xl:grid-cols-4">
+          <div className="mt-4 grid grid-cols-1 gap-2.5 md:grid-cols-2 xl:grid-cols-4">
             {dailyPath.steps.map((step, index) => (
               <DailyPathStepCard
                 key={step.id}
@@ -189,18 +177,18 @@ export function DashboardHero({ totalVocab, totalRules, totalLessons }: Props) {
           </div>
         </div>
 
-        <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-3">
+        <div className="surface mt-4 grid grid-cols-1 divide-y divide-hairline sm:grid-cols-3 sm:divide-x sm:divide-y-0">
           <Pill label="Words" value={totalVocab} href="/vocabulary" />
           <Pill label="Grammar rules" value={totalRules} href="/grammar" />
           <Pill label="Lessons" value={totalLessons} href="/topics" />
         </div>
 
-        <div className="mt-3 flex flex-wrap items-center justify-between gap-2 text-xs text-muted-foreground">
+        <div className="mt-3 flex flex-wrap items-center justify-between gap-2 px-1 text-xs text-muted-foreground">
           <span>
             Daily goal:{" "}
             <button
               type="button"
-              className="underline-offset-2 hover:underline focus-ring"
+              className="font-medium text-foreground-soft underline decoration-hairline-strong underline-offset-4 hover:decoration-current focus-ring rounded"
               onClick={openGoalDialog}
             >
               {goal} cards
@@ -208,7 +196,7 @@ export function DashboardHero({ totalVocab, totalRules, totalLessons }: Props) {
           </span>
           <button
             type="button"
-            className="underline-offset-2 hover:underline focus-ring"
+            className="underline-offset-4 hover:text-foreground hover:underline focus-ring rounded"
             onClick={() => setResetDialogOpen(true)}
           >
             Reset progress
@@ -233,20 +221,20 @@ export function DashboardHero({ totalVocab, totalRules, totalLessons }: Props) {
               autoFocus
               value={goalInput}
               onChange={(event) => setGoalInput(event.target.value)}
-              className="mt-2 w-full rounded-2xl border border-border bg-background px-3 py-2 text-base outline-none focus-ring"
+              className="mt-2 w-full rounded-[10px] border border-hairline-strong bg-background px-3 py-2 text-base outline-none focus-ring"
             />
           </label>
           <div className="flex flex-wrap justify-end gap-2">
             <button
               type="button"
               onClick={() => setGoalDialogOpen(false)}
-              className="rounded-full border border-border bg-background-soft px-4 py-2 text-sm font-medium hover:bg-muted focus-ring"
+              className="btn btn-secondary focus-ring"
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground hover:opacity-90 focus-ring"
+              className="btn btn-primary focus-ring"
             >
               Save goal
             </button>
@@ -265,14 +253,14 @@ export function DashboardHero({ totalVocab, totalRules, totalLessons }: Props) {
           <button
             type="button"
             onClick={() => setResetDialogOpen(false)}
-            className="rounded-full border border-border bg-background-soft px-4 py-2 text-sm font-medium hover:bg-muted focus-ring"
+            className="btn btn-secondary focus-ring"
           >
             Keep progress
           </button>
           <button
             type="button"
             onClick={resetProgress}
-            className="rounded-full bg-danger px-4 py-2 text-sm font-semibold text-white hover:opacity-90 focus-ring"
+            className="btn bg-danger text-white shadow-[0_2px_0_0_oklch(from_var(--danger)_calc(l-0.14)_c_h)] hover:brightness-105 focus-ring"
           >
             Reset progress
           </button>
@@ -292,25 +280,29 @@ function GoalRing({
   reached: boolean;
 }) {
   return (
-    <div className="flex flex-col items-center gap-1">
+    <div className="flex flex-col items-center gap-2">
       <ProgressRing
         value={goal > 0 ? seen / goal : 0}
-        size={72}
-        thickness={8}
+        size={92}
+        thickness={7}
+        trackClassName="stroke-muted"
         fillClassName={reached ? "stroke-success" : "stroke-primary"}
         label={
           reached ? (
-            <Check className="h-6 w-6 text-success" aria-label="Goal reached" />
+            <Check className="h-6 w-6 text-success lg:h-8 lg:w-8" aria-label="Goal reached" />
           ) : (
-            <span className="text-sm font-bold tabular-nums">
+            <span className="font-display text-base tabular-nums lg:text-xl">
               {seen}
               <span className="font-medium text-muted-foreground">/{goal}</span>
             </span>
           )
         }
-        className={reached ? "goal-ring-reached" : undefined}
+        className={cn(
+          "max-lg:[&>svg]:h-16 max-lg:[&>svg]:w-16",
+          reached && "goal-ring-reached",
+        )}
       />
-      <span className="flex items-center gap-1 text-[11px] font-medium uppercase tracking-wider text-muted-foreground">
+      <span className="eyebrow flex items-center gap-1 !text-[10px]">
         <Target className="h-3 w-3" aria-hidden />
         Daily goal
       </span>
@@ -321,11 +313,11 @@ function GoalRing({
 function StreakFlame({ count, freezes }: { count: number; freezes: number }) {
   const lit = count > 0;
   return (
-    <div className="flex flex-col items-center gap-1">
-      <div className="flex h-[72px] flex-col items-center justify-center">
+    <div className="flex flex-col items-center gap-2">
+      <div className="flex h-16 flex-col lg:h-[92px] items-center justify-center gap-1">
         <Flame
           className={cn(
-            "h-8 w-8",
+            "h-7 w-7 lg:h-10 lg:w-10",
             lit
               ? "flame-lit fill-accent-gold text-accent-gold"
               : "text-border",
@@ -334,14 +326,14 @@ function StreakFlame({ count, freezes }: { count: number; freezes: number }) {
         />
         <span
           className={cn(
-            "text-base font-bold tabular-nums",
+            "font-display text-lg leading-none tabular-nums lg:text-2xl",
             lit ? "text-foreground" : "text-muted-foreground",
           )}
         >
           {count}d
         </span>
       </div>
-      <span className="flex items-center gap-1 text-[11px] font-medium uppercase tracking-wider text-muted-foreground">
+      <span className="eyebrow flex items-center gap-1 !text-[10px]">
         Streak
         {freezes > 0 ? (
           <span className="flex items-center gap-0.5 text-primary">
@@ -361,6 +353,7 @@ function Stat({
   tone,
   sublabel,
   sublabelIcon,
+  className,
 }: {
   icon: React.ReactNode;
   label: string;
@@ -368,22 +361,25 @@ function Stat({
   tone: "primary" | "success" | "gold" | "muted";
   sublabel?: string;
   sublabelIcon?: React.ReactNode;
+  className?: string;
 }) {
   const toneClasses: Record<typeof tone, string> = {
-    primary: "border-primary/40 bg-primary/10 text-primary",
-    success: "border-success/40 bg-success-soft text-foreground",
-    gold: "border-accent-gold/50 bg-accent-gold-soft text-foreground",
-    muted: "border-border bg-background-soft text-foreground-soft",
+    primary: "bg-primary-soft text-primary",
+    success: "bg-success-soft text-success",
+    gold: "bg-accent-gold-soft text-accent-gold",
+    muted: "bg-muted text-muted-foreground",
   };
   return (
-    <div className={cn("rounded-2xl border px-3 py-2.5", toneClasses[tone])}>
-      <div className="flex items-center gap-1.5 text-[11px] font-medium uppercase tracking-wider opacity-80">
-        {icon}
+    <div className={cn("px-4 py-3", className)}>
+      <div className="flex items-center gap-2 text-xs font-medium text-muted-foreground">
+        <span className={cn("flex h-5 w-5 items-center justify-center rounded-md", toneClasses[tone])}>
+          {icon}
+        </span>
         {label}
       </div>
-      <div className="mt-0.5 text-lg font-semibold tabular-nums">{value}</div>
+      <div className="font-display mt-1 text-2xl leading-none tabular-nums text-foreground">{value}</div>
       {sublabel ? (
-        <div className="mt-0.5 flex items-center gap-1 text-[10px] font-medium opacity-70">
+        <div className="mt-1 flex items-center gap-1 text-[10px] font-medium text-muted-foreground">
           {sublabelIcon}
           {sublabel}
         </div>
@@ -417,10 +413,10 @@ function DailyPathStepCard({
       <div className="flex items-center gap-3">
         <span
           className={cn(
-            "inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-sm font-bold tabular-nums",
-            !ready && "bg-success text-white",
-            ready && isFirstReady && "path-node-current bg-primary text-primary-foreground",
-            ready && !isFirstReady && "border-2 border-border bg-background text-muted-foreground",
+            "inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-[13px] font-semibold tabular-nums",
+            !ready && "bg-success text-brand-navy",
+            ready && isFirstReady && "path-node-current bg-primary text-primary-foreground shadow-[inset_0_1px_0_oklch(1_0_0/30%)]",
+            ready && !isFirstReady && "bg-background text-foreground-soft ring-1 ring-inset ring-hairline-strong",
           )}
         >
           {ready ? index + 1 : <Check className="h-4 w-4" />}
@@ -428,19 +424,19 @@ function DailyPathStepCard({
         {!isLast ? (
           <span
             className={cn(
-              "h-1 flex-1 rounded-full",
-              ready ? "bg-border" : "bg-success/50",
+              "h-px flex-1",
+              ready ? "bg-hairline-strong" : "bg-success/50",
             )}
             aria-hidden
           />
         ) : (
           <span className="flex-1" aria-hidden />
         )}
-        <span className="rounded-full bg-background-soft px-2 py-1 text-xs font-semibold tabular-nums text-foreground-soft">
+        <span className="rounded-md bg-background/60 px-1.5 py-0.5 text-[11px] font-semibold tabular-nums text-foreground-soft ring-1 ring-inset ring-hairline">
           {step.count}
         </span>
       </div>
-      <h3 className="mt-3 text-sm font-semibold text-foreground">{step.title}</h3>
+      <h3 className="mt-3 text-sm font-semibold tracking-[-0.005em] text-foreground">{step.title}</h3>
       <p className="mt-1 flex-1 text-xs leading-5 text-muted-foreground">
         {step.description}
       </p>
@@ -460,7 +456,7 @@ function DailyPathStepCard({
 
   if (!ready) {
     return (
-      <div className="flex min-h-32 flex-col rounded-2xl border border-border bg-background p-3.5 text-muted-foreground">
+      <div className="flex min-h-32 flex-col rounded-xl bg-background/45 p-3.5 text-muted-foreground ring-1 ring-inset ring-hairline">
         {content}
       </div>
     );
@@ -469,7 +465,7 @@ function DailyPathStepCard({
   return (
     <Link
       href={step.href}
-      className="group flex min-h-32 flex-col rounded-2xl border border-border bg-card p-3.5 transition-colors hover:bg-muted focus-ring"
+      className="group flex min-h-32 flex-col rounded-xl bg-card/80 p-3.5 shadow-[inset_0_1px_0_oklch(1_0_0/7%)] ring-1 ring-inset ring-hairline-strong transition-[background-color,transform] hover:-translate-y-0.5 hover:bg-card focus-ring"
     >
       {content}
     </Link>
@@ -480,10 +476,10 @@ function Pill({ label, value, href }: { label: string; value: number; href: stri
   return (
     <Link
       href={href}
-      className="group flex items-center justify-between rounded-2xl border border-border bg-background-soft px-4 py-3 transition-colors hover:border-primary/30 hover:bg-muted focus-ring"
+      className="group flex items-center justify-between px-4 py-3 transition-colors first:rounded-t-[14px] last:rounded-b-[14px] hover:bg-background-soft focus-ring sm:first:rounded-l-[14px] sm:first:rounded-tr-none sm:last:rounded-r-[14px] sm:last:rounded-bl-none"
     >
       <span className="text-sm text-muted-foreground group-hover:text-foreground">{label}</span>
-      <span className="flex items-center gap-1.5 text-lg font-semibold tabular-nums">
+      <span className="font-display flex items-center gap-1.5 text-2xl leading-none tabular-nums">
         {value}
         <ChevronRight className="h-4 w-4 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100" />
       </span>
@@ -496,25 +492,25 @@ function CourseProgressCard({ course }: { course: CourseProgress }) {
   const next = course.nextLesson;
   return (
     <div
-      className="mt-4 max-w-xl rounded-2xl border border-primary/20 bg-primary-soft px-3 py-2"
+      className="surface mt-5 max-w-xl px-4 py-3"
       title="Mastered means answered correctly often enough to reach the top mastery rating. A lesson counts as covered once every word in it has been introduced in practice."
     >
       <div className="flex items-center justify-between gap-3">
         <div className="leading-tight">
-          <div className="text-[11px] font-medium uppercase tracking-wider text-foreground-soft">
+          <div className="eyebrow !text-[10px]">
             Course progress
           </div>
-          <div className="text-sm font-semibold text-foreground tabular-nums">
+          <div className="mt-0.5 text-sm font-semibold text-foreground tabular-nums">
             {course.masteredWords} / {course.totalWords} words mastered
           </div>
         </div>
-        <span className="flex items-center gap-1 text-[11px] font-medium text-foreground-soft tabular-nums">
-          <Trophy className="h-3.5 w-3.5 text-primary" aria-hidden />
+        <span className="chip !h-6 shrink-0 tabular-nums text-foreground-soft">
+          <Trophy className="h-3.5 w-3.5 text-accent-gold" aria-hidden />
           {course.lessonsCovered} of {course.lessonsTotal} lessons covered
         </span>
       </div>
       <div
-        className="mt-1.5 h-1.5 overflow-hidden rounded-full bg-primary/15"
+        className="mt-2 h-1.5 overflow-hidden rounded-full bg-muted"
         role="progressbar"
         aria-valuemin={0}
         aria-valuemax={100}
@@ -522,11 +518,11 @@ function CourseProgressCard({ course }: { course: CourseProgress }) {
         aria-label={`${course.masteredWords} of ${course.totalWords} words mastered`}
       >
         <div
-          className="h-full rounded-full bg-primary transition-[width] duration-500"
+          className="h-full rounded-full bg-gradient-to-r from-primary to-accent-aqua transition-[width] duration-500"
           style={{ width: `${pct}%` }}
         />
       </div>
-      <div className="mt-1.5 text-xs text-foreground-soft">
+      <div className="mt-2 text-xs text-foreground-soft">
         {next ? (
           <>
             Next:{" "}

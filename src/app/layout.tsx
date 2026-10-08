@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
+import { Fraunces, Inter } from "next/font/google";
 import localFont from "next/font/local";
 import { Analytics } from "@vercel/analytics/next";
 
@@ -15,6 +15,15 @@ import "./globals.css";
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
+});
+
+// Display serif for headings and headline numbers. Variable SOFT axis gives
+// it rounded, friendly terminals so it stays playful next to Inter.
+const fraunces = Fraunces({
+  variable: "--font-fraunces",
+  subsets: ["latin"],
+  axes: ["SOFT", "WONK", "opsz"],
+  display: "swap",
 });
 
 // Self-hosted Noto Naskh Arabic (Medium). Naskh is the traditional book/Quran
@@ -62,7 +71,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${notoArabic.variable} h-full antialiased`}
+      className={`${inter.variable} ${fraunces.variable} ${notoArabic.variable} h-full antialiased`}
       // Bootstrap script and `applyTheme` mutate the className/style here at
       // runtime, which would otherwise trigger a hydration mismatch warning.
       suppressHydrationWarning
@@ -77,14 +86,14 @@ export default function RootLayout({
         <ProgressSyncProvider>
           <Topbar />
           <main className="site-main flex-1 flex flex-col">{children}</main>
-          <footer className="site-footer border-t border-border px-4 py-8 text-center text-xs text-muted-foreground">
+          <footer className="site-footer border-t border-hairline px-4 py-8 text-center text-xs text-muted-foreground">
             <div className="mx-auto mb-5 flex max-w-6xl flex-col items-center gap-3 sm:flex-row sm:justify-between">
               <Link
                 href="/"
                 className="inline-flex items-center gap-2 text-sm font-semibold tracking-tight text-foreground"
               >
                 <span
-                  className="brand-panel flex h-7 w-7 items-center justify-center rounded-md font-arabic-display text-base leading-none text-accent-gold"
+                  className="brand-panel flex h-7 w-7 items-center justify-center rounded-[8px] font-arabic-display text-base leading-none text-accent-gold"
                   aria-hidden
                 >
                   ع
