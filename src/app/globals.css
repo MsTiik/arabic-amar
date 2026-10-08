@@ -347,8 +347,8 @@ body {
     0 8px 24px oklch(from var(--primary) l c h / 30%);
 }
 
-/* Faint aqua/amber ambient wash behind the page hero, clipped to the hero
- * so it never bleeds into content. */
+/* Faint aqua/amber ambient wash behind the page hero. Kept within the hero's
+ * horizontal bounds so it never widens the page on small screens. */
 .ambient-hero {
   position: relative;
   isolation: isolate;
@@ -356,7 +356,7 @@ body {
 .ambient-hero::before {
   content: "";
   position: absolute;
-  inset: -20% -10% auto -10%;
+  inset: -20% 0 auto 0;
   height: 70%;
   z-index: -1;
   pointer-events: none;
