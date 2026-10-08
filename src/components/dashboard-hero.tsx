@@ -70,7 +70,7 @@ export function DashboardHero({ totalVocab, totalRules, totalLessons }: Props) {
 
   return (
     <>
-      <section className="rounded-3xl border border-border bg-card p-5 sm:p-6">
+      <section className="rounded-3xl border border-border bg-card p-4 sm:p-5">
         {freezeJustConsumed ? (
           <div className="mb-4 flex items-center gap-2 rounded-2xl border border-primary/40 bg-primary/10 px-4 py-2.5 text-sm">
             <Snowflake className="h-4 w-4 text-primary" aria-hidden />
@@ -81,20 +81,20 @@ export function DashboardHero({ totalVocab, totalRules, totalLessons }: Props) {
             </span>
           </div>
         ) : null}
-        <div className="grid gap-6 sm:grid-cols-3">
+        <div className="grid gap-4 sm:grid-cols-3">
           <div className="sm:col-span-2">
             <p className="text-sm font-medium uppercase tracking-wider text-muted-foreground">
               Welcome back
             </p>
-            <h1 className="mt-1 text-3xl font-semibold tracking-tight sm:text-4xl">
+            <h1 className="mt-0.5 text-2xl font-semibold tracking-tight sm:text-3xl">
               Today&apos;s practice
             </h1>
-            <p className="mt-2 max-w-xl text-base text-foreground-soft">
+            <p className="mt-1.5 max-w-xl text-sm text-foreground-soft sm:text-[15px]">
               Hit your daily goal, keep your streak alive, and chip away at any words you&apos;ve
               been getting wrong. Your progress is saved in this browser
               {sync.configured ? " and can sync when you sign in." : " — no account needed."}
             </p>
-            <div className="mt-4 flex flex-wrap gap-2">
+            <div className="mt-3 flex flex-wrap gap-2">
               <Link
                 href={primaryPathHref(dailyPath)}
                 className="inline-flex items-center gap-2 rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground hover:opacity-90 focus-ring"
@@ -135,7 +135,7 @@ export function DashboardHero({ totalVocab, totalRules, totalLessons }: Props) {
           </div>
 
           <div className="grid grid-cols-2 gap-3">
-            <div className="col-span-2 flex items-center justify-around gap-4 rounded-2xl border border-border bg-background-soft px-4 py-3">
+            <div className="col-span-2 flex items-center justify-around gap-4 rounded-2xl border border-border bg-background-soft px-4 py-2.5">
               <GoalRing seen={seen} goal={goal} reached={goalReached} />
               <StreakFlame
                 count={progress.streak.count}
@@ -157,13 +157,13 @@ export function DashboardHero({ totalVocab, totalRules, totalLessons }: Props) {
           </div>
         </div>
 
-        <div className="brand-panel mt-5 rounded-3xl border border-border p-4 sm:p-5">
+        <div className="brand-panel mt-4 rounded-3xl border border-border p-4">
           <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
             <div className="max-w-2xl">
               <p className="text-xs font-semibold uppercase tracking-wider text-primary">
                 Today&apos;s path
               </p>
-              <h2 className="mt-1 text-xl font-semibold tracking-tight">
+              <h2 className="mt-0.5 text-lg font-semibold tracking-tight">
                 Start with review, then add a little new Arabic.
               </h2>
               <p className="mt-1 text-sm text-muted-foreground">
@@ -180,7 +180,7 @@ export function DashboardHero({ totalVocab, totalRules, totalLessons }: Props) {
             </Link>
           </div>
 
-          <div className="mt-5 grid grid-cols-1 gap-3 md:grid-cols-2 md:gap-y-5 xl:grid-cols-4">
+          <div className="mt-4 grid grid-cols-1 gap-3 md:grid-cols-2 md:gap-y-4 xl:grid-cols-4">
             {dailyPath.steps.map((step, index) => (
               <DailyPathStepCard
                 key={step.id}
@@ -193,13 +193,13 @@ export function DashboardHero({ totalVocab, totalRules, totalLessons }: Props) {
           </div>
         </div>
 
-        <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-3">
+        <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-3">
           <Pill label="Words" value={totalVocab} href="/vocabulary" />
           <Pill label="Grammar rules" value={totalRules} href="/grammar" />
           <Pill label="Lessons" value={totalLessons} href="/topics" />
         </div>
 
-        <div className="mt-4 flex flex-wrap items-center justify-between gap-2 text-xs text-muted-foreground">
+        <div className="mt-3 flex flex-wrap items-center justify-between gap-2 text-xs text-muted-foreground">
           <span>
             Daily goal:{" "}
             <button
@@ -299,8 +299,8 @@ function GoalRing({
     <div className="flex flex-col items-center gap-1">
       <ProgressRing
         value={goal > 0 ? seen / goal : 0}
-        size={84}
-        thickness={9}
+        size={72}
+        thickness={8}
         fillClassName={reached ? "stroke-success" : "stroke-primary"}
         label={
           reached ? (
@@ -326,10 +326,10 @@ function StreakFlame({ count, freezes }: { count: number; freezes: number }) {
   const lit = count > 0;
   return (
     <div className="flex flex-col items-center gap-1">
-      <div className="flex h-[84px] flex-col items-center justify-center">
+      <div className="flex h-[72px] flex-col items-center justify-center">
         <Flame
           className={cn(
-            "h-10 w-10",
+            "h-8 w-8",
             lit
               ? "flame-lit fill-accent-gold text-accent-gold"
               : "text-border",
@@ -338,7 +338,7 @@ function StreakFlame({ count, freezes }: { count: number; freezes: number }) {
         />
         <span
           className={cn(
-            "text-lg font-bold tabular-nums",
+            "text-base font-bold tabular-nums",
             lit ? "text-foreground" : "text-muted-foreground",
           )}
         >
@@ -380,12 +380,12 @@ function Stat({
     muted: "border-border bg-background-soft text-foreground-soft",
   };
   return (
-    <div className={cn("rounded-2xl border p-3", toneClasses[tone])}>
+    <div className={cn("rounded-2xl border px-3 py-2.5", toneClasses[tone])}>
       <div className="flex items-center gap-1.5 text-[11px] font-medium uppercase tracking-wider opacity-80">
         {icon}
         {label}
       </div>
-      <div className="mt-1 text-xl font-semibold tabular-nums">{value}</div>
+      <div className="mt-0.5 text-lg font-semibold tabular-nums">{value}</div>
       {sublabel ? (
         <div className="mt-0.5 flex items-center gap-1 text-[10px] font-medium opacity-70">
           {sublabelIcon}
@@ -421,13 +421,13 @@ function DailyPathStepCard({
       <div className="flex items-center gap-3">
         <span
           className={cn(
-            "inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-sm font-bold tabular-nums",
+            "inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-sm font-bold tabular-nums",
             !ready && "bg-success text-white",
             ready && isFirstReady && "path-node-current bg-primary text-primary-foreground",
             ready && !isFirstReady && "border-2 border-border bg-background text-muted-foreground",
           )}
         >
-          {ready ? index + 1 : <Check className="h-5 w-5" />}
+          {ready ? index + 1 : <Check className="h-4 w-4" />}
         </span>
         {!isLast ? (
           <span
@@ -444,13 +444,13 @@ function DailyPathStepCard({
           {step.count}
         </span>
       </div>
-      <h3 className="mt-4 text-sm font-semibold text-foreground">{step.title}</h3>
+      <h3 className="mt-3 text-sm font-semibold text-foreground">{step.title}</h3>
       <p className="mt-1 flex-1 text-xs leading-5 text-muted-foreground">
         {step.description}
       </p>
       <span
         className={cn(
-          "mt-3 inline-flex items-center gap-1 text-xs font-semibold",
+          "mt-2 inline-flex items-center gap-1 text-xs font-semibold",
           ready ? "text-primary" : "text-muted-foreground",
         )}
       >
@@ -464,7 +464,7 @@ function DailyPathStepCard({
 
   if (!ready) {
     return (
-      <div className="flex min-h-36 flex-col rounded-2xl border border-border bg-background p-4 text-muted-foreground">
+      <div className="flex min-h-32 flex-col rounded-2xl border border-border bg-background p-3.5 text-muted-foreground">
         {content}
       </div>
     );
@@ -473,7 +473,7 @@ function DailyPathStepCard({
   return (
     <Link
       href={step.href}
-      className="group flex min-h-36 flex-col rounded-2xl border border-border bg-card p-4 transition-colors hover:bg-muted focus-ring"
+      className="group flex min-h-32 flex-col rounded-2xl border border-border bg-card p-3.5 transition-colors hover:bg-muted focus-ring"
     >
       {content}
     </Link>
@@ -509,7 +509,7 @@ function LevelCard({
   const topLevel = remaining === 0;
   return (
     <div
-      className="mt-5 max-w-xl rounded-2xl border border-accent-gold/40 bg-accent-gold-soft px-3 py-2.5"
+      className="mt-4 max-w-xl rounded-2xl border border-accent-gold/40 bg-accent-gold-soft px-3 py-2"
       title={
         topLevel
           ? "You've reached the top level."
