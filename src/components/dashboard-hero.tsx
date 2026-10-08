@@ -70,7 +70,7 @@ export function DashboardHero({ totalVocab, totalRules, totalLessons }: Props) {
 
   return (
     <>
-      <section className="rounded-3xl border border-border bg-card p-6 sm:p-8">
+      <section className="rounded-3xl border border-border bg-card p-5 sm:p-6">
         {freezeJustConsumed ? (
           <div className="mb-4 flex items-center gap-2 rounded-2xl border border-primary/40 bg-primary/10 px-4 py-2.5 text-sm">
             <Snowflake className="h-4 w-4 text-primary" aria-hidden />
@@ -126,6 +126,12 @@ export function DashboardHero({ totalVocab, totalRules, totalLessons }: Props) {
                 </Link>
               ) : null}
             </div>
+            <LevelCard
+              level={learnerLevel.level}
+              title={learnerLevel.title}
+              progress={learnerLevel.progress}
+              remaining={learnerLevel.remaining}
+            />
           </div>
 
           <div className="grid grid-cols-2 gap-3">
@@ -148,16 +154,10 @@ export function DashboardHero({ totalVocab, totalRules, totalLessons }: Props) {
               value={accuracy === null ? "—" : `${accuracy}%`}
               tone="muted"
             />
-            <LevelCard
-              level={learnerLevel.level}
-              title={learnerLevel.title}
-              progress={learnerLevel.progress}
-              remaining={learnerLevel.remaining}
-            />
           </div>
         </div>
 
-        <div className="brand-panel mt-6 rounded-3xl border border-border p-4 sm:p-5">
+        <div className="brand-panel mt-5 rounded-3xl border border-border p-4 sm:p-5">
           <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
             <div className="max-w-2xl">
               <p className="text-xs font-semibold uppercase tracking-wider text-primary">
@@ -509,7 +509,7 @@ function LevelCard({
   const topLevel = remaining === 0;
   return (
     <div
-      className="col-span-2 rounded-2xl border border-accent-gold/40 bg-accent-gold-soft p-3"
+      className="mt-5 max-w-xl rounded-2xl border border-accent-gold/40 bg-accent-gold-soft px-3 py-2.5"
       title={
         topLevel
           ? "You've reached the top level."
@@ -518,7 +518,7 @@ function LevelCard({
     >
       <div className="flex items-center justify-between gap-3">
         <div className="flex items-center gap-2">
-          <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-accent-gold text-sm font-bold tabular-nums text-white shadow-sm">
+          <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-accent-gold text-xs font-bold tabular-nums text-white shadow-sm">
             {level}
           </span>
           <div className="leading-tight">
@@ -534,7 +534,7 @@ function LevelCard({
         </span>
       </div>
       <div
-        className="mt-2 h-2 overflow-hidden rounded-full bg-accent-gold/20"
+        className="mt-1.5 h-1.5 overflow-hidden rounded-full bg-accent-gold/20"
         role="progressbar"
         aria-valuemin={0}
         aria-valuemax={100}

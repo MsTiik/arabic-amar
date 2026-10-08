@@ -12,7 +12,7 @@ export default function Home() {
   const content = getSiteContent();
 
   return (
-    <div className="ambient-hero mx-auto w-full max-w-6xl px-4 py-8 sm:py-12">
+    <div className="ambient-hero mx-auto w-full max-w-6xl px-4 py-6 sm:py-8">
       <DashboardHero
         totalVocab={content.vocab.length}
         totalRules={content.rules.length}
