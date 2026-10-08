@@ -19,9 +19,10 @@ import { AppDialog } from "@/components/app-dialog";
 import { ProgressRing } from "@/components/progress-ring";
 import { useProgressSync } from "@/components/progress-sync-provider";
 import type { DailyPathPlan, DailyPathStep } from "@/lib/progress";
+import type { CourseProgress } from "@/lib/course-progress";
 import { buildDailyPathPlan, progressActions, summarizeMastery, useProgress } from "@/lib/progress";
 import { getSiteContent } from "@/lib/content";
-import { getLearnerLevel } from "@/lib/learner-level";
+import { getCourseProgress } from "@/lib/course-progress";
 import { cn } from "@/lib/cn";
 
 interface Props {
@@ -39,7 +40,7 @@ export function DashboardHero({ totalVocab, totalRules, totalLessons }: Props) {
   const content = getSiteContent();
   const allWordIds = useMemo(() => content.vocab.map((v) => v.id), [content.vocab]);
   const summary = summarizeMastery(progress, allWordIds);
-  const learnerLevel = getLearnerLevel(summary.mastered);
+  const course = getCourseProgress(progress, content.vocab, content.topics);
   const dailyPath = buildDailyPathPlan(progress, content.vocab, content.topics);
   const goal = progress.daily.goalCards;
   const seen = progress.daily.today.cardsSeen;
@@ -126,12 +127,7 @@ export function DashboardHero({ totalVocab, totalRules, totalLessons }: Props) {
                 </Link>
               ) : null}
             </div>
-            <LevelCard
-              level={learnerLevel.level}
-              title={learnerLevel.title}
-              progress={learnerLevel.progress}
-              remaining={learnerLevel.remaining}
-            />
+            <CourseProgressCard course={course} />
           </div>
 
           <div className="grid grid-cols-2 gap-3">
@@ -495,56 +491,53 @@ function Pill({ label, value, href }: { label: string; value: number; href: stri
   );
 }
 
-function LevelCard({
-  level,
-  title,
-  progress,
-  remaining,
-}: {
-  level: number;
-  title: string;
-  progress: number;
-  remaining: number;
-}) {
-  const topLevel = remaining === 0;
+function CourseProgressCard({ course }: { course: CourseProgress }) {
+  const pct = Math.round(course.masteredFraction * 100);
+  const next = course.nextLesson;
   return (
     <div
-      className="mt-4 max-w-xl rounded-2xl border border-accent-gold/40 bg-accent-gold-soft px-3 py-2"
-      title={
-        topLevel
-          ? "You've reached the top level."
-          : `Master ${remaining} more word${remaining === 1 ? "" : "s"} to reach level ${level + 1}.`
-      }
+      className="mt-4 max-w-xl rounded-2xl border border-primary/20 bg-primary-soft px-3 py-2"
+      title="Mastered means answered correctly often enough to reach the top mastery rating. A lesson counts as covered once every word in it has been introduced in practice."
     >
       <div className="flex items-center justify-between gap-3">
-        <div className="flex items-center gap-2">
-          <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-accent-gold text-xs font-bold tabular-nums text-white shadow-sm">
-            {level}
-          </span>
-          <div className="leading-tight">
-            <div className="text-[11px] font-medium uppercase tracking-wider text-foreground-soft">
-              Level {level}
-            </div>
-            <div className="text-sm font-semibold text-foreground">{title}</div>
+        <div className="leading-tight">
+          <div className="text-[11px] font-medium uppercase tracking-wider text-foreground-soft">
+            Course progress
+          </div>
+          <div className="text-sm font-semibold text-foreground tabular-nums">
+            {course.masteredWords} / {course.totalWords} words mastered
           </div>
         </div>
-        <span className="flex items-center gap-1 text-[11px] font-medium text-foreground-soft">
-          <Trophy className="h-3.5 w-3.5 text-accent-gold" aria-hidden />
-          {topLevel ? "Top level" : `${remaining} to go`}
+        <span className="flex items-center gap-1 text-[11px] font-medium text-foreground-soft tabular-nums">
+          <Trophy className="h-3.5 w-3.5 text-primary" aria-hidden />
+          {course.lessonsCovered} of {course.lessonsTotal} lessons covered
         </span>
       </div>
       <div
-        className="mt-1.5 h-1.5 overflow-hidden rounded-full bg-accent-gold/20"
+        className="mt-1.5 h-1.5 overflow-hidden rounded-full bg-primary/15"
         role="progressbar"
         aria-valuemin={0}
         aria-valuemax={100}
-        aria-valuenow={Math.round(progress * 100)}
-        aria-label={topLevel ? "Top learner level reached" : `Progress to level ${level + 1}`}
+        aria-valuenow={pct}
+        aria-label={`${course.masteredWords} of ${course.totalWords} words mastered`}
       >
         <div
-          className="h-full rounded-full bg-accent-gold transition-[width] duration-500"
-          style={{ width: `${Math.round(progress * 100)}%` }}
+          className="h-full rounded-full bg-primary transition-[width] duration-500"
+          style={{ width: `${pct}%` }}
         />
+      </div>
+      <div className="mt-1.5 text-xs text-foreground-soft">
+        {next ? (
+          <>
+            Next:{" "}
+            <Link href={`/topics/${next.slug}`} className="font-semibold text-foreground underline-offset-2 hover:underline focus-ring rounded">
+              {next.name}
+            </Link>{" "}
+            — {next.newCount} new word{next.newCount === 1 ? "" : "s"} left
+          </>
+        ) : (
+          "Every lesson's vocabulary has been introduced — keep reviewing to master the rest."
+        )}
       </div>
     </div>
   );
