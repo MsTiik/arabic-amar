@@ -10,7 +10,12 @@ import {
   teardownAudioElement,
 } from "@/lib/audio-prefetch";
 import { cn } from "@/lib/cn";
-import { speakArabic, stopSpeaking, subscribeArabicVoice } from "@/lib/speech";
+import {
+  speakArabic,
+  stopSpeaking,
+  subscribeArabicVoice,
+  type SpeechHandle,
+} from "@/lib/speech";
 
 interface Props {
   /** The Arabic word to play. Looked up by diacritic-stripped form. */
@@ -50,14 +55,14 @@ export function SpeakerButton({
   // Speech synthesis is only offered once the browser confirms an Arabic
   // voice. Starts false so server and first client render agree.
   const [ttsAvailable, setTtsAvailable] = useState(false);
-  const speakingRef = useRef(false);
+  const speakingRef = useRef<SpeechHandle | null>(null);
 
   useEffect(() => {
     const speaking = speakingRef;
     return () => {
       if (audioRef.current) teardownAudioElement(audioRef.current);
       audioRef.current = null;
-      if (speaking.current) stopSpeaking();
+      if (speaking.current !== null) stopSpeaking(speaking.current);
     };
   }, []);
 
@@ -190,7 +195,7 @@ function SynthesisButton({
   className?: string;
   state: "idle" | "loading" | "playing" | "error";
   setState: (s: "idle" | "loading" | "playing" | "error") => void;
-  speakingRef: React.MutableRefObject<boolean>;
+  speakingRef: React.MutableRefObject<SpeechHandle | null>;
 }) {
   const sizeClass =
     size === "sm"
@@ -205,27 +210,27 @@ function SynthesisButton({
     e.preventDefault();
     e.stopPropagation();
     if (state === "playing") {
-      stopSpeaking();
-      speakingRef.current = false;
+      if (speakingRef.current !== null) stopSpeaking(speakingRef.current);
+      speakingRef.current = null;
       setState("idle");
       return;
     }
-    const ok = speakArabic(arabic, {
+    const handle = speakArabic(arabic, {
       onStart: () => setState("playing"),
       onEnd: () => {
-        speakingRef.current = false;
+        speakingRef.current = null;
         setState("idle");
       },
       onError: () => {
-        speakingRef.current = false;
+        speakingRef.current = null;
         setState("error");
       },
     });
-    if (!ok) {
+    if (handle === null) {
       setState("error");
       return;
     }
-    speakingRef.current = true;
+    speakingRef.current = handle;
     setState("loading");
     trackEvent("audio_played", { source: "word", mode: "tts" });
   }

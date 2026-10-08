@@ -539,7 +539,7 @@ function LevelCard({
         aria-valuemin={0}
         aria-valuemax={100}
         aria-valuenow={Math.round(progress * 100)}
-        aria-label={`Progress to level ${level + 1}`}
+        aria-label={topLevel ? "Top learner level reached" : `Progress to level ${level + 1}`}
       >
         <div
           className="h-full rounded-full bg-accent-gold transition-[width] duration-500"
