@@ -28,7 +28,7 @@ export function TopicHeader({ topic, vocab, ruleCount }: Props) {
   const Icon = identity.icon;
 
   return (
-    <header className="brand-panel rounded-3xl border border-border p-6 sm:p-8">
+    <header className="brand-panel rounded-[18px] shadow-[var(--shadow-md),inset_0_1px_0_oklch(1_0_0/8%)] p-6 sm:p-8">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <Link
@@ -39,11 +39,11 @@ export function TopicHeader({ topic, vocab, ruleCount }: Props) {
           </Link>
           <div className="mt-2 flex items-center gap-3">
             <span
-              className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl ${identity.chip}`}
+              className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-[10px] ${identity.chip}`}
             >
               <Icon className="h-6 w-6" aria-hidden />
             </span>
-            <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">
+            <h1 className="page-title">
               {topic.name}
             </h1>
           </div>
@@ -67,7 +67,7 @@ export function TopicHeader({ topic, vocab, ruleCount }: Props) {
         </div>
       </div>
       {topic.notes && topic.notes.length > 0 ? (
-        <div className="mt-5 space-y-3 border-t border-border pt-5">
+        <div className="mt-5 space-y-3 border-t border-hairline pt-5">
           {topic.notes.map((note, i) => (
             <p key={i} className="text-sm leading-relaxed text-foreground-soft">
               {note}

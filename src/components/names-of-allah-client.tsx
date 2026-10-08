@@ -19,14 +19,14 @@ export function NamesOfAllahClient() {
 
   return (
     <div className="mx-auto w-full max-w-6xl space-y-8 px-4 py-8 sm:py-10">
-      <header className="rounded-3xl border border-primary/20 bg-primary/10 p-6 sm:p-8">
+      <header className="surface border-l-4 border-l-primary p-6 sm:p-8">
         <div className="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
           <div>
-            <p className="inline-flex items-center gap-1 rounded-full border border-primary/30 bg-card/80 px-2.5 py-1 text-xs font-semibold uppercase tracking-wider text-primary">
+            <p className="chip border border-primary/30 bg-card/80 text-primary">
               <Sparkles className="h-3.5 w-3.5" aria-hidden />
               Full 99-name collection
             </p>
-            <h1 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">
+            <h1 className="mt-3 page-title">
               Names of Allah
             </h1>
             <p className="mt-2 max-w-2xl text-sm text-foreground-soft sm:text-base">
@@ -68,13 +68,13 @@ export function NamesOfAllahClient() {
         <div className="mt-5 flex flex-wrap gap-2">
           <Link
             href="/practice?deck=names-of-allah"
-            className="rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground hover:opacity-90 focus-ring"
+            className="btn btn-primary"
           >
             Practice Names of Allah
           </Link>
           <Link
             href="/vocabulary"
-            className="rounded-full border border-border bg-background-soft px-4 py-2 text-sm font-medium hover:bg-muted focus-ring"
+            className="btn btn-secondary"
           >
             Back to vocabulary
           </Link>
@@ -84,7 +84,7 @@ export function NamesOfAllahClient() {
       <section>
         <div className="mb-4 flex items-center gap-2">
           <BookOpen className="h-5 w-5 text-primary" aria-hidden />
-          <h2 className="text-2xl font-semibold tracking-tight">
+          <h2 className="section-title">
             99 names of Allah
           </h2>
         </div>
@@ -96,7 +96,7 @@ export function NamesOfAllahClient() {
               <article
                 key={name.id}
                 id={name.id}
-                className="rounded-3xl border border-border bg-card p-5 sm:p-6"
+                className="surface p-5 sm:p-6"
               >
                 <div>
                   <ArabicText variant="display" className="text-5xl sm:text-6xl">
@@ -122,7 +122,7 @@ export function NamesOfAllahClient() {
                       href={source.url}
                       target="_blank"
                       rel="noreferrer"
-                      className="rounded-full border border-border bg-background-soft px-3 py-1 text-xs font-medium text-muted-foreground hover:text-foreground focus-ring"
+                      className="chip text-muted-foreground hover:text-foreground focus-ring"
                     >
                       {source.reference}
                     </a>
@@ -139,7 +139,7 @@ export function NamesOfAllahClient() {
 
 function ProgressStat({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-2xl border border-border bg-card px-4 py-3">
+    <div className="surface px-4 py-3">
       <p className="text-2xl font-semibold tabular-nums">{value}</p>
       <p className="text-xs uppercase tracking-wider text-muted-foreground">
         {label}

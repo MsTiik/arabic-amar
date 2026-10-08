@@ -85,7 +85,7 @@ export default async function TopicPage({
                   </section>
                 ))}
                 {groups.length === 0 ? (
-                  <p className="rounded-2xl border border-border bg-card p-6 text-sm text-muted-foreground">
+                  <p className="surface p-6 text-sm text-muted-foreground">
                     No vocabulary captured for this lesson yet.
                   </p>
                 ) : null}
@@ -95,7 +95,7 @@ export default async function TopicPage({
           rules: (
             <div className="mt-6 grid grid-cols-1 gap-4 lg:grid-cols-2">
               {rules.length === 0 ? (
-                <p className="col-span-full rounded-2xl border border-border bg-card p-6 text-sm text-muted-foreground">
+                <p className="col-span-full surface p-6 text-sm text-muted-foreground">
                   No grammar rules in this lesson — practice with the vocabulary deck instead.
                 </p>
               ) : (
@@ -112,7 +112,7 @@ export default async function TopicPage({
           practice: (
             <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
               {vocab.length === 0 ? (
-                <p className="col-span-full rounded-2xl border border-border bg-card p-6 text-sm text-muted-foreground">
+                <p className="col-span-full surface p-6 text-sm text-muted-foreground">
                   This lesson currently contains reference tables rather than
                   individual vocabulary cards, so it does not have a practice
                   deck yet.
@@ -170,7 +170,7 @@ function PracticeLink({
   return (
     <Link
       href={href}
-      className="group flex flex-col gap-1 rounded-2xl border border-border bg-card p-5 hover-lift focus-ring"
+      className="group flex flex-col gap-1 surface p-5 hover-lift focus-ring"
     >
       <h4 className="text-base font-semibold">{title}</h4>
       <p className="text-sm text-muted-foreground">{description}</p>

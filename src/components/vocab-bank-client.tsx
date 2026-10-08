@@ -92,20 +92,20 @@ export function VocabBankClient({ vocab, topics }: Props) {
 
   return (
     <div className="space-y-6">
-      <div className="card-flat p-4 sm:p-6">
-        <div className="flex items-center gap-3 rounded-full border border-border bg-card px-4 py-2">
+      <div className="surface-quiet p-4 sm:p-6">
+        <div className="flex items-center gap-3">
           <Search className="h-4 w-4 text-muted-foreground" aria-hidden />
           <input
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search Arabic, transliteration, or English… (try هذا, hadha, this)"
-            className="w-full bg-transparent text-base outline-none placeholder:text-muted-foreground"
+            className="input min-w-0 flex-1 text-base"
             aria-label="Search vocabulary"
           />
           {query ? (
             <button
               type="button"
-              className="rounded-full p-1 text-muted-foreground hover:text-foreground focus-ring"
+              className="icon-btn"
               onClick={() => setQuery("")}
               aria-label="Clear search"
             >
@@ -134,11 +134,11 @@ export function VocabBankClient({ vocab, topics }: Props) {
           <button
             type="button"
             onClick={() => setExtraOnly((x) => !x)}
+            aria-pressed={extraOnly}
+            data-active={extraOnly}
             className={cn(
-              "shrink-0 whitespace-nowrap rounded-full border px-3 py-1.5 text-sm font-medium transition-colors focus-ring",
-              extraOnly
-                ? "border-accent-gold bg-accent-gold-soft text-foreground"
-                : "border-border bg-background-soft text-muted-foreground hover:text-foreground",
+              "shrink-0 segmented-item focus-ring",
+              !extraOnly && "text-muted-foreground hover:text-foreground",
             )}
           >
             Extras only
@@ -158,7 +158,7 @@ export function VocabBankClient({ vocab, topics }: Props) {
                     setExpanded(new Set(overflowingTopics.map(([s]) => s)));
                   }
                 }}
-                className="whitespace-nowrap rounded-full border border-border bg-background-soft px-3 py-1 hover:text-foreground focus-ring"
+                className="btn btn-secondary btn-sm whitespace-nowrap"
               >
                 {allExpanded ? "Collapse all" : "Expand all"}
               </button>
@@ -169,7 +169,7 @@ export function VocabBankClient({ vocab, topics }: Props) {
 
       <div className="space-y-8">
         {showEmpty ? (
-          <div className="card-raised rounded-2xl p-8 text-center">
+          <div className="surface p-8 text-center">
             <p className="text-base text-foreground">No words match those filters.</p>
             <p className="mt-1 text-sm text-muted-foreground">
               Try removing a filter or searching by transliteration (e.g. <em>raʾsun</em> or{" "}
@@ -210,7 +210,7 @@ export function VocabBankClient({ vocab, topics }: Props) {
               return (
                 <section key={slug}>
                   <header className="mb-3 flex items-baseline justify-between gap-3">
-                    <h2 className="text-xl font-semibold tracking-tight">
+                    <h2 className="section-title">
                       {topic?.name ?? slug}
                       {topic?.nameArabic ? (
                         <ArabicText
@@ -241,7 +241,7 @@ export function VocabBankClient({ vocab, topics }: Props) {
                         type="button"
                         onClick={toggle}
                         aria-expanded={isExpanded}
-                        className="inline-flex items-center gap-1.5 rounded-full border border-border bg-background-soft px-3 py-1.5 text-sm font-medium text-foreground hover:bg-card focus-ring"
+                        className="btn btn-secondary btn-sm"
                       >
                         <ChevronDown
                           className={cn(
@@ -281,7 +281,7 @@ function Select({
     <select
       value={value}
       onChange={(e) => onChange(e.target.value)}
-      className="max-w-40 shrink-0 rounded-full border border-border bg-background-soft px-3 py-1.5 text-sm font-medium text-foreground focus-ring sm:max-w-none"
+      className="input max-w-40 shrink-0 sm:max-w-none"
     >
       <option value="">{placeholder}</option>
       {options.map((opt) => (

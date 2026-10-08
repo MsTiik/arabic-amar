@@ -23,7 +23,7 @@ export default function PronounsPage() {
           </Link>{" "}
           / Pronouns
         </p>
-        <h1 className="mt-1 text-4xl font-bold tracking-tight">
+        <h1 className="mt-1 page-title">
           Pronouns (الضمائر)
         </h1>
         <p className="mt-2 max-w-3xl text-sm text-muted-foreground">
@@ -37,8 +37,8 @@ export default function PronounsPage() {
       </header>
 
       {intro && intro.paragraphs.length > 0 ? (
-        <section className="mb-8 rounded-2xl border border-border bg-card p-5 sm:p-6">
-          <h2 className="mb-3 text-sm font-semibold uppercase tracking-wider text-muted-foreground">
+        <section className="mb-8 surface p-5 sm:p-6">
+          <h2 className="mb-3 text-muted-foreground eyebrow">
             About pronouns
           </h2>
           <div className="space-y-3 text-sm leading-relaxed text-foreground-soft sm:text-base">
@@ -55,13 +55,13 @@ export default function PronounsPage() {
       >
         <a
           href="#detached"
-          className="rounded-full border border-border bg-background-soft px-3 py-1 text-xs font-medium hover:bg-muted focus-ring"
+          className="rounded-full border border-hairline bg-background-soft px-3 py-1 text-xs font-medium hover:bg-muted focus-ring"
         >
           Detached pronouns
         </a>
         <a
           href="#attached"
-          className="rounded-full border border-border bg-background-soft px-3 py-1 text-xs font-medium hover:bg-muted focus-ring"
+          className="rounded-full border border-hairline bg-background-soft px-3 py-1 text-xs font-medium hover:bg-muted focus-ring"
         >
           Attached pronouns
         </a>
@@ -69,7 +69,7 @@ export default function PronounsPage() {
 
       <section id="detached" className="mb-12 scroll-mt-32">
         <header className="mb-3">
-          <h2 className="text-2xl font-semibold tracking-tight">
+          <h2 className="section-title">
             Detached pronouns
           </h2>
           <p className="text-sm text-muted-foreground">
@@ -81,7 +81,7 @@ export default function PronounsPage() {
           </p>
         </header>
         {detached.length === 0 ? (
-          <p className="rounded-2xl border border-border bg-card p-6 text-sm text-muted-foreground">
+          <p className="surface p-6 text-sm text-muted-foreground">
             No detached pronouns captured yet — try refreshing from the source
             doc.
           </p>
@@ -96,7 +96,7 @@ export default function PronounsPage() {
 
       <section id="attached" className="mb-12 scroll-mt-32">
         <header className="mb-3">
-          <h2 className="text-2xl font-semibold tracking-tight">
+          <h2 className="section-title">
             Attached pronouns
           </h2>
           <p className="text-sm text-muted-foreground">
@@ -108,7 +108,7 @@ export default function PronounsPage() {
           </p>
         </header>
         {attached.length === 0 ? (
-          <p className="rounded-2xl border border-border bg-card p-6 text-sm text-muted-foreground">
+          <p className="surface p-6 text-sm text-muted-foreground">
             No attached pronouns captured yet — try refreshing from the source
             doc.
           </p>

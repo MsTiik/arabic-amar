@@ -20,7 +20,7 @@ export function RuleTableCard({ rule, className }: Props) {
   return (
     <article
       className={cn(
-        "rounded-2xl border border-border border-l-4 border-l-accent-gold bg-card p-5 shadow-sm sm:p-6",
+        "surface border-l-4 border-l-accent-gold p-5 sm:p-6",
         className,
       )}
     >
@@ -39,7 +39,7 @@ export function RuleTableCard({ rule, className }: Props) {
           >
             Pattern
           </h4>
-          <div className="rounded-xl border border-border bg-background-soft px-4 py-3 sm:px-5 sm:py-4">
+          <div className="tile px-4 py-3 sm:px-5 sm:py-4">
             {parsed.patternEnglish ? (
               <p className="text-base leading-relaxed text-foreground sm:text-lg">
                 {renderInlineArabic(parsed.patternEnglish)}
@@ -104,7 +104,7 @@ export function RuleTableCard({ rule, className }: Props) {
           >
             Result
           </h4>
-          <div className="rounded-xl border border-accent-gold/40 bg-accent-gold-soft/40 px-4 py-4 sm:px-5">
+          <div className="rounded-[10px] border border-accent-gold/40 bg-accent-gold-soft/40 px-4 py-4 sm:px-5">
             <ArabicText variant="display" className="text-2xl sm:text-3xl">
               {parsed.result.arabic}
             </ArabicText>
@@ -121,7 +121,7 @@ export function RuleTableCard({ rule, className }: Props) {
       ) : null}
 
       {parsed.notes.length > 0 ? (
-        <ul className="mt-4 space-y-1 border-t border-border pt-3 text-sm text-muted-foreground">
+        <ul className="mt-4 space-y-1 border-t border-hairline pt-3 text-sm text-muted-foreground">
           {parsed.notes.map((n, i) => (
             <li key={i} className="flex gap-2">
               <span aria-hidden="true">ⓘ</span>
@@ -136,7 +136,7 @@ export function RuleTableCard({ rule, className }: Props) {
 
 function ComponentChip({ component }: { component: { label: string; arabic: string; caveat?: string } }) {
   return (
-    <div className="flex min-w-[7.5rem] flex-col rounded-xl border border-border bg-background-soft px-3 py-2 sm:min-w-[8.5rem] sm:px-4 sm:py-3">
+    <div className="flex min-w-[7.5rem] flex-col tile px-3 py-2 sm:min-w-[8.5rem] sm:px-4 sm:py-3">
       <span className="text-[0.7rem] font-semibold uppercase tracking-wide text-muted-foreground">
         {component.label}
       </span>

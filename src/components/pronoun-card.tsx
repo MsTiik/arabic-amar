@@ -25,11 +25,11 @@ export function PronounCard({ pronoun, className }: Props) {
   return (
     <article
       className={cn(
-        "group relative flex flex-col gap-3 rounded-2xl border border-border bg-card p-5 sm:p-6 hover-lift",
+        "group relative flex flex-col gap-3 surface p-5 sm:p-6 hover-lift",
         className,
       )}
     >
-      <span className="absolute right-3 top-3 rounded-full bg-background-soft px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
+      <span className="chip absolute right-3 top-3 bg-background-soft text-muted-foreground">
         {pronoun.category}
       </span>
 
@@ -67,7 +67,7 @@ export function PronounCard({ pronoun, className }: Props) {
       ) : null}
 
       {hasExample ? (
-        <div className="mt-auto border-t border-border/60 pt-3">
+        <div className="mt-auto border-t border-hairline/60 pt-3">
           <button
             type="button"
             onClick={() => setOpen((o) => !o)}
@@ -77,7 +77,7 @@ export function PronounCard({ pronoun, className }: Props) {
             {open ? "Hide example" : "Show example"}
           </button>
           {open ? (
-            <div className="mt-2 flex flex-col gap-1 rounded-xl bg-background-soft p-3">
+            <div className="mt-2 flex flex-col gap-1 rounded-[10px] bg-background-soft p-3">
               <div className="flex items-start justify-between gap-3">
                 <ArabicText
                   variant="body"

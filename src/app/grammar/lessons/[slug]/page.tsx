@@ -47,7 +47,7 @@ export default async function GrammarLessonPage({
           / Lesson {lesson.number}
         </p>
         <div className="mt-1 flex flex-wrap items-baseline justify-between gap-3">
-          <h1 className="text-3xl font-semibold tracking-tight">
+          <h1 className="page-title">
             {lesson.title}
             {lesson.titleArabic ? (
               <span
@@ -78,7 +78,7 @@ export default async function GrammarLessonPage({
           aria-label="Rules in this lesson"
           className="hidden w-56 shrink-0 lg:block"
         >
-          <nav className="sticky top-24 max-h-[calc(100vh-7rem)] overflow-y-auto rounded-2xl border border-border bg-card p-3">
+          <nav className="sticky top-24 max-h-[calc(100vh-7rem)] overflow-y-auto surface p-3">
             <p className="mb-2 px-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
               Rules
             </p>
@@ -110,7 +110,7 @@ export default async function GrammarLessonPage({
               <a
                 key={r.id}
                 href={`#${r.id}`}
-                className="rounded-full border border-border bg-background-soft px-3 py-1 text-xs font-medium text-foreground-soft hover:bg-muted focus-ring"
+                className="rounded-full border border-hairline bg-background-soft px-3 py-1 text-xs font-medium text-foreground-soft hover:bg-muted focus-ring"
               >
                 {i + 1}. {r.title}
               </a>
@@ -118,7 +118,7 @@ export default async function GrammarLessonPage({
           </nav>
 
           {rules.length === 0 ? (
-            <p className="rounded-2xl border border-border bg-card p-6 text-sm text-muted-foreground">
+            <p className="surface p-6 text-sm text-muted-foreground">
               No grammar rules in this lesson yet.
             </p>
           ) : (

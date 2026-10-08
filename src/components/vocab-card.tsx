@@ -41,12 +41,12 @@ export function VocabCard({
   return (
     <article
       className={cn(
-        "group card-raised hover-lift relative min-w-0 flex flex-col gap-3 rounded-2xl p-5 sm:p-6",
+        "group surface hover-lift relative min-w-0 flex flex-col gap-3 p-5 sm:p-6",
         className,
       )}
     >
       {entry.isExtra ? (
-        <span className="absolute right-3 top-3 rounded-full bg-accent-gold-soft px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-foreground">
+        <span className="chip absolute right-3 top-3 bg-accent-gold-soft text-foreground">
           Extra
         </span>
       ) : null}
@@ -90,19 +90,19 @@ export function VocabCard({
               entry.gender === "F" && "bg-accent-rose-soft text-accent-rose",
               entry.gender !== "M" &&
                 entry.gender !== "F" &&
-                "border border-border bg-background-soft",
+                "border border-hairline bg-background-soft",
             )}
           >
             {entry.gender === "M" ? "مذكر" : entry.gender === "F" ? "مؤنث" : entry.gender}
           </span>
         ) : null}
         {entry.subCategory && entry.subCategory !== entry.continent ? (
-          <span className="rounded-md border border-border bg-background-soft px-2 py-0.5">
+          <span className="rounded-md border border-hairline bg-background-soft px-2 py-0.5">
             {entry.subCategory}
           </span>
         ) : null}
         {entry.continent ? (
-          <span className="rounded-md border border-border bg-background-soft px-2 py-0.5">
+          <span className="rounded-md border border-hairline bg-background-soft px-2 py-0.5">
             {entry.continent}
           </span>
         ) : null}

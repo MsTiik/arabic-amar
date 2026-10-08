@@ -54,7 +54,7 @@ export function DemonstrativePairCard({ rule, className }: Props) {
   return (
     <article
       className={cn(
-        "rounded-2xl border border-border border-l-4 border-l-accent-gold bg-card p-5 shadow-sm sm:p-6",
+        "surface border-l-4 border-l-accent-gold p-5 sm:p-6",
         className,
       )}
     >
@@ -75,7 +75,7 @@ export function DemonstrativePairCard({ rule, className }: Props) {
         >
           Pattern
         </h4>
-        <div className="flex flex-wrap items-center gap-2 rounded-xl border border-border bg-background-soft px-4 py-3 sm:px-5 sm:py-4">
+        <div className="flex flex-wrap items-center gap-2 tile px-4 py-3 sm:px-5 sm:py-4">
           <TokenChip token={token} label="Demonstrative" />
           <Plus />
           <NounChip />
@@ -101,7 +101,7 @@ export function DemonstrativePairCard({ rule, className }: Props) {
           {pairs.map((pair, i) => (
             <li
               key={i}
-              className="flex flex-col gap-0.5 rounded-lg border border-border bg-background-soft px-2.5 py-2"
+              className="flex flex-col gap-0.5 rounded-lg border border-hairline bg-background-soft px-2.5 py-2"
             >
               <ArabicText variant="display" className="text-lg sm:text-xl">
                 {pair.sentence}
@@ -119,7 +119,7 @@ export function DemonstrativePairCard({ rule, className }: Props) {
 
 function TokenChip({ token, label }: { token: string; label: string }) {
   return (
-    <span className="inline-flex flex-col items-center rounded-lg border border-accent-gold/50 bg-accent-gold-soft/40 px-3 py-1.5">
+    <span className="chip inline-flex flex-col items-center border border-accent-gold/50 bg-accent-gold-soft/40">
       <span className="text-[0.65rem] font-semibold uppercase tracking-wide text-muted-foreground">
         {label}
       </span>
@@ -134,7 +134,7 @@ function TokenChip({ token, label }: { token: string; label: string }) {
 
 function NounChip() {
   return (
-    <span className="inline-flex flex-col items-center rounded-lg border border-border bg-card px-3 py-1.5">
+    <span className="chip inline-flex flex-col items-center border border-hairline bg-card">
       <span className="text-[0.65rem] font-semibold uppercase tracking-wide text-muted-foreground">
         Noun
       </span>
