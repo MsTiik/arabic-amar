@@ -1080,7 +1080,7 @@ function MatchPairsView({
       </p>
 
       <div className="mt-6 grid grid-cols-2 gap-3">
-        <ul className="space-y-2">
+        <ul className="flex flex-col gap-2">
           {leftItems.map((p) => (
             <MatchCard
               key={p.id + "L"}
@@ -1093,7 +1093,7 @@ function MatchPairsView({
             />
           ))}
         </ul>
-        <ul className="space-y-2">
+        <ul className="flex flex-col gap-2">
           {rightItems.map((p) => (
             <MatchCard
               key={p.id + "R"}
@@ -1148,7 +1148,7 @@ function MatchCard({
   else if (wrong) style = "answer-shake border-danger bg-danger-soft";
   else if (selected) style = "border-primary bg-primary/10";
   return (
-    <li className="h-full min-w-0">
+    <li className="flex min-w-0 flex-1">
       <button
         type="button"
         onClick={onClick}
