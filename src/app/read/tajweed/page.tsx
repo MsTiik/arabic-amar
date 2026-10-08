@@ -25,7 +25,7 @@ export default function TajweedPage() {
         <div className="mb-3">
           <FoundationsBadge />
         </div>
-        <h1 className="text-4xl font-bold tracking-tight">
+        <h1 className="page-title">
           Tajweed basics
           <span
             lang="ar"
@@ -43,7 +43,7 @@ export default function TajweedPage() {
           when a qualified reciter recites — this page explains what&rsquo;s
           actually happening.
         </p>
-        <div className="mt-3 rounded-lg border border-border bg-background-soft p-3 text-xs text-foreground-soft">
+        <div className="mt-3 tile p-3 text-xs text-foreground-soft">
           <strong className="font-semibold text-foreground">
             How to use this page:{" "}
           </strong>
@@ -55,7 +55,7 @@ export default function TajweedPage() {
       </header>
 
       <section className="mb-10">
-        <h2 className="mb-4 text-sm font-semibold uppercase tracking-wider text-muted-foreground">
+        <h2 className="mb-4 text-muted-foreground eyebrow">
           Core rules
         </h2>
         <div className="space-y-8">
@@ -67,7 +67,7 @@ export default function TajweedPage() {
 
       <AdvancedTajweedToggle groups={advancedGroups} />
 
-      <footer className="mt-12 rounded-2xl border border-border bg-card p-6 text-sm text-muted-foreground">
+      <footer className="mt-12 surface p-6 text-sm text-muted-foreground">
         <p>
           These rules describe <em>what</em> happens, not <em>how much</em>{" "}
           to pronounce each thing. The exact timing (e.g. &ldquo;hold the

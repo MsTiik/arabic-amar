@@ -95,7 +95,7 @@ export default function ReadQuranPage() {
         <div className="mb-3">
           <FoundationsBadge />
         </div>
-        <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">Foundations</h1>
+        <h1 className="sm:text-4xl page-title">Foundations</h1>
         <p className="mt-1 text-sm font-medium text-foreground-soft">
           Reading basics for Qurʼānic Arabic.
         </p>
@@ -163,7 +163,7 @@ function Card({ card }: { card: FoundationCard }) {
   return (
     <Link
       href={card.href}
-      className="group card-raised hover-lift flex flex-col gap-2 rounded-2xl p-5 focus-ring sm:p-6"
+      className="group surface hover-lift flex flex-col gap-2 p-5 focus-ring sm:p-6"
     >
       <div className="flex items-start justify-between gap-3">
         <span

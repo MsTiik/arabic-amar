@@ -25,7 +25,7 @@ export default function ConnectingLettersPage() {
         <div className="mb-3">
           <FoundationsBadge />
         </div>
-        <h1 className="text-4xl font-bold tracking-tight">
+        <h1 className="page-title">
           Connecting letters
           <span
             lang="ar"
@@ -46,8 +46,8 @@ export default function ConnectingLettersPage() {
         </p>
       </header>
 
-      <section className="mb-10 rounded-2xl border border-accent-gold/40 bg-accent-gold-soft p-5 sm:p-6">
-        <h2 className="mb-2 text-sm font-semibold uppercase tracking-wider text-foreground">
+      <section className="mb-10 surface border-l-4 border-l-accent-gold p-5 sm:p-6">
+        <h2 className="mb-2 text-foreground eyebrow">
           The six non-connectors
         </h2>
         <p className="mb-4 text-sm text-foreground-soft">
@@ -62,7 +62,7 @@ export default function ConnectingLettersPage() {
           {NON_CONNECTOR_DETAILS.map((l) => (
             <div
               key={l.order}
-              className="flex flex-col items-center gap-1 rounded-xl border border-accent-gold/40 bg-card p-3"
+              className="tile flex flex-col items-center gap-1 p-3"
             >
               <span className="font-arabic-display text-4xl">{l.forms.isolated}</span>
               <span className="font-arabic text-sm text-foreground-soft">
@@ -102,14 +102,14 @@ export default function ConnectingLettersPage() {
       </section>
 
       <section className="mb-10">
-        <h2 className="mb-3 text-sm font-semibold uppercase tracking-wider text-muted-foreground">
+        <h2 className="mb-3 text-muted-foreground eyebrow">
           Try it yourself
         </h2>
         <JoinLettersDemo />
       </section>
 
-      <section className="mb-2 rounded-2xl border border-border bg-card p-5 text-sm text-muted-foreground sm:p-6">
-        <h2 className="mb-2 text-base font-semibold text-foreground">
+      <section className="mb-2 surface p-5 text-sm text-muted-foreground sm:p-6">
+        <h2 className="mb-2 text-base text-foreground font-display">
           Why does this matter for reading the Qur’ān?
         </h2>
         <p className="mb-2">
@@ -153,8 +153,9 @@ function ExampleCard({
   return (
     <article
       className={
-        "rounded-2xl border bg-card p-5 sm:p-6 " +
-        (highlight ? "border-accent-gold/40" : "border-border")
+        highlight
+          ? "surface border-l-4 border-l-accent-gold p-5 sm:p-6"
+          : "surface p-5 sm:p-6"
       }
     >
       <h3 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">
