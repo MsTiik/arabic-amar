@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "fetchedAt": "2026-10-01T17:22:30.706Z",
+  "fetchedAt": "2026-10-08T12:25:37.085Z",
   "entries": {
     "١ - محرم": {
       "url": "https://upload.wikimedia.org/wikipedia/commons/0/0b/LL-Q13955_%28ara%29-Fjmustak-%D9%85%D8%AD%D8%B1%D9%85.wav",
@@ -2570,6 +2570,55 @@
       "title": "File:LL-Q13955 (ara)-Zinou2go-سنة.wav",
       "author": "Zinou2go",
       "license": "CC-BY-SA-4.0"
+    },
+    "الله / —": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/5/53/LL-Q13955_%28ara%29-Zinou2go-%D8%A7%D9%84%D9%84%D9%87.wav?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "source": "lingualibre",
+      "title": "File:LL-Q13955 (ara)-Zinou2go-الله.wav",
+      "author": "Zinou2go",
+      "license": "CC-BY-SA-4.0"
+    },
+    "بنفسجي / بنفسجية": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/1/17/LL-Q13955_%28ara%29-Zinou2go-%D8%A8%D9%8E%D9%86%D9%8E%D9%81%D9%92%D8%B3%D9%8E%D8%AC%D9%90%D9%8A.wav?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "source": "lingualibre",
+      "title": "File:LL-Q13955 (ara)-Zinou2go-بَنَفْسَجِي.wav",
+      "author": "Zinou2go",
+      "license": "CC-BY-SA-4.0"
+    },
+    "تكتبن": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/4/4a/LL-Q13955_%28ara%29-Zinou2go-%D8%AA%D9%8E%D9%83%D9%92%D8%AA%D9%8F%D8%A8%D9%92%D9%86%D9%8E.wav?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "source": "lingualibre",
+      "title": "File:LL-Q13955 (ara)-Zinou2go-تَكْتُبْنَ.wav",
+      "author": "Zinou2go",
+      "license": "CC-BY-SA-4.0"
+    },
+    "تكتبون": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/9/97/LL-Q13955_%28ara%29-Zinou2go-%D8%AA%D9%8E%D9%83%D9%92%D8%AA%D9%8F%D8%A8%D9%8F%D9%88%D9%92%D9%86%D9%8E.wav?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "source": "lingualibre",
+      "title": "File:LL-Q13955 (ara)-Zinou2go-تَكْتُبُوْنَ.wav",
+      "author": "Zinou2go",
+      "license": "CC-BY-SA-4.0"
+    },
+    "تكتبين": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/c/c1/LL-Q13955_%28ara%29-Zinou2go-%D8%AA%D9%8E%D9%83%D9%92%D8%AA%D9%8F%D8%A8%D9%90%D9%8A%D9%92%D9%86%D9%8E.wav?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "source": "lingualibre",
+      "title": "File:LL-Q13955 (ara)-Zinou2go-تَكْتُبِيْنَ.wav",
+      "author": "Zinou2go",
+      "license": "CC-BY-SA-4.0"
+    },
+    "مشتري / مشترون": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/4/43/LL-Q13955_%28ara%29-Spotless_Mind1988-%D9%85%D9%8F%D8%B4%D9%92%D8%AA%D9%8E%D8%B1%D9%90%D9%8A.wav?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "source": "lingualibre",
+      "title": "File:LL-Q13955 (ara)-Spotless Mind1988-مُشْتَرِي.wav",
+      "author": "Spotless Mind1988",
+      "license": "CC-BY-SA-4.0"
+    },
+    "نكتب": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/6/61/LL-Q13955_%28ara%29-Zinou2go-%D9%86%D9%8E%D9%83%D9%92%D8%AA%D9%8F%D8%A8%D9%8F.wav?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "source": "lingualibre",
+      "title": "File:LL-Q13955 (ara)-Zinou2go-نَكْتُبُ.wav",
+      "author": "Zinou2go",
+      "license": "CC-BY-SA-4.0"
     }
   },
   "quran": {
@@ -2709,9 +2758,6 @@
     "تركي",
     "تسعمائة",
     "تكتب",
-    "تكتبن",
-    "تكتبون",
-    "تكتبين",
     "ثلاثمائة",
     "ثمانمائة",
     "جبين",
@@ -2754,7 +2800,6 @@
     "مائتان",
     "ماليزي",
     "مكسيكي",
-    "نكتب",
     "نيجيري",
     "ـهن",
     "هندي",
@@ -2876,7 +2921,6 @@
     "أداة مكتبية / أدوات مكتبية",
     "أداة نظافة / أدوات نظافة",
     "بائع / بائعون",
-    "بنفسجي / بنفسجية",
     "جاروف / جواريف",
     "جزار / جزارون",
     "حبة بازلاء / بازلاء",
@@ -2898,14 +2942,12 @@
     "كوب شاي / أكواب شاي",
     "محاسب / محاسبون",
     "مسحوق غسيل / مساحيق غسيل",
-    "مشتري / مشترون",
     "معجون أسنان / معاجين أسنان",
     "معجون حلاقة / معاجين حلاقة",
     "ممسحة / مماسح",
     "وردي / وردية",
     "ذانك / تانك",
     "هذان / هاتان",
-    "الله / —",
     "خطبة / خطب",
     "سيئة / سيئات",
     "فقرة / فقر",

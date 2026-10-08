@@ -34,14 +34,18 @@ export function TabBar() {
               href={tab.href}
               aria-current={active ? "page" : undefined}
               className={cn(
-                "flex flex-col items-center gap-0.5 px-1 pb-1.5 pt-2 text-[11px] font-medium focus-ring",
+                "flex flex-col items-center gap-0.5 px-1 pb-1.5 pt-1.5 text-[11px] font-medium transition-colors focus-ring",
                 active ? "text-primary" : "text-muted-foreground",
               )}
             >
-              <Icon
-                className={cn("h-5 w-5", active && "text-primary")}
-                aria-hidden
-              />
+              <span
+                className={cn(
+                  "flex h-7 w-12 items-center justify-center rounded-full transition-colors",
+                  active ? "bg-primary/12 text-primary" : "text-muted-foreground",
+                )}
+              >
+                <Icon className="h-5 w-5" aria-hidden />
+              </span>
               <span>{tab.label}</span>
             </Link>
           );

@@ -69,8 +69,15 @@ export function Topbar() {
       <div className="mx-auto flex w-full max-w-6xl items-center gap-4 px-4 py-3">
         <Link
           href="/"
-          className="flex shrink-0 items-center whitespace-nowrap text-lg font-semibold tracking-tight"
+          className="flex shrink-0 items-center gap-2.5 whitespace-nowrap text-lg font-semibold tracking-tight focus-ring rounded-lg"
+          aria-label="Arabic AMAR home"
         >
+          <span
+            className="brand-panel flex h-8 w-8 items-center justify-center rounded-lg font-arabic-display text-lg leading-none text-accent-gold shadow-sm"
+            aria-hidden
+          >
+            ع
+          </span>
           <span>
             Arabic <span className="text-primary">AMAR</span>
           </span>
@@ -86,10 +93,11 @@ export function Topbar() {
               <Link
                 key={item.href}
                 href={item.href}
+                aria-current={active ? "page" : undefined}
                 className={cn(
-                  "whitespace-nowrap rounded-md px-3 py-1.5 text-sm transition-colors focus-ring",
+                  "whitespace-nowrap rounded-full px-3.5 py-1.5 text-sm font-medium transition-colors focus-ring",
                   active
-                    ? "bg-muted text-foreground"
+                    ? "bg-primary text-primary-foreground shadow-sm"
                     : "text-muted-foreground hover:bg-muted hover:text-foreground",
                 )}
               >
@@ -162,10 +170,11 @@ function AboutNavLink({ pathname }: { pathname: string }) {
   return (
     <Link
       href={ABOUT.href}
+      aria-current={active ? "page" : undefined}
       className={cn(
-        "hidden whitespace-nowrap rounded-md px-3 py-1.5 text-sm transition-colors focus-ring md:inline-flex",
+        "hidden whitespace-nowrap rounded-full px-3.5 py-1.5 text-sm font-medium transition-colors focus-ring md:inline-flex",
         active
-          ? "bg-muted text-foreground"
+          ? "bg-primary text-primary-foreground shadow-sm"
           : "text-muted-foreground hover:bg-muted hover:text-foreground",
       )}
       title="About Arabic AMAR"

@@ -24,10 +24,17 @@
   --muted: oklch(0.93 0.014 82);
   --muted-foreground: oklch(0.5 0.024 235);
   --border: oklch(0.9 0.012 82);
-  --primary: oklch(0.44 0.08 222);
+  --primary: oklch(0.4 0.075 218);
   --primary-foreground: oklch(0.98 0.01 85);
-  --accent-gold: oklch(0.66 0.13 55);
-  --accent-gold-soft: oklch(0.93 0.05 60);
+  --accent-gold: oklch(0.67 0.15 50);
+  --accent-gold-soft: oklch(0.94 0.05 60);
+  /* Dusk aqua + midnight navy, borrowed from the AMAR programme site's
+   * dark-navy/aqua/orange system. Aqua is a highlight tint, navy the deep
+   * end of brand panels. */
+  --accent-aqua: oklch(0.6 0.1 215);
+  --accent-aqua-soft: oklch(0.94 0.035 210);
+  --brand-navy: oklch(0.22 0.035 250);
+  --brand-teal: oklch(0.36 0.05 215);
   --tense-past: oklch(0.95 0.02 250);
   --tense-present: oklch(0.95 0.02 155);
   --tense-command: oklch(0.95 0.025 80);
@@ -42,7 +49,7 @@
   --danger-soft: oklch(0.95 0.05 25);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.24 0.028 240);
-  --ring: oklch(0.55 0.09 222 / 50%);
+  --ring: oklch(0.55 0.09 218 / 50%);
 
   /*
    * Accent hue scale — 8 named hues used for lesson/deck/reference colour
@@ -91,19 +98,23 @@
  * OS preference for first-time visitors.
  */
 :root.dark {
-  /* Dark mode is the "brand mode": cream text on the AMAR deep teal-slate,
-   * a direct translation of the prospectus cover. */
-  --background: oklch(0.37 0.05 222);
-  --background-soft: oklch(0.41 0.05 222);
+  /* Dark mode is the "brand mode": cream text on midnight navy shading into
+   * the AMAR deep teal, with aqua links and amber CTAs. */
+  --background: oklch(0.25 0.035 245);
+  --background-soft: oklch(0.29 0.038 240);
   --foreground: oklch(0.96 0.012 85);
-  --foreground-soft: oklch(0.8 0.02 85);
-  --muted: oklch(0.45 0.05 222);
-  --muted-foreground: oklch(0.74 0.02 90);
-  --border: oklch(0.51 0.05 222);
-  --primary: oklch(0.72 0.08 210);
-  --primary-foreground: oklch(0.26 0.045 222);
-  --accent-gold: oklch(0.76 0.13 55);
-  --accent-gold-soft: oklch(0.48 0.07 55);
+  --foreground-soft: oklch(0.82 0.02 85);
+  --muted: oklch(0.34 0.04 235);
+  --muted-foreground: oklch(0.76 0.02 90);
+  --border: oklch(0.4 0.04 235);
+  --primary: oklch(0.76 0.09 210);
+  --primary-foreground: oklch(0.22 0.035 245);
+  --accent-gold: oklch(0.76 0.14 52);
+  --accent-gold-soft: oklch(0.44 0.07 52);
+  --accent-aqua: oklch(0.78 0.09 210);
+  --accent-aqua-soft: oklch(0.36 0.05 215);
+  --brand-navy: oklch(0.18 0.03 250);
+  --brand-teal: oklch(0.4 0.05 215);
   --tense-past: oklch(0.44 0.04 250);
   --tense-present: oklch(0.44 0.04 155);
   --tense-command: oklch(0.46 0.045 80);
@@ -116,9 +127,9 @@
   --success-soft: oklch(0.45 0.06 145);
   --danger: oklch(0.72 0.15 25);
   --danger-soft: oklch(0.46 0.06 25);
-  --card: oklch(0.42 0.05 222);
+  --card: oklch(0.31 0.04 238);
   --card-foreground: oklch(0.96 0.012 85);
-  --ring: oklch(0.72 0.09 210 / 60%);
+  --ring: oklch(0.76 0.09 210 / 60%);
 
   --accent-rose: oklch(0.82 0.08 350);
   --accent-rose-soft: oklch(0.45 0.05 350);
@@ -153,6 +164,10 @@
   --color-primary-foreground: var(--primary-foreground);
   --color-accent-gold: var(--accent-gold);
   --color-accent-gold-soft: var(--accent-gold-soft);
+  --color-accent-aqua: var(--accent-aqua);
+  --color-accent-aqua-soft: var(--accent-aqua-soft);
+  --color-brand-navy: var(--brand-navy);
+  --color-brand-teal: var(--brand-teal);
   --color-tense-past: var(--tense-past);
   --color-tense-present: var(--tense-present);
   --color-tense-command: var(--tense-command);
@@ -247,29 +262,46 @@ body {
  * ramp automatically; --primary flips to amber so CTAs pop on teal.
  */
 .brand-panel {
-  --background: oklch(0.41 0.05 222);
-  --background-soft: oklch(0.45 0.05 222);
+  --background: oklch(0.32 0.045 232);
+  --background-soft: oklch(0.36 0.045 230);
   --foreground: oklch(0.97 0.012 85);
   --foreground-soft: oklch(0.86 0.02 85);
-  --muted: oklch(0.49 0.05 222);
-  --muted-foreground: oklch(0.8 0.02 90);
-  --border: oklch(0.53 0.05 222);
-  --card: oklch(0.46 0.05 222);
+  --muted: oklch(0.4 0.045 230);
+  --muted-foreground: oklch(0.82 0.02 90);
+  --border: oklch(0.45 0.045 230);
+  --card: oklch(0.37 0.045 230);
   --card-foreground: oklch(0.97 0.012 85);
-  --primary: oklch(0.75 0.13 55);
-  --primary-foreground: oklch(0.25 0.045 222);
-  --accent-gold: oklch(0.78 0.13 55);
-  --accent-gold-soft: oklch(0.5 0.07 55);
-  --success: oklch(0.74 0.13 145);
-  --success-soft: oklch(0.47 0.06 145);
-  --danger: oklch(0.74 0.15 25);
-  --danger-soft: oklch(0.48 0.06 25);
-  --ring: oklch(0.78 0.12 55 / 60%);
-  background: linear-gradient(
-    135deg,
-    oklch(0.44 0.052 220),
-    oklch(0.37 0.05 226)
-  );
+  --primary: oklch(0.77 0.15 50);
+  --primary-foreground: oklch(0.22 0.035 245);
+  --accent-gold: oklch(0.8 0.14 52);
+  --accent-gold-soft: oklch(0.48 0.07 52);
+  --accent-aqua: oklch(0.8 0.09 210);
+  --accent-aqua-soft: oklch(0.42 0.05 215);
+  --success: oklch(0.76 0.13 145);
+  --success-soft: oklch(0.45 0.06 145);
+  --danger: oklch(0.76 0.15 25);
+  --danger-soft: oklch(0.46 0.06 25);
+  --ring: oklch(0.8 0.12 52 / 60%);
+  /* Deep teal → midnight navy, with a soft aqua glow in one corner and a
+   * faint dot lattice for texture (the programme site uses a calligraphic
+   * swirl; a lattice gives the same depth without an image asset). */
+  background:
+    radial-gradient(
+      ellipse 60% 70% at 100% 0%,
+      oklch(0.78 0.09 210 / 22%),
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse 50% 60% at 0% 100%,
+      oklch(0.77 0.15 50 / 12%),
+      transparent 70%
+    ),
+    radial-gradient(
+      circle at 1px 1px,
+      oklch(1 0 0 / 5%) 1px,
+      transparent 1.5px
+    ) 0 0 / 22px 22px,
+    linear-gradient(135deg, oklch(0.37 0.05 218), oklch(0.22 0.035 250));
   color: var(--foreground);
 }
 
@@ -301,9 +333,45 @@ body {
   background: var(--card);
   border-radius: 1rem;
   box-shadow:
-    0 0 0 1px oklch(from var(--foreground) l c h / 4%),
-    0 1px 2px oklch(from var(--foreground) l c h / 5%),
-    0 4px 12px oklch(from var(--foreground) l c h / 5%);
+    0 0 0 1px oklch(from var(--primary) l c h / 6%),
+    0 1px 2px oklch(from var(--primary) l c h / 6%),
+    0 6px 16px oklch(from var(--primary) l c h / 6%);
+}
+
+/* Soft amber CTA glow — used sparingly on the single primary action of a
+ * dark panel so it reads as "the" button, the way the programme site's
+ * orange CTAs do. */
+.cta-glow {
+  box-shadow:
+    0 4px 0 0 oklch(from var(--primary) calc(l - 0.12) c h),
+    0 8px 24px oklch(from var(--primary) l c h / 30%);
+}
+
+/* Faint aqua/amber ambient wash behind the page hero. Kept within the hero's
+ * horizontal bounds so it never widens the page on small screens. */
+.ambient-hero {
+  position: relative;
+  isolation: isolate;
+}
+.ambient-hero::before {
+  content: "";
+  position: absolute;
+  inset: -20% 0 auto 0;
+  height: 70%;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      ellipse 40% 60% at 80% 20%,
+      oklch(from var(--accent-aqua) l c h / 14%),
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse 35% 55% at 10% 10%,
+      oklch(from var(--accent-gold) l c h / 12%),
+      transparent 70%
+    );
+  filter: blur(24px);
 }
 
 /* Section label — small caps in the primary accent, used above card grids */

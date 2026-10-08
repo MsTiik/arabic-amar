@@ -188,10 +188,11 @@ async function findLinguaLibre(word: string): Promise<AudioEntry | null> {
     );
     if (!m) continue;
     const author = m[1];
-    const recordedWord = m[2];
-    // Accept hamza-folded equality too — uploaders often use the looser
-    // spelling (e.g. ا for أ) even when the word itself carries a hamza.
-    if (recordedWord !== word && foldHamza(recordedWord) !== foldHamza(word))
+    // Uploaders often vowel the filename (بَنَفْسَجِي) or use looser hamza
+    // spelling (ا for أ); compare on the stripped, hamza-folded forms.
+    const recordedWord = audioManifestKey(m[2]);
+    const target = audioManifestKey(word);
+    if (recordedWord !== target && foldHamza(recordedWord) !== foldHamza(target))
       continue;
     const directUrl = await resolveFileUrl(h.title);
     if (!directUrl) continue;

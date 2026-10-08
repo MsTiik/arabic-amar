@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Loader2, Square, Volume2, VolumeX } from "lucide-react";
+import { AudioLines, Loader2, Square, Volume2, VolumeX } from "lucide-react";
 
 import { trackEvent } from "@/lib/analytics";
 import { getAudioForWord } from "@/lib/audio";
@@ -10,6 +10,12 @@ import {
   teardownAudioElement,
 } from "@/lib/audio-prefetch";
 import { cn } from "@/lib/cn";
+import {
+  speakArabic,
+  stopSpeaking,
+  subscribeArabicVoice,
+  type SpeechHandle,
+} from "@/lib/speech";
 
 interface Props {
   /** The Arabic word to play. Looked up by diacritic-stripped form. */
@@ -46,13 +52,24 @@ export function SpeakerButton({
 
   const entry = url ? null : getAudioForWord(arabic);
   const playUrl = url ?? entry?.url;
+  // Speech synthesis is only offered once the browser confirms an Arabic
+  // voice. Starts false so server and first client render agree.
+  const [ttsAvailable, setTtsAvailable] = useState(false);
+  const speakingRef = useRef<SpeechHandle | null>(null);
 
   useEffect(() => {
+    const speaking = speakingRef;
     return () => {
       if (audioRef.current) teardownAudioElement(audioRef.current);
       audioRef.current = null;
+      if (speaking.current !== null) stopSpeaking(speaking.current);
     };
   }, []);
+
+  useEffect(() => {
+    if (playUrl) return;
+    return subscribeArabicVoice(setTtsAvailable);
+  }, [playUrl]);
 
   const sizeClass =
     size === "sm"
@@ -61,6 +78,20 @@ export function SpeakerButton({
 
   const unavailableLabel =
     label ? `Audio unavailable for ${label}` : "Audio unavailable";
+
+  if (!playUrl && ttsAvailable) {
+    return (
+      <SynthesisButton
+        arabic={arabic}
+        label={label}
+        size={size}
+        className={className}
+        state={state}
+        setState={setState}
+        speakingRef={speakingRef}
+      />
+    );
+  }
 
   if (!playUrl) {
     if (!showUnavailable) return null;
@@ -143,6 +174,87 @@ export function SpeakerButton({
         className={cn(iconSize, state === "loading" && "animate-spin")}
         aria-hidden="true"
       />
+    </button>
+  );
+}
+
+/** Dashed-border variant that reads the word with the browser's Arabic
+ *  voice. Visually distinct from a real recording and says so in its label. */
+function SynthesisButton({
+  arabic,
+  label,
+  size,
+  className,
+  state,
+  setState,
+  speakingRef,
+}: {
+  arabic: string;
+  label?: string;
+  size: "sm" | "md";
+  className?: string;
+  state: "idle" | "loading" | "playing" | "error";
+  setState: (s: "idle" | "loading" | "playing" | "error") => void;
+  speakingRef: React.MutableRefObject<SpeechHandle | null>;
+}) {
+  const sizeClass =
+    size === "sm"
+      ? "h-6 w-6 rounded-md p-1 text-xs"
+      : "h-8 w-8 rounded-lg p-1.5 text-sm";
+  const iconSize = size === "sm" ? "h-3.5 w-3.5" : "h-4 w-4";
+  const labelText = label
+    ? `Read ${label} aloud (synthesised voice — no recording yet)`
+    : "Read aloud (synthesised voice — no recording yet)";
+
+  function speak(e: React.MouseEvent) {
+    e.preventDefault();
+    e.stopPropagation();
+    if (state === "playing") {
+      if (speakingRef.current !== null) stopSpeaking(speakingRef.current);
+      speakingRef.current = null;
+      setState("idle");
+      return;
+    }
+    const handle = speakArabic(arabic, {
+      onStart: () => setState("playing"),
+      onEnd: () => {
+        speakingRef.current = null;
+        setState("idle");
+      },
+      onError: () => {
+        speakingRef.current = null;
+        setState("error");
+      },
+    });
+    if (handle === null) {
+      setState("error");
+      return;
+    }
+    speakingRef.current = handle;
+    setState("loading");
+    trackEvent("audio_played", { source: "word", mode: "tts" });
+  }
+
+  let Icon = AudioLines;
+  if (state === "loading") Icon = Loader2;
+  else if (state === "playing") Icon = Square;
+  else if (state === "error") Icon = VolumeX;
+
+  return (
+    <button
+      type="button"
+      onClick={speak}
+      aria-label={labelText}
+      title={labelText}
+      className={cn(
+        "inline-flex items-center justify-center border border-dashed border-border bg-background-soft text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-ring",
+        sizeClass,
+        state === "playing" && "border-primary text-primary",
+        state === "error" && "border-danger text-danger",
+        className,
+      )}
+    >
+      <Icon className={cn(iconSize, state === "loading" && "animate-spin")} aria-hidden="true" />
     </button>
   );
 }

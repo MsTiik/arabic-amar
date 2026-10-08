@@ -31,10 +31,10 @@ describe("content vocabulary search", () => {
       foldForSearch("هذا"),
     );
     expect(searchVocab({ query: "حجرة الدراسة" }).map((entry) => foldForSearch(entry.arabic))).toEqual(
-      [foldForSearch("حُجْرَةُ الدِّرَاسَة / حُجَرُ الدِّرَاسَة")],
+      [foldForSearch("حُجْرَةُ الدِّرَاسَة / حُجُرَاتُ الدِّرَاسَة")],
     );
-    expect(searchVocab({ query: "حجرة / حجر" }).map((entry) => foldForSearch(entry.arabic))).toEqual(
-      [foldForSearch("حُجْرَة / حُجُر")],
+    expect(searchVocab({ query: "حجرة / حجرات" }).map((entry) => foldForSearch(entry.arabic))).toEqual(
+      [foldForSearch("حُجْرَة / حُجُرَات")],
     );
     expect(searchVocab({ query: "جَزَّارُون" }).map((entry) => foldForSearch(entry.arabic))).toContain(
       foldForSearch("جَزَّار / جَزَّارُون"),
