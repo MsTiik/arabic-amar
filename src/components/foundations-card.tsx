@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, BookOpen, Sparkles } from "lucide-react";
+import { ArrowRight, Sparkles } from "lucide-react";
 
 import { cn } from "@/lib/cn";
 
@@ -14,16 +14,11 @@ export function FoundationsCard({ className }: { className?: string }) {
         className,
       )}
     >
-      <span
-        className="glyph-watermark -right-1 top-6 text-[9rem] text-accent-gold/[0.09] transition-transform duration-500 group-hover:-translate-y-1"
-        aria-hidden
-      >
-        ب
-      </span>
-
       <div className="relative flex items-start justify-between gap-3">
         <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[10px] bg-accent-gold/15 text-accent-gold ring-1 ring-inset ring-accent-gold/25">
-          <BookOpen className="h-5 w-5" aria-hidden />
+          <span className="font-arabic-display text-2xl leading-none" aria-hidden>
+            ب
+          </span>
         </span>
         <span className="inline-flex items-center gap-1.5 rounded-md bg-accent-gold/15 px-2 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-accent-gold ring-1 ring-inset ring-accent-gold/20">
           <Sparkles className="h-3 w-3" aria-hidden />

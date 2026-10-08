@@ -25,16 +25,9 @@ import { getSiteContent } from "@/lib/content";
 import { getCourseProgress } from "@/lib/course-progress";
 import { cn } from "@/lib/cn";
 
-interface Props {
-  totalVocab: number;
-  totalRules: number;
-  totalLessons: number;
-}
-
-export function DashboardHero({ totalVocab, totalRules, totalLessons }: Props) {
+export function DashboardHero() {
   const [goalDialogOpen, setGoalDialogOpen] = useState(false);
   const [goalInput, setGoalInput] = useState("");
-  const [resetDialogOpen, setResetDialogOpen] = useState(false);
   const progress = useProgress();
   const sync = useProgressSync();
   const content = getSiteContent();
@@ -50,6 +43,7 @@ export function DashboardHero({ totalVocab, totalRules, totalLessons }: Props) {
   const freezesAvailable = progress.streak.freezesAvailable ?? 0;
   const todayIso = new Date().toISOString().slice(0, 10);
   const freezeJustConsumed = progress.streak.lastFreezeConsumedAt === todayIso;
+  const stepsDone = dailyPath.steps.filter((step) => step.status !== "ready").length;
 
   function openGoalDialog() {
     setGoalInput(String(goal));
@@ -62,11 +56,6 @@ export function DashboardHero({ totalVocab, totalRules, totalLessons }: Props) {
     if (!Number.isFinite(parsed) || parsed <= 0) return;
     progressActions.setDailyGoal(parsed);
     setGoalDialogOpen(false);
-  }
-
-  function resetProgress() {
-    progressActions.reset();
-    setResetDialogOpen(false);
   }
 
   return (
@@ -118,7 +107,7 @@ export function DashboardHero({ totalVocab, totalRules, totalLessons }: Props) {
             <CourseProgressCard course={course} />
           </div>
 
-          <div className="surface grid grid-cols-2 grid-rows-[1fr_auto]">
+          <div className="surface grid grid-cols-2 grid-rows-[1fr_auto_auto]">
             <div className="col-span-2 flex items-center justify-around gap-4 border-b border-hairline px-4 py-3">
               <GoalRing seen={seen} goal={goal} reached={goalReached} />
               <span className="h-14 w-px bg-hairline lg:h-20" aria-hidden />
@@ -140,6 +129,19 @@ export function DashboardHero({ totalVocab, totalRules, totalLessons }: Props) {
               tone="muted"
               className="border-l border-hairline"
             />
+            <div className="col-span-2 flex items-center justify-between gap-3 border-t border-hairline px-4 py-2.5 text-xs text-muted-foreground">
+              <span>
+                Daily goal:{" "}
+                <span className="font-semibold text-foreground tabular-nums">{goal} cards</span>
+              </span>
+              <button
+                type="button"
+                className="rounded font-semibold text-primary underline-offset-4 hover:underline focus-ring"
+                onClick={openGoalDialog}
+              >
+                Edit goal
+              </button>
+            </div>
           </div>
         </div>
 
@@ -155,13 +157,10 @@ export function DashboardHero({ totalVocab, totalRules, totalLessons }: Props) {
                 vocabulary, and the next lesson stay connected.
               </p>
             </div>
-            <Link
-              href={primaryPathHref(dailyPath)}
-              className="btn btn-primary btn-lg focus-ring"
-            >
-              {seen === 0 ? "Start today's path" : "Continue today's path"}
-              <ChevronRight className="h-4 w-4" />
-            </Link>
+            <span className="chip shrink-0 self-start tabular-nums text-foreground-soft">
+              <Check className="h-3.5 w-3.5 text-success" aria-hidden />
+              {stepsDone} of {dailyPath.steps.length} done
+            </span>
           </div>
 
           <div className="mt-4 grid grid-cols-1 gap-2.5 md:grid-cols-2 xl:grid-cols-4">
@@ -177,31 +176,6 @@ export function DashboardHero({ totalVocab, totalRules, totalLessons }: Props) {
           </div>
         </div>
 
-        <div className="surface mt-4 grid grid-cols-1 divide-y divide-hairline sm:grid-cols-3 sm:divide-x sm:divide-y-0">
-          <Pill label="Words" value={totalVocab} href="/vocabulary" />
-          <Pill label="Grammar rules" value={totalRules} href="/grammar" />
-          <Pill label="Lessons" value={totalLessons} href="/topics" />
-        </div>
-
-        <div className="mt-3 flex flex-wrap items-center justify-between gap-2 px-1 text-xs text-muted-foreground">
-          <span>
-            Daily goal:{" "}
-            <button
-              type="button"
-              className="font-medium text-foreground-soft underline decoration-hairline-strong underline-offset-4 hover:decoration-current focus-ring rounded"
-              onClick={openGoalDialog}
-            >
-              {goal} cards
-            </button>
-          </span>
-          <button
-            type="button"
-            className="underline-offset-4 hover:text-foreground hover:underline focus-ring rounded"
-            onClick={() => setResetDialogOpen(true)}
-          >
-            Reset progress
-          </button>
-        </div>
       </section>
 
       <AppDialog
@@ -241,18 +215,40 @@ export function DashboardHero({ totalVocab, totalRules, totalLessons }: Props) {
           </div>
         </form>
       </AppDialog>
+    </>
+  );
+}
 
+/** Quiet "Reset progress" link with its confirmation dialog, shown at the
+ *  foot of the homepage so the destructive action sits away from the stats. */
+export function ResetProgressButton() {
+  const [open, setOpen] = useState(false);
+
+  function resetProgress() {
+    progressActions.reset();
+    setOpen(false);
+  }
+
+  return (
+    <>
+      <button
+        type="button"
+        className="rounded text-xs text-muted-foreground underline-offset-4 hover:text-foreground hover:underline focus-ring"
+        onClick={() => setOpen(true)}
+      >
+        Reset progress
+      </button>
       <AppDialog
-        open={resetDialogOpen}
+        open={open}
         title="Reset all progress?"
         description="This clears your streak, daily stats, and word mastery stored in this browser."
-        onClose={() => setResetDialogOpen(false)}
+        onClose={() => setOpen(false)}
         tone="danger"
       >
         <div className="flex flex-wrap justify-end gap-2">
           <button
             type="button"
-            onClick={() => setResetDialogOpen(false)}
+            onClick={() => setOpen(false)}
             className="btn btn-secondary focus-ring"
           >
             Keep progress
@@ -456,7 +452,7 @@ function DailyPathStepCard({
 
   if (!ready) {
     return (
-      <div className="flex min-h-32 flex-col rounded-xl bg-background/45 p-3.5 text-muted-foreground ring-1 ring-inset ring-hairline">
+      <div className="flex min-h-32 flex-col rounded-xl bg-background/50 p-3.5 text-muted-foreground ring-1 ring-inset ring-hairline">
         {content}
       </div>
     );
@@ -465,24 +461,9 @@ function DailyPathStepCard({
   return (
     <Link
       href={step.href}
-      className="group flex min-h-32 flex-col rounded-xl bg-card/80 p-3.5 shadow-[inset_0_1px_0_oklch(1_0_0/7%)] ring-1 ring-inset ring-hairline-strong transition-[background-color,transform] hover:-translate-y-0.5 hover:bg-card focus-ring"
+      className="group flex min-h-32 flex-col rounded-xl bg-card p-3.5 shadow-[inset_0_1px_0_oklch(1_0_0/7%)] ring-1 ring-inset ring-hairline-strong transition-[background-color,transform] hover:-translate-y-0.5 hover:bg-card focus-ring"
     >
       {content}
-    </Link>
-  );
-}
-
-function Pill({ label, value, href }: { label: string; value: number; href: string }) {
-  return (
-    <Link
-      href={href}
-      className="group flex items-center justify-between px-4 py-3 transition-colors first:rounded-t-[14px] last:rounded-b-[14px] hover:bg-background-soft focus-ring sm:first:rounded-l-[14px] sm:first:rounded-tr-none sm:last:rounded-r-[14px] sm:last:rounded-bl-none"
-    >
-      <span className="text-sm text-muted-foreground group-hover:text-foreground">{label}</span>
-      <span className="font-display flex items-center gap-1.5 text-2xl leading-none tabular-nums">
-        {value}
-        <ChevronRight className="h-4 w-4 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100" />
-      </span>
     </Link>
   );
 }

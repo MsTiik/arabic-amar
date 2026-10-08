@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, Layers3, Sparkles } from "lucide-react";
+import { ArrowRight, Sparkles } from "lucide-react";
 
 import { ArabicText } from "@/components/arabic-text";
 import { ProgressRing } from "@/components/progress-ring";
@@ -16,7 +16,7 @@ interface Props {
   className?: string;
 }
 
-/** Arabic-Indic numeral shown as a large watermark on each level card. */
+/** Arabic-Indic numeral shown in each level card's badge tile. */
 const LEVEL_NUMERAL: Record<string, string> = {
   "level-1": "١",
   "level-2": "٢",
@@ -37,18 +37,6 @@ export function CurriculumLevelCard({ level, vocab, className }: Props) {
         className,
       )}
     >
-      {LEVEL_NUMERAL[level.slug] ? (
-        <span
-          className={cn(
-            "glyph-watermark right-6 top-12 text-[9rem] transition-transform duration-500 group-hover:-translate-y-1",
-            level.slug === "level-1" ? "text-primary/[0.07]" : "text-accent-gold/[0.1]",
-          )}
-          aria-hidden
-        >
-          {LEVEL_NUMERAL[level.slug]}
-        </span>
-      ) : null}
-
       <div className="relative flex items-start justify-between gap-3">
         <span
           className={cn(
@@ -58,7 +46,9 @@ export function CurriculumLevelCard({ level, vocab, className }: Props) {
               : "bg-accent-gold/15 text-accent-gold ring-accent-gold/25",
           )}
         >
-          <Layers3 className="h-5 w-5" aria-hidden />
+          <span className="font-arabic-display text-2xl leading-none" aria-hidden>
+            {LEVEL_NUMERAL[level.slug] ?? "١"}
+          </span>
         </span>
         {inProgress ? (
           <span className="inline-flex items-center gap-1.5 rounded-md bg-accent-gold/15 px-2 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-accent-gold ring-1 ring-inset ring-accent-gold/20">
