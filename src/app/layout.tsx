@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { Metadata, Viewport } from "next";
-import { Fraunces, Inter } from "next/font/google";
+import { Inter } from "next/font/google";
 import localFont from "next/font/local";
 import { Analytics } from "@vercel/analytics/next";
 
@@ -15,15 +15,6 @@ import "./globals.css";
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
-});
-
-// Display serif for headings and headline numbers. Variable SOFT axis gives
-// it rounded, friendly terminals so it stays playful next to Inter.
-const fraunces = Fraunces({
-  variable: "--font-fraunces",
-  subsets: ["latin"],
-  axes: ["SOFT", "WONK", "opsz"],
-  display: "swap",
 });
 
 // Self-hosted Noto Naskh Arabic (Medium). Naskh is the traditional book/Quran
@@ -71,7 +62,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${fraunces.variable} ${notoArabic.variable} h-full antialiased`}
+      className={`${inter.variable} ${notoArabic.variable} h-full antialiased`}
       // Bootstrap script and `applyTheme` mutate the className/style here at
       // runtime, which would otherwise trigger a hydration mismatch warning.
       suppressHydrationWarning

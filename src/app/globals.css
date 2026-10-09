@@ -102,7 +102,7 @@
   --font-arabic-display: var(--font-noto-arabic), "Noto Naskh Arabic",
     "Amiri", "Scheherazade New", system-ui, serif;
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
+  --font-display: var(--font-sans);
 }
 
 /*
@@ -265,10 +265,8 @@ body::before {
 @layer components {
   .font-display {
     font-family: var(--font-display);
-    font-optical-sizing: auto;
-    font-variation-settings: "SOFT" 60, "WONK" 0;
-    font-weight: 560;
-    letter-spacing: -0.022em;
+    font-weight: 700;
+    letter-spacing: -0.025em;
   }
 
   .eyebrow {
@@ -488,19 +486,17 @@ body::before {
 
   .page-title {
     font-family: var(--font-display);
-    font-variation-settings: "SOFT" 60, "WONK" 0;
-    font-weight: 500;
+    font-weight: 700;
     font-size: clamp(2rem, 1.6rem + 1.6vw, 2.6rem);
-    line-height: 1.05;
-    letter-spacing: -0.02em;
+    line-height: 1.1;
+    letter-spacing: -0.025em;
   }
   .section-title {
     font-family: var(--font-display);
-    font-variation-settings: "SOFT" 60, "WONK" 0;
-    font-weight: 500;
+    font-weight: 650;
     font-size: 1.5rem;
     line-height: 1.15;
-    letter-spacing: -0.015em;
+    letter-spacing: -0.02em;
   }
 }
 
