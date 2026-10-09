@@ -77,14 +77,14 @@ export default function RootLayout({
         <ProgressSyncProvider>
           <Topbar />
           <main className="site-main flex-1 flex flex-col">{children}</main>
-          <footer className="site-footer border-t border-border px-4 py-8 text-center text-xs text-muted-foreground">
+          <footer className="site-footer border-t border-hairline px-4 py-8 text-center text-xs text-muted-foreground">
             <div className="mx-auto mb-5 flex max-w-6xl flex-col items-center gap-3 sm:flex-row sm:justify-between">
               <Link
                 href="/"
                 className="inline-flex items-center gap-2 text-sm font-semibold tracking-tight text-foreground"
               >
                 <span
-                  className="brand-panel flex h-7 w-7 items-center justify-center rounded-md font-arabic-display text-base leading-none text-accent-gold"
+                  className="brand-panel flex h-7 w-7 items-center justify-center rounded-[8px] font-arabic-display text-base leading-none text-accent-gold"
                   aria-hidden
                 >
                   ع

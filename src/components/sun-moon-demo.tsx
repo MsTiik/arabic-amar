@@ -22,7 +22,7 @@ export function SunMoonDemo() {
   const category = classifySunMoon(firstLetter);
 
   return (
-    <div className="rounded-2xl border border-border bg-card p-5 sm:p-6">
+    <div className="surface p-5 sm:p-6">
       <div className="flex flex-wrap items-baseline justify-between gap-3">
         <h3 className="text-lg font-semibold tracking-tight">
           Tap a noun to see ’al-’ in action
@@ -32,17 +32,16 @@ export function SunMoonDemo() {
         </span>
       </div>
 
-      <div className="mt-4 flex flex-wrap gap-1.5">
+      <div className="segmented mt-4 flex flex-wrap gap-1.5">
         {SUN_MOON_EXAMPLES.map((e) => (
           <button
             key={e.slug}
             type="button"
             onClick={() => setSelected(e.slug)}
+            data-active={selected === e.slug}
             className={cn(
-              "rounded-md border px-2.5 py-1.5 text-sm transition-colors focus-ring",
-              selected === e.slug
-                ? "border-primary bg-primary/10 text-foreground"
-                : "border-border bg-background-soft text-foreground-soft hover:bg-muted",
+              "segmented-item text-sm",
+              selected !== e.slug && "text-foreground-soft",
             )}
           >
             <ArabicText variant="inline" as="span" className="text-base">
@@ -56,7 +55,7 @@ export function SunMoonDemo() {
       </div>
 
       <div className="mt-5 grid gap-4 sm:grid-cols-3">
-        <div className="rounded-xl border border-border bg-background-soft p-4 text-center">
+        <div className="tile p-4 text-center">
           <div className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
             Bare noun
           </div>
@@ -68,7 +67,7 @@ export function SunMoonDemo() {
           </div>
         </div>
 
-        <div className="rounded-xl border border-primary/30 bg-primary/5 p-4 text-center">
+        <div className="tile border-t-2 border-t-primary p-4 text-center">
           <div className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
             Plus ’al-’ prefix
           </div>
@@ -87,16 +86,21 @@ export function SunMoonDemo() {
 
         <div
           className={cn(
-            "rounded-xl border p-4 text-center",
-            category === "sun"
-              ? "border-accent-gold/50 bg-accent-gold-soft"
-              : "border-primary/30 bg-primary/5",
+            "tile border-t-2 p-4 text-center",
+            category === "sun" ? "border-t-accent-gold" : "border-t-primary",
           )}
         >
           <div className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
             First letter
           </div>
-          <div className="my-2 font-arabic-display text-3xl" lang="ar" dir="rtl">
+          <div
+            className={cn(
+              "my-2 font-arabic-display text-3xl",
+              category === "sun" ? "text-accent-gold" : "text-primary",
+            )}
+            lang="ar"
+            dir="rtl"
+          >
             {firstLetter}
           </div>
           <div className="text-xs font-semibold uppercase tracking-wider">
@@ -105,7 +109,7 @@ export function SunMoonDemo() {
         </div>
       </div>
 
-      <div className="mt-4 rounded-xl border border-border bg-background-soft p-4 text-sm text-muted-foreground">
+      <div className="mt-4 tile p-4 text-sm text-muted-foreground">
         {category === "sun" ? (
           <p>
             <strong className="font-semibold text-foreground">Sun-letter rule:</strong>{" "}

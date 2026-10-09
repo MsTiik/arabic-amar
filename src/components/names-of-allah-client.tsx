@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { BookOpen, Sparkles } from "lucide-react";
+import { ArrowRight, BookOpen, Sparkles } from "lucide-react";
 
 import { ArabicText } from "@/components/arabic-text";
 import { MasteryDots } from "@/components/mastery-dots";
@@ -19,29 +19,34 @@ export function NamesOfAllahClient() {
 
   return (
     <div className="mx-auto w-full max-w-6xl space-y-8 px-4 py-8 sm:py-10">
-      <header className="rounded-3xl border border-primary/20 bg-primary/10 p-6 sm:p-8">
+      <header className="brand-panel overflow-hidden rounded-[18px] p-6 shadow-[var(--shadow-md),inset_0_1px_0_oklch(1_0_0/8%)] sm:p-7">
         <div className="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
-          <div>
-            <p className="inline-flex items-center gap-1 rounded-full border border-primary/30 bg-card/80 px-2.5 py-1 text-xs font-semibold uppercase tracking-wider text-primary">
+          <div className="min-w-0">
+            <p className="chip mb-3 !bg-white/10 !text-accent-gold !shadow-[inset_0_0_0_1px_oklch(1_0_0/15%)]">
               <Sparkles className="h-3.5 w-3.5" aria-hidden />
               Full 99-name collection
             </p>
-            <h1 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">
+            <p className="mb-1 text-2xl leading-[1.5] text-accent-gold">
+              <span lang="ar" dir="rtl" className="font-arabic-display">
+                الأسماء الحسنى
+              </span>
+            </p>
+            <h1 className="page-title text-white">
               Names of Allah
             </h1>
-            <p className="mt-2 max-w-2xl text-sm text-foreground-soft sm:text-base">
+            <p className="mt-2 max-w-2xl text-sm text-white/75 sm:text-base">
               Study the traditional Asmā&apos; al-Ḥusnā 99-name list, with
               Qur&apos;ān references where the name or closely related attribute
               wording appears. Each card includes Arabic, a pronunciation
               reveal, a concise meaning, a longer explanation, and sources.
             </p>
-            <p className="mt-2 max-w-2xl text-xs leading-5 text-muted-foreground">
+            <p className="mt-2 max-w-2xl text-xs leading-5 text-white/60">
               Source note: the general 99 Names hadith is authentic in{" "}
               <a
                 href="https://sunnah.com/bukhari:7392"
                 target="_blank"
                 rel="noreferrer"
-                className="font-semibold underline underline-offset-2"
+                className="font-semibold text-white underline underline-offset-2"
               >
                 Sahih al-Bukhari 7392
               </a>
@@ -50,7 +55,7 @@ export function NamesOfAllahClient() {
                 href="https://sunnah.com/tirmidhi:3507"
                 target="_blank"
                 rel="noreferrer"
-                className="font-semibold underline underline-offset-2"
+                className="font-semibold text-white underline underline-offset-2"
               >
                 Jami&apos; at-Tirmidhi 3507
               </a>{" "}
@@ -59,22 +64,23 @@ export function NamesOfAllahClient() {
             </p>
           </div>
           <div className="grid min-w-64 grid-cols-2 gap-2">
-            <ProgressStat label="Known" value={`${summary.known}/${summary.total}`} />
-            <ProgressStat label="Learning" value={String(summary.learning)} />
-            <ProgressStat label="Mastered" value={String(summary.mastered)} />
-            <ProgressStat label="New" value={String(summary.new)} />
+            <ProgressStat label="Known" value={`${summary.known}/${summary.total}`} variant="midnight" />
+            <ProgressStat label="Learning" value={String(summary.learning)} variant="midnight" />
+            <ProgressStat label="Mastered" value={String(summary.mastered)} variant="midnight" />
+            <ProgressStat label="New" value={String(summary.new)} variant="midnight" />
           </div>
         </div>
         <div className="mt-5 flex flex-wrap gap-2">
           <Link
             href="/practice?deck=names-of-allah"
-            className="rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground hover:opacity-90 focus-ring"
+            className="btn cta-glow bg-primary text-primary-foreground focus-ring"
           >
             Practice Names of Allah
+            <ArrowRight className="h-4 w-4" aria-hidden />
           </Link>
           <Link
             href="/vocabulary"
-            className="rounded-full border border-border bg-background-soft px-4 py-2 text-sm font-medium hover:bg-muted focus-ring"
+            className="btn bg-white/10 text-white ring-1 ring-inset ring-white/20 hover:bg-white/15 focus-ring"
           >
             Back to vocabulary
           </Link>
@@ -84,7 +90,7 @@ export function NamesOfAllahClient() {
       <section>
         <div className="mb-4 flex items-center gap-2">
           <BookOpen className="h-5 w-5 text-primary" aria-hidden />
-          <h2 className="text-2xl font-semibold tracking-tight">
+          <h2 className="section-title">
             99 names of Allah
           </h2>
         </div>
@@ -96,7 +102,7 @@ export function NamesOfAllahClient() {
               <article
                 key={name.id}
                 id={name.id}
-                className="rounded-3xl border border-border bg-card p-5 sm:p-6"
+                className="surface p-5 sm:p-6"
               >
                 <div>
                   <ArabicText variant="display" className="text-5xl sm:text-6xl">
@@ -122,7 +128,7 @@ export function NamesOfAllahClient() {
                       href={source.url}
                       target="_blank"
                       rel="noreferrer"
-                      className="rounded-full border border-border bg-background-soft px-3 py-1 text-xs font-medium text-muted-foreground hover:text-foreground focus-ring"
+                      className="chip text-muted-foreground hover:text-foreground focus-ring"
                     >
                       {source.reference}
                     </a>
@@ -137,11 +143,30 @@ export function NamesOfAllahClient() {
   );
 }
 
-function ProgressStat({ label, value }: { label: string; value: string }) {
+function ProgressStat({
+  label,
+  value,
+  variant = "default",
+}: {
+  label: string;
+  value: string;
+  variant?: "default" | "midnight";
+}) {
+  const midnight = variant === "midnight";
   return (
-    <div className="rounded-2xl border border-border bg-card px-4 py-3">
+    <div
+      className={
+        midnight
+          ? "rounded-[12px] bg-white/8 px-4 py-3 text-white ring-1 ring-inset ring-white/12"
+          : "surface px-4 py-3"
+      }
+    >
       <p className="text-2xl font-semibold tabular-nums">{value}</p>
-      <p className="text-xs uppercase tracking-wider text-muted-foreground">
+      <p
+        className={`text-xs uppercase tracking-wider ${
+          midnight ? "text-white/60" : "text-muted-foreground"
+        }`}
+      >
         {label}
       </p>
     </div>

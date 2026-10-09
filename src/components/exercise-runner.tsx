@@ -104,14 +104,14 @@ export function ExerciseRunner({ deck, onExit, onAttempt }: Props) {
 
   if (deck.questions.length === 0) {
     return (
-      <div className="rounded-3xl border border-border bg-card p-8 text-center">
+      <div className="surface p-8 text-center">
         <p className="text-base text-foreground">
           This deck doesn&apos;t have any questions yet.
         </p>
         <button
           type="button"
           onClick={onExit}
-          className="btn-chunky btn-chunky-primary mt-3 rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground focus-ring"
+          className="btn-chunky btn-chunky-primary mt-3 rounded-[14px] bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground focus-ring"
         >
           Back to practice
         </button>
@@ -177,7 +177,7 @@ export function ExerciseRunner({ deck, onExit, onAttempt }: Props) {
         <button
           type="button"
           onClick={onExit}
-          className="rounded-full border border-border bg-background-soft p-2 hover:bg-muted focus-ring"
+          className="icon-btn"
           aria-label="Exit deck"
         >
           <ArrowLeft className="h-4 w-4" />
@@ -208,7 +208,7 @@ export function ExerciseRunner({ deck, onExit, onAttempt }: Props) {
         {combo >= 3 ? (
           <span
             key={combo}
-            className="combo-pop flex shrink-0 items-center gap-1 rounded-full bg-accent-gold-soft px-3 py-1.5 text-xs font-bold text-foreground"
+            className="combo-pop chip flex shrink-0 bg-accent-gold-soft text-foreground"
           >
             <Flame className="h-3.5 w-3.5 text-accent-gold" aria-hidden />
             {combo} in a row!
@@ -324,7 +324,7 @@ function CompletionScreen({
       : "Session complete";
 
   return (
-    <div className="relative overflow-hidden rounded-3xl border border-border bg-card p-8 text-center">
+    <div className="relative overflow-hidden surface p-8 text-center">
       {accuracy >= 80 ? <ConfettiBurst count={perfect ? 36 : 24} /> : null}
       <div
         className={cn(
@@ -340,12 +340,12 @@ function CompletionScreen({
           aria-hidden
         />
       </div>
-      <h2 className="mt-4 text-2xl font-bold tracking-tight">{heading}</h2>
+      <h2 className="mt-4 section-title">{heading}</h2>
       <p className="mt-1 text-sm text-muted-foreground">
         {deckTitle} · {total} cards
       </p>
       <div className="mt-6 grid grid-cols-3 gap-2 sm:gap-6">
-        <div className="min-w-0 rounded-2xl border border-primary/30 bg-primary/5 px-2 py-3 text-center sm:px-4">
+        <div className="min-w-0 rounded-[10px] border border-primary/30 bg-primary/5 px-2 py-3 text-center sm:px-4">
           <p className="text-3xl font-bold text-primary">
             <CountUpNumber value={accuracy} suffix="%" />
           </p>
@@ -353,7 +353,7 @@ function CompletionScreen({
             Accuracy
           </p>
         </div>
-        <div className="min-w-0 rounded-2xl border border-success/40 bg-success-soft px-2 py-3 text-center sm:px-4">
+        <div className="min-w-0 rounded-[10px] border border-success/40 bg-success-soft px-2 py-3 text-center sm:px-4">
           <p className="text-3xl font-bold text-success">
             <CountUpNumber value={correct} />
           </p>
@@ -361,7 +361,7 @@ function CompletionScreen({
             Correct
           </p>
         </div>
-        <div className="min-w-0 rounded-2xl border border-danger/40 bg-danger-soft px-2 py-3 text-center sm:px-4">
+        <div className="min-w-0 rounded-[10px] border border-danger/40 bg-danger-soft px-2 py-3 text-center sm:px-4">
           <p className="text-3xl font-bold text-danger">
             <CountUpNumber value={wrong} />
           </p>
@@ -372,7 +372,7 @@ function CompletionScreen({
       </div>
       <div className="mt-4 flex flex-wrap items-center justify-center gap-2">
         {bestCombo >= 3 ? (
-          <p className="inline-flex items-center gap-1 rounded-full bg-accent-gold-soft px-3 py-1.5 text-xs font-bold">
+          <p className="chip">
             <Flame className="h-3.5 w-3.5 text-accent-gold" aria-hidden />
             Best streak: {bestCombo} in a row
           </p>
@@ -383,7 +383,7 @@ function CompletionScreen({
         <button
           type="button"
           onClick={onRunAgain}
-          className="btn-chunky rounded-full border border-border bg-background-soft px-5 py-2.5 text-sm font-semibold hover:bg-muted focus-ring"
+          className="btn-chunky rounded-[14px] border border-hairline bg-background-soft px-5 py-2.5 text-sm font-semibold hover:bg-muted focus-ring"
         >
           <RotateCcw className="mr-1 inline h-3.5 w-3.5" />
           Run again
@@ -391,7 +391,7 @@ function CompletionScreen({
         <button
           type="button"
           onClick={onExit}
-          className="btn-chunky btn-chunky-primary rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground focus-ring"
+          className="btn-chunky btn-chunky-primary rounded-[14px] bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground focus-ring"
         >
           Back to practice
         </button>
@@ -410,7 +410,7 @@ function MasteryChip() {
   const summary = summarizeMastery(progress, allWordIds);
   return (
     <p
-      className="inline-flex items-center gap-1.5 rounded-full border border-border bg-background-soft px-3 py-1.5 text-xs font-semibold text-foreground tabular-nums"
+      className="chip tabular-nums"
       title="Mastered means answered correctly often enough to reach the top mastery rating."
     >
       {summary.mastered} / {summary.total} words mastered
@@ -459,7 +459,7 @@ function FeedbackBar({
         className={cn(
           "feedback-enter flex flex-wrap items-center justify-between gap-3 border p-4",
           "fixed inset-x-0 bottom-0 z-40 rounded-t-2xl border-x-0 border-b-0 pb-[max(1rem,env(safe-area-inset-bottom))] shadow-[0_-8px_24px_rgb(0_0_0/0.15)]",
-          "sm:static sm:z-auto sm:mt-6 sm:rounded-2xl sm:border sm:pb-4 sm:shadow-none",
+          "sm:static sm:z-auto sm:mt-6 sm:rounded-[10px] sm:border sm:pb-4 sm:shadow-none",
           correct
             ? "border-success/50 bg-success-soft"
             : "border-danger/50 bg-danger-soft",
@@ -498,7 +498,7 @@ function FeedbackBar({
           type="button"
           onClick={onContinue}
           className={cn(
-            "btn-chunky rounded-full px-6 py-2.5 text-sm font-bold text-primary-foreground focus-ring",
+            "btn-chunky rounded-[14px] px-6 py-2.5 text-sm font-bold text-primary-foreground focus-ring",
             correct
               ? "btn-chunky-success bg-success"
               : "btn-chunky-danger bg-danger",
@@ -518,12 +518,12 @@ function optionClasses(
   isSelected: boolean,
 ): string {
   const base =
-    "btn-chunky rounded-2xl border-2 text-center focus-ring";
+    "btn-chunky rounded-[14px] border-2 text-center focus-ring";
   if (!answered)
-    return cn(base, "border-border bg-background-soft hover:bg-muted");
+    return cn(base, "border-hairline bg-background-soft hover:bg-muted");
   if (isCorrect) return cn(base, "answer-pop border-success bg-success-soft");
   if (isSelected) return cn(base, "answer-shake border-danger bg-danger-soft");
-  return cn(base, "border-border bg-background-soft opacity-50");
+  return cn(base, "border-hairline bg-background-soft opacity-50");
 }
 
 function QuestionView({
@@ -579,7 +579,7 @@ function FlashcardView({
     : "Flip card to show English";
 
   return (
-    <div className="rounded-3xl border border-border bg-card p-4 text-center sm:p-10">
+    <div className="surface p-4 text-center sm:p-10">
       <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
         {flipped ? "English" : "Arabic"}
       </p>
@@ -594,7 +594,7 @@ function FlashcardView({
             type="button"
             aria-label={flipLabel}
             onClick={toggleFlip}
-            className="flip-face btn-chunky absolute inset-0 flex cursor-pointer flex-col items-center justify-center gap-2 rounded-2xl border-2 border-border bg-background-soft p-6 hover:border-primary/50 hover:bg-muted/70 focus-ring sm:p-8"
+            className="flip-face btn-chunky absolute inset-0 flex cursor-pointer flex-col items-center justify-center gap-2 rounded-[14px] border-2 border-hairline bg-background-soft p-6 hover:border-primary/50 hover:bg-muted/70 focus-ring sm:p-8"
           >
             <ArabicText
               variant="display"
@@ -613,7 +613,7 @@ function FlashcardView({
             type="button"
             aria-label={flipLabel}
             onClick={toggleFlip}
-            className="flip-face flip-face-back btn-chunky btn-chunky-primary absolute inset-0 flex cursor-pointer flex-col items-center justify-center gap-3 rounded-2xl border-2 border-primary/30 bg-primary/5 p-6 focus-ring sm:p-8"
+            className="flip-face flip-face-back btn-chunky btn-chunky-primary absolute inset-0 flex cursor-pointer flex-col items-center justify-center gap-3 rounded-[14px] border-2 border-primary/30 bg-primary/5 p-6 focus-ring sm:p-8"
           >
             <p
               className={cn(
@@ -666,7 +666,7 @@ function FlashcardView({
             answerFeedback(false);
             onAnswer(false);
           }}
-          className="btn-chunky btn-chunky-danger rounded-full border-2 border-danger bg-danger-soft px-4 py-2.5 text-sm font-bold text-foreground focus-ring"
+          className="btn-chunky btn-chunky-danger rounded-[14px] border-2 border-danger bg-danger-soft px-4 py-2.5 text-sm font-bold text-foreground focus-ring"
         >
           <X className="mr-1 inline h-4 w-4" />
           Got it wrong
@@ -677,7 +677,7 @@ function FlashcardView({
             answerFeedback(true);
             onAnswer(true);
           }}
-          className="btn-chunky btn-chunky-success rounded-full bg-success px-4 py-2.5 text-sm font-bold text-primary-foreground focus-ring"
+          className="btn-chunky btn-chunky-success rounded-[14px] bg-success px-4 py-2.5 text-sm font-bold text-primary-foreground focus-ring"
         >
           <Check className="mr-1 inline h-4 w-4" />
           Got it right
@@ -701,7 +701,7 @@ function MultipleChoiceView({
   );
 
   return (
-    <div className="rounded-3xl border border-border bg-card p-4 sm:p-8">
+    <div className="surface p-4 sm:p-8">
       <div className="text-center">
         {question.promptArabic ? (
           <>
@@ -822,7 +822,7 @@ function FillBlankView({
   }
 
   return (
-    <div className="rounded-3xl border border-border bg-card p-4 sm:p-8">
+    <div className="surface p-4 sm:p-8">
       <div className="text-center">
         <ArabicText
           variant="display"
@@ -850,14 +850,14 @@ function FillBlankView({
           disabled={submitted !== null}
           placeholder="Type the transliteration"
           aria-label="Transliteration"
-          className="w-full rounded-full border border-border bg-background-soft px-4 py-3 text-center text-base outline-none focus-ring disabled:opacity-60"
+          className="input w-full text-center disabled:opacity-60"
           lang="ar-Latn"
         />
 
         {submitted === null ? (
           <button
             type="submit"
-            className="btn-chunky btn-chunky-primary mt-4 w-full rounded-full bg-primary py-2.5 text-sm font-bold text-primary-foreground focus-ring"
+            className="btn-chunky btn-chunky-primary mt-4 w-full rounded-[14px] bg-primary py-2.5 text-sm font-bold text-primary-foreground focus-ring"
           >
             Submit
           </button>
@@ -917,7 +917,7 @@ function OrderingView({
   const optionMap = new Map(question.options?.map((o) => [o.id, o]));
 
   return (
-    <div className="rounded-3xl border border-border bg-card p-4 sm:p-8">
+    <div className="surface p-4 sm:p-8">
       <p className="text-base font-medium">{question.prompt}</p>
       <ul className="mt-4 space-y-2">
         {order.map((id, i) => {
@@ -925,7 +925,7 @@ function OrderingView({
           return (
             <li
               key={id}
-              className="flex items-center gap-3 rounded-2xl border border-border bg-background-soft px-3 py-2"
+              className="flex items-center gap-3 tile px-3 py-2"
             >
               <span className="w-6 text-right text-xs tabular-nums text-muted-foreground">
                 {i + 1}.
@@ -952,7 +952,7 @@ function OrderingView({
                 type="button"
                 onClick={() => move(id, -1)}
                 disabled={i === 0 || submitted !== null}
-                className="rounded-md border border-border bg-background-soft px-2 py-1 text-xs hover:bg-muted disabled:opacity-40 focus-ring"
+                className="rounded-md border border-hairline bg-background-soft px-2 py-1 text-xs hover:bg-muted disabled:opacity-40 focus-ring"
                 aria-label="Move up"
               >
                 ↑
@@ -961,7 +961,7 @@ function OrderingView({
                 type="button"
                 onClick={() => move(id, 1)}
                 disabled={i === order.length - 1 || submitted !== null}
-                className="rounded-md border border-border bg-background-soft px-2 py-1 text-xs hover:bg-muted disabled:opacity-40 focus-ring"
+                className="rounded-md border border-hairline bg-background-soft px-2 py-1 text-xs hover:bg-muted disabled:opacity-40 focus-ring"
                 aria-label="Move down"
               >
                 ↓
@@ -975,7 +975,7 @@ function OrderingView({
         <button
           type="button"
           onClick={submit}
-          className="btn-chunky btn-chunky-primary mt-4 w-full rounded-full bg-primary py-2.5 text-sm font-bold text-primary-foreground focus-ring"
+          className="btn-chunky btn-chunky-primary mt-4 w-full rounded-[14px] bg-primary py-2.5 text-sm font-bold text-primary-foreground focus-ring"
         >
           Check
         </button>
@@ -1073,14 +1073,14 @@ function MatchPairsView({
   const noErrors = errorCount === 0;
 
   return (
-    <div className="rounded-3xl border border-border bg-card p-4 sm:p-8">
+    <div className="surface p-4 sm:p-8">
       <p className="text-base font-medium text-center">{question.prompt}</p>
       <p className="mt-1 text-center text-xs text-muted-foreground">
         Tap one from each column.
       </p>
 
       <div className="mt-6 grid grid-cols-2 gap-3">
-        <ul className="space-y-2">
+        <ul className="flex flex-col gap-2">
           {leftItems.map((p) => (
             <MatchCard
               key={p.id + "L"}
@@ -1093,7 +1093,7 @@ function MatchPairsView({
             />
           ))}
         </ul>
-        <ul className="space-y-2">
+        <ul className="flex flex-col gap-2">
           {rightItems.map((p) => (
             <MatchCard
               key={p.id + "R"}
@@ -1143,12 +1143,12 @@ function MatchCard({
   const isArabic = side === "left" ? pair.leftIsArabic : pair.rightIsArabic;
   const text = side === "left" ? pair.leftText : pair.rightText;
   const translit = side === "left" ? pair.leftTranslit : pair.rightTranslit;
-  let style = "border-border bg-background-soft hover:bg-muted";
+  let style = "border-hairline bg-background-soft hover:bg-muted";
   if (matched) style = "answer-pop border-success bg-success-soft opacity-70";
   else if (wrong) style = "answer-shake border-danger bg-danger-soft";
   else if (selected) style = "border-primary bg-primary/10";
   return (
-    <li className="h-full min-w-0">
+    <li className="flex min-w-0 flex-1">
       <button
         type="button"
         onClick={onClick}
@@ -1156,7 +1156,7 @@ function MatchCard({
         className={cn(
           // A shared minimum height keeps the columns visually steady, while
           // h-full lets a row grow rather than clipping a long paired form.
-          "btn-chunky flex h-full min-h-24 w-full min-w-0 flex-col items-center justify-center rounded-2xl border-2 p-3 text-center focus-ring sm:min-h-28",
+          "btn-chunky flex h-full min-h-24 w-full min-w-0 flex-col items-center justify-center rounded-[14px] border-2 p-3 text-center focus-ring sm:min-h-28",
           style,
         )}
       >
@@ -1205,7 +1205,7 @@ function WhichLetterView({
   );
 
   return (
-    <div className="rounded-3xl border border-border bg-card p-4 sm:p-8">
+    <div className="surface p-4 sm:p-8">
       <div className="text-center">
         <ArabicText
           variant="display"
@@ -1290,7 +1290,7 @@ function ClozeView({
   const after = question.clozeAfter ?? "";
 
   return (
-    <div className="rounded-3xl border border-border bg-card p-4 sm:p-8">
+    <div className="surface p-4 sm:p-8">
       <div className="text-center">
         <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
           Meaning
@@ -1405,7 +1405,7 @@ function ConnectingLettersView({
   );
 
   return (
-    <div className="rounded-3xl border border-border bg-card p-4 sm:p-8">
+    <div className="surface p-4 sm:p-8">
       <p className="text-center text-sm font-medium text-foreground-soft">
         {question.prompt}
       </p>

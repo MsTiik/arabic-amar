@@ -59,7 +59,7 @@ export function PwaSetup() {
   return (
     <div
       role="status"
-      className="fixed inset-x-3 bottom-3 z-50 flex items-start gap-3 rounded-2xl border border-border bg-card p-4 text-sm text-card-foreground shadow-lg"
+      className="fixed inset-x-3 bottom-3 z-50 flex items-start gap-3 surface p-4 text-sm text-card-foreground shadow-lg"
     >
       <div className="min-w-0">
         <p className="font-semibold">Install Arabic Amar</p>
@@ -73,7 +73,7 @@ export function PwaSetup() {
         type="button"
         onClick={dismiss}
         aria-label="Dismiss install hint"
-        className="ml-auto inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-ring"
+        className="icon-btn ml-auto shrink-0"
       >
         <X className="h-4 w-4" aria-hidden />
       </button>

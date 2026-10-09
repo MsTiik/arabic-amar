@@ -61,16 +61,16 @@ export function ProgressSyncPanel() {
   }
 
   return (
-    <section className="rounded-3xl border border-border bg-card p-6 sm:p-8">
+    <section className="surface p-6 sm:p-8">
       <div className="flex items-start gap-4">
-        <div className="rounded-2xl bg-primary/10 p-3 text-primary">
+        <div className="rounded-[10px] bg-primary/10 p-3 text-primary">
           {sync.configured ? <Cloud className="h-6 w-6" /> : <CloudOff className="h-6 w-6" />}
         </div>
         <div>
           <p className="text-sm font-medium uppercase tracking-wider text-muted-foreground">
             Progress sync
           </p>
-          <h1 className="mt-1 text-3xl font-semibold tracking-tight">
+          <h1 className="mt-1 page-title">
             Use the same progress on your phone
           </h1>
           <p className="mt-2 text-sm leading-6 text-foreground-soft">
@@ -87,17 +87,17 @@ export function ProgressSyncPanel() {
       </div>
 
       {!sync.configured ? (
-        <div className="mt-6 rounded-2xl border border-border bg-background-soft p-4 text-sm text-muted-foreground">
+        <div className="mt-6 tile p-4 text-sm text-muted-foreground">
           Sync is not configured on this deployment yet. Add
-          <code className="mx-1 rounded bg-muted px-1.5 py-0.5">NEXT_PUBLIC_SUPABASE_URL</code>
+          <code className="mx-1 break-all rounded bg-muted px-1.5 py-0.5">NEXT_PUBLIC_SUPABASE_URL</code>
           and
-          <code className="mx-1 rounded bg-muted px-1.5 py-0.5">
+          <code className="mx-1 break-all rounded bg-muted px-1.5 py-0.5">
             NEXT_PUBLIC_SUPABASE_ANON_KEY
           </code>
           to enable optional account sync.
         </div>
       ) : sync.user ? (
-        <div className="mt-6 rounded-2xl border border-success/30 bg-success/10 p-4">
+        <div className="mt-6 rounded-[10px] border border-success/30 bg-success/10 p-4">
           <p className="text-sm font-semibold">Signed in as {sync.user.email}</p>
           <p className="mt-1 text-sm text-muted-foreground">
             Status: {sync.status === "syncing" ? "Syncing…" : sync.status}
@@ -107,7 +107,7 @@ export function ProgressSyncPanel() {
             <button
               type="button"
               onClick={() => sync.syncNow()}
-              className="inline-flex items-center gap-2 rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground hover:opacity-90 focus-ring"
+              className="btn btn-primary btn-sm"
             >
               <RefreshCw className="h-4 w-4" />
               Sync now
@@ -115,14 +115,14 @@ export function ProgressSyncPanel() {
             <button
               type="button"
               onClick={() => sync.signOut()}
-              className="rounded-full border border-border px-4 py-2 text-sm font-semibold hover:bg-muted focus-ring"
+              className="btn btn-secondary btn-sm"
             >
               Sign out
             </button>
           </div>
         </div>
       ) : (
-        <form onSubmit={submit} className="mt-6 rounded-2xl border border-border bg-background-soft p-4">
+        <form onSubmit={submit} className="mt-6 tile p-4">
           <label className="text-sm font-semibold" htmlFor="sync-email">
             Email address
           </label>
@@ -133,12 +133,12 @@ export function ProgressSyncPanel() {
               value={email}
               onChange={(event) => setEmail(event.target.value)}
               placeholder="you@example.com"
-              className="min-w-0 flex-1 rounded-full border border-border bg-background px-4 py-2 text-sm focus-ring"
+              className="input min-w-0 flex-1"
             />
             <button
               type="submit"
               disabled={signInDisabled}
-              className="rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60 focus-ring"
+              className="btn btn-primary btn-sm disabled:cursor-not-allowed disabled:opacity-60"
             >
               {sync.status === "syncing"
                 ? "Sending…"
@@ -165,7 +165,7 @@ export function ProgressSyncPanel() {
       {sync.configured && !sync.user && sent ? (
         <form
           onSubmit={submitCode}
-          className="mt-3 rounded-2xl border border-border bg-background-soft p-4"
+          className="mt-3 tile p-4"
         >
           <label className="text-sm font-semibold" htmlFor="sync-code">
             Sign-in code from the email
@@ -179,12 +179,12 @@ export function ProgressSyncPanel() {
               value={code}
               onChange={(event) => setCode(event.target.value)}
               placeholder="123456"
-              className="min-w-0 flex-1 rounded-full border border-border bg-background px-4 py-2 text-sm tracking-widest focus-ring"
+              className="input min-w-0 flex-1 tracking-widest"
             />
             <button
               type="submit"
               disabled={!codeReady || verifying}
-              className="rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60 focus-ring"
+              className="btn btn-primary btn-sm disabled:cursor-not-allowed disabled:opacity-60"
             >
               {verifying ? "Verifying…" : "Verify code"}
             </button>
@@ -200,7 +200,7 @@ export function ProgressSyncPanel() {
 
 function Stat({ label, value }: { label: string; value: string | number }) {
   return (
-    <div className="rounded-2xl border border-border bg-background-soft p-4">
+    <div className="tile p-4">
       <div className="text-2xl font-semibold tabular-nums">{value}</div>
       <div className="mt-1 text-xs text-muted-foreground">{label}</div>
     </div>

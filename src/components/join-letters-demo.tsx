@@ -51,7 +51,7 @@ export function JoinLettersDemo() {
   }
 
   return (
-    <div className="rounded-2xl border border-border bg-card p-5 sm:p-6">
+    <div className="surface p-5 sm:p-6">
       <div className="flex flex-wrap items-baseline justify-between gap-3">
         <h3 className="text-lg font-semibold tracking-tight">
           Pick letters, watch them join
@@ -62,7 +62,7 @@ export function JoinLettersDemo() {
       </div>
 
       <div
-        className="mt-4 flex min-h-[96px] items-center justify-center rounded-xl bg-background-soft p-4"
+        className="mt-4 flex min-h-[96px] items-center justify-center rounded-[10px] bg-background-soft p-4"
         lang="ar"
         dir="rtl"
       >
@@ -83,7 +83,7 @@ export function JoinLettersDemo() {
               <span key={i} className="inline-flex items-center gap-1">
                 <span
                   className={cn(
-                    "inline-flex h-7 min-w-7 items-center justify-center rounded-md border border-border bg-card px-1.5 font-arabic text-lg",
+                    "inline-flex h-7 min-w-7 items-center justify-center rounded-md border border-hairline bg-card px-1.5 font-arabic text-lg",
                     isBreak && "border-accent-gold/60 bg-accent-gold-soft",
                   )}
                   title={isBreak ? "Non-connector — chain breaks after this letter" : undefined}
@@ -111,7 +111,7 @@ export function JoinLettersDemo() {
           type="button"
           onClick={removeLast}
           disabled={picked.length === 0}
-          className="rounded-md border border-border bg-background-soft px-3 py-1.5 text-xs font-medium hover:bg-muted disabled:cursor-not-allowed disabled:opacity-40 focus-ring"
+          className="rounded-md border border-hairline bg-background-soft px-3 py-1.5 text-xs font-medium hover:bg-muted disabled:cursor-not-allowed disabled:opacity-40 focus-ring"
         >
           ← Remove last
         </button>
@@ -119,7 +119,7 @@ export function JoinLettersDemo() {
           type="button"
           onClick={reset}
           disabled={picked.length === 0}
-          className="inline-flex items-center gap-1.5 rounded-md border border-border bg-background-soft px-3 py-1.5 text-xs font-medium hover:bg-muted disabled:cursor-not-allowed disabled:opacity-40 focus-ring"
+          className="inline-flex items-center gap-1.5 rounded-md border border-hairline bg-background-soft px-3 py-1.5 text-xs font-medium hover:bg-muted disabled:cursor-not-allowed disabled:opacity-40 focus-ring"
         >
           <RefreshCcw className="h-3 w-3" aria-hidden /> Reset
         </button>
@@ -129,7 +129,7 @@ export function JoinLettersDemo() {
             key={s}
             type="button"
             onClick={() => loadSample(s)}
-            className="rounded-md border border-border bg-background-soft px-2.5 py-1 text-xs hover:bg-muted focus-ring"
+            className="rounded-md border border-hairline bg-background-soft px-2.5 py-1 text-xs hover:bg-muted focus-ring"
             lang="ar"
             dir="rtl"
           >
@@ -152,7 +152,7 @@ export function JoinLettersDemo() {
                 onClick={() => addLetter(letter.forms.isolated)}
                 disabled={picked.length >= 6}
                 className={cn(
-                  "rounded-md border border-border bg-card px-1 py-2 font-arabic-display text-xl transition-colors hover:bg-muted focus-ring disabled:cursor-not-allowed disabled:opacity-40",
+                  "rounded-md border border-hairline bg-card px-1 py-2 font-arabic-display text-xl transition-colors hover:bg-muted focus-ring disabled:cursor-not-allowed disabled:opacity-40",
                   isNC && "border-accent-gold/50",
                 )}
                 title={isNC ? `${letter.name} — non-connector` : letter.name}

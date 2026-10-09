@@ -20,7 +20,7 @@ export default function TopicsPage() {
     <div className="mx-auto w-full max-w-6xl px-4 py-10">
       <header className="mb-6">
         <p className="section-label">Curriculum</p>
-        <h1 className="mt-1 text-3xl font-semibold tracking-tight sm:text-4xl">Courses</h1>
+        <h1 className="mt-1 sm:text-4xl page-title">Courses</h1>
         <p className="mt-1 text-sm text-muted-foreground">
           Foundations is the reading course. Each numbered level keeps its lessons,
           grammar, and practice together without duplicating your word progress.
@@ -44,7 +44,7 @@ export default function TopicsPage() {
           <header className="mb-4 flex items-end justify-between gap-4">
             <div>
               <p className="section-label">Course map</p>
-              <h2 id="topics-level-1-heading" className="mt-1 text-2xl font-semibold tracking-tight">
+              <h2 id="topics-level-1-heading" className="mt-1 section-title">
                 Level 1 lessons
               </h2>
               <p className="mt-1 text-sm text-muted-foreground">
@@ -75,7 +75,7 @@ export default function TopicsPage() {
           <header className="mb-4 flex items-end justify-between gap-4">
             <div>
               <p className="section-label">Growing course</p>
-              <h2 id="topics-level-2-heading" className="mt-1 text-2xl font-semibold tracking-tight">
+              <h2 id="topics-level-2-heading" className="mt-1 section-title">
                 Level 2 topics
               </h2>
               <p className="mt-1 text-sm text-muted-foreground">

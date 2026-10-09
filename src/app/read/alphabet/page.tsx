@@ -28,7 +28,7 @@ export default function AlphabetPage() {
         <div className="mb-3">
           <FoundationsBadge />
         </div>
-        <h1 className="text-4xl font-bold tracking-tight">
+        <h1 className="page-title">
           The Arabic alphabet
           <span
             lang="ar"
@@ -62,8 +62,8 @@ export default function AlphabetPage() {
         ))}
       </div>
 
-      <footer className="mt-10 rounded-2xl border border-border bg-card p-6 text-sm text-muted-foreground">
-        <h2 className="mb-2 text-base font-semibold text-foreground">
+      <footer className="mt-10 surface p-6 text-sm text-muted-foreground">
+        <h2 className="mb-2 text-base text-foreground font-display">
           How audio works here
         </h2>
         <p className="mb-1">
@@ -109,7 +109,7 @@ function LetterCard({ letter }: { letter: (typeof ALPHABET)[number] }) {
   const isNonConnector = NON_CONNECTORS.includes(letter.forms.isolated);
   return (
     <article
-      className="flex flex-col gap-3 rounded-2xl border border-border bg-card p-5"
+      className="flex flex-col gap-3 surface p-5"
       aria-label={`Letter ${letter.name}`}
       dir="ltr"
     >
@@ -137,7 +137,7 @@ function LetterCard({ letter }: { letter: (typeof ALPHABET)[number] }) {
         <div className="flex items-center gap-2">
           {isNonConnector ? (
             <span
-              className="inline-flex items-center gap-1 rounded-full border border-accent-gold/50 bg-accent-gold-soft px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-foreground"
+              className="chip inline-flex gap-1 border border-accent-gold/50 bg-accent-gold-soft text-foreground"
               title="This letter never attaches to the letter that follows it."
             >
               <span className="inline-block h-1.5 w-1.5 rounded-full bg-accent-gold" />
@@ -152,7 +152,7 @@ function LetterCard({ letter }: { letter: (typeof ALPHABET)[number] }) {
         </div>
       </header>
 
-      <section aria-label="Positional forms" className="rounded-xl bg-background-soft p-3">
+      <section aria-label="Positional forms" className="rounded-[10px] bg-background-soft p-3">
         <div className="mb-1.5 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
           Isolated · Initial · Medial · Final
         </div>
@@ -179,7 +179,7 @@ function LetterCard({ letter }: { letter: (typeof ALPHABET)[number] }) {
 
       <p className="text-xs text-muted-foreground">{letter.pronunciationHint}</p>
 
-      <div className="flex items-center justify-between gap-3 rounded-xl border border-border bg-background-soft px-3 py-2">
+      <div className="flex items-center justify-between gap-3 tile px-3 py-2">
         <div>
           <ArabicText variant="display" as="span" className="text-xl">
             {letter.example.arabic}
@@ -215,7 +215,7 @@ function FormCell({
       className={`rounded-md border px-1 font-arabic-display ${
         emphasized
           ? "border-primary/30 bg-primary/5 py-3 text-4xl font-semibold"
-          : "border-border bg-card py-2 text-2xl"
+          : "border-hairline bg-card py-2 text-2xl"
       } ${faded ? "text-foreground-soft" : "text-foreground"}`}
     >
       {glyph}
@@ -226,7 +226,7 @@ function FormCell({
 function ExtraCard({ extra }: { extra: AlphabetExtra }) {
   return (
     <article
-      className="flex flex-col gap-3 rounded-2xl border-2 border-dashed border-accent-gold/60 bg-accent-gold-soft/40 p-5"
+      className="surface flex flex-col gap-3 border-l-4 border-l-accent-gold p-5"
       aria-label={extra.name}
       dir="ltr"
     >
@@ -234,7 +234,7 @@ function ExtraCard({ extra }: { extra: AlphabetExtra }) {
         <div>
           <div className="flex items-center gap-2">
             <span
-              className="inline-flex items-center rounded-full border border-accent-gold/60 bg-accent-gold-soft px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-foreground"
+              className="chip border border-accent-gold/60 bg-accent-gold-soft text-foreground"
               title="Not one of the 28 letters"
             >
               {extra.tag}
@@ -263,7 +263,7 @@ function ExtraCard({ extra }: { extra: AlphabetExtra }) {
 
       <section
         aria-label="Positional forms"
-        className="rounded-xl bg-background-soft/80 p-3"
+        className="tile p-3"
       >
         <div className="mb-1.5 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
           Isolated · Initial · Medial · Final
@@ -291,7 +291,7 @@ function ExtraCard({ extra }: { extra: AlphabetExtra }) {
 
       <p className="text-xs text-muted-foreground">{extra.pronunciationHint}</p>
 
-      <div className="flex items-center justify-between gap-3 rounded-xl border border-accent-gold/30 bg-background-soft/80 px-3 py-2">
+      <div className="flex items-center justify-between gap-3 tile px-3 py-2">
         <div>
           <ArabicText variant="display" as="span" className="text-xl">
             {extra.example.arabic}

@@ -98,7 +98,7 @@ function GenderBadge({ gender }: { gender?: "M" | "F" | "Both" }) {
   const label =
     gender === "M" ? "masc." : gender === "F" ? "fem." : "masc. / fem.";
   return (
-    <span className="ml-2 inline-flex items-center rounded-full border border-border bg-background-soft px-1.5 text-[10px] font-medium tracking-wider text-muted-foreground">
+    <span className="ml-2 chip border border-hairline bg-background-soft text-muted-foreground">
       {label}
     </span>
   );
@@ -107,7 +107,7 @@ function GenderBadge({ gender }: { gender?: "M" | "F" | "Both" }) {
 function Table({ rows }: { rows: ConjugationEntry[] }) {
   if (rows.length === 0) {
     return (
-      <p className="rounded-2xl border border-border bg-card p-6 text-sm text-muted-foreground">
+      <p className="surface p-6 text-sm text-muted-foreground">
         No conjugations captured yet — try refreshing from the source doc.
       </p>
     );
@@ -118,7 +118,7 @@ function Table({ rows }: { rows: ConjugationEntry[] }) {
       {rows.map((r) => (
         <article
           key={r.id}
-          className="rounded-2xl border border-border bg-card p-4"
+          className="surface p-4"
         >
           <header className="flex items-center justify-between gap-2">
             <p className="text-sm font-semibold text-foreground">
@@ -139,7 +139,7 @@ function Table({ rows }: { rows: ConjugationEntry[] }) {
             {r.pronunciation && r.english ? " — " : null}
             {r.english}
           </p>
-          <dl className="mt-3 space-y-2 border-t border-border/60 pt-3">
+          <dl className="mt-3 space-y-2 border-t border-hairline/60 pt-3">
             <div>
               <dt className="text-[0.65rem] font-semibold uppercase tracking-wider text-muted-foreground">
                 Pattern
@@ -160,10 +160,10 @@ function Table({ rows }: { rows: ConjugationEntry[] }) {
         </article>
       ))}
     </div>
-    <div className="hidden overflow-x-auto rounded-2xl border border-border bg-card md:block">
+    <div className="hidden overflow-x-auto surface md:block">
       <table className="w-full border-collapse text-sm">
         <thead className="text-left">
-          <tr className="border-b border-border bg-background-soft">
+          <tr className="border-b border-hairline bg-background-soft">
             <th className="px-3 py-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
               Person / number
             </th>
@@ -189,7 +189,7 @@ function Table({ rows }: { rows: ConjugationEntry[] }) {
             <tr
               key={r.id}
               className={cn(
-                "border-b border-border/60 last:border-0",
+                "border-b border-hairline/60 last:border-0",
                 i % 2 === 1 ? "bg-background-soft/30" : "",
               )}
             >
@@ -245,7 +245,7 @@ export function ConjugationTable({ past, presentFuture, command }: Props) {
           aria-selected={tab === "past"}
           onClick={() => setTab("past")}
           className={cn(
-            "rounded-full px-4 py-1.5 text-sm font-medium focus-ring",
+            "rounded-[10px] px-4 py-1.5 text-sm font-medium focus-ring",
             tab === "past"
               ? "bg-foreground text-background"
               : "border border-border bg-background-soft text-foreground-soft hover:bg-muted",
@@ -263,7 +263,7 @@ export function ConjugationTable({ past, presentFuture, command }: Props) {
           aria-selected={tab === "present-future"}
           onClick={() => setTab("present-future")}
           className={cn(
-            "rounded-full px-4 py-1.5 text-sm font-medium focus-ring",
+            "rounded-[10px] px-4 py-1.5 text-sm font-medium focus-ring",
             tab === "present-future"
               ? "bg-foreground text-background"
               : "border border-border bg-background-soft text-foreground-soft hover:bg-muted",
@@ -281,7 +281,7 @@ export function ConjugationTable({ past, presentFuture, command }: Props) {
           aria-selected={tab === "command"}
           onClick={() => setTab("command")}
           className={cn(
-            "rounded-full px-4 py-1.5 text-sm font-medium focus-ring",
+            "rounded-[10px] px-4 py-1.5 text-sm font-medium focus-ring",
             tab === "command"
               ? "bg-foreground text-background"
               : "border border-border bg-background-soft text-foreground-soft hover:bg-muted",

@@ -21,7 +21,7 @@ export default function MakharijPage() {
         <div className="mb-3">
           <FoundationsBadge />
         </div>
-        <h1 className="text-4xl font-bold tracking-tight">
+        <h1 className="page-title">
           Makhārij — articulation points
           <span
             lang="ar"
@@ -42,8 +42,8 @@ export default function MakharijPage() {
         </p>
       </header>
 
-      <section className="mb-6 rounded-2xl border border-primary/25 bg-primary/5 p-5 sm:p-6">
-        <h2 className="mb-3 text-sm font-semibold uppercase tracking-wider text-foreground">
+      <section className="mb-6 surface border-l-4 border-l-primary p-5 sm:p-6">
+        <h2 className="mb-3 text-foreground eyebrow">
           The 5 zones
         </h2>
         <div className="grid gap-2 sm:grid-cols-5">
@@ -51,7 +51,7 @@ export default function MakharijPage() {
             <a
               key={z.slug}
               href={`#${z.slug}`}
-              className="rounded-xl border border-border bg-card px-3 py-2 text-center text-xs transition-colors hover:bg-muted focus-ring"
+              className="tile px-3 py-2 text-center text-xs transition-colors hover:bg-muted focus-ring"
             >
               <div className="font-arabic text-sm">{z.nameArabic}</div>
               <div className="mt-0.5 italic text-foreground-soft" dir="ltr">
@@ -67,7 +67,7 @@ export default function MakharijPage() {
           <article
             key={zone.slug}
             id={zone.slug}
-            className="scroll-mt-24 rounded-2xl border border-border bg-card p-5 sm:p-6"
+            className="scroll-mt-24 surface p-5 sm:p-6"
           >
             <div className="flex flex-wrap items-baseline justify-between gap-3">
               <h3 className="text-xl font-semibold tracking-tight">
@@ -92,7 +92,7 @@ export default function MakharijPage() {
               {zone.letters.map((l) => (
                 <span
                   key={l}
-                  className="inline-flex min-w-9 items-center justify-center rounded-md border border-border bg-background-soft px-2 py-1.5 font-arabic-display text-2xl"
+                  className="inline-flex min-w-9 items-center justify-center rounded-md border border-hairline bg-background-soft px-2 py-1.5 font-arabic-display text-2xl"
                 >
                   {l}
                 </span>
@@ -107,7 +107,7 @@ export default function MakharijPage() {
                 {zone.subPoints.map((sp, i) => (
                   <div
                     key={i}
-                    className="rounded-xl border border-border bg-background-soft p-3"
+                    className="tile p-3"
                   >
                     <div className="flex flex-wrap items-baseline justify-between gap-2">
                       <h4 className="text-sm font-semibold">{sp.name}</h4>
@@ -119,7 +119,7 @@ export default function MakharijPage() {
                         {sp.letters.map((l) => (
                           <span
                             key={l}
-                            className="inline-flex min-w-7 items-center justify-center rounded border border-border bg-card px-1.5 py-0.5 font-arabic-display text-lg"
+                            className="inline-flex min-w-7 items-center justify-center rounded border border-hairline bg-card px-1.5 py-0.5 font-arabic-display text-lg"
                           >
                             {l}
                           </span>
@@ -137,8 +137,8 @@ export default function MakharijPage() {
         ))}
       </section>
 
-      <section className="mt-10 rounded-2xl border border-border bg-card p-6 text-sm text-muted-foreground">
-        <h2 className="mb-2 text-base font-semibold text-foreground">
+      <section className="mt-10 surface p-6 text-sm text-muted-foreground">
+        <h2 className="mb-2 text-base text-foreground font-display">
           A note on practice
         </h2>
         <p>

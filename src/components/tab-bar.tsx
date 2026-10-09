@@ -21,7 +21,7 @@ export function TabBar() {
   return (
     <nav
       aria-label="Primary"
-      className="site-tabbar fixed inset-x-0 bottom-0 z-30 border-t border-border bg-background/90 pb-[env(safe-area-inset-bottom)] backdrop-blur supports-[backdrop-filter]:bg-background/75 md:hidden"
+      className="site-tabbar fixed inset-x-0 bottom-0 z-30 border-t border-hairline bg-background/85 pb-[env(safe-area-inset-bottom)] backdrop-blur-xl backdrop-saturate-150 supports-[backdrop-filter]:bg-background/70 md:hidden"
     >
       <div className="grid grid-cols-5">
         {TABS.map((tab) => {
@@ -34,14 +34,16 @@ export function TabBar() {
               href={tab.href}
               aria-current={active ? "page" : undefined}
               className={cn(
-                "flex flex-col items-center gap-0.5 px-1 pb-1.5 pt-1.5 text-[11px] font-medium transition-colors focus-ring",
-                active ? "text-primary" : "text-muted-foreground",
+                "relative flex flex-col items-center gap-0.5 px-1 pb-1.5 pt-1.5 text-[11px] font-medium transition-colors focus-ring",
+                active ? "text-foreground" : "text-muted-foreground",
               )}
             >
               <span
                 className={cn(
-                  "flex h-7 w-12 items-center justify-center rounded-full transition-colors",
-                  active ? "bg-primary/12 text-primary" : "text-muted-foreground",
+                  "flex h-7 w-12 items-center justify-center rounded-[9px] transition-colors",
+                  active
+                    ? "bg-card text-primary shadow-[0_0_0_1px_var(--hairline),var(--shadow-sm)]"
+                    : "text-muted-foreground",
                 )}
               >
                 <Icon className="h-5 w-5" aria-hidden />

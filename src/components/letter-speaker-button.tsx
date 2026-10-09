@@ -89,10 +89,10 @@ export function LetterSpeakerButton({
 
   const sizeClass =
     size === "sm"
-      ? "h-6 w-6 rounded-md p-1 text-xs"
+      ? "h-6 w-6 rounded-[9px] p-1 text-xs"
       : size === "lg"
-        ? "h-10 w-10 rounded-xl p-2 text-base"
-        : "h-8 w-8 rounded-lg p-1.5 text-sm";
+        ? "h-10 w-10 rounded-[9px] p-2 text-base"
+        : "h-8 w-8 rounded-[9px] p-1.5 text-sm";
   const iconSize =
     size === "sm" ? "h-3.5 w-3.5" : size === "lg" ? "h-5 w-5" : "h-4 w-4";
 
@@ -168,7 +168,7 @@ export function LetterSpeakerButton({
       aria-label={ariaLabel}
       title={ariaLabel}
       className={cn(
-        "inline-flex items-center justify-center border border-border bg-background-soft text-foreground-soft transition-colors hover:bg-muted hover:text-foreground focus-ring",
+        "inline-flex items-center justify-center border border-hairline bg-background-soft text-foreground-soft transition-colors hover:bg-muted hover:text-foreground focus-ring",
         sizeClass,
         state === "playing" && "border-primary text-primary",
         state === "error" && "border-danger text-danger",

@@ -26,6 +26,7 @@
   --border: oklch(0.9 0.012 82);
   --primary: oklch(0.4 0.075 218);
   --primary-foreground: oklch(0.98 0.01 85);
+  --primary-soft: oklch(0.945 0.025 218);
   --accent-gold: oklch(0.67 0.15 50);
   --accent-gold-soft: oklch(0.94 0.05 60);
   /* Dusk aqua + midnight navy, borrowed from the AMAR programme site's
@@ -50,6 +51,18 @@
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.24 0.028 240);
   --ring: oklch(0.55 0.09 218 / 50%);
+
+  /* Premium surface system: hairline rings instead of borders, layered
+   * low-opacity shadows tinted with the ink colour, and a 1px top highlight. */
+  --hairline: oklch(0.24 0.028 240 / 8%);
+  --hairline-strong: oklch(0.24 0.028 240 / 14%);
+  --shadow-sm: 0 1px 2px oklch(0.24 0.03 240 / 5%);
+  --shadow-md:
+    0 1px 2px oklch(0.24 0.03 240 / 4%),
+    0 4px 10px -2px oklch(0.24 0.03 240 / 5%),
+    0 18px 36px -14px oklch(0.24 0.03 240 / 12%);
+  --highlight: inset 0 1px 0 oklch(1 0 0 / 75%);
+  --grain-opacity: 0.035;
 
   /*
    * Accent hue scale — 8 named hues used for lesson/deck/reference colour
@@ -89,6 +102,7 @@
   --font-arabic-display: var(--font-noto-arabic), "Noto Naskh Arabic",
     "Amiri", "Scheherazade New", system-ui, serif;
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-sans);
 }
 
 /*
@@ -109,6 +123,7 @@
   --border: oklch(0.4 0.04 235);
   --primary: oklch(0.76 0.09 210);
   --primary-foreground: oklch(0.22 0.035 245);
+  --primary-soft: oklch(0.34 0.05 215);
   --accent-gold: oklch(0.76 0.14 52);
   --accent-gold-soft: oklch(0.44 0.07 52);
   --accent-aqua: oklch(0.78 0.09 210);
@@ -130,6 +145,15 @@
   --card: oklch(0.31 0.04 238);
   --card-foreground: oklch(0.96 0.012 85);
   --ring: oklch(0.76 0.09 210 / 60%);
+  --hairline: oklch(1 0 0 / 8%);
+  --hairline-strong: oklch(1 0 0 / 13%);
+  --shadow-sm: 0 1px 2px oklch(0.1 0.02 250 / 30%);
+  --shadow-md:
+    0 1px 2px oklch(0.1 0.02 250 / 25%),
+    0 6px 14px -4px oklch(0.1 0.02 250 / 25%),
+    0 22px 40px -16px oklch(0.1 0.02 250 / 45%);
+  --highlight: inset 0 1px 0 oklch(1 0 0 / 5%);
+  --grain-opacity: 0.05;
 
   --accent-rose: oklch(0.82 0.08 350);
   --accent-rose-soft: oklch(0.45 0.05 350);
@@ -162,6 +186,9 @@
   --color-border: var(--border);
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
+  --color-primary-soft: var(--primary-soft);
+  --color-hairline: var(--hairline);
+  --color-hairline-strong: var(--hairline-strong);
   --color-accent-gold: var(--accent-gold);
   --color-accent-gold-soft: var(--accent-gold-soft);
   --color-accent-aqua: var(--accent-aqua);
@@ -214,6 +241,271 @@ body {
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+}
+
+/* Faint paper grain so large cream/navy areas don't read as flat fills. */
+body {
+  position: relative;
+  isolation: isolate;
+}
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: var(--grain-opacity);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/*
+ * Premium component primitives. Layered so Tailwind utilities on the same
+ * element (padding, width, …) still win.
+ */
+@layer components {
+  .font-display {
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: -0.025em;
+  }
+
+  .eyebrow {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted-foreground);
+  }
+
+  .surface {
+    background: var(--card);
+    border-radius: 14px;
+    box-shadow:
+      0 0 0 1px var(--hairline),
+      var(--shadow-md),
+      var(--highlight);
+  }
+
+  .surface-quiet {
+    background: oklch(from var(--card) l c h / 55%);
+    border-radius: 12px;
+    box-shadow: 0 0 0 1px var(--hairline);
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    height: 2.5rem;
+    padding: 0 1rem;
+    border-radius: 12px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: -0.005em;
+    white-space: nowrap;
+    touch-action: manipulation;
+    transition:
+      transform 0.08s ease,
+      box-shadow 0.12s ease,
+      background-color 0.15s ease,
+      filter 0.15s ease;
+  }
+  .btn:active {
+    transform: translateY(2px);
+  }
+  .btn-sm {
+    height: 2rem;
+    padding: 0 0.75rem;
+    border-radius: 10px;
+    font-size: 0.8125rem;
+  }
+  .btn-lg {
+    height: 2.75rem;
+    padding: 0 1.25rem;
+  }
+
+  /* Primary: subtle top-lit gradient, inner highlight and a short hard
+   * bottom edge that collapses on press — keeps the playful "chunky" feel. */
+  .btn-primary {
+    background: linear-gradient(
+      180deg,
+      oklch(from var(--primary) calc(l + 0.045) c h),
+      var(--primary)
+    );
+    color: var(--primary-foreground);
+    box-shadow:
+      inset 0 1px 0 oklch(1 0 0 / 22%),
+      0 0 0 1px oklch(from var(--primary) calc(l - 0.07) c h),
+      0 3px 0 0 oklch(from var(--primary) calc(l - 0.14) c h),
+      0 10px 22px -8px oklch(from var(--primary) l c h / 55%);
+  }
+  .btn-primary:hover {
+    filter: brightness(1.06);
+  }
+  .btn-primary:active {
+    box-shadow:
+      inset 0 1px 0 oklch(1 0 0 / 22%),
+      0 0 0 1px oklch(from var(--primary) calc(l - 0.07) c h),
+      0 1px 0 0 oklch(from var(--primary) calc(l - 0.14) c h);
+  }
+
+  .btn-secondary {
+    background: var(--card);
+    color: var(--foreground);
+    box-shadow:
+      0 0 0 1px var(--hairline-strong),
+      0 2px 0 0 var(--hairline-strong),
+      var(--highlight);
+  }
+  .btn-secondary:hover {
+    background: oklch(from var(--card) calc(l - 0.02) c h);
+  }
+  .btn-secondary:active {
+    box-shadow:
+      0 0 0 1px var(--hairline-strong),
+      0 0 0 0 var(--hairline-strong);
+  }
+
+  .btn-danger-soft {
+    background: var(--danger-soft);
+    color: var(--foreground);
+    box-shadow:
+      0 0 0 1px oklch(from var(--danger) l c h / 35%),
+      0 2px 0 0 oklch(from var(--danger) l c h / 35%);
+  }
+  .btn-danger-soft:active {
+    box-shadow: 0 0 0 1px oklch(from var(--danger) l c h / 35%);
+  }
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    height: 1.75rem;
+    padding: 0 0.625rem;
+    border-radius: 8px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    background: var(--card);
+    box-shadow: 0 0 0 1px var(--hairline-strong);
+  }
+
+  .icon-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 10px;
+    background: var(--card);
+    color: var(--muted-foreground);
+    box-shadow: 0 0 0 1px var(--hairline-strong), var(--shadow-sm);
+    transition:
+      background-color 0.15s ease,
+      color 0.15s ease;
+  }
+  .icon-btn:hover {
+    color: var(--foreground);
+    background: oklch(from var(--card) calc(l - 0.02) c h);
+  }
+
+  /* Oversized decorative Arabic glyph tucked into a card corner. */
+  /* Quiet nested tile inside a .surface (examples, sub-items). */
+  .tile {
+    background: var(--background-soft);
+    border-radius: 10px;
+    box-shadow: inset 0 0 0 1px var(--hairline);
+  }
+
+  .input {
+    width: 100%;
+    height: 2.5rem;
+    padding: 0 0.75rem;
+    border-radius: 10px;
+    background: var(--card);
+    color: var(--foreground);
+    font-size: 0.875rem;
+    box-shadow:
+      inset 0 0 0 1px var(--hairline-strong),
+      var(--shadow-sm);
+    outline: none;
+    transition: box-shadow 0.15s ease;
+  }
+  .input::placeholder {
+    color: var(--muted-foreground);
+  }
+  .input:focus-visible {
+    box-shadow:
+      inset 0 0 0 1px var(--primary),
+      0 0 0 3px var(--ring);
+  }
+
+  /* Segmented control / tab strip. Mark the active item with
+   * aria-selected="true", aria-pressed="true", aria-current or data-active. */
+  .segmented {
+    display: inline-flex;
+    flex-wrap: wrap;
+    max-width: 100%;
+    gap: 0.25rem;
+    padding: 0.25rem;
+    border-radius: 12px;
+    background: var(--muted);
+    box-shadow: inset 0 0 0 1px var(--hairline);
+  }
+  .segmented-item {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.375rem;
+    height: 2rem;
+    padding: 0 0.75rem;
+    border-radius: 9px;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--muted-foreground);
+    white-space: nowrap;
+    transition:
+      background-color 0.15s ease,
+      color 0.15s ease,
+      box-shadow 0.15s ease;
+  }
+  .segmented-item:hover {
+    color: var(--foreground);
+  }
+  .segmented-item[aria-selected="true"],
+  .segmented-item[aria-pressed="true"],
+  .segmented-item[aria-current],
+  .segmented-item[data-active="true"] {
+    background: var(--card);
+    color: var(--foreground);
+    box-shadow:
+      0 0 0 1px var(--hairline),
+      var(--shadow-sm);
+  }
+
+  .page-title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(2rem, 1.6rem + 1.6vw, 2.6rem);
+    line-height: 1.1;
+    letter-spacing: -0.025em;
+  }
+  .section-title {
+    font-family: var(--font-display);
+    font-weight: 650;
+    font-size: 1.5rem;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn,
+  .btn:active {
+    transform: none;
+    transition: none;
+  }
 }
 
 /*
@@ -273,6 +565,7 @@ body {
   --card-foreground: oklch(0.97 0.012 85);
   --primary: oklch(0.77 0.15 50);
   --primary-foreground: oklch(0.22 0.035 245);
+  --primary-soft: oklch(0.42 0.05 215);
   --accent-gold: oklch(0.8 0.14 52);
   --accent-gold-soft: oklch(0.48 0.07 52);
   --accent-aqua: oklch(0.8 0.09 210);
@@ -282,9 +575,12 @@ body {
   --danger: oklch(0.76 0.15 25);
   --danger-soft: oklch(0.46 0.06 25);
   --ring: oklch(0.8 0.12 52 / 60%);
-  /* Deep teal → midnight navy, with a soft aqua glow in one corner and a
-   * faint dot lattice for texture (the programme site uses a calligraphic
-   * swirl; a lattice gives the same depth without an image asset). */
+  --hairline: oklch(1 0 0 / 9%);
+  --hairline-strong: oklch(1 0 0 / 14%);
+  --highlight: inset 0 1px 0 oklch(1 0 0 / 7%);
+  /* Deep teal → midnight navy with a soft aqua glow in one corner and an
+   * amber glow in the other. Deliberately pattern-free so nested cards and
+   * text sit on a clean surface. */
   background:
     radial-gradient(
       ellipse 60% 70% at 100% 0%,
@@ -296,13 +592,24 @@ body {
       oklch(0.77 0.15 50 / 12%),
       transparent 70%
     ),
-    radial-gradient(
-      circle at 1px 1px,
-      oklch(1 0 0 / 5%) 1px,
-      transparent 1.5px
-    ) 0 0 / 22px 22px,
     linear-gradient(135deg, oklch(0.37 0.05 218), oklch(0.22 0.035 250));
   color: var(--foreground);
+}
+
+.brand-panel-dots {
+  background:
+    radial-gradient(circle at 1px 1px, oklch(1 0 0 / 5%) 1px, transparent 1.5px) 0 0 / 22px 22px,
+    radial-gradient(
+      ellipse 60% 70% at 100% 0%,
+      oklch(0.78 0.09 210 / 22%),
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse 50% 60% at 0% 100%,
+      oklch(0.77 0.15 50 / 12%),
+      transparent 70%
+    ),
+    linear-gradient(135deg, oklch(0.37 0.05 218), oklch(0.22 0.035 250));
 }
 
 /* Subtle calligraphic divider used between sections */
@@ -327,15 +634,16 @@ body {
  */
 .card-flat {
   background: var(--background-soft);
-  border-radius: 1.5rem;
+  border-radius: 14px;
+  box-shadow: 0 0 0 1px var(--hairline);
 }
 .card-raised {
   background: var(--card);
-  border-radius: 1rem;
+  border-radius: 14px;
   box-shadow:
-    0 0 0 1px oklch(from var(--primary) l c h / 6%),
-    0 1px 2px oklch(from var(--primary) l c h / 6%),
-    0 6px 16px oklch(from var(--primary) l c h / 6%);
+    0 0 0 1px var(--hairline),
+    var(--shadow-md),
+    var(--highlight);
 }
 
 /* Soft amber CTA glow — used sparingly on the single primary action of a
@@ -376,10 +684,10 @@ body {
 
 /* Section label — small caps in the primary accent, used above card grids */
 .section-label {
-  font-size: 0.8125rem;
-  font-weight: 700;
+  font-size: 0.6875rem;
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.14em;
   color: var(--primary);
 }
 
@@ -422,8 +730,9 @@ body {
 .hover-lift:hover {
   transform: translateY(-2px);
   box-shadow:
-    0 1px 2px oklch(from var(--foreground) l c h / 5%),
-    0 8px 24px oklch(from var(--foreground) l c h / 6%);
+    0 0 0 1px var(--hairline-strong),
+    0 2px 4px oklch(from var(--foreground) l c h / 5%),
+    0 22px 40px -16px oklch(from var(--foreground) l c h / 18%);
 }
 
 /* Scoped focus ring */

@@ -73,8 +73,8 @@ export function SpeakerButton({
 
   const sizeClass =
     size === "sm"
-      ? "h-6 w-6 rounded-md p-1 text-xs"
-      : "h-8 w-8 rounded-lg p-1.5 text-sm";
+      ? "h-6 w-6 rounded-[9px] p-1 text-xs"
+      : "h-8 w-8 rounded-[9px] p-1.5 text-sm";
 
   const unavailableLabel =
     label ? `Audio unavailable for ${label}` : "Audio unavailable";
@@ -100,7 +100,7 @@ export function SpeakerButton({
         aria-label={unavailableLabel}
         title={unavailableLabel}
         className={cn(
-          "inline-flex items-center justify-center border border-dashed border-border bg-background-soft text-muted-foreground/70",
+          "inline-flex items-center justify-center border border-dashed border-hairline bg-background-soft text-muted-foreground/70",
           sizeClass,
           className,
         )}
@@ -163,7 +163,7 @@ export function SpeakerButton({
       aria-label={labelText}
       title={labelText}
       className={cn(
-        "inline-flex items-center justify-center border border-border bg-background-soft text-foreground-soft transition-colors hover:bg-muted hover:text-foreground focus-ring",
+        "inline-flex items-center justify-center border border-hairline bg-background-soft text-foreground-soft transition-colors hover:bg-muted hover:text-foreground focus-ring",
         sizeClass,
         state === "playing" && "border-primary text-primary",
         state === "error" && "border-danger text-danger",
@@ -199,8 +199,8 @@ function SynthesisButton({
 }) {
   const sizeClass =
     size === "sm"
-      ? "h-6 w-6 rounded-md p-1 text-xs"
-      : "h-8 w-8 rounded-lg p-1.5 text-sm";
+      ? "h-6 w-6 rounded-[9px] p-1 text-xs"
+      : "h-8 w-8 rounded-[9px] p-1.5 text-sm";
   const iconSize = size === "sm" ? "h-3.5 w-3.5" : "h-4 w-4";
   const labelText = label
     ? `Read ${label} aloud (synthesised voice — no recording yet)`
@@ -247,7 +247,7 @@ function SynthesisButton({
       aria-label={labelText}
       title={labelText}
       className={cn(
-        "inline-flex items-center justify-center border border-dashed border-border bg-background-soft text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-ring",
+        "inline-flex items-center justify-center border border-dashed border-hairline bg-background-soft text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-ring",
         sizeClass,
         state === "playing" && "border-primary text-primary",
         state === "error" && "border-danger text-danger",

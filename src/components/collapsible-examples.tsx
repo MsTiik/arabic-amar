@@ -48,7 +48,7 @@ export function CollapsibleExamples({
         aria-controls={id}
         aria-expanded={open}
         onClick={() => setOpen((v) => !v)}
-        className="mt-2 inline-flex items-center gap-1 rounded-full border border-border bg-background-soft px-3 py-1 text-xs font-medium text-foreground-soft hover:bg-muted focus-ring"
+        className="btn btn-secondary btn-sm mt-2"
       >
         {open ? "Show fewer" : (label ?? `Show all (${total})`)}
         <span aria-hidden="true">{open ? "↑" : `+${hidden}`}</span>

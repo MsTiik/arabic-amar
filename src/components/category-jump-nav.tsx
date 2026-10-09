@@ -51,7 +51,7 @@ export function CategoryJumpNav({ categories, className }: Props) {
       // unreachable. `w-44` (instead of `min-w-44`) locks the width so long
       // category labels don't push the nav wider than the layout allows.
       className={cn(
-        "sticky top-24 hidden max-h-[calc(100vh-7rem)] w-44 flex-col gap-1 self-start overflow-y-auto rounded-2xl border border-border bg-card p-3 lg:flex",
+        "sticky top-24 hidden max-h-[calc(100vh-7rem)] w-44 flex-col gap-1 self-start overflow-y-auto surface p-3 lg:flex",
         className,
       )}
     >

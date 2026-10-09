@@ -14,7 +14,7 @@ export default function VerbFamiliesPage() {
           </Link>{" "}
           / Verb families
         </p>
-        <h1 className="mt-1 text-3xl font-semibold tracking-tight sm:text-4xl">
+        <h1 className="mt-1 sm:text-4xl page-title">
           Verb families <span lang="ar" dir="rtl" className="font-arabic font-normal">عَائِلَاتُ الأَفْعَال</span>
         </h1>
         <p className="mt-2 max-w-3xl text-sm leading-relaxed text-muted-foreground sm:text-base">
@@ -22,7 +22,7 @@ export default function VerbFamiliesPage() {
           verbal noun—then sort its shuffled forms. Level 2 and Qur’anic
           examples show how the same root changes inside a real sentence.
         </p>
-        <details className="mt-4 max-w-3xl rounded-2xl border border-border bg-background-soft p-4 text-sm leading-relaxed text-foreground-soft">
+        <details className="mt-4 max-w-3xl tile p-4 text-sm leading-relaxed text-foreground-soft">
           <summary className="cursor-pointer font-semibold text-primary focus-ring">
             How the reference forms work
           </summary>

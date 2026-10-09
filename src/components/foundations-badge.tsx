@@ -7,7 +7,7 @@ export function FoundationsBadge({ className }: { className?: string }) {
   return (
     <span
       className={cn(
-        "inline-flex items-center gap-1.5 rounded-full border border-accent-gold/40 bg-accent-gold-soft px-2.5 py-0.5 text-[11px] font-semibold uppercase tracking-wider text-foreground",
+        "chip border border-accent-gold/40 bg-accent-gold-soft text-foreground",
         className,
       )}
       title="Baked-in reference content, independent of the curriculum doc."

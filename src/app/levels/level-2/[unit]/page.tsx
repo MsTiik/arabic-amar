@@ -40,9 +40,9 @@ const ACTION_GROUPS = [
     title: "Learning and language",
     description: "Actions used for reading, writing, understanding, and teaching.",
     icon: BookOpenText,
-    surface: "border-accent-sky/35 bg-accent-sky-soft/35",
+    surface: "border-l-4 border-l-accent-sky",
     iconStyle: "bg-accent-sky-soft text-accent-sky",
-    cardStyle: "border-accent-sky/25 bg-accent-sky-soft/25",
+    cardStyle: "border-l-2 border-l-accent-sky",
     ids: ["write", "read", "explain", "understand", "correct", "think", "ask", "answer", "learn", "revise", "teach", "hear"],
   },
   {
@@ -50,9 +50,9 @@ const ACTION_GROUPS = [
     title: "Movement and position",
     description: "Actions that describe where someone goes or how they move.",
     icon: Footprints,
-    surface: "border-accent-emerald/35 bg-accent-emerald-soft/35",
+    surface: "border-l-4 border-l-accent-emerald",
     iconStyle: "bg-accent-emerald-soft text-accent-emerald",
-    cardStyle: "border-accent-emerald/25 bg-accent-emerald-soft/25",
+    cardStyle: "border-l-2 border-l-accent-emerald",
     ids: ["stand", "sit", "enter", "leave", "walk", "run"],
   },
   {
@@ -60,9 +60,9 @@ const ACTION_GROUPS = [
     title: "Everyday classroom actions",
     description: "Practical actions for objects, pictures, and classroom activities.",
     icon: Shapes,
-    surface: "border-accent-amber/35 bg-accent-amber-soft/35",
+    surface: "border-l-4 border-l-accent-amber",
     iconStyle: "bg-accent-amber-soft text-accent-amber",
-    cardStyle: "border-accent-amber/25 bg-accent-amber-soft/25",
+    cardStyle: "border-l-2 border-l-accent-amber",
     ids: ["open", "close", "draw", "colour", "take", "give", "point", "watch", "wipe"],
   },
 ] as const;
@@ -95,14 +95,14 @@ export default async function LevelTwoUnitPage({
 
   return (
     <div className="mx-auto w-full max-w-6xl px-4 py-8 sm:py-10">
-      <header className="brand-panel rounded-3xl border border-border p-6 sm:p-8">
+      <header className="brand-panel rounded-[18px] shadow-[var(--shadow-md),inset_0_1px_0_oklch(1_0_0/8%)] p-6 sm:p-8">
         <Link
           href="/levels/level-2"
           className="text-sm text-muted-foreground hover:text-foreground"
         >
           ← Level 2 topics
         </Link>
-        <h1 className="mt-4 max-w-4xl text-3xl font-semibold tracking-tight sm:text-4xl">
+        <h1 className="mt-4 max-w-4xl page-title">
           {meta.title}
         </h1>
         <p className="mt-2 max-w-3xl text-base leading-relaxed text-foreground-soft">
@@ -147,9 +147,9 @@ function ActionsInContext() {
             );
             const Icon = group.icon;
             return (
-              <section key={group.id} className={cn("rounded-3xl border p-4 sm:p-6", group.surface)}>
+              <section key={group.id} className={cn("surface p-4 sm:p-6", group.surface)}>
                 <header className="mb-4 flex items-start gap-3">
-                  <span className={cn("flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl", group.iconStyle)}>
+                  <span className={cn("flex h-11 w-11 shrink-0 items-center justify-center rounded-[10px]", group.iconStyle)}>
                     <Icon className="h-5 w-5" aria-hidden />
                   </span>
                   <div>
@@ -194,7 +194,7 @@ function ActionCard({
   className: string;
 }) {
   return (
-    <article className={cn("relative flex min-h-44 flex-col items-center justify-center rounded-2xl border p-4", className)}>
+    <article className={cn("relative flex min-h-44 flex-col items-center justify-center tile border-l-2 p-4", className)}>
       {action.note ? <InformationTip label={`More about ${action.arabic}`}>{action.note}</InformationTip> : null}
       <ArabicText variant="display" className="text-center text-5xl leading-relaxed sm:text-6xl">
         {action.arabic}
@@ -219,13 +219,13 @@ function InformationTip({
       <button
         type="button"
         aria-label={label}
-        className="flex h-8 w-8 items-center justify-center rounded-full border border-border bg-card/90 text-muted-foreground shadow-sm transition-colors hover:text-primary focus-ring"
+        className="flex h-8 w-8 items-center justify-center rounded-full border border-hairline bg-card/90 text-muted-foreground shadow-sm transition-colors hover:text-primary focus-ring"
       >
         <Info className="h-4 w-4" aria-hidden />
       </button>
       <span
         role="tooltip"
-        className="absolute right-0 top-10 hidden w-64 rounded-xl border border-border bg-card p-3 text-left text-xs leading-relaxed text-foreground-soft shadow-lg group-hover:block group-focus-within:block"
+        className="absolute right-0 top-10 hidden w-64 tile p-3 text-left text-xs leading-relaxed text-foreground-soft shadow-lg group-hover:block group-focus-within:block"
       >
         {children}
       </span>
@@ -244,14 +244,14 @@ function ActionSentenceCollection({ sentences }: { sentences: readonly LevelTwoS
       />
       <div className="grid gap-3 md:grid-cols-2">
         {sentences.map((sentence) => (
-          <details key={sentence.id} className="group rounded-2xl border border-border bg-card p-4 sm:p-5">
+          <details key={sentence.id} className="group surface p-4 sm:p-5">
             <summary className="flex cursor-pointer list-none items-center gap-3 focus-ring">
               <ArabicText className="min-w-0 flex-1 text-2xl leading-loose sm:text-3xl">
                 {sentence.arabic}
               </ArabicText>
               <ChevronDown className="h-5 w-5 shrink-0 text-muted-foreground transition-transform group-open:rotate-180" aria-hidden />
             </summary>
-            <p className="mt-3 border-t border-border pt-3 text-sm leading-relaxed text-foreground-soft">
+            <p className="mt-3 border-t border-hairline pt-3 text-sm leading-relaxed text-foreground-soft">
               {sentence.english}
             </p>
           </details>
@@ -275,7 +275,7 @@ function SectionHeading({
   return (
     <header className="mb-4">
       <p className="section-label">{eyebrow}</p>
-      <h2 id={id} className="mt-1 text-2xl font-semibold tracking-tight sm:text-3xl">
+      <h2 id={id} className="mt-1 sm:text-3xl section-title">
         {title}
       </h2>
       {description ? (
@@ -291,9 +291,9 @@ function LessonLink({ href, title, body }: { href: string; title: string; body: 
   return (
     <Link
       href={href}
-      className="group flex items-start gap-4 rounded-2xl border border-primary/30 bg-primary-soft p-5 hover-lift focus-ring"
+      className="group flex items-start gap-4 rounded-[10px] border border-primary/30 bg-primary-soft p-5 hover-lift focus-ring"
     >
-      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary text-primary-foreground">
+      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[10px] bg-primary text-primary-foreground">
         {href.includes("verb-families") ? (
           <Waypoints className="h-5 w-5" aria-hidden />
         ) : (

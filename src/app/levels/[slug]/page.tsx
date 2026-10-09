@@ -38,7 +38,7 @@ export default async function CurriculumLevelPage({
 
   return (
     <div className="mx-auto w-full max-w-6xl px-4 py-8 sm:py-10">
-      <header className="brand-panel rounded-3xl border border-border p-6 sm:p-8">
+      <header className="brand-panel rounded-[18px] shadow-[var(--shadow-md),inset_0_1px_0_oklch(1_0_0/8%)] p-6 sm:p-8">
         <Link
           href="/topics"
           className="text-sm text-muted-foreground hover:text-foreground"
@@ -46,7 +46,7 @@ export default async function CurriculumLevelPage({
           ← All courses
         </Link>
         <div className="mt-3 flex flex-wrap items-baseline gap-x-3 gap-y-1">
-          <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">
+          <h1 className="sm:text-4xl page-title">
             {level.title}
           </h1>
           <ArabicText variant="display" className="text-3xl text-foreground-soft sm:text-4xl">
@@ -67,7 +67,7 @@ export default async function CurriculumLevelPage({
         <section className="mt-8" aria-labelledby="level-units-heading">
           <div className="mb-4">
             <p className="section-label">Explore</p>
-            <h2 id="level-units-heading" className="mt-1 text-2xl font-semibold tracking-tight">
+            <h2 id="level-units-heading" className="mt-1 section-title">
               Level 2 topics
             </h2>
             <p className="mt-1 text-sm text-muted-foreground">
@@ -84,7 +84,7 @@ export default async function CurriculumLevelPage({
         <section className="mt-8" aria-labelledby="level-lessons-heading">
           <div className="mb-4">
             <p className="section-label">Course map</p>
-            <h2 id="level-lessons-heading" className="mt-1 text-2xl font-semibold tracking-tight">
+            <h2 id="level-lessons-heading" className="mt-1 section-title">
               Level 1 lessons
             </h2>
           </div>

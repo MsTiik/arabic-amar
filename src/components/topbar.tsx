@@ -62,18 +62,18 @@ export function Topbar() {
   return (
     <header
       className={cn(
-        "site-topbar sticky top-0 z-30 border-b border-border bg-background/80 pt-[env(safe-area-inset-top)] backdrop-blur transition-transform duration-300 supports-[backdrop-filter]:bg-background/60 md:translate-y-0",
+        "site-topbar sticky top-0 z-30 border-b border-hairline bg-background/80 pt-[env(safe-area-inset-top)] backdrop-blur-xl backdrop-saturate-150 transition-transform duration-300 supports-[backdrop-filter]:bg-background/65 md:translate-y-0",
         hidden && "-translate-y-full",
       )}
     >
       <div className="mx-auto flex w-full max-w-6xl items-center gap-4 px-4 py-3">
         <Link
           href="/"
-          className="flex shrink-0 items-center gap-2.5 whitespace-nowrap text-lg font-semibold tracking-tight focus-ring rounded-lg"
+          className="flex shrink-0 items-center gap-2.5 whitespace-nowrap text-[17px] font-semibold tracking-[-0.02em] focus-ring rounded-lg"
           aria-label="Arabic AMAR home"
         >
           <span
-            className="brand-panel flex h-8 w-8 items-center justify-center rounded-lg font-arabic-display text-lg leading-none text-accent-gold shadow-sm"
+            className="brand-panel flex h-8 w-8 items-center justify-center rounded-[9px] font-arabic-display text-lg leading-none text-accent-gold shadow-[var(--shadow-sm),inset_0_1px_0_oklch(1_0_0/12%)]"
             aria-hidden
           >
             ع
@@ -83,7 +83,7 @@ export function Topbar() {
           </span>
         </Link>
 
-        <nav className="ml-4 hidden items-center gap-1 md:flex">
+        <nav className="ml-2 hidden items-center gap-0.5 rounded-xl bg-muted/60 p-1 ring-1 ring-inset ring-hairline md:flex">
           {NAV.map((item) => {
             const active =
               item.href === "/"
@@ -95,10 +95,10 @@ export function Topbar() {
                 href={item.href}
                 aria-current={active ? "page" : undefined}
                 className={cn(
-                  "whitespace-nowrap rounded-full px-3.5 py-1.5 text-sm font-medium transition-colors focus-ring",
+                  "whitespace-nowrap rounded-[9px] px-3 py-1.5 text-[13px] font-medium transition-colors focus-ring",
                   active
-                    ? "bg-primary text-primary-foreground shadow-sm"
-                    : "text-muted-foreground hover:bg-muted hover:text-foreground",
+                    ? "bg-card text-foreground shadow-[0_0_0_1px_var(--hairline),var(--shadow-sm)]"
+                    : "text-muted-foreground hover:text-foreground",
                 )}
               >
                 {item.label}
@@ -108,34 +108,36 @@ export function Topbar() {
         </nav>
 
         <div className="ml-auto flex items-center gap-2 sm:gap-3">
-          <div
-            className={cn(
-              "flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-medium",
-              streakActive
-                ? "border-accent-gold bg-accent-gold-soft text-foreground"
-                : "border-border bg-muted text-muted-foreground",
-            )}
-            title={
-              streakActive
-                ? `You're on a ${progress.streak.count}-day streak!`
-                : "Practice today to start a streak."
-            }
-          >
-            <Flame
+          <div className="flex items-center gap-1 rounded-xl bg-muted/60 p-1 ring-1 ring-inset ring-hairline sm:gap-1.5">
+            <div
               className={cn(
-                "h-3.5 w-3.5",
-                streakActive ? "text-accent-gold" : "text-muted-foreground",
+                "chip !bg-transparent !shadow-none hover:!bg-card/70",
+                streakActive ? "text-foreground" : "text-muted-foreground",
               )}
-              aria-hidden
-            />
-            <span>{progress.streak.count}</span>
-            <span className="hidden sm:inline">streak</span>
+              title={
+                streakActive
+                  ? `You're on a ${progress.streak.count}-day streak!`
+                  : "Practice today to start a streak."
+              }
+            >
+              <Flame
+                className={cn(
+                  "h-3.5 w-3.5",
+                  streakActive ? "text-accent-gold" : "text-muted-foreground",
+                )}
+                aria-hidden
+              />
+              <span>{progress.streak.count}</span>
+              <span className="hidden sm:inline">streak</span>
+            </div>
+            <FreezeChip count={freezesAvailable} />
+            {sync.configured ? (
+              <SyncChip status={sync.status} signedIn={Boolean(sync.user)} />
+            ) : null}
+            <DailyGoalChip seen={seen} goal={goal} ratio={goalRatio} />
+            <FeedbackToggle className="hidden !bg-transparent !shadow-none hover:!bg-card/70 sm:inline-flex" />
+            <ThemeToggle className="!bg-transparent !shadow-none hover:!bg-card/70" />
           </div>
-          <FreezeChip count={freezesAvailable} />
-          {sync.configured ? <SyncChip status={sync.status} signedIn={Boolean(sync.user)} /> : null}
-          <DailyGoalChip seen={seen} goal={goal} ratio={goalRatio} />
-          <FeedbackToggle className="hidden sm:inline-flex" />
-          <ThemeToggle />
           <AboutNavLink pathname={pathname} />
         </div>
       </div>
@@ -149,8 +151,8 @@ function SyncChip({ signedIn, status }: { signedIn: boolean; status: string }) {
     <Link
       href="/sync"
       className={cn(
-        "hidden items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-medium hover:bg-muted focus-ring sm:flex",
-        signedIn ? "border-success/40 bg-success/10" : "border-border bg-muted text-muted-foreground",
+        "chip hidden !bg-transparent !shadow-none hover:!bg-card/70 focus-ring sm:inline-flex",
+        signedIn ? "" : "text-muted-foreground",
       )}
       title={signedIn ? "Progress sync is enabled." : "Sign in to sync progress across devices."}
     >
@@ -172,10 +174,10 @@ function AboutNavLink({ pathname }: { pathname: string }) {
       href={ABOUT.href}
       aria-current={active ? "page" : undefined}
       className={cn(
-        "hidden whitespace-nowrap rounded-full px-3.5 py-1.5 text-sm font-medium transition-colors focus-ring md:inline-flex",
+        "hidden whitespace-nowrap rounded-[9px] px-3 py-1.5 text-[13px] font-medium transition-colors focus-ring md:inline-flex",
         active
-          ? "bg-primary text-primary-foreground shadow-sm"
-          : "text-muted-foreground hover:bg-muted hover:text-foreground",
+          ? "bg-card text-foreground shadow-[0_0_0_1px_var(--hairline),var(--shadow-sm)]"
+          : "text-muted-foreground hover:text-foreground",
       )}
       title="About Arabic AMAR"
     >
@@ -188,7 +190,7 @@ function FreezeChip({ count }: { count: number }) {
   if (count <= 0) return null;
   return (
     <div
-      className="hidden items-center gap-1 rounded-full border border-border bg-muted px-2.5 py-1 text-xs font-medium text-foreground sm:inline-flex"
+      className="chip hidden !bg-accent-gold-soft !shadow-none text-foreground hover:!bg-accent-gold-soft sm:inline-flex"
       title={`${count} streak freeze${count === 1 ? "" : "s"} available — automatically saves your streak if you miss a day. Refills every 7 days.`}
     >
       <Snowflake className="h-3.5 w-3.5 text-primary" aria-hidden />
@@ -210,10 +212,8 @@ function DailyGoalChip({
   return (
     <div
       className={cn(
-        "flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-medium",
-        done
-          ? "border-success bg-success-soft text-foreground"
-          : "border-border bg-muted text-foreground",
+        "chip !bg-transparent !shadow-none text-foreground hover:!bg-card/70",
+        done && "!bg-success-soft hover:!bg-success-soft",
       )}
       title={`${seen} of ${goal} cards practiced today`}
     >
@@ -224,7 +224,7 @@ function DailyGoalChip({
         )}
         aria-hidden
       />
-      <div className="hidden h-1.5 w-12 overflow-hidden rounded-full bg-muted-foreground/20 sm:block">
+      <div className="hidden h-1.5 w-12 overflow-hidden rounded-full bg-muted sm:block">
         <div
           className={cn(
             "h-full rounded-full",

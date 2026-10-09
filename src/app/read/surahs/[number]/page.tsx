@@ -49,7 +49,7 @@ export default async function SurahPage({
             <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
               Surah {surah.number} · {surah.revelation}
             </p>
-            <h1 className="mt-1 text-3xl font-semibold tracking-tight">
+            <h1 className="mt-1 page-title">
               {surah.name}
             </h1>
             <p className="text-sm text-muted-foreground">{surah.meaning}</p>

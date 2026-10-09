@@ -24,7 +24,7 @@ export function ExplainerCard({ rule, className }: Props) {
   return (
     <article
       className={cn(
-        "rounded-2xl border border-border border-l-4 border-l-accent-gold bg-card p-5 shadow-sm sm:p-6",
+        "surface border-l-4 border-l-accent-gold p-5 sm:p-6",
         className,
       )}
     >

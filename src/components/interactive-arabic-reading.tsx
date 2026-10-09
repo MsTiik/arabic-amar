@@ -53,8 +53,8 @@ export function InteractiveArabicReading() {
   const selectedStyle = TOKEN_STYLES[selected.token.kind];
 
   return (
-    <article className="rounded-3xl border border-border bg-card p-4 shadow-sm sm:p-7">
-      <div className="flex flex-col gap-4 border-b border-border pb-5 sm:flex-row sm:items-center sm:justify-between">
+    <article className="surface p-4 sm:p-7">
+      <div className="flex flex-col gap-4 border-b border-hairline pb-5 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <p className="flex items-center gap-2 text-sm font-semibold">
             <MousePointer2 className="h-4 w-4 text-primary" aria-hidden />
@@ -74,7 +74,7 @@ export function InteractiveArabicReading() {
         </div>
       </div>
 
-      <div className="divide-y divide-border">
+      <div className="divide-y divide-hairline">
         {LEVEL_TWO_MARKETPLACE_READING.map((sentence) => (
           <div key={sentence.id} className="py-5 sm:py-6">
             <div dir="rtl" className="flex flex-wrap items-baseline justify-start gap-x-2 gap-y-3">
@@ -90,7 +90,7 @@ export function InteractiveArabicReading() {
                       onClick={() => setSelected({ key, token })}
                       aria-pressed={selected.key === key}
                       className={cn(
-                        "rounded-xl border-b-2 px-2 py-1 transition-all focus-ring",
+                        "rounded-[12px] border-b-2 px-2 py-1 transition-all focus-ring",
                         style.button,
                         selected.key === key && "ring-2 ring-primary/25",
                       )}
@@ -102,7 +102,7 @@ export function InteractiveArabicReading() {
                     </button>
                     <span
                       role="tooltip"
-                      className="pointer-events-none absolute bottom-[calc(100%+0.5rem)] left-1/2 z-30 hidden min-w-36 -translate-x-1/2 rounded-xl border border-border bg-card px-3 py-2 text-center shadow-lg group-hover:block group-focus-within:block"
+                      className="pointer-events-none absolute bottom-[calc(100%+0.5rem)] left-1/2 z-30 hidden min-w-36 -translate-x-1/2 tile px-3 py-2 text-center shadow-lg group-hover:block group-focus-within:block"
                     >
                       <span lang="ar-Latn" className="block text-xs italic text-foreground-soft">
                         {token.transliteration}
@@ -121,7 +121,7 @@ export function InteractiveArabicReading() {
 
       <section
         aria-live="polite"
-        className={cn("grid gap-3 rounded-2xl border p-4 sm:grid-cols-[auto_1fr] sm:items-center sm:p-5", selectedStyle.panel)}
+        className={cn("grid gap-3 rounded-[10px] border p-4 sm:grid-cols-[auto_1fr] sm:items-center sm:p-5", selectedStyle.panel)}
       >
         <ArabicText variant="display" className="text-4xl leading-relaxed sm:min-w-40 sm:text-center sm:text-5xl">
           {selected.token.arabic}
@@ -137,7 +137,7 @@ export function InteractiveArabicReading() {
         </div>
       </section>
 
-      <details className="mt-4 rounded-2xl border border-border bg-background-soft p-4 sm:p-5">
+      <details className="mt-4 tile p-4 sm:p-5">
         <summary className="flex cursor-pointer list-none items-center gap-2 text-sm font-semibold text-primary focus-ring">
           <BookOpen className="h-4 w-4" aria-hidden />
           Show the complete English meaning

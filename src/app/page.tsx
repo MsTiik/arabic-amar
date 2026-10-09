@@ -1,7 +1,8 @@
 import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 
 import { CurriculumLevelCard } from "@/components/curriculum-level-card";
-import { DashboardHero } from "@/components/dashboard-hero";
+import { DashboardHero, ResetProgressButton } from "@/components/dashboard-hero";
 import { FoundationsCard } from "@/components/foundations-card";
 import { NamesOfAllahTeaser } from "@/components/names-of-allah-teaser";
 import { RefreshContentButton } from "@/components/refresh-content-button";
@@ -12,30 +13,37 @@ export default function Home() {
   const content = getSiteContent();
 
   return (
-    <div className="ambient-hero mx-auto w-full max-w-6xl px-4 py-4 sm:py-5">
-      <DashboardHero
-        totalVocab={content.vocab.length}
-        totalRules={content.rules.length}
-        totalLessons={content.lessons.length}
-      />
+    <div className="ambient-hero mx-auto w-full max-w-6xl px-4 py-5 sm:py-7">
+      <DashboardHero />
 
-      <div className="mt-8">
-        <NamesOfAllahTeaser />
-      </div>
-
-      <section className="mt-10">
-        <header className="mb-4 flex items-end justify-between">
+      <section className="mt-12">
+        <header className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between sm:gap-4">
           <div>
-            <h2 className="text-2xl font-semibold tracking-tight">Choose your course</h2>
-            <p className="text-sm text-muted-foreground">
+            <p className="eyebrow">Courses</p>
+            <h2 className="font-display mt-1 text-[1.75rem] leading-tight">Choose your course</h2>
+            <p className="mt-1 text-sm text-muted-foreground">
               Start with reading foundations, then follow Level 1 or continue into Level 2.
+            </p>
+            <p className="mt-2 flex flex-wrap gap-x-3 gap-y-1 text-xs text-muted-foreground">
+              <Link href="/vocabulary" className="rounded hover:text-foreground focus-ring">
+                <span className="font-semibold text-foreground-soft tabular-nums">{content.vocab.length}</span> words
+              </Link>
+              <span aria-hidden>·</span>
+              <Link href="/grammar" className="rounded hover:text-foreground focus-ring">
+                <span className="font-semibold text-foreground-soft tabular-nums">{content.rules.length}</span> grammar rules
+              </Link>
+              <span aria-hidden>·</span>
+              <Link href="/topics" className="rounded hover:text-foreground focus-ring">
+                <span className="font-semibold text-foreground-soft tabular-nums">{content.lessons.length}</span> lessons
+              </Link>
             </p>
           </div>
           <Link
             href="/topics"
-            className="text-sm font-medium text-primary hover:underline"
+            className="btn btn-secondary btn-sm shrink-0 self-start sm:self-auto focus-ring"
           >
             View all
+            <ArrowRight className="h-3.5 w-3.5" aria-hidden />
           </Link>
         </header>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -51,6 +59,14 @@ export default function Home() {
           ))}
         </div>
       </section>
+
+      <div className="mt-10">
+        <NamesOfAllahTeaser />
+      </div>
+
+      <div className="mt-10 flex justify-center">
+        <ResetProgressButton />
+      </div>
 
       <RefreshContentButton />
     </div>

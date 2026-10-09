@@ -12,8 +12,8 @@ export function RuleCard({ rule, className }: Props) {
   return (
     <article
       className={cn(
-        "rounded-2xl border-l-4 border-accent-gold bg-card p-5 shadow-sm",
-        "border border-l-4 border-l-accent-gold border-border",
+        "surface border-l-4 border-l-accent-gold p-5",
+        "border border-l-4 border-l-accent-gold border-hairline",
         className,
       )}
     >
@@ -41,14 +41,14 @@ export function RuleCard({ rule, className }: Props) {
             {rule.examples.map((ex, i) => (
               <li
                 key={i}
-                className="flex flex-col gap-0.5 rounded-lg border border-border bg-background-soft px-2.5 py-2"
+                className="flex flex-col gap-0.5 rounded-lg border border-hairline bg-background-soft px-2.5 py-2"
               >
                 {ex.parts?.length ? (
                   <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
                     {ex.parts.map((part, partIndex) => (
                       <div
                         key={partIndex}
-                        className="rounded-md border border-border/70 bg-card/70 p-2"
+                        className="rounded-md border border-hairline/70 bg-card/70 p-2"
                       >
                         <p className="text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">
                           {part.label}
