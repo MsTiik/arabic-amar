@@ -106,17 +106,16 @@ export function DashboardHero() {
             <CourseProgressCard course={course} />
           </div>
 
-          <div className="grid grid-cols-2 gap-3">
-            <div className="surface flex min-w-0 flex-col items-center p-3">
+          <div className="grid grid-cols-2 gap-x-4 gap-y-5">
+            <div className="flex min-w-0 flex-col items-center py-1">
               <GoalRing seen={seen} goal={goal} reached={goalReached} />
-              <p className="mt-1 flex flex-wrap items-center justify-center gap-x-1 text-center text-[10px] leading-snug text-muted-foreground">
+              <div className="mt-1 flex flex-col items-center text-center text-[10px] leading-snug text-muted-foreground">
                 <span>
                   Daily goal:{" "}
                   <span className="font-semibold text-foreground tabular-nums">
                     {goal} cards
                   </span>
                 </span>
-                <span aria-hidden>·</span>
                 <button
                   type="button"
                   className="font-semibold text-primary underline-offset-4 hover:underline focus-ring"
@@ -124,9 +123,9 @@ export function DashboardHero() {
                 >
                   Edit goal
                 </button>
-              </p>
+              </div>
             </div>
-            <div className="surface flex min-w-0 flex-col items-center justify-center p-3">
+            <div className="flex min-w-0 flex-col items-center justify-center py-1">
               <StreakFlame
                 count={progress.streak.count}
                 freezes={freezesAvailable}
@@ -137,14 +136,14 @@ export function DashboardHero() {
               label="Mastered"
               value={`${summary.mastered}/${summary.total}`}
               tone="success"
-              className="surface flex min-w-0 flex-col justify-center p-3"
+              className="flex min-w-0 flex-col justify-center"
             />
             <Stat
               icon={<BookOpen className="h-3.5 w-3.5" />}
               label="Accuracy"
               value={accuracy === null ? "—" : `${accuracy}%`}
               tone="muted"
-              className="surface flex min-w-0 flex-col justify-center p-3"
+              className="flex min-w-0 flex-col justify-center"
             />
           </div>
         </div>
@@ -287,12 +286,16 @@ function GoalRing({
       <ProgressRing
         value={goal > 0 ? seen / goal : 0}
         size={92}
-        thickness={7}
+        thickness={7.7}
         trackClassName="stroke-muted"
         fillClassName={reached ? "stroke-success" : "stroke-primary"}
         label={
           reached ? (
-            <Check className="h-6 w-6 text-success lg:h-8 lg:w-8" aria-label="Goal reached" />
+            <Check
+              className="h-6 w-6 text-success lg:h-8 lg:w-8"
+              strokeWidth={2.2}
+              aria-label="Goal reached"
+            />
           ) : (
             <span className="font-display text-base tabular-nums lg:text-xl">
               {seen}
