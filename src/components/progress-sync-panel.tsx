@@ -89,9 +89,9 @@ export function ProgressSyncPanel() {
       {!sync.configured ? (
         <div className="mt-6 tile p-4 text-sm text-muted-foreground">
           Sync is not configured on this deployment yet. Add
-          <code className="mx-1 rounded bg-muted px-1.5 py-0.5">NEXT_PUBLIC_SUPABASE_URL</code>
+          <code className="mx-1 break-all rounded bg-muted px-1.5 py-0.5">NEXT_PUBLIC_SUPABASE_URL</code>
           and
-          <code className="mx-1 rounded bg-muted px-1.5 py-0.5">
+          <code className="mx-1 break-all rounded bg-muted px-1.5 py-0.5">
             NEXT_PUBLIC_SUPABASE_ANON_KEY
           </code>
           to enable optional account sync.
