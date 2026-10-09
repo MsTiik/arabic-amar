@@ -106,44 +106,46 @@ export function DashboardHero() {
             <CourseProgressCard course={course} />
           </div>
 
-          <div className="grid grid-cols-2 gap-x-4 gap-y-5">
-            <div className="flex min-w-0 flex-col items-center py-1">
-              <GoalRing seen={seen} goal={goal} reached={goalReached} />
-              <div className="mt-1 flex flex-col items-center text-center text-[10px] leading-snug text-muted-foreground">
-                <span>
-                  Daily goal:{" "}
-                  <span className="font-semibold text-foreground tabular-nums">
-                    {goal} cards
+          <div className="grid grid-cols-2 gap-3">
+            <div className="col-span-2 grid grid-cols-2 items-center gap-4 rounded-[14px] bg-background-soft p-3 ring-1 ring-inset ring-hairline shadow-[var(--shadow-sm),inset_0_1px_0_oklch(1_0_0/40%)]">
+              <div className="flex min-w-0 flex-col items-center">
+                <GoalRing seen={seen} goal={goal} reached={goalReached} />
+                <div className="mt-1 flex flex-col items-center text-center text-[10px] leading-snug text-muted-foreground">
+                  <span>
+                    Daily goal:{" "}
+                    <span className="font-semibold text-foreground tabular-nums">
+                      {goal} cards
+                    </span>
                   </span>
-                </span>
-                <button
-                  type="button"
-                  className="font-semibold text-primary underline-offset-4 hover:underline focus-ring"
-                  onClick={openGoalDialog}
-                >
-                  Edit goal
-                </button>
+                  <button
+                    type="button"
+                    className="font-semibold text-primary underline-offset-4 hover:underline focus-ring"
+                    onClick={openGoalDialog}
+                  >
+                    Edit goal
+                  </button>
+                </div>
               </div>
-            </div>
-            <div className="flex min-w-0 flex-col items-center justify-center py-1">
-              <StreakFlame
-                count={progress.streak.count}
-                freezes={freezesAvailable}
-              />
+              <div className="flex min-w-0 flex-col items-center justify-center">
+                <StreakFlame
+                  count={progress.streak.count}
+                  freezes={freezesAvailable}
+                />
+              </div>
             </div>
             <Stat
               icon={<GraduationCap className="h-3.5 w-3.5" />}
               label="Mastered"
               value={`${summary.mastered}/${summary.total}`}
               tone="success"
-              className="flex min-w-0 flex-col justify-center"
+              className="flex min-w-0 flex-col justify-center rounded-[14px] bg-success-soft p-3 ring-1 ring-inset ring-success/20 shadow-[var(--shadow-sm),inset_0_1px_0_oklch(1_0_0/40%)]"
             />
             <Stat
               icon={<BookOpen className="h-3.5 w-3.5" />}
               label="Accuracy"
               value={accuracy === null ? "—" : `${accuracy}%`}
               tone="muted"
-              className="flex min-w-0 flex-col justify-center"
+              className="flex min-w-0 flex-col justify-center rounded-[14px] bg-background-soft p-3 ring-1 ring-inset ring-hairline shadow-[var(--shadow-sm),inset_0_1px_0_oklch(1_0_0/40%)]"
             />
           </div>
         </div>
@@ -371,13 +373,13 @@ function Stat({
 }) {
   const toneClasses: Record<typeof tone, string> = {
     primary: "bg-primary-soft text-primary",
-    success: "bg-success-soft text-success",
+    success: "bg-success/10 text-success",
     gold: "bg-accent-gold-soft text-accent-gold",
     muted: "bg-muted text-muted-foreground",
   };
   return (
     <div className={cn("px-4 py-3", className)}>
-      <div className="flex items-center gap-2 text-xs font-medium text-muted-foreground">
+      <div className="eyebrow flex items-center gap-2 !text-[10px]">
         <span className={cn("flex h-5 w-5 items-center justify-center rounded-md", toneClasses[tone])}>
           {icon}
         </span>
