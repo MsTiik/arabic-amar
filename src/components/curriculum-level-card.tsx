@@ -37,7 +37,15 @@ export function CurriculumLevelCard({ level, vocab, className }: Props) {
         className,
       )}
     >
-      <div className="relative flex items-start justify-between gap-3">
+      <span
+        className={cn(
+          "pointer-events-none absolute -right-8 -top-10 h-32 w-32 rounded-full transition-transform duration-300 group-hover:scale-110",
+          level.slug === "level-1" ? "bg-primary/10" : "bg-accent-gold/10",
+        )}
+        aria-hidden
+      />
+
+      <div className="relative z-10 flex items-start justify-between gap-3">
         <span
           className={cn(
             "flex h-10 w-10 shrink-0 items-center justify-center rounded-[10px] ring-1 ring-inset",
@@ -60,7 +68,7 @@ export function CurriculumLevelCard({ level, vocab, className }: Props) {
         )}
       </div>
 
-      <div className="relative mt-4">
+      <div className="relative z-10 mt-4">
         <p className="eyebrow">
           {level.stage}
         </p>
@@ -75,7 +83,7 @@ export function CurriculumLevelCard({ level, vocab, className }: Props) {
         </p>
       </div>
 
-      <div className="relative mt-auto flex items-end justify-between gap-3 pt-4">
+      <div className="relative z-10 mt-auto flex items-end justify-between gap-3 pt-4">
         <span className="text-xs text-muted-foreground">
           {level.units?.length ?? level.topicSlugs.length} {level.units ? "units" : "lessons"}
           {summary.total > 0 ? ` · ${summary.mastered}/${summary.total} words mastered` : ""}

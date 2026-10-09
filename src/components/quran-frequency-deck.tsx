@@ -29,12 +29,12 @@ export function QuranFrequencyDeck() {
   }, []);
 
   return (
-    <section className="surface border-l-4 border-l-accent-gold p-5 sm:p-6">
+    <section className="rounded-[18px] bg-gradient-to-br from-accent-gold-soft via-background to-accent-amber-soft p-5 shadow-[var(--shadow-md)] sm:p-6">
       <button
         type="button"
         onClick={() => setDeckOpen((v) => !v)}
         aria-expanded={deckOpen}
-        className="flex w-full items-start justify-between gap-3 text-left focus-ring rounded-[10px]"
+        className="flex w-full items-start justify-between gap-3 text-left focus-ring rounded-[12px]"
       >
         <div>
           <div className="mb-2">

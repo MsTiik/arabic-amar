@@ -309,7 +309,7 @@ function PracticeSession({
         </p>
       </header>
 
-      <section className="brand-panel relative overflow-hidden rounded-[18px] p-6 sm:p-8 shadow-[var(--shadow-md),inset_0_1px_0_oklch(1_0_0/8%)]">
+      <section className="brand-panel brand-panel-dots relative overflow-hidden rounded-[18px] p-6 sm:p-8 shadow-[var(--shadow-md),inset_0_1px_0_oklch(1_0_0/8%)]">
         <div className="flex flex-wrap items-center justify-between gap-6">
           <div className="min-w-0">
             <h2 className="section-title">Today&apos;s session</h2>
@@ -322,7 +322,7 @@ function PracticeSession({
           <button
             type="button"
             onClick={startTodaysSession}
-            className="btn-chunky btn-chunky-primary flex shrink-0 items-center gap-2 rounded-[12px] bg-primary px-7 py-3.5 text-base font-bold text-primary-foreground focus-ring"
+            className="btn-chunky btn-chunky-primary flex shrink-0 items-center gap-2 rounded-[14px] bg-primary px-7 py-3.5 text-base font-bold text-primary-foreground focus-ring"
           >
             <Play className="h-5 w-5" aria-hidden />
             Start today&apos;s session
@@ -475,7 +475,7 @@ function PracticeSession({
         <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
           <Link
             href="/practice/verb-families"
-            className="btn-chunky group flex items-start gap-4 rounded-[12px] border-2 border-hairline bg-card p-4 text-left hover:bg-background-soft focus-ring"
+            className="btn-chunky group flex items-start gap-4 rounded-[14px] border-2 border-hairline bg-card p-4 text-left hover:bg-background-soft focus-ring"
           >
             <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[10px] bg-tense-command text-tense-command-accent">
               <Shuffle className="h-5 w-5" aria-hidden />
@@ -567,7 +567,7 @@ function PracticeSession({
               <Link
                 key={l.id}
                 href={`/practice?topic=${l.topicSlugs[0]}&kind=mc`}
-                className="btn-chunky flex items-center gap-4 rounded-[12px] border-2 border-hairline bg-card p-4 hover:bg-background-soft focus-ring"
+                className="btn-chunky flex items-center gap-4 rounded-[14px] border-2 border-hairline bg-card p-4 hover:bg-background-soft focus-ring"
               >
                 <span
                   className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-[10px] ${identity.chip}`}
@@ -642,7 +642,7 @@ function DeckCard({
     <button
       type="button"
       onClick={onClick}
-      className="btn-chunky group flex items-start gap-4 rounded-[12px] border-2 border-hairline bg-card p-4 text-left hover:bg-background-soft focus-ring"
+      className="btn-chunky group flex items-start gap-4 rounded-[14px] border-2 border-hairline bg-card p-4 text-left hover:bg-background-soft focus-ring"
     >
       <span
         className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-[10px] ${styles.chip}`}

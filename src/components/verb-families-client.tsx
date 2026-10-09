@@ -164,7 +164,7 @@ function ExploreMode({
                 onClick={() => onSelect(index)}
                 aria-pressed={index === familyIndex}
                 className={cn(
-                  "min-w-32 shrink-0 rounded-[10px] border px-3 py-2 text-center transition-colors focus-ring",
+                  "min-w-32 shrink-0 rounded-[12px] border px-3 py-2 text-center transition-colors focus-ring",
                   index === familyIndex
                     ? "border-primary bg-primary-soft shadow-sm"
                     : "border-hairline bg-card hover:bg-muted",
@@ -605,7 +605,7 @@ function SortMode() {
                 onClick={() => (tileKey ? returnToBank(slot) : placeIn(slot))}
                 disabled={status !== "building"}
                 className={cn(
-                    "btn-chunky flex min-h-44 min-w-0 flex-col rounded-[12px] border-2 border-dashed p-3 text-left transition-colors focus-ring sm:min-h-48",
+                    "btn-chunky flex min-h-44 min-w-0 flex-col rounded-[14px] border-2 border-dashed p-3 text-left transition-colors focus-ring sm:min-h-48",
                   style.surface,
                   selected && !tileKey && "border-solid ring-2 ring-primary/30",
                   status !== "building" && slotCorrect && "border-success bg-success-soft",
@@ -673,7 +673,7 @@ function SortMode() {
                   aria-pressed={selected === key}
                   disabled={status !== "building"}
                   className={cn(
-                    "btn-chunky min-w-0 rounded-[12px] bg-card p-3 text-center ring-1 ring-inset ring-hairline transition-all focus-ring",
+                    "btn-chunky min-w-0 rounded-[14px] bg-card p-3 text-center ring-1 ring-inset ring-hairline transition-all focus-ring",
                     selected === key
                       ? "border-primary ring-2 ring-primary/30"
                       : "border-hairline hover:border-primary/50",
@@ -704,7 +704,7 @@ function SortMode() {
             <button
               type="button"
               onClick={nextRound}
-              className="btn-chunky btn-chunky-primary sm:ml-auto inline-flex items-center justify-center gap-2 rounded-[12px] bg-primary px-5 py-2.5 text-sm font-bold text-primary-foreground focus-ring"
+              className="btn-chunky btn-chunky-primary sm:ml-auto inline-flex items-center justify-center gap-2 rounded-[14px] bg-primary px-5 py-2.5 text-sm font-bold text-primary-foreground focus-ring"
             >
               Next verb <ArrowRight className="h-4 w-4" aria-hidden />
             </button>
@@ -728,7 +728,7 @@ function SortMode() {
             type="button"
             onClick={check}
             disabled={!complete}
-            className="btn-chunky btn-chunky-primary mt-4 inline-flex w-full items-center justify-center gap-2 rounded-[12px] bg-primary px-5 py-3 text-sm font-bold text-primary-foreground disabled:cursor-not-allowed disabled:opacity-40 focus-ring sm:ml-auto sm:w-auto"
+            className="btn-chunky btn-chunky-primary mt-4 inline-flex w-full items-center justify-center gap-2 rounded-[14px] bg-primary px-5 py-3 text-sm font-bold text-primary-foreground disabled:cursor-not-allowed disabled:opacity-40 focus-ring sm:ml-auto sm:w-auto"
           >
             <Check className="h-4 w-4" aria-hidden />
             Check my sorting

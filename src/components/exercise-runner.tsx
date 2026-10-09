@@ -111,7 +111,7 @@ export function ExerciseRunner({ deck, onExit, onAttempt }: Props) {
         <button
           type="button"
           onClick={onExit}
-          className="btn-chunky btn-chunky-primary mt-3 rounded-[12px] bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground focus-ring"
+          className="btn-chunky btn-chunky-primary mt-3 rounded-[14px] bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground focus-ring"
         >
           Back to practice
         </button>
@@ -383,7 +383,7 @@ function CompletionScreen({
         <button
           type="button"
           onClick={onRunAgain}
-          className="btn-chunky rounded-[12px] border border-hairline bg-background-soft px-5 py-2.5 text-sm font-semibold hover:bg-muted focus-ring"
+          className="btn-chunky rounded-[14px] border border-hairline bg-background-soft px-5 py-2.5 text-sm font-semibold hover:bg-muted focus-ring"
         >
           <RotateCcw className="mr-1 inline h-3.5 w-3.5" />
           Run again
@@ -391,7 +391,7 @@ function CompletionScreen({
         <button
           type="button"
           onClick={onExit}
-          className="btn-chunky btn-chunky-primary rounded-[12px] bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground focus-ring"
+          className="btn-chunky btn-chunky-primary rounded-[14px] bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground focus-ring"
         >
           Back to practice
         </button>
@@ -498,7 +498,7 @@ function FeedbackBar({
           type="button"
           onClick={onContinue}
           className={cn(
-            "btn-chunky rounded-[12px] px-6 py-2.5 text-sm font-bold text-primary-foreground focus-ring",
+            "btn-chunky rounded-[14px] px-6 py-2.5 text-sm font-bold text-primary-foreground focus-ring",
             correct
               ? "btn-chunky-success bg-success"
               : "btn-chunky-danger bg-danger",
@@ -518,7 +518,7 @@ function optionClasses(
   isSelected: boolean,
 ): string {
   const base =
-    "btn-chunky rounded-[12px] border-2 text-center focus-ring";
+    "btn-chunky rounded-[14px] border-2 text-center focus-ring";
   if (!answered)
     return cn(base, "border-hairline bg-background-soft hover:bg-muted");
   if (isCorrect) return cn(base, "answer-pop border-success bg-success-soft");
@@ -594,7 +594,7 @@ function FlashcardView({
             type="button"
             aria-label={flipLabel}
             onClick={toggleFlip}
-            className="flip-face btn-chunky absolute inset-0 flex cursor-pointer flex-col items-center justify-center gap-2 rounded-[12px] border-2 border-hairline bg-background-soft p-6 hover:border-primary/50 hover:bg-muted/70 focus-ring sm:p-8"
+            className="flip-face btn-chunky absolute inset-0 flex cursor-pointer flex-col items-center justify-center gap-2 rounded-[14px] border-2 border-hairline bg-background-soft p-6 hover:border-primary/50 hover:bg-muted/70 focus-ring sm:p-8"
           >
             <ArabicText
               variant="display"
@@ -613,7 +613,7 @@ function FlashcardView({
             type="button"
             aria-label={flipLabel}
             onClick={toggleFlip}
-            className="flip-face flip-face-back btn-chunky btn-chunky-primary absolute inset-0 flex cursor-pointer flex-col items-center justify-center gap-3 rounded-[12px] border-2 border-primary/30 bg-primary/5 p-6 focus-ring sm:p-8"
+            className="flip-face flip-face-back btn-chunky btn-chunky-primary absolute inset-0 flex cursor-pointer flex-col items-center justify-center gap-3 rounded-[14px] border-2 border-primary/30 bg-primary/5 p-6 focus-ring sm:p-8"
           >
             <p
               className={cn(
@@ -666,7 +666,7 @@ function FlashcardView({
             answerFeedback(false);
             onAnswer(false);
           }}
-          className="btn-chunky btn-chunky-danger rounded-[12px] border-2 border-danger bg-danger-soft px-4 py-2.5 text-sm font-bold text-foreground focus-ring"
+          className="btn-chunky btn-chunky-danger rounded-[14px] border-2 border-danger bg-danger-soft px-4 py-2.5 text-sm font-bold text-foreground focus-ring"
         >
           <X className="mr-1 inline h-4 w-4" />
           Got it wrong
@@ -677,7 +677,7 @@ function FlashcardView({
             answerFeedback(true);
             onAnswer(true);
           }}
-          className="btn-chunky btn-chunky-success rounded-[12px] bg-success px-4 py-2.5 text-sm font-bold text-primary-foreground focus-ring"
+          className="btn-chunky btn-chunky-success rounded-[14px] bg-success px-4 py-2.5 text-sm font-bold text-primary-foreground focus-ring"
         >
           <Check className="mr-1 inline h-4 w-4" />
           Got it right
@@ -857,7 +857,7 @@ function FillBlankView({
         {submitted === null ? (
           <button
             type="submit"
-            className="btn-chunky btn-chunky-primary mt-4 w-full rounded-[12px] bg-primary py-2.5 text-sm font-bold text-primary-foreground focus-ring"
+            className="btn-chunky btn-chunky-primary mt-4 w-full rounded-[14px] bg-primary py-2.5 text-sm font-bold text-primary-foreground focus-ring"
           >
             Submit
           </button>
@@ -975,7 +975,7 @@ function OrderingView({
         <button
           type="button"
           onClick={submit}
-          className="btn-chunky btn-chunky-primary mt-4 w-full rounded-[12px] bg-primary py-2.5 text-sm font-bold text-primary-foreground focus-ring"
+          className="btn-chunky btn-chunky-primary mt-4 w-full rounded-[14px] bg-primary py-2.5 text-sm font-bold text-primary-foreground focus-ring"
         >
           Check
         </button>
@@ -1156,7 +1156,7 @@ function MatchCard({
         className={cn(
           // A shared minimum height keeps the columns visually steady, while
           // h-full lets a row grow rather than clipping a long paired form.
-          "btn-chunky flex h-full min-h-24 w-full min-w-0 flex-col items-center justify-center rounded-[12px] border-2 p-3 text-center focus-ring sm:min-h-28",
+          "btn-chunky flex h-full min-h-24 w-full min-w-0 flex-col items-center justify-center rounded-[14px] border-2 p-3 text-center focus-ring sm:min-h-28",
           style,
         )}
       >

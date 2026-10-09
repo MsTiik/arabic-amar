@@ -238,15 +238,17 @@ export function ConjugationTable({ past, presentFuture, command }: Props) {
 
   return (
     <div className="flex flex-col gap-3">
-      <div role="tablist" className="segmented">
+      <div role="tablist" className="flex flex-wrap gap-2">
         <button
           type="button"
           role="tab"
           aria-selected={tab === "past"}
           onClick={() => setTab("past")}
           className={cn(
-            "segmented-item focus-ring",
-            tab !== "past" && "text-muted-foreground hover:text-foreground",
+            "rounded-[10px] px-4 py-1.5 text-sm font-medium focus-ring",
+            tab === "past"
+              ? "bg-foreground text-background"
+              : "border border-border bg-background-soft text-foreground-soft hover:bg-muted",
           )}
         >
           Past (
@@ -261,8 +263,10 @@ export function ConjugationTable({ past, presentFuture, command }: Props) {
           aria-selected={tab === "present-future"}
           onClick={() => setTab("present-future")}
           className={cn(
-            "segmented-item focus-ring",
-            tab !== "present-future" && "text-muted-foreground hover:text-foreground",
+            "rounded-[10px] px-4 py-1.5 text-sm font-medium focus-ring",
+            tab === "present-future"
+              ? "bg-foreground text-background"
+              : "border border-border bg-background-soft text-foreground-soft hover:bg-muted",
           )}
         >
           Present / Future (
@@ -277,8 +281,10 @@ export function ConjugationTable({ past, presentFuture, command }: Props) {
           aria-selected={tab === "command"}
           onClick={() => setTab("command")}
           className={cn(
-            "segmented-item focus-ring",
-            tab !== "command" && "text-muted-foreground hover:text-foreground",
+            "rounded-[10px] px-4 py-1.5 text-sm font-medium focus-ring",
+            tab === "command"
+              ? "bg-foreground text-background"
+              : "border border-border bg-background-soft text-foreground-soft hover:bg-muted",
           )}
         >
           Command (

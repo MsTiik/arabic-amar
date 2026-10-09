@@ -19,7 +19,7 @@ export function NamesOfAllahClient() {
 
   return (
     <div className="mx-auto w-full max-w-6xl space-y-8 px-4 py-8 sm:py-10">
-      <header className="surface border-l-4 border-l-primary p-6 sm:p-8">
+      <header className="rounded-[18px] border border-primary/25 bg-primary/15 p-6 sm:p-8">
         <div className="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
           <div>
             <p className="chip border border-primary/30 bg-card/80 text-primary">

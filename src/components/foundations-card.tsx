@@ -14,7 +14,12 @@ export function FoundationsCard({ className }: { className?: string }) {
         className,
       )}
     >
-      <div className="relative flex items-start justify-between gap-3">
+      <span
+        className="pointer-events-none absolute -right-8 -top-10 h-32 w-32 rounded-full border border-accent-gold/20 bg-accent-gold/10 transition-transform duration-300 group-hover:scale-110"
+        aria-hidden
+      />
+
+      <div className="relative z-10 flex items-start justify-between gap-3">
         <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[10px] bg-accent-gold/15 text-accent-gold ring-1 ring-inset ring-accent-gold/25">
           <span className="font-arabic-display text-2xl leading-none" aria-hidden>
             ب
@@ -26,7 +31,7 @@ export function FoundationsCard({ className }: { className?: string }) {
         </span>
       </div>
 
-      <div className="relative mt-4">
+      <div className="relative z-10 mt-4">
         <h3 className="font-display text-[1.4rem] leading-tight">Foundations</h3>
         <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
           Build your reading skills, then explore Al-Fātiḥah and short surahs
@@ -34,7 +39,7 @@ export function FoundationsCard({ className }: { className?: string }) {
         </p>
       </div>
 
-      <span className="relative mt-auto inline-flex items-center gap-1.5 pt-4 text-xs font-semibold text-primary">
+      <span className="relative z-10 mt-auto inline-flex items-center gap-1.5 pt-4 text-xs font-semibold text-primary">
         Start reading
         <ArrowRight
           className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1"

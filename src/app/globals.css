@@ -299,7 +299,7 @@ body::before {
     gap: 0.5rem;
     height: 2.5rem;
     padding: 0 1rem;
-    border-radius: 10px;
+    border-radius: 12px;
     font-size: 0.875rem;
     font-weight: 600;
     letter-spacing: -0.005em;
@@ -317,7 +317,7 @@ body::before {
   .btn-sm {
     height: 2rem;
     padding: 0 0.75rem;
-    border-radius: 8px;
+    border-radius: 10px;
     font-size: 0.8125rem;
   }
   .btn-lg {
@@ -397,7 +397,7 @@ body::before {
     justify-content: center;
     width: 2rem;
     height: 2rem;
-    border-radius: 9px;
+    border-radius: 10px;
     background: var(--card);
     color: var(--muted-foreground);
     box-shadow: 0 0 0 1px var(--hairline-strong), var(--shadow-sm);
@@ -594,6 +594,22 @@ body::before {
     ),
     linear-gradient(135deg, oklch(0.37 0.05 218), oklch(0.22 0.035 250));
   color: var(--foreground);
+}
+
+.brand-panel-dots {
+  background:
+    radial-gradient(circle at 1px 1px, oklch(1 0 0 / 5%) 1px, transparent 1.5px) 0 0 / 22px 22px,
+    radial-gradient(
+      ellipse 60% 70% at 100% 0%,
+      oklch(0.78 0.09 210 / 22%),
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse 50% 60% at 0% 100%,
+      oklch(0.77 0.15 50 / 12%),
+      transparent 70%
+    ),
+    linear-gradient(135deg, oklch(0.37 0.05 218), oklch(0.22 0.035 250));
 }
 
 /* Subtle calligraphic divider used between sections */

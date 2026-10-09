@@ -108,34 +108,36 @@ export function Topbar() {
         </nav>
 
         <div className="ml-auto flex items-center gap-2 sm:gap-3">
-          <div
-            className={cn(
-              "chip",
-              streakActive
-                ? "!bg-accent-gold-soft text-foreground !shadow-[0_0_0_1px_oklch(from_var(--accent-gold)_l_c_h/45%)]"
-                : "text-muted-foreground",
-            )}
-            title={
-              streakActive
-                ? `You're on a ${progress.streak.count}-day streak!`
-                : "Practice today to start a streak."
-            }
-          >
-            <Flame
+          <div className="flex items-center gap-1 rounded-xl bg-muted/60 p-1 ring-1 ring-inset ring-hairline sm:gap-1.5">
+            <div
               className={cn(
-                "h-3.5 w-3.5",
-                streakActive ? "text-accent-gold" : "text-muted-foreground",
+                "chip !bg-transparent !shadow-none hover:!bg-card/70",
+                streakActive ? "text-foreground" : "text-muted-foreground",
               )}
-              aria-hidden
-            />
-            <span>{progress.streak.count}</span>
-            <span className="hidden sm:inline">streak</span>
+              title={
+                streakActive
+                  ? `You're on a ${progress.streak.count}-day streak!`
+                  : "Practice today to start a streak."
+              }
+            >
+              <Flame
+                className={cn(
+                  "h-3.5 w-3.5",
+                  streakActive ? "text-accent-gold" : "text-muted-foreground",
+                )}
+                aria-hidden
+              />
+              <span>{progress.streak.count}</span>
+              <span className="hidden sm:inline">streak</span>
+            </div>
+            <FreezeChip count={freezesAvailable} />
+            {sync.configured ? (
+              <SyncChip status={sync.status} signedIn={Boolean(sync.user)} />
+            ) : null}
+            <DailyGoalChip seen={seen} goal={goal} ratio={goalRatio} />
+            <FeedbackToggle className="hidden !bg-transparent !shadow-none hover:!bg-card/70 sm:inline-flex" />
+            <ThemeToggle className="!bg-transparent !shadow-none hover:!bg-card/70" />
           </div>
-          <FreezeChip count={freezesAvailable} />
-          {sync.configured ? <SyncChip status={sync.status} signedIn={Boolean(sync.user)} /> : null}
-          <DailyGoalChip seen={seen} goal={goal} ratio={goalRatio} />
-          <FeedbackToggle className="hidden sm:inline-flex" />
-          <ThemeToggle />
           <AboutNavLink pathname={pathname} />
         </div>
       </div>
@@ -149,7 +151,7 @@ function SyncChip({ signedIn, status }: { signedIn: boolean; status: string }) {
     <Link
       href="/sync"
       className={cn(
-        "chip hidden hover:bg-muted focus-ring sm:inline-flex",
+        "chip hidden !bg-transparent !shadow-none hover:!bg-card/70 focus-ring sm:inline-flex",
         signedIn ? "" : "text-muted-foreground",
       )}
       title={signedIn ? "Progress sync is enabled." : "Sign in to sync progress across devices."}
@@ -188,7 +190,7 @@ function FreezeChip({ count }: { count: number }) {
   if (count <= 0) return null;
   return (
     <div
-      className="chip hidden text-foreground sm:inline-flex"
+      className="chip hidden !bg-accent-gold-soft !shadow-none text-foreground hover:!bg-accent-gold-soft sm:inline-flex"
       title={`${count} streak freeze${count === 1 ? "" : "s"} available — automatically saves your streak if you miss a day. Refills every 7 days.`}
     >
       <Snowflake className="h-3.5 w-3.5 text-primary" aria-hidden />
@@ -210,8 +212,8 @@ function DailyGoalChip({
   return (
     <div
       className={cn(
-        "chip text-foreground",
-        done && "!bg-success-soft !shadow-[0_0_0_1px_oklch(from_var(--success)_l_c_h/45%)]",
+        "chip !bg-transparent !shadow-none text-foreground hover:!bg-card/70",
+        done && "!bg-success-soft hover:!bg-success-soft",
       )}
       title={`${seen} of ${goal} cards practiced today`}
     >
@@ -222,7 +224,7 @@ function DailyGoalChip({
         )}
         aria-hidden
       />
-      <div className="hidden h-1 w-12 overflow-hidden rounded-full bg-muted sm:block">
+      <div className="hidden h-1.5 w-12 overflow-hidden rounded-full bg-muted sm:block">
         <div
           className={cn(
             "h-full rounded-full",

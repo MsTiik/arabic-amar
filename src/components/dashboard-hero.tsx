@@ -43,7 +43,6 @@ export function DashboardHero() {
   const freezesAvailable = progress.streak.freezesAvailable ?? 0;
   const todayIso = new Date().toISOString().slice(0, 10);
   const freezeJustConsumed = progress.streak.lastFreezeConsumedAt === todayIso;
-  const stepsDone = dailyPath.steps.filter((step) => step.status !== "ready").length;
 
   function openGoalDialog() {
     setGoalInput(String(goal));
@@ -107,10 +106,27 @@ export function DashboardHero() {
             <CourseProgressCard course={course} />
           </div>
 
-          <div className="surface grid grid-cols-2 grid-rows-[1fr_auto_auto]">
-            <div className="col-span-2 flex items-center justify-around gap-4 border-b border-hairline px-4 py-3">
+          <div className="grid grid-cols-2 gap-3">
+            <div className="surface flex min-w-0 flex-col items-center p-3">
               <GoalRing seen={seen} goal={goal} reached={goalReached} />
-              <span className="h-14 w-px bg-hairline lg:h-20" aria-hidden />
+              <p className="mt-1 flex flex-wrap items-center justify-center gap-x-1 text-center text-[10px] leading-snug text-muted-foreground">
+                <span>
+                  Daily goal:{" "}
+                  <span className="font-semibold text-foreground tabular-nums">
+                    {goal} cards
+                  </span>
+                </span>
+                <span aria-hidden>·</span>
+                <button
+                  type="button"
+                  className="font-semibold text-primary underline-offset-4 hover:underline focus-ring"
+                  onClick={openGoalDialog}
+                >
+                  Edit goal
+                </button>
+              </p>
+            </div>
+            <div className="surface flex min-w-0 flex-col items-center justify-center p-3">
               <StreakFlame
                 count={progress.streak.count}
                 freezes={freezesAvailable}
@@ -121,27 +137,15 @@ export function DashboardHero() {
               label="Mastered"
               value={`${summary.mastered}/${summary.total}`}
               tone="success"
+              className="surface min-w-0 p-3"
             />
             <Stat
               icon={<BookOpen className="h-3.5 w-3.5" />}
               label="Accuracy"
               value={accuracy === null ? "—" : `${accuracy}%`}
               tone="muted"
-              className="border-l border-hairline"
+              className="surface min-w-0 p-3"
             />
-            <div className="col-span-2 flex items-center justify-between gap-3 border-t border-hairline px-4 py-2.5 text-xs text-muted-foreground">
-              <span>
-                Daily goal:{" "}
-                <span className="font-semibold text-foreground tabular-nums">{goal} cards</span>
-              </span>
-              <button
-                type="button"
-                className="rounded font-semibold text-primary underline-offset-4 hover:underline focus-ring"
-                onClick={openGoalDialog}
-              >
-                Edit goal
-              </button>
-            </div>
           </div>
         </div>
 
@@ -157,10 +161,13 @@ export function DashboardHero() {
                 vocabulary, and the next lesson stay connected.
               </p>
             </div>
-            <span className="chip shrink-0 self-start tabular-nums text-foreground-soft">
-              <Check className="h-3.5 w-3.5 text-success" aria-hidden />
-              {stepsDone} of {dailyPath.steps.length} done
-            </span>
+            <Link
+              href={primaryPathHref(dailyPath)}
+              className="cta-glow inline-flex items-center justify-center gap-2 rounded-[12px] bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition hover:brightness-105 active:translate-y-0.5 focus-ring"
+            >
+              {seen === 0 ? "Start today's path" : "Continue today's path"}
+              <ChevronRight className="h-4 w-4" />
+            </Link>
           </div>
 
           <div className="mt-4 grid grid-cols-1 gap-2.5 md:grid-cols-2 xl:grid-cols-4">
@@ -420,8 +427,8 @@ function DailyPathStepCard({
         {!isLast ? (
           <span
             className={cn(
-              "h-px flex-1",
-              ready ? "bg-hairline-strong" : "bg-success/50",
+              "h-1 flex-1 rounded-full",
+              ready ? "bg-border" : "bg-success/50",
             )}
             aria-hidden
           />

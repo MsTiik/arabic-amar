@@ -90,7 +90,7 @@ export function InteractiveArabicReading() {
                       onClick={() => setSelected({ key, token })}
                       aria-pressed={selected.key === key}
                       className={cn(
-                        "rounded-[10px] border-b-2 px-2 py-1 transition-all focus-ring",
+                        "rounded-[12px] border-b-2 px-2 py-1 transition-all focus-ring",
                         style.button,
                         selected.key === key && "ring-2 ring-primary/25",
                       )}
