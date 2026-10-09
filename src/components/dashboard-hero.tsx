@@ -137,14 +137,14 @@ export function DashboardHero() {
               label="Mastered"
               value={`${summary.mastered}/${summary.total}`}
               tone="success"
-              className="surface min-w-0 p-3"
+              className="surface flex min-w-0 flex-col justify-center p-3"
             />
             <Stat
               icon={<BookOpen className="h-3.5 w-3.5" />}
               label="Accuracy"
               value={accuracy === null ? "—" : `${accuracy}%`}
               tone="muted"
-              className="surface min-w-0 p-3"
+              className="surface flex min-w-0 flex-col justify-center p-3"
             />
           </div>
         </div>
