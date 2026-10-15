@@ -309,7 +309,7 @@ function PracticeSession({
         </p>
       </header>
 
-      <section className="brand-panel brand-panel-dots relative overflow-hidden rounded-[18px] p-6 sm:p-8 shadow-[var(--shadow-md),inset_0_1px_0_oklch(1_0_0/8%)]">
+      <section className="brand-panel brand-panel-dots relative overflow-hidden rounded-[18px] p-5 sm:p-8 shadow-[var(--shadow-md),inset_0_1px_0_oklch(1_0_0/8%)]">
         <div className="flex flex-wrap items-center justify-between gap-6">
           <div className="min-w-0">
             <h2 className="section-title">Today&apos;s session</h2>

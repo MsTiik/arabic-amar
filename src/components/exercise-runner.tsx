@@ -925,7 +925,7 @@ function OrderingView({
           return (
             <li
               key={id}
-              className="flex items-center gap-3 tile px-3 py-2"
+              className="flex items-center gap-2 tile px-2.5 py-1.5 sm:gap-3 sm:px-3 sm:py-2"
             >
               <span className="w-6 text-right text-xs tabular-nums text-muted-foreground">
                 {i + 1}.
@@ -952,7 +952,7 @@ function OrderingView({
                 type="button"
                 onClick={() => move(id, -1)}
                 disabled={i === 0 || submitted !== null}
-                className="rounded-md border border-hairline bg-background-soft px-2 py-1 text-xs hover:bg-muted disabled:opacity-40 focus-ring"
+                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md border border-hairline bg-background-soft text-base hover:bg-muted disabled:opacity-40 focus-ring sm:h-8 sm:w-8 sm:text-xs"
                 aria-label="Move up"
               >
                 ↑
@@ -961,7 +961,7 @@ function OrderingView({
                 type="button"
                 onClick={() => move(id, 1)}
                 disabled={i === order.length - 1 || submitted !== null}
-                className="rounded-md border border-hairline bg-background-soft px-2 py-1 text-xs hover:bg-muted disabled:opacity-40 focus-ring"
+                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md border border-hairline bg-background-soft text-base hover:bg-muted disabled:opacity-40 focus-ring sm:h-8 sm:w-8 sm:text-xs"
                 aria-label="Move down"
               >
                 ↓
@@ -1079,7 +1079,7 @@ function MatchPairsView({
         Tap one from each column.
       </p>
 
-      <div className="mt-6 grid grid-cols-2 gap-3">
+      <div className="mt-4 grid grid-cols-2 gap-2 sm:mt-6 sm:gap-3">
         <ul className="flex flex-col gap-2">
           {leftItems.map((p) => (
             <MatchCard
@@ -1156,7 +1156,7 @@ function MatchCard({
         className={cn(
           // A shared minimum height keeps the columns visually steady, while
           // h-full lets a row grow rather than clipping a long paired form.
-          "btn-chunky flex h-full min-h-24 w-full min-w-0 flex-col items-center justify-center rounded-[14px] border-2 p-3 text-center focus-ring sm:min-h-28",
+          "btn-chunky flex h-full min-h-16 w-full min-w-0 flex-col items-center justify-center rounded-[14px] border-2 px-2 py-1.5 text-center focus-ring sm:min-h-28 sm:p-3",
           style,
         )}
       >

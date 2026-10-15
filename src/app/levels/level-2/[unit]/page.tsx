@@ -95,7 +95,7 @@ export default async function LevelTwoUnitPage({
 
   return (
     <div className="mx-auto w-full max-w-6xl px-4 py-8 sm:py-10">
-      <header className="brand-panel rounded-[18px] shadow-[var(--shadow-md),inset_0_1px_0_oklch(1_0_0/8%)] p-6 sm:p-8">
+      <header className="brand-panel rounded-[18px] shadow-[var(--shadow-md),inset_0_1px_0_oklch(1_0_0/8%)] p-5 sm:p-8">
         <Link
           href="/levels/level-2"
           className="text-sm text-muted-foreground hover:text-foreground"
@@ -123,7 +123,7 @@ function MarketplaceReading() {
         id="marketplace-passage-heading"
         eyebrow="Interactive reading"
         title="Read first, then explore"
-        description="The Arabic is the main focus. Hover with a mouse or tap on a phone to inspect any word."
+        description="The Arabic is the main focus. Tap any word (or hover with a mouse) to see its meaning."
       />
       <InteractiveArabicReading />
     </section>
@@ -147,9 +147,9 @@ function ActionsInContext() {
             );
             const Icon = group.icon;
             return (
-              <section key={group.id} className={cn("surface p-4 sm:p-6", group.surface)}>
-                <header className="mb-4 flex items-start gap-3">
-                  <span className={cn("flex h-11 w-11 shrink-0 items-center justify-center rounded-[10px]", group.iconStyle)}>
+              <section key={group.id} className={cn("surface p-3 sm:p-6", group.surface)}>
+                <header className="mb-3 flex items-start gap-3 sm:mb-4">
+                  <span className={cn("flex h-9 w-9 shrink-0 sm:h-11 sm:w-11 items-center justify-center rounded-[10px]", group.iconStyle)}>
                     <Icon className="h-5 w-5" aria-hidden />
                   </span>
                   <div>
@@ -157,7 +157,7 @@ function ActionsInContext() {
                     <p className="mt-0.5 text-sm text-muted-foreground">{group.description}</p>
                   </div>
                 </header>
-                <div className="grid auto-rows-fr grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                <div className="grid auto-rows-fr grid-cols-2 gap-2 sm:gap-3 lg:grid-cols-3 xl:grid-cols-4">
                   {actions.map((action) => (
                     <ActionCard key={action.id} action={action} className={group.cardStyle} />
                   ))}
@@ -194,12 +194,12 @@ function ActionCard({
   className: string;
 }) {
   return (
-    <article className={cn("relative flex min-h-44 flex-col items-center justify-center tile border-l-2 p-4", className)}>
+    <article className={cn("relative flex min-h-32 flex-col items-center justify-center tile border-l-2 px-2 py-3 sm:min-h-44 sm:p-4", className)}>
       {action.note ? <InformationTip label={`More about ${action.arabic}`}>{action.note}</InformationTip> : null}
-      <ArabicText variant="display" className="text-center text-5xl leading-relaxed sm:text-6xl">
+      <ArabicText variant="display" className="text-center text-[2rem] leading-relaxed sm:text-6xl">
         {action.arabic}
       </ArabicText>
-      <p lang="ar-Latn" className="mt-2 text-center text-sm italic text-foreground-soft">
+      <p lang="ar-Latn" className="mt-1 text-center text-sm italic text-foreground-soft sm:mt-2">
         {action.transliteration}
       </p>
       <p className="mt-1 text-center text-sm font-semibold">{action.english}</p>
@@ -215,21 +215,20 @@ function InformationTip({
   children: React.ReactNode;
 }) {
   return (
-    <span className="group absolute right-3 top-3 z-20">
-      <button
-        type="button"
+    // `<details>` so a tap opens it on phones, where hover/focus tooltips
+    // never appear. The note is positioned against the card (not the icon)
+    // so it can't spill off-screen from a left-column card.
+    <details className="group">
+      <summary
         aria-label={label}
-        className="flex h-8 w-8 items-center justify-center rounded-full border border-hairline bg-card/90 text-muted-foreground shadow-sm transition-colors hover:text-primary focus-ring"
+        className="absolute right-1.5 top-1.5 z-20 flex h-8 w-8 cursor-pointer list-none items-center justify-center rounded-full border border-hairline bg-card/90 text-muted-foreground shadow-sm transition-colors hover:text-primary focus-ring group-open:text-primary sm:right-3 sm:top-3 [&::-webkit-details-marker]:hidden"
       >
         <Info className="h-4 w-4" aria-hidden />
-      </button>
-      <span
-        role="tooltip"
-        className="absolute right-0 top-10 hidden w-64 tile p-3 text-left text-xs leading-relaxed text-foreground-soft shadow-lg group-hover:block group-focus-within:block"
-      >
+      </summary>
+      <span className="absolute inset-x-1.5 top-11 z-20 block tile p-3 text-left text-xs leading-relaxed text-foreground-soft shadow-lg sm:inset-x-auto sm:right-3 sm:top-[3.25rem] sm:w-64">
         {children}
       </span>
-    </span>
+    </details>
   );
 }
 

@@ -59,7 +59,7 @@ export function PwaSetup() {
   return (
     <div
       role="status"
-      className="fixed inset-x-3 bottom-3 z-50 flex items-start gap-3 surface p-4 text-sm text-card-foreground shadow-lg"
+      className="fixed inset-x-3 bottom-[calc(4.75rem+env(safe-area-inset-bottom))] z-50 md:bottom-3 flex items-start gap-3 surface p-4 text-sm text-card-foreground shadow-lg"
     >
       <div className="min-w-0">
         <p className="font-semibold">Install Arabic Amar</p>

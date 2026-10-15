@@ -23,8 +23,8 @@ export function arabicDisplaySize(text: string | undefined): string {
  * reducing Arabic below a comfortable reading size. */
 export function arabicOptionSize(text: string | undefined): string {
   const len = visibleArabicLength(text);
-  if (len <= 28) return "text-3xl sm:text-4xl";
-  return "text-2xl sm:text-3xl";
+  if (len <= 28) return "text-[1.75rem] sm:text-4xl";
+  return "text-[1.4rem] sm:text-3xl";
 }
 
 export function englishDisplaySize(text: string | undefined): string {

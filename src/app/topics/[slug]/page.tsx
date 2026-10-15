@@ -50,7 +50,7 @@ export default async function TopicPage({
   }));
 
   return (
-    <div className="mx-auto w-full max-w-6xl px-4 py-8">
+    <div className="mx-auto w-full max-w-6xl px-4 py-5 sm:py-8">
       <TopicHeader topic={topic} vocab={vocab} ruleCount={rules.length} />
 
       <TopicTabs
@@ -59,20 +59,24 @@ export default async function TopicPage({
         ruleCount={rules.length}
         panels={{
           vocab: (
-            <div className="mt-6 flex gap-8">
+            <div className="mt-4 flex flex-col gap-4 sm:mt-6 lg:flex-row lg:gap-8">
               <CategoryJumpNav categories={navItems} />
-              <div className="min-w-0 flex-1 space-y-10">
+              <div className="min-w-0 flex-1 space-y-8 sm:space-y-10">
                 {groups.map((group) => (
-                  <section key={group.category} id={`cat-${slugify(group.category)}`}>
+                  <section
+                    key={group.category}
+                    id={`cat-${slugify(group.category)}`}
+                    className="scroll-mt-16 lg:scroll-mt-24"
+                  >
                     <header className="mb-3 flex items-baseline justify-between">
-                      <h3 className="text-xl font-semibold tracking-tight">
+                      <h3 className="text-lg font-semibold tracking-tight sm:text-xl">
                         {group.category}
                       </h3>
                       <span className="text-xs text-muted-foreground">
                         {group.entries.length} words
                       </span>
                     </header>
-                    <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                    <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 sm:gap-3 lg:grid-cols-3 xl:grid-cols-4">
                       {group.entries.map((entry) => (
                         <VocabCard
                           key={entry.id}
