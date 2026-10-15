@@ -216,15 +216,16 @@ function InformationTip({
 }) {
   return (
     // `<details>` so a tap opens it on phones, where hover/focus tooltips
-    // never appear; hover still previews it with a mouse.
-    <details className="group absolute right-1.5 top-1.5 z-20 sm:right-3 sm:top-3">
+    // never appear. The note is positioned against the card (not the icon)
+    // so it can't spill off-screen from a left-column card.
+    <details className="group">
       <summary
         aria-label={label}
-        className="flex h-8 w-8 cursor-pointer list-none items-center justify-center rounded-full border border-hairline bg-card/90 text-muted-foreground shadow-sm transition-colors hover:text-primary focus-ring group-open:text-primary [&::-webkit-details-marker]:hidden"
+        className="absolute right-1.5 top-1.5 z-20 flex h-8 w-8 cursor-pointer list-none items-center justify-center rounded-full border border-hairline bg-card/90 text-muted-foreground shadow-sm transition-colors hover:text-primary focus-ring group-open:text-primary sm:right-3 sm:top-3 [&::-webkit-details-marker]:hidden"
       >
         <Info className="h-4 w-4" aria-hidden />
       </summary>
-      <span className="absolute right-0 top-10 block w-56 tile p-3 text-left text-xs leading-relaxed text-foreground-soft shadow-lg sm:w-64">
+      <span className="absolute inset-x-1.5 top-11 z-20 block tile p-3 text-left text-xs leading-relaxed text-foreground-soft shadow-lg sm:inset-x-auto sm:right-3 sm:top-[3.25rem] sm:w-64">
         {children}
       </span>
     </details>
