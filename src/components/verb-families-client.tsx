@@ -140,19 +140,20 @@ function ExploreMode({
               Choose a verb
             </h2>
             <p className="mt-0.5 text-xs text-muted-foreground">
-              Use the arrow buttons to browse all {VERB_FAMILIES.length} verbs.
+              <span className="sm:hidden">Swipe to browse all {VERB_FAMILIES.length} verbs.</span>
+              <span className="hidden sm:inline">Use the arrow buttons to browse all {VERB_FAMILIES.length} verbs.</span>
             </p>
           </div>
           <p className="text-xs font-semibold text-muted-foreground">
             {familyIndex + 1} of {VERB_FAMILIES.length}
           </p>
         </div>
-        <div className="grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-2">
+        <div className="grid grid-cols-1 items-center gap-2 sm:grid-cols-[auto_minmax(0,1fr)_auto]">
           <button
             type="button"
             onClick={() => scrollPicker("left")}
             aria-label="Show earlier verbs"
-            className="icon-btn h-11 w-11"
+            className="icon-btn hidden h-11 w-11 sm:inline-flex"
           >
             <ChevronLeft className="h-5 w-5" aria-hidden />
           </button>
@@ -164,13 +165,13 @@ function ExploreMode({
                 onClick={() => onSelect(index)}
                 aria-pressed={index === familyIndex}
                 className={cn(
-                  "min-w-32 shrink-0 rounded-[12px] border px-3 py-2 text-center transition-colors focus-ring",
+                  "min-w-24 shrink-0 rounded-[12px] border px-2.5 py-1.5 text-center sm:min-w-32 sm:px-3 sm:py-2 transition-colors focus-ring",
                   index === familyIndex
                     ? "border-primary bg-primary-soft shadow-sm"
                     : "border-hairline bg-card hover:bg-muted",
                 )}
               >
-                <ArabicText variant="display" className="text-3xl leading-tight">
+                <ArabicText variant="display" className="text-2xl leading-tight sm:text-3xl">
                   {item.forms.past.arabic}
                 </ArabicText>
                 <span className="mt-1 block text-xs text-muted-foreground">
@@ -183,7 +184,7 @@ function ExploreMode({
             type="button"
             onClick={() => scrollPicker("right")}
             aria-label="Show more verbs"
-            className="icon-btn h-11 w-11 border-primary/30 bg-primary-soft text-primary hover:bg-primary/10"
+            className="icon-btn hidden h-11 w-11 border-primary/30 sm:inline-flex bg-primary-soft text-primary hover:bg-primary/10"
           >
             <ChevronRight className="h-5 w-5" aria-hidden />
           </button>
@@ -191,8 +192,8 @@ function ExploreMode({
       </section>
 
       <article className="overflow-hidden surface">
-        <header className="flex flex-col gap-4 border-b border-hairline p-5 sm:flex-row sm:items-start sm:justify-between sm:p-7">
-          <div>
+        <header className="flex items-start justify-between gap-3 border-b border-hairline p-4 sm:gap-4 sm:p-7">
+          <div className="min-w-0">
             <p className="section-label">Verb family</p>
             <h2 className="mt-1 section-title">
               {family.meaning}
@@ -203,7 +204,7 @@ function ExploreMode({
               </p>
             ) : null}
           </div>
-          <div className="self-start tile border-l-2 border-l-accent-gold px-4 py-2 text-center">
+          <div className="shrink-0 self-start tile border-l-2 border-l-accent-gold px-3 py-1.5 text-center sm:px-4 sm:py-2">
             <p className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
               Root
             </p>
@@ -213,14 +214,14 @@ function ExploreMode({
           </div>
         </header>
 
-        <div className="grid grid-cols-1 gap-3 p-4 sm:grid-cols-2 sm:p-6 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-2 p-3 sm:grid-cols-2 sm:gap-3 sm:p-6 lg:grid-cols-4">
           {VERB_FORM_KEYS.map((key) => (
             <FamilyFormCard key={key} family={family} formKey={key} />
           ))}
         </div>
 
         {family.relatedForms?.length ? (
-          <details className="group border-t border-hairline px-4 py-5 sm:px-6">
+          <details className="group border-t border-hairline px-4 py-4 sm:px-6 sm:py-5">
             <summary className="flex cursor-pointer list-none items-center justify-between gap-3 focus-ring">
               <span className="flex flex-wrap items-baseline gap-2 text-sm font-semibold">
                 Related form{family.relatedForms.length === 1 ? "" : "s"}
@@ -438,7 +439,7 @@ function HighlightedArabicExample({
     return (
       <ArabicText
         variant="display"
-        className={cn("text-right text-4xl leading-[1.9] sm:text-5xl", className)}
+        className={cn("text-right text-[1.75rem] leading-[1.9] sm:text-5xl", className)}
       >
         {arabic}
       </ArabicText>
@@ -448,7 +449,7 @@ function HighlightedArabicExample({
   return (
     <ArabicText
       variant="display"
-      className={cn("text-right text-4xl leading-[1.9] sm:text-5xl", className)}
+      className={cn("text-right text-[1.75rem] leading-[1.9] sm:text-5xl", className)}
     >
       {arabic.slice(0, focusIndex)}
       <span className="rounded-lg bg-primary-soft px-1 text-primary">
@@ -471,8 +472,15 @@ function FamilyFormCard({
   const style = FORM_STYLES[formKey];
 
   return (
-    <section className={cn("min-w-0 tile p-4", style.surface)}>
-      <div className="flex items-start justify-between gap-2">
+    // Phones: one compact row per form (label + meaning left, Arabic right)
+    // so the whole family compares on one screen.
+    <section
+      className={cn(
+        "grid min-w-0 grid-cols-[minmax(0,1fr)_auto] items-center gap-x-3 tile px-3.5 py-2.5 sm:block sm:p-4",
+        style.surface,
+      )}
+    >
+      <div className="col-start-1 row-start-1 flex items-start justify-between gap-2">
         <div>
           <p className={cn("text-xs font-bold uppercase tracking-wide", style.accent)}>
             {meta.shortLabel}
@@ -481,17 +489,20 @@ function FamilyFormCard({
             {meta.grammarLabel} · {meta.prompt}
           </p>
         </div>
-        <ArabicText className="text-lg text-muted-foreground">
+        <ArabicText className="hidden text-lg text-muted-foreground sm:block">
           {meta.arabicLabel}
         </ArabicText>
       </div>
-      <ArabicText variant="display" className="mt-5 text-center text-4xl leading-relaxed sm:text-5xl">
+      <ArabicText
+        variant="display"
+        className="col-start-2 row-span-3 row-start-1 text-[2rem] leading-relaxed sm:mt-5 sm:text-center sm:text-5xl"
+      >
         {form.arabic}
       </ArabicText>
-      <p lang="ar-Latn" className="mt-2 text-center text-sm font-medium italic text-foreground-soft">
+      <p lang="ar-Latn" className="col-start-1 row-start-3 text-sm font-medium italic text-foreground-soft sm:mt-2 sm:text-center">
         {form.transliteration}
       </p>
-      <p className="mt-1 text-center text-xs text-muted-foreground">
+      <p className="col-start-1 row-start-2 mt-1 text-base font-semibold text-foreground sm:text-center sm:text-xs sm:font-normal sm:text-muted-foreground">
         {form.english}
       </p>
     </section>
@@ -556,8 +567,8 @@ function SortMode() {
 
   return (
     <section className="overflow-hidden surface">
-      <header className="border-b border-hairline p-5 sm:p-7">
-        <div className="flex flex-wrap items-start justify-between gap-4">
+      <header className="border-b border-hairline p-4 sm:p-7">
+        <div className="flex items-start justify-between gap-3 sm:gap-4">
           <div>
             <p className="section-label">Round {round + 1}</p>
             <h2 className="mt-1 section-title">
@@ -567,13 +578,13 @@ function SortMode() {
               Select a shuffled form, then select the column where it belongs.
             </p>
           </div>
-          <div className="tile px-4 py-2 text-center">
+          <div className="shrink-0 tile px-3 py-1.5 text-center sm:px-4 sm:py-2">
             <p className="text-[10px] font-bold uppercase tracking-wider text-primary">Score</p>
             <p className="text-xl font-bold tabular-nums">{score}</p>
           </div>
         </div>
 
-        <div className="mt-5 flex flex-wrap items-center gap-3 tile p-4">
+        <div className="mt-3 flex flex-wrap items-center gap-3 tile px-3 py-2 sm:mt-5 sm:p-4">
           <div>
             <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
               Meaning
@@ -591,8 +602,8 @@ function SortMode() {
         </div>
       </header>
 
-      <div className="p-4 sm:p-6">
-        <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
+      <div className="p-3 sm:p-6">
+        <div className="grid grid-cols-2 gap-2 sm:gap-3 lg:grid-cols-4">
           {VERB_FORM_KEYS.map((slot) => {
             const tileKey = placements[slot];
             const slotCorrect = tileKey === slot;
@@ -605,7 +616,7 @@ function SortMode() {
                 onClick={() => (tileKey ? returnToBank(slot) : placeIn(slot))}
                 disabled={status !== "building"}
                 className={cn(
-                    "btn-chunky flex min-h-44 min-w-0 flex-col rounded-[14px] border-2 border-dashed p-3 text-left transition-colors focus-ring sm:min-h-48",
+                    "btn-chunky flex min-h-32 min-w-0 flex-col rounded-[14px] border-2 border-dashed p-2.5 text-left transition-colors focus-ring sm:min-h-48 sm:p-3",
                   style.surface,
                   selected && !tileKey && "border-solid ring-2 ring-primary/30",
                   status !== "building" && slotCorrect && "border-success bg-success-soft",
@@ -630,7 +641,7 @@ function SortMode() {
 
                 {tileKey ? (
                   <div className="my-auto w-full text-center">
-                    <ArabicText variant="display" className="text-3xl leading-relaxed sm:text-4xl">
+                    <ArabicText variant="display" className="text-2xl leading-relaxed sm:text-4xl">
                       {family.forms[tileKey].arabic}
                     </ArabicText>
                     <p lang="ar-Latn" className="mt-1 text-xs italic text-foreground-soft sm:text-sm">
@@ -650,8 +661,8 @@ function SortMode() {
           })}
         </div>
 
-        <div className="mt-6 tile p-4">
-          <div className="mb-3 flex items-center justify-between gap-3">
+        <div className="mt-3 tile p-3 sm:mt-6 sm:p-4">
+          <div className="mb-2 flex sm:mb-3 items-center justify-between gap-3">
             <h3 className="text-sm font-semibold">Shuffled forms</h3>
             <button
               type="button"
@@ -673,13 +684,13 @@ function SortMode() {
                   aria-pressed={selected === key}
                   disabled={status !== "building"}
                   className={cn(
-                    "btn-chunky min-w-0 rounded-[14px] bg-card p-3 text-center ring-1 ring-inset ring-hairline transition-all focus-ring",
+                    "btn-chunky min-w-0 rounded-[14px] bg-card p-2 text-center sm:p-3 ring-1 ring-inset ring-hairline transition-all focus-ring",
                     selected === key
                       ? "border-primary ring-2 ring-primary/30"
                       : "border-hairline hover:border-primary/50",
                   )}
                 >
-                  <ArabicText variant="display" className="text-2xl leading-relaxed sm:text-3xl">
+                  <ArabicText variant="display" className="text-xl leading-relaxed sm:text-3xl">
                     {family.forms[key].arabic}
                   </ArabicText>
                   <p lang="ar-Latn" className="mt-1 truncate text-xs italic text-muted-foreground">

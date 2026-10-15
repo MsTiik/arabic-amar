@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/cn";
 
 interface Props {
@@ -40,9 +40,46 @@ export function CategoryJumpNav({ categories, className }: Props) {
     return () => observer.disconnect();
   }, [categories]);
 
+  const stripRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const strip = stripRef.current;
+    const chip = strip?.querySelector<HTMLElement>(`[data-cat="${activeId}"]`);
+    if (!strip || !chip) return;
+    strip.scrollTo({
+      left: chip.offsetLeft - (strip.clientWidth - chip.offsetWidth) / 2,
+      behavior: "smooth",
+    });
+  }, [activeId]);
+
   if (categories.length <= 1) return null;
 
   return (
+    <>
+    {/* Phones: sticky chip strip in place of the sidebar. */}
+    <nav
+      aria-label="Categories"
+      className="sticky top-0 z-20 -mx-4 border-b border-hairline bg-background/90 backdrop-blur-xl lg:hidden"
+    >
+      <div ref={stripRef} className="flex gap-1.5 overflow-x-auto px-4 py-2 [scrollbar-width:none]">
+        {categories.map((c) => (
+          <a
+            key={c.id}
+            data-cat={c.id}
+            href={`#${c.id}`}
+            aria-current={activeId === c.id ? "true" : undefined}
+            className={cn(
+              "shrink-0 rounded-full border px-3 py-1.5 text-xs font-medium whitespace-nowrap transition-colors focus-ring",
+              activeId === c.id
+                ? "border-foreground bg-foreground text-background"
+                : "border-hairline bg-surface text-foreground-soft",
+            )}
+          >
+            {c.label}
+            <span className="ml-1.5 tabular-nums opacity-60">{c.count}</span>
+          </a>
+        ))}
+      </div>
+    </nav>
     <nav
       aria-label="Categories"
       // `max-h-[calc(100vh-7rem)]` + `overflow-y-auto` keeps the sticky nav
@@ -76,5 +113,6 @@ export function CategoryJumpNav({ categories, className }: Props) {
         </a>
       ))}
     </nav>
+    </>
   );
 }

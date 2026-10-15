@@ -38,7 +38,7 @@ export default async function CurriculumLevelPage({
 
   return (
     <div className="mx-auto w-full max-w-6xl px-4 py-8 sm:py-10">
-      <header className="brand-panel rounded-[18px] shadow-[var(--shadow-md),inset_0_1px_0_oklch(1_0_0/8%)] p-6 sm:p-8">
+      <header className="brand-panel rounded-[18px] shadow-[var(--shadow-md),inset_0_1px_0_oklch(1_0_0/8%)] p-5 sm:p-8">
         <Link
           href="/topics"
           className="text-sm text-muted-foreground hover:text-foreground"

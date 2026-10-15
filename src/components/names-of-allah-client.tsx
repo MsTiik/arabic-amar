@@ -19,7 +19,7 @@ export function NamesOfAllahClient() {
 
   return (
     <div className="mx-auto w-full max-w-6xl space-y-8 px-4 py-8 sm:py-10">
-      <header className="brand-panel overflow-hidden rounded-[18px] p-6 shadow-[var(--shadow-md),inset_0_1px_0_oklch(1_0_0/8%)] sm:p-7">
+      <header className="brand-panel overflow-hidden rounded-[18px] p-5 shadow-[var(--shadow-md),inset_0_1px_0_oklch(1_0_0/8%)] sm:p-7">
         <div className="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
           <div className="min-w-0">
             <p className="chip mb-3 !bg-white/10 !text-accent-gold !shadow-[inset_0_0_0_1px_oklch(1_0_0/15%)]">

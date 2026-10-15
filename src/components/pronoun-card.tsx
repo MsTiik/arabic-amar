@@ -25,7 +25,7 @@ export function PronounCard({ pronoun, className }: Props) {
   return (
     <article
       className={cn(
-        "group relative flex flex-col gap-3 surface p-5 sm:p-6 hover-lift",
+        "group relative flex flex-col gap-2 surface p-4 sm:gap-3 sm:p-6 hover-lift",
         className,
       )}
     >
@@ -35,7 +35,7 @@ export function PronounCard({ pronoun, className }: Props) {
 
       <ArabicText
         variant="display"
-        className="text-5xl text-foreground sm:text-6xl"
+        className="text-4xl text-foreground sm:text-6xl"
       >
         {pronoun.arabic}
       </ArabicText>

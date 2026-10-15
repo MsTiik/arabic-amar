@@ -54,12 +54,12 @@ export function TranslitReveal({
         aria-pressed={shown}
         aria-label={shown ? shownLabel : hiddenLabel}
         className={cn(
-          "block w-full text-center text-[10px] leading-tight text-muted-foreground/60 hover:text-muted-foreground focus-ring rounded",
+          "block w-full text-center text-[11px] leading-tight text-muted-foreground/80 underline decoration-dotted underline-offset-2 hover:text-muted-foreground focus-ring rounded",
           className,
         )}
         lang={shown ? resolvedLang : undefined}
       >
-        {shown ? text : "🔊 hint"}
+        {shown ? text : hiddenLabel}
       </button>
     );
   }
