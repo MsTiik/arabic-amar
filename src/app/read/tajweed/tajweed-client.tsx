@@ -15,14 +15,14 @@ export function AdvancedTajweedToggle({ groups }: { groups: TajweedGroup[] }) {
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
-        className="flex w-full items-center justify-between rounded-2xl border border-dashed border-accent-gold/50 bg-accent-gold-soft/30 px-5 py-4 text-left transition-colors hover:bg-accent-gold-soft/50 focus-ring"
+        className="surface flex w-full items-center justify-between border-l-4 border-l-accent-gold px-5 py-4 text-left transition-colors hover:bg-muted focus-ring"
         aria-expanded={open}
       >
         <div>
           <p className="text-[11px] font-semibold uppercase tracking-wider text-foreground-soft">
             Not urgent for a beginner
           </p>
-          <h2 className="mt-0.5 text-base font-semibold text-foreground sm:text-lg">
+          <h2 className="mt-0.5 text-base text-foreground sm:text-lg font-display">
             {open ? "Hide" : "Show"} advanced rules ({groups.length})
           </h2>
           <p className="mt-1 text-xs text-muted-foreground">
@@ -57,10 +57,10 @@ export function TajweedGroupCard({
 }) {
   return (
     <article
-      className={`rounded-2xl border p-5 sm:p-6 ${
+      className={`surface border-l-4 p-5 sm:p-6 ${
         advanced
-          ? "border-dashed border-accent-gold/50 bg-accent-gold-soft/25"
-          : "border-border bg-card"
+          ? "border-l-accent-gold"
+          : "border-l-hairline"
       }`}
     >
       <header className="mb-4">
@@ -71,7 +71,7 @@ export function TajweedGroupCard({
           </ArabicText>
         </div>
         <p className="mt-2 text-sm text-foreground-soft">{group.intro}</p>
-        <div className="mt-3 rounded-lg bg-background-soft px-3 py-2 text-xs text-foreground-soft">
+        <div className="mt-3 tile px-3 py-2 text-xs text-foreground-soft">
           <span className="font-semibold text-foreground">Trigger: </span>
           {group.trigger}
         </div>
@@ -88,7 +88,7 @@ export function TajweedGroupCard({
 
 function TajweedRuleRow({ rule }: { rule: TajweedRule }) {
   return (
-    <div className="rounded-xl border border-border bg-background-soft/60 p-4">
+    <div className="tile p-4">
       <header className="mb-2">
         <div className="flex flex-wrap items-center gap-2">
           <h4 className="text-base font-semibold text-foreground">{rule.name}</h4>
@@ -109,7 +109,7 @@ function TajweedRuleRow({ rule }: { rule: TajweedRule }) {
             {rule.triggerLetters.map((t) => (
               <span
                 key={t.arabic + t.translit}
-                className="inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-2.5 py-1 text-xs"
+                className="chip border border-hairline bg-card"
               >
                 <ArabicText variant="display" as="span" className="text-lg leading-none">
                   {t.arabic}
@@ -128,7 +128,7 @@ function TajweedRuleRow({ rule }: { rule: TajweedRule }) {
         {rule.examples.map((ex, i) => (
           <div
             key={i}
-            className="flex items-center justify-between gap-3 rounded-lg border border-border bg-card px-3 py-2"
+            className="flex items-center justify-between gap-3 tile px-3 py-2"
           >
             <div className="min-w-0">
               <ArabicText variant="display" as="span" className="text-xl sm:text-2xl">

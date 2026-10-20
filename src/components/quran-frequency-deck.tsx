@@ -29,18 +29,18 @@ export function QuranFrequencyDeck() {
   }, []);
 
   return (
-    <section className="rounded-3xl bg-gradient-to-br from-accent-gold-soft via-background to-accent-amber-soft p-5 shadow-sm sm:p-6">
+    <section className="rounded-[18px] bg-gradient-to-br from-accent-gold-soft via-background to-accent-amber-soft p-5 shadow-[var(--shadow-md)] sm:p-6">
       <button
         type="button"
         onClick={() => setDeckOpen((v) => !v)}
         aria-expanded={deckOpen}
-        className="flex w-full items-start justify-between gap-3 text-left focus-ring rounded-2xl"
+        className="flex w-full items-start justify-between gap-3 text-left focus-ring rounded-[12px]"
       >
         <div>
           <div className="mb-2">
             <FoundationsBadge />
           </div>
-          <h2 className="text-2xl font-semibold tracking-tight">
+          <h2 className="section-title">
             Top Qur&apos;ānic words
           </h2>
           <p className="mt-1 max-w-xl text-sm text-foreground-soft">
@@ -51,7 +51,7 @@ export function QuranFrequencyDeck() {
             {TOP_QURAN_WORDS.length} words · {groups.length} categories
           </p>
         </div>
-        <span className="mt-1 inline-flex items-center gap-1 rounded-full border border-accent-gold/40 bg-card/70 px-3 py-1 text-xs font-medium text-foreground-soft">
+        <span className="chip mt-1 border border-accent-gold/40 bg-card/70 text-foreground-soft">
           {deckOpen ? "Hide" : "Show"}
           <ChevronDown
             className={cn(
@@ -97,7 +97,7 @@ export function QuranFrequencyDeck() {
                 <button
                   type="button"
                   onClick={toggle}
-                  className="mt-3 inline-flex items-center gap-1 rounded-full border border-border bg-background-soft px-3 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground focus-ring"
+                  className="btn btn-secondary btn-sm mt-3"
                 >
                   {isExpanded
                     ? "Show less"
@@ -123,7 +123,7 @@ function FrequencyCard({ word }: { word: QuranFrequencyWord }) {
   return (
     // The grid stretches neighbouring cards to the same row height. Keeping
     // this as a minimum lets longer glosses grow instead of escaping the card.
-    <div className="flex min-h-36 min-w-0 flex-col rounded-2xl border border-border bg-card px-3 py-2.5">
+    <div className="flex min-h-36 min-w-0 flex-col surface px-3 py-2.5">
       <div className="flex items-start justify-between gap-2">
         <ArabicText
           variant="display"

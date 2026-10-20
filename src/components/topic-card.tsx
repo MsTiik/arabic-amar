@@ -28,7 +28,7 @@ export function TopicCard({ topic, vocab, className }: Props) {
     <Link
       href={`/topics/${topic.slug}`}
       className={cn(
-        "group flex items-center gap-5 rounded-2xl border border-border bg-card p-5 hover-lift focus-ring",
+        "group flex items-center gap-5 surface p-5 hover-lift focus-ring",
         className,
       )}
     >
@@ -37,7 +37,7 @@ export function TopicCard({ topic, vocab, className }: Props) {
         <div className="flex items-center gap-2">
           <span
             className={cn(
-              "flex h-8 w-8 shrink-0 items-center justify-center rounded-xl",
+              "flex h-8 w-8 shrink-0 items-center justify-center rounded-[10px]",
               identity.chip,
             )}
           >

@@ -8,7 +8,7 @@ description: Test word-pronunciation audio in Arabic AMAR (SpeakerButton, audio 
 Use when verifying `src/components/speaker-button.tsx`, `src/lib/audio.ts`, `src/lib/audio-prefetch.ts`, `scripts/build-audio-manifest.ts`, `content/audio-manifest.json`, or `content/audio-local.json`.
 
 ## How the feature works
-- A `<SpeakerButton>` renders next to Arabic words **only when the word is in `content/audio-manifest.json`** — otherwise it renders unavailable/null (graceful fallback, intentional).
+- A `<SpeakerButton>` plays a recording **only when the word is in `content/audio-manifest.json`**. Otherwise it renders the muted "no recording" state — unless the browser's real `speechSynthesis.getVoices()` list contains an `ar-*` voice, in which case it shows a dashed, explicitly labelled "synthesised voice" button (`src/lib/speech.ts`). Let the real `voiceschanged` event settle; never inject fake voices to claim TTS coverage. If no Arabic voice exists (typical on the Devin VM), verify the muted state and report synthesis as untested, not passed.
 - Clicking plays `new Audio(url)`. URL resolution order (since PR #78):
   1. **Local mirror**: `content/audio-local.json` maps manifest keys → same-origin `/audio/words/<md5>.mp3` (vocab) and `/audio/quran/SSSAAA.mp3` (ayat, surah/ayah zero-padded to 3 digits). Files live in `public/audio/`. `getAudioForWord`/`getAudioForCitation` prefer these.
   2. **Blob prefetch**: `src/lib/audio-prefetch.ts` — ExerciseRunner prefetches a deck's audio at deck start (network tab shows a burst of `/audio/words/*.mp3` GETs); `resolveAudioUrl()` swaps in a `blob:` object URL when playing. Object URLs are revoked when the deck unmounts (`releasePrefetchedAudio()`), then re-fetched on next deck start.
@@ -33,7 +33,7 @@ Manifest keys are diacritic-stripped NFC Arabic (`جبين` not `جَبِينٌ`
 - If the branch under test receives a push while `npm run dev` is running, Fast Refresh may do a **full page reload** mid-deck: the deck resets and any injected probes are lost — re-inject and re-verify before asserting.
 
 ## Known coverage gaps (do not report as bugs)
-- Many words/phrases have no free recording (multi-word phrases, clock/time expressions, month names, conjugated verbs). Generated/TTS voices were explicitly rejected by the user.
+- Many words/phrases have no free recording (multi-word phrases, clock/time expressions, month names, conjugated verbs). Never mirror generated/TTS audio into the manifest; the only synthesis allowed is the clearly labelled on-device browser fallback above. The Colours lesson is a handy comparison (e.g. purple has a recording, pink/navy blue/sky blue may not — recheck the manifest rather than assuming).
 - Wikimedia rate-limits bulk URL checks (429 after a few rapid HEADs) — but with the local mirror you rarely need to hit Wikimedia at all.
 
 ## Devin Secrets Needed

@@ -25,20 +25,22 @@ export function PronounCard({ pronoun, className }: Props) {
   return (
     <article
       className={cn(
-        "group relative flex flex-col gap-3 rounded-2xl border border-border bg-card p-5 sm:p-6 hover-lift",
+        "group relative flex flex-col gap-2 surface p-4 sm:gap-3 sm:p-6 hover-lift",
         className,
       )}
     >
-      <span className="absolute right-3 top-3 rounded-full bg-background-soft px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
-        {pronoun.category}
-      </span>
+      <div className="flex items-start justify-between gap-3 sm:block">
+        <span className="chip shrink-0 bg-background-soft text-muted-foreground sm:absolute sm:right-3 sm:top-3">
+          {pronoun.category}
+        </span>
 
-      <ArabicText
-        variant="display"
-        className="text-5xl text-foreground sm:text-6xl"
-      >
-        {pronoun.arabic}
-      </ArabicText>
+        <ArabicText
+          variant="display"
+          className="min-w-0 text-4xl text-foreground sm:text-6xl"
+        >
+          {pronoun.arabic}
+        </ArabicText>
+      </div>
 
       <div className="flex flex-col gap-1">
         <div className="flex items-center gap-2">
@@ -67,7 +69,7 @@ export function PronounCard({ pronoun, className }: Props) {
       ) : null}
 
       {hasExample ? (
-        <div className="mt-auto border-t border-border/60 pt-3">
+        <div className="mt-auto border-t border-hairline/60 pt-3">
           <button
             type="button"
             onClick={() => setOpen((o) => !o)}
@@ -77,7 +79,7 @@ export function PronounCard({ pronoun, className }: Props) {
             {open ? "Hide example" : "Show example"}
           </button>
           {open ? (
-            <div className="mt-2 flex flex-col gap-1 rounded-xl bg-background-soft p-3">
+            <div className="mt-2 flex flex-col gap-1 rounded-[10px] bg-background-soft p-3">
               <div className="flex items-start justify-between gap-3">
                 <ArabicText
                   variant="body"

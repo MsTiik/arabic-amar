@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { BookOpen, MousePointer2 } from "lucide-react";
+import { BookOpen, ChevronLeft, ChevronRight, MousePointer2, X } from "lucide-react";
 
 import { ArabicText } from "@/components/arabic-text";
 import {
@@ -44,21 +44,35 @@ interface SelectedWord {
   token: LevelTwoReadingToken;
 }
 
+const ALL_WORDS: SelectedWord[] = LEVEL_TWO_MARKETPLACE_READING.flatMap((sentence) =>
+  sentence.tokens.map((token, index) => ({ key: `${sentence.id}-${index}`, token })),
+);
+
 export function InteractiveArabicReading() {
   const firstToken = LEVEL_TWO_MARKETPLACE_READING[0].tokens[0];
   const [selected, setSelected] = useState<SelectedWord>({
     key: `${LEVEL_TWO_MARKETPLACE_READING[0].id}-0`,
     token: firstToken,
   });
+  // Phones get a bottom sheet instead of the inline panel, which sits below
+  // the whole passage and is easy to miss on a small screen.
+  const [sheetOpen, setSheetOpen] = useState(false);
   const selectedStyle = TOKEN_STYLES[selected.token.kind];
+  const selectedIndex = ALL_WORDS.findIndex((word) => word.key === selected.key);
+
+  function step(delta: number) {
+    const next = ALL_WORDS[selectedIndex + delta];
+    if (next) setSelected(next);
+  }
 
   return (
-    <article className="rounded-3xl border border-border bg-card p-4 shadow-sm sm:p-7">
-      <div className="flex flex-col gap-4 border-b border-border pb-5 sm:flex-row sm:items-center sm:justify-between">
+    <article className="surface p-4 sm:p-7">
+      <div className="flex flex-col gap-4 border-b border-hairline pb-5 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <p className="flex items-center gap-2 text-sm font-semibold">
             <MousePointer2 className="h-4 w-4 text-primary" aria-hidden />
-            Hover or tap any Arabic word
+            <span className="sm:hidden">Tap any Arabic word</span>
+            <span className="hidden sm:inline">Hover or tap any Arabic word</span>
           </p>
           <p className="mt-1 text-xs text-muted-foreground">
             Its pronunciation and meaning will appear without interrupting the reading.
@@ -74,10 +88,10 @@ export function InteractiveArabicReading() {
         </div>
       </div>
 
-      <div className="divide-y divide-border">
+      <div className="divide-y divide-hairline">
         {LEVEL_TWO_MARKETPLACE_READING.map((sentence) => (
-          <div key={sentence.id} className="py-5 sm:py-6">
-            <div dir="rtl" className="flex flex-wrap items-baseline justify-start gap-x-2 gap-y-3">
+          <div key={sentence.id} className="py-4 sm:py-6">
+            <div dir="rtl" className="flex flex-wrap items-baseline justify-start gap-x-1.5 gap-y-2 sm:gap-x-2 sm:gap-y-3">
               {sentence.tokens.map((token, index) => {
                 const key = `${sentence.id}-${index}`;
                 const style = TOKEN_STYLES[token.kind];
@@ -87,22 +101,25 @@ export function InteractiveArabicReading() {
                       type="button"
                       onMouseEnter={() => setSelected({ key, token })}
                       onFocus={() => setSelected({ key, token })}
-                      onClick={() => setSelected({ key, token })}
+                      onClick={() => {
+                        setSelected({ key, token });
+                        setSheetOpen(true);
+                      }}
                       aria-pressed={selected.key === key}
                       className={cn(
-                        "rounded-xl border-b-2 px-2 py-1 transition-all focus-ring",
+                        "rounded-[10px] border-b-2 px-1.5 py-0.5 transition-all focus-ring sm:rounded-[12px] sm:px-2 sm:py-1",
                         style.button,
                         selected.key === key && "ring-2 ring-primary/25",
                       )}
                     >
-                      <ArabicText as="span" variant="display" className="text-[2rem] leading-[1.9] sm:text-[2.65rem]">
+                      <ArabicText as="span" variant="display" className="text-[1.65rem] leading-[1.75] sm:text-[2.65rem] sm:leading-[1.9]">
                         {token.arabic}
                         {token.punctuationAfter ?? ""}
                       </ArabicText>
                     </button>
                     <span
                       role="tooltip"
-                      className="pointer-events-none absolute bottom-[calc(100%+0.5rem)] left-1/2 z-30 hidden min-w-36 -translate-x-1/2 rounded-xl border border-border bg-card px-3 py-2 text-center shadow-lg group-hover:block group-focus-within:block"
+                      className="pointer-events-none absolute bottom-[calc(100%+0.5rem)] left-1/2 z-30 hidden min-w-36 -translate-x-1/2 tile px-3 py-2 text-center shadow-lg group-hover:block [@media(hover:hover)]:group-focus-within:block"
                     >
                       <span lang="ar-Latn" className="block text-xs italic text-foreground-soft">
                         {token.transliteration}
@@ -121,7 +138,7 @@ export function InteractiveArabicReading() {
 
       <section
         aria-live="polite"
-        className={cn("grid gap-3 rounded-2xl border p-4 sm:grid-cols-[auto_1fr] sm:items-center sm:p-5", selectedStyle.panel)}
+        className={cn("hidden gap-3 rounded-[10px] border p-4 sm:grid sm:grid-cols-[auto_1fr] sm:items-center sm:p-5", selectedStyle.panel)}
       >
         <ArabicText variant="display" className="text-4xl leading-relaxed sm:min-w-40 sm:text-center sm:text-5xl">
           {selected.token.arabic}
@@ -137,7 +154,69 @@ export function InteractiveArabicReading() {
         </div>
       </section>
 
-      <details className="mt-4 rounded-2xl border border-border bg-background-soft p-4 sm:p-5">
+      {sheetOpen ? (
+        <>
+          {/* Keeps the last lines of the passage reachable above the sheet. */}
+          <div className="h-44 sm:hidden" aria-hidden />
+          <div
+            role="dialog"
+            aria-label="Word meaning"
+            className="fixed inset-x-0 bottom-[calc(4.25rem+env(safe-area-inset-bottom))] z-40 px-3 pb-2 sm:hidden"
+          >
+            <div className={cn("feedback-enter rounded-[14px] border p-4 shadow-2xl", selectedStyle.panel)}>
+              <div className="flex items-start gap-3">
+                <div className="min-w-0 flex-1">
+                  <p className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
+                    {selectedStyle.label}
+                  </p>
+                  <p className="mt-1 text-lg font-semibold leading-snug">{selected.token.english}</p>
+                  <p lang="ar-Latn" className="mt-0.5 text-sm italic text-foreground-soft">
+                    {selected.token.transliteration}
+                  </p>
+                </div>
+                <ArabicText variant="display" className="shrink-0 text-4xl leading-relaxed">
+                  {selected.token.arabic}
+                </ArabicText>
+              </div>
+              <div className="mt-3 flex items-center gap-2 border-t border-hairline pt-3">
+                <button
+                  type="button"
+                  onClick={() => step(1)}
+                  disabled={selectedIndex >= ALL_WORDS.length - 1}
+                  className="btn btn-secondary btn-sm disabled:opacity-40"
+                  aria-label="Next word in the passage"
+                >
+                  <ChevronLeft className="h-4 w-4" aria-hidden />
+                  Next
+                </button>
+                <button
+                  type="button"
+                  onClick={() => step(-1)}
+                  disabled={selectedIndex <= 0}
+                  className="btn btn-secondary btn-sm disabled:opacity-40"
+                  aria-label="Previous word in the passage"
+                >
+                  Back
+                  <ChevronRight className="h-4 w-4" aria-hidden />
+                </button>
+                <span className="ml-auto text-xs tabular-nums text-muted-foreground">
+                  {selectedIndex + 1} / {ALL_WORDS.length}
+                </span>
+                <button
+                  type="button"
+                  onClick={() => setSheetOpen(false)}
+                  className="icon-btn"
+                  aria-label="Close word meaning"
+                >
+                  <X className="h-4 w-4" aria-hidden />
+                </button>
+              </div>
+            </div>
+          </div>
+        </>
+      ) : null}
+
+      <details className="mt-4 tile p-4 sm:p-5">
         <summary className="flex cursor-pointer list-none items-center gap-2 text-sm font-semibold text-primary focus-ring">
           <BookOpen className="h-4 w-4" aria-hidden />
           Show the complete English meaning

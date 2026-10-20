@@ -48,7 +48,7 @@ export default function GrammarPage() {
     <div className="mx-auto w-full max-w-5xl px-4 py-8 sm:py-10">
       <header className="mb-8">
         <p className="section-label">Rules & tables</p>
-        <h1 className="mt-1 text-3xl font-semibold tracking-tight sm:text-4xl">Grammar reference</h1>
+        <h1 className="mt-1 sm:text-4xl page-title">Grammar reference</h1>
         <p className="mt-1 text-sm text-muted-foreground">
           Three big reference tables on top, then per-lesson grammar pages
           underneath.
@@ -67,7 +67,7 @@ export default function GrammarPage() {
             <Link
               key={p.href}
               href={p.href}
-              className="group card-raised hover-lift flex flex-col gap-2 rounded-2xl p-5 focus-ring sm:p-6"
+              className="group surface hover-lift flex flex-col gap-2 p-5 focus-ring sm:p-6"
             >
               <span
                 className={
@@ -104,7 +104,7 @@ export default function GrammarPage() {
           Rules by lesson
         </h2>
         {lessonsWithRules.length === 0 ? (
-          <p className="card-raised rounded-2xl p-6 text-sm text-muted-foreground">
+          <p className="surface p-6 text-sm text-muted-foreground">
             No grammar rules captured yet.
           </p>
         ) : (
@@ -118,7 +118,7 @@ export default function GrammarPage() {
                 <Link
                   key={lesson.id}
                   href={`/grammar/lessons/${slug}`}
-                  className="group card-raised hover-lift flex flex-col gap-2 rounded-2xl p-5 focus-ring sm:p-6"
+                  className="group surface hover-lift flex flex-col gap-2 p-5 focus-ring sm:p-6"
                 >
                   <span
                     className={`flex items-center gap-1.5 self-start rounded-full px-2.5 py-0.5 text-[11px] font-semibold uppercase tracking-wider ${identity.chip}`}

@@ -18,10 +18,10 @@ export default function ContentHealthPage() {
     <div className="mx-auto w-full max-w-5xl px-4 py-10">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <p className="text-sm font-medium uppercase tracking-[0.2em] text-primary">
+          <p className="eyebrow text-primary">
             Admin
           </p>
-          <h1 className="mt-2 text-3xl font-semibold tracking-tight">Content health</h1>
+          <h1 className="mt-2 page-title">Content health</h1>
           <p className="mt-2 max-w-2xl text-sm text-foreground-soft">
             Parser and content-quality checks generated during the latest content build.
           </p>
@@ -44,20 +44,20 @@ export default function ContentHealthPage() {
         Generated: {new Date(report.generatedAt).toUTCString()}
       </p>
 
-      <section className="mt-8 rounded-2xl border border-border bg-card p-5">
+      <section className="mt-8 surface p-5">
         <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">
+            <p className="eyebrow text-primary">
               Audio coverage
             </p>
-            <h2 className="mt-1 text-xl font-semibold tracking-tight">
+            <h2 className="mt-1 section-title">
               {report.audioCoverage.vocabWithAudio} of {report.audioCoverage.vocabTotal} words have audio
             </h2>
             <p className="mt-1 text-sm text-foreground-soft">
               {report.audioCoverage.vocabMissingAudio} vocabulary cards currently show an audio unavailable icon.
             </p>
           </div>
-          <span className="rounded-full bg-primary-soft px-3 py-1 text-sm font-semibold text-primary">
+          <span className="chip bg-primary-soft text-primary">
             {report.audioCoverage.coveragePercent}%
           </span>
         </div>
@@ -83,30 +83,30 @@ export default function ContentHealthPage() {
 
       <section className="mt-8 space-y-4">
         {report.issues.length === 0 ? (
-          <div className="rounded-2xl border border-emerald-200 bg-emerald-50 p-5 text-sm text-emerald-950">
+          <div className="rounded-[10px] border border-emerald-200 bg-emerald-50 p-5 text-sm text-emerald-950">
             No content QA issues detected.
           </div>
         ) : (
           report.issues.map((issue) => (
             <article
               key={issue.code}
-              className={`rounded-2xl border p-5 ${SEVERITY_CLASS[issue.severity]}`}
+              className={`rounded-[10px] border p-5 ${SEVERITY_CLASS[issue.severity]}`}
             >
               <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
                 <div>
                   <p className="text-xs font-semibold uppercase tracking-[0.2em]">
                     {issue.severity} · {issue.code}
                   </p>
-                  <h2 className="mt-1 text-lg font-semibold">{issue.message}</h2>
+                  <h2 className="mt-1 text-lg font-display">{issue.message}</h2>
                 </div>
-                <span className="rounded-full bg-white/70 px-3 py-1 text-sm font-semibold">
+                <span className="chip bg-white/70 text-sm font-semibold">
                   {issue.count}
                 </span>
               </div>
               {issue.examples.length > 0 ? (
                 <ul className="mt-4 space-y-2 text-sm">
                   {issue.examples.map((example) => (
-                    <li key={example} className="rounded-xl bg-white/70 p-3">
+                    <li key={example} className="rounded-[10px] bg-white/70 p-3">
                       {example}
                     </li>
                   ))}
@@ -122,7 +122,7 @@ export default function ContentHealthPage() {
 
 function Metric({ label, value }: { label: string; value: number }) {
   return (
-    <div className="rounded-2xl border border-border bg-card p-4">
+    <div className="surface p-4">
       <p className="text-xs font-medium uppercase tracking-[0.16em] text-muted-foreground">
         {label}
       </p>

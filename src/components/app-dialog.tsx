@@ -48,7 +48,7 @@ export function AppDialog({
         aria-modal="true"
         aria-labelledby={titleId}
         aria-describedby={description ? descriptionId : undefined}
-        className="w-full max-w-md rounded-3xl border border-border bg-card p-5 shadow-2xl"
+        className="w-full max-w-md surface p-5 shadow-2xl"
       >
         <div className="flex items-start justify-between gap-4">
           <div>
@@ -70,7 +70,7 @@ export function AppDialog({
           <button
             type="button"
             onClick={onClose}
-            className="rounded-full p-1.5 text-muted-foreground hover:bg-muted hover:text-foreground focus-ring"
+            className="icon-btn"
             aria-label="Close dialog"
           >
             <X className="h-4 w-4" />

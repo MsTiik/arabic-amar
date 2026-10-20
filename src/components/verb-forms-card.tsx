@@ -57,8 +57,8 @@ export function VerbFormsCard({ rule, className }: Props) {
   return (
     <article
       className={cn(
-        "rounded-2xl border-l-4 border-accent-gold bg-card p-5 shadow-sm",
-        "border border-l-4 border-l-accent-gold border-border",
+        "surface border-l-4 border-l-accent-gold p-5",
+        "border border-l-4 border-l-accent-gold border-hairline",
         className,
       )}
     >

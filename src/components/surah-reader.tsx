@@ -148,9 +148,9 @@ function AyahCard({
   const [showTranslit, setShowTranslit] = useState(false);
 
   return (
-    <article className="rounded-3xl border border-border bg-card p-5 sm:p-6">
+    <article className="surface p-5 sm:p-6">
       <header className="mb-3 flex flex-wrap items-center gap-3">
-        <span className="inline-flex h-7 min-w-7 items-center justify-center rounded-full border border-border bg-background-soft px-2 text-xs font-semibold tabular-nums text-foreground-soft">
+        <span className="inline-flex h-7 min-w-7 items-center justify-center rounded-full border border-hairline bg-background-soft px-2 text-xs font-semibold tabular-nums text-foreground-soft">
           {ayah.number}
         </span>
         <SpeakerButton
@@ -159,19 +159,16 @@ function AyahCard({
           ariaLabel={`Play recitation of surah ${surah.number}, verse ${ayah.number}`}
           size="sm"
         />
-        <button
-          type="button"
-          onClick={() => setShowTranslit((v) => !v)}
-          aria-pressed={showTranslit}
-          className={cn(
-            "ml-auto rounded-full border px-3 py-1 text-xs font-medium transition-colors focus-ring",
-            showTranslit
-              ? "border-primary bg-primary-soft text-primary"
-              : "border-border bg-background-soft text-muted-foreground hover:text-foreground",
-          )}
-        >
-          {showTranslit ? "Hide transliteration" : "Show transliteration"}
-        </button>
+        <span className="segmented ml-auto">
+          <button
+            type="button"
+            onClick={() => setShowTranslit((v) => !v)}
+            aria-pressed={showTranslit}
+            className="segmented-item"
+          >
+            {showTranslit ? "Hide transliteration" : "Show transliteration"}
+          </button>
+        </span>
         {showTapHint ? (
           <span className="basis-full text-xs text-muted-foreground">
             Tap any word for its meaning, root, and grammar.
@@ -231,7 +228,7 @@ function WordPopup({
       role="dialog"
       aria-modal="true"
     >
-      <div className="w-full max-w-md rounded-3xl border border-border bg-card p-4 shadow-2xl sm:p-5">
+      <div className="w-full max-w-md surface p-4 shadow-2xl sm:p-5">
         <div className="flex items-start justify-between gap-3">
           <div className="flex-1">
             <ArabicText
@@ -251,7 +248,7 @@ function WordPopup({
           <button
             type="button"
             onClick={onClose}
-            className="rounded-full p-1.5 text-muted-foreground hover:bg-muted hover:text-foreground focus-ring"
+            className="icon-btn"
             aria-label="Close"
           >
             <X className="h-4 w-4" />
@@ -265,7 +262,7 @@ function WordPopup({
         <div className="mt-3 flex flex-wrap items-center gap-1.5">
           {extras?.inTop125 ? (
             <span
-              className="inline-flex items-center gap-1 rounded-full border border-accent-gold bg-accent-gold-soft px-2.5 py-1 text-xs font-semibold text-foreground-soft"
+              className="chip border border-accent-gold bg-accent-gold-soft text-foreground-soft"
               title="One of the 125 most-used words in the Qurʾān"
             >
               <Sparkles className="h-3 w-3 text-accent-gold" />
@@ -274,14 +271,14 @@ function WordPopup({
           ) : null}
           <span
             className={cn(
-              "inline-flex items-center rounded-full px-2.5 py-1 text-xs font-semibold",
+              "chip",
               POS_TONE[word.pos],
             )}
           >
             {POS_LABEL[word.pos]}
           </span>
           {word.root ? (
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-dashed border-accent-gold bg-accent-gold-soft px-2.5 py-1 text-xs font-semibold text-foreground-soft">
+            <span className="chip inline-flex gap-1.5 border border-dashed border-accent-gold bg-accent-gold-soft text-foreground-soft">
               <span className="uppercase tracking-wider text-muted-foreground">
                 Root
               </span>
@@ -299,7 +296,7 @@ function WordPopup({
           const showFreq = !!extras && extras.frequency > 0;
           if (!showBaseForm && !showFreq) return null;
           return (
-            <div className="mt-3 grid grid-cols-2 divide-x divide-border overflow-hidden rounded-xl border border-border bg-background-soft">
+            <div className="mt-3 grid grid-cols-2 divide-x divide-hairline overflow-hidden tile">
               {showBaseForm ? (
                 <StatCell
                   label="Base form"

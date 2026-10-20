@@ -28,8 +28,8 @@ export function TopicHeader({ topic, vocab, ruleCount }: Props) {
   const Icon = identity.icon;
 
   return (
-    <header className="brand-panel rounded-3xl border border-border p-6 sm:p-8">
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+    <header className="brand-panel rounded-[18px] shadow-[var(--shadow-md),inset_0_1px_0_oklch(1_0_0/8%)] p-4 sm:p-8">
+      <div className="flex flex-col gap-3 sm:flex-row sm:gap-4 sm:items-center sm:justify-between">
         <div>
           <Link
             href="/topics"
@@ -39,26 +39,27 @@ export function TopicHeader({ topic, vocab, ruleCount }: Props) {
           </Link>
           <div className="mt-2 flex items-center gap-3">
             <span
-              className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl ${identity.chip}`}
+              className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-[10px] sm:h-12 sm:w-12 ${identity.chip}`}
             >
-              <Icon className="h-6 w-6" aria-hidden />
+              <Icon className="h-5 w-5 sm:h-6 sm:w-6" aria-hidden />
             </span>
-            <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">
+            <h1 className="page-title">
               {topic.name}
             </h1>
           </div>
           {topic.nameArabic ? (
-            <ArabicText variant="display" className="mt-1 text-3xl text-foreground-soft sm:text-4xl">
+            <ArabicText variant="display" className="mt-1 text-2xl text-foreground-soft sm:text-4xl">
               {topic.nameArabic}
             </ArabicText>
           ) : null}
-          <p className="mt-3 text-sm text-muted-foreground">
+          <p className="mt-1 text-sm text-muted-foreground sm:mt-3">
             {vocab.length} words · {ruleCount} rules
           </p>
         </div>
-        <div className="flex items-center gap-6">
-          <ProgressRing value={fraction} size={96} thickness={10} />
-          <div className="flex flex-col gap-1 text-sm">
+        <div className="flex items-center gap-4 border-t border-hairline pt-3 sm:gap-6 sm:border-0 sm:pt-0">
+          <ProgressRing value={fraction} size={64} thickness={7} className="sm:hidden" />
+          <ProgressRing value={fraction} size={96} thickness={10} className="hidden sm:block" />
+          <div className="grid grid-cols-2 gap-x-5 gap-y-1 text-sm sm:flex sm:flex-col">
             <Legend dotClassName="bg-success" label="Mastered" count={summary.mastered} />
             <Legend dotClassName="bg-primary/70" label="Familiar" count={summary.familiar} />
             <Legend dotClassName="bg-primary/40" label="Learning" count={summary.learning} />
@@ -67,7 +68,7 @@ export function TopicHeader({ topic, vocab, ruleCount }: Props) {
         </div>
       </div>
       {topic.notes && topic.notes.length > 0 ? (
-        <div className="mt-5 space-y-3 border-t border-border pt-5">
+        <div className="mt-4 space-y-3 border-t border-hairline pt-4 sm:mt-5 sm:pt-5">
           {topic.notes.map((note, i) => (
             <p key={i} className="text-sm leading-relaxed text-foreground-soft">
               {note}

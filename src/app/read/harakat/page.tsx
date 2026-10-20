@@ -29,7 +29,7 @@ export default function HarakatPage() {
         <div className="mb-3">
           <FoundationsBadge />
         </div>
-        <h1 className="text-4xl font-bold tracking-tight">
+        <h1 className="page-title">
           Harakāt — the diacritics
           <span
             lang="ar"
@@ -92,8 +92,8 @@ export default function HarakatPage() {
         />
       </Section>
 
-      <section className="mt-10 rounded-2xl border border-border bg-card p-6 text-sm text-muted-foreground">
-        <h2 className="mb-2 text-base font-semibold text-foreground">
+      <section className="mt-10 surface p-6 text-sm text-muted-foreground">
+        <h2 className="mb-2 text-base text-foreground font-display">
           Next step
         </h2>
         <p>
@@ -121,7 +121,7 @@ function Section({
   return (
     <section className="mb-10">
       <div className="mb-3 flex items-baseline justify-between gap-3">
-        <h2 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">
+        <h2 className="text-muted-foreground eyebrow">
           {title}
         </h2>
         {subtitle ? (
@@ -140,20 +140,14 @@ function HarakahCard({
   h: HarakahEntry;
   accentTone: "primary" | "gold" | "muted";
 }) {
-  const toneBorder =
+  const toneAccent =
     accentTone === "gold"
-      ? "border-accent-gold/40"
+      ? "border-l-accent-gold"
       : accentTone === "muted"
-        ? "border-border"
-        : "border-primary/30";
-  const toneBg =
-    accentTone === "gold"
-      ? "bg-accent-gold-soft"
-      : accentTone === "muted"
-        ? "bg-background-soft"
-        : "bg-background-soft";
+        ? "border-l-hairline"
+        : "border-l-primary";
   return (
-    <article className={`flex flex-col gap-3 rounded-2xl border bg-card p-5 ${toneBorder}`}>
+    <article className={`surface flex flex-col gap-3 border-l-4 p-5 ${toneAccent}`}>
       <header className="flex items-start justify-between gap-3">
         <div>
           <ArabicText variant="display" as="span" className="text-2xl">
@@ -173,7 +167,13 @@ function HarakahCard({
       </header>
 
       <div
-        className={`flex items-center justify-center rounded-xl ${toneBg} py-4`}
+        className={`tile flex items-center justify-center border-t-2 py-4 ${
+          accentTone === "gold"
+            ? "border-t-accent-gold"
+            : accentTone === "muted"
+              ? "border-t-hairline"
+              : "border-t-primary"
+        }`}
         lang="ar"
         dir="rtl"
       >
@@ -188,7 +188,7 @@ function HarakahCard({
         {h.soundEffect}
       </p>
 
-      <div className="mt-1 flex items-center justify-between rounded-xl border border-border bg-background-soft px-3 py-2">
+      <div className="mt-1 flex items-center justify-between tile px-3 py-2">
         <div>
           <ArabicText variant="display" as="span" className="text-xl">
             {h.example.arabic}
@@ -217,7 +217,7 @@ function HarakahCard({
 
 function CompareRow({ entries }: { entries: HarakahEntry[] }) {
   return (
-    <div className="mt-4 rounded-2xl border border-primary/20 bg-primary/5 p-4 sm:p-5">
+    <div className="mt-4 surface border-l-4 border-l-primary p-4 sm:p-5">
       <div className="mb-2 flex items-baseline justify-between gap-3">
         <h3 className="text-sm font-semibold tracking-tight text-foreground">
           Hear the three in sequence
@@ -248,7 +248,7 @@ function CompareRow({ entries }: { entries: HarakahEntry[] }) {
 
 function InfoCard({ title, body }: { title: string; body: string }) {
   return (
-    <article className="rounded-2xl border border-border bg-card p-5">
+    <article className="surface p-5">
       <h3 className="mb-2 text-sm font-semibold tracking-tight">{title}</h3>
       <p className="text-xs text-muted-foreground">{body}</p>
     </article>

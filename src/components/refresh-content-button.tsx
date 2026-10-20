@@ -137,18 +137,18 @@ export function RefreshContentButton() {
   return (
     <>
       <section className="mt-12">
-        <h2 className="text-lg font-semibold tracking-tight">Admin</h2>
+        <h2 className="text-lg section-title">Admin</h2>
         <p className="mt-1 mb-3 text-sm text-muted-foreground">
           Pull the latest content from the source Google Doc on demand. The
           daily cron also handles this automatically at 04:00 UTC.
         </p>
-        <div className="rounded-2xl border border-dashed border-border bg-background-soft p-4 text-sm">
+        <div className="rounded-[10px] border border-dashed border-hairline bg-background-soft p-4 text-sm">
           <div className="flex flex-wrap items-center gap-3">
             <button
               type="button"
               onClick={handleClick}
               disabled={status.kind === "loading"}
-              className="rounded-full bg-primary px-4 py-2 font-medium text-primary-foreground hover:opacity-90 focus-ring disabled:cursor-not-allowed disabled:opacity-60"
+              className="btn btn-primary btn-sm disabled:cursor-not-allowed disabled:opacity-60"
             >
               {status.kind === "loading"
                 ? "Triggering deploy…"
@@ -198,7 +198,7 @@ export function RefreshContentButton() {
               autoFocus
               value={tokenInput}
               onChange={(event) => setTokenInput(event.target.value)}
-              className="mt-2 w-full rounded-2xl border border-border bg-background px-3 py-2 text-base outline-none focus-ring"
+              className="input mt-2 w-full"
             />
           </label>
           <p className="text-xs text-muted-foreground">
@@ -208,14 +208,14 @@ export function RefreshContentButton() {
             <button
               type="button"
               onClick={() => setTokenDialogOpen(false)}
-              className="rounded-full border border-border bg-background-soft px-4 py-2 text-sm font-medium hover:bg-muted focus-ring"
+              className="btn btn-secondary btn-sm"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={status.kind === "loading"}
-              className="rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground hover:opacity-90 focus-ring disabled:cursor-not-allowed disabled:opacity-60"
+              className="btn btn-primary btn-sm disabled:cursor-not-allowed disabled:opacity-60"
             >
               Save token and refresh
             </button>

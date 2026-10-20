@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "builtAt": "2026-07-26T23:01:34.107Z",
+  "builtAt": "2026-10-08T12:26:05.387Z",
   "entries": {
     "١ - محرم": "/audio/words/16041a6b9a07.mp3",
     "١ - يناير": "/audio/words/8e7bc68d71de.mp3",
@@ -380,7 +380,16 @@
     "مائة": "/audio/words/a562918d49b5.mp3",
     "مثال": "/audio/words/540c061acec5.mp3",
     "وراء": "/audio/words/1aa626c99a08.mp3",
-    "ياباني": "/audio/words/f5e2c57f9406.mp3"
+    "ياباني": "/audio/words/f5e2c57f9406.mp3",
+    "حجرة / حجرات": "/audio/words/fa37e82182e0.mp3",
+    "سنة": "/audio/words/92d1b47100ee.mp3",
+    "الله / —": "/audio/words/24df0b607e66.mp3",
+    "بنفسجي / بنفسجية": "/audio/words/b9cbc720336e.mp3",
+    "تكتبن": "/audio/words/5fc236339c2e.mp3",
+    "تكتبون": "/audio/words/af325cc9b2f7.mp3",
+    "تكتبين": "/audio/words/44120f1608d3.mp3",
+    "مشتري / مشترون": "/audio/words/c2cfddafa37c.mp3",
+    "نكتب": "/audio/words/2c2edba98d11.mp3"
   },
   "quran": {
     "20:14": "/audio/quran/020014.mp3",

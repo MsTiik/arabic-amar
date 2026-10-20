@@ -19,7 +19,7 @@ export default function SurahsIndexPage() {
         >
           ← Back to Foundations
         </Link>
-        <h1 className="text-4xl font-bold tracking-tight">
+        <h1 className="page-title">
           Short surahs · word by word
         </h1>
         <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
@@ -34,13 +34,13 @@ export default function SurahsIndexPage() {
           <Link
             key={s.number}
             href={`/read/surahs/${s.number}`}
-            className="group flex flex-col rounded-3xl border border-border bg-card p-5 transition-colors hover:border-primary focus-ring"
+            className="group flex flex-col surface p-5 transition-colors hover:border-primary focus-ring"
           >
             <div className="flex items-start justify-between gap-3">
               <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
                 Surah {s.number}
               </span>
-              <span className="rounded-full border border-border bg-background-soft px-2 py-0.5 text-[11px] text-muted-foreground">
+              <span className="chip border border-hairline bg-background-soft text-muted-foreground">
                 {s.revelation}
               </span>
             </div>

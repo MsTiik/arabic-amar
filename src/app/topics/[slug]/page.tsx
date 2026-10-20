@@ -50,7 +50,7 @@ export default async function TopicPage({
   }));
 
   return (
-    <div className="mx-auto w-full max-w-6xl px-4 py-8">
+    <div className="mx-auto w-full max-w-6xl px-4 py-5 sm:py-8">
       <TopicHeader topic={topic} vocab={vocab} ruleCount={rules.length} />
 
       <TopicTabs
@@ -59,20 +59,24 @@ export default async function TopicPage({
         ruleCount={rules.length}
         panels={{
           vocab: (
-            <div className="mt-6 flex gap-8">
+            <div className="mt-4 flex flex-col gap-4 sm:mt-6 lg:flex-row lg:gap-8">
               <CategoryJumpNav categories={navItems} />
-              <div className="min-w-0 flex-1 space-y-10">
+              <div className="min-w-0 flex-1 space-y-8 sm:space-y-10">
                 {groups.map((group) => (
-                  <section key={group.category} id={`cat-${slugify(group.category)}`}>
+                  <section
+                    key={group.category}
+                    id={`cat-${slugify(group.category)}`}
+                    className="scroll-mt-16 lg:scroll-mt-24"
+                  >
                     <header className="mb-3 flex items-baseline justify-between">
-                      <h3 className="text-xl font-semibold tracking-tight">
+                      <h3 className="text-lg font-semibold tracking-tight sm:text-xl">
                         {group.category}
                       </h3>
                       <span className="text-xs text-muted-foreground">
                         {group.entries.length} words
                       </span>
                     </header>
-                    <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                    <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 sm:gap-3 lg:grid-cols-3 xl:grid-cols-4">
                       {group.entries.map((entry) => (
                         <VocabCard
                           key={entry.id}
@@ -85,7 +89,7 @@ export default async function TopicPage({
                   </section>
                 ))}
                 {groups.length === 0 ? (
-                  <p className="rounded-2xl border border-border bg-card p-6 text-sm text-muted-foreground">
+                  <p className="surface p-6 text-sm text-muted-foreground">
                     No vocabulary captured for this lesson yet.
                   </p>
                 ) : null}
@@ -95,7 +99,7 @@ export default async function TopicPage({
           rules: (
             <div className="mt-6 grid grid-cols-1 gap-4 lg:grid-cols-2">
               {rules.length === 0 ? (
-                <p className="col-span-full rounded-2xl border border-border bg-card p-6 text-sm text-muted-foreground">
+                <p className="col-span-full surface p-6 text-sm text-muted-foreground">
                   No grammar rules in this lesson — practice with the vocabulary deck instead.
                 </p>
               ) : (
@@ -112,7 +116,7 @@ export default async function TopicPage({
           practice: (
             <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
               {vocab.length === 0 ? (
-                <p className="col-span-full rounded-2xl border border-border bg-card p-6 text-sm text-muted-foreground">
+                <p className="col-span-full surface p-6 text-sm text-muted-foreground">
                   This lesson currently contains reference tables rather than
                   individual vocabulary cards, so it does not have a practice
                   deck yet.
@@ -170,7 +174,7 @@ function PracticeLink({
   return (
     <Link
       href={href}
-      className="group flex flex-col gap-1 rounded-2xl border border-border bg-card p-5 hover-lift focus-ring"
+      className="group flex flex-col gap-1 surface p-5 hover-lift focus-ring"
     >
       <h4 className="text-base font-semibold">{title}</h4>
       <p className="text-sm text-muted-foreground">{description}</p>

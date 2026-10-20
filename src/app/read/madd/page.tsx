@@ -23,7 +23,7 @@ export default function MaddPage() {
         <div className="mb-3">
           <FoundationsBadge />
         </div>
-        <h1 className="text-4xl font-bold tracking-tight">
+        <h1 className="page-title">
           Long vowels — Madd
           <span
             lang="ar"
@@ -43,15 +43,15 @@ export default function MaddPage() {
         </p>
       </header>
 
-      <section className="mb-10 rounded-2xl border border-primary/25 bg-primary/5 p-5 sm:p-6">
-        <h2 className="mb-3 text-sm font-semibold uppercase tracking-wider text-foreground">
+      <section className="mb-10 surface border-l-4 border-l-primary p-5 sm:p-6">
+        <h2 className="mb-3 text-foreground eyebrow">
           The rule at a glance
         </h2>
         <div className="grid gap-3 sm:grid-cols-3">
           {MADD_LETTERS.map((m) => (
             <div
               key={m.slug}
-              className="rounded-xl border border-primary/20 bg-card p-4 text-center sm:p-5"
+              className="tile border-t-2 border-t-primary p-4 text-center sm:p-5"
             >
               <div className="mb-2 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
                 {m.precededBy} +{" "}
@@ -78,7 +78,7 @@ export default function MaddPage() {
         {MADD_LETTERS.map((m) => (
           <article
             key={m.slug}
-            className="rounded-2xl border border-border bg-card p-5 sm:p-6"
+            className="surface p-5 sm:p-6"
           >
             <div className="flex flex-wrap items-baseline justify-between gap-3">
               <h3 className="text-xl font-semibold tracking-tight">
@@ -115,7 +115,7 @@ export default function MaddPage() {
               />
             </div>
 
-            <div className="mt-4 flex items-center justify-between gap-3 rounded-xl border border-border bg-background-soft px-3 py-2">
+            <div className="mt-4 flex items-center justify-between gap-3 tile px-3 py-2">
               <div>
                 <span className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
                   Qur’ānic example
@@ -147,8 +147,8 @@ export default function MaddPage() {
         ))}
       </section>
 
-      <section className="mt-10 rounded-2xl border border-border bg-card p-6 text-sm text-muted-foreground">
-        <h2 className="mb-2 text-base font-semibold text-foreground">
+      <section className="mt-10 surface p-6 text-sm text-muted-foreground">
+        <h2 className="mb-2 text-base text-foreground font-display">
           Beyond the basic 2-count madd
         </h2>
         <p>
@@ -176,10 +176,9 @@ function CompareBlock({
   counts: string;
   tone: "gold" | "muted";
 }) {
-  const border = tone === "gold" ? "border-accent-gold/40" : "border-border";
-  const bg = tone === "gold" ? "bg-accent-gold-soft" : "bg-background-soft";
+  const border = tone === "gold" ? "border-accent-gold/40" : "border-hairline";
   return (
-    <div className={`rounded-xl border ${border} ${bg} p-4 text-center`}>
+    <div className={`tile border-t-2 ${border} p-4 text-center`}>
       <div className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
         {title}
       </div>

@@ -7,22 +7,22 @@ export const metadata = { title: "Verb families" };
 export default function VerbFamiliesPage() {
   return (
     <div className="mx-auto w-full max-w-6xl px-4 py-8 sm:py-10">
-      <header className="mb-7">
+      <header className="mb-5 sm:mb-7">
         <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
           <Link href="/practice" className="hover:text-foreground hover:underline">
             Practice
           </Link>{" "}
           / Verb families
         </p>
-        <h1 className="mt-1 text-3xl font-semibold tracking-tight sm:text-4xl">
-          Verb families <span lang="ar" dir="rtl" className="font-arabic font-normal">عَائِلَاتُ الأَفْعَال</span>
+        <h1 className="mt-1 sm:text-4xl page-title">
+          Verb families <span lang="ar" dir="rtl" className="block font-arabic text-2xl font-normal text-foreground-soft sm:inline sm:text-[length:inherit] sm:text-foreground">عَائِلَاتُ الأَفْعَال</span>
         </h1>
         <p className="mt-2 max-w-3xl text-sm leading-relaxed text-muted-foreground sm:text-base">
           Learn each verb as one connected family—past, present, command, and
           verbal noun—then sort its shuffled forms. Level 2 and Qur’anic
           examples show how the same root changes inside a real sentence.
         </p>
-        <details className="mt-4 max-w-3xl rounded-2xl border border-border bg-background-soft p-4 text-sm leading-relaxed text-foreground-soft">
+        <details className="mt-3 max-w-3xl tile p-3 text-sm sm:mt-4 sm:p-4 leading-relaxed text-foreground-soft">
           <summary className="cursor-pointer font-semibold text-primary focus-ring">
             How the reference forms work
           </summary>

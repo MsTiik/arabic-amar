@@ -32,7 +32,7 @@ export function ProgressRing({
       className={cn("relative inline-flex items-center justify-center", className)}
       style={{ width: size, height: size }}
     >
-      <svg width={size} height={size} role="img" aria-label={`Progress ${Math.round(safe * 100)}%`}>
+      <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} role="img" aria-label={`Progress ${Math.round(safe * 100)}%`}>
         <circle
           cx={size / 2}
           cy={size / 2}

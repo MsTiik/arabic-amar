@@ -24,10 +24,10 @@ export function AutoplayToggle({ className }: { className?: string }) {
       aria-label={label}
       aria-pressed={on}
       className={cn(
-        "inline-flex h-8 w-8 items-center justify-center rounded-full border transition-colors focus-ring",
+        "icon-btn",
         on
           ? "border-primary/50 bg-primary/10 text-primary hover:bg-primary/20"
-          : "border-border bg-card text-muted-foreground hover:bg-muted hover:text-foreground",
+          : "border-hairline bg-card text-muted-foreground hover:bg-muted hover:text-foreground",
         className,
       )}
     >

@@ -25,7 +25,7 @@ export function FeedbackToggle({ className }: { className?: string }) {
       aria-label={label}
       aria-pressed={on}
       className={cn(
-        "inline-flex h-8 w-8 items-center justify-center rounded-full border border-border bg-card text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-ring",
+        "icon-btn focus-ring",
         className,
       )}
     >

@@ -23,9 +23,9 @@ interface Props {
 
 
 const SIZE_CLASSES: Record<NonNullable<Props["size"]>, string> = {
-  md: "text-3xl sm:text-4xl",
-  lg: "text-5xl sm:text-6xl",
-  xl: "text-6xl sm:text-7xl",
+  md: "text-[1.75rem] sm:text-4xl",
+  lg: "text-[2rem] sm:text-6xl",
+  xl: "text-4xl sm:text-7xl",
 };
 
 export function VocabCard({
@@ -41,12 +41,14 @@ export function VocabCard({
   return (
     <article
       className={cn(
-        "group card-raised hover-lift relative min-w-0 flex flex-col gap-3 rounded-2xl p-5 sm:p-6",
+        // Phones get a compact row (meaning left, Arabic right) so a lesson
+        // shows several words per screen; the stacked card returns at `sm`.
+        "group surface hover-lift relative grid min-w-0 grid-cols-[minmax(0,1fr)_auto] items-center gap-x-3 gap-y-1.5 px-3.5 py-3 sm:flex sm:flex-col sm:items-stretch sm:gap-3 sm:p-6",
         className,
       )}
     >
       {entry.isExtra ? (
-        <span className="absolute right-3 top-3 rounded-full bg-accent-gold-soft px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-foreground">
+        <span className="chip absolute -top-2 left-3 bg-accent-gold-soft text-foreground sm:left-auto sm:right-3 sm:top-3">
           Extra
         </span>
       ) : null}
@@ -55,13 +57,13 @@ export function VocabCard({
         variant="display"
         className={cn(
           SIZE_CLASSES[size],
-          "w-full break-words leading-relaxed text-foreground",
+          "col-start-2 row-span-2 row-start-1 max-w-[11rem] break-words text-right leading-relaxed text-foreground sm:w-full sm:max-w-none sm:text-start",
         )}
       >
         {entry.arabic}
       </ArabicText>
 
-      <div className="flex flex-col gap-1">
+      <div className="col-start-1 row-start-1 flex min-w-0 flex-col gap-0.5 sm:gap-1">
         <div className="flex min-w-0 items-center gap-2">
           <SpeakerButton
             arabic={entry.arabic}
@@ -71,7 +73,7 @@ export function VocabCard({
           />
           {entry.pronunciation ? (
             <p
-              className="min-w-0 break-words text-base font-medium text-foreground sm:text-lg"
+              className="min-w-0 break-words text-[15px] font-medium text-foreground sm:text-lg"
               lang="ar-Latn"
             >
               {entry.pronunciation}
@@ -81,7 +83,7 @@ export function VocabCard({
         <p className="text-sm text-foreground-soft sm:text-base">{entry.english}</p>
       </div>
 
-      <div className="mt-1 flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
+      <div className="col-start-1 row-start-2 flex flex-wrap items-center gap-1.5 text-xs text-muted-foreground sm:mt-1 sm:gap-2">
         {entry.gender ? (
           <span
             className={cn(
@@ -90,19 +92,19 @@ export function VocabCard({
               entry.gender === "F" && "bg-accent-rose-soft text-accent-rose",
               entry.gender !== "M" &&
                 entry.gender !== "F" &&
-                "border border-border bg-background-soft",
+                "border border-hairline bg-background-soft",
             )}
           >
             {entry.gender === "M" ? "مذكر" : entry.gender === "F" ? "مؤنث" : entry.gender}
           </span>
         ) : null}
         {entry.subCategory && entry.subCategory !== entry.continent ? (
-          <span className="rounded-md border border-border bg-background-soft px-2 py-0.5">
+          <span className="rounded-md border border-hairline bg-background-soft px-2 py-0.5">
             {entry.subCategory}
           </span>
         ) : null}
         {entry.continent ? (
-          <span className="rounded-md border border-border bg-background-soft px-2 py-0.5">
+          <span className="rounded-md border border-hairline bg-background-soft px-2 py-0.5">
             {entry.continent}
           </span>
         ) : null}

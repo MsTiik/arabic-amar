@@ -93,7 +93,7 @@ export function VocabBankClient({ vocab, topics }: Props) {
   return (
     <div className="space-y-6">
       <div className="card-flat p-4 sm:p-6">
-        <div className="flex items-center gap-3 rounded-full border border-border bg-card px-4 py-2">
+        <div className="flex items-center gap-3 rounded-[12px] border border-border bg-card px-4 py-2">
           <Search className="h-4 w-4 text-muted-foreground" aria-hidden />
           <input
             value={query}
@@ -134,8 +134,10 @@ export function VocabBankClient({ vocab, topics }: Props) {
           <button
             type="button"
             onClick={() => setExtraOnly((x) => !x)}
+            aria-pressed={extraOnly}
+            data-active={extraOnly}
             className={cn(
-              "shrink-0 whitespace-nowrap rounded-full border px-3 py-1.5 text-sm font-medium transition-colors focus-ring",
+              "shrink-0 whitespace-nowrap rounded-[10px] border px-3 py-1.5 text-sm font-medium transition-colors focus-ring",
               extraOnly
                 ? "border-accent-gold bg-accent-gold-soft text-foreground"
                 : "border-border bg-background-soft text-muted-foreground hover:text-foreground",
@@ -158,7 +160,7 @@ export function VocabBankClient({ vocab, topics }: Props) {
                     setExpanded(new Set(overflowingTopics.map(([s]) => s)));
                   }
                 }}
-                className="whitespace-nowrap rounded-full border border-border bg-background-soft px-3 py-1 hover:text-foreground focus-ring"
+                className="whitespace-nowrap rounded-[10px] border border-border bg-background-soft px-3 py-1 hover:text-foreground focus-ring"
               >
                 {allExpanded ? "Collapse all" : "Expand all"}
               </button>
@@ -241,7 +243,7 @@ export function VocabBankClient({ vocab, topics }: Props) {
                         type="button"
                         onClick={toggle}
                         aria-expanded={isExpanded}
-                        className="inline-flex items-center gap-1.5 rounded-full border border-border bg-background-soft px-3 py-1.5 text-sm font-medium text-foreground hover:bg-card focus-ring"
+                        className="inline-flex items-center gap-1.5 rounded-[10px] border border-border bg-background-soft px-3 py-1.5 text-sm font-medium text-foreground hover:bg-card focus-ring"
                       >
                         <ChevronDown
                           className={cn(
@@ -281,7 +283,7 @@ function Select({
     <select
       value={value}
       onChange={(e) => onChange(e.target.value)}
-      className="max-w-40 shrink-0 rounded-full border border-border bg-background-soft px-3 py-1.5 text-sm font-medium text-foreground focus-ring sm:max-w-none"
+      className="max-w-40 shrink-0 rounded-[10px] border border-border bg-background-soft px-3 py-1.5 text-sm font-medium text-foreground focus-ring sm:max-w-none"
     >
       <option value="">{placeholder}</option>
       {options.map((opt) => (

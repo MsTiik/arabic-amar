@@ -26,7 +26,7 @@ export default function ConjugationsPage() {
           </Link>{" "}
           / Verb conjugations
         </p>
-        <h1 className="mt-1 text-4xl font-bold tracking-tight">
+        <h1 className="mt-1 page-title">
           Verb conjugations (
           <span lang="ar" dir="rtl">
             تَصْرِيف الأَفْعَال
@@ -42,8 +42,8 @@ export default function ConjugationsPage() {
       </header>
 
       {intro && intro.paragraphs.length > 0 ? (
-        <section className="mb-8 rounded-2xl border border-border bg-card p-5 sm:p-6">
-          <h2 className="mb-3 text-sm font-semibold uppercase tracking-wider text-muted-foreground">
+        <section className="mb-8 surface p-5 sm:p-6">
+          <h2 className="mb-3 text-muted-foreground eyebrow">
             About the tenses
           </h2>
           <div className="space-y-3 text-sm leading-relaxed text-foreground-soft sm:text-base">

@@ -105,12 +105,10 @@ function setPreference(next: ThemePreference): void {
 }
 
 export const themeActions = {
-  /** Cycle: light → dark → system → light. Used by the topbar toggle. */
-  cycle(): void {
-    const order: ThemePreference[] = ["light", "dark", "system"];
-    const idx = order.indexOf(getSnapshot());
-    const next = order[(idx + 1) % order.length];
-    setPreference(next);
+  /** Flip between explicit light and dark, starting from what is shown now.
+   *  Used by the topbar toggle. */
+  toggle(): void {
+    setPreference(resolvePreference(getSnapshot()) === "dark" ? "light" : "dark");
   },
   set(pref: ThemePreference): void {
     setPreference(pref);

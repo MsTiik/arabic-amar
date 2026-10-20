@@ -28,14 +28,14 @@ export function CurriculumUnitCard({
   const Icon = identity.icon;
 
   return (
-    <article className="card-raised flex h-full flex-col rounded-2xl p-5 sm:p-6">
+    <article className="surface flex h-full flex-col p-5 sm:p-6">
       <div>
-        <span className={cn("flex h-10 w-10 items-center justify-center rounded-xl", identity.chip)}>
+        <span className={cn("flex h-10 w-10 items-center justify-center rounded-[10px]", identity.chip)}>
           <Icon className="h-5 w-5" aria-hidden />
         </span>
       </div>
 
-      <h2 className="mt-4 text-xl font-semibold tracking-tight">{unit.title}</h2>
+      <h2 className="mt-4 section-title">{unit.title}</h2>
       <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
         {unit.description}
       </p>
@@ -46,10 +46,9 @@ export function CurriculumUnitCard({
             key={link.href}
             href={link.href}
             className={cn(
-              "inline-flex min-h-10 items-center gap-1.5 rounded-full px-3.5 py-2 text-sm font-semibold focus-ring",
               linkIndex === 0
-                ? "bg-primary text-primary-foreground hover:opacity-90"
-                : "border border-border bg-background-soft text-foreground hover:bg-muted",
+                ? "btn btn-primary btn-sm"
+                : "btn btn-secondary btn-sm",
             )}
           >
             {link.label}

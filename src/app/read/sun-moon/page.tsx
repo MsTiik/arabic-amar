@@ -24,7 +24,7 @@ export default function SunMoonPage() {
         <div className="mb-3">
           <FoundationsBadge />
         </div>
-        <h1 className="text-4xl font-bold tracking-tight">
+        <h1 className="page-title">
           Sun & moon letters
           <span
             lang="ar"
@@ -86,14 +86,14 @@ export default function SunMoonPage() {
       </section>
 
       <section className="mb-10">
-        <h2 className="mb-3 text-sm font-semibold uppercase tracking-wider text-muted-foreground">
+        <h2 className="mb-3 text-muted-foreground eyebrow">
           Try it yourself
         </h2>
         <SunMoonDemo />
       </section>
 
-      <section className="mb-2 rounded-2xl border border-border bg-card p-5 text-sm text-muted-foreground sm:p-6">
-        <h2 className="mb-2 text-base font-semibold text-foreground">
+      <section className="mb-2 surface p-5 text-sm text-muted-foreground sm:p-6">
+        <h2 className="mb-2 text-base text-foreground font-display">
           Why the names?
         </h2>
         <p>
@@ -122,10 +122,12 @@ function RuleCard({
   example: { bare: string; withAl: string; translit: string; gloss: string };
   description: string;
 }) {
-  const border = tone === "sun" ? "border-accent-gold/40" : "border-primary/25";
-  const bg = tone === "sun" ? "bg-accent-gold-soft" : "bg-primary/5";
   return (
-    <article className={`rounded-2xl border bg-card p-5 sm:p-6 ${border}`}>
+    <article
+      className={`surface border-l-4 p-5 sm:p-6 ${
+        tone === "sun" ? "border-l-accent-gold" : "border-l-primary"
+      }`}
+    >
       <h3 className="text-lg font-semibold tracking-tight">
         {title}
         <span
@@ -137,7 +139,7 @@ function RuleCard({
         </span>
       </h3>
       <p className="mt-2 text-sm text-muted-foreground">{description}</p>
-      <div className={`mt-4 rounded-xl ${bg} p-4`}>
+      <div className="mt-4 tile p-4">
         <div
           className="flex items-center justify-center gap-3"
           lang="ar"
@@ -172,11 +174,10 @@ function LetterGridCard({
   tone: "sun" | "moon";
   letters: readonly string[];
 }) {
-  const border = tone === "sun" ? "border-accent-gold/40" : "border-primary/25";
   const letterBorder =
     tone === "sun" ? "border-accent-gold/30" : "border-primary/20";
   return (
-    <article className={`rounded-2xl border bg-card p-5 ${border}`}>
+    <article className="surface p-5">
       <h3 className="text-sm font-semibold uppercase tracking-wider text-foreground">
         {title}
       </h3>

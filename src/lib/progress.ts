@@ -507,7 +507,11 @@ function activeVocab(vocab: VocabEntry[]): VocabEntry[] {
   return vocab.filter((v) => !v.isExtra);
 }
 
-function topicNewCount(progress: UserProgress, vocab: VocabEntry[], topicSlug: string): number {
+export function topicNewCount(
+  progress: UserProgress,
+  vocab: VocabEntry[],
+  topicSlug: string,
+): number {
   return activeVocab(vocab).filter(
     (v) => v.topicSlugs.includes(topicSlug) && !progress.words[v.id],
   ).length;

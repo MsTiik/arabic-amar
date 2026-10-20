@@ -22,7 +22,7 @@ export function TopicTabs({ slug, vocabCount, ruleCount, panels }: Props) {
       <div
         role="tablist"
         aria-label="Topic content"
-        className="inline-flex gap-1 rounded-full border border-border bg-muted p-1"
+        className="segmented"
       >
         <TabButton
           active={tab === "vocab"}
@@ -65,10 +65,8 @@ function TabButton({
       aria-selected={active}
       onClick={onClick}
       className={cn(
-        "rounded-full px-4 py-1.5 text-sm font-medium transition-colors focus-ring",
-        active
-          ? "bg-card text-foreground shadow-sm"
-          : "text-muted-foreground hover:text-foreground",
+        "segmented-item focus-ring",
+        !active && "text-muted-foreground hover:text-foreground",
       )}
     >
       {label}

@@ -30,7 +30,7 @@ export default function PluralsPage() {
           </Link>{" "}
           / Plural forms
         </p>
-        <h1 className="mt-1 text-4xl font-bold tracking-tight">
+        <h1 className="mt-1 page-title">
           Plural forms (الجَمْع)
         </h1>
         <p className="mt-2 max-w-3xl text-sm text-muted-foreground">
@@ -41,8 +41,8 @@ export default function PluralsPage() {
       </header>
 
       {intro && intro.paragraphs.length > 0 ? (
-        <section className="mb-8 rounded-2xl border border-border bg-card p-5 sm:p-6">
-          <h2 className="mb-3 text-sm font-semibold uppercase tracking-wider text-muted-foreground">
+        <section className="mb-8 surface p-5 sm:p-6">
+          <h2 className="mb-3 text-muted-foreground eyebrow">
             Why three systems?
           </h2>
           <div className="space-y-3 text-sm leading-relaxed text-foreground-soft sm:text-base">
@@ -54,7 +54,7 @@ export default function PluralsPage() {
       ) : null}
 
       {forms.length === 0 ? (
-        <p className="rounded-2xl border border-border bg-card p-6 text-sm text-muted-foreground">
+        <p className="surface p-6 text-sm text-muted-foreground">
           No plural rules captured yet — try refreshing from the source doc.
         </p>
       ) : (
@@ -62,7 +62,7 @@ export default function PluralsPage() {
           {forms.map((f) => (
             <article
               key={f.id}
-              className="flex flex-col gap-3 rounded-2xl border border-border bg-card p-5 sm:p-6"
+              className="flex flex-col gap-3 surface p-5 sm:p-6"
             >
               <span
                 className={
@@ -95,7 +95,7 @@ export default function PluralsPage() {
                     {f.examples.map((ex, i) => (
                       <li
                         key={i}
-                        className="rounded-xl bg-background-soft p-3"
+                        className="rounded-[10px] bg-background-soft p-3"
                       >
                         <p
                           className="font-arabic text-lg leading-relaxed text-foreground sm:text-xl"
