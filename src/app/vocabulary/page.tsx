@@ -2,11 +2,13 @@ import { QuranFrequencyDeck } from "@/components/quran-frequency-deck";
 import { NamesOfAllahTeaser } from "@/components/names-of-allah-teaser";
 import { VocabBankClient } from "@/components/vocab-bank-client";
 import { getSiteContent } from "@/lib/content";
+import { getVocabularyBankContent } from "@/lib/vocabulary-bank";
 
 export const metadata = { title: "Vocabulary bank" };
 
 export default function VocabularyPage() {
   const content = getSiteContent();
+  const bank = getVocabularyBankContent(content);
   return (
     <div className="mx-auto w-full max-w-6xl space-y-8 px-4 py-8 sm:py-10">
       <header>
@@ -21,7 +23,7 @@ export default function VocabularyPage() {
       <QuranFrequencyDeck />
       <div>
         <h2 className="section-label mb-3">Lesson vocabulary</h2>
-        <VocabBankClient vocab={content.vocab} topics={content.topics} />
+        <VocabBankClient vocab={bank.vocab} topics={bank.topics} />
       </div>
     </div>
   );

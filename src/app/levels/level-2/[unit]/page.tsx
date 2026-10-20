@@ -40,9 +40,10 @@ const ACTION_GROUPS = [
     title: "Learning and language",
     description: "Actions used for reading, writing, understanding, and teaching.",
     icon: BookOpenText,
-    surface: "border-accent-sky/35 bg-accent-sky-soft/35",
+    surface: "border-accent-sky/45 bg-card",
     iconStyle: "bg-accent-sky-soft text-accent-sky",
-    cardStyle: "border-accent-sky/25 bg-accent-sky-soft/25",
+    countStyle: "border-accent-sky/30 bg-accent-sky-soft text-accent-sky",
+    cardStyle: "border-border border-l-4 border-l-accent-sky bg-card",
     ids: ["write", "read", "explain", "understand", "correct", "think", "ask", "answer", "learn", "revise", "teach", "hear"],
   },
   {
@@ -50,9 +51,10 @@ const ACTION_GROUPS = [
     title: "Movement and position",
     description: "Actions that describe where someone goes or how they move.",
     icon: Footprints,
-    surface: "border-accent-emerald/35 bg-accent-emerald-soft/35",
+    surface: "border-accent-emerald/45 bg-card",
     iconStyle: "bg-accent-emerald-soft text-accent-emerald",
-    cardStyle: "border-accent-emerald/25 bg-accent-emerald-soft/25",
+    countStyle: "border-accent-emerald/30 bg-accent-emerald-soft text-accent-emerald",
+    cardStyle: "border-border border-l-4 border-l-accent-emerald bg-card",
     ids: ["stand", "sit", "enter", "leave", "walk", "run"],
   },
   {
@@ -60,9 +62,10 @@ const ACTION_GROUPS = [
     title: "Everyday classroom actions",
     description: "Practical actions for objects, pictures, and classroom activities.",
     icon: Shapes,
-    surface: "border-accent-amber/35 bg-accent-amber-soft/35",
+    surface: "border-accent-amber/45 bg-card",
     iconStyle: "bg-accent-amber-soft text-accent-amber",
-    cardStyle: "border-accent-amber/25 bg-accent-amber-soft/25",
+    countStyle: "border-accent-amber/30 bg-accent-amber-soft text-accent-amber",
+    cardStyle: "border-border border-l-4 border-l-accent-amber bg-card",
     ids: ["open", "close", "draw", "colour", "take", "give", "point", "watch", "wipe"],
   },
 ] as const;
@@ -140,29 +143,39 @@ function ActionsInContext() {
           title={`${LEVEL_TWO_ACTIONS.length} present-tense actions`}
           description="The colours group related ideas. Each Arabic form means ‘he …’; use the information icon for an occasional extra note."
         />
-        <div className="space-y-5">
-          {ACTION_GROUPS.map((group) => {
+        <div className="space-y-3">
+          {ACTION_GROUPS.map((group, groupIndex) => {
             const actions = LEVEL_TWO_ACTIONS.filter((action) =>
               (group.ids as readonly string[]).includes(action.id),
             );
             const Icon = group.icon;
             return (
-              <section key={group.id} className={cn("rounded-3xl border p-4 sm:p-6", group.surface)}>
-                <header className="mb-4 flex items-start gap-3">
+              <details
+                key={group.id}
+                open={groupIndex === 0}
+                className={cn("group overflow-hidden rounded-3xl border shadow-sm", group.surface)}
+              >
+                <summary className="flex cursor-pointer list-none items-center gap-3 p-4 focus-ring sm:p-5 [&::-webkit-details-marker]:hidden">
                   <span className={cn("flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl", group.iconStyle)}>
                     <Icon className="h-5 w-5" aria-hidden />
                   </span>
-                  <div>
-                    <h3 className="text-lg font-semibold">{group.title}</h3>
-                    <p className="mt-0.5 text-sm text-muted-foreground">{group.description}</p>
+                  <span className="min-w-0 flex-1">
+                    <span className="block text-lg font-semibold">{group.title}</span>
+                    <span className="mt-0.5 block text-sm text-muted-foreground">{group.description}</span>
+                  </span>
+                  <span className={cn("hidden rounded-full border px-2.5 py-1 text-xs font-semibold tabular-nums sm:inline-flex", group.countStyle)}>
+                    {actions.length} actions
+                  </span>
+                  <ChevronDown className="h-5 w-5 shrink-0 text-muted-foreground transition-transform group-open:rotate-180" aria-hidden />
+                </summary>
+                <div className="border-t border-border bg-background-soft/40 p-4 sm:p-5">
+                  <div className="grid auto-rows-fr grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                    {actions.map((action) => (
+                      <ActionCard key={action.id} action={action} className={group.cardStyle} />
+                    ))}
                   </div>
-                </header>
-                <div className="grid auto-rows-fr grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                  {actions.map((action) => (
-                    <ActionCard key={action.id} action={action} className={group.cardStyle} />
-                  ))}
                 </div>
-              </section>
+              </details>
             );
           })}
         </div>
@@ -194,9 +207,9 @@ function ActionCard({
   className: string;
 }) {
   return (
-    <article className={cn("relative flex min-h-44 flex-col items-center justify-center rounded-2xl border p-4", className)}>
+    <article className={cn("relative flex min-h-36 flex-col items-center justify-center rounded-2xl border p-4 shadow-sm", className)}>
       {action.note ? <InformationTip label={`More about ${action.arabic}`}>{action.note}</InformationTip> : null}
-      <ArabicText variant="display" className="text-center text-5xl leading-relaxed sm:text-6xl">
+      <ArabicText variant="display" className="text-center text-4xl leading-relaxed sm:text-5xl">
         {action.arabic}
       </ArabicText>
       <p lang="ar-Latn" className="mt-2 text-center text-sm italic text-foreground-soft">
