@@ -398,3 +398,16 @@ There are now no source-reading questions blocking content modelling. Any future
 - The source plural `مَمَاحٍ` for `مِمْحَاة` and `مَبَارٍ` for `مِبْرَاة` were cross-checked against dictionary records derived from *al-Muʿjam al-Wasīṭ* and modern Arabic lexica. These replace the current website's regularised but inaccurate plurals.
 
 The audit is ready to become the controlled source for Level 2 modelling. Religious quotations and any newly introduced examples still require the same per-item source check during implementation.
+
+## 13. Bayt to Masjid vocabulary cards (supplied October 2026)
+
+Source: thirteen Level 2 vocabulary cards (`bayt` to `masjid`) supplied by the course owner as images and HTML. Published data lives in `src/data/level-two-vocab-sets.ts`; every form, headword, and sentence word is derived into the vocabulary bank by `getLevelTwoVocabularyEntries()`.
+
+- All 28 example sentences are kept exactly as supplied, split into glossed words. The validator checks that the word-by-word transliterations rebuild each sentence's transliteration.
+- **Normalised:** transliteration uses `ʿ` for ʿayn and `ʾ` for hamza instead of the cards' `‘` and `’`.
+- Word glosses inside sentences (for example `قَارَّاتٍ` "continents") are editorial additions, not part of the cards.
+- Points raised with the course owner (kept as supplied until confirmed):
+  1. `تَكَوَّنَ العَالَمُ مِنْ سَبْعِ قَارَّاتٍ` uses the past form with a present-tense English translation; `يَتَكَوَّنُ` would match "is made up of".
+  2. The command `تَكَوَّنْ` ("be formed!") is rare in real use.
+  3. `هَيْدْرُوجِين وَأُكْسِجِين` carry no case ending, unlike the other fully vowelled nouns (`هَيْدْرُوجِينٍ وَأُكْسِجِينٍ`).
+  4. Eight of the follow-up questions (for example `أَيْنَ البَيْتُ؟` on the `shāriʿ` card) do not contain the card's own word.
