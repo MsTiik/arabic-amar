@@ -5,6 +5,7 @@ import {
   LEVEL_TWO_CLASSROOM_VOCABULARY,
   LEVEL_TWO_MARKETPLACE_READING,
 } from "../../src/data/level-two-lessons";
+import { LEVEL_TWO_VOCAB_SETS } from "../../src/data/level-two-vocab-sets";
 import { VERB_FAMILIES } from "../../src/data/verb-families";
 import { getSiteContent } from "../../src/lib/content";
 import { foldForSearch } from "../../src/lib/diacritics";
@@ -62,6 +63,42 @@ describe("Level 2 vocabulary bank coverage", () => {
         expectArabicInLevelTwoBank(form.arabic);
       }
     }
+  });
+
+  test("includes every form, headword, and sentence word from the vocabulary sets", () => {
+    for (const set of LEVEL_TWO_VOCAB_SETS) {
+      for (const word of set.words) {
+        expectArabicInLevelTwoBank(word.headword.arabic);
+        for (const item of word.forms.flatMap((form) => form.items)) {
+          expectArabicInLevelTwoBank(item.arabic);
+        }
+        for (const token of word.sentences.flatMap((sentence) => sentence.tokens)) {
+          expectArabicInLevelTwoBank(token.arabic.replace(/[()]/g, ""));
+        }
+      }
+    }
+  });
+
+  test("finds Bayt to Masjid words by Arabic, transliteration, and English", () => {
+    const matches = (query: string) => {
+      const folded = foldForSearch(query);
+      return bank.vocab.filter((entry) =>
+        [entry.arabicFolded, foldForSearch(entry.pronunciation ?? ""), foldForSearch(entry.english)]
+          .some((field) => field.includes(folded)),
+      );
+    };
+    expect(matches("continents").map((entry) => entry.arabic)).toContain("قَارَّاتٍ");
+    expect(matches("qarrat").map((entry) => entry.arabic)).toContain("قَارَّاتٍ");
+    expect(matches("قارات").map((entry) => entry.english)).toContain("continents");
+    expect(matches("hadaiq").map((entry) => entry.arabic)).toContain("حَدَائِق");
+    expect(matches("prostration").map((entry) => entry.arabic)).toContain("سُجُود");
+    expect(matches("مسجد").some((entry) => entry.topicSlugs.includes("level-2-home-and-places"))).toBe(true);
+  });
+
+  test("lists Home and Places as its own vocabulary-bank topics", () => {
+    const slugs = bank.topics.map((topic) => topic.slug);
+    expect(slugs).toContain("level-2-home-and-places");
+    expect(slugs).toContain("level-2-home-and-places-sentences");
   });
 
   test("finds he takes by English and transliteration", () => {

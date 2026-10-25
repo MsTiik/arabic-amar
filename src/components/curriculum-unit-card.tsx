@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, Languages, ShoppingBasket, Waypoints } from "lucide-react";
+import { ArrowRight, House, Languages, ShoppingBasket, Waypoints } from "lucide-react";
 
 import type { CurriculumUnit } from "@/data/curriculum";
 import { cn } from "@/lib/cn";
@@ -12,6 +12,10 @@ const UNIT_IDENTITIES = {
   "actions-in-context": {
     icon: Languages,
     chip: "bg-primary-soft text-primary",
+  },
+  "home-and-places": {
+    icon: House,
+    chip: "bg-accent-rose-soft text-accent-rose",
   },
   "core-verb-families": {
     icon: Waypoints,

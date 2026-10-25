@@ -8,6 +8,7 @@ import {
   LEVEL_TWO_MARKETPLACE_READING,
   LEVEL_TWO_MATCHING_PHRASES,
 } from "@/data/level-two-lessons";
+import { LEVEL_TWO_VOCAB_SETS, LEVEL_TWO_VOCAB_THEMES } from "@/data/level-two-vocab-sets";
 import { VERB_FAMILIES } from "@/data/verb-families";
 
 const ARABIC_RE = /[\u0600-\u06ff]/u;
@@ -182,6 +183,73 @@ export function validateLevelTwoPublishedContent(): LevelTwoValidationIssue[] {
           location: exampleLocation,
           message: "Qur’an and hadith examples require an HTTPS source link.",
         });
+      }
+    }
+  }
+
+  for (const theme of LEVEL_TWO_VOCAB_THEMES) {
+    const themeLocation = `vocab-theme.${theme.slug}`;
+    requireUniqueId(themeLocation, themeLocation);
+    requireText(theme.title, themeLocation, "Title");
+    requireArabic(theme.titleArabic, `${themeLocation}.title`);
+    if (theme.sets.length === 0) issues.push({ location: themeLocation, message: "A vocabulary theme needs at least one set." });
+  }
+
+  for (const set of LEVEL_TWO_VOCAB_SETS) {
+    const setLocation = `vocab-set.${set.slug}`;
+    requireUniqueId(setLocation, setLocation);
+    requireText(set.title, setLocation, "Title");
+    requireArabic(set.titleArabic, `${setLocation}.title`);
+    requireText(set.source, setLocation, "Source");
+    if (set.words.length === 0) issues.push({ location: setLocation, message: "A vocabulary set needs words." });
+
+    for (const word of set.words) {
+      const location = `${setLocation}.${word.id}`;
+      requireUniqueId(location, location);
+      requireReviewStatus(word.reviewStatus, location);
+      requireArabic(word.headword.arabic, `${location}.headword`);
+      requireTransliteration(word.headword.transliteration, `${location}.headword`);
+      requireText(word.headword.english, `${location}.headword`, "English");
+      if (word.forms.length === 0) issues.push({ location, message: "A word card needs at least one form." });
+      const roles = new Set<string>();
+      for (const form of word.forms) {
+        const formLocation = `${location}.${form.role}`;
+        if (roles.has(form.role)) issues.push({ location: formLocation, message: "Each form role may appear once per card." });
+        roles.add(form.role);
+        if (form.items.length === 0) issues.push({ location: formLocation, message: "A form needs at least one item." });
+        for (const item of form.items) {
+          requireArabic(item.arabic, formLocation);
+          requireTransliteration(item.transliteration, formLocation);
+          requireText(item.english, formLocation, "English");
+        }
+      }
+      if (!word.sentences.some((sentence) => sentence.tokens.some((token) => token.focus))) {
+        issues.push({ location, message: "At least one example sentence must use the card’s word (mark it with focus)." });
+      }
+      if (word.sentences.length === 0) {
+        issues.push({ location, message: "Every vocabulary word needs at least one example sentence." });
+      }
+      for (const sentence of word.sentences) {
+        const sentenceLocation = `${location}.sentence.${sentence.id}`;
+        requireUniqueId(`${setLocation}.sentence.${sentence.id}`, sentenceLocation);
+        requireTransliteration(sentence.transliteration, sentenceLocation);
+        requireText(sentence.english, sentenceLocation, "English");
+        if (sentence.tokens.length === 0) issues.push({ location: sentenceLocation, message: "A sentence needs tokens." });
+        for (const [index, token] of sentence.tokens.entries()) {
+          const tokenLocation = `${sentenceLocation}.token.${index + 1}`;
+          requireArabic(token.arabic, tokenLocation);
+          requireTransliteration(token.transliteration, tokenLocation);
+          requireText(token.english, tokenLocation, "English");
+        }
+        const tokenTransliteration = sentence.tokens
+          .map((token) => `${token.transliteration}${(token.punctuationAfter ?? "").replace("؟", "?")}`)
+          .join(" ");
+        if (tokenTransliteration !== sentence.transliteration) {
+          issues.push({
+            location: sentenceLocation,
+            message: `Word glosses do not line up with the sentence transliteration (“${tokenTransliteration}”).`,
+          });
+        }
       }
     }
   }

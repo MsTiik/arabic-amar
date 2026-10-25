@@ -72,6 +72,17 @@ const LEVEL_TWO_UNITS: readonly CurriculumUnit[] = [
       { href: "/practice/verb-families", label: "Explore the five verb families" },
     ],
   },
+  {
+    id: "home-and-places",
+    title: "Home and Places",
+    description:
+      "Words for the home, its rooms and the places around it, with plurals, opposites, verb forms, and example sentences you can explore word by word. Starts with the Bayt to Masjid set.",
+    topicSlugs: [],
+    links: [
+      { href: "/levels/level-2/home-and-places", label: "Open the word cards" },
+      { href: "/vocabulary", label: "Search the vocabulary bank" },
+    ],
+  },
 ] as const;
 
 export const CURRICULUM_LEVELS: readonly CurriculumLevel[] = [

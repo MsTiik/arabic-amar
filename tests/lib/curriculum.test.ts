@@ -31,6 +31,7 @@ describe("curriculum levels", () => {
       "marketplace-reading",
       "actions-in-context",
       "core-verb-families",
+      "home-and-places",
     ]);
   });
 

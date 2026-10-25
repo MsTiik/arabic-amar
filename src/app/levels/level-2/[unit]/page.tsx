@@ -13,12 +13,14 @@ import {
 
 import { ArabicText } from "@/components/arabic-text";
 import { InteractiveArabicReading } from "@/components/interactive-arabic-reading";
+import { VocabSetView } from "@/components/vocab-set-view";
 import {
   LEVEL_TWO_ACTIONS,
   LEVEL_TWO_ACTION_SENTENCES,
   type LevelTwoAction,
   type LevelTwoSentence,
 } from "@/data/level-two-lessons";
+import { LEVEL_TWO_VOCAB_THEMES, getLevelTwoVocabTheme } from "@/data/level-two-vocab-sets";
 import { cn } from "@/lib/cn";
 
 const UNIT_META = {
@@ -76,7 +78,10 @@ const ACTION_GROUPS = [
 type UnitSlug = keyof typeof UNIT_META;
 
 export function generateStaticParams() {
-  return Object.keys(UNIT_META).map((unit) => ({ unit }));
+  return [
+    ...Object.keys(UNIT_META),
+    ...LEVEL_TWO_VOCAB_THEMES.map((theme) => theme.slug),
+  ].map((unit) => ({ unit }));
 }
 
 export async function generateMetadata({
@@ -85,7 +90,7 @@ export async function generateMetadata({
   params: Promise<{ unit: string }>;
 }) {
   const { unit } = await params;
-  const meta = UNIT_META[unit as UnitSlug];
+  const meta = UNIT_META[unit as UnitSlug] ?? getLevelTwoVocabTheme(unit);
   return meta ? { title: `${meta.title} · Level 2` } : {};
 }
 
@@ -95,6 +100,8 @@ export default async function LevelTwoUnitPage({
   params: Promise<{ unit: string }>;
 }) {
   const { unit } = await params;
+  const vocabTheme = getLevelTwoVocabTheme(unit);
+  if (vocabTheme) return <VocabThemePage theme={vocabTheme} />;
   if (!(unit in UNIT_META)) notFound();
   const slug = unit as UnitSlug;
   const meta = UNIT_META[slug];
@@ -118,6 +125,39 @@ export default async function LevelTwoUnitPage({
 
       {slug === "marketplace-reading" ? <MarketplaceReading /> : null}
       {slug === "actions-in-context" ? <ActionsInContext /> : null}
+    </div>
+  );
+}
+
+function VocabThemePage({ theme }: { theme: NonNullable<ReturnType<typeof getLevelTwoVocabTheme>> }) {
+  return (
+    <div className="mx-auto w-full max-w-6xl px-4 py-8 sm:py-10">
+      <header className="brand-panel rounded-[18px] shadow-[var(--shadow-md),inset_0_1px_0_oklch(1_0_0/8%)] p-5 sm:p-8">
+        <Link
+          href="/levels/level-2"
+          className="text-sm text-muted-foreground hover:text-foreground"
+        >
+          ← Level 2 topics
+        </Link>
+        <p className="mt-4 section-label">Level 2 vocabulary</p>
+        <div className="mt-1 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
+          <h1 className="page-title">{theme.title}</h1>
+          <ArabicText variant="display" as="p" className="text-2xl text-foreground-soft sm:text-3xl">
+            {theme.titleArabic}
+          </ArabicText>
+        </div>
+        <p className="mt-2 max-w-3xl text-base leading-relaxed text-foreground-soft">
+          {theme.description}
+        </p>
+        <Link href="/vocabulary" className="mt-4 btn btn-secondary btn-sm">
+          Search these words in the vocabulary bank
+          <ArrowRight className="h-3.5 w-3.5" aria-hidden />
+        </Link>
+      </header>
+
+      <section className="mt-8" aria-label={`${theme.title} word cards`}>
+        <VocabSetView theme={theme} />
+      </section>
     </div>
   );
 }
@@ -173,11 +213,6 @@ function ActionsInContext() {
                   <ChevronDown className="h-5 w-5 shrink-0 text-muted-foreground transition-transform group-open:rotate-180" aria-hidden />
                 </summary>
                 <div className="border-t border-border bg-background-soft/40 p-4 sm:p-5">
-                  <div className="grid auto-rows-fr grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                    {actions.map((action) => (
-                      <ActionCard key={action.id} action={action} className={group.cardStyle} />
-                    ))}
-                  </div>
                 <div className="grid auto-rows-fr grid-cols-2 gap-2 sm:gap-3 lg:grid-cols-3 xl:grid-cols-4">
                   {actions.map((action) => (
                     <ActionCard key={action.id} action={action} className={group.cardStyle} />
