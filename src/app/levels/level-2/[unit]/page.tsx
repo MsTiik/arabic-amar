@@ -20,7 +20,7 @@ import {
   type LevelTwoAction,
   type LevelTwoSentence,
 } from "@/data/level-two-lessons";
-import { LEVEL_TWO_VOCAB_SETS, getLevelTwoVocabSet } from "@/data/level-two-vocab-sets";
+import { LEVEL_TWO_VOCAB_THEMES, getLevelTwoVocabTheme } from "@/data/level-two-vocab-sets";
 import { cn } from "@/lib/cn";
 
 const UNIT_META = {
@@ -80,7 +80,7 @@ type UnitSlug = keyof typeof UNIT_META;
 export function generateStaticParams() {
   return [
     ...Object.keys(UNIT_META),
-    ...LEVEL_TWO_VOCAB_SETS.map((set) => set.slug),
+    ...LEVEL_TWO_VOCAB_THEMES.map((theme) => theme.slug),
   ].map((unit) => ({ unit }));
 }
 
@@ -90,7 +90,7 @@ export async function generateMetadata({
   params: Promise<{ unit: string }>;
 }) {
   const { unit } = await params;
-  const meta = UNIT_META[unit as UnitSlug] ?? getLevelTwoVocabSet(unit);
+  const meta = UNIT_META[unit as UnitSlug] ?? getLevelTwoVocabTheme(unit);
   return meta ? { title: `${meta.title} · Level 2` } : {};
 }
 
@@ -100,8 +100,8 @@ export default async function LevelTwoUnitPage({
   params: Promise<{ unit: string }>;
 }) {
   const { unit } = await params;
-  const vocabSet = getLevelTwoVocabSet(unit);
-  if (vocabSet) return <VocabSetPage set={vocabSet} />;
+  const vocabTheme = getLevelTwoVocabTheme(unit);
+  if (vocabTheme) return <VocabThemePage theme={vocabTheme} />;
   if (!(unit in UNIT_META)) notFound();
   const slug = unit as UnitSlug;
   const meta = UNIT_META[slug];
@@ -129,7 +129,7 @@ export default async function LevelTwoUnitPage({
   );
 }
 
-function VocabSetPage({ set }: { set: NonNullable<ReturnType<typeof getLevelTwoVocabSet>> }) {
+function VocabThemePage({ theme }: { theme: NonNullable<ReturnType<typeof getLevelTwoVocabTheme>> }) {
   return (
     <div className="mx-auto w-full max-w-6xl px-4 py-8 sm:py-10">
       <header className="brand-panel rounded-[18px] shadow-[var(--shadow-md),inset_0_1px_0_oklch(1_0_0/8%)] p-5 sm:p-8">
@@ -141,13 +141,13 @@ function VocabSetPage({ set }: { set: NonNullable<ReturnType<typeof getLevelTwoV
         </Link>
         <p className="mt-4 section-label">Level 2 vocabulary</p>
         <div className="mt-1 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
-          <h1 className="page-title">{set.title}</h1>
+          <h1 className="page-title">{theme.title}</h1>
           <ArabicText variant="display" as="p" className="text-2xl text-foreground-soft sm:text-3xl">
-            {set.titleArabic}
+            {theme.titleArabic}
           </ArabicText>
         </div>
         <p className="mt-2 max-w-3xl text-base leading-relaxed text-foreground-soft">
-          {set.description}
+          {theme.description}
         </p>
         <Link href="/vocabulary" className="mt-4 btn btn-secondary btn-sm">
           Search these words in the vocabulary bank
@@ -155,8 +155,8 @@ function VocabSetPage({ set }: { set: NonNullable<ReturnType<typeof getLevelTwoV
         </Link>
       </header>
 
-      <section className="mt-8" aria-label={`${set.title} word cards`}>
-        <VocabSetView set={set} />
+      <section className="mt-8" aria-label={`${theme.title} word cards`}>
+        <VocabSetView theme={theme} />
       </section>
     </div>
   );

@@ -58,6 +58,15 @@ export interface LevelTwoVocabSet {
   words: readonly VocabSetWord[];
 }
 
+/** A broad Level 2 vocabulary theme (one unit page) that grows by adding sets. */
+export interface LevelTwoVocabTheme {
+  slug: string;
+  title: string;
+  titleArabic: string;
+  description: string;
+  sets: readonly LevelTwoVocabSet[];
+}
+
 export const VOCAB_SET_FORM_LABELS: Record<
   VocabSetFormRole,
   { english: string; arabic: string }
@@ -579,11 +588,24 @@ const BAYT_TO_MASJID: LevelTwoVocabSet = {
   ],
 };
 
-/** Level 2 vocabulary sets, in the order they were supplied. Add new sets here. */
-export const LEVEL_TWO_VOCAB_SETS: readonly LevelTwoVocabSet[] = [BAYT_TO_MASJID];
+const HOME_AND_PLACES: LevelTwoVocabTheme = {
+  slug: "home-and-places",
+  title: "Home and Places",
+  titleArabic: "البَيْتُ وَالأَمَاكِنُ",
+  description:
+    "Words for the home, its rooms and the places around it, with their forms and example sentences you can explore word by word.",
+  sets: [BAYT_TO_MASJID],
+};
 
-export function getLevelTwoVocabSet(slug: string): LevelTwoVocabSet | undefined {
-  return LEVEL_TWO_VOCAB_SETS.find((set) => set.slug === slug);
+/** Level 2 vocabulary themes. Add new word sets to a theme's `sets`, in the order supplied. */
+export const LEVEL_TWO_VOCAB_THEMES: readonly LevelTwoVocabTheme[] = [HOME_AND_PLACES];
+
+export const LEVEL_TWO_VOCAB_SETS: readonly LevelTwoVocabSet[] = LEVEL_TWO_VOCAB_THEMES.flatMap(
+  (theme) => theme.sets,
+);
+
+export function getLevelTwoVocabTheme(slug: string): LevelTwoVocabTheme | undefined {
+  return LEVEL_TWO_VOCAB_THEMES.find((theme) => theme.slug === slug);
 }
 
 export function sentenceArabic(sentence: VocabSetSentence): string {

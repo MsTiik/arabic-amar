@@ -8,7 +8,7 @@ import {
   LEVEL_TWO_MARKETPLACE_READING,
   LEVEL_TWO_MATCHING_PHRASES,
 } from "@/data/level-two-lessons";
-import { LEVEL_TWO_VOCAB_SETS } from "@/data/level-two-vocab-sets";
+import { LEVEL_TWO_VOCAB_SETS, LEVEL_TWO_VOCAB_THEMES } from "@/data/level-two-vocab-sets";
 import { VERB_FAMILIES } from "@/data/verb-families";
 
 const ARABIC_RE = /[\u0600-\u06ff]/u;
@@ -185,6 +185,14 @@ export function validateLevelTwoPublishedContent(): LevelTwoValidationIssue[] {
         });
       }
     }
+  }
+
+  for (const theme of LEVEL_TWO_VOCAB_THEMES) {
+    const themeLocation = `vocab-theme.${theme.slug}`;
+    requireUniqueId(themeLocation, themeLocation);
+    requireText(theme.title, themeLocation, "Title");
+    requireArabic(theme.titleArabic, `${themeLocation}.title`);
+    if (theme.sets.length === 0) issues.push({ location: themeLocation, message: "A vocabulary theme needs at least one set." });
   }
 
   for (const set of LEVEL_TWO_VOCAB_SETS) {

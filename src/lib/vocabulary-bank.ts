@@ -4,21 +4,21 @@ import {
   LEVEL_TWO_MARKETPLACE_READING,
 } from "@/data/level-two-lessons";
 import {
-  LEVEL_TWO_VOCAB_SETS,
+  LEVEL_TWO_VOCAB_THEMES,
   VOCAB_SET_FORM_LABELS,
-  type LevelTwoVocabSet,
+  type LevelTwoVocabTheme,
   type VocabSetItem,
 } from "@/data/level-two-vocab-sets";
 import { VERB_FAMILIES, VERB_FORM_KEYS } from "@/data/verb-families";
 import { foldForSearch } from "@/lib/diacritics";
 import type { SiteContent, Topic, VocabEntry } from "@/lib/types";
 
-export function vocabSetTopicSlug(set: Pick<LevelTwoVocabSet, "slug">): string {
-  return `level-2-${set.slug}`;
+export function vocabThemeTopicSlug(theme: Pick<LevelTwoVocabTheme, "slug">): string {
+  return `level-2-${theme.slug}`;
 }
 
-export function vocabSetSentenceTopicSlug(set: Pick<LevelTwoVocabSet, "slug">): string {
-  return `level-2-${set.slug}-sentences`;
+export function vocabThemeSentenceTopicSlug(theme: Pick<LevelTwoVocabTheme, "slug">): string {
+  return `level-2-${theme.slug}-sentences`;
 }
 
 const LEVEL_TWO_TOPICS: readonly { slug: string; name: string }[] = [
@@ -38,9 +38,9 @@ const LEVEL_TWO_TOPICS: readonly { slug: string; name: string }[] = [
     slug: "level-2-marketplace-reading",
     name: "Level 2 · Marketplace reading",
   },
-  ...LEVEL_TWO_VOCAB_SETS.flatMap((set) => [
-    { slug: vocabSetTopicSlug(set), name: `Level 2 · ${set.title}` },
-    { slug: vocabSetSentenceTopicSlug(set), name: `Level 2 · ${set.title} sentence words` },
+  ...LEVEL_TWO_VOCAB_THEMES.flatMap((theme) => [
+    { slug: vocabThemeTopicSlug(theme), name: `Level 2 · ${theme.title}` },
+    { slug: vocabThemeSentenceTopicSlug(theme), name: `Level 2 · ${theme.title} sentence words` },
   ]),
 ];
 
@@ -186,17 +186,18 @@ export function getLevelTwoVocabularyEntries(): VocabEntry[] {
     }
   }
 
-  for (const set of LEVEL_TWO_VOCAB_SETS) words.push(...vocabSetBankWords(set));
+  for (const theme of LEVEL_TWO_VOCAB_THEMES) words.push(...vocabThemeBankWords(theme));
 
   return words.map(toVocabEntry);
 }
 
-/** Every form on a vocabulary-set card, plus each distinct word in its sentences. */
-function vocabSetBankWords(set: LevelTwoVocabSet): LevelTwoBankWord[] {
+/** Every form on a theme's word cards, plus each distinct word in their sentences. */
+function vocabThemeBankWords(theme: LevelTwoVocabTheme): LevelTwoBankWord[] {
   const words: LevelTwoBankWord[] = [];
   const seenForms = new Set<string>();
   const seenArabic = new Set<string>();
-  const category = `Level 2 · ${set.title}`;
+  const seenTokens = new Set<string>();
+  const category = `Level 2 · ${theme.title}`;
 
   const addForm = (item: VocabSetItem, id: string, subCategory: string) => {
     const key = `${foldForSearch(item.arabic)}\u0000${foldForSearch(item.english)}`;
@@ -204,49 +205,52 @@ function vocabSetBankWords(set: LevelTwoVocabSet): LevelTwoBankWord[] {
     seenForms.add(key);
     seenArabic.add(foldForSearch(item.arabic));
     words.push({
-      id: `${set.slug}__${id}`,
+      id,
       arabic: item.arabic,
       pronunciation: item.transliteration,
       english: item.english,
       category,
       subCategory,
-      topicSlug: vocabSetTopicSlug(set),
+      topicSlug: vocabThemeTopicSlug(theme),
     });
   };
 
-  for (const word of set.words) {
-    const name = word.headword.transliteration;
-    for (const form of word.forms) {
-      for (const [index, item] of form.items.entries()) {
-        addForm(
-          item,
-          `${word.id}__${form.role}__${index + 1}`,
-          `${name} · ${VOCAB_SET_FORM_LABELS[form.role].english}`,
-        );
+  for (const set of theme.sets) {
+    for (const word of set.words) {
+      const name = `${set.title} · ${word.headword.transliteration}`;
+      for (const form of word.forms) {
+        for (const [index, item] of form.items.entries()) {
+          addForm(
+            item,
+            `${set.slug}__${word.id}__${form.role}__${index + 1}`,
+            `${name} · ${VOCAB_SET_FORM_LABELS[form.role].english}`,
+          );
+        }
       }
-    }
-    if (!seenArabic.has(foldForSearch(word.headword.arabic))) {
-      addForm(word.headword, `${word.id}__headword`, `${name} · Headword`);
+      if (!seenArabic.has(foldForSearch(word.headword.arabic))) {
+        addForm(word.headword, `${set.slug}__${word.id}__headword`, `${name} · Headword`);
+      }
     }
   }
 
-  const seenTokens = new Set<string>();
-  for (const word of set.words) {
-    for (const sentence of word.sentences) {
-      for (const [index, token] of sentence.tokens.entries()) {
-        const arabic = token.arabic.replace(/[()]/g, "");
-        const folded = foldForSearch(arabic);
-        if (seenArabic.has(folded) || seenTokens.has(folded)) continue;
-        seenTokens.add(folded);
-        words.push({
-          id: `${set.slug}__sentence__${sentence.id}__${index + 1}`,
-          arabic,
-          pronunciation: token.transliteration.replace(/[()]/g, ""),
-          english: token.english,
-          category,
-          subCategory: `Example sentence · ${word.headword.transliteration}`,
-          topicSlug: vocabSetSentenceTopicSlug(set),
-        });
+  for (const set of theme.sets) {
+    for (const word of set.words) {
+      for (const sentence of word.sentences) {
+        for (const [index, token] of sentence.tokens.entries()) {
+          const arabic = token.arabic.replace(/[()]/g, "");
+          const folded = foldForSearch(arabic);
+          if (seenArabic.has(folded) || seenTokens.has(folded)) continue;
+          seenTokens.add(folded);
+          words.push({
+            id: `${set.slug}__sentence__${sentence.id}__${index + 1}`,
+            arabic,
+            pronunciation: token.transliteration.replace(/[()]/g, ""),
+            english: token.english,
+            category,
+            subCategory: `${set.title} · Example sentence · ${word.headword.transliteration}`,
+            topicSlug: vocabThemeSentenceTopicSlug(theme),
+          });
+        }
       }
     }
   }

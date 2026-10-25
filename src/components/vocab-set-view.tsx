@@ -8,7 +8,7 @@ import { SpeakerButton } from "@/components/speaker-button";
 import {
   VOCAB_SET_FORM_LABELS,
   sentenceArabic,
-  type LevelTwoVocabSet,
+  type LevelTwoVocabTheme,
   type VocabSetForm,
   type VocabSetSentence,
   type VocabSetToken,
@@ -31,7 +31,9 @@ interface SelectedToken {
   token: VocabSetToken;
 }
 
-export function VocabSetView({ set }: { set: LevelTwoVocabSet }) {
+export function VocabSetView({ theme }: { theme: LevelTwoVocabTheme }) {
+  const [setSlug, setSetSlug] = useState(theme.sets[0].slug);
+  const set = theme.sets.find((entry) => entry.slug === setSlug) ?? theme.sets[0];
   const [filter, setFilter] = useState<KindFilter>("all");
   const [showTransliteration, setShowTransliteration] = useState(true);
   const [showEnglish, setShowEnglish] = useState(true);
@@ -52,6 +54,13 @@ export function VocabSetView({ set }: { set: LevelTwoVocabSet }) {
   );
   const words = set.words.filter((word) => filter === "all" || word.kind === filter);
 
+  function chooseSet(slug: string) {
+    setSetSlug(slug);
+    setFilter("all");
+    setSelected(null);
+    setSheetOpen(false);
+  }
+
   function selectToken(key: string, token: VocabSetToken) {
     setSelected({ key, token });
     // Touch screens cannot hover, so a tap opens the meaning in a sheet.
@@ -60,6 +69,36 @@ export function VocabSetView({ set }: { set: LevelTwoVocabSet }) {
 
   return (
     <div className="space-y-5">
+      <div className="space-y-3">
+        {theme.sets.length > 1 ? (
+          <div className="-mx-4 overflow-x-auto px-4 sm:mx-0 sm:px-0">
+            <div className="segmented" role="group" aria-label={`${theme.title} word sets`}>
+              {theme.sets.map((entry) => (
+                <FilterButton
+                  key={entry.slug}
+                  active={entry.slug === set.slug}
+                  onClick={() => chooseSet(entry.slug)}
+                >
+                  <span className="whitespace-nowrap">{entry.title}</span>
+                </FilterButton>
+              ))}
+            </div>
+          </div>
+        ) : null}
+        <div>
+          <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+            <h2 className="text-lg font-semibold">{set.title}</h2>
+            <ArabicText variant="inline" className="text-xl text-foreground-soft">
+              {set.titleArabic}
+            </ArabicText>
+            <span className="text-sm tabular-nums text-muted-foreground">
+              {set.words.length} words
+            </span>
+          </div>
+          <p className="mt-1 text-sm text-muted-foreground">{set.description}</p>
+        </div>
+      </div>
+
       <div className="surface flex flex-col gap-3 p-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between sm:p-4">
         <div className="segmented" role="group" aria-label="Show word types">
           <FilterButton active={filter === "all"} onClick={() => setFilter("all")}>

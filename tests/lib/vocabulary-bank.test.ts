@@ -92,13 +92,13 @@ describe("Level 2 vocabulary bank coverage", () => {
     expect(matches("قارات").map((entry) => entry.english)).toContain("continents");
     expect(matches("hadaiq").map((entry) => entry.arabic)).toContain("حَدَائِق");
     expect(matches("prostration").map((entry) => entry.arabic)).toContain("سُجُود");
-    expect(matches("مسجد").some((entry) => entry.topicSlugs.includes("level-2-bayt-to-masjid"))).toBe(true);
+    expect(matches("مسجد").some((entry) => entry.topicSlugs.includes("level-2-home-and-places"))).toBe(true);
   });
 
-  test("lists Bayt to Masjid as its own vocabulary-bank topics", () => {
+  test("lists Home and Places as its own vocabulary-bank topics", () => {
     const slugs = bank.topics.map((topic) => topic.slug);
-    expect(slugs).toContain("level-2-bayt-to-masjid");
-    expect(slugs).toContain("level-2-bayt-to-masjid-sentences");
+    expect(slugs).toContain("level-2-home-and-places");
+    expect(slugs).toContain("level-2-home-and-places-sentences");
   });
 
   test("finds he takes by English and transliteration", () => {

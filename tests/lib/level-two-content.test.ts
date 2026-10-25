@@ -10,12 +10,17 @@ import {
   LEVEL_TWO_MATCHING_PHRASES,
 } from "../../src/data/level-two-lessons";
 import { VERB_FAMILIES } from "../../src/data/verb-families";
-import { LEVEL_TWO_VOCAB_SETS } from "../../src/data/level-two-vocab-sets";
+import { LEVEL_TWO_VOCAB_SETS, LEVEL_TWO_VOCAB_THEMES } from "../../src/data/level-two-vocab-sets";
 import { validateLevelTwoPublishedContent } from "../../src/lib/level-two-content";
 
 describe("published Level 2 content", () => {
   test("passes the publication accuracy gate", () => {
     expect(validateLevelTwoPublishedContent()).toEqual([]);
+  });
+
+  test("groups Bayt to Masjid under the Home and Places theme", () => {
+    expect(LEVEL_TWO_VOCAB_THEMES.map((theme) => theme.slug)).toEqual(["home-and-places"]);
+    expect(LEVEL_TWO_VOCAB_THEMES[0].sets.map((set) => set.slug)).toEqual(["bayt-to-masjid"]);
   });
 
   test("keeps every Bayt to Masjid card and example sentence", () => {

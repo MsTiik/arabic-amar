@@ -401,7 +401,7 @@ The audit is ready to become the controlled source for Level 2 modelling. Religi
 
 ## 13. Bayt to Masjid vocabulary cards (supplied October 2026)
 
-Source: thirteen Level 2 vocabulary cards (`bayt` to `masjid`) supplied by the course owner as images and HTML. Published data lives in `src/data/level-two-vocab-sets.ts`; every form, headword, and sentence word is derived into the vocabulary bank by `getLevelTwoVocabularyEntries()`.
+Source: thirteen Level 2 vocabulary cards (`bayt` to `masjid`) supplied by the course owner as images and HTML. Published data lives in `src/data/level-two-vocab-sets.ts` as the first set of the **Home and Places** theme (`/levels/level-2/home-and-places`), which later home, room and place vocabulary will join; every form, headword, and sentence word is derived into the vocabulary bank by `getLevelTwoVocabularyEntries()`.
 
 - All 28 example sentences are kept exactly as supplied, split into glossed words. The validator checks that the word-by-word transliterations rebuild each sentence's transliteration.
 - **Normalised:** transliteration uses `ʿ` for ʿayn and `ʾ` for hamza instead of the cards' `‘` and `’`.

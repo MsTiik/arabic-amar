@@ -13,7 +13,7 @@ const UNIT_IDENTITIES = {
     icon: Languages,
     chip: "bg-primary-soft text-primary",
   },
-  "bayt-to-masjid": {
+  "home-and-places": {
     icon: House,
     chip: "bg-accent-rose-soft text-accent-rose",
   },

@@ -31,7 +31,7 @@ describe("curriculum levels", () => {
       "marketplace-reading",
       "actions-in-context",
       "core-verb-families",
-      "bayt-to-masjid",
+      "home-and-places",
     ]);
   });
 

@@ -73,13 +73,13 @@ const LEVEL_TWO_UNITS: readonly CurriculumUnit[] = [
     ],
   },
   {
-    id: "bayt-to-masjid",
-    title: "Bayt to Masjid",
+    id: "home-and-places",
+    title: "Home and Places",
     description:
-      "Thirteen words for the house, the street, and the mosque, with their plurals, opposites, verb forms, and example sentences you can explore word by word.",
+      "Words for the home, its rooms and the places around it, with plurals, opposites, verb forms, and example sentences you can explore word by word. Starts with the Bayt to Masjid set.",
     topicSlugs: [],
     links: [
-      { href: "/levels/level-2/bayt-to-masjid", label: "Open the word cards" },
+      { href: "/levels/level-2/home-and-places", label: "Open the word cards" },
       { href: "/vocabulary", label: "Search the vocabulary bank" },
     ],
   },
