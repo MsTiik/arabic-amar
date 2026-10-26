@@ -10,7 +10,7 @@ import {
   type VocabSetItem,
 } from "@/data/level-two-vocab-sets";
 import { LEVEL_TWO_GRAMMAR_SHEETS, chartForms, plainArabic } from "@/data/level-two-grammar";
-import type { LevelTwoGrammarSheet } from "@/data/level-two-grammar";
+import type { GrammarItem, LevelTwoGrammarSheet } from "@/data/level-two-grammar";
 import { VERB_FAMILIES, VERB_FORM_KEYS } from "@/data/verb-families";
 import { foldForSearch } from "@/lib/diacritics";
 import type { SiteContent, Topic, VocabEntry } from "@/lib/types";
@@ -120,6 +120,21 @@ function grammarSheetBankWords(sheet: LevelTwoGrammarSheet): LevelTwoBankWord[] 
     for (const form of chartForms(verb, sheet.persons)) {
       push(`verb-${verb.id}-${form.person.id}`, `Verb chart · ${verb.english}`, form);
     }
+  }
+  const key = (item: GrammarItem) => `${foldForSearch(plainArabic(item.arabic))}\u0000${item.english}`;
+  const seen = new Set(words.map((word) => `${foldForSearch(word.arabic)}\u0000${word.english}`));
+  const pushNew = (id: string, subCategory: string, item: GrammarItem) => {
+    if (seen.has(key(item))) return;
+    seen.add(key(item));
+    push(id, subCategory, item);
+  };
+  for (const question of sheet.practice) {
+    for (const option of question.options) {
+      pushNew(`practice-${question.id}-${option.transliteration}`, "Practice answers", option);
+    }
+  }
+  for (const word of sheet.sentenceWords) {
+    pushNew(`sentence-word-${word.transliteration}`, "Words in the examples", word);
   }
   return words;
 }

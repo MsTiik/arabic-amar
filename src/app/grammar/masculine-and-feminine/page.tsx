@@ -60,9 +60,11 @@ export default function MasculineAndFemininePage() {
 
       <section id="feminine-nouns" className="mb-12 scroll-mt-32">
         <SectionHeader number={1} title="How to spot a feminine noun">
-          Every noun is either masculine or feminine. If a word ends in one of
-          these three, it&apos;s almost always feminine. No ending? Treat it as
-          masculine.
+          A noun is usually feminine when it ends in one of these three
+          endings. If it has none of them, it&apos;s usually masculine, but a
+          few everyday words are feminine without one, such as{" "}
+          <span lang="ar">أُمّ</span> (mother) and{" "}
+          <span lang="ar">أَرْض</span> (earth).
         </SectionHeader>
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
           {SHEET.markers.map((marker) => (

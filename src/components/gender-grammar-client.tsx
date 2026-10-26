@@ -100,14 +100,14 @@ function QuestionCard({ question, index }: { question: GrammarQuestion; index: n
       </ArabicText>
       <div className="mt-3 flex flex-wrap gap-2" dir="rtl">
         {question.options.map((option) => {
-          const isAnswer = option === question.answer;
-          const isPicked = option === picked;
+          const isAnswer = option.arabic === question.answer;
+          const isPicked = option.arabic === picked;
           return (
             <button
-              key={option}
+              key={option.arabic}
               type="button"
               disabled={answered}
-              onClick={() => setPicked(option)}
+              onClick={() => setPicked(option.arabic)}
               className={cn(
                 "inline-flex items-center gap-1.5 rounded-full border px-4 py-1.5 font-arabic text-xl focus-ring",
                 !answered && "border-hairline bg-background-soft hover:bg-muted",
@@ -116,7 +116,7 @@ function QuestionCard({ question, index }: { question: GrammarQuestion; index: n
                 answered && !isPicked && !isAnswer && "border-hairline opacity-60",
               )}
             >
-              <span lang="ar">{option}</span>
+              <span lang="ar">{option.arabic}</span>
               {answered && isAnswer ? <Check className="size-4" aria-hidden /> : null}
               {answered && isPicked && !isAnswer ? <X className="size-4" aria-hidden /> : null}
             </button>

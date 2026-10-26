@@ -95,6 +95,10 @@ describe("Level 2 vocabulary bank coverage", () => {
           expectArabicInLevelTwoBank(plainArabic(form.arabic));
         }
       }
+      for (const option of sheet.practice.flatMap((question) => question.options)) {
+        expectArabicInLevelTwoBank(option.arabic);
+      }
+      for (const word of sheet.sentenceWords) expectArabicInLevelTwoBank(word.arabic);
     }
   });
 
@@ -112,6 +116,10 @@ describe("Level 2 vocabulary bank coverage", () => {
     expect(matches("you (f.) study").map((entry) => entry.arabic)).toContain("تَدْرُسِينَ");
     expect(matches("tadrusina").map((entry) => entry.arabic)).toContain("تَدْرُسِينَ");
     expect(matches("صحراء").map((entry) => entry.english)).toContain("desert");
+    expect(matches("تشرح").map((entry) => entry.english)).toContain("she explains");
+    expect(matches("tashrahu").map((entry) => entry.arabic)).toContain("تَشْرَحُ");
+    expect(matches("المشتري").map((entry) => entry.english)).toContain("the buyer");
+    expect(matches("homework").map((entry) => entry.arabic)).toContain("وَاجِبٌ");
     expect(bank.topics.map((topic) => topic.slug)).toContain("level-2-masculine-and-feminine");
   });
 

@@ -426,4 +426,6 @@ Source: the "Masculine and Feminine" sheet supplied by the course owner as HTML,
 
 - All five parts are kept: feminine endings `ـة`, `ـى` and `ـاء` with examples; `هَذَا` / `هَذِهِ` and `مَنْ` / `مَا`; present-tense agreement for `هُوَ`, `هِيَ`, `أَنْتَ`, `أَنْتِ` and `أَنَا`; the ten-verb chart; and the 11 practice questions with their explanations.
 - **Normalised:** the verb chart is generated from each verb's stem, as the sheet's own script did. Transliterations and English glosses for chart forms (for example `tadrusīna`, "you (f.) study") are editorial, so the chart is searchable in the vocabulary bank.
-- Every example word, pronoun and chart form is derived into the vocabulary bank by `getLevelTwoVocabularyEntries()` under the topic "Level 2 · Masculine and feminine".
+- **Editorial:** each practice answer choice has a transliteration and gloss, and `sentenceWords` glosses the other words used in the example sentences and questions (for example `وَاجِبٌ`, `كُرْسِيٌّ`, `مَاذَا`, `يَا`), so they are searchable too.
+- **Copy:** the intro keeps the sheet's "usually feminine / usually masculine" wording and adds `أُمّ` and `أَرْض` as everyday feminine nouns with no ending.
+- Every example word, pronoun, chart form, practice choice and sentence word is derived into the vocabulary bank by `getLevelTwoVocabularyEntries()` under the topic "Level 2 · Masculine and feminine".

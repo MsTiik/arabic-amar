@@ -62,7 +62,7 @@ export interface GrammarQuestion {
   ask: string;
   /** Arabic sentence with ___ marking the gap. */
   stem: string;
-  options: readonly string[];
+  options: readonly GrammarItem[];
   answer: string;
   transliteration: string;
   english: string;
@@ -90,6 +90,8 @@ export interface LevelTwoGrammarSheet {
   verbExamples: readonly GrammarSentence[];
   chartVerbs: readonly ChartVerb[];
   practice: readonly GrammarQuestion[];
+  /** Other words used in the example sentences and practice questions, glossed for the vocabulary bank. */
+  sentenceWords: readonly GrammarItem[];
 }
 
 const g = (arabic: string, transliteration: string, english: string): GrammarItem => ({
@@ -260,17 +262,34 @@ export const MASCULINE_AND_FEMININE: LevelTwoGrammarSheet = {
     verb("pray", "to pray", "prays", "pray", "u", "صَلِّي", "صَلِّ", "ṣallī", "ṣallīna"),
   ],
   practice: [
-    { id: "q1", ask: "Which verb?", stem: "الطَّالِبَةُ ___ الوَاجِبَ.", options: ["يَكْتُبُ", "تَكْتُبُ"], answer: "تَكْتُبُ", transliteration: "aṭ-ṭālibatu taktubu l-wājib.", english: "The student (f.) writes the homework.", why: "She → the verb starts with تَـ." },
-    { id: "q2", ask: "Which verb?", stem: "أَنْتِ يَا مَرْيَمُ ___ القُرْآنَ.", options: ["تَقْرَئِينَ", "تَقْرَأُ"], answer: "تَقْرَئِينَ", transliteration: "anti yā maryamu taqraʾīna l-qurʾān.", english: "You, Maryam, read the Quran.", why: "You (f.) → تَـ at the start and ـينَ at the end." },
-    { id: "q3", ask: "Which verb?", stem: "أَنَا ___ الدَّرْسَ.", options: ["يَفْهَمُ", "أَفْهَمُ"], answer: "أَفْهَمُ", transliteration: "anā afhamu d-dars.", english: "I understand the lesson.", why: "I → the verb starts with أَ." },
-    { id: "q4", ask: "Which verb?", stem: "أَنْتَ يَا أَحْمَدُ ___ عَلَى الكُرْسِيِّ.", options: ["تَجْلِسِينَ", "تَجْلِسُ"], answer: "تَجْلِسُ", transliteration: "anta yā aḥmadu tajlisu ʿalā l-kursiyy.", english: "You, Ahmad, sit on the chair.", why: "You (m.) → تَـ with no ending. ـينَ is only for a woman." },
-    { id: "q5", ask: "Which verb?", stem: "المُدَرِّسَةُ ___ الدَّرْسَ.", options: ["تَشْرَحُ", "يَشْرَحُ"], answer: "تَشْرَحُ", transliteration: "al-mudarrisatu tashraḥu d-dars.", english: "The teacher (f.) explains the lesson.", why: "مُدَرِّسَة ends in ة, so she → تَـ." },
-    { id: "q6", ask: "Which verb?", stem: "فَاطِمَةُ ___ الفَجْرَ.", options: ["يُصَلِّي", "تُصَلِّي"], answer: "تُصَلِّي", transliteration: "fāṭimatu tuṣallī l-fajr.", english: "Fatima prays Fajr.", why: "She → تُـ. This is a ḍamma verb, so it's تُ not تَ." },
-    { id: "q7", ask: "This (m.) or this (f.)?", stem: "___ نَافِذَةٌ.", options: ["هَذِهِ", "هَذَا"], answer: "هَذِهِ", transliteration: "hādhihi nāfidha.", english: "This is a window.", why: "نَافِذَة ends in ة, so it's feminine." },
-    { id: "q8", ask: "This (m.) or this (f.)?", stem: "___ كِتَابٌ.", options: ["هَذَا", "هَذِهِ"], answer: "هَذَا", transliteration: "hādhā kitāb.", english: "This is a book.", why: "No feminine ending, so it's masculine." },
-    { id: "q9", ask: "This (m.) or this (f.)?", stem: "___ سَلْمَى.", options: ["هَذَا", "هَذِهِ"], answer: "هَذِهِ", transliteration: "hādhihi salmā.", english: "This is Salma.", why: "سَلْمَى ends in ى (alif maqṣūra), so it's feminine." },
-    { id: "q10", ask: "Who or what?", stem: "___ هَذَا؟ هُوَ مُدَرِّسٌ.", options: ["مَا", "مَنْ"], answer: "مَنْ", transliteration: "man hādhā? huwa mudarris.", english: "Who is this? He is a teacher.", why: "Asking about a person → مَنْ." },
-    { id: "q11", ask: "Who or what?", stem: "___ هَذِهِ؟ هَذِهِ سَاعَةٌ.", options: ["مَا", "مَنْ"], answer: "مَا", transliteration: "mā hādhihi? hādhihi sāʿa.", english: "What is this? This is a clock.", why: "Asking about a thing → مَا." },
+    { id: "q1", ask: "Which verb?", stem: "الطَّالِبَةُ ___ الوَاجِبَ.", options: [g("يَكْتُبُ", "yaktubu", "he writes"), g("تَكْتُبُ", "taktubu", "she writes")], answer: "تَكْتُبُ", transliteration: "aṭ-ṭālibatu taktubu l-wājib.", english: "The student (f.) writes the homework.", why: "She → the verb starts with تَـ." },
+    { id: "q2", ask: "Which verb?", stem: "أَنْتِ يَا مَرْيَمُ ___ القُرْآنَ.", options: [g("تَقْرَئِينَ", "taqraʾīna", "you (f.) read"), g("تَقْرَأُ", "taqraʾu", "she reads")], answer: "تَقْرَئِينَ", transliteration: "anti yā maryamu taqraʾīna l-qurʾān.", english: "You, Maryam, read the Quran.", why: "You (f.) → تَـ at the start and ـينَ at the end." },
+    { id: "q3", ask: "Which verb?", stem: "أَنَا ___ الدَّرْسَ.", options: [g("يَفْهَمُ", "yafhamu", "he understands"), g("أَفْهَمُ", "afhamu", "I understand")], answer: "أَفْهَمُ", transliteration: "anā afhamu d-dars.", english: "I understand the lesson.", why: "I → the verb starts with أَ." },
+    { id: "q4", ask: "Which verb?", stem: "أَنْتَ يَا أَحْمَدُ ___ عَلَى الكُرْسِيِّ.", options: [g("تَجْلِسِينَ", "tajlisīna", "you (f.) sit"), g("تَجْلِسُ", "tajlisu", "you (m.) sit")], answer: "تَجْلِسُ", transliteration: "anta yā aḥmadu tajlisu ʿalā l-kursiyy.", english: "You, Ahmad, sit on the chair.", why: "You (m.) → تَـ with no ending. ـينَ is only for a woman." },
+    { id: "q5", ask: "Which verb?", stem: "المُدَرِّسَةُ ___ الدَّرْسَ.", options: [g("تَشْرَحُ", "tashraḥu", "she explains"), g("يَشْرَحُ", "yashraḥu", "he explains")], answer: "تَشْرَحُ", transliteration: "al-mudarrisatu tashraḥu d-dars.", english: "The teacher (f.) explains the lesson.", why: "مُدَرِّسَة ends in ة, so she → تَـ." },
+    { id: "q6", ask: "Which verb?", stem: "فَاطِمَةُ ___ الفَجْرَ.", options: [g("يُصَلِّي", "yuṣallī", "he prays"), g("تُصَلِّي", "tuṣallī", "she prays")], answer: "تُصَلِّي", transliteration: "fāṭimatu tuṣallī l-fajr.", english: "Fatima prays Fajr.", why: "She → تُـ. This is a ḍamma verb, so it's تُ not تَ." },
+    { id: "q7", ask: "This (m.) or this (f.)?", stem: "___ نَافِذَةٌ.", options: [g("هَذِهِ", "hādhihi", "this (f.)"), g("هَذَا", "hādhā", "this (m.)")], answer: "هَذِهِ", transliteration: "hādhihi nāfidha.", english: "This is a window.", why: "نَافِذَة ends in ة, so it's feminine." },
+    { id: "q8", ask: "This (m.) or this (f.)?", stem: "___ كِتَابٌ.", options: [g("هَذَا", "hādhā", "this (m.)"), g("هَذِهِ", "hādhihi", "this (f.)")], answer: "هَذَا", transliteration: "hādhā kitāb.", english: "This is a book.", why: "No feminine ending, so it's masculine." },
+    { id: "q9", ask: "This (m.) or this (f.)?", stem: "___ سَلْمَى.", options: [g("هَذَا", "hādhā", "this (m.)"), g("هَذِهِ", "hādhihi", "this (f.)")], answer: "هَذِهِ", transliteration: "hādhihi salmā.", english: "This is Salma.", why: "سَلْمَى ends in ى (alif maqṣūra), so it's feminine." },
+    { id: "q10", ask: "Who or what?", stem: "___ هَذَا؟ هُوَ مُدَرِّسٌ.", options: [g("مَا", "mā", "what? (things)"), g("مَنْ", "man", "who? (people)")], answer: "مَنْ", transliteration: "man hādhā? huwa mudarris.", english: "Who is this? He is a teacher.", why: "Asking about a person → مَنْ." },
+    { id: "q11", ask: "Who or what?", stem: "___ هَذِهِ؟ هَذِهِ سَاعَةٌ.", options: [g("مَا", "mā", "what? (things)"), g("مَنْ", "man", "who? (people)")], answer: "مَا", transliteration: "mā hādhihi? hādhihi sāʿa.", english: "What is this? This is a clock.", why: "Asking about a thing → مَا." },
+  ],
+  sentenceWords: [
+    g("قَلَمٌ", "qalam", "pen"),
+    g("كِتَابٌ", "kitāb", "book"),
+    g("دَرْسٌ", "dars", "lesson"),
+    g("وَاجِبٌ", "wājib", "homework"),
+    g("القُرْآنُ", "al-qurʾān", "the Quran"),
+    g("كُرْسِيٌّ", "kursiyy", "chair"),
+    g("الفَجْرُ", "al-fajr", "Fajr (the dawn prayer)"),
+    g("اللُّغَةُ العَرَبِيَّةُ", "al-lugha al-ʿarabiyya", "the Arabic language"),
+    g("مَاذَا", "mādhā", "what? (with a verb)"),
+    g("يَا", "yā", "O (calling someone by name)"),
+    g("عَلَى", "ʿalā", "on"),
+    g("مُحَمَّدٌ", "muḥammad", "Muhammad"),
+    g("فَاطِمَةُ", "fāṭima", "Fatima"),
+    g("أَحْمَدُ", "aḥmad", "Ahmad"),
+    g("مَرْيَمُ", "maryam", "Maryam"),
   ],
 };
 

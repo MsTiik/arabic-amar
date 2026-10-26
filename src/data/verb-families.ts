@@ -1240,7 +1240,8 @@ const VERB_FAMILY_DECK: VerbFamily[] = [
     },
     relatedForms: [
       { label: "Regular Form VIII verbal noun", arabic: "اِشْتِرَاء", transliteration: "ishtirāʾ", english: "buying" },
-      { label: "Related word", arabic: "مُشْتَرٍ (المُشْتَرِي)", transliteration: "mushtarin (al-mushtarī)", english: "buyer" },
+      { label: "Related word", arabic: "مُشْتَرٍ", transliteration: "mushtarin", english: "buyer" },
+      { label: "Related word", arabic: "المُشْتَرِي", transliteration: "al-mushtarī", english: "the buyer" },
     ],
     opposite: { arabic: "بَائِع", transliteration: "bāʾiʿ", english: "seller" },
     examples: [
