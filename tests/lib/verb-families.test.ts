@@ -42,6 +42,28 @@ describe("verb families", () => {
     expect(VERB_FAMILIES.some((family) => family.id === "baqiya")).toBe(true);
   });
 
+  test("adds the 17 lesson-board families after the class notes, in sheet order", () => {
+    const lessonFamilies = VERB_FAMILIES.slice(5, 22);
+    expect(lessonFamilies.map((family) => family.id)).toEqual([
+      "jalasa", "rasama", "lawwana", "masha", "sahhaha", "saala", "ajaba", "shahada", "ashara",
+      "fakkara", "taallama", "ishtara", "hasaba", "wazana", "dafaa", "irtafaa", "takawwana",
+    ]);
+    expect(new Set(lessonFamilies.map((family) => family.levelTwoLesson))).toEqual(new Set([3, 4, 6, 9]));
+    for (const family of lessonFamilies) {
+      expect(family.pattern, family.id).toBeTruthy();
+      expect(family.examples.length, family.id).toBeGreaterThanOrEqual(3);
+      for (const example of family.examples) {
+        expect(example.reference).toContain(`lesson ${family.levelTwoLesson}`);
+      }
+    }
+    const byId = (id: string) => VERB_FAMILIES.find((family) => family.id === id);
+    expect(byId("masha")?.forms.command.arabic).toBe("اِمْشِ");
+    expect(byId("wazana")?.forms.present.arabic).toBe("يَزِنُ");
+    expect(byId("saala")?.relatedForms?.map((form) => form.arabic)).toContain("سَلْ");
+    expect(byId("ishtara")?.relatedForms?.map((form) => form.arabic)).toContain("اِشْتِرَاء");
+    expect(byId("saala")?.opposite?.familyId).toBe("ajaba");
+  });
+
   test("places the five Level 2 class-note families first and preserves related forms", () => {
     const levelTwoFamilies = VERB_FAMILIES.slice(0, 5);
     expect(levelTwoFamilies.map((family) => family.id)).toEqual([

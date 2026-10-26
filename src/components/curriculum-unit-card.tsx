@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, House, Languages, ShoppingBasket, Waypoints } from "lucide-react";
+import { ArrowRight, House, Languages, ShoppingBasket, VenusAndMars, Waypoints } from "lucide-react";
 
 import type { CurriculumUnit } from "@/data/curriculum";
 import { cn } from "@/lib/cn";
@@ -20,6 +20,10 @@ const UNIT_IDENTITIES = {
   "core-verb-families": {
     icon: Waypoints,
     chip: "bg-tense-command text-tense-command-accent",
+  },
+  "masculine-and-feminine": {
+    icon: VenusAndMars,
+    chip: "bg-accent-teal-soft text-accent-teal",
   },
 } as const;
 

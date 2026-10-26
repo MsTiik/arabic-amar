@@ -411,3 +411,21 @@ Source: thirteen Level 2 vocabulary cards (`bayt` to `masjid`) supplied by the c
   2. The command `تَكَوَّنْ` ("be formed!") is rare in real use.
   3. `هَيْدْرُوجِين وَأُكْسِجِين` carry no case ending, unlike the other fully vowelled nouns (`هَيْدْرُوجِينٍ وَأُكْسِجِينٍ`).
   4. Eight of the follow-up questions (for example `أَيْنَ البَيْتُ؟` on the `shāriʿ` card) do not contain the card's own word.
+
+## 14. Lesson-board verb families (supplied October 2026)
+
+Source: the "Arabic Verb Families" sheet supplied by the course owner as HTML: every verb the teacher wrote out in full on the board in lessons 1 to 9 that was not already in the notes. Published data lives in `src/data/verb-families.ts` as 17 families (`jalasa` to `takawwana`) with `levelTwoOrder` 6 to 22 and `levelTwoLesson` 3, 4, 6 or 9, after the five class-note families. The validator traces each example's reference to its lesson. Every core form, related form, plural and opposite is derived into the vocabulary bank by `getLevelTwoVocabularyEntries()`.
+
+- Forms, glosses, notes and all example sentences are kept as supplied. The sheet's `*focus*` markers became each example's `focusArabic`.
+- **Normalised:** where the sheet gives two forms in one cell (`اِسْأَلْ · سَلْ`, `شِرَاء · اِشْتِرَاء`), the first is the core form and the second is listed under related forms. Roots (for example `ش-ر-ي`, `و-ز-ن`) were added from the sheet's Arabic; the sheet did not list them.
+- The sheet's opposite of `سَأَلَ` is linked to the `ajaba` family.
+
+## 15. Masculine and feminine grammar sheet (supplied October 2026)
+
+Source: the "Masculine and Feminine" sheet supplied by the course owner as HTML, covering lessons 1, 2, 3, 4 and 9. It expands page 12 of the notes (section 7). Published data lives in `src/data/level-two-grammar.ts` and the page at `/grammar/masculine-and-feminine`, linked from the grammar reference and from Level 2.
+
+- All five parts are kept: feminine endings `ـة`, `ـى` and `ـاء` with examples; `هَذَا` / `هَذِهِ` and `مَنْ` / `مَا`; present-tense agreement for `هُوَ`, `هِيَ`, `أَنْتَ`, `أَنْتِ` and `أَنَا`; the ten-verb chart; and the 11 practice questions with their explanations.
+- **Normalised:** the verb chart is generated from each verb's stem, as the sheet's own script did. Transliterations and English glosses for chart forms (for example `tadrusīna`, "you (f.) study") are editorial, so the chart is searchable in the vocabulary bank.
+- **Editorial:** each practice answer choice has a transliteration and gloss, and `sentenceWords` glosses the other words used in the example sentences and questions (for example `وَاجِبٌ`, `كُرْسِيٌّ`, `مَاذَا`, `يَا`), so they are searchable too.
+- **Copy:** the intro keeps the sheet's "usually feminine / usually masculine" wording and adds `أُمّ` and `أَرْض` as everyday feminine nouns with no ending.
+- Every example word, pronoun, chart form, practice choice and sentence word is derived into the vocabulary bank by `getLevelTwoVocabularyEntries()` under the topic "Level 2 · Masculine and feminine".

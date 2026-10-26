@@ -141,18 +141,44 @@ export function validateLevelTwoPublishedContent(): LevelTwoValidationIssue[] {
     }
   }
 
-  const coreFamilies = VERB_FAMILIES.filter((family) => family.levelTwoOrder !== undefined);
-  if (coreFamilies.length !== 5) {
-    issues.push({ location: "verb-families", message: "Exactly five reviewed core families are required." });
+  const levelTwoFamilies = VERB_FAMILIES.filter((family) => family.levelTwoOrder !== undefined);
+  const classNoteFamilies = levelTwoFamilies.filter((family) => family.levelTwoSourcePage !== undefined);
+  if (classNoteFamilies.length !== 5) {
+    issues.push({ location: "verb-families", message: "Exactly five reviewed class-note families are required." });
   }
-  for (const family of coreFamilies) {
+  const seenOrders = new Set<number>();
+  for (const family of levelTwoFamilies) {
     const location = `verb-family.${family.id}`;
-    requirePage(family.levelTwoSourcePage ?? 0, location);
+    const order = family.levelTwoOrder ?? 0;
+    if (seenOrders.has(order)) issues.push({ location, message: `Duplicate Level 2 order ${order}.` });
+    seenOrders.add(order);
+    const sourceTag =
+      family.levelTwoSourcePage !== undefined
+        ? `page ${family.levelTwoSourcePage}`
+        : family.levelTwoLesson !== undefined
+          ? `lesson ${family.levelTwoLesson}`
+          : undefined;
+    if (family.levelTwoSourcePage !== undefined) requirePage(family.levelTwoSourcePage, location);
+    if (
+      family.levelTwoLesson !== undefined &&
+      (!Number.isInteger(family.levelTwoLesson) || family.levelTwoLesson < 1)
+    ) {
+      issues.push({ location, message: `Lesson ${family.levelTwoLesson} is not a valid lesson number.` });
+    }
+    if (!sourceTag) {
+      issues.push({ location, message: "A Level 2 family needs a source page or lesson." });
+    }
     requireReviewStatus(family.levelTwoReviewStatus ?? "", location);
     for (const [key, form] of Object.entries(family.forms)) {
       requireArabic(form.arabic, `${location}.${key}`);
       requireTransliteration(form.transliteration, `${location}.${key}`);
       requireText(form.english, `${location}.${key}`, "English");
+    }
+    for (const [index, form] of (family.relatedForms ?? []).entries()) {
+      const formLocation = `${location}.related.${index + 1}`;
+      requireArabic(form.arabic, formLocation);
+      requireTransliteration(form.transliteration, formLocation);
+      requireText(form.english, formLocation, "English");
     }
     if (family.examples.length === 0) {
       issues.push({ location, message: "A reviewed family needs at least one context sentence." });
@@ -169,13 +195,10 @@ export function validateLevelTwoPublishedContent(): LevelTwoValidationIssue[] {
           message: "The form to notice must appear exactly in the Arabic example.",
         });
       }
-      if (
-        example.kind === "class" &&
-        !example.reference.includes(`page ${family.levelTwoSourcePage}`)
-      ) {
+      if (example.kind === "class" && sourceTag && !example.reference.includes(sourceTag)) {
         issues.push({
           location: exampleLocation,
-          message: "Class example reference does not match the family’s reviewed source page.",
+          message: "Class example reference does not match the family’s source page or lesson.",
         });
       }
       if (example.kind !== "class" && !example.url?.startsWith("https://")) {
