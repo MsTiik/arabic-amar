@@ -64,12 +64,12 @@ const LEVEL_TWO_UNITS: readonly CurriculumUnit[] = [
   },
   {
     id: "core-verb-families",
-    title: "Five core verb families",
+    title: "Verb families",
     description:
-      "Compare past, present, command, verbal noun, and related forms for writing, reading, explaining, understanding, and standing.",
+      "Compare past, present, command, verbal noun, and related forms: the five class-note verbs, then 17 more from the boards in lessons 3 to 9, from sitting and drawing to buying and weighing.",
     topicSlugs: ["verbs-in-the-classroom"],
     links: [
-      { href: "/practice/verb-families", label: "Explore the five verb families" },
+      { href: "/practice/verb-families", label: "Explore the verb families" },
     ],
   },
   {
@@ -81,6 +81,16 @@ const LEVEL_TWO_UNITS: readonly CurriculumUnit[] = [
     links: [
       { href: "/levels/level-2/home-and-places", label: "Open the word cards" },
       { href: "/vocabulary", label: "Search the vocabulary bank" },
+    ],
+  },
+  {
+    id: "masculine-and-feminine",
+    title: "Masculine and feminine",
+    description:
+      "How to spot a feminine noun, when to use هَذَا or هَذِهِ, and how present-tense verbs change for he, she, you and I, with a verb chart and a short quiz.",
+    topicSlugs: [],
+    links: [
+      { href: "/grammar/masculine-and-feminine", label: "Open the grammar sheet" },
     ],
   },
 ] as const;

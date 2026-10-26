@@ -5,6 +5,11 @@ import {
   LEVEL_TWO_CLASSROOM_VOCABULARY,
   LEVEL_TWO_MARKETPLACE_READING,
 } from "../../src/data/level-two-lessons";
+import {
+  LEVEL_TWO_GRAMMAR_SHEETS,
+  chartForms,
+  plainArabic,
+} from "../../src/data/level-two-grammar";
 import { LEVEL_TWO_VOCAB_SETS } from "../../src/data/level-two-vocab-sets";
 import { VERB_FAMILIES } from "../../src/data/verb-families";
 import { getSiteContent } from "../../src/lib/content";
@@ -63,6 +68,51 @@ describe("Level 2 vocabulary bank coverage", () => {
         expectArabicInLevelTwoBank(form.arabic);
       }
     }
+  });
+
+  test("includes every related form and opposite from the Level 2 verb families", () => {
+    for (const family of VERB_FAMILIES.filter(
+      (entry) => entry.levelTwoOrder !== undefined,
+    )) {
+      for (const form of family.relatedForms ?? []) expectArabicInLevelTwoBank(form.arabic);
+      if (family.opposite) expectArabicInLevelTwoBank(family.opposite.arabic);
+    }
+  });
+
+  test("includes every word and chart form from the Level 2 grammar sheets", () => {
+    for (const sheet of LEVEL_TWO_GRAMMAR_SHEETS) {
+      for (const example of sheet.markers.flatMap((marker) => marker.examples)) {
+        expectArabicInLevelTwoBank(plainArabic(example.arabic));
+      }
+      for (const pair of sheet.pairs) {
+        expectArabicInLevelTwoBank(pair.masculine.arabic);
+        expectArabicInLevelTwoBank(plainArabic(pair.feminine.arabic));
+      }
+      for (const word of sheet.demonstrativeWords) expectArabicInLevelTwoBank(word.arabic);
+      for (const person of sheet.persons) expectArabicInLevelTwoBank(person.pronoun.arabic);
+      for (const verb of [sheet.modelVerb, ...sheet.chartVerbs]) {
+        for (const form of chartForms(verb, sheet.persons)) {
+          expectArabicInLevelTwoBank(plainArabic(form.arabic));
+        }
+      }
+    }
+  });
+
+  test("finds new verb-family and grammar words by Arabic, transliteration, and English", () => {
+    const matches = (query: string) => {
+      const folded = foldForSearch(query);
+      return bank.vocab.filter((entry) =>
+        [entry.arabicFolded, foldForSearch(entry.pronunciation ?? ""), foldForSearch(entry.english)]
+          .some((field) => field.includes(folded)),
+      );
+    };
+    expect(matches("he weighs").map((entry) => entry.arabic)).toContain("يَزِنُ");
+    expect(matches("yazinu").map((entry) => entry.arabic)).toContain("يَزِنُ");
+    expect(matches("يزن").map((entry) => entry.english)).toContain("he weighs");
+    expect(matches("you (f.) study").map((entry) => entry.arabic)).toContain("تَدْرُسِينَ");
+    expect(matches("tadrusina").map((entry) => entry.arabic)).toContain("تَدْرُسِينَ");
+    expect(matches("صحراء").map((entry) => entry.english)).toContain("desert");
+    expect(bank.topics.map((topic) => topic.slug)).toContain("level-2-masculine-and-feminine");
   });
 
   test("includes every form, headword, and sentence word from the vocabulary sets", () => {

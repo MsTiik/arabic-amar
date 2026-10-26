@@ -38,6 +38,15 @@ const REFERENCE_PAGES = [
       "Sound masculine, sound feminine, and broken plurals — when each applies and why broken plurals must be memorised.",
     accent: "bg-accent-amber-soft text-accent-amber",
   },
+  {
+    href: "/grammar/masculine-and-feminine",
+    title: "Masculine and feminine",
+    titleArabic: "المُذَكَّر وَالمُؤَنَّث",
+    description:
+      "Feminine noun endings, هَذَا and هَذِهِ, and how present-tense verbs change for he, she, you and I, with a verb chart and a quiz.",
+    accent: "bg-accent-teal-soft text-accent-teal",
+    badge: "Level 2",
+  },
 ] as const;
 
 export default function GrammarPage() {
@@ -50,8 +59,7 @@ export default function GrammarPage() {
         <p className="section-label">Rules & tables</p>
         <h1 className="mt-1 sm:text-4xl page-title">Grammar reference</h1>
         <p className="mt-1 text-sm text-muted-foreground">
-          Three big reference tables on top, then per-lesson grammar pages
-          underneath.
+          Reference tables on top, then per-lesson grammar pages underneath.
         </p>
       </header>
 
@@ -62,7 +70,7 @@ export default function GrammarPage() {
         >
           Reference tables
         </h2>
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {REFERENCE_PAGES.map((p) => (
             <Link
               key={p.href}
@@ -75,14 +83,14 @@ export default function GrammarPage() {
                   p.accent
                 }
               >
-                Reference
+                {"badge" in p ? p.badge : "Reference"}
               </span>
-              <h3 className="text-xl font-semibold tracking-tight">
+              <h3 className="flex flex-wrap items-baseline gap-x-2 text-xl font-semibold tracking-tight">
                 {p.title}
                 <span
                   lang="ar"
                   dir="rtl"
-                  className="ml-2 font-arabic text-base font-normal text-foreground-soft"
+                  className="font-arabic text-base font-normal text-foreground-soft"
                 >
                   {p.titleArabic}
                 </span>

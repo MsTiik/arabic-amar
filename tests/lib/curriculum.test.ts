@@ -32,6 +32,7 @@ describe("curriculum levels", () => {
       "actions-in-context",
       "core-verb-families",
       "home-and-places",
+      "masculine-and-feminine",
     ]);
   });
 

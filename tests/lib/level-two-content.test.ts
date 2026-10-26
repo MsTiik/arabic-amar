@@ -42,7 +42,9 @@ describe("published Level 2 content", () => {
     expect(LEVEL_TWO_MARKETPLACE_ORDERING).toHaveLength(9);
     expect(LEVEL_TWO_ACTIONS).toHaveLength(27);
     expect(LEVEL_TWO_ACTION_SENTENCES).toHaveLength(11);
-    expect(VERB_FAMILIES.filter((family) => family.levelTwoOrder !== undefined)).toHaveLength(5);
+    expect(VERB_FAMILIES.filter((family) => family.levelTwoSourcePage !== undefined)).toHaveLength(5);
+    expect(VERB_FAMILIES.filter((family) => family.levelTwoLesson !== undefined)).toHaveLength(17);
+    expect(VERB_FAMILIES.filter((family) => family.levelTwoOrder !== undefined)).toHaveLength(22);
   });
 
   test("does not reintroduce the two inaccurate regularised plurals", () => {

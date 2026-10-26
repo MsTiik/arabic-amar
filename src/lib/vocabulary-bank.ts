@@ -9,6 +9,8 @@ import {
   type LevelTwoVocabTheme,
   type VocabSetItem,
 } from "@/data/level-two-vocab-sets";
+import { LEVEL_TWO_GRAMMAR_SHEETS, chartForms, plainArabic } from "@/data/level-two-grammar";
+import type { LevelTwoGrammarSheet } from "@/data/level-two-grammar";
 import { VERB_FAMILIES, VERB_FORM_KEYS } from "@/data/verb-families";
 import { foldForSearch } from "@/lib/diacritics";
 import type { SiteContent, Topic, VocabEntry } from "@/lib/types";
@@ -19,6 +21,10 @@ export function vocabThemeTopicSlug(theme: Pick<LevelTwoVocabTheme, "slug">): st
 
 export function vocabThemeSentenceTopicSlug(theme: Pick<LevelTwoVocabTheme, "slug">): string {
   return `level-2-${theme.slug}-sentences`;
+}
+
+export function grammarSheetTopicSlug(sheet: Pick<LevelTwoGrammarSheet, "slug">): string {
+  return `level-2-${sheet.slug}`;
 }
 
 const LEVEL_TWO_TOPICS: readonly { slug: string; name: string }[] = [
@@ -38,6 +44,10 @@ const LEVEL_TWO_TOPICS: readonly { slug: string; name: string }[] = [
     slug: "level-2-marketplace-reading",
     name: "Level 2 · Marketplace reading",
   },
+  ...LEVEL_TWO_GRAMMAR_SHEETS.map((sheet) => ({
+    slug: grammarSheetTopicSlug(sheet),
+    name: `Level 2 · ${sheet.title}`,
+  })),
   ...LEVEL_TWO_VOCAB_THEMES.flatMap((theme) => [
     { slug: vocabThemeTopicSlug(theme), name: `Level 2 · ${theme.title}` },
     { slug: vocabThemeSentenceTopicSlug(theme), name: `Level 2 · ${theme.title} sentence words` },
@@ -76,6 +86,42 @@ function toVocabEntry(word: LevelTwoBankWord): VocabEntry {
     topicSlugs: [word.topicSlug],
     lessonId: word.topicSlug,
   };
+}
+
+function grammarSheetBankWords(sheet: LevelTwoGrammarSheet): LevelTwoBankWord[] {
+  const topicSlug = grammarSheetTopicSlug(sheet);
+  const category = `Level 2 grammar · ${sheet.title}`;
+  const words: LevelTwoBankWord[] = [];
+  const push = (id: string, subCategory: string, item: { arabic: string; transliteration: string; english: string }) =>
+    words.push({
+      id: `grammar__${sheet.slug}__${id}`,
+      arabic: plainArabic(item.arabic),
+      pronunciation: item.transliteration,
+      english: item.english,
+      category,
+      subCategory,
+      topicSlug,
+    });
+
+  for (const marker of sheet.markers) {
+    for (const [index, example] of marker.examples.entries()) {
+      push(`${marker.id}-${index + 1}`, `Feminine ending ${marker.symbol}`, example);
+    }
+  }
+  for (const [index, pair] of sheet.pairs.entries()) {
+    push(`pair-${index + 1}-m`, "Masculine and feminine pairs", pair.masculine);
+    push(`pair-${index + 1}-f`, "Masculine and feminine pairs", pair.feminine);
+  }
+  for (const word of sheet.demonstrativeWords) {
+    push(`word-${word.transliteration}`, "This is… · who or what", word);
+  }
+  for (const person of sheet.persons) push(`pronoun-${person.id}`, "Pronouns", person.pronoun);
+  for (const verb of [sheet.modelVerb, ...sheet.chartVerbs]) {
+    for (const form of chartForms(verb, sheet.persons)) {
+      push(`verb-${verb.id}-${form.person.id}`, `Verb chart · ${verb.english}`, form);
+    }
+  }
+  return words;
 }
 
 /**
@@ -185,6 +231,8 @@ export function getLevelTwoVocabularyEntries(): VocabEntry[] {
       });
     }
   }
+
+  for (const sheet of LEVEL_TWO_GRAMMAR_SHEETS) words.push(...grammarSheetBankWords(sheet));
 
   for (const theme of LEVEL_TWO_VOCAB_THEMES) words.push(...vocabThemeBankWords(theme));
 

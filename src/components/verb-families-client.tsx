@@ -198,6 +198,16 @@ function ExploreMode({
             <h2 className="mt-1 section-title">
               {family.meaning}
             </h2>
+            {family.pattern || family.levelTwoLesson ? (
+              <p className="mt-2 flex flex-wrap gap-1.5">
+                {family.pattern ? (
+                  <span className="chip bg-background-soft text-muted-foreground">{family.pattern}</span>
+                ) : null}
+                {family.levelTwoLesson ? (
+                  <span className="chip bg-primary-soft text-primary">Lesson {family.levelTwoLesson}</span>
+                ) : null}
+              </p>
+            ) : null}
             {family.usageNote ? (
               <p className="mt-2 max-w-2xl text-sm text-foreground-soft">
                 {family.usageNote}

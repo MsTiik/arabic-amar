@@ -29,8 +29,8 @@ export function PronounCard({ pronoun, className }: Props) {
         className,
       )}
     >
-      <div className="flex items-start justify-between gap-3 sm:block">
-        <span className="chip shrink-0 bg-background-soft text-muted-foreground sm:absolute sm:right-3 sm:top-3">
+      <div className="flex items-start justify-between gap-3 sm:flex-col sm:items-stretch sm:gap-2">
+        <span className="chip shrink-0 bg-background-soft text-muted-foreground sm:self-end">
           {pronoun.category}
         </span>
 
