@@ -58,7 +58,7 @@ export default function MasculineAndFemininePage() {
         ))}
       </nav>
 
-      <section id="feminine-nouns" className="mb-12 scroll-mt-32">
+      <section id="feminine-nouns" className="mb-10 scroll-mt-32 sm:mb-12">
         <SectionHeader number={1} title="How to spot a feminine noun">
           A noun is usually feminine when it ends in one of these three
           endings. If it has none of them, it&apos;s usually masculine, but a
@@ -68,11 +68,15 @@ export default function MasculineAndFemininePage() {
         </SectionHeader>
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
           {SHEET.markers.map((marker) => (
-            <article key={marker.id} className="surface p-4 sm:p-5">
-              <ArabicText variant="display" className="text-5xl text-primary">{marker.symbol}</ArabicText>
-              <ArabicText className="mt-2 text-lg text-foreground">{marker.nameArabic}</ArabicText>
-              <p className="text-xs text-muted-foreground">{marker.name}</p>
-              <ul className="mt-3 space-y-2 border-t border-hairline pt-3">
+            <article key={marker.id} className="surface p-3 sm:p-5">
+              <div className="flex flex-row-reverse items-center justify-between gap-3 sm:block">
+                <ArabicText variant="display" className="shrink-0 text-4xl text-primary sm:text-5xl">{marker.symbol}</ArabicText>
+                <div className="min-w-0">
+                  <ArabicText className="text-left text-lg text-foreground sm:mt-2 sm:text-start">{marker.nameArabic}</ArabicText>
+                  <p className="text-xs text-muted-foreground">{marker.name}</p>
+                </div>
+              </div>
+              <ul className="mt-2 space-y-1 border-t border-hairline pt-2 sm:mt-3 sm:space-y-2 sm:pt-3">
                 {marker.examples.map((example) => (
                   <li key={example.transliteration} className="flex items-baseline justify-between gap-3">
                     <span className="text-sm text-muted-foreground">
@@ -85,14 +89,14 @@ export default function MasculineAndFemininePage() {
             </article>
           ))}
         </div>
-        <div className="mt-4 surface p-4 sm:p-5">
+        <div className="mt-3 surface p-3 sm:mt-4 sm:p-5">
           <p className="text-sm text-foreground-soft">
             Turn a masculine word into a feminine one by adding{" "}
             <ArabicText variant="inline" className="text-primary">ـة</ArabicText>:
           </p>
-          <ul className="mt-3 grid grid-cols-1 gap-2 sm:grid-cols-2">
+          <ul className="mt-2 grid grid-cols-1 gap-2 sm:mt-3 sm:grid-cols-2">
             {SHEET.pairs.map((pair) => (
-              <li key={pair.masculine.transliteration} className="tile flex items-center justify-between gap-3 p-3" dir="rtl">
+              <li key={pair.masculine.transliteration} className="tile flex items-center justify-between gap-3 px-3 py-2 sm:p-3" dir="rtl">
                 <div className="text-center">
                   <ArabicText className="text-2xl text-foreground">{pair.masculine.arabic}</ArabicText>
                   <p dir="ltr" className="text-xs text-muted-foreground">{pair.masculine.english}</p>
@@ -108,39 +112,40 @@ export default function MasculineAndFemininePage() {
         </div>
       </section>
 
-      <section id="this-and-who" className="mb-12 scroll-mt-32">
+      <section id="this-and-who" className="mb-10 scroll-mt-32 sm:mb-12">
         <SectionHeader number={2} title="This is… and who or what?">
           The noun decides the word for &ldquo;this&rdquo;. And when you ask a
           question, use <ArabicText variant="inline">مَنْ</ArabicText> for people
           and <ArabicText variant="inline">مَا</ArabicText> for things.
         </SectionHeader>
-        <ul className="mb-4 grid grid-cols-2 gap-2 sm:grid-cols-4">
+        <ul className="mb-3 grid grid-cols-4 gap-1.5 sm:mb-4 sm:gap-2">
           {SHEET.demonstrativeWords.map((word) => (
-            <li key={word.transliteration} className="tile p-3 text-center">
-              <ArabicText variant="display" className="text-3xl text-foreground">{word.arabic}</ArabicText>
-              <p className="mt-1 text-xs text-muted-foreground">
-                <span lang="ar-Latn" className="italic">{word.transliteration}</span> · {word.english}
+            <li key={word.transliteration} className="tile px-1.5 py-2 text-center sm:p-3">
+              <ArabicText variant="display" className="text-2xl text-foreground sm:text-3xl">{word.arabic}</ArabicText>
+              <p className="mt-1 text-xs leading-snug text-muted-foreground">
+                <span lang="ar-Latn" className="block italic sm:inline">{word.transliteration}</span>
+                <span className="hidden sm:inline"> · </span>
+                <span className="block sm:inline">{word.english}</span>
               </p>
             </li>
           ))}
         </ul>
         <div className="surface overflow-hidden">
-          <div className="hidden grid-cols-[8rem_1fr_1fr] gap-3 border-b border-hairline px-4 py-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground sm:grid">
-            <span />
+          <div className="grid grid-cols-2 gap-3 border-b border-hairline px-3 py-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground sm:grid-cols-[8rem_1fr_1fr] sm:px-4">
+            <span className="hidden sm:block" />
             <span>Masculine</span>
             <span>Feminine</span>
           </div>
           <ul className="divide-y divide-hairline">
             {SHEET.demonstratives.map((row) => (
-              <li key={row.id} className="grid grid-cols-2 gap-3 px-4 py-3 sm:grid-cols-[8rem_1fr_1fr]">
+              <li key={row.id} className="grid grid-cols-2 gap-x-3 gap-y-1 px-3 py-2.5 sm:grid-cols-[8rem_1fr_1fr] sm:gap-3 sm:px-4 sm:py-3">
                 <p className="col-span-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground sm:col-span-1 sm:self-center">
                   {row.label}
                 </p>
-                {[row.masculine, row.feminine].map((item, index) => (
+                {[row.masculine, row.feminine].map((item) => (
                   <div key={item.arabic}>
-                    <p className="text-[0.7rem] text-muted-foreground sm:hidden">{index === 0 ? "Masculine" : "Feminine"}</p>
-                    <ArabicText className="text-2xl text-foreground">{item.arabic}</ArabicText>
-                    <p className="text-sm text-muted-foreground">
+                    <ArabicText className="text-xl text-foreground sm:text-2xl">{item.arabic}</ArabicText>
+                    <p className="text-xs text-muted-foreground sm:text-sm">
                       <span lang="ar-Latn" className="italic">{item.transliteration}</span> · {item.english}
                     </p>
                   </div>
@@ -151,7 +156,7 @@ export default function MasculineAndFemininePage() {
         </div>
       </section>
 
-      <section id="verbs" className="mb-12 scroll-mt-32">
+      <section id="verbs" className="mb-10 scroll-mt-32 sm:mb-12">
         <SectionHeader number={3} title="Verbs change for he, she, you and I">
           In the present tense, the letter at the start of the verb tells you who
           is doing it. Speaking to a woman adds{" "}
@@ -159,21 +164,21 @@ export default function MasculineAndFemininePage() {
           the end. Model verb: <ArabicText variant="inline">فَعَلَ</ArabicText>{" "}
           (to do).
         </SectionHeader>
-        <div className="grid grid-cols-1 gap-2 sm:grid-cols-5">
+        <div className="grid grid-cols-1 gap-1.5 sm:grid-cols-5 sm:gap-2">
           {modelForms.map((form) => (
-            <div key={form.person.id} className="tile flex items-center justify-between gap-3 p-3 sm:block sm:text-center">
+            <div key={form.person.id} className="tile flex items-center justify-between gap-3 px-3 py-2 sm:block sm:p-3 sm:text-center">
               <div>
-                <ArabicText className="text-xl text-foreground">{form.person.pronoun.arabic}</ArabicText>
+                <ArabicText className="text-lg text-foreground sm:text-xl">{form.person.pronoun.arabic}</ArabicText>
                 <p className="text-xs text-muted-foreground">{form.person.pronoun.english}</p>
               </div>
               <div className="text-end sm:mt-2 sm:text-center">
-                <MarkedArabic text={form.arabic} variant="display" className="text-3xl text-foreground" />
+                <MarkedArabic text={form.arabic} variant="display" className="text-2xl text-foreground sm:text-3xl" />
                 <p className="text-xs text-muted-foreground">{form.person.how}</p>
               </div>
             </div>
           ))}
         </div>
-        <div className="mt-4 surface border-l-4 border-l-accent-gold p-4 sm:p-5">
+        <div className="mt-3 surface border-l-4 border-l-accent-gold p-3 sm:mt-4 sm:p-5">
           <p className="text-sm text-foreground-soft">
             <strong className="text-foreground">Watch out:</strong>{" "}
             <ArabicText variant="inline">هِيَ</ArabicText> (she) and{" "}
@@ -182,9 +187,9 @@ export default function MasculineAndFemininePage() {
             context tells you which one it is.
           </p>
         </div>
-        <ul className="mt-4 space-y-2">
+        <ul className="mt-3 space-y-2 sm:mt-4">
           {SHEET.verbExamples.map((example) => (
-            <li key={example.id} className="tile p-3 sm:p-4">
+            <li key={example.id} className="tile px-3 py-2.5 sm:p-4">
               <MarkedArabic text={example.arabic} className="text-xl leading-loose text-foreground sm:text-2xl" />
               <p className="mt-1 text-sm text-muted-foreground">
                 <span lang="ar-Latn" className="italic">{example.transliteration}</span>
@@ -195,7 +200,7 @@ export default function MasculineAndFemininePage() {
         </ul>
       </section>
 
-      <section id="chart" className="mb-12 scroll-mt-32">
+      <section id="chart" className="mb-10 scroll-mt-32 sm:mb-12">
         <SectionHeader number={4} title="Verb chart">
           The verbs from class, in the present tense for all five people. Pick a
           verb to see its chart.
@@ -203,7 +208,7 @@ export default function MasculineAndFemininePage() {
         <VerbChart verbs={SHEET.chartVerbs} persons={SHEET.persons} />
       </section>
 
-      <section id="practice" className="mb-12 scroll-mt-32">
+      <section id="practice" className="mb-10 scroll-mt-32 sm:mb-12">
         <SectionHeader number={5} title="Practice">
           Choose the right word for each sentence.
         </SectionHeader>

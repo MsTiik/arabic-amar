@@ -187,7 +187,7 @@ function ActionsInContext() {
           description="The colours group related ideas. Each Arabic form means ‘he …’; use the information icon for an occasional extra note."
         />
         <div className="space-y-3">
-          {ACTION_GROUPS.map((group, groupIndex) => {
+          {ACTION_GROUPS.map((group) => {
             const actions = LEVEL_TWO_ACTIONS.filter((action) =>
               (group.ids as readonly string[]).includes(action.id),
             );
@@ -195,7 +195,6 @@ function ActionsInContext() {
             return (
               <details
                 key={group.id}
-                open={groupIndex === 0}
                 className={cn("group overflow-hidden rounded-3xl border shadow-sm", group.surface)}
               >
                 <summary className="flex cursor-pointer list-none items-center gap-3 p-4 focus-ring sm:p-5 [&::-webkit-details-marker]:hidden">
