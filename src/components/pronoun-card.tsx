@@ -25,24 +25,43 @@ export function PronounCard({ pronoun, className }: Props) {
   return (
     <article
       className={cn(
-        "group relative flex flex-col gap-2 surface p-4 sm:gap-3 sm:p-6 hover-lift",
+        "group relative flex flex-col gap-1.5 surface p-3 sm:gap-3 sm:p-6 hover-lift",
         className,
       )}
     >
-      <div className="flex items-start justify-between gap-3 sm:flex-col sm:items-stretch sm:gap-2">
-        <span className="chip shrink-0 bg-background-soft text-muted-foreground sm:self-end">
+      <div className="flex items-center gap-3 sm:hidden">
+        <div className="min-w-0 flex-1">
+          <div className="flex items-center gap-2">
+            <SpeakerButton
+              arabic={pronoun.arabic}
+              label={pronoun.english}
+              size="sm"
+            />
+            <p className="text-base font-medium text-foreground" lang="ar-Latn">
+              {pronoun.pronunciation}
+            </p>
+          </div>
+          <p className="mt-0.5 text-sm text-foreground-soft">{pronoun.english}</p>
+        </div>
+        <ArabicText variant="display" className="shrink-0 text-4xl text-foreground">
+          {pronoun.arabic}
+        </ArabicText>
+      </div>
+
+      <div className="hidden sm:flex sm:flex-col sm:items-stretch sm:gap-2">
+        <span className="chip shrink-0 self-end bg-background-soft text-muted-foreground">
           {pronoun.category}
         </span>
 
         <ArabicText
           variant="display"
-          className="min-w-0 text-4xl text-foreground sm:text-6xl"
+          className="min-w-0 text-6xl text-foreground"
         >
           {pronoun.arabic}
         </ArabicText>
       </div>
 
-      <div className="flex flex-col gap-1">
+      <div className="hidden flex-col gap-1 sm:flex">
         <div className="flex items-center gap-2">
           <SpeakerButton
             arabic={pronoun.arabic}
@@ -61,20 +80,24 @@ export function PronounCard({ pronoun, className }: Props) {
         </p>
       </div>
 
+      <p className="text-xs leading-relaxed text-muted-foreground sm:hidden">
+        <span className="font-semibold text-foreground-soft">{pronoun.category}</span>
+        {pronoun.usageNote ? <> · {pronoun.usageNote}</> : null}
+      </p>
       {pronoun.usageNote ? (
-        <p className="text-xs leading-relaxed text-muted-foreground">
+        <p className="hidden text-xs leading-relaxed text-muted-foreground sm:block">
           <span className="font-semibold text-foreground-soft">Usage:</span>{" "}
           {pronoun.usageNote}
         </p>
       ) : null}
 
       {hasExample ? (
-        <div className="mt-auto border-t border-hairline/60 pt-3">
+        <div className="mt-auto sm:border-t sm:border-hairline/60 sm:pt-3">
           <button
             type="button"
             onClick={() => setOpen((o) => !o)}
             aria-expanded={open}
-            className="text-xs font-medium text-primary hover:underline focus-ring rounded"
+            className="-my-1 py-1 text-xs font-medium text-primary hover:underline focus-ring rounded"
           >
             {open ? "Hide example" : "Show example"}
           </button>

@@ -26,8 +26,12 @@ export function VerbChart({
   const forms = chartForms(verb, persons);
 
   return (
-    <div className="surface p-4 sm:p-6">
-      <div role="tablist" aria-label="Choose a verb" className="flex flex-wrap gap-1.5">
+    <div className="surface p-3 sm:p-6">
+      <div
+        role="tablist"
+        aria-label="Choose a verb"
+        className="-mx-3 flex gap-1.5 overflow-x-auto px-3 pb-1 [scrollbar-width:none] sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0 sm:pb-0"
+      >
         {verbs.map((entry) => (
           <button
             key={entry.id}
@@ -36,7 +40,7 @@ export function VerbChart({
             aria-selected={entry.id === verb.id}
             onClick={() => setVerbId(entry.id)}
             className={cn(
-              "rounded-full border px-3 py-1 text-xs font-medium focus-ring",
+              "shrink-0 whitespace-nowrap rounded-full border px-3 py-1.5 text-sm font-medium focus-ring sm:py-1 sm:text-xs",
               entry.id === verb.id
                 ? "border-primary bg-primary text-primary-foreground"
                 : "border-hairline bg-background-soft hover:bg-muted",
@@ -54,11 +58,11 @@ export function VerbChart({
           exactly the same.
         </p>
       ) : null}
-      <ul className="mt-4 divide-y divide-hairline">
+      <ul className="mt-2 divide-y divide-hairline sm:mt-4">
         {forms.map((form) => (
           <li
             key={form.person.id}
-            className="grid grid-cols-[4.5rem_minmax(0,1fr)] items-center gap-x-3 gap-y-0.5 py-2.5 sm:grid-cols-[6rem_minmax(0,1fr)_minmax(0,1fr)]"
+            className="grid grid-cols-[4.5rem_minmax(0,1fr)] items-center gap-x-3 gap-y-0.5 py-2 sm:grid-cols-[6rem_minmax(0,1fr)_minmax(0,1fr)]"
           >
             <div className="row-span-2 sm:row-span-1">
               <ArabicText className="text-xl text-foreground">{form.person.pronoun.arabic}</ArabicText>
@@ -82,11 +86,12 @@ function QuestionCard({ question, index }: { question: GrammarQuestion; index: n
   const [before, after] = question.stem.split("___");
 
   return (
-    <li className="tile p-4">
+    <li className="tile p-3 sm:p-4">
       <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
         {index + 1}. {question.ask}
       </p>
-      <ArabicText className="mt-2 text-2xl leading-loose text-foreground">
+      <div className="mt-1 flex flex-wrap items-center justify-between gap-x-3 gap-y-1 sm:mt-2 sm:block" dir="rtl">
+      <ArabicText className="text-2xl leading-loose text-foreground">
         {before}
         <span
           className={cn(
@@ -98,7 +103,7 @@ function QuestionCard({ question, index }: { question: GrammarQuestion; index: n
         </span>
         {after}
       </ArabicText>
-      <div className="mt-3 flex flex-wrap gap-2" dir="rtl">
+      <div className="flex flex-wrap gap-2 sm:mt-3" dir="rtl">
         {question.options.map((option) => {
           const isAnswer = option.arabic === question.answer;
           const isPicked = option.arabic === picked;
@@ -123,8 +128,9 @@ function QuestionCard({ question, index }: { question: GrammarQuestion; index: n
           );
         })}
       </div>
+      </div>
       {answered ? (
-        <div className="mt-3 space-y-1 text-sm" aria-live="polite">
+        <div className="mt-2 space-y-1 text-sm" aria-live="polite">
           <p className={cn("font-medium", correct ? "text-success" : "text-danger")}>
             {correct ? "Correct." : "Not quite."} {question.why}
           </p>
