@@ -3,6 +3,7 @@ import { describe, expect, test } from "vitest";
 import {
   LEVEL_TWO_ACTIONS,
   LEVEL_TWO_CLASSROOM_VOCABULARY,
+  LEVEL_TWO_KHALIDS_HOUSE,
   LEVEL_TWO_MARKETPLACE_READING,
 } from "../../src/data/level-two-lessons";
 import {
@@ -57,6 +58,15 @@ describe("Level 2 vocabulary bank coverage", () => {
       (sentence) => sentence.tokens,
     )) {
       expectArabicInLevelTwoBank(token.arabic);
+    }
+  });
+
+  test("includes every word in Khalid’s house, its questions and answers", () => {
+    for (const sentence of [
+      ...LEVEL_TWO_KHALIDS_HOUSE.sentences,
+      ...LEVEL_TWO_KHALIDS_HOUSE.questions.flatMap((question) => [question.question, question.answer]),
+    ]) {
+      for (const token of sentence.tokens) expectArabicInLevelTwoBank(token.arabic);
     }
   });
 
@@ -121,6 +131,15 @@ describe("Level 2 vocabulary bank coverage", () => {
     expect(matches("المشتري").map((entry) => entry.english)).toContain("the buyer");
     expect(matches("homework").map((entry) => entry.arabic)).toContain("وَاجِبٌ");
     expect(bank.topics.map((topic) => topic.slug)).toContain("level-2-masculine-and-feminine");
+    expect(matches("a wall").map((entry) => entry.arabic)).toContain("سُورٌ");
+    expect(matches("murtafiun").map((entry) => entry.arabic)).toContain("مُرْتَفِعٌ");
+    expect(matches("حديقة").map((entry) => entry.english)).toContain("a garden");
+    expect(matches("بعيدة").map((entry) => entry.english)).toContain("and far (f.)");
+    expect(bank.topics.map((topic) => topic.slug)).toContain("level-2-khalids-house-reading");
+    const khalidTopic = bank.vocab.filter((entry) => entry.topicSlugs.includes("level-2-khalids-house-reading"));
+    for (const pronunciation of ["al-baytu", "al-bayti", "thalāthati", "thalāthatu", "Muḥammad", "Iqbāl"]) {
+      expect(khalidTopic.map((entry) => entry.pronunciation)).toContain(pronunciation);
+    }
   });
 
   test("includes every form, headword, and sentence word from the vocabulary sets", () => {

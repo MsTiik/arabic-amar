@@ -13,10 +13,14 @@ import {
 
 import { ArabicText } from "@/components/arabic-text";
 import { InteractiveArabicReading } from "@/components/interactive-arabic-reading";
+import { ReadingExercise } from "@/components/reading-exercise";
 import { VocabSetView } from "@/components/vocab-set-view";
 import {
   LEVEL_TWO_ACTIONS,
   LEVEL_TWO_ACTION_SENTENCES,
+  LEVEL_TWO_KHALIDS_HOUSE,
+  LEVEL_TWO_MARKETPLACE_PASSAGE,
+  LEVEL_TWO_MARKETPLACE_READING,
   type LevelTwoAction,
   type LevelTwoSentence,
 } from "@/data/level-two-lessons";
@@ -28,6 +32,11 @@ const UNIT_META = {
     title: "Ahmed goes shopping",
     description:
       "Read a short Arabic passage and explore each word without leaving the page.",
+  },
+  "khalids-house": {
+    title: "Khalid’s house",
+    description:
+      "Read a short description of Khalid’s house, tap any word to check it, then answer eight questions about it.",
   },
   "actions-in-context": {
     title: "Action verbs in context",
@@ -107,23 +116,24 @@ export default async function LevelTwoUnitPage({
   const meta = UNIT_META[slug];
 
   return (
-    <div className="mx-auto w-full max-w-6xl px-4 py-8 sm:py-10">
-      <header className="brand-panel rounded-[18px] shadow-[var(--shadow-md),inset_0_1px_0_oklch(1_0_0/8%)] p-5 sm:p-8">
+    <div className="mx-auto w-full max-w-6xl px-4 py-4 sm:py-10">
+      <header className="brand-panel rounded-[18px] shadow-[var(--shadow-md),inset_0_1px_0_oklch(1_0_0/8%)] p-4 sm:p-8">
         <Link
           href="/levels/level-2"
           className="text-sm text-muted-foreground hover:text-foreground"
         >
           ← Level 2 topics
         </Link>
-        <h1 className="mt-4 max-w-4xl page-title">
+        <h1 className="mt-2 max-w-4xl page-title sm:mt-4">
           {meta.title}
         </h1>
-        <p className="mt-2 max-w-3xl text-base leading-relaxed text-foreground-soft">
+        <p className="mt-1 hidden max-w-3xl text-base leading-relaxed text-foreground-soft sm:mt-2 sm:block">
           {meta.description}
         </p>
       </header>
 
       {slug === "marketplace-reading" ? <MarketplaceReading /> : null}
+      {slug === "khalids-house" ? <KhalidsHouseReading /> : null}
       {slug === "actions-in-context" ? <ActionsInContext /> : null}
     </div>
   );
@@ -164,15 +174,41 @@ function VocabThemePage({ theme }: { theme: NonNullable<ReturnType<typeof getLev
 
 function MarketplaceReading() {
   return (
-    <section className="mt-8" aria-labelledby="marketplace-passage-heading">
-      <SectionHeading
-        id="marketplace-passage-heading"
-        eyebrow="Interactive reading"
-        title="Read first, then explore"
-        description="The Arabic is the main focus. Tap any word (or hover with a mouse) to see its meaning."
+    <section className="mt-4 sm:mt-8" aria-labelledby="marketplace-passage-heading">
+      <SectionHeading id="marketplace-passage-heading" eyebrow="Interactive reading" title="Read the story" />
+      <InteractiveArabicReading
+        sentences={LEVEL_TWO_MARKETPLACE_READING}
+        english={LEVEL_TWO_MARKETPLACE_PASSAGE.english}
       />
-      <InteractiveArabicReading />
     </section>
+  );
+}
+
+function KhalidsHouseReading() {
+  const reading = LEVEL_TWO_KHALIDS_HOUSE;
+  return (
+    <div className="mt-4 space-y-8 sm:mt-8 sm:space-y-10">
+      <section aria-labelledby="khalid-passage-heading">
+        <SectionHeading id="khalid-passage-heading" eyebrow="Interactive reading" title="Read the story" />
+        <InteractiveArabicReading sentences={reading.sentences} english={reading.english} />
+      </section>
+
+      <section aria-labelledby="khalid-questions-heading">
+        <SectionHeading
+          id="khalid-questions-heading"
+          eyebrow="Exercise"
+          title="Answer the questions"
+          description="Answer each question in Arabic first, then tap it to check, and mark whether you got it."
+        />
+        <ReadingExercise reading={reading} />
+      </section>
+
+      <LessonLink
+        href="/levels/level-2/home-and-places"
+        title="Study the words from this story"
+        body="The Bayt to Masjid cards cover بَيْت, حَدِيقَة, طَابِق, قَرِيب and more, with their forms and example sentences."
+      />
+    </div>
   );
 }
 
@@ -330,7 +366,7 @@ function SectionHeading({
   description?: string;
 }) {
   return (
-    <header className="mb-4">
+    <header className="mb-3 sm:mb-4">
       <p className="section-label">{eyebrow}</p>
       <h2 id={id} className="mt-1 sm:text-3xl section-title">
         {title}

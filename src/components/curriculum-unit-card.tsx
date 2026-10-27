@@ -1,13 +1,19 @@
 import Link from "next/link";
-import { ArrowRight, House, Languages, ShoppingBasket, VenusAndMars, Waypoints } from "lucide-react";
+import { ArrowRight, BookOpenText, House, Languages, ShoppingBasket, VenusAndMars, Waypoints } from "lucide-react";
 
+import { ReadingScoreBadge } from "@/components/reading-score-badge";
 import type { CurriculumUnit } from "@/data/curriculum";
+import { LEVEL_TWO_READINGS } from "@/data/level-two-lessons";
 import { cn } from "@/lib/cn";
 
 const UNIT_IDENTITIES = {
   "marketplace-reading": {
     icon: ShoppingBasket,
     chip: "bg-accent-amber-soft text-accent-amber",
+  },
+  "khalids-house": {
+    icon: BookOpenText,
+    chip: "bg-accent-sky-soft text-accent-sky",
   },
   "actions-in-context": {
     icon: Languages,
@@ -34,6 +40,7 @@ export function CurriculumUnitCard({
 }) {
   const identity = UNIT_IDENTITIES[unit.id as keyof typeof UNIT_IDENTITIES] ?? UNIT_IDENTITIES["actions-in-context"];
   const Icon = identity.icon;
+  const reading = LEVEL_TWO_READINGS.find((candidate) => candidate.slug === unit.id);
 
   return (
     <article className="surface flex h-full flex-col p-5 sm:p-6">
@@ -47,6 +54,9 @@ export function CurriculumUnitCard({
       <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
         {unit.description}
       </p>
+      {reading ? (
+        <ReadingScoreBadge slug={reading.slug} questionIds={reading.questions.map((question) => question.id)} />
+      ) : null}
 
       <div className="mt-auto flex flex-col items-start gap-2 pt-5">
         {unit.links.map((link, linkIndex) => (

@@ -52,6 +52,17 @@ const LEVEL_TWO_UNITS: readonly CurriculumUnit[] = [
     ],
   },
   {
+    id: "khalids-house",
+    title: "Khalid’s house",
+    description:
+      "Read a short description of Khalid’s house word by word, then answer eight questions about where it is and what is around it.",
+    topicSlugs: [],
+    links: [
+      { href: "/levels/level-2/khalids-house", label: "Open the reading" },
+      { href: "/levels/level-2/home-and-places", label: "Study the words" },
+    ],
+  },
+  {
     id: "actions-in-context",
     title: "Action verbs in context",
     description:
@@ -80,6 +91,7 @@ const LEVEL_TWO_UNITS: readonly CurriculumUnit[] = [
     topicSlugs: [],
     links: [
       { href: "/levels/level-2/home-and-places", label: "Open the word cards" },
+      { href: "/levels/level-2/khalids-house", label: "Read Khalid’s house" },
       { href: "/vocabulary", label: "Search the vocabulary bank" },
     ],
   },

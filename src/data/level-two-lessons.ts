@@ -40,13 +40,14 @@ export interface LevelTwoAction extends ReviewedContent {
   note?: string;
 }
 
-export type LevelTwoReadingTokenKind = "verb" | "noun" | "connector";
+export type LevelTwoReadingTokenKind = "verb" | "noun" | "adjective" | "connector";
 
 export interface LevelTwoReadingToken {
   arabic: string;
   transliteration: string;
   english: string;
   kind: LevelTwoReadingTokenKind;
+  punctuationBefore?: string;
   punctuationAfter?: string;
 }
 
@@ -54,6 +55,25 @@ export interface LevelTwoReadingSentence {
   id: string;
   tokens: readonly LevelTwoReadingToken[];
   english: string;
+  transliteration?: string;
+}
+
+export interface LevelTwoReadingQuestion {
+  id: string;
+  /** The reading sentence that holds the answer, for "Show in story". */
+  sentenceId?: string;
+  question: LevelTwoReadingSentence;
+  answer: LevelTwoReadingSentence;
+}
+
+export interface LevelTwoReading {
+  slug: string;
+  title: string;
+  source: string;
+  reviewStatus: ContentReviewStatus;
+  sentences: readonly LevelTwoReadingSentence[];
+  english: string;
+  questions: readonly LevelTwoReadingQuestion[];
 }
 
 export const LEVEL_TWO_CLASSROOM_VOCABULARY: readonly LevelTwoVocabulary[] = [
@@ -151,9 +171,9 @@ export const LEVEL_TWO_MARKETPLACE_READING: readonly LevelTwoReadingSentence[] =
   },
 ] as const;
 
-function readingSentenceToArabic(sentence: LevelTwoReadingSentence): string {
+export function readingSentenceToArabic(sentence: LevelTwoReadingSentence): string {
   return sentence.tokens
-    .map((token) => `${token.arabic}${token.punctuationAfter ?? ""}`)
+    .map((token) => `${token.punctuationBefore ?? ""}${token.arabic}${token.punctuationAfter ?? ""}`)
     .join(" ");
 }
 
@@ -245,3 +265,197 @@ export const LEVEL_TWO_ACTION_SENTENCES: readonly LevelTwoSentence[] = [
   { id: "wipes-board", arabic: "الْمُدَرِّسُ يَمْسَحُ السَّبُّورَةَ.", english: "The teacher wipes the board.", sourcePage: 15, reviewStatus: "confirmed" },
   { id: "takes-notebook", arabic: "الطَّالِبُ يَأْخُذُ الدَّفْتَرَ مِنَ الْمُدَرِّسِ.", english: "The student takes the notebook from the teacher.", sourcePage: 15, reviewStatus: "confirmed" },
 ] as const;
+
+type KhalidWord = Omit<LevelTwoReadingToken, "punctuationBefore" | "punctuationAfter">;
+
+const KHALID_WORDS = {
+  baytu: { arabic: "بَيْتُ", transliteration: "baytu", english: "house (of)", kind: "noun" },
+  khalidin: { arabic: "خَالِدٍ", transliteration: "Khālidin", english: "Khalid", kind: "noun" },
+  kabirun: { arabic: "كَبِيرٌ", transliteration: "kabīrun", english: "big", kind: "adjective" },
+  waJamilun: { arabic: "وَجَمِيلٌ", transliteration: "wa-jamīlun", english: "and beautiful", kind: "adjective" },
+  jamilun: { arabic: "جَمِيلٌ", transliteration: "jamīlun", english: "beautiful", kind: "adjective" },
+  alBaytu: { arabic: "الْبَيْتُ", transliteration: "al-baytu", english: "the house", kind: "noun" },
+  alBayti: { arabic: "الْبَيْتِ", transliteration: "al-bayti", english: "the house", kind: "noun" },
+  fi: { arabic: "فِي", transliteration: "fī", english: "in / on", kind: "connector" },
+  shariI: { arabic: "شَارِعِ", transliteration: "shāriʿi", english: "street (of)", kind: "noun" },
+  muhammad: { arabic: "مُحَمَّد", transliteration: "Muḥammad", english: "Muhammad (street name)", kind: "noun" },
+  iqbal: { arabic: "إِقْبَال", transliteration: "Iqbāl", english: "Iqbal (street name)", kind: "noun" },
+  raqmu: { arabic: "رَقْمُ", transliteration: "raqmu", english: "number (of)", kind: "noun" },
+  eightyFiveDigits: { arabic: "٨٥", transliteration: "85", english: "85", kind: "noun" },
+  khamsatun: { arabic: "خَمْسَةٌ", transliteration: "khamsatun", english: "five", kind: "noun" },
+  waThamanuna: { arabic: "وَثَمَانُونَ", transliteration: "wa-thamānūna", english: "and eighty", kind: "noun" },
+  amama: { arabic: "أَمَامَ", transliteration: "amāma", english: "in front of", kind: "connector" },
+  hadiqatun: { arabic: "حَدِيقَةٌ", transliteration: "ḥadīqatun", english: "a garden", kind: "noun" },
+  wasiatun: { arabic: "وَاسِعَةٌ", transliteration: "wāsiʿatun", english: "spacious", kind: "adjective" },
+  hawla: { arabic: "حَوْلَ", transliteration: "ḥawla", english: "around", kind: "connector" },
+  alHadiqati: { arabic: "الْحَدِيقَةِ", transliteration: "al-ḥadīqati", english: "the garden", kind: "noun" },
+  surun: { arabic: "سُورٌ", transliteration: "sūrun", english: "a wall", kind: "noun" },
+  murtafiun: { arabic: "مُرْتَفِعٌ", transliteration: "murtafiʿun", english: "high", kind: "adjective" },
+  shajarun: { arabic: "شَجَرٌ", transliteration: "shajarun", english: "trees", kind: "noun" },
+  yatakawwanu: { arabic: "يَتَكَوَّنُ", transliteration: "yatakawwanu", english: "it is made up", kind: "verb" },
+  min: { arabic: "مِنْ", transliteration: "min", english: "of (lit. from)", kind: "connector" },
+  thalathati: { arabic: "ثَلَاثَةِ", transliteration: "thalāthati", english: "three", kind: "noun" },
+  thalathatu: { arabic: "ثَلَاثَةُ", transliteration: "thalāthatu", english: "three", kind: "noun" },
+  tawabiqa: { arabic: "طَوَابِقَ", transliteration: "ṭawābiqa", english: "floors", kind: "noun" },
+  qaribun: { arabic: "قَرِيبٌ", transliteration: "qarībun", english: "near", kind: "adjective" },
+  mina: { arabic: "مِنَ", transliteration: "mina", english: "to (lit. from)", kind: "connector" },
+  alMasjidi: { arabic: "الْمَسْجِدِ", transliteration: "al-masjidi", english: "the mosque", kind: "noun" },
+  waBaidun: { arabic: "وَبَعِيدٌ", transliteration: "wa-baʿīdun", english: "and far", kind: "adjective" },
+  baidun: { arabic: "بَعِيدٌ", transliteration: "baʿīdun", english: "far", kind: "adjective" },
+  ani: { arabic: "عَنِ", transliteration: "ʿani", english: "from", kind: "connector" },
+  asSuqi: { arabic: "السُّوقِ", transliteration: "as-sūqi", english: "the market", kind: "noun" },
+  sayyaratu: { arabic: "سَيَّارَةُ", transliteration: "sayyāratu", english: "car (of)", kind: "noun" },
+  taqifu: { arabic: "تَقِفُ", transliteration: "taqifu", english: "it (f.) stands / is parked", kind: "verb" },
+  ayna: { arabic: "أَيْنَ", transliteration: "ayna", english: "where", kind: "connector" },
+  ma: { arabic: "مَا", transliteration: "mā", english: "what", kind: "connector" },
+  madha: { arabic: "مَاذَا", transliteration: "mādhā", english: "what", kind: "connector" },
+  kam: { arabic: "كَمْ", transliteration: "kam", english: "how many", kind: "connector" },
+  tabiqan: { arabic: "طَابِقًا", transliteration: "ṭābiqan", english: "floor(s)", kind: "noun" },
+  lilBayti: { arabic: "لِلْبَيْتِ", transliteration: "lil-bayti", english: "the house has (lit. to the house)", kind: "noun" },
+  hali: { arabic: "هَلِ", transliteration: "hali", english: "is …? (question word)", kind: "connector" },
+  la: { arabic: "لَا", transliteration: "lā", english: "no", kind: "connector" },
+} as const satisfies Record<string, KhalidWord>;
+
+type KhalidKey = keyof typeof KHALID_WORDS;
+
+function khalidLine(
+  id: string,
+  english: string,
+  transliteration: string,
+  words: readonly (KhalidKey | [KhalidKey, Pick<LevelTwoReadingToken, "punctuationBefore" | "punctuationAfter">])[],
+): LevelTwoReadingSentence {
+  return {
+    id,
+    english,
+    transliteration,
+    tokens: words.map((word) =>
+      typeof word === "string" ? KHALID_WORDS[word] : { ...KHALID_WORDS[word[0]], ...word[1] },
+    ),
+  };
+}
+
+const KHALID_READING: readonly LevelTwoReadingSentence[] = [
+  khalidLine("khalid-big-and-beautiful", "Khalid’s house is big and beautiful.", "baytu Khālidin kabīrun wa-jamīlun.", [
+    "baytu", "khalidin", "kabirun", ["waJamilun", { punctuationAfter: "." }],
+  ]),
+  khalidLine("khalid-street", "The house is on Muhammad Iqbal Street.", "al-baytu fī shāriʿi Muḥammad Iqbāl.", [
+    "alBaytu", "fi", "shariI", ["muhammad", { punctuationBefore: "«" }], ["iqbal", { punctuationAfter: "»." }],
+  ]),
+  khalidLine("khalid-number", "The house number is eighty-five (85).", "raqmu al-bayti khamsatun wa-thamānūna.", [
+    "raqmu", "alBayti", ["eightyFiveDigits", { punctuationBefore: "(", punctuationAfter: ")" }], "khamsatun", ["waThamanuna", { punctuationAfter: "." }],
+  ]),
+  khalidLine("khalid-garden", "In front of the house is a spacious garden.", "amāma al-bayti ḥadīqatun wāsiʿatun.", [
+    "amama", "alBayti", "hadiqatun", ["wasiatun", { punctuationAfter: "." }],
+  ]),
+  khalidLine("khalid-wall", "Around the garden is a high wall.", "ḥawla al-ḥadīqati sūrun murtafiʿun.", [
+    "hawla", "alHadiqati", "surun", ["murtafiun", { punctuationAfter: "." }],
+  ]),
+  khalidLine("khalid-trees", "There are beautiful trees in the garden.", "fī al-ḥadīqati shajarun jamīlun.", [
+    "fi", "alHadiqati", "shajarun", ["jamilun", { punctuationAfter: "." }],
+  ]),
+  khalidLine("khalid-floors", "The house consists of three floors.", "al-baytu yatakawwanu min thalāthati ṭawābiqa.", [
+    "alBaytu", "yatakawwanu", "min", "thalathati", ["tawabiqa", { punctuationAfter: "." }],
+  ]),
+  khalidLine("khalid-near-far", "The house is near the mosque and far from the market.", "al-baytu qarībun mina al-masjidi wa-baʿīdun ʿani as-sūqi.", [
+    "alBaytu", "qaribun", "mina", "alMasjidi", "waBaidun", "ani", ["asSuqi", { punctuationAfter: "." }],
+  ]),
+  khalidLine("khalid-car", "Khalid’s car is parked in front of the house.", "sayyāratu Khālidin taqifu amāma al-bayti.", [
+    "sayyaratu", "khalidin", "taqifu", "amama", ["alBayti", { punctuationAfter: "." }],
+  ]),
+];
+
+const KHALID_QUESTIONS: readonly LevelTwoReadingQuestion[] = [
+  {
+    id: "khalid-q-where",
+    sentenceId: "khalid-street",
+    question: khalidLine("khalid-q-where-question", "Where is Khalid’s house?", "ayna baytu Khālid?", [
+      "ayna", "baytu", ["khalidin", { punctuationAfter: "؟" }],
+    ]),
+    answer: khalidLine("khalid-q-where-answer", "Khalid’s house is on Muhammad Iqbal Street.", "baytu Khālidin fī shāriʿi Muḥammad Iqbāl.", [
+      "baytu", "khalidin", "fi", "shariI", "muhammad", ["iqbal", { punctuationAfter: "." }],
+    ]),
+  },
+  {
+    id: "khalid-q-number",
+    sentenceId: "khalid-number",
+    question: khalidLine("khalid-q-number-question", "What is the house number?", "mā raqmu al-bayt?", [
+      "ma", "raqmu", ["alBayti", { punctuationAfter: "؟" }],
+    ]),
+    answer: khalidLine("khalid-q-number-answer", "The house number is eighty-five.", "raqmu al-bayti khamsatun wa-thamānūna.", [
+      "raqmu", "alBayti", "khamsatun", ["waThamanuna", { punctuationAfter: "." }],
+    ]),
+  },
+  {
+    id: "khalid-q-front",
+    sentenceId: "khalid-garden",
+    question: khalidLine("khalid-q-front-question", "What is in front of the house?", "mādhā amāma al-bayt?", [
+      "madha", "amama", ["alBayti", { punctuationAfter: "؟" }],
+    ]),
+    answer: khalidLine("khalid-q-front-answer", "In front of the house is a spacious garden.", "amāma al-bayti ḥadīqatun wāsiʿatun.", [
+      "amama", "alBayti", "hadiqatun", ["wasiatun", { punctuationAfter: "." }],
+    ]),
+  },
+  {
+    id: "khalid-q-around",
+    sentenceId: "khalid-wall",
+    question: khalidLine("khalid-q-around-question", "What is around the garden?", "mādhā ḥawla al-ḥadīqah?", [
+      "madha", "hawla", ["alHadiqati", { punctuationAfter: "؟" }],
+    ]),
+    answer: khalidLine("khalid-q-around-answer", "Around the garden is a high wall.", "ḥawla al-ḥadīqati sūrun murtafiʿun.", [
+      "hawla", "alHadiqati", "surun", ["murtafiun", { punctuationAfter: "." }],
+    ]),
+  },
+  {
+    id: "khalid-q-in-garden",
+    sentenceId: "khalid-trees",
+    question: khalidLine("khalid-q-in-garden-question", "What is in the garden?", "mādhā fī al-ḥadīqah?", [
+      "madha", "fi", ["alHadiqati", { punctuationAfter: "؟" }],
+    ]),
+    answer: khalidLine("khalid-q-in-garden-answer", "There are beautiful trees in the garden.", "fī al-ḥadīqati shajarun jamīlun.", [
+      "fi", "alHadiqati", "shajarun", ["jamilun", { punctuationAfter: "." }],
+    ]),
+  },
+  {
+    id: "khalid-q-floors",
+    sentenceId: "khalid-floors",
+    question: khalidLine("khalid-q-floors-question", "How many floors does the house have?", "kam ṭābiqan lil-bayt?", [
+      "kam", "tabiqan", ["lilBayti", { punctuationAfter: "؟" }],
+    ]),
+    answer: khalidLine("khalid-q-floors-answer", "The house has three floors.", "lil-bayti thalāthatu ṭawābiqa.", [
+      "lilBayti", "thalathatu", ["tawabiqa", { punctuationAfter: "." }],
+    ]),
+  },
+  {
+    id: "khalid-q-market",
+    sentenceId: "khalid-near-far",
+    question: khalidLine("khalid-q-market-question", "Is the house near the market?", "hal al-baytu qarībun mina as-sūq?", [
+      "hali", "alBaytu", "qaribun", "mina", ["asSuqi", { punctuationAfter: "؟" }],
+    ]),
+    answer: khalidLine("khalid-q-market-answer", "No, the house is far from the market.", "lā, al-baytu baʿīdun ʿani as-sūq.", [
+      ["la", { punctuationAfter: "،" }], "alBaytu", "baidun", "ani", ["asSuqi", { punctuationAfter: "." }],
+    ]),
+  },
+  {
+    id: "khalid-q-car",
+    sentenceId: "khalid-car",
+    question: khalidLine("khalid-q-car-question", "Where is Khalid’s car parked?", "ayna taqifu sayyāratu Khālid?", [
+      "ayna", "taqifu", "sayyaratu", ["khalidin", { punctuationAfter: "؟" }],
+    ]),
+    answer: khalidLine("khalid-q-car-answer", "Khalid’s car is parked in front of the house.", "taqifu sayyāratu Khālidin amāma al-bayti.", [
+      "taqifu", "sayyaratu", "khalidin", "amama", ["alBayti", { punctuationAfter: "." }],
+    ]),
+  },
+];
+
+export const LEVEL_TWO_KHALIDS_HOUSE: LevelTwoReading = {
+  slug: "khalids-house",
+  title: "Khalid’s house",
+  source: "Khalid’s House lesson sheet (Level 2, supplied October 2026)",
+  reviewStatus: "normalised",
+  sentences: KHALID_READING,
+  english: KHALID_READING.map((sentence) => sentence.english).join(" "),
+  questions: KHALID_QUESTIONS,
+};
+
+/** Readings with a self-marked exercise, keyed by curriculum unit id. */
+export const LEVEL_TWO_READINGS: readonly LevelTwoReading[] = [LEVEL_TWO_KHALIDS_HOUSE];

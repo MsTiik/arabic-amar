@@ -1,7 +1,10 @@
 import {
   LEVEL_TWO_ACTIONS,
   LEVEL_TWO_CLASSROOM_VOCABULARY,
+  LEVEL_TWO_KHALIDS_HOUSE,
   LEVEL_TWO_MARKETPLACE_READING,
+  type LevelTwoReading,
+  type LevelTwoReadingTokenKind,
 } from "@/data/level-two-lessons";
 import {
   LEVEL_TWO_VOCAB_THEMES,
@@ -23,6 +26,17 @@ export function vocabThemeSentenceTopicSlug(theme: Pick<LevelTwoVocabTheme, "slu
   return `level-2-${theme.slug}-sentences`;
 }
 
+export function readingTopicSlug(reading: Pick<LevelTwoReading, "slug">): string {
+  return `level-2-${reading.slug}-reading`;
+}
+
+const READING_KIND_LABELS: Record<LevelTwoReadingTokenKind, string> = {
+  verb: "Action",
+  noun: "Person or thing",
+  adjective: "Describing word",
+  connector: "Connecting word",
+};
+
 export function grammarSheetTopicSlug(sheet: Pick<LevelTwoGrammarSheet, "slug">): string {
   return `level-2-${sheet.slug}`;
 }
@@ -43,6 +57,10 @@ const LEVEL_TWO_TOPICS: readonly { slug: string; name: string }[] = [
   {
     slug: "level-2-marketplace-reading",
     name: "Level 2 · Marketplace reading",
+  },
+  {
+    slug: readingTopicSlug(LEVEL_TWO_KHALIDS_HOUSE),
+    name: `Level 2 · ${LEVEL_TWO_KHALIDS_HOUSE.title} reading`,
   },
   ...LEVEL_TWO_GRAMMAR_SHEETS.map((sheet) => ({
     slug: grammarSheetTopicSlug(sheet),
@@ -236,22 +254,49 @@ export function getLevelTwoVocabularyEntries(): VocabEntry[] {
         pronunciation: token.transliteration,
         english: token.english,
         category: "Level 2 marketplace reading",
-        subCategory:
-          token.kind === "verb"
-            ? "Action"
-            : token.kind === "noun"
-              ? "Person or thing"
-              : "Connecting word",
+        subCategory: READING_KIND_LABELS[token.kind],
         topicSlug: "level-2-marketplace-reading",
       });
     }
   }
+
+  words.push(...readingBankWords(LEVEL_TWO_KHALIDS_HOUSE));
 
   for (const sheet of LEVEL_TWO_GRAMMAR_SHEETS) words.push(...grammarSheetBankWords(sheet));
 
   for (const theme of LEVEL_TWO_VOCAB_THEMES) words.push(...vocabThemeBankWords(theme));
 
   return words.map(toVocabEntry);
+}
+
+/** Each distinct word in a reading, its questions and their answers. */
+function readingBankWords(reading: LevelTwoReading): LevelTwoBankWord[] {
+  const words: LevelTwoBankWord[] = [];
+  const seen = new Set<string>();
+  const sentences = [
+    ...reading.sentences.map((sentence) => ({ sentence, part: "Reading" })),
+    ...reading.questions.flatMap((question) => [
+      { sentence: question.question, part: "Question" },
+      { sentence: question.answer, part: "Answer" },
+    ]),
+  ];
+  for (const { sentence, part } of sentences) {
+    for (const [index, token] of sentence.tokens.entries()) {
+      const key = `${token.arabic}\u0000${token.transliteration}\u0000${token.english}`;
+      if (seen.has(key)) continue;
+      seen.add(key);
+      words.push({
+        id: `${reading.slug}__${sentence.id}__${index + 1}`,
+        arabic: token.arabic,
+        pronunciation: token.transliteration,
+        english: token.english,
+        category: `Level 2 · ${reading.title}`,
+        subCategory: `${part} · ${READING_KIND_LABELS[token.kind]}`,
+        topicSlug: readingTopicSlug(reading),
+      });
+    }
+  }
+  return words;
 }
 
 /** Every form on a theme's word cards, plus each distinct word in their sentences. */
