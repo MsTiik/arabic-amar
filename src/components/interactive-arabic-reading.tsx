@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { BookOpen, ChevronLeft, ChevronRight, MousePointer2, X } from "lucide-react";
 
 import { ArabicText } from "@/components/arabic-text";
@@ -69,6 +69,28 @@ export function InteractiveArabicReading({
   const [sheetOpen, setSheetOpen] = useState(false);
   const selectedStyle = TOKEN_STYLES[selected.token.kind];
   const selectedIndex = allWords.findIndex((word) => word.key === selected.key);
+  const passageRef = useRef<HTMLDivElement>(null);
+  const sheetRef = useRef<HTMLDivElement>(null);
+
+  // Scroll the selected word clear of the sheet (and the sticky header) so
+  // tapping a word low on the screen never hides it.
+  useEffect(() => {
+    if (!sheetOpen) return;
+    const frame = requestAnimationFrame(() => {
+      const word = passageRef.current?.querySelector<HTMLElement>(`[data-word-key="${selected.key}"]`);
+      const sheet = sheetRef.current;
+      if (!word || !sheet) return;
+      const wordBox = word.getBoundingClientRect();
+      const sheetTop = sheet.getBoundingClientRect().top;
+      const margin = 16;
+      if (wordBox.bottom > sheetTop - margin) {
+        window.scrollBy({ top: wordBox.bottom - sheetTop + margin, behavior: "smooth" });
+      } else if (wordBox.top < 80) {
+        window.scrollBy({ top: wordBox.top - 80, behavior: "smooth" });
+      }
+    });
+    return () => cancelAnimationFrame(frame);
+  }, [sheetOpen, selected.key]);
 
   function step(delta: number) {
     const next = allWords[selectedIndex + delta];
@@ -98,7 +120,7 @@ export function InteractiveArabicReading({
         </div>
       </div>
 
-      <div className="divide-y divide-hairline">
+      <div ref={passageRef} className="divide-y divide-hairline">
         {sentences.map((sentence) => (
           <div key={sentence.id} className="py-4 sm:py-6">
             <div dir="rtl" className="flex flex-wrap items-baseline justify-start gap-x-1.5 gap-y-2 sm:gap-x-2 sm:gap-y-3">
@@ -109,6 +131,7 @@ export function InteractiveArabicReading({
                   <span key={key} className="group relative inline-flex">
                     <button
                       type="button"
+                      data-word-key={key}
                       onMouseEnter={() => setSelected({ key, token })}
                       onFocus={() => setSelected({ key, token })}
                       onClick={() => {
@@ -172,6 +195,7 @@ export function InteractiveArabicReading({
           <div
             role="dialog"
             aria-label="Word meaning"
+            ref={sheetRef}
             className="fixed inset-x-0 bottom-[calc(4.25rem+env(safe-area-inset-bottom))] z-40 px-3 pb-2 sm:hidden"
           >
             <div className={cn("feedback-enter rounded-[14px] border p-4 shadow-2xl", selectedStyle.panel)}>
