@@ -117,6 +117,15 @@ export function validateLevelTwoPublishedContent(): LevelTwoValidationIssue[] {
     if (reading.questions.length === 0) {
       issues.push({ location: readingLocation, message: "A reading needs its exercise questions." });
     }
+    const sentenceIds = new Set(reading.sentences.map((sentence) => sentence.id));
+    for (const question of reading.questions) {
+      if (question.sentenceId && !sentenceIds.has(question.sentenceId)) {
+        issues.push({
+          location: `${readingLocation}.${question.id}`,
+          message: `"Show in story" points at a sentence that is not in the reading: ${question.sentenceId}.`,
+        });
+      }
+    }
     const parts = [
       ...reading.sentences,
       ...reading.questions.flatMap((question) => [question.question, question.answer]),

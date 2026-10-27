@@ -41,6 +41,10 @@ describe("published Level 2 content", () => {
     expect(LEVEL_TWO_MARKETPLACE_READING.flatMap((sentence) => sentence.tokens)).toHaveLength(39);
     expect(LEVEL_TWO_KHALIDS_HOUSE.sentences).toHaveLength(9);
     expect(LEVEL_TWO_KHALIDS_HOUSE.questions).toHaveLength(8);
+    const sentenceIds = LEVEL_TWO_KHALIDS_HOUSE.sentences.map((sentence) => sentence.id);
+    for (const question of LEVEL_TWO_KHALIDS_HOUSE.questions) {
+      expect(sentenceIds).toContain(question.sentenceId);
+    }
     expect(LEVEL_TWO_MATCHING_PHRASES).toHaveLength(9);
     expect(LEVEL_TWO_MARKETPLACE_ORDERING).toHaveLength(9);
     expect(LEVEL_TWO_ACTIONS).toHaveLength(27);

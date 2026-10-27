@@ -60,6 +60,8 @@ export interface LevelTwoReadingSentence {
 
 export interface LevelTwoReadingQuestion {
   id: string;
+  /** The reading sentence that holds the answer, for "Show in story". */
+  sentenceId?: string;
   question: LevelTwoReadingSentence;
   answer: LevelTwoReadingSentence;
 }
@@ -365,6 +367,7 @@ const KHALID_READING: readonly LevelTwoReadingSentence[] = [
 const KHALID_QUESTIONS: readonly LevelTwoReadingQuestion[] = [
   {
     id: "khalid-q-where",
+    sentenceId: "khalid-street",
     question: khalidLine("khalid-q-where-question", "Where is Khalid’s house?", "ayna baytu Khālid?", [
       "ayna", "baytu", ["khalidin", { punctuationAfter: "؟" }],
     ]),
@@ -374,6 +377,7 @@ const KHALID_QUESTIONS: readonly LevelTwoReadingQuestion[] = [
   },
   {
     id: "khalid-q-number",
+    sentenceId: "khalid-number",
     question: khalidLine("khalid-q-number-question", "What is the house number?", "mā raqmu al-bayt?", [
       "ma", "raqmu", ["alBayti", { punctuationAfter: "؟" }],
     ]),
@@ -383,6 +387,7 @@ const KHALID_QUESTIONS: readonly LevelTwoReadingQuestion[] = [
   },
   {
     id: "khalid-q-front",
+    sentenceId: "khalid-garden",
     question: khalidLine("khalid-q-front-question", "What is in front of the house?", "mādhā amāma al-bayt?", [
       "madha", "amama", ["alBayti", { punctuationAfter: "؟" }],
     ]),
@@ -392,6 +397,7 @@ const KHALID_QUESTIONS: readonly LevelTwoReadingQuestion[] = [
   },
   {
     id: "khalid-q-around",
+    sentenceId: "khalid-wall",
     question: khalidLine("khalid-q-around-question", "What is around the garden?", "mādhā ḥawla al-ḥadīqah?", [
       "madha", "hawla", ["alHadiqati", { punctuationAfter: "؟" }],
     ]),
@@ -401,6 +407,7 @@ const KHALID_QUESTIONS: readonly LevelTwoReadingQuestion[] = [
   },
   {
     id: "khalid-q-in-garden",
+    sentenceId: "khalid-trees",
     question: khalidLine("khalid-q-in-garden-question", "What is in the garden?", "mādhā fī al-ḥadīqah?", [
       "madha", "fi", ["alHadiqati", { punctuationAfter: "؟" }],
     ]),
@@ -410,6 +417,7 @@ const KHALID_QUESTIONS: readonly LevelTwoReadingQuestion[] = [
   },
   {
     id: "khalid-q-floors",
+    sentenceId: "khalid-floors",
     question: khalidLine("khalid-q-floors-question", "How many floors does the house have?", "kam ṭābiqan lil-bayt?", [
       "kam", "tabiqan", ["lilBayti", { punctuationAfter: "؟" }],
     ]),
@@ -419,6 +427,7 @@ const KHALID_QUESTIONS: readonly LevelTwoReadingQuestion[] = [
   },
   {
     id: "khalid-q-market",
+    sentenceId: "khalid-near-far",
     question: khalidLine("khalid-q-market-question", "Is the house near the market?", "hal al-baytu qarībun mina as-sūq?", [
       "hali", "alBaytu", "qaribun", "mina", ["asSuqi", { punctuationAfter: "؟" }],
     ]),
@@ -428,6 +437,7 @@ const KHALID_QUESTIONS: readonly LevelTwoReadingQuestion[] = [
   },
   {
     id: "khalid-q-car",
+    sentenceId: "khalid-car",
     question: khalidLine("khalid-q-car-question", "Where is Khalid’s car parked?", "ayna taqifu sayyāratu Khālid?", [
       "ayna", "taqifu", "sayyaratu", ["khalidin", { punctuationAfter: "؟" }],
     ]),
@@ -446,3 +456,6 @@ export const LEVEL_TWO_KHALIDS_HOUSE: LevelTwoReading = {
   english: KHALID_READING.map((sentence) => sentence.english).join(" "),
   questions: KHALID_QUESTIONS,
 };
+
+/** Readings with a self-marked exercise, keyed by curriculum unit id. */
+export const LEVEL_TWO_READINGS: readonly LevelTwoReading[] = [LEVEL_TWO_KHALIDS_HOUSE];

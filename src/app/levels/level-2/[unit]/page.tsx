@@ -13,6 +13,7 @@ import {
 
 import { ArabicText } from "@/components/arabic-text";
 import { InteractiveArabicReading } from "@/components/interactive-arabic-reading";
+import { ReadingExercise } from "@/components/reading-exercise";
 import { VocabSetView } from "@/components/vocab-set-view";
 import {
   LEVEL_TWO_ACTIONS,
@@ -20,9 +21,7 @@ import {
   LEVEL_TWO_KHALIDS_HOUSE,
   LEVEL_TWO_MARKETPLACE_PASSAGE,
   LEVEL_TWO_MARKETPLACE_READING,
-  readingSentenceToArabic,
   type LevelTwoAction,
-  type LevelTwoReadingQuestion,
   type LevelTwoSentence,
 } from "@/data/level-two-lessons";
 import { LEVEL_TWO_VOCAB_THEMES, getLevelTwoVocabTheme } from "@/data/level-two-vocab-sets";
@@ -117,18 +116,18 @@ export default async function LevelTwoUnitPage({
   const meta = UNIT_META[slug];
 
   return (
-    <div className="mx-auto w-full max-w-6xl px-4 py-8 sm:py-10">
-      <header className="brand-panel rounded-[18px] shadow-[var(--shadow-md),inset_0_1px_0_oklch(1_0_0/8%)] p-5 sm:p-8">
+    <div className="mx-auto w-full max-w-6xl px-4 py-4 sm:py-10">
+      <header className="brand-panel rounded-[18px] shadow-[var(--shadow-md),inset_0_1px_0_oklch(1_0_0/8%)] p-4 sm:p-8">
         <Link
           href="/levels/level-2"
           className="text-sm text-muted-foreground hover:text-foreground"
         >
           ← Level 2 topics
         </Link>
-        <h1 className="mt-4 max-w-4xl page-title">
+        <h1 className="mt-2 max-w-4xl page-title sm:mt-4">
           {meta.title}
         </h1>
-        <p className="mt-2 max-w-3xl text-base leading-relaxed text-foreground-soft">
+        <p className="mt-1 hidden max-w-3xl text-base leading-relaxed text-foreground-soft sm:mt-2 sm:block">
           {meta.description}
         </p>
       </header>
@@ -175,13 +174,8 @@ function VocabThemePage({ theme }: { theme: NonNullable<ReturnType<typeof getLev
 
 function MarketplaceReading() {
   return (
-    <section className="mt-8" aria-labelledby="marketplace-passage-heading">
-      <SectionHeading
-        id="marketplace-passage-heading"
-        eyebrow="Interactive reading"
-        title="Read first, then explore"
-        description="The Arabic is the main focus. Tap any word (or hover with a mouse) to see its meaning."
-      />
+    <section className="mt-4 sm:mt-8" aria-labelledby="marketplace-passage-heading">
+      <SectionHeading id="marketplace-passage-heading" eyebrow="Interactive reading" title="Read the story" />
       <InteractiveArabicReading
         sentences={LEVEL_TWO_MARKETPLACE_READING}
         english={LEVEL_TWO_MARKETPLACE_PASSAGE.english}
@@ -193,14 +187,9 @@ function MarketplaceReading() {
 function KhalidsHouseReading() {
   const reading = LEVEL_TWO_KHALIDS_HOUSE;
   return (
-    <div className="mt-8 space-y-10">
+    <div className="mt-4 space-y-8 sm:mt-8 sm:space-y-10">
       <section aria-labelledby="khalid-passage-heading">
-        <SectionHeading
-          id="khalid-passage-heading"
-          eyebrow="Interactive reading"
-          title="Read first, then explore"
-          description="Tap any word (or hover with a mouse) to see its meaning."
-        />
+        <SectionHeading id="khalid-passage-heading" eyebrow="Interactive reading" title="Read the story" />
         <InteractiveArabicReading sentences={reading.sentences} english={reading.english} />
       </section>
 
@@ -209,13 +198,9 @@ function KhalidsHouseReading() {
           id="khalid-questions-heading"
           eyebrow="Exercise"
           title="Answer the questions"
-          description="Answer each question in Arabic first, then tap it to check the answer."
+          description="Answer each question in Arabic first, then tap it to check, and mark whether you got it."
         />
-        <ol className="grid gap-2 sm:gap-3 md:grid-cols-2">
-          {reading.questions.map((question, index) => (
-            <ReadingQuestionCard key={question.id} question={question} number={index + 1} />
-          ))}
-        </ol>
+        <ReadingExercise reading={reading} />
       </section>
 
       <LessonLink
@@ -224,46 +209,6 @@ function KhalidsHouseReading() {
         body="The Bayt to Masjid cards cover بَيْت, حَدِيقَة, طَابِق, قَرِيب and more, with their forms and example sentences."
       />
     </div>
-  );
-}
-
-function ReadingQuestionCard({
-  question,
-  number,
-}: {
-  question: LevelTwoReadingQuestion;
-  number: number;
-}) {
-  return (
-    <li>
-      <details className="group surface h-full p-3 sm:p-4">
-        <summary className="flex cursor-pointer list-none items-center gap-3 focus-ring [&::-webkit-details-marker]:hidden">
-          <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary-soft text-xs font-semibold tabular-nums text-primary">
-            {number}
-          </span>
-          <span className="min-w-0 flex-1">
-            <ArabicText className="text-2xl leading-loose sm:text-3xl">
-              {readingSentenceToArabic(question.question)}
-            </ArabicText>
-            <span lang="ar-Latn" className="block text-sm italic text-foreground-soft">
-              {question.question.transliteration}
-            </span>
-            <span className="block text-xs text-muted-foreground">{question.question.english}</span>
-          </span>
-          <ChevronDown className="h-5 w-5 shrink-0 text-muted-foreground transition-transform group-open:rotate-180" aria-hidden />
-        </summary>
-        <div className="mt-2 border-t border-hairline pt-2">
-          <p className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">Answer</p>
-          <ArabicText className="text-2xl leading-loose text-foreground sm:text-3xl">
-            {readingSentenceToArabic(question.answer)}
-          </ArabicText>
-          <p lang="ar-Latn" className="text-sm italic text-foreground-soft">
-            {question.answer.transliteration}
-          </p>
-          <p className="text-sm font-medium">{question.answer.english}</p>
-        </div>
-      </details>
-    </li>
   );
 }
 
@@ -421,7 +366,7 @@ function SectionHeading({
   description?: string;
 }) {
   return (
-    <header className="mb-4">
+    <header className="mb-3 sm:mb-4">
       <p className="section-label">{eyebrow}</p>
       <h2 id={id} className="mt-1 sm:text-3xl section-title">
         {title}
