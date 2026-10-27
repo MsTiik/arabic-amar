@@ -29,6 +29,7 @@ describe("curriculum levels", () => {
     const levelTwo = getCurriculumLevel("level-2");
     expect(levelTwo?.units?.map((unit) => unit.id)).toEqual([
       "marketplace-reading",
+      "khalids-house",
       "actions-in-context",
       "core-verb-families",
       "home-and-places",

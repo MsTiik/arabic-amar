@@ -4,11 +4,10 @@ import { useState } from "react";
 import { BookOpen, ChevronLeft, ChevronRight, MousePointer2, X } from "lucide-react";
 
 import { ArabicText } from "@/components/arabic-text";
-import {
-  LEVEL_TWO_MARKETPLACE_PASSAGE,
-  LEVEL_TWO_MARKETPLACE_READING,
-  type LevelTwoReadingToken,
-  type LevelTwoReadingTokenKind,
+import type {
+  LevelTwoReadingSentence,
+  LevelTwoReadingToken,
+  LevelTwoReadingTokenKind,
 } from "@/data/level-two-lessons";
 import { cn } from "@/lib/cn";
 
@@ -30,6 +29,13 @@ const TOKEN_STYLES: Record<
     panel: "border-accent-sky/40 bg-accent-sky-soft",
     dot: "bg-accent-sky",
   },
+  adjective: {
+    label: "Describing word",
+    button:
+      "border-accent-rose/45 bg-accent-rose-soft/55 hover:bg-accent-rose-soft focus:bg-accent-rose-soft",
+    panel: "border-accent-rose/40 bg-accent-rose-soft",
+    dot: "bg-accent-rose",
+  },
   connector: {
     label: "Connecting word",
     button:
@@ -44,24 +50,28 @@ interface SelectedWord {
   token: LevelTwoReadingToken;
 }
 
-const ALL_WORDS: SelectedWord[] = LEVEL_TWO_MARKETPLACE_READING.flatMap((sentence) =>
-  sentence.tokens.map((token, index) => ({ key: `${sentence.id}-${index}`, token })),
-);
-
-export function InteractiveArabicReading() {
-  const firstToken = LEVEL_TWO_MARKETPLACE_READING[0].tokens[0];
-  const [selected, setSelected] = useState<SelectedWord>({
-    key: `${LEVEL_TWO_MARKETPLACE_READING[0].id}-0`,
-    token: firstToken,
-  });
+export function InteractiveArabicReading({
+  sentences,
+  english,
+}: {
+  sentences: readonly LevelTwoReadingSentence[];
+  english: string;
+}) {
+  const allWords: SelectedWord[] = sentences.flatMap((sentence) =>
+    sentence.tokens.map((token, index) => ({ key: `${sentence.id}-${index}`, token })),
+  );
+  const kinds = (Object.keys(TOKEN_STYLES) as LevelTwoReadingTokenKind[]).filter((kind) =>
+    allWords.some((word) => word.token.kind === kind),
+  );
+  const [selected, setSelected] = useState<SelectedWord>(allWords[0]);
   // Phones get a bottom sheet instead of the inline panel, which sits below
   // the whole passage and is easy to miss on a small screen.
   const [sheetOpen, setSheetOpen] = useState(false);
   const selectedStyle = TOKEN_STYLES[selected.token.kind];
-  const selectedIndex = ALL_WORDS.findIndex((word) => word.key === selected.key);
+  const selectedIndex = allWords.findIndex((word) => word.key === selected.key);
 
   function step(delta: number) {
-    const next = ALL_WORDS[selectedIndex + delta];
+    const next = allWords[selectedIndex + delta];
     if (next) setSelected(next);
   }
 
@@ -79,7 +89,7 @@ export function InteractiveArabicReading() {
           </p>
         </div>
         <div className="flex flex-wrap gap-3 text-xs text-muted-foreground" aria-label="Word colour key">
-          {(Object.keys(TOKEN_STYLES) as LevelTwoReadingTokenKind[]).map((kind) => (
+          {kinds.map((kind) => (
             <span key={kind} className="inline-flex items-center gap-1.5">
               <span className={cn("h-2.5 w-2.5 rounded-full", TOKEN_STYLES[kind].dot)} />
               {TOKEN_STYLES[kind].label}
@@ -89,7 +99,7 @@ export function InteractiveArabicReading() {
       </div>
 
       <div className="divide-y divide-hairline">
-        {LEVEL_TWO_MARKETPLACE_READING.map((sentence) => (
+        {sentences.map((sentence) => (
           <div key={sentence.id} className="py-4 sm:py-6">
             <div dir="rtl" className="flex flex-wrap items-baseline justify-start gap-x-1.5 gap-y-2 sm:gap-x-2 sm:gap-y-3">
               {sentence.tokens.map((token, index) => {
@@ -113,6 +123,7 @@ export function InteractiveArabicReading() {
                       )}
                     >
                       <ArabicText as="span" variant="display" className="text-[1.65rem] leading-[1.75] sm:text-[2.65rem] sm:leading-[1.9]">
+                        {token.punctuationBefore ?? ""}
                         {token.arabic}
                         {token.punctuationAfter ?? ""}
                       </ArabicText>
@@ -182,7 +193,7 @@ export function InteractiveArabicReading() {
                 <button
                   type="button"
                   onClick={() => step(1)}
-                  disabled={selectedIndex >= ALL_WORDS.length - 1}
+                  disabled={selectedIndex >= allWords.length - 1}
                   className="btn btn-secondary btn-sm disabled:opacity-40"
                   aria-label="Next word in the passage"
                 >
@@ -200,7 +211,7 @@ export function InteractiveArabicReading() {
                   <ChevronRight className="h-4 w-4" aria-hidden />
                 </button>
                 <span className="ml-auto text-xs tabular-nums text-muted-foreground">
-                  {selectedIndex + 1} / {ALL_WORDS.length}
+                  {selectedIndex + 1} / {allWords.length}
                 </span>
                 <button
                   type="button"
@@ -222,7 +233,7 @@ export function InteractiveArabicReading() {
           Show the complete English meaning
         </summary>
         <p className="mt-3 max-w-4xl text-sm leading-relaxed text-foreground-soft">
-          {LEVEL_TWO_MARKETPLACE_PASSAGE.english}
+          {english}
         </p>
       </details>
     </article>

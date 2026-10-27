@@ -2,11 +2,13 @@ import {
   LEVEL_TWO_ACTIONS,
   LEVEL_TWO_ACTION_SENTENCES,
   LEVEL_TWO_CLASSROOM_VOCABULARY,
+  LEVEL_TWO_KHALIDS_HOUSE,
   LEVEL_TWO_MARKETPLACE_ORDERING,
   LEVEL_TWO_MARKETPLACE_PASSAGE,
   LEVEL_TWO_MARKETPLACE_QUESTIONS,
   LEVEL_TWO_MARKETPLACE_READING,
   LEVEL_TWO_MATCHING_PHRASES,
+  type LevelTwoReadingSentence,
 } from "@/data/level-two-lessons";
 import { LEVEL_TWO_VOCAB_SETS, LEVEL_TWO_VOCAB_THEMES } from "@/data/level-two-vocab-sets";
 import { VERB_FAMILIES } from "@/data/verb-families";
@@ -85,8 +87,7 @@ export function validateLevelTwoPublishedContent(): LevelTwoValidationIssue[] {
   requireArabic(LEVEL_TWO_MARKETPLACE_PASSAGE.arabic, "marketplace.passage");
   requireText(LEVEL_TWO_MARKETPLACE_PASSAGE.english, "marketplace.passage", "English");
 
-  for (const sentence of LEVEL_TWO_MARKETPLACE_READING) {
-    const location = `marketplace.reading.${sentence.id}`;
+  function requireReadingSentence(sentence: LevelTwoReadingSentence, location: string) {
     requireUniqueId(sentence.id, location);
     requireText(sentence.english, location, "Sentence meaning");
     if (sentence.tokens.length === 0) {
@@ -97,9 +98,33 @@ export function validateLevelTwoPublishedContent(): LevelTwoValidationIssue[] {
       requireArabic(token.arabic, tokenLocation);
       requireTransliteration(token.transliteration, tokenLocation);
       requireText(token.english, tokenLocation, "Word meaning");
-      if (!["verb", "noun", "connector"].includes(token.kind)) {
+      if (!["verb", "noun", "adjective", "connector"].includes(token.kind)) {
         issues.push({ location: tokenLocation, message: `Unknown reading word kind: ${token.kind}.` });
       }
+    }
+  }
+
+  for (const sentence of LEVEL_TWO_MARKETPLACE_READING) {
+    requireReadingSentence(sentence, `marketplace.reading.${sentence.id}`);
+  }
+
+  for (const reading of [LEVEL_TWO_KHALIDS_HOUSE]) {
+    const readingLocation = `reading.${reading.slug}`;
+    requireUniqueId(readingLocation, readingLocation);
+    requireText(reading.source, readingLocation, "Source");
+    requireReviewStatus(reading.reviewStatus, readingLocation);
+    requireText(reading.english, readingLocation, "English");
+    if (reading.questions.length === 0) {
+      issues.push({ location: readingLocation, message: "A reading needs its exercise questions." });
+    }
+    const parts = [
+      ...reading.sentences,
+      ...reading.questions.flatMap((question) => [question.question, question.answer]),
+    ];
+    for (const sentence of parts) {
+      const location = `${readingLocation}.${sentence.id}`;
+      requireReadingSentence(sentence, location);
+      requireTransliteration(sentence.transliteration ?? "", location);
     }
   }
 

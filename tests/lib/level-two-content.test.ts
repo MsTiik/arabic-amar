@@ -4,6 +4,7 @@ import {
   LEVEL_TWO_ACTIONS,
   LEVEL_TWO_ACTION_SENTENCES,
   LEVEL_TWO_CLASSROOM_VOCABULARY,
+  LEVEL_TWO_KHALIDS_HOUSE,
   LEVEL_TWO_MARKETPLACE_ORDERING,
   LEVEL_TWO_MARKETPLACE_QUESTIONS,
   LEVEL_TWO_MARKETPLACE_READING,
@@ -29,7 +30,7 @@ describe("published Level 2 content", () => {
       "bayt", "kabir", "jamil", "shari", "hadiqa", "wasi", "hawla",
       "yartafiu", "shajara", "yatakawwanu", "tabiq", "qarib", "masjid",
     ]);
-    expect(set?.words.flatMap((word) => word.sentences)).toHaveLength(28);
+    expect(set?.words.flatMap((word) => word.sentences)).toHaveLength(33);
     for (const word of set?.words ?? []) expect(word.sentences.length).toBeGreaterThan(0);
   });
 
@@ -38,6 +39,8 @@ describe("published Level 2 content", () => {
     expect(LEVEL_TWO_MARKETPLACE_QUESTIONS).toHaveLength(11);
     expect(LEVEL_TWO_MARKETPLACE_READING).toHaveLength(4);
     expect(LEVEL_TWO_MARKETPLACE_READING.flatMap((sentence) => sentence.tokens)).toHaveLength(39);
+    expect(LEVEL_TWO_KHALIDS_HOUSE.sentences).toHaveLength(9);
+    expect(LEVEL_TWO_KHALIDS_HOUSE.questions).toHaveLength(8);
     expect(LEVEL_TWO_MATCHING_PHRASES).toHaveLength(9);
     expect(LEVEL_TWO_MARKETPLACE_ORDERING).toHaveLength(9);
     expect(LEVEL_TWO_ACTIONS).toHaveLength(27);
@@ -45,6 +48,17 @@ describe("published Level 2 content", () => {
     expect(VERB_FAMILIES.filter((family) => family.levelTwoSourcePage !== undefined)).toHaveLength(5);
     expect(VERB_FAMILIES.filter((family) => family.levelTwoLesson !== undefined)).toHaveLength(17);
     expect(VERB_FAMILIES.filter((family) => family.levelTwoOrder !== undefined)).toHaveLength(22);
+  });
+
+  test("adds the teacher’s five near-and-far examples to the qarīb card", () => {
+    const qarib = LEVEL_TWO_VOCAB_SETS.flatMap((set) => set.words).find((word) => word.id === "qarib");
+    expect(qarib?.sentences.slice(-5).map((sentence) => sentence.english)).toEqual([
+      "The pen is near the book and far from the ruler.",
+      "The teacher is near the board and far from the students.",
+      "The car is near the tree and far from the house.",
+      "Pakistan is near Iran and far from Egypt.",
+      "The Muslim is close to Allah and far from Satan.",
+    ]);
   });
 
   test("does not reintroduce the two inaccurate regularised plurals", () => {

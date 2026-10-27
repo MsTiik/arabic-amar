@@ -17,7 +17,12 @@ import { VocabSetView } from "@/components/vocab-set-view";
 import {
   LEVEL_TWO_ACTIONS,
   LEVEL_TWO_ACTION_SENTENCES,
+  LEVEL_TWO_KHALIDS_HOUSE,
+  LEVEL_TWO_MARKETPLACE_PASSAGE,
+  LEVEL_TWO_MARKETPLACE_READING,
+  readingSentenceToArabic,
   type LevelTwoAction,
+  type LevelTwoReadingQuestion,
   type LevelTwoSentence,
 } from "@/data/level-two-lessons";
 import { LEVEL_TWO_VOCAB_THEMES, getLevelTwoVocabTheme } from "@/data/level-two-vocab-sets";
@@ -28,6 +33,11 @@ const UNIT_META = {
     title: "Ahmed goes shopping",
     description:
       "Read a short Arabic passage and explore each word without leaving the page.",
+  },
+  "khalids-house": {
+    title: "Khalid’s house",
+    description:
+      "Read a short description of Khalid’s house, tap any word to check it, then answer eight questions about it.",
   },
   "actions-in-context": {
     title: "Action verbs in context",
@@ -124,6 +134,7 @@ export default async function LevelTwoUnitPage({
       </header>
 
       {slug === "marketplace-reading" ? <MarketplaceReading /> : null}
+      {slug === "khalids-house" ? <KhalidsHouseReading /> : null}
       {slug === "actions-in-context" ? <ActionsInContext /> : null}
     </div>
   );
@@ -171,8 +182,88 @@ function MarketplaceReading() {
         title="Read first, then explore"
         description="The Arabic is the main focus. Tap any word (or hover with a mouse) to see its meaning."
       />
-      <InteractiveArabicReading />
+      <InteractiveArabicReading
+        sentences={LEVEL_TWO_MARKETPLACE_READING}
+        english={LEVEL_TWO_MARKETPLACE_PASSAGE.english}
+      />
     </section>
+  );
+}
+
+function KhalidsHouseReading() {
+  const reading = LEVEL_TWO_KHALIDS_HOUSE;
+  return (
+    <div className="mt-8 space-y-10">
+      <section aria-labelledby="khalid-passage-heading">
+        <SectionHeading
+          id="khalid-passage-heading"
+          eyebrow="Interactive reading"
+          title="Read first, then explore"
+          description="Tap any word (or hover with a mouse) to see its meaning."
+        />
+        <InteractiveArabicReading sentences={reading.sentences} english={reading.english} />
+      </section>
+
+      <section aria-labelledby="khalid-questions-heading">
+        <SectionHeading
+          id="khalid-questions-heading"
+          eyebrow="Exercise"
+          title="Answer the questions"
+          description="Answer each question in Arabic first, then tap it to check the answer."
+        />
+        <ol className="grid gap-2 sm:gap-3 md:grid-cols-2">
+          {reading.questions.map((question, index) => (
+            <ReadingQuestionCard key={question.id} question={question} number={index + 1} />
+          ))}
+        </ol>
+      </section>
+
+      <LessonLink
+        href="/levels/level-2/home-and-places"
+        title="Study the words from this story"
+        body="The Bayt to Masjid cards cover بَيْت, حَدِيقَة, طَابِق, قَرِيب and more, with their forms and example sentences."
+      />
+    </div>
+  );
+}
+
+function ReadingQuestionCard({
+  question,
+  number,
+}: {
+  question: LevelTwoReadingQuestion;
+  number: number;
+}) {
+  return (
+    <li>
+      <details className="group surface h-full p-3 sm:p-4">
+        <summary className="flex cursor-pointer list-none items-center gap-3 focus-ring [&::-webkit-details-marker]:hidden">
+          <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary-soft text-xs font-semibold tabular-nums text-primary">
+            {number}
+          </span>
+          <span className="min-w-0 flex-1">
+            <ArabicText className="text-2xl leading-loose sm:text-3xl">
+              {readingSentenceToArabic(question.question)}
+            </ArabicText>
+            <span lang="ar-Latn" className="block text-sm italic text-foreground-soft">
+              {question.question.transliteration}
+            </span>
+            <span className="block text-xs text-muted-foreground">{question.question.english}</span>
+          </span>
+          <ChevronDown className="h-5 w-5 shrink-0 text-muted-foreground transition-transform group-open:rotate-180" aria-hidden />
+        </summary>
+        <div className="mt-2 border-t border-hairline pt-2">
+          <p className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">Answer</p>
+          <ArabicText className="text-2xl leading-loose text-foreground sm:text-3xl">
+            {readingSentenceToArabic(question.answer)}
+          </ArabicText>
+          <p lang="ar-Latn" className="text-sm italic text-foreground-soft">
+            {question.answer.transliteration}
+          </p>
+          <p className="text-sm font-medium">{question.answer.english}</p>
+        </div>
+      </details>
+    </li>
   );
 }
 

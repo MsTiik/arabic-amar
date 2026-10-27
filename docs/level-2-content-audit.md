@@ -429,3 +429,13 @@ Source: the "Masculine and Feminine" sheet supplied by the course owner as HTML,
 - **Editorial:** each practice answer choice has a transliteration and gloss, and `sentenceWords` glosses the other words used in the example sentences and questions (for example `وَاجِبٌ`, `كُرْسِيٌّ`, `مَاذَا`, `يَا`), so they are searchable too.
 - **Copy:** the intro keeps the sheet's "usually feminine / usually masculine" wording and adds `أُمّ` and `أَرْض` as everyday feminine nouns with no ending.
 - Every example word, pronoun, chart form, practice choice and sentence word is derived into the vocabulary bank by `getLevelTwoVocabularyEntries()` under the topic "Level 2 · Masculine and feminine".
+
+## 16. Khalid’s House reading and near-and-far examples (supplied October 2026)
+
+Source: the "Khalid’s House" lesson sheet supplied by the course owner as a Word document: a nine-sentence reading, eight exercise questions with answers, and five of the teacher’s near-and-far examples.
+
+- **Reading and exercise:** published in `src/data/level-two-lessons.ts` as `LEVEL_TWO_KHALIDS_HOUSE` and shown at `/levels/level-2/khalids-house`, after "Ahmed goes shopping". The reading reuses the tap-a-word component; each question opens to show its answer. The Arabic and English of every sentence, question and answer are kept as supplied.
+- **Normalised:** transliteration adds long vowels and `ʿ` (for example `ḥadīqatun` for the sheet’s `hadiqatun`) and hyphenates `wa-`; question transliterations keep the sheet’s pausal endings (`ayna baytu Khālid?`).
+- **Editorial:** word-by-word glosses and the English for each question (the sheet gives questions in Arabic and transliteration only). The reading adds a fourth word colour, "Describing word", for adjectives such as `كَبِيرٌ` and `وَاسِعَةٌ`.
+- **Near and far:** the five teacher’s examples are added to the `qarib` card in the Bayt to Masjid set (`src/data/level-two-vocab-sets.ts`), after its two existing sentences, with `قَرِيب` / `بَعِيد` and `مِنْ` / `عَنْ` marked as focus words; their transliteration elides the article after `mina` and `ʿani` (`mina l-kitābi`) to match the card’s existing sentences.
+- Every reading, question and answer word is derived into the vocabulary bank by `getLevelTwoVocabularyEntries()` under the topic "Level 2 · Khalid’s house reading"; the near-and-far sentence words flow through the existing Home and Places derivation.
