@@ -282,7 +282,7 @@ function readingBankWords(reading: LevelTwoReading): LevelTwoBankWord[] {
   ];
   for (const { sentence, part } of sentences) {
     for (const [index, token] of sentence.tokens.entries()) {
-      const key = `${foldForSearch(token.arabic)}\u0000${foldForSearch(token.english)}`;
+      const key = `${token.arabic}\u0000${token.transliteration}\u0000${token.english}`;
       if (seen.has(key)) continue;
       seen.add(key);
       words.push({

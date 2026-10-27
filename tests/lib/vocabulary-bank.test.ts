@@ -136,6 +136,10 @@ describe("Level 2 vocabulary bank coverage", () => {
     expect(matches("حديقة").map((entry) => entry.english)).toContain("a garden");
     expect(matches("بعيدة").map((entry) => entry.english)).toContain("and far (f.)");
     expect(bank.topics.map((topic) => topic.slug)).toContain("level-2-khalids-house-reading");
+    const khalidTopic = bank.vocab.filter((entry) => entry.topicSlugs.includes("level-2-khalids-house-reading"));
+    for (const pronunciation of ["al-baytu", "al-bayti", "thalāthati", "thalāthatu", "Muḥammad", "Iqbāl"]) {
+      expect(khalidTopic.map((entry) => entry.pronunciation)).toContain(pronunciation);
+    }
   });
 
   test("includes every form, headword, and sentence word from the vocabulary sets", () => {

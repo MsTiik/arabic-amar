@@ -276,7 +276,8 @@ const KHALID_WORDS = {
   alBayti: { arabic: "الْبَيْتِ", transliteration: "al-bayti", english: "the house", kind: "noun" },
   fi: { arabic: "فِي", transliteration: "fī", english: "in / on", kind: "connector" },
   shariI: { arabic: "شَارِعِ", transliteration: "shāriʿi", english: "street (of)", kind: "noun" },
-  iqbal: { arabic: "مُحَمَّد إِقْبَال", transliteration: "Muḥammad Iqbāl", english: "Muhammad Iqbal", kind: "noun" },
+  muhammad: { arabic: "مُحَمَّد", transliteration: "Muḥammad", english: "Muhammad (street name)", kind: "noun" },
+  iqbal: { arabic: "إِقْبَال", transliteration: "Iqbāl", english: "Iqbal (street name)", kind: "noun" },
   raqmu: { arabic: "رَقْمُ", transliteration: "raqmu", english: "number (of)", kind: "noun" },
   eightyFiveDigits: { arabic: "٨٥", transliteration: "85", english: "85", kind: "noun" },
   khamsatun: { arabic: "خَمْسَةٌ", transliteration: "khamsatun", english: "five", kind: "noun" },
@@ -336,7 +337,7 @@ const KHALID_READING: readonly LevelTwoReadingSentence[] = [
     "baytu", "khalidin", "kabirun", ["waJamilun", { punctuationAfter: "." }],
   ]),
   khalidLine("khalid-street", "The house is on Muhammad Iqbal Street.", "al-baytu fī shāriʿi Muḥammad Iqbāl.", [
-    "alBaytu", "fi", "shariI", ["iqbal", { punctuationBefore: "«", punctuationAfter: "»." }],
+    "alBaytu", "fi", "shariI", ["muhammad", { punctuationBefore: "«" }], ["iqbal", { punctuationAfter: "»." }],
   ]),
   khalidLine("khalid-number", "The house number is eighty-five (85).", "raqmu al-bayti khamsatun wa-thamānūna.", [
     "raqmu", "alBayti", ["eightyFiveDigits", { punctuationBefore: "(", punctuationAfter: ")" }], "khamsatun", ["waThamanuna", { punctuationAfter: "." }],
@@ -368,7 +369,7 @@ const KHALID_QUESTIONS: readonly LevelTwoReadingQuestion[] = [
       "ayna", "baytu", ["khalidin", { punctuationAfter: "؟" }],
     ]),
     answer: khalidLine("khalid-q-where-answer", "Khalid’s house is on Muhammad Iqbal Street.", "baytu Khālidin fī shāriʿi Muḥammad Iqbāl.", [
-      "baytu", "khalidin", "fi", "shariI", ["iqbal", { punctuationAfter: "." }],
+      "baytu", "khalidin", "fi", "shariI", "muhammad", ["iqbal", { punctuationAfter: "." }],
     ]),
   },
   {
