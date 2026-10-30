@@ -171,7 +171,7 @@ export function InteractiveArabicReading({
               id={readingSentenceAnchor(sentence.id)}
               className={cn(
                 "scroll-mt-24 rounded-[10px] transition-colors target:bg-primary-soft/60 target:ring-2 target:ring-primary/30",
-                mode === "explore" ? "py-4 sm:py-6" : "py-1 sm:py-1.5",
+                mode === "explore" ? "py-3 sm:py-4" : "py-1 sm:py-1.5",
               )}
             >
               <div dir="rtl" className="flex items-start gap-2 sm:gap-3">
@@ -182,7 +182,7 @@ export function InteractiveArabicReading({
                   aria-controls={translationId}
                   aria-label={`Sentence ${sentenceIndex + 1}: ${translationOpen ? "hide" : "show"} the English`}
                   className={cn(
-                    "mt-3 flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-[11px] font-semibold tabular-nums transition-colors focus-ring sm:mt-5 sm:h-7 sm:w-7 sm:text-xs",
+                    "mt-2 flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-[11px] font-semibold tabular-nums transition-colors focus-ring sm:mt-3 sm:h-7 sm:w-7 sm:text-xs",
                     translationOpen ? "bg-primary text-primary-foreground" : "bg-primary-soft text-primary",
                   )}
                 >
@@ -191,7 +191,7 @@ export function InteractiveArabicReading({
                 <div
                   className={cn(
                     "flex min-w-0 flex-1 flex-wrap items-baseline justify-start",
-                    mode === "explore" ? "gap-x-1.5 gap-y-2 sm:gap-x-2 sm:gap-y-3" : "gap-x-1 gap-y-0 sm:gap-x-1.5",
+                    mode === "explore" ? "gap-x-1 gap-y-1.5 sm:gap-x-1.5 sm:gap-y-2" : "gap-x-1 gap-y-0 sm:gap-x-1.5",
                   )}
                 >
                   {sentence.tokens.map((token, index) => {
@@ -212,7 +212,7 @@ export function InteractiveArabicReading({
                           className={cn(
                             "transition-all focus-ring",
                             mode === "explore"
-                              ? cn("rounded-[10px] border-b-2 px-1.5 py-0.5 sm:rounded-[12px] sm:px-2 sm:py-1", style.button)
+                              ? cn("rounded-[10px] border-b-2 px-1 py-0.5 sm:rounded-[12px] sm:px-1.5 sm:py-0.5", style.button)
                               : cn("rounded-[6px] border-b-2 px-0.5", style.underline),
                             selected.key === key && (mode === "explore" || sheetOpen) && "ring-2 ring-primary/25",
                           )}
@@ -221,7 +221,7 @@ export function InteractiveArabicReading({
                             as="span"
                             variant="display"
                             className={cn(
-                              "text-[1.65rem] sm:text-[2.65rem]",
+                              "text-[1.35rem] sm:text-[2rem]",
                               mode === "explore" ? "leading-[1.75] sm:leading-[1.9]" : "leading-[1.65] sm:leading-[1.8]",
                             )}
                           >

@@ -281,7 +281,7 @@ function KhalidsHouseRoomsReading() {
         <div className="grid gap-2 md:grid-cols-2">
           {reading.phrases?.map((phrase) => (
             <article key={phrase.arabic} className="tile min-w-0 p-3.5 sm:p-4">
-              <ArabicText className="text-2xl leading-relaxed">{phrase.arabic}</ArabicText>
+              <ArabicText className="text-xl leading-relaxed sm:text-2xl">{phrase.arabic}</ArabicText>
               <p className="mt-1 text-sm italic text-muted-foreground">{phrase.transliteration}</p>
               <p className="mt-2 text-sm text-muted-foreground">Literally: {phrase.literal}</p>
               <p className="mt-0.5 font-semibold">{phrase.meaning}</p>
