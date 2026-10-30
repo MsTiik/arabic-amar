@@ -87,11 +87,12 @@ const LEVEL_TWO_UNITS: readonly CurriculumUnit[] = [
     id: "home-and-places",
     title: "Home and Places",
     description:
-      "Words for the home, its rooms and the places around it, with plurals, opposites, verb forms, and example sentences you can explore word by word. Starts with the Bayt to Masjid set.",
+      "Words for the home, its rooms and the places around it, with plurals, opposites, verb forms, and example sentences you can explore word by word. Includes the Bayt to Masjid set and a longer story naming every room and item in Khalid’s house.",
     topicSlugs: [],
     links: [
       { href: "/levels/level-2/home-and-places", label: "Open the word cards" },
       { href: "/levels/level-2/khalids-house", label: "Read Khalid’s house" },
+      { href: "/levels/level-2/khalids-house-rooms", label: "Name every room in Khalid’s house" },
       { href: "/vocabulary", label: "Search the vocabulary bank" },
     ],
   },

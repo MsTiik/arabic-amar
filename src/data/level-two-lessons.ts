@@ -1,3 +1,5 @@
+import { LEVEL_TWO_KHALIDS_HOUSE_ROOMS } from "@/data/level-two-khalids-house-rooms";
+
 export type ContentReviewStatus = "confirmed" | "normalised";
 
 export interface ReviewedContent {
@@ -58,6 +60,20 @@ export interface LevelTwoReadingSentence {
   transliteration?: string;
 }
 
+export interface LevelTwoReadingSection {
+  id: string;
+  title: string;
+  english: string;
+  sentences: readonly LevelTwoReadingSentence[];
+}
+
+export interface LevelTwoReadingPhrase {
+  arabic: string;
+  transliteration: string;
+  literal: string;
+  meaning: string;
+}
+
 export interface LevelTwoReadingQuestion {
   id: string;
   /** The reading sentence that holds the answer, for "Show in story". */
@@ -74,6 +90,11 @@ export interface LevelTwoReading {
   sentences: readonly LevelTwoReadingSentence[];
   english: string;
   questions: readonly LevelTwoReadingQuestion[];
+  titleArabic?: string;
+  shortTitle?: string;
+  sections?: readonly LevelTwoReadingSection[];
+  phrases?: readonly LevelTwoReadingPhrase[];
+  notes?: readonly string[];
 }
 
 export const LEVEL_TWO_CLASSROOM_VOCABULARY: readonly LevelTwoVocabulary[] = [
@@ -457,5 +478,8 @@ export const LEVEL_TWO_KHALIDS_HOUSE: LevelTwoReading = {
   questions: KHALID_QUESTIONS,
 };
 
-/** Readings with a self-marked exercise, keyed by curriculum unit id. */
-export const LEVEL_TWO_READINGS: readonly LevelTwoReading[] = [LEVEL_TWO_KHALIDS_HOUSE];
+/** Level 2 readings, keyed by curriculum unit id. */
+export const LEVEL_TWO_READINGS: readonly LevelTwoReading[] = [
+  LEVEL_TWO_KHALIDS_HOUSE,
+  LEVEL_TWO_KHALIDS_HOUSE_ROOMS,
+];

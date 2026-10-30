@@ -14,6 +14,7 @@ import {
 import { ArabicText } from "@/components/arabic-text";
 import { InteractiveArabicReading } from "@/components/interactive-arabic-reading";
 import { ReadingExercise } from "@/components/reading-exercise";
+import { SectionedReading } from "@/components/sectioned-reading";
 import { VocabSetView } from "@/components/vocab-set-view";
 import {
   LEVEL_TWO_ACTIONS,
@@ -24,10 +25,20 @@ import {
   type LevelTwoAction,
   type LevelTwoSentence,
 } from "@/data/level-two-lessons";
+import { LEVEL_TWO_KHALIDS_HOUSE_ROOMS } from "@/data/level-two-khalids-house-rooms";
 import { LEVEL_TWO_VOCAB_THEMES, getLevelTwoVocabTheme } from "@/data/level-two-vocab-sets";
 import { cn } from "@/lib/cn";
 
-const UNIT_META = {
+type UnitSlug = "marketplace-reading" | "khalids-house" | "khalids-house-rooms" | "actions-in-context";
+
+interface UnitMeta {
+  title: string;
+  description: string;
+  titleArabic?: string;
+  parent?: { href: string; label: string };
+}
+
+const UNIT_META: Record<UnitSlug, UnitMeta> = {
   "marketplace-reading": {
     title: "Ahmed goes shopping",
     description:
@@ -38,13 +49,19 @@ const UNIT_META = {
     description:
       "Read a short description of Khalid’s house, tap any word to check it, then answer eight questions about it.",
   },
+  "khalids-house-rooms": {
+    title: "Naming every room and item in Khalid’s house",
+    description:
+      "Read a longer description of Khalid’s house, room by room, tap any word to check it, then learn nine useful phrases.",
+    titleArabic: "بَيْتُ خالِدٍ ٢",
+    parent: { href: "/levels/level-2/home-and-places", label: "Home and Places" },
+  },
   "actions-in-context": {
     title: "Action verbs in context",
     description:
       "Build a visual bank of useful present-tense verbs, then open examples only when you need them.",
   },
 } as const;
-
 const ACTION_GROUPS = [
   {
     id: "learning",
@@ -84,8 +101,6 @@ const ACTION_GROUPS = [
   },
 ] as const;
 
-type UnitSlug = keyof typeof UNIT_META;
-
 export function generateStaticParams() {
   return [
     ...Object.keys(UNIT_META),
@@ -113,20 +128,25 @@ export default async function LevelTwoUnitPage({
   if (vocabTheme) return <VocabThemePage theme={vocabTheme} />;
   if (!(unit in UNIT_META)) notFound();
   const slug = unit as UnitSlug;
-  const meta = UNIT_META[slug];
+  const meta: UnitMeta = UNIT_META[slug];
 
   return (
     <div className="mx-auto w-full max-w-6xl px-4 py-4 sm:py-10">
       <header className="brand-panel rounded-[18px] shadow-[var(--shadow-md),inset_0_1px_0_oklch(1_0_0/8%)] p-4 sm:p-8">
         <Link
-          href="/levels/level-2"
+          href={meta.parent?.href ?? "/levels/level-2"}
           className="text-sm text-muted-foreground hover:text-foreground"
         >
-          ← Level 2 topics
+          ← {meta.parent?.label ?? "Level 2 topics"}
         </Link>
-        <h1 className="mt-2 max-w-4xl page-title sm:mt-4">
-          {meta.title}
-        </h1>
+        <div className="mt-2 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 sm:mt-4">
+          <h1 className="max-w-4xl page-title">{meta.title}</h1>
+          {meta.titleArabic ? (
+            <ArabicText variant="display" as="p" className="text-2xl text-foreground-soft sm:text-3xl">
+              {meta.titleArabic}
+            </ArabicText>
+          ) : null}
+        </div>
         <p className="mt-1 hidden max-w-3xl text-base leading-relaxed text-foreground-soft sm:mt-2 sm:block">
           {meta.description}
         </p>
@@ -134,6 +154,7 @@ export default async function LevelTwoUnitPage({
 
       {slug === "marketplace-reading" ? <MarketplaceReading /> : null}
       {slug === "khalids-house" ? <KhalidsHouseReading /> : null}
+      {slug === "khalids-house-rooms" ? <KhalidsHouseRoomsReading /> : null}
       {slug === "actions-in-context" ? <ActionsInContext /> : null}
     </div>
   );
@@ -164,6 +185,32 @@ function VocabThemePage({ theme }: { theme: NonNullable<ReturnType<typeof getLev
           <ArrowRight className="h-3.5 w-3.5" aria-hidden />
         </Link>
       </header>
+
+      {theme.readingSlugs?.length ? (
+        <section className="mt-6" aria-labelledby="home-stories-heading">
+          <SectionHeading
+            id="home-stories-heading"
+            eyebrow="Read about the home"
+            title="Stories"
+          />
+          <div className="grid gap-3 md:grid-cols-2">
+            {theme.readingSlugs.map((slug) => {
+              const reading = UNIT_META[slug as UnitSlug];
+              if (!reading) return null;
+              return (
+                <LessonLink
+                  key={slug}
+                  href={`/levels/level-2/${slug}`}
+                  title={reading.title}
+                  body={reading.description}
+                  reading
+                  compact
+                />
+              );
+            })}
+          </div>
+        </section>
+      ) : null}
 
       <section className="mt-8" aria-label={`${theme.title} word cards`}>
         <VocabSetView theme={theme} />
@@ -208,6 +255,64 @@ function KhalidsHouseReading() {
         title="Study the words from this story"
         body="The Bayt to Masjid cards cover بَيْت, حَدِيقَة, طَابِق, قَرِيب and more, with their forms and example sentences."
       />
+    </div>
+  );
+}
+
+function KhalidsHouseRoomsReading() {
+  const reading = LEVEL_TWO_KHALIDS_HOUSE_ROOMS;
+  return (
+    <div className="mt-4 space-y-8 sm:mt-8 sm:space-y-10">
+      <section aria-labelledby="khalid-rooms-reading-heading">
+        <SectionHeading
+          id="khalid-rooms-reading-heading"
+          eyebrow="Interactive reading"
+          title="Read the story"
+        />
+        <SectionedReading sections={reading.sections ?? []} />
+      </section>
+
+      <section aria-labelledby="khalid-rooms-phrases-heading">
+        <SectionHeading
+          id="khalid-rooms-phrases-heading"
+          eyebrow="Literal vs real meaning"
+          title="Useful phrases"
+        />
+        <div className="grid gap-2 md:grid-cols-2">
+          {reading.phrases?.map((phrase) => (
+            <article key={phrase.arabic} className="tile min-w-0 p-3.5 sm:p-4">
+              <ArabicText className="text-xl leading-relaxed sm:text-2xl">{phrase.arabic}</ArabicText>
+              <p className="mt-1 text-sm italic text-muted-foreground">{phrase.transliteration}</p>
+              <p className="mt-2 text-sm text-muted-foreground">Literally: {phrase.literal}</p>
+              <p className="mt-0.5 font-semibold">{phrase.meaning}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <details className="surface group p-4 sm:p-5">
+        <summary className="flex cursor-pointer list-none items-center justify-between gap-3 font-semibold focus-ring [&::-webkit-details-marker]:hidden">
+          About this text
+          <ChevronDown className="h-5 w-5 shrink-0 text-muted-foreground transition-transform group-open:rotate-180" aria-hidden />
+        </summary>
+        <ul className="mt-3 list-disc space-y-2 border-t border-hairline pt-3 pl-5 text-sm leading-relaxed text-foreground-soft">
+          {reading.notes?.map((note) => <li key={note}>{note}</li>)}
+        </ul>
+      </details>
+
+      <div className="grid gap-3 md:grid-cols-2">
+        <LessonLink
+          href="/levels/level-2/khalids-house"
+          title="Read the first Khalid’s house story"
+          body="Return to the first story, with a short reading exercise."
+          reading
+        />
+        <LessonLink
+          href="/vocabulary"
+          title="Search these words in the vocabulary bank"
+          body="Look up the story’s words and useful phrases by Arabic, transliteration or English."
+        />
+      </div>
     </div>
   );
 }
@@ -380,18 +485,30 @@ function SectionHeading({
   );
 }
 
-function LessonLink({ href, title, body }: { href: string; title: string; body: string }) {
+function LessonLink({
+  href,
+  title,
+  body,
+  reading = false,
+  compact = false,
+}: {
+  href: string;
+  title: string;
+  body: string;
+  reading?: boolean;
+  compact?: boolean;
+}) {
+  const Icon = reading ? BookOpenText : href.includes("verb-families") ? Waypoints : ListChecks;
   return (
     <Link
       href={href}
-      className="group flex items-start gap-4 rounded-[10px] border border-primary/30 bg-primary-soft p-5 hover-lift focus-ring"
+      className={cn(
+        "group flex items-start gap-4 rounded-[10px] border border-primary/30 bg-primary-soft hover-lift focus-ring",
+        compact ? "p-4" : "p-5",
+      )}
     >
       <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[10px] bg-primary text-primary-foreground">
-        {href.includes("verb-families") ? (
-          <Waypoints className="h-5 w-5" aria-hidden />
-        ) : (
-          <ListChecks className="h-5 w-5" aria-hidden />
-        )}
+        <Icon className="h-5 w-5" aria-hidden />
       </span>
       <span className="min-w-0 flex-1">
         <span className="block font-semibold">{title}</span>

@@ -32,6 +32,8 @@ For a verb family:
 - any “other form” exactly as taught
 - example sentences
 
+Longer readings can be split into `sections`, with optional `phrases` and `notes`; they do not need an exercise.
+
 It is fine if some boxes are missing or the harakat are uncertain. Missing information is recorded as missing; it is never invented silently.
 
 ## Accuracy gate

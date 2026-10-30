@@ -100,7 +100,7 @@ function ReadingQuestionCard({
             {mark === "right" ? <Check className="h-4 w-4" aria-label="Got it" /> : number}
           </span>
           <span className="min-w-0 flex-1">
-            <ArabicText className="text-2xl leading-loose sm:text-3xl">
+            <ArabicText className="text-xl leading-loose sm:text-2xl">
               {readingSentenceToArabic(question.question)}
             </ArabicText>
             <span lang="ar-Latn" className="block text-sm italic text-foreground-soft">
@@ -112,7 +112,7 @@ function ReadingQuestionCard({
         </summary>
         <div className="mt-2 border-t border-hairline pt-2">
           <p className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">Answer</p>
-          <ArabicText className="text-2xl leading-loose text-foreground sm:text-3xl">
+          <ArabicText className="text-xl leading-loose text-foreground sm:text-2xl">
             {readingSentenceToArabic(question.answer)}
           </ArabicText>
           <p lang="ar-Latn" className="text-sm italic text-foreground-soft">

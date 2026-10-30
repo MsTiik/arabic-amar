@@ -5,6 +5,7 @@ import {
   LEVEL_TWO_ACTION_SENTENCES,
   LEVEL_TWO_CLASSROOM_VOCABULARY,
   LEVEL_TWO_KHALIDS_HOUSE,
+  LEVEL_TWO_READINGS,
   LEVEL_TWO_MARKETPLACE_ORDERING,
   LEVEL_TWO_MARKETPLACE_QUESTIONS,
   LEVEL_TWO_MARKETPLACE_READING,
@@ -12,11 +13,24 @@ import {
 } from "../../src/data/level-two-lessons";
 import { VERB_FAMILIES } from "../../src/data/verb-families";
 import { LEVEL_TWO_VOCAB_SETS, LEVEL_TWO_VOCAB_THEMES } from "../../src/data/level-two-vocab-sets";
+import { LEVEL_TWO_KHALIDS_HOUSE_ROOMS } from "../../src/data/level-two-khalids-house-rooms";
 import { validateLevelTwoPublishedContent } from "../../src/lib/level-two-content";
 
 describe("published Level 2 content", () => {
   test("passes the publication accuracy gate", () => {
     expect(validateLevelTwoPublishedContent()).toEqual([]);
+  });
+
+  test("flags reading sections that do not cover their sentences", () => {
+    const reading = {
+      ...LEVEL_TWO_KHALIDS_HOUSE_ROOMS,
+      sections: LEVEL_TWO_KHALIDS_HOUSE_ROOMS.sections?.slice(0, 1),
+    };
+
+    expect(validateLevelTwoPublishedContent([reading])).toContainEqual({
+      location: "reading.khalids-house-rooms",
+      message: "Section sentences must cover the reading sentences in the same order.",
+    });
   });
 
   test("groups Bayt to Masjid under the Home and Places theme", () => {
@@ -41,6 +55,11 @@ describe("published Level 2 content", () => {
     expect(LEVEL_TWO_MARKETPLACE_READING.flatMap((sentence) => sentence.tokens)).toHaveLength(39);
     expect(LEVEL_TWO_KHALIDS_HOUSE.sentences).toHaveLength(9);
     expect(LEVEL_TWO_KHALIDS_HOUSE.questions).toHaveLength(8);
+    expect(LEVEL_TWO_READINGS).toHaveLength(2);
+    expect(LEVEL_TWO_KHALIDS_HOUSE_ROOMS.sections).toHaveLength(3);
+    expect(LEVEL_TWO_KHALIDS_HOUSE_ROOMS.sentences).toHaveLength(12);
+    expect(LEVEL_TWO_KHALIDS_HOUSE_ROOMS.sentences.flatMap((sentence) => sentence.tokens)).toHaveLength(147);
+    expect(LEVEL_TWO_KHALIDS_HOUSE_ROOMS.phrases).toHaveLength(9);
     const sentenceIds = LEVEL_TWO_KHALIDS_HOUSE.sentences.map((sentence) => sentence.id);
     for (const question of LEVEL_TWO_KHALIDS_HOUSE.questions) {
       expect(sentenceIds).toContain(question.sentenceId);

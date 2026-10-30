@@ -137,7 +137,7 @@ export function searchVocab(options: VocabSearchOptions = {}): VocabEntry[] {
   const allowArabicPrefix =
     Boolean(options.allowArabicPrefix && folded && isArabicFolded(folded)) &&
     !content.vocab.some((v) =>
-      [v.arabicFolded, foldForSearch(v.arabic)].some((value) =>
+      [v.arabicFolded, ...(v.arabicSearchForms ?? []), foldForSearch(v.arabic)].some((value) =>
         foldedSearchMatches(value, folded, { exactArabic: true }),
       ),
     );
@@ -149,6 +149,7 @@ export function searchVocab(options: VocabSearchOptions = {}): VocabEntry[] {
     if (folded) {
       const haystack = [
         v.arabicFolded,
+        ...(v.arabicSearchForms ?? []),
         foldForSearch(v.arabic),
         foldForSearch(v.pronunciation ?? ""),
         foldForSearch(v.english),

@@ -4,8 +4,10 @@ import {
   LEVEL_TWO_ACTIONS,
   LEVEL_TWO_CLASSROOM_VOCABULARY,
   LEVEL_TWO_KHALIDS_HOUSE,
+  LEVEL_TWO_READINGS,
   LEVEL_TWO_MARKETPLACE_READING,
 } from "../../src/data/level-two-lessons";
+import { LEVEL_TWO_KHALIDS_HOUSE_ROOMS } from "../../src/data/level-two-khalids-house-rooms";
 import {
   LEVEL_TWO_GRAMMAR_SHEETS,
   chartForms,
@@ -14,8 +16,9 @@ import {
 import { LEVEL_TWO_VOCAB_SETS } from "../../src/data/level-two-vocab-sets";
 import { VERB_FAMILIES } from "../../src/data/verb-families";
 import { getSiteContent } from "../../src/lib/content";
-import { foldForSearch } from "../../src/lib/diacritics";
+import { foldedSearchMatches, foldForSearch } from "../../src/lib/diacritics";
 import {
+  cliticFreeArabicForms,
   getLevelTwoVocabularyEntries,
   getVocabularyBankContent,
 } from "../../src/lib/vocabulary-bank";
@@ -67,6 +70,59 @@ describe("Level 2 vocabulary bank coverage", () => {
       ...LEVEL_TWO_KHALIDS_HOUSE.questions.flatMap((question) => [question.question, question.answer]),
     ]) {
       for (const token of sentence.tokens) expectArabicInLevelTwoBank(token.arabic);
+    }
+  });
+
+  test("includes every token in the sectioned reading and each useful phrase", () => {
+    for (const token of LEVEL_TWO_KHALIDS_HOUSE_ROOMS.sections!.flatMap((section) =>
+      section.sentences.flatMap((sentence) => sentence.tokens),
+    )) {
+      expectArabicInLevelTwoBank(token.arabic);
+    }
+    for (const phrase of LEVEL_TWO_KHALIDS_HOUSE_ROOMS.phrases ?? []) {
+      expectArabicInLevelTwoBank(phrase.arabic);
+    }
+
+    expect(bank.topics.map((topic) => topic.slug)).toContain(
+      "level-2-khalids-house-rooms-reading",
+    );
+    expect(LEVEL_TWO_READINGS.map((reading) => reading.slug)).toContain(
+      "khalids-house-rooms",
+    );
+  });
+
+  test.each([
+    ["وَسَجّادَةٌ", "wa-sajjādatun", ["سجادة"]],
+    ["وَلِلْغُرْفَةِ", "wa-li-l-ghurfati", ["للغرفة", "غرفة"]],
+    ["لِلطَّعامِ", "li-ṭ-ṭaʿāmi", ["طعام"]],
+    ["الصّابونُ", "aṣ-ṣābūnu", ["صابون"]],
+    ["وَالشّامبو", "wa-sh-shāmbū", ["الشامبو", "شامبو"]],
+    ["وَوِسادَةٌ", "wa-wisādatun", ["وسادة"]],
+    ["خالِدٍ", "khālidin", []],
+    ["لِلْبَيْتِ", "lil-bayti", []],
+    ["اسْتِقْبالٍ", "stiqbālin", []],
+  ])("derives clitic-free Arabic forms for %s", (arabic, transliteration, expected) => {
+    expect(cliticFreeArabicForms(arabic, transliteration)).toEqual(expected);
+  });
+
+  test("searches clitic-free Arabic forms without changing the displayed Arabic key", () => {
+    const rug = bank.vocab.find((entry) => entry.arabic === "وَسَجّادَةٌ");
+    expect(rug?.arabicSearchForms).toContain("سجادة");
+    expect(
+      [rug?.arabicFolded ?? "", ...(rug?.arabicSearchForms ?? [])].some((value) =>
+        foldedSearchMatches(value, foldForSearch("سجادة"), { exactArabic: true }),
+      ),
+    ).toBe(true);
+    expect(rug?.arabicFolded).toBe(foldForSearch("وَسَجّادَةٌ"));
+
+    for (const query of ["sajjada", "rug"]) {
+      expect(
+        [
+          rug?.arabicFolded ?? "",
+          foldForSearch(rug?.pronunciation ?? ""),
+          foldForSearch(rug?.english ?? ""),
+        ].some((value) => value.includes(foldForSearch(query))),
+      ).toBe(true);
     }
   });
 
