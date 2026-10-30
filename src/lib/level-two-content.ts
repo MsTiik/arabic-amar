@@ -2,12 +2,13 @@ import {
   LEVEL_TWO_ACTIONS,
   LEVEL_TWO_ACTION_SENTENCES,
   LEVEL_TWO_CLASSROOM_VOCABULARY,
-  LEVEL_TWO_KHALIDS_HOUSE,
   LEVEL_TWO_MARKETPLACE_ORDERING,
   LEVEL_TWO_MARKETPLACE_PASSAGE,
   LEVEL_TWO_MARKETPLACE_QUESTIONS,
   LEVEL_TWO_MARKETPLACE_READING,
   LEVEL_TWO_MATCHING_PHRASES,
+  LEVEL_TWO_READINGS,
+  type LevelTwoReading,
   type LevelTwoReadingSentence,
 } from "@/data/level-two-lessons";
 import { LEVEL_TWO_VOCAB_SETS, LEVEL_TWO_VOCAB_THEMES } from "@/data/level-two-vocab-sets";
@@ -20,7 +21,9 @@ export interface LevelTwoValidationIssue {
   message: string;
 }
 
-export function validateLevelTwoPublishedContent(): LevelTwoValidationIssue[] {
+export function validateLevelTwoPublishedContent(
+  readings: readonly LevelTwoReading[] = LEVEL_TWO_READINGS,
+): LevelTwoValidationIssue[] {
   const issues: LevelTwoValidationIssue[] = [];
   const seenIds = new Set<string>();
 
@@ -108,14 +111,42 @@ export function validateLevelTwoPublishedContent(): LevelTwoValidationIssue[] {
     requireReadingSentence(sentence, `marketplace.reading.${sentence.id}`);
   }
 
-  for (const reading of [LEVEL_TWO_KHALIDS_HOUSE]) {
+  for (const reading of readings) {
     const readingLocation = `reading.${reading.slug}`;
     requireUniqueId(readingLocation, readingLocation);
     requireText(reading.source, readingLocation, "Source");
     requireReviewStatus(reading.reviewStatus, readingLocation);
     requireText(reading.english, readingLocation, "English");
-    if (reading.questions.length === 0) {
-      issues.push({ location: readingLocation, message: "A reading needs its exercise questions." });
+    if (reading.sections) {
+      const sectionIds = new Set<string>();
+      const sectionSentenceIds: string[] = [];
+      for (const section of reading.sections) {
+        const sectionLocation = `${readingLocation}.${section.id}`;
+        if (sectionIds.has(section.id)) {
+          issues.push({ location: sectionLocation, message: `Duplicate reading section id: ${section.id}.` });
+        }
+        sectionIds.add(section.id);
+        requireText(section.title, sectionLocation, "Section title");
+        requireText(section.english, sectionLocation, "Section meaning");
+        sectionSentenceIds.push(...section.sentences.map((sentence) => sentence.id));
+      }
+      const readingSentenceIds = reading.sentences.map((sentence) => sentence.id);
+      if (
+        sectionSentenceIds.length !== readingSentenceIds.length ||
+        sectionSentenceIds.some((id, index) => id !== readingSentenceIds[index])
+      ) {
+        issues.push({
+          location: readingLocation,
+          message: "Section sentences must cover the reading sentences in the same order.",
+        });
+      }
+    }
+    for (const [index, phrase] of (reading.phrases ?? []).entries()) {
+      const phraseLocation = `${readingLocation}.phrase.${index + 1}`;
+      requireArabic(phrase.arabic, phraseLocation);
+      requireTransliteration(phrase.transliteration, phraseLocation);
+      requireText(phrase.literal, phraseLocation, "Literal meaning");
+      requireText(phrase.meaning, phraseLocation, "Meaning");
     }
     const sentenceIds = new Set(reading.sentences.map((sentence) => sentence.id));
     for (const question of reading.questions) {

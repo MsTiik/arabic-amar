@@ -1,8 +1,8 @@
 import {
   LEVEL_TWO_ACTIONS,
   LEVEL_TWO_CLASSROOM_VOCABULARY,
-  LEVEL_TWO_KHALIDS_HOUSE,
   LEVEL_TWO_MARKETPLACE_READING,
+  LEVEL_TWO_READINGS,
   type LevelTwoReading,
   type LevelTwoReadingTokenKind,
 } from "@/data/level-two-lessons";
@@ -28,6 +28,36 @@ export function vocabThemeSentenceTopicSlug(theme: Pick<LevelTwoVocabTheme, "slu
 
 export function readingTopicSlug(reading: Pick<LevelTwoReading, "slug">): string {
   return `level-2-${reading.slug}-reading`;
+}
+
+export function cliticFreeArabicForms(arabic: string, transliteration: string): string[] {
+  const original = foldForSearch(arabic);
+  let folded = original;
+  let latin = transliteration.toLowerCase();
+  const forms: string[] = [];
+  const prefix = /^[^\s-]{1,3}-/;
+
+  const add = (form: string) => {
+    if (form && form !== original && !forms.includes(form)) forms.push(form);
+  };
+
+  if (latin.startsWith("wa-") && folded.startsWith("و")) {
+    folded = folded.slice(1);
+    latin = latin.slice(3);
+    add(folded);
+  }
+
+  if (latin.startsWith("li-") && folded.startsWith("ل")) {
+    folded = folded.slice(1);
+    latin = latin.slice(3);
+    if (prefix.test(latin) && folded.startsWith("ل")) folded = folded.slice(1);
+    add(folded);
+  } else if (prefix.test(latin) && folded.startsWith("ال")) {
+    folded = folded.slice(2);
+    add(folded);
+  }
+
+  return forms;
 }
 
 const READING_KIND_LABELS: Record<LevelTwoReadingTokenKind, string> = {
@@ -58,10 +88,10 @@ const LEVEL_TWO_TOPICS: readonly { slug: string; name: string }[] = [
     slug: "level-2-marketplace-reading",
     name: "Level 2 · Marketplace reading",
   },
-  {
-    slug: readingTopicSlug(LEVEL_TWO_KHALIDS_HOUSE),
-    name: `Level 2 · ${LEVEL_TWO_KHALIDS_HOUSE.title} reading`,
-  },
+  ...LEVEL_TWO_READINGS.map((reading) => ({
+    slug: readingTopicSlug(reading),
+    name: `Level 2 · ${reading.shortTitle ?? reading.title} reading`,
+  })),
   ...LEVEL_TWO_GRAMMAR_SHEETS.map((sheet) => ({
     slug: grammarSheetTopicSlug(sheet),
     name: `Level 2 · ${sheet.title}`,
@@ -91,10 +121,12 @@ const FORM_LABELS = {
 } as const;
 
 function toVocabEntry(word: LevelTwoBankWord): VocabEntry {
+  const arabicSearchForms = cliticFreeArabicForms(word.arabic, word.pronunciation);
   return {
     id: `level-2__${word.id}`,
     arabic: word.arabic,
     arabicFolded: foldForSearch(word.arabic),
+    ...(arabicSearchForms.length ? { arabicSearchForms } : {}),
     pronunciation: word.pronunciation,
     english: word.english,
     category: word.category,
@@ -260,7 +292,7 @@ export function getLevelTwoVocabularyEntries(): VocabEntry[] {
     }
   }
 
-  words.push(...readingBankWords(LEVEL_TWO_KHALIDS_HOUSE));
+  for (const reading of LEVEL_TWO_READINGS) words.push(...readingBankWords(reading));
 
   for (const sheet of LEVEL_TWO_GRAMMAR_SHEETS) words.push(...grammarSheetBankWords(sheet));
 
@@ -273,6 +305,13 @@ export function getLevelTwoVocabularyEntries(): VocabEntry[] {
 function readingBankWords(reading: LevelTwoReading): LevelTwoBankWord[] {
   const words: LevelTwoBankWord[] = [];
   const seen = new Set<string>();
+  const category = `Level 2 · ${reading.shortTitle ?? reading.title}`;
+  const addWord = (word: LevelTwoBankWord) => {
+    const key = `${word.arabic}\u0000${word.pronunciation}\u0000${word.english}`;
+    if (seen.has(key)) return;
+    seen.add(key);
+    words.push(word);
+  };
   const sentences = [
     ...reading.sentences.map((sentence) => ({ sentence, part: "Reading" })),
     ...reading.questions.flatMap((question) => [
@@ -282,19 +321,27 @@ function readingBankWords(reading: LevelTwoReading): LevelTwoBankWord[] {
   ];
   for (const { sentence, part } of sentences) {
     for (const [index, token] of sentence.tokens.entries()) {
-      const key = `${token.arabic}\u0000${token.transliteration}\u0000${token.english}`;
-      if (seen.has(key)) continue;
-      seen.add(key);
-      words.push({
+      addWord({
         id: `${reading.slug}__${sentence.id}__${index + 1}`,
         arabic: token.arabic,
         pronunciation: token.transliteration,
         english: token.english,
-        category: `Level 2 · ${reading.title}`,
+        category,
         subCategory: `${part} · ${READING_KIND_LABELS[token.kind]}`,
         topicSlug: readingTopicSlug(reading),
       });
     }
+  }
+  for (const [index, phrase] of (reading.phrases ?? []).entries()) {
+    addWord({
+      id: `${reading.slug}__phrase__${index + 1}`,
+      arabic: phrase.arabic,
+      pronunciation: phrase.transliteration,
+      english: `${phrase.meaning} (lit. ${phrase.literal})`,
+      category,
+      subCategory: "Useful phrase",
+      topicSlug: readingTopicSlug(reading),
+    });
   }
   return words;
 }
@@ -397,6 +444,12 @@ export function getVocabularyBankContent(base: SiteContent): {
     const existing = vocab[existingIndex];
     existing.topicSlugs = [
       ...new Set([...existing.topicSlugs, ...entry.topicSlugs]),
+    ];
+    existing.arabicSearchForms = [
+      ...new Set([
+        ...(existing.arabicSearchForms ?? []),
+        ...(entry.arabicSearchForms ?? []),
+      ]),
     ];
   }
 

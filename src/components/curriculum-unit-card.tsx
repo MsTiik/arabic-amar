@@ -54,7 +54,7 @@ export function CurriculumUnitCard({
       <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
         {unit.description}
       </p>
-      {reading ? (
+      {reading && reading.questions.length > 0 ? (
         <ReadingScoreBadge slug={reading.slug} questionIds={reading.questions.map((question) => question.id)} />
       ) : null}
 
