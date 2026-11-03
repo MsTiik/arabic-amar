@@ -88,6 +88,64 @@ export interface LevelTwoReadingQuestion {
   sentenceId?: string;
   question: LevelTwoReadingSentence;
   answer: LevelTwoReadingSentence;
+  /** The number on the sheet, when it differs from the position (e.g. a board that skips numbers). */
+  number?: number;
+}
+
+/** Two halves that go together, and the phrase they make. */
+export interface LevelTwoMatchPair {
+  id: string;
+  left: LevelTwoReadingSentence;
+  right: LevelTwoReadingSentence;
+  answer: LevelTwoReadingSentence;
+  /** Shown already matched, as the sheet's worked example. */
+  example?: boolean;
+}
+
+/** Jumbled words (in the sheet's order) and the suggested sentence they make. */
+export interface LevelTwoOrderItem {
+  id: string;
+  jumbled: readonly LevelTwoReadingToken[];
+  /** Indexes into `jumbled`, in the order of the suggested sentence. */
+  order: readonly number[];
+  answer: LevelTwoReadingSentence;
+}
+
+interface LevelTwoDrillBase {
+  id: string;
+  /** Tab label, e.g. "Matching". */
+  label: string;
+  /** The sheet's exercise heading, e.g. التَّدْرِيبَاتُ ٢. */
+  heading: LevelTwoReadingSentence;
+  instruction: LevelTwoReadingSentence;
+}
+
+export type LevelTwoReadingDrill =
+  | (LevelTwoDrillBase & {
+      kind: "match";
+      pairs: readonly LevelTwoMatchPair[];
+      /** Pair ids in the order the second column lists them. */
+      rightOrder: readonly string[];
+    })
+  | (LevelTwoDrillBase & { kind: "order"; items: readonly LevelTwoOrderItem[] })
+  | (LevelTwoDrillBase & { kind: "correct"; items: readonly LevelTwoReadingQuestion[] });
+
+/** Every sentence a drill shows, including each jumbled word list, for checks and the vocabulary bank. */
+export function drillSentences(drill: LevelTwoReadingDrill): LevelTwoReadingSentence[] {
+  const sentences = [drill.heading, drill.instruction];
+  if (drill.kind === "match") {
+    for (const pair of drill.pairs) sentences.push(pair.left, pair.right, pair.answer);
+  } else if (drill.kind === "order") {
+    for (const item of drill.items) {
+      sentences.push(
+        { id: `${item.id}-jumbled`, tokens: item.jumbled, english: item.answer.english, transliteration: item.answer.transliteration },
+        item.answer,
+      );
+    }
+  } else {
+    for (const item of drill.items) sentences.push(item.question, item.answer);
+  }
+  return sentences;
 }
 
 export interface LevelTwoReading {
@@ -104,6 +162,10 @@ export interface LevelTwoReading {
   phrases?: readonly LevelTwoReadingPhrase[];
   /** The exercise instruction shown above the questions (e.g. "Read the paragraph and answer…"). */
   instruction?: LevelTwoReadingSentence;
+  /** The sheet's heading for the questions, e.g. التَّدْرِيبَاتُ ١. */
+  questionsHeading?: LevelTwoReadingSentence;
+  /** Further exercises on the sheet: matching, word order, corrections. */
+  drills?: readonly LevelTwoReadingDrill[];
   /** The vocabulary table supplied with the sheet. */
   wordList?: readonly LevelTwoReadingWord[];
   notes?: readonly string[];

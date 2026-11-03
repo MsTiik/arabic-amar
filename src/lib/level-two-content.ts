@@ -8,6 +8,7 @@ import {
   LEVEL_TWO_MARKETPLACE_READING,
   LEVEL_TWO_MATCHING_PHRASES,
   LEVEL_TWO_READINGS,
+  drillSentences,
   type LevelTwoReading,
   type LevelTwoReadingSentence,
 } from "@/data/level-two-lessons";
@@ -163,7 +164,27 @@ export function validateLevelTwoPublishedContent(
         });
       }
     }
+    for (const drill of reading.drills ?? []) {
+      const drillLocation = `${readingLocation}.${drill.id}`;
+      requireUniqueId(drill.id, drillLocation);
+      if (drill.kind === "match") {
+        const pairIds = drill.pairs.map((pair) => pair.id);
+        if ([...drill.rightOrder].sort().join() !== [...pairIds].sort().join()) {
+          issues.push({ location: drillLocation, message: "The second column must list every pair exactly once." });
+        }
+      }
+      if (drill.kind === "order") {
+        for (const item of drill.items) {
+          const sorted = [...item.order].sort((a, b) => a - b);
+          if (sorted.length !== item.jumbled.length || sorted.some((value, index) => value !== index)) {
+            issues.push({ location: `${drillLocation}.${item.id}`, message: "Word order must use every jumbled word exactly once." });
+          }
+        }
+      }
+    }
     const parts = [
+      ...(reading.questionsHeading ? [reading.questionsHeading] : []),
+      ...(reading.drills ?? []).flatMap(drillSentences),
       ...(reading.instruction ? [reading.instruction] : []),
       ...reading.sentences,
       ...reading.questions.flatMap((question) => [question.question, question.answer]),

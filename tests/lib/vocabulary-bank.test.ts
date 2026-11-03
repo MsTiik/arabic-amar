@@ -6,6 +6,7 @@ import {
   LEVEL_TWO_KHALIDS_HOUSE,
   LEVEL_TWO_READINGS,
   LEVEL_TWO_MARKETPLACE_READING,
+  drillSentences,
 } from "../../src/data/level-two-lessons";
 import { LEVEL_TWO_KHALIDS_HOUSE_ROOMS } from "../../src/data/level-two-khalids-house-rooms";
 import { LEVEL_TWO_MASJID_AL_HARAM } from "../../src/data/level-two-masjid-al-haram";
@@ -92,10 +93,12 @@ describe("Level 2 vocabulary bank coverage", () => {
     );
   });
 
-  test("includes every word in the Masjid al-Haram reading, instruction, questions and word list", () => {
+  test("includes every word in the Masjid al-Haram reading, exercises and word list", () => {
     const reading = LEVEL_TWO_MASJID_AL_HARAM;
     for (const sentence of [
       reading.instruction!,
+      reading.questionsHeading!,
+      ...(reading.drills ?? []).flatMap(drillSentences),
       ...reading.sentences,
       ...reading.questions.flatMap((question) => [question.question, question.answer]),
     ]) {
@@ -121,6 +124,10 @@ describe("Level 2 vocabulary bank coverage", () => {
     expect(matches("yatufu").map((entry) => entry.arabic)).toContain("يَطُوفُ");
     expect(matches("pilgrims").map((entry) => entry.arabic)).toContain("الْحُجَّاجُ");
     expect(matches("فنادق").map((entry) => entry.pronunciation)).toContain("fanādiq");
+    expect(matches("wallet").map((entry) => entry.arabic)).toContain("الْمِحْفَظَةِ");
+    expect(matches("sunburu").map((entry) => entry.arabic)).toContain("صُنْبُورُ");
+    expect(matches("قبيح").map((entry) => entry.english)).toContain("ugly");
+    expect(matches("رتب").map((entry) => entry.english)).toContain("arrange (command)");
   });
 
   test.each([

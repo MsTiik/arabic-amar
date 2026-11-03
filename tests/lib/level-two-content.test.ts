@@ -58,7 +58,20 @@ describe("published Level 2 content", () => {
     expect(LEVEL_TWO_KHALIDS_HOUSE.questions).toHaveLength(8);
     expect(LEVEL_TWO_READINGS).toHaveLength(3);
     expect(LEVEL_TWO_MASJID_AL_HARAM.sentences).toHaveLength(13);
-    expect(LEVEL_TWO_MASJID_AL_HARAM.questions).toHaveLength(10);
+    expect(LEVEL_TWO_MASJID_AL_HARAM.questions).toHaveLength(12);
+    expect(LEVEL_TWO_MASJID_AL_HARAM.drills?.map((drill) => drill.kind)).toEqual(["match", "order", "correct"]);
+    const [matching, ordering, corrections] = LEVEL_TWO_MASJID_AL_HARAM.drills ?? [];
+    expect(matching?.kind === "match" && matching.pairs).toHaveLength(8);
+    expect(ordering?.kind === "order" && ordering.items).toHaveLength(10);
+    expect(corrections?.kind === "correct" && corrections.items.map((item) => item.number)).toEqual([1, 2, 3, 4, 5, 8, 9, 10, 11]);
+    if (ordering?.kind === "order") {
+      for (const item of ordering.items) {
+        // Building the suggested sentence from the chips must give the same words, bar joined وَ.
+        const built = item.order.map((index) => item.jumbled[index].arabic).join(" ");
+        const answer = item.answer.tokens.map((token) => token.arabic).join(" ");
+        expect(built.replace(/وَ /g, "وَ")).toBe(answer);
+      }
+    }
     expect(LEVEL_TWO_MASJID_AL_HARAM.wordList).toHaveLength(59);
     const haramSentenceIds = LEVEL_TWO_MASJID_AL_HARAM.sentences.map((sentence) => sentence.id);
     for (const question of LEVEL_TWO_MASJID_AL_HARAM.questions) {

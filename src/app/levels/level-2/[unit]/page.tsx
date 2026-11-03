@@ -13,6 +13,7 @@ import {
 
 import { ArabicText } from "@/components/arabic-text";
 import { InteractiveArabicReading } from "@/components/interactive-arabic-reading";
+import { ReadingDrills } from "@/components/reading-drills";
 import { ReadingExercise } from "@/components/reading-exercise";
 import { SectionedReading } from "@/components/sectioned-reading";
 import { VocabSetView } from "@/components/vocab-set-view";
@@ -22,7 +23,6 @@ import {
   LEVEL_TWO_KHALIDS_HOUSE,
   LEVEL_TWO_MARKETPLACE_PASSAGE,
   LEVEL_TWO_MARKETPLACE_READING,
-  readingSentenceToArabic,
   type LevelTwoAction,
   type LevelTwoSentence,
 } from "@/data/level-two-lessons";
@@ -66,7 +66,7 @@ const UNIT_META: Record<UnitSlug, UnitMeta> = {
   "masjid-al-haram": {
     title: "The Sacred Mosque in Makkah",
     description:
-      "Read a paragraph about al-Masjid al-Haram and Ahmad’s stay nearby, tap any word to check it, then answer ten questions about it.",
+      "Read a paragraph about al-Masjid al-Haram and Ahmad’s stay nearby, tap any word to check it, then work through four exercises: questions, matching, word order and corrections.",
     titleArabic: "الْمَسْجِدُ الْحَرَامُ",
     parent: { href: "/levels/level-2/home-and-places", label: "Home and Places" },
   },
@@ -334,7 +334,6 @@ function KhalidsHouseRoomsReading() {
 
 function MasjidAlHaramReading() {
   const reading = LEVEL_TWO_MASJID_AL_HARAM;
-  const instruction = reading.instruction;
   return (
     <div className="mt-4 space-y-8 sm:mt-8 sm:space-y-10">
       <section aria-labelledby="haram-passage-heading">
@@ -345,20 +344,11 @@ function MasjidAlHaramReading() {
       <section aria-labelledby="haram-questions-heading">
         <SectionHeading
           id="haram-questions-heading"
-          eyebrow="Exercise"
-          title="Answer the questions"
-          description="Answer each question in Arabic first, then tap it to check, and mark whether you got it."
+          eyebrow="Exercises"
+          title="Practise with the passage"
+          description="Four exercises from the sheet: answer the questions, match the pairs, put the words in order, and correct the sentences."
         />
-        {instruction ? (
-          <div className="mb-3 tile p-3.5 sm:p-4">
-            <ArabicText className="text-xl leading-loose sm:text-2xl">
-              {readingSentenceToArabic(instruction)}
-            </ArabicText>
-            <p lang="ar-Latn" className="text-sm italic text-foreground-soft">{instruction.transliteration}</p>
-            <p className="text-sm text-muted-foreground">{instruction.english}</p>
-          </div>
-        ) : null}
-        <ReadingExercise reading={reading} />
+        <ReadingDrills reading={reading} />
       </section>
 
       {reading.wordList?.length ? (

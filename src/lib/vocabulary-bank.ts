@@ -3,6 +3,7 @@ import {
   LEVEL_TWO_CLASSROOM_VOCABULARY,
   LEVEL_TWO_MARKETPLACE_READING,
   LEVEL_TWO_READINGS,
+  drillSentences,
   type LevelTwoReading,
   type LevelTwoReadingTokenKind,
 } from "@/data/level-two-lessons";
@@ -319,6 +320,10 @@ function readingBankWords(reading: LevelTwoReading): LevelTwoBankWord[] {
       { sentence: question.question, part: "Question" },
       { sentence: question.answer, part: "Answer" },
     ]),
+    ...(reading.questionsHeading ? [{ sentence: reading.questionsHeading, part: "Exercise" }] : []),
+    ...(reading.drills ?? []).flatMap((drill) =>
+      drillSentences(drill).map((sentence) => ({ sentence, part: `Exercise · ${drill.label}` })),
+    ),
   ];
   for (const { sentence, part } of sentences) {
     for (const [index, token] of sentence.tokens.entries()) {

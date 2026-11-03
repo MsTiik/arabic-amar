@@ -20,12 +20,24 @@ export function readingSentenceAnchor(sentenceId: string): string {
   return `sentence-${sentenceId}`;
 }
 
-export function ReadingExercise({ reading }: { reading: LevelTwoReading }) {
+export function ReadingExercise({
+  reading,
+  questions = reading.questions,
+  resultsKey = reading.slug,
+  answerLabel = "Answer",
+}: {
+  reading: LevelTwoReading;
+  /** Defaults to the reading's own questions; pass a drill's items to reuse the self-marked cards. */
+  questions?: readonly LevelTwoReadingQuestion[];
+  /** Where marks are saved; defaults to the reading slug. */
+  resultsKey?: string;
+  answerLabel?: string;
+}) {
   const results = useReadingResults();
-  const marks = results[reading.slug];
+  const marks = results[resultsKey];
   const score = scoreReading(
     marks,
-    reading.questions.map((question) => question.id),
+    questions.map((question) => question.id),
   );
 
   return (
@@ -40,7 +52,7 @@ export function ReadingExercise({ reading }: { reading: LevelTwoReading }) {
         {score.answered > 0 ? (
           <button
             type="button"
-            onClick={() => readingResultsActions.reset(reading.slug)}
+            onClick={() => readingResultsActions.reset(resultsKey)}
             className="ml-auto inline-flex items-center gap-1 text-xs font-semibold text-primary focus-ring"
           >
             <RotateCcw className="h-3.5 w-3.5" aria-hidden />
@@ -49,13 +61,14 @@ export function ReadingExercise({ reading }: { reading: LevelTwoReading }) {
         ) : null}
       </div>
       <ol className="grid gap-2 sm:gap-3 md:grid-cols-2">
-        {reading.questions.map((question, index) => (
+        {questions.map((question, index) => (
           <ReadingQuestionCard
             key={question.id}
-            slug={reading.slug}
+            slug={resultsKey}
             question={question}
-            number={index + 1}
+            number={question.number ?? index + 1}
             mark={marks?.[question.id]}
+            answerLabel={answerLabel}
           />
         ))}
       </ol>
@@ -68,11 +81,13 @@ function ReadingQuestionCard({
   question,
   number,
   mark,
+  answerLabel,
 }: {
   slug: string;
   question: LevelTwoReadingQuestion;
   number: number;
   mark: ReadingAnswerMark | undefined;
+  answerLabel: string;
 }) {
   const setMark = (next: ReadingAnswerMark) =>
     readingResultsActions.mark(slug, question.id, mark === next ? null : next);
@@ -111,7 +126,7 @@ function ReadingQuestionCard({
           <ChevronDown className="h-5 w-5 shrink-0 text-muted-foreground transition-transform group-open:rotate-180" aria-hidden />
         </summary>
         <div className="mt-2 border-t border-hairline pt-2">
-          <p className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">Answer</p>
+          <p className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">{answerLabel}</p>
           <ArabicText className="text-xl leading-loose text-foreground sm:text-2xl">
             {readingSentenceToArabic(question.answer)}
           </ArabicText>
