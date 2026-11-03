@@ -1,4 +1,5 @@
 import { LEVEL_TWO_KHALIDS_HOUSE_ROOMS } from "@/data/level-two-khalids-house-rooms";
+import { LEVEL_TWO_MASJID_AL_HARAM } from "@/data/level-two-masjid-al-haram";
 
 export type ContentReviewStatus = "confirmed" | "normalised";
 
@@ -74,6 +75,13 @@ export interface LevelTwoReadingPhrase {
   meaning: string;
 }
 
+/** A row of a reading's supplied vocabulary table, in dictionary form. */
+export interface LevelTwoReadingWord {
+  arabic: string;
+  transliteration: string;
+  english: string;
+}
+
 export interface LevelTwoReadingQuestion {
   id: string;
   /** The reading sentence that holds the answer, for "Show in story". */
@@ -94,6 +102,10 @@ export interface LevelTwoReading {
   shortTitle?: string;
   sections?: readonly LevelTwoReadingSection[];
   phrases?: readonly LevelTwoReadingPhrase[];
+  /** The exercise instruction shown above the questions (e.g. "Read the paragraph and answer…"). */
+  instruction?: LevelTwoReadingSentence;
+  /** The vocabulary table supplied with the sheet. */
+  wordList?: readonly LevelTwoReadingWord[];
   notes?: readonly string[];
 }
 
@@ -482,4 +494,5 @@ export const LEVEL_TWO_KHALIDS_HOUSE: LevelTwoReading = {
 export const LEVEL_TWO_READINGS: readonly LevelTwoReading[] = [
   LEVEL_TWO_KHALIDS_HOUSE,
   LEVEL_TWO_KHALIDS_HOUSE_ROOMS,
+  LEVEL_TWO_MASJID_AL_HARAM,
 ];

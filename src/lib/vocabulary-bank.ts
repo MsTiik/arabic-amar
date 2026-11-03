@@ -313,6 +313,7 @@ function readingBankWords(reading: LevelTwoReading): LevelTwoBankWord[] {
     words.push(word);
   };
   const sentences = [
+    ...(reading.instruction ? [{ sentence: reading.instruction, part: "Instruction" }] : []),
     ...reading.sentences.map((sentence) => ({ sentence, part: "Reading" })),
     ...reading.questions.flatMap((question) => [
       { sentence: question.question, part: "Question" },
@@ -331,6 +332,17 @@ function readingBankWords(reading: LevelTwoReading): LevelTwoBankWord[] {
         topicSlug: readingTopicSlug(reading),
       });
     }
+  }
+  for (const [index, word] of (reading.wordList ?? []).entries()) {
+    addWord({
+      id: `${reading.slug}__word__${index + 1}`,
+      arabic: word.arabic,
+      pronunciation: word.transliteration,
+      english: word.english,
+      category,
+      subCategory: "Word list",
+      topicSlug: readingTopicSlug(reading),
+    });
   }
   for (const [index, phrase] of (reading.phrases ?? []).entries()) {
     addWord({

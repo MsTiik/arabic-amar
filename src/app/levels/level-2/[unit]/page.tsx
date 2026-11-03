@@ -22,14 +22,21 @@ import {
   LEVEL_TWO_KHALIDS_HOUSE,
   LEVEL_TWO_MARKETPLACE_PASSAGE,
   LEVEL_TWO_MARKETPLACE_READING,
+  readingSentenceToArabic,
   type LevelTwoAction,
   type LevelTwoSentence,
 } from "@/data/level-two-lessons";
 import { LEVEL_TWO_KHALIDS_HOUSE_ROOMS } from "@/data/level-two-khalids-house-rooms";
+import { LEVEL_TWO_MASJID_AL_HARAM } from "@/data/level-two-masjid-al-haram";
 import { LEVEL_TWO_VOCAB_THEMES, getLevelTwoVocabTheme } from "@/data/level-two-vocab-sets";
 import { cn } from "@/lib/cn";
 
-type UnitSlug = "marketplace-reading" | "khalids-house" | "khalids-house-rooms" | "actions-in-context";
+type UnitSlug =
+  | "marketplace-reading"
+  | "khalids-house"
+  | "khalids-house-rooms"
+  | "masjid-al-haram"
+  | "actions-in-context";
 
 interface UnitMeta {
   title: string;
@@ -54,6 +61,13 @@ const UNIT_META: Record<UnitSlug, UnitMeta> = {
     description:
       "Read a longer description of Khalid’s house, room by room, tap any word to check it, then learn nine useful phrases.",
     titleArabic: "بَيْتُ خالِدٍ ٢",
+    parent: { href: "/levels/level-2/home-and-places", label: "Home and Places" },
+  },
+  "masjid-al-haram": {
+    title: "The Sacred Mosque in Makkah",
+    description:
+      "Read a paragraph about al-Masjid al-Haram and Ahmad’s stay nearby, tap any word to check it, then answer ten questions about it.",
+    titleArabic: "الْمَسْجِدُ الْحَرَامُ",
     parent: { href: "/levels/level-2/home-and-places", label: "Home and Places" },
   },
   "actions-in-context": {
@@ -155,6 +169,7 @@ export default async function LevelTwoUnitPage({
       {slug === "marketplace-reading" ? <MarketplaceReading /> : null}
       {slug === "khalids-house" ? <KhalidsHouseReading /> : null}
       {slug === "khalids-house-rooms" ? <KhalidsHouseRoomsReading /> : null}
+      {slug === "masjid-al-haram" ? <MasjidAlHaramReading /> : null}
       {slug === "actions-in-context" ? <ActionsInContext /> : null}
     </div>
   );
@@ -190,7 +205,7 @@ function VocabThemePage({ theme }: { theme: NonNullable<ReturnType<typeof getLev
         <section className="mt-6" aria-labelledby="home-stories-heading">
           <SectionHeading
             id="home-stories-heading"
-            eyebrow="Read about the home"
+            eyebrow="Read about the home and places"
             title="Stories"
           />
           <div className="grid gap-3 md:grid-cols-2">
@@ -311,6 +326,84 @@ function KhalidsHouseRoomsReading() {
           href="/vocabulary"
           title="Search these words in the vocabulary bank"
           body="Look up the story’s words and useful phrases by Arabic, transliteration or English."
+        />
+      </div>
+    </div>
+  );
+}
+
+function MasjidAlHaramReading() {
+  const reading = LEVEL_TWO_MASJID_AL_HARAM;
+  const instruction = reading.instruction;
+  return (
+    <div className="mt-4 space-y-8 sm:mt-8 sm:space-y-10">
+      <section aria-labelledby="haram-passage-heading">
+        <SectionHeading id="haram-passage-heading" eyebrow="Interactive reading" title="Read the paragraph" />
+        <InteractiveArabicReading sentences={reading.sentences} english={reading.english} />
+      </section>
+
+      <section aria-labelledby="haram-questions-heading">
+        <SectionHeading
+          id="haram-questions-heading"
+          eyebrow="Exercise"
+          title="Answer the questions"
+          description="Answer each question in Arabic first, then tap it to check, and mark whether you got it."
+        />
+        {instruction ? (
+          <div className="mb-3 tile p-3.5 sm:p-4">
+            <ArabicText className="text-xl leading-loose sm:text-2xl">
+              {readingSentenceToArabic(instruction)}
+            </ArabicText>
+            <p lang="ar-Latn" className="text-sm italic text-foreground-soft">{instruction.transliteration}</p>
+            <p className="text-sm text-muted-foreground">{instruction.english}</p>
+          </div>
+        ) : null}
+        <ReadingExercise reading={reading} />
+      </section>
+
+      {reading.wordList?.length ? (
+        <details className="surface group p-4 sm:p-5">
+          <summary className="flex cursor-pointer list-none items-center justify-between gap-3 font-semibold focus-ring [&::-webkit-details-marker]:hidden">
+            Word list ({reading.wordList.length} words)
+            <ChevronDown className="h-5 w-5 shrink-0 text-muted-foreground transition-transform group-open:rotate-180" aria-hidden />
+          </summary>
+          <ol className="mt-3 grid gap-2 border-t border-hairline pt-3 sm:grid-cols-2 lg:grid-cols-3">
+            {reading.wordList.map((word, index) => (
+              <li key={`${word.arabic}-${index}`} className="tile flex min-w-0 items-center gap-3 p-3">
+                <span className="w-6 shrink-0 text-xs tabular-nums text-muted-foreground">{index + 1}</span>
+                <span className="min-w-0 flex-1">
+                  <span lang="ar-Latn" className="block text-sm italic text-foreground-soft">{word.transliteration}</span>
+                  <span className="block text-sm font-semibold">{word.english}</span>
+                </span>
+                <ArabicText className="shrink-0 text-xl leading-relaxed sm:text-2xl">{word.arabic}</ArabicText>
+              </li>
+            ))}
+          </ol>
+        </details>
+      ) : null}
+
+      {reading.notes?.length ? (
+        <details className="surface group p-4 sm:p-5">
+          <summary className="flex cursor-pointer list-none items-center justify-between gap-3 font-semibold focus-ring [&::-webkit-details-marker]:hidden">
+            About this text
+            <ChevronDown className="h-5 w-5 shrink-0 text-muted-foreground transition-transform group-open:rotate-180" aria-hidden />
+          </summary>
+          <ul className="mt-3 list-disc space-y-2 border-t border-hairline pt-3 pl-5 text-sm leading-relaxed text-foreground-soft">
+            {reading.notes.map((note) => <li key={note}>{note}</li>)}
+          </ul>
+        </details>
+      ) : null}
+
+      <div className="grid gap-3 md:grid-cols-2">
+        <LessonLink
+          href="/levels/level-2/home-and-places"
+          title="Study the Bayt to Masjid word cards"
+          body="مَسْجِد, طَابِق, قَرِيب, حَوْلَ and more, with their forms and example sentences."
+        />
+        <LessonLink
+          href="/vocabulary"
+          title="Search these words in the vocabulary bank"
+          body="Look up every word from the paragraph, questions and word list by Arabic, transliteration or English."
         />
       </div>
     </div>

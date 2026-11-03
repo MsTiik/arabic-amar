@@ -14,6 +14,7 @@ import {
 import { VERB_FAMILIES } from "../../src/data/verb-families";
 import { LEVEL_TWO_VOCAB_SETS, LEVEL_TWO_VOCAB_THEMES } from "../../src/data/level-two-vocab-sets";
 import { LEVEL_TWO_KHALIDS_HOUSE_ROOMS } from "../../src/data/level-two-khalids-house-rooms";
+import { LEVEL_TWO_MASJID_AL_HARAM } from "../../src/data/level-two-masjid-al-haram";
 import { validateLevelTwoPublishedContent } from "../../src/lib/level-two-content";
 
 describe("published Level 2 content", () => {
@@ -55,7 +56,14 @@ describe("published Level 2 content", () => {
     expect(LEVEL_TWO_MARKETPLACE_READING.flatMap((sentence) => sentence.tokens)).toHaveLength(39);
     expect(LEVEL_TWO_KHALIDS_HOUSE.sentences).toHaveLength(9);
     expect(LEVEL_TWO_KHALIDS_HOUSE.questions).toHaveLength(8);
-    expect(LEVEL_TWO_READINGS).toHaveLength(2);
+    expect(LEVEL_TWO_READINGS).toHaveLength(3);
+    expect(LEVEL_TWO_MASJID_AL_HARAM.sentences).toHaveLength(13);
+    expect(LEVEL_TWO_MASJID_AL_HARAM.questions).toHaveLength(10);
+    expect(LEVEL_TWO_MASJID_AL_HARAM.wordList).toHaveLength(59);
+    const haramSentenceIds = LEVEL_TWO_MASJID_AL_HARAM.sentences.map((sentence) => sentence.id);
+    for (const question of LEVEL_TWO_MASJID_AL_HARAM.questions) {
+      expect(haramSentenceIds).toContain(question.sentenceId);
+    }
     expect(LEVEL_TWO_KHALIDS_HOUSE_ROOMS.sections).toHaveLength(3);
     expect(LEVEL_TWO_KHALIDS_HOUSE_ROOMS.sentences).toHaveLength(12);
     expect(LEVEL_TWO_KHALIDS_HOUSE_ROOMS.sentences.flatMap((sentence) => sentence.tokens)).toHaveLength(147);

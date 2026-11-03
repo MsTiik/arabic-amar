@@ -148,6 +148,12 @@ export function validateLevelTwoPublishedContent(
       requireText(phrase.literal, phraseLocation, "Literal meaning");
       requireText(phrase.meaning, phraseLocation, "Meaning");
     }
+    for (const [index, word] of (reading.wordList ?? []).entries()) {
+      const wordLocation = `${readingLocation}.word.${index + 1}`;
+      requireArabic(word.arabic, wordLocation);
+      requireTransliteration(word.transliteration, wordLocation);
+      requireText(word.english, wordLocation, "English");
+    }
     const sentenceIds = new Set(reading.sentences.map((sentence) => sentence.id));
     for (const question of reading.questions) {
       if (question.sentenceId && !sentenceIds.has(question.sentenceId)) {
@@ -158,6 +164,7 @@ export function validateLevelTwoPublishedContent(
       }
     }
     const parts = [
+      ...(reading.instruction ? [reading.instruction] : []),
       ...reading.sentences,
       ...reading.questions.flatMap((question) => [question.question, question.answer]),
     ];

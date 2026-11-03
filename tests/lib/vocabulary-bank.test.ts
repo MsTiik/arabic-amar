@@ -8,6 +8,7 @@ import {
   LEVEL_TWO_MARKETPLACE_READING,
 } from "../../src/data/level-two-lessons";
 import { LEVEL_TWO_KHALIDS_HOUSE_ROOMS } from "../../src/data/level-two-khalids-house-rooms";
+import { LEVEL_TWO_MASJID_AL_HARAM } from "../../src/data/level-two-masjid-al-haram";
 import {
   LEVEL_TWO_GRAMMAR_SHEETS,
   chartForms,
@@ -89,6 +90,37 @@ describe("Level 2 vocabulary bank coverage", () => {
     expect(LEVEL_TWO_READINGS.map((reading) => reading.slug)).toContain(
       "khalids-house-rooms",
     );
+  });
+
+  test("includes every word in the Masjid al-Haram reading, instruction, questions and word list", () => {
+    const reading = LEVEL_TWO_MASJID_AL_HARAM;
+    for (const sentence of [
+      reading.instruction!,
+      ...reading.sentences,
+      ...reading.questions.flatMap((question) => [question.question, question.answer]),
+    ]) {
+      for (const token of sentence.tokens) expectArabicInLevelTwoBank(token.arabic);
+    }
+    expect(reading.wordList).toHaveLength(59);
+    for (const word of reading.wordList ?? []) expectArabicInLevelTwoBank(word.arabic);
+
+    expect(LEVEL_TWO_READINGS.map((candidate) => candidate.slug)).toContain("masjid-al-haram");
+    expect(bank.topics.map((topic) => topic.slug)).toContain("level-2-masjid-al-haram-reading");
+
+    const matches = (query: string) =>
+      bank.vocab.filter((entry) =>
+        entry.topicSlugs.includes("level-2-masjid-al-haram-reading") &&
+        [entry.arabicFolded, foldForSearch(entry.pronunciation ?? ""), foldForSearch(entry.english)].some((value) =>
+          value.includes(foldForSearch(query)),
+        ),
+      );
+    expect(matches("ثريات").map((entry) => entry.english)).toContain("chandeliers");
+    expect(matches("thurayyat").map((entry) => entry.arabic)).toContain("ثُرَيَّاتٌ");
+    expect(matches("chandeliers").map((entry) => entry.arabic)).toContain("ثُرَيَّاتٌ");
+    expect(matches("زمزم").map((entry) => entry.english)).toContain("Zamzam");
+    expect(matches("yatufu").map((entry) => entry.arabic)).toContain("يَطُوفُ");
+    expect(matches("pilgrims").map((entry) => entry.arabic)).toContain("الْحُجَّاجُ");
+    expect(matches("فنادق").map((entry) => entry.pronunciation)).toContain("fanādiq");
   });
 
   test.each([
