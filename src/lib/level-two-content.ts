@@ -208,6 +208,43 @@ export function validateLevelTwoPublishedContent(
       for (const block of section.blocks) {
         const blockLocation = `${sectionLocation}.${block.id}`;
         requireUniqueId(`${notes.slug}.${block.id}`, blockLocation);
+        if (block.kind === "dialogue") {
+          for (const [index, line] of block.lines.entries()) {
+            const lineLocation = `${blockLocation}.line.${index + 1}`;
+            if (!line.gap) continue;
+            const options = line.options ?? [];
+            if (!options.includes(line.arabic)) {
+              issues.push({ location: lineLocation, message: "A gap's choices must include the line itself." });
+            }
+            if (new Set(options).size !== options.length || options.length < 2) {
+              issues.push({ location: lineLocation, message: "A gap needs at least two different choices." });
+            }
+            for (const option of options) requireArabic(option, lineLocation);
+            requireText(line.why, lineLocation, "Why");
+          }
+        }
+        if (block.kind === "practice") {
+          for (const question of block.questions) {
+            const questionLocation = `${blockLocation}.${question.id}`;
+            requireUniqueId(`${notes.slug}.${question.id}`, questionLocation);
+            const arabic = question.options.map((option) => option.arabic);
+            if (arabic.filter((option) => option === question.answer).length !== 1) {
+              issues.push({ location: questionLocation, message: "The answer must be exactly one of the options." });
+            }
+            if (new Set(arabic).size !== arabic.length || arabic.length < 2) {
+              issues.push({ location: questionLocation, message: "A question needs at least two different options." });
+            }
+            if (question.stem !== undefined && question.stem.split("___").length !== 2) {
+              issues.push({ location: questionLocation, message: "A stem must contain exactly one ___ gap." });
+            }
+            for (const option of question.options) {
+              requireArabic(option.arabic, questionLocation);
+              requireTransliteration(option.transliteration, questionLocation);
+              requireText(option.english, questionLocation, "Option English");
+            }
+            requireText(question.why, questionLocation, "Why");
+          }
+        }
         if (block.kind === "table") {
           for (const [index, row] of block.rows.entries()) {
             if (row.length !== block.columns.length) {

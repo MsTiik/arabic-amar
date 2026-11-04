@@ -12,6 +12,35 @@ export interface NoteDialogueLine extends NoteItem {
   speaker?: string;
   /** In a complete-the-dialogue exercise, a line the learner has to supply. */
   gap?: boolean;
+  /** For a gap: the lines to choose from, in display order (one of them is this line's `arabic`). */
+  options?: readonly string[];
+  /** For a gap: the clue that gives the answer away, shown once the learner has chosen. */
+  why?: string;
+}
+
+/** A small picture drawn beside a practice question. */
+export type PracticeVisual =
+  | { kind: "position"; position: "above" | "under" | "front" | "behind" | "in" | "between" }
+  | { kind: "count"; object: "pen" | "ruler"; count: 1 | 2 | 3 | 4 };
+
+/**
+ * A choose-the-answer question. Options can include deliberately wrong forms
+ * (e.g. ثَلَاثُ أَقْلَامٍ); only the right answer and `result` go into the
+ * vocabulary bank, so a wrong option's `english` says why it is wrong.
+ */
+export interface PracticeQuestion {
+  id: string;
+  /** English prompt; may include Arabic inline. */
+  ask: string;
+  /** An Arabic sentence with ___ marking the gap the answer fills. */
+  stem?: string;
+  visual?: PracticeVisual;
+  options: readonly NoteItem[];
+  /** The `arabic` of the right option. */
+  answer: string;
+  why: string;
+  /** The whole sentence, shown once answered. */
+  result?: NoteItem;
 }
 
 /** A table cell is either English text or an Arabic item. */
@@ -34,6 +63,7 @@ export type NoteBlock =
     }
   | { kind: "bullets"; id: string; title?: string; items: readonly string[]; ordered?: boolean }
   | { kind: "examples"; id: string; title?: string; items: readonly NoteItem[] }
+  | { kind: "practice"; id: string; title?: string; intro?: string; questions: readonly PracticeQuestion[] }
   | {
       kind: "quiz";
       id: string;
@@ -95,10 +125,38 @@ export function lessonNoteItems(notes: LevelTwoLessonNotes): { item: NoteItem; w
       if (block.kind === "quiz") {
         for (const question of block.items) if (isNoteItem(question.answer)) items.push({ item: question.answer, where });
       }
+      if (block.kind === "practice") {
+        for (const question of block.questions) {
+          const answer = question.options.find((option) => option.arabic === question.answer);
+          if (answer) items.push({ item: answer, where });
+          if (question.result) items.push({ item: question.result, where });
+        }
+      }
     }
   }
   for (const item of notes.sentenceWords) items.push({ item, where: "Words in the sentences" });
   return items;
+}
+
+/**
+ * Arabic shown in exercises that is not itself a bank entry: practice stems,
+ * every option (wrong ones included) and the lines offered in a dialogue gap.
+ * Each word in them must still be glossed on its own.
+ */
+export function lessonNoteExerciseArabic(notes: LevelTwoLessonNotes): string[] {
+  const text: string[] = [];
+  for (const section of notes.sections) {
+    for (const block of section.blocks) {
+      if (block.kind === "dialogue") for (const line of block.lines) text.push(...(line.options ?? []));
+      if (block.kind === "practice") {
+        for (const question of block.questions) {
+          if (question.stem) text.push(question.stem);
+          text.push(...question.options.map((option) => option.arabic));
+        }
+      }
+    }
+  }
+  return text;
 }
 
 /** Every piece of English prose in the notes, which may carry inline Arabic. */
@@ -109,6 +167,11 @@ export function lessonNoteProse(notes: LevelTwoLessonNotes): string[] {
     for (const block of section.blocks) {
       if (block.title) prose.push(block.title);
       if (block.kind === "bullets") prose.push(...block.items);
+      if (block.kind === "dialogue") for (const line of block.lines) if (line.why) prose.push(line.why);
+      if (block.kind === "practice") {
+        if (block.intro) prose.push(block.intro);
+        for (const question of block.questions) prose.push(question.ask, question.why);
+      }
       if (block.kind === "table") {
         prose.push(...block.columns);
         for (const row of block.rows) for (const cell of row) if (typeof cell === "string") prose.push(cell);

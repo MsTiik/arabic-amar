@@ -2,7 +2,7 @@ import Link from "next/link";
 import { ChevronDown } from "lucide-react";
 
 import { ArabicText } from "@/components/arabic-text";
-import { GapDialogue } from "@/components/lesson-notes-client";
+import { ChoicePractice, GapDialogue } from "@/components/lesson-notes-client";
 import {
   isNoteItem,
   type LevelTwoLessonNotes,
@@ -13,12 +13,7 @@ import {
   type NoteSection,
 } from "@/data/level-two-lesson-notes";
 import { cn } from "@/lib/cn";
-
-// Arabic letters, harakat and tatweel. The Arabic comma is deliberately not
-// part of a run: in "مَكْتَب → مَكَاتِب، مِسْطَرَة → مَسَاطِر" the pieces must
-// stay separate, in reading order, or a right-to-left span flips the pairs.
-const ARABIC_LETTER = "\\u0610-\\u061A\\u0620-\\u065F\\u0670-\\u06D3";
-const ARABIC_RUN = new RegExp(`([${ARABIC_LETTER}](?:[${ARABIC_LETTER}\\s]*[${ARABIC_LETTER}])?؟?)`);
+import { ARABIC_RUN } from "@/lib/inline-arabic";
 
 /** English prose with any Arabic in it set in the Arabic font. */
 export function Prose({ text }: { text: string }) {
@@ -192,6 +187,20 @@ function Block({ block }: { block: NoteBlock }) {
             </li>
           ))}
         </ul>
+      </div>
+    );
+  }
+
+  if (block.kind === "practice") {
+    return (
+      <div>
+        <BlockTitle title={block.title} />
+        {block.intro ? (
+          <p className="mb-3 max-w-3xl text-sm leading-relaxed text-muted-foreground">
+            <Prose text={block.intro} />
+          </p>
+        ) : null}
+        <ChoicePractice questions={block.questions} />
       </div>
     );
   }

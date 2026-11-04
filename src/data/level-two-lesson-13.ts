@@ -1,4 +1,10 @@
-import type { LevelTwoLessonNotes, NoteDialogueLine, NoteItem } from "@/data/level-two-lesson-notes";
+import type {
+  LevelTwoLessonNotes,
+  NoteDialogueLine,
+  NoteItem,
+  PracticeQuestion,
+  PracticeVisual,
+} from "@/data/level-two-lesson-notes";
 
 const n = (arabic: string, transliteration: string, english: string): NoteItem => ({ arabic, transliteration, english });
 
@@ -15,6 +21,24 @@ const line = (
   english,
   ...(gap ? { gap } : {}),
 });
+
+/** A line the learner chooses from `options` (which must include `arabic`). */
+const gap = (
+  arabic: string,
+  transliteration: string,
+  english: string,
+  options: readonly string[],
+  why: string,
+): NoteDialogueLine => ({ arabic, transliteration, english, gap: true, options, why });
+
+const q = (
+  id: string,
+  ask: string,
+  options: readonly NoteItem[],
+  answer: string,
+  why: string,
+  extra: { stem?: string; result?: NoteItem; visual?: PracticeVisual } = {},
+): PracticeQuestion => ({ id, ask, options, answer, why, ...extra });
 
 const HASAN = "Hasan";
 const HAMZA = "Hamza";
@@ -93,7 +117,7 @@ export const LEVEL_TWO_LESSON_13: LevelTwoLessonNotes = {
       title: "Exercise 1: Complete the dialogue",
       heading: n("التَّدْرِيبُ الأَوَّلُ: أَكْمِلِ الحِوَارَ", "at-tadrību l-awwal: akmili l-ḥiwār", "The first exercise: complete the dialogue"),
       intro:
-        "You get one side of a conversation and fill in the missing lines. Work backwards: look at the answer to work out the question, and at the question to work out the answer. Try each blank line yourself before you reveal it.",
+        "Seven lines are missing. For each one, pick the line that fits. Work backwards: the answer tells you what the question was, and the question tells you what the answer must be. Try it with the English hidden first.",
       blocks: [
         {
           kind: "dialogue",
@@ -101,32 +125,35 @@ export const LEVEL_TWO_LESSON_13: LevelTwoLessonNotes = {
           numbered: true,
           lines: [
             line(undefined, "السَّلَامُ عَلَيْكُمْ", "as-salāmu ʿalaykum", "Peace be upon you."),
-            line(undefined, "وَعَلَيْكُمُ السَّلَامُ", "wa ʿalaykumu s-salām", "And upon you be peace.", true),
+            gap("وَعَلَيْكُمُ السَّلَامُ", "wa ʿalaykumu s-salām", "And upon you be peace.",
+              ["كَيْفَ حَالُكَ؟", "وَعَلَيْكُمُ السَّلَامُ", "نَعَمْ، أَنَا طَالِبٌ."],
+              "The reply to السَّلَامُ عَلَيْكُمْ is always وَعَلَيْكُمُ السَّلَامُ."),
             line(undefined, "مَا اسْمُكَ؟", "ma-smuka?", "What is your name?"),
-            line(undefined, "اِسْمِي عَبْدُ الرَّحْمَنِ", "ismī ʿabdu r-raḥmān", "My name is Abdulrahman.", true),
-            line(undefined, "كَيْفَ حَالُكَ؟", "kayfa ḥāluka?", "How are you?", true),
+            gap("اِسْمِي عَبْدُ الرَّحْمَنِ", "ismī ʿabdu r-raḥmān", "My name is Abdulrahman.",
+              ["أَنَا مِنْ بَاكِسْتَانَ.", "بِخَيْرٍ، الحَمْدُ لِلَّهِ.", "اِسْمِي عَبْدُ الرَّحْمَنِ"],
+              "Line 3 asks مَا اسْمُكَ؟ (what is your name?), so the answer starts with اِسْمِي (my name)."),
+            gap("كَيْفَ حَالُكَ؟", "kayfa ḥāluka?", "How are you?",
+              ["مَا اسْمُكَ؟", "كَيْفَ حَالُكَ؟", "مِنْ أَيْنَ أَنْتَ؟"],
+              "Line 6 answers بِخَيْرٍ (well), so this line asks how you are."),
             line(undefined, "بِخَيْرٍ، الحَمْدُ لِلَّهِ.", "bi-khayr, al-ḥamdu lillāh.", "Well, praise be to Allah."),
             line(undefined, "وَكَيْفَ أَنْتَ؟", "wa kayfa anta?", "And how are you?"),
             line(undefined, "أَنَا بِخَيْرٍ، الحَمْدُ لِلَّهِ.", "anā bi-khayr, al-ḥamdu lillāh.", "I’m well, praise be to Allah."),
-            line(undefined, "مِنْ أَيْنَ أَنْتَ؟", "min ayna anta?", "Where are you from?", true),
+            gap("مِنْ أَيْنَ أَنْتَ؟", "min ayna anta?", "Where are you from?",
+              ["مِنْ أَيْنَ أَنْتَ؟", "هَلْ أَنْتَ طَالِبٌ؟", "كَيْفَ حَالُكَ؟"],
+              "Line 10 answers with مِنْ + a country, so the question is مِنْ أَيْنَ (from where)."),
             line(undefined, "أَنَا مِنْ بَاكِسْتَانَ.", "anā min bākistān.", "I’m from Pakistan."),
             line(undefined, "وَمِنْ أَيْنَ أَنْتَ؟", "wa min ayna anta?", "And where are you from?"),
-            line(undefined, "أَنَا مِنَ الصِّينِ.", "anā mina ṣ-ṣīn.", "I’m from China.", true),
-            line(undefined, "هَلْ أَنْتَ طَالِبٌ؟", "hal anta ṭālib?", "Are you a student?", true),
+            gap("أَنَا مِنَ الصِّينِ.", "anā mina ṣ-ṣīn.", "I’m from China.",
+              ["نَعَمْ، أَنَا طَالِبٌ.", "أَنَا بِخَيْرٍ، الحَمْدُ لِلَّهِ.", "أَنَا مِنَ الصِّينِ."],
+              "Line 11 asks where you are from, so the answer is أَنَا مِنْ + a country. مِنْ becomes مِنَ before ال."),
+            gap("هَلْ أَنْتَ طَالِبٌ؟", "hal anta ṭālib?", "Are you a student?",
+              ["هَلْ أَنْتَ طَالِبٌ؟", "مَا اسْمُكَ؟", "وَكَيْفَ أَنْتَ؟"],
+              "Line 14 starts with نَعَمْ (yes), so this is a yes/no question with هَلْ, and the answer repeats the job: طَالِبٌ."),
             line(undefined, "نَعَمْ، أَنَا طَالِبٌ.", "naʿam, anā ṭālib.", "Yes, I am a student."),
-            line(undefined, "هَلْ أَنْتَ مُهَنْدِسٌ؟", "hal anta muhandis?", "Are you an engineer?", true),
+            gap("هَلْ أَنْتَ مُهَنْدِسٌ؟", "hal anta muhandis?", "Are you an engineer?",
+              ["هَلْ أَنْتَ طَالِبٌ؟", "مِنْ أَيْنَ أَنْتَ؟", "هَلْ أَنْتَ مُهَنْدِسٌ؟"],
+              "Line 16 says لَا، أَنَا طَالِبٌ (no, I’m a student), so the question must name a different job. Asking هَلْ أَنْتَ طَالِبٌ؟ would make “no, I’m a student” contradict itself."),
             line(undefined, "لَا، أَنَا طَالِبٌ.", "lā, anā ṭālib.", "No, I am a student."),
-          ],
-        },
-        {
-          kind: "bullets",
-          id: "spot-missing-line",
-          title: "How to spot the missing line",
-          items: [
-            "Line 5 must be a “how are you” question, because line 6 answers بِخَيْرٍ.",
-            "Line 9 must use مِنْ أَيْنَ, because line 10 answers with مِنْ + a country.",
-            "Line 15 is a yes/no question with هَلْ, because line 16 starts with لَا. “No, I am a student” tells you the question named another job, so any job word works: مُهَنْدِسٌ (engineer), مُدَرِّسٌ (teacher), طَبِيبٌ (doctor).",
-            "مَا اسْمُكَ؟ is the direct way to ask someone’s name. To a woman: مَا اسْمُكِ؟",
           ],
         },
         {
@@ -190,6 +217,74 @@ export const LEVEL_TWO_LESSON_13: LevelTwoLessonNotes = {
             [n("ـكِ", "-ki", "your (f.)"), n("اِسْمُكِ", "ismuki", "your name (f.)")],
             [n("ـهُ", "-hu", "his"), n("اِسْمُهُ", "ismuhu", "his name")],
             [n("ـهَا", "-hā", "her"), n("اِسْمُهَا", "ismuhā", "her name")],
+          ],
+        },
+        {
+          kind: "practice",
+          id: "endings-practice",
+          title: "Practice: my, your, his and her",
+          questions: [
+            q("end-her-name", "How do you say “her name”?", [
+              n("اِسْمُهُ", "ismuhu", "his name"),
+              n("اِسْمُكِ", "ismuki", "your name (f.)"),
+              n("اِسْمُهَا", "ismuhā", "her name"),
+            ], "اِسْمُهَا", "ـهَا means “her”."),
+            q("end-your-name", "Ask a man “What is your name?”", [
+              n("مَا اسْمُكِ؟", "ma-smuki?", "What is your name? (to a woman)"),
+              n("مَا اسْمُكَ؟", "ma-smuka?", "What is your name? (to a man)"),
+              n("مَا اسْمِي؟", "ma-smī?", "What is my name?"),
+            ], "مَا اسْمُكَ؟", "ـكَ (with fatha) is “your” for a man; ـكِ (with kasra) is for a woman."),
+            q("end-his-name", "Fill the gap.", [
+              n("اسْمُهَا", "smuhā", "her name"),
+              n("اسْمُكَ", "smuka", "your name (m.)"),
+              n("اسْمُهُ", "smuhu", "his name"),
+            ], "اسْمُهُ", "The answer says اِسْمُهُ (his name), so the question asks about him.", {
+              stem: "مَا ___؟ اِسْمُهُ أَحْمَدُ.",
+              result: n("مَا اسْمُهُ؟ اِسْمُهُ أَحْمَدُ.", "ma-smuhu? ismuhu aḥmad.", "What is his name? His name is Ahmad."),
+            }),
+            q("end-my-friend-f", "Fill the gap: “This is my friend” (a woman).", [
+              n("صَدِيقَتِي", "ṣadīqatī", "my friend (f.)"),
+              n("صَدِيقِي", "ṣadīqī", "my friend (m.)"),
+              n("صَدِيقُهَا", "ṣadīquhā", "her friend (m.)"),
+            ], "صَدِيقَتِي", "A female friend is صَدِيقَة; ة opens into ت before ـي (my): صَدِيقَتِي.", {
+              stem: "هَذِهِ ___.",
+              result: n("هَذِهِ صَدِيقَتِي.", "hādhihi ṣadīqatī.", "This is my friend. (f.)"),
+            }),
+            q("end-who-this", "Fill the gap.", [
+              n("هَذِهِ", "hādhihi", "this (f.)"),
+              n("هَذَا", "hādhā", "this (m.)"),
+            ], "هَذَا", "The answer is about a man (صَدِيقِي), so the question uses هَذَا.", {
+              stem: "مَنْ ___؟ هَذَا صَدِيقِي.",
+              result: n("مَنْ هَذَا؟ هَذَا صَدِيقِي.", "man hādhā? hādhā ṣadīqī.", "Who is this? This is my friend."),
+            }),
+          ],
+        },
+        {
+          kind: "practice",
+          id: "about-a-woman",
+          title: "Practice: say it about a woman",
+          intro: "Each line is about a man. Choose the same line about a woman, or to a woman.",
+          questions: [
+            q("fem-from-where", "Say it about a woman: مِنْ أَيْنَ هُوَ؟", [
+              n("مِنْ أَيْنَ أَنْتِ؟", "min ayna anti?", "Where are you from? (to a woman)"),
+              n("مِنْ أَيْنَ هِيَ؟", "min ayna hiya?", "Where is she from?"),
+              n("مِنْ أَيْنَ هُوَ؟", "min ayna huwa?", "Where is he from?"),
+            ], "مِنْ أَيْنَ هِيَ؟", "هُوَ (he) becomes هِيَ (she). أَنْتِ would be talking to her, not about her."),
+            q("fem-name", "Say it about a woman: مَا اسْمُهُ؟", [
+              n("مَا اسْمُهَا؟", "ma-smuhā?", "What is her name?"),
+              n("مَا اسْمُكِ؟", "ma-smuki?", "What is your name? (to a woman)"),
+              n("مَا اسْمِي؟", "ma-smī?", "What is my name?"),
+            ], "مَا اسْمُهَا؟", "ـهُ (his) becomes ـهَا (her)."),
+            q("fem-friend", "Say it about a woman: هَذَا صَدِيقِي.", [
+              n("هَذِهِ صَدِيقِي.", "hādhihi ṣadīqī.", "✗ only هَذَا changed"),
+              n("هَذِهِ صَدِيقَتِي.", "hādhihi ṣadīqatī.", "This is my friend. (f.)"),
+              n("هَذَا صَدِيقَتِي.", "hādhā ṣadīqatī.", "✗ only صَدِيق changed"),
+            ], "هَذِهِ صَدِيقَتِي.", "Both words change: هَذَا → هَذِهِ and صَدِيق → صَدِيقَة."),
+            q("fem-student", "Ask a woman: هَلْ أَنْتَ طَالِبٌ؟", [
+              n("هَلْ أَنْتِ طَالِبٌ؟", "hal anti ṭālib?", "✗ the job word is still masculine"),
+              n("هَلْ هِيَ طَالِبَةٌ؟", "hal hiya ṭālibah?", "Is she a student?"),
+              n("هَلْ أَنْتِ طَالِبَةٌ؟", "hal anti ṭālibah?", "Are you a student? (to a woman)"),
+            ], "هَلْ أَنْتِ طَالِبَةٌ؟", "أَنْتَ becomes أَنْتِ, and the job takes ة: طَالِبَةٌ."),
           ],
         },
         {
@@ -272,6 +367,62 @@ export const LEVEL_TWO_LESSON_13: LevelTwoLessonNotes = {
             [n("هَلْ أَنْتَ بِرِيطَانِيٌّ؟", "hal anta birīṭāniyy?", "Are you British?"), n("نَعَمْ، أَنَا مِنْ بِرِيطَانِيَا.", "naʿam, anā min birīṭāniyā.", "Yes, I am from Britain.")],
           ],
         },
+        {
+          kind: "practice",
+          id: "nationality-practice",
+          title: "Practice: say where they’re from",
+          questions: [
+            q("nat-fatima", "Fatima is from Egypt. She says: أَنَا …", [
+              n("مِصْرِيٌّ", "miṣriyyun", "Egyptian (m.)"),
+              n("مِصْرُ", "miṣru", "Egypt"),
+              n("مِصْرِيَّةٌ", "miṣriyyatun", "Egyptian (f.)"),
+            ], "مِصْرِيَّةٌ", "A woman adds ـِيَّة to the country.", {
+              result: n("أَنَا مِصْرِيَّةٌ.", "anā miṣriyyah.", "I am Egyptian. (f.)"),
+            }),
+            q("nat-hamza", "Hamza is from Pakistan. He says: أَنَا …", [
+              n("بَاكِسْتَانِيٌّ", "bākistāniyyun", "Pakistani (m.)"),
+              n("بَاكِسْتَانِيَّةٌ", "bākistāniyyatun", "Pakistani (f.)"),
+              n("بَاكِسْتَانُ", "bākistānu", "Pakistan"),
+            ], "بَاكِسْتَانِيٌّ", "A man adds ـِيّ to the country.", {
+              result: n("أَنَا بَاكِسْتَانِيٌّ.", "anā bākistāniyy.", "I am Pakistani."),
+            }),
+            q("nat-ahmad", "Ahmad is from China: هُوَ …", [
+              n("الصِّينُ", "aṣ-ṣīnu", "China"),
+              n("صِينِيٌّ", "ṣīniyyun", "Chinese (m.)"),
+              n("صِينِيَّةٌ", "ṣīniyyatun", "Chinese (f.)"),
+            ], "صِينِيٌّ", "Drop ال from the country, then add ـِيّ: الصِّين → صِينِيّ.", {
+              result: n("هُوَ صِينِيٌّ.", "huwa ṣīniyy.", "He is Chinese."),
+            }),
+            q("nat-maryam", "Maryam is from Spain: هِيَ …", [
+              n("إِسْبَانِيَا", "isbāniyā", "Spain"),
+              n("إِسْبَانِيٌّ", "isbāniyyun", "Spanish (m.)"),
+              n("إِسْبَانِيَّةٌ", "isbāniyyatun", "Spanish (f.)"),
+            ], "إِسْبَانِيَّةٌ", "Drop the ending ـيَا, then add ـِيَّة for a woman.", {
+              result: n("هِيَ إِسْبَانِيَّةٌ.", "hiya isbāniyyah.", "She is Spanish."),
+            }),
+            q("nat-khalid", "Khalid is from Saudi Arabia: هُوَ …", [
+              n("السُّعُودِيَّةُ", "as-suʿūdiyyatu", "Saudi Arabia"),
+              n("سُعُودِيٌّ", "suʿūdiyyun", "Saudi (m.)"),
+              n("سُعُودِيَّةٌ", "suʿūdiyyatun", "Saudi (f.)"),
+            ], "سُعُودِيٌّ", "السُّعُودِيَّة already ends in ـِيَّة. For a man, drop ال and ة: سُعُودِيّ.", {
+              result: n("هُوَ سُعُودِيٌّ.", "huwa suʿūdiyy.", "He is Saudi."),
+            }),
+            q("nat-yes-no-1", "Choose the answer.", [
+              n("نَعَمْ", "naʿam", "yes"),
+              n("لَا", "lā", "no"),
+            ], "لَا", "She says she is Chinese, so she is not Japanese: لَا.", {
+              stem: "هَلْ أَنْتِ يَابَانِيَّةٌ؟ ___، أَنَا صِينِيَّةٌ.",
+              result: n("هَلْ أَنْتِ يَابَانِيَّةٌ؟ لَا، أَنَا صِينِيَّةٌ.", "hal anti yābāniyyah? lā, anā ṣīniyyah.", "Are you Japanese? No, I am Chinese."),
+            }),
+            q("nat-yes-no-2", "Choose the answer.", [
+              n("لَا", "lā", "no"),
+              n("نَعَمْ", "naʿam", "yes"),
+            ], "نَعَمْ", "He is from Iraq, so he is Iraqi: نَعَمْ.", {
+              stem: "هَلْ هُوَ عِرَاقِيٌّ؟ ___، هُوَ مِنَ العِرَاقِ.",
+              result: n("هَلْ هُوَ عِرَاقِيٌّ؟ نَعَمْ، هُوَ مِنَ العِرَاقِ.", "hal huwa ʿirāqiyy? naʿam, huwa mina l-ʿirāq.", "Is he Iraqi? Yes, he is from Iraq."),
+            }),
+          ],
+        },
       ],
     },
     {
@@ -307,9 +458,71 @@ export const LEVEL_TWO_LESSON_13: LevelTwoLessonNotes = {
           ],
         },
         {
-          kind: "examples",
+          kind: "practice",
           id: "position-practice",
-          title: "Practice sentences",
+          title: "Practice: where is the ball?",
+          intro: "Look at the picture and choose the word that says where the ball (الكُرَةُ) is. The box is الصُّنْدُوقُ and the table is الطَّاوِلَةُ.",
+          questions: [
+            q("where-under", "Where is the ball?", [
+              n("فَوْقَ", "fawqa", "above"),
+              n("تَحْتَ", "taḥta", "under"),
+              n("فِي", "fī", "in"),
+            ], "تَحْتَ", "The ball is below the table: تَحْتَ.", {
+              stem: "الكُرَةُ ___ الطَّاوِلَةِ.",
+              visual: { kind: "position", position: "under" },
+              result: n("الكُرَةُ تَحْتَ الطَّاوِلَةِ.", "al-kuratu taḥta ṭ-ṭāwilah.", "The ball is under the table."),
+            }),
+            q("where-in", "Where is the ball?", [
+              n("فِي", "fī", "in"),
+              n("وَرَاءَ", "warā’a", "behind"),
+              n("تَحْتَ", "taḥta", "under"),
+            ], "فِي", "The ball is inside the box: فِي.", {
+              stem: "الكُرَةُ ___ الصُّنْدُوقِ.",
+              visual: { kind: "position", position: "in" },
+              result: n("الكُرَةُ فِي الصُّنْدُوقِ.", "al-kuratu fi ṣ-ṣundūq.", "The ball is in the box."),
+            }),
+            q("where-above", "Where is the ball?", [
+              n("أَمَامَ", "amāma", "in front of"),
+              n("بَيْنَ", "bayna", "between"),
+              n("فَوْقَ", "fawqa", "above"),
+            ], "فَوْقَ", "The ball is on top of the box: فَوْقَ.", {
+              stem: "الكُرَةُ ___ الصُّنْدُوقِ.",
+              visual: { kind: "position", position: "above" },
+              result: n("الكُرَةُ فَوْقَ الصُّنْدُوقِ.", "al-kuratu fawqa ṣ-ṣundūq.", "The ball is above the box."),
+            }),
+            q("where-behind", "Where is the ball?", [
+              n("وَرَاءَ", "warā’a", "behind"),
+              n("أَمَامَ", "amāma", "in front of"),
+              n("فِي", "fī", "in"),
+            ], "وَرَاءَ", "The box hides part of the ball, so the ball is behind it: وَرَاءَ.", {
+              stem: "الكُرَةُ ___ الصُّنْدُوقِ.",
+              visual: { kind: "position", position: "behind" },
+              result: n("الكُرَةُ وَرَاءَ الصُّنْدُوقِ.", "al-kuratu warā’a ṣ-ṣundūq.", "The ball is behind the box."),
+            }),
+            q("where-between", "Where is the ball?", [
+              n("فِي", "fī", "in"),
+              n("أَمَامَ", "amāma", "in front of"),
+              n("بَيْنَ", "bayna", "between"),
+            ], "بَيْنَ", "The ball is between two boxes: بَيْنَ. Notice الصُّنْدُوقَيْنِ, the dual after بَيْنَ.", {
+              stem: "الكُرَةُ ___ الصُّنْدُوقَيْنِ.",
+              visual: { kind: "position", position: "between" },
+              result: n("الكُرَةُ بَيْنَ الصُّنْدُوقَيْنِ.", "al-kuratu bayna ṣ-ṣundūqayn.", "The ball is between the two boxes."),
+            }),
+            q("where-front", "Where is the ball?", [
+              n("تَحْتَ", "taḥta", "under"),
+              n("أَمَامَ", "amāma", "in front of"),
+              n("وَرَاءَ", "warā’a", "behind"),
+            ], "أَمَامَ", "The ball is in front, covering part of the box: أَمَامَ.", {
+              stem: "الكُرَةُ ___ الصُّنْدُوقِ.",
+              visual: { kind: "position", position: "front" },
+              result: n("الكُرَةُ أَمَامَ الصُّنْدُوقِ.", "al-kuratu amāma ṣ-ṣundūq.", "The ball is in front of the box."),
+            }),
+          ],
+        },
+        {
+          kind: "examples",
+          id: "position-sentences",
+          title: "More example sentences",
           items: [
             n("القَلَمُ فَوْقَ الكِتَابِ.", "al-qalamu fawqa l-kitāb.", "The pen is on the book."),
             n("الحَقِيبَةُ تَحْتَ الكُرْسِيِّ.", "al-ḥaqībatu taḥta l-kursiyy.", "The bag is under the chair."),
@@ -409,6 +622,43 @@ export const LEVEL_TWO_LESSON_13: LevelTwoLessonNotes = {
             "Plurals shaped فَعَائِل or مَفَاعِل take a single damma and no tanween (دَفَاتِرُ، حَقَائِبُ). They are diptotes (مَمْنُوع مِنَ الصَّرْفِ), a later topic.",
           ],
         },
+        {
+          kind: "practice",
+          id: "one-two-many",
+          title: "Practice: one, two, many",
+          questions: [
+            q("otm-two-books", "Two books:", [
+              n("كُتُبٌ", "kutubun", "books (3 or more)"),
+              n("كِتَابَانِ", "kitābāni", "two books"),
+              n("كِتَابٌ", "kitābun", "a book"),
+            ], "كِتَابَانِ", "Two = the dual: add ـَانِ to the singular."),
+            q("otm-two-bags", "Two bags:", [
+              n("حَقِيبَتَانِ", "ḥaqībatāni", "two bags"),
+              n("حَقَائِبُ", "ḥaqā’ibu", "bags (3 or more)"),
+              n("حَقِيبَةٌ", "ḥaqībatun", "a bag"),
+            ], "حَقِيبَتَانِ", "Add ـَانِ, and ة opens into ت: حَقِيبَة → حَقِيبَتَانِ."),
+            q("otm-pens", "Pens (three or more):", [
+              n("قَلَمَانِ", "qalamāni", "two pens"),
+              n("قَلَمٌ", "qalamun", "a pen"),
+              n("أَقْلَامٌ", "aqlāmun", "pens"),
+            ], "أَقْلَامٌ", "Short three-letter words often take the pattern أَفْعَال: قَلَم → أَقْلَام."),
+            q("otm-desks", "The plural of مَكْتَب (desk):", [
+              n("مَصَابِيحُ", "maṣābīḥu", "lamps"),
+              n("مَكَاتِبُ", "makātibu", "desks, offices"),
+              n("دَفَاتِرُ", "dafātiru", "notebooks"),
+            ], "مَكَاتِبُ", "مَفْعَل becomes مَفَاعِل: مَكْتَب → مَكَاتِب. Learn each plural with its singular."),
+            q("otm-clocks", "The plural of سَاعَة (clock):", [
+              n("سَاعَتَانِ", "sāʿatāni", "two clocks"),
+              n("سَاعَاتٌ", "sāʿātun", "clocks"),
+              n("سَاعَةٌ", "sāʿatun", "a clock"),
+            ], "سَاعَاتٌ", "سَاعَة takes the sound feminine plural: ة becomes ـَات."),
+            q("otm-bags", "The plural of حَقِيبَة (bag):", [
+              n("خَرَائِطُ", "kharā’iṭu", "maps"),
+              n("حَقِيبَتَانِ", "ḥaqībatāni", "two bags"),
+              n("حَقَائِبُ", "ḥaqā’ibu", "bags"),
+            ], "حَقَائِبُ", "Not every word ending in ة takes ـَات. حَقِيبَة has a broken plural on the pattern فَعَائِل."),
+          ],
+        },
       ],
     },
     {
@@ -442,6 +692,56 @@ export const LEVEL_TWO_LESSON_13: LevelTwoLessonNotes = {
             "Three to ten: the number comes first and the noun is plural. The number takes the opposite gender to the singular noun. قَلَم is masculine, so the number gets ة: ثَلَاثَةُ أَقْلَامٍ. مِسْطَرَة is feminine, so the number drops ة: أَرْبَعُ مَسَاطِرَ.",
             "The plural after 3 to 10 is genitive (أَقْلَامٍ, with kasra tanween). مَسَاطِرَ ends in fatha because it is a diptote.",
             "The lesson only previews rule 3. It gets its own lesson later, so don’t worry if it feels backwards for now.",
+          ],
+        },
+        {
+          kind: "practice",
+          id: "count-them",
+          title: "Practice: count them",
+          intro: "Count the pictures and choose the right phrase. قَلَم (pen) is masculine; مِسْطَرَة (ruler) is feminine.",
+          questions: [
+            q("count-1-pen", "How many pens?", [
+              n("قَلَمٌ وَاحِدَةٌ", "qalamun wāḥidatun", "✗ وَاحِدَة is feminine, but قَلَم is masculine"),
+              n("قَلَمٌ وَاحِدٌ", "qalamun wāḥidun", "one pen"),
+              n("قَلَمَانِ", "qalamāni", "two pens"),
+            ], "قَلَمٌ وَاحِدٌ", "One: the noun first, then وَاحِد matching its gender.", {
+              visual: { kind: "count", object: "pen", count: 1 },
+            }),
+            q("count-2-rulers", "How many rulers?", [
+              n("مِسْطَرَتَانِ", "misṭaratāni", "two rulers"),
+              n("مَسَاطِرُ", "masāṭiru", "rulers (3 or more)"),
+              n("مِسْطَرَةٌ وَاحِدَةٌ", "misṭaratun wāḥidatun", "one ruler"),
+            ], "مِسْطَرَتَانِ", "Two: the dual already means “two”.", {
+              visual: { kind: "count", object: "ruler", count: 2 },
+            }),
+            q("count-3-pens", "How many pens?", [
+              n("ثَلَاثُ أَقْلَامٍ", "thalāthu aqlāmin", "✗ the number needs ة with a masculine noun"),
+              n("ثَلَاثَةُ قَلَمٍ", "thalāthatu qalamin", "✗ after 3 to 10 the noun is plural"),
+              n("ثَلَاثَةُ أَقْلَامٍ", "thalāthatu aqlāmin", "three pens"),
+            ], "ثَلَاثَةُ أَقْلَامٍ", "قَلَم is masculine, so the number takes the opposite gender (with ة), and the noun after it is plural.", {
+              visual: { kind: "count", object: "pen", count: 3 },
+            }),
+            q("count-4-rulers", "How many rulers?", [
+              n("أَرْبَعُ مَسَاطِرَ", "arbaʿu masāṭira", "four rulers"),
+              n("أَرْبَعَةُ مَسَاطِرَ", "arbaʿatu masāṭira", "✗ the number drops ة with a feminine noun"),
+              n("أَرْبَعُ مِسْطَرَةٍ", "arbaʿu misṭaratin", "✗ after 3 to 10 the noun is plural"),
+            ], "أَرْبَعُ مَسَاطِرَ", "مِسْطَرَة is feminine, so the number drops ة: أَرْبَعُ. The noun is plural.", {
+              visual: { kind: "count", object: "ruler", count: 4 },
+            }),
+            q("count-3-rulers", "How many rulers?", [
+              n("ثَلَاثَةُ مَسَاطِرَ", "thalāthatu masāṭira", "✗ the number drops ة with a feminine noun"),
+              n("ثَلَاثُ مَسَاطِرَ", "thalāthu masāṭira", "three rulers"),
+              n("مِسْطَرَتَانِ", "misṭaratāni", "two rulers"),
+            ], "ثَلَاثُ مَسَاطِرَ", "مِسْطَرَة is feminine, so three is ثَلَاث without ة.", {
+              visual: { kind: "count", object: "ruler", count: 3 },
+            }),
+            q("count-4-pens", "How many pens?", [
+              n("قَلَمَانِ", "qalamāni", "two pens"),
+              n("أَرْبَعُ أَقْلَامٍ", "arbaʿu aqlāmin", "✗ the number needs ة with a masculine noun"),
+              n("أَرْبَعَةُ أَقْلَامٍ", "arbaʿatu aqlāmin", "four pens"),
+            ], "أَرْبَعَةُ أَقْلَامٍ", "قَلَم is masculine, so four takes ة: أَرْبَعَةُ.", {
+              visual: { kind: "count", object: "pen", count: 4 },
+            }),
           ],
         },
       ],
@@ -623,5 +923,15 @@ export const LEVEL_TWO_LESSON_13: LevelTwoLessonNotes = {
     n("أَرْبَعَةُ", "arbaʿatu", "four (with a masculine noun)"),
     n("أَرْبَعُ", "arbaʿu", "four (with a feminine noun)"),
     n("ـِيَا", "-iyā", "country-name ending dropped in the nationality"),
+    n("الكُرَةُ", "al-kuratu", "the ball"),
+    n("الطَّاوِلَةُ", "aṭ-ṭāwilatu", "the table"),
+    n("الصُّنْدُوقُ", "aṣ-ṣundūqu", "the box"),
+    n("الصُّنْدُوقِ", "aṣ-ṣundūqi", "the box"),
+    n("الصُّنْدُوقَيْنِ", "aṣ-ṣundūqayni", "the two boxes (after a preposition)"),
+    n("صَدِيقُهَا", "ṣadīquhā", "her friend (m.)"),
+    n("العِرَاقِ", "al-ʿirāqi", "Iraq"),
+    n("قَلَمٍ", "qalamin", "a pen (after a number or preposition)"),
+    n("مِسْطَرَةٍ", "misṭaratin", "a ruler (after a number or preposition)"),
+    n("مِسْطَرَةٌ", "misṭaratun", "a ruler"),
   ],
 };

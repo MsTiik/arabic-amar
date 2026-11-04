@@ -13,6 +13,7 @@ import { LEVEL_TWO_MASJID_AL_HARAM } from "../../src/data/level-two-masjid-al-ha
 import {
   LEVEL_TWO_LESSON_NOTES,
   arabicWords,
+  lessonNoteExerciseArabic,
   lessonNoteItems,
   lessonNoteProse,
 } from "../../src/data/level-two-lesson-notes";
@@ -151,6 +152,7 @@ describe("Level 2 vocabulary bank coverage", () => {
       const words = new Set<string>();
       for (const { item } of lessonNoteItems(notes)) for (const word of arabicWords(item.arabic)) words.add(word);
       for (const text of lessonNoteProse(notes)) for (const word of arabicWords(text)) words.add(word);
+      for (const text of lessonNoteExerciseArabic(notes)) for (const word of arabicWords(text)) words.add(word);
       const missing = [...words].filter((word) => {
         const folded = foldForSearch(word).replace(/\u0640/g, "");
         // Single letters (root letters, ة, ي) are spelling notes, not vocabulary.
@@ -176,6 +178,10 @@ describe("Level 2 vocabulary bank coverage", () => {
     expect(matches("two bags").map((entry) => entry.arabic)).toContain("حَقِيبَتَانِ");
     expect(matches("warā").map((entry) => entry.arabic)).toContain("وَرَاءَ");
     expect(matches("what is your name").map((entry) => entry.arabic)).toContain("مَا اسْمُكَ؟");
+    expect(matches("the ball").map((entry) => entry.arabic)).toContain("الكُرَةُ");
+    // Deliberately wrong options are shown in exercises but never become bank entries.
+    expect(topic.some((entry) => entry.english.startsWith("✗"))).toBe(false);
+    expect(topic.map((entry) => entry.arabic)).not.toContain("ثَلَاثُ أَقْلَامٍ");
   });
 
   test.each([
