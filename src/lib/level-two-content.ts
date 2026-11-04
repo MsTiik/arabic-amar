@@ -223,6 +223,19 @@ export function validateLevelTwoPublishedContent(
             requireText(line.why, lineLocation, "Why");
           }
         }
+        if (block.kind === "quran") {
+          for (const example of block.items) {
+            const exampleLocation = `${blockLocation}.${example.surah}:${example.ayah}`;
+            if (example.surah < 1 || example.surah > 114 || example.ayah < 1) {
+              issues.push({ location: exampleLocation, message: "Qur’an reference is out of range." });
+            }
+            if (!/\[[^\]]+\]/.test(example.text)) {
+              issues.push({ location: exampleLocation, message: "Mark the lesson’s word in the excerpt with [brackets]." });
+            }
+            requireText(example.english, exampleLocation, "English");
+            requireText(example.note, exampleLocation, "Note");
+          }
+        }
         if (block.kind === "practice") {
           for (const question of block.questions) {
             const questionLocation = `${blockLocation}.${question.id}`;

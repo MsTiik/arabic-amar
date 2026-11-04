@@ -1,8 +1,11 @@
 import Link from "next/link";
-import { ChevronDown } from "lucide-react";
+import { BookOpen, ChevronDown } from "lucide-react";
 
 import { ArabicText } from "@/components/arabic-text";
 import { ChoicePractice, GapDialogue } from "@/components/lesson-notes-client";
+import { MarkedArabic } from "@/components/marked-arabic";
+import { SpeakerButton } from "@/components/speaker-button";
+import { ayahAudioUrl } from "@/data/quran";
 import {
   isNoteItem,
   type LevelTwoLessonNotes,
@@ -11,6 +14,7 @@ import {
   type NoteDialogueLine,
   type NoteItem,
   type NoteSection,
+  type QuranExample,
 } from "@/data/level-two-lesson-notes";
 import { cn } from "@/lib/cn";
 import { ARABIC_RUN } from "@/lib/inline-arabic";
@@ -45,15 +49,18 @@ export function NoteItemView({
 }) {
   return (
     <div className="min-w-0">
-      <ArabicText
-        className={cn(
-          "leading-loose text-foreground",
-          alignLeft && "text-left",
-          size === "lg" ? "text-xl sm:text-2xl" : size === "md" ? "text-lg sm:text-xl" : "text-lg",
-        )}
-      >
-        {item.arabic}
-      </ArabicText>
+      <div className="flex items-start gap-2">
+        <ArabicText
+          className={cn(
+            "leading-loose text-foreground",
+            alignLeft ? "text-left" : "min-w-0 flex-1",
+            size === "lg" ? "text-xl sm:text-2xl" : size === "md" ? "text-lg sm:text-xl" : "text-lg",
+          )}
+        >
+          {item.arabic}
+        </ArabicText>
+        <SpeakerButton arabic={item.arabic} label={item.english} size="sm" className="mt-1.5 shrink-0" />
+      </div>
       <p lang="ar-Latn" className="text-sm italic text-foreground-soft">{item.transliteration}</p>
       <p className="text-sm text-muted-foreground">{item.english}</p>
     </div>
@@ -90,6 +97,43 @@ function BlockTitle({ title }: { title?: string }) {
       <Prose text={title} />
     </h3>
   ) : null;
+}
+
+function QuranCard({ example }: { example: QuranExample }) {
+  const reference = `${example.surahName} ${example.surah}:${example.ayah}`;
+  return (
+    <li className="surface flex h-full flex-col gap-2 border-l-4 border-l-accent-gold p-3 sm:p-4">
+      <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+        <a
+          href={`https://quran.com/${example.surah}/${example.ayah}`}
+          target="_blank"
+          rel="noreferrer"
+          className="hover:text-foreground hover:underline focus-ring"
+        >
+          {reference}
+        </a>
+        <SpeakerButton
+          arabic={example.focus.arabic}
+          url={ayahAudioUrl(example.surah, example.ayah)}
+          ariaLabel={`Play the recitation of ${reference}`}
+          size="sm"
+          className="ml-auto"
+        />
+      </div>
+      <MarkedArabic
+        text={example.text}
+        variant="display"
+        className="text-2xl leading-[2.1] text-foreground"
+        markClassName="text-accent-gold"
+      />
+      <p className="text-sm text-foreground-soft">{example.english}</p>
+      <p className="mt-auto border-t border-hairline pt-2 text-sm text-muted-foreground">
+        <ArabicText variant="inline" className="text-[1.15em] text-foreground">{example.focus.arabic}</ArabicText>{" "}
+        <span lang="ar-Latn" className="italic">{example.focus.transliteration}</span> · {example.focus.english}.{" "}
+        <Prose text={example.note} />
+      </p>
+    </li>
+  );
 }
 
 function Block({ block }: { block: NoteBlock }) {
@@ -185,6 +229,22 @@ function Block({ block }: { block: NoteBlock }) {
             <li key={item.arabic} className="tile px-3 py-2.5 sm:p-4">
               <NoteItemView item={item} size="lg" />
             </li>
+          ))}
+        </ul>
+      </div>
+    );
+  }
+
+  if (block.kind === "quran") {
+    return (
+      <div>
+        <h3 className="mb-2 flex items-center gap-2 text-base font-semibold sm:text-lg">
+          <BookOpen className="h-4 w-4 text-accent-gold" aria-hidden />
+          {block.title ?? "In the Qur’an"}
+        </h3>
+        <ul className="grid gap-2 md:grid-cols-2">
+          {block.items.map((example) => (
+            <QuranCard key={`${example.surah}:${example.ayah}`} example={example} />
           ))}
         </ul>
       </div>

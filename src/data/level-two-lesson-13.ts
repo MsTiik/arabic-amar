@@ -5,6 +5,7 @@ import type {
   PracticeQuestion,
   PracticeVisual,
 } from "@/data/level-two-lesson-notes";
+import { LESSON_13_QURAN } from "@/data/level-two-lesson-13-quran";
 
 const n = (arabic: string, transliteration: string, english: string): NoteItem => ({ arabic, transliteration, english });
 
@@ -43,7 +44,7 @@ const q = (
 const HASAN = "Hasan";
 const HAMZA = "Hamza";
 
-export const LEVEL_TWO_LESSON_13: LevelTwoLessonNotes = {
+const LESSON: LevelTwoLessonNotes = {
   slug: "getting-to-know-each-other",
   lesson: 13,
   title: "Getting to know each other, the dual and the broken plural",
@@ -933,5 +934,31 @@ export const LEVEL_TWO_LESSON_13: LevelTwoLessonNotes = {
     n("قَلَمٍ", "qalamin", "a pen (after a number or preposition)"),
     n("مِسْطَرَةٍ", "misṭaratin", "a ruler (after a number or preposition)"),
     n("مِسْطَرَةٌ", "misṭaratun", "a ruler"),
+    n("يَوْم", "yawm", "day"),
+    n("أَيَّامٍ", "ayyāmin", "days (after a number)"),
+    n("شَهْر", "shahr", "month"),
+    n("أَشْهُرٍ", "ash-hurin", "months (after a number)"),
+    n("سَمَاء", "samā’", "sky, heaven"),
+    n("سَمَاوَاتٍ", "samāwātin", "heavens (after a number)"),
+    n("سَبْع", "sabʿ", "seven (with a feminine noun)"),
+    n("سَبْعَ", "sabʿa", "seven (with a feminine noun)"),
+    n("عَرَب", "ʿarab", "the Arabs"),
+    n("عَرَبِيّ", "ʿarabiyy", "Arabic, Arab (m.)"),
+    n("عَيْن", "ʿayn", "spring (of water); eye"),
+    n("أَيْدِيهِمْ", "aydīhim", "their hands"),
+    n("هُمْ", "hum", "they, them"),
+    n("فِيهِمَا", "fīhimā", "in both of them"),
+    n("تَجْرِيَانِ", "tajriyāni", "the two of them flow"),
   ],
+};
+
+/** Lesson 13, with an “In the Qur’an” block closing each section that has one. */
+export const LEVEL_TWO_LESSON_13: LevelTwoLessonNotes = {
+  ...LESSON,
+  sections: LESSON.sections.map((section) => {
+    const items = LESSON_13_QURAN[section.id];
+    return items
+      ? { ...section, blocks: [...section.blocks, { kind: "quran" as const, id: `${section.id}-quran`, title: "In the Qur’an", items }] }
+      : section;
+  }),
 };

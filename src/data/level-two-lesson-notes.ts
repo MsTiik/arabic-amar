@@ -43,6 +43,19 @@ export interface PracticeQuestion {
   result?: NoteItem;
 }
 
+/** A short Qur’an excerpt that uses a word or pattern from the lesson. */
+export interface QuranExample {
+  surah: number;
+  ayah: number;
+  surahName: string;
+  /** Uthmani text, copied word for word; the lesson's word in [brackets], … where the ayah goes on. */
+  text: string;
+  english: string;
+  /** The bracketed word in the lesson's everyday spelling, for the vocabulary bank. */
+  focus: NoteItem;
+  note: string;
+}
+
 /** A table cell is either English text or an Arabic item. */
 export type NoteCell = string | NoteItem;
 
@@ -64,6 +77,7 @@ export type NoteBlock =
   | { kind: "bullets"; id: string; title?: string; items: readonly string[]; ordered?: boolean }
   | { kind: "examples"; id: string; title?: string; items: readonly NoteItem[] }
   | { kind: "practice"; id: string; title?: string; intro?: string; questions: readonly PracticeQuestion[] }
+  | { kind: "quran"; id: string; title?: string; items: readonly QuranExample[] }
   | {
       kind: "quiz";
       id: string;
@@ -125,6 +139,7 @@ export function lessonNoteItems(notes: LevelTwoLessonNotes): { item: NoteItem; w
       if (block.kind === "quiz") {
         for (const question of block.items) if (isNoteItem(question.answer)) items.push({ item: question.answer, where });
       }
+      if (block.kind === "quran") for (const example of block.items) items.push({ item: example.focus, where: `${where} · Qur’an ${example.surah}:${example.ayah}` });
       if (block.kind === "practice") {
         for (const question of block.questions) {
           const answer = question.options.find((option) => option.arabic === question.answer);
@@ -168,6 +183,7 @@ export function lessonNoteProse(notes: LevelTwoLessonNotes): string[] {
       if (block.title) prose.push(block.title);
       if (block.kind === "bullets") prose.push(...block.items);
       if (block.kind === "dialogue") for (const line of block.lines) if (line.why) prose.push(line.why);
+      if (block.kind === "quran") for (const example of block.items) prose.push(example.note);
       if (block.kind === "practice") {
         if (block.intro) prose.push(block.intro);
         for (const question of block.questions) prose.push(question.ask, question.why);

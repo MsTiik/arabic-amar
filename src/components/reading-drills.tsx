@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Check, Eye, RotateCcw } from "lucide-react";
+import { Check, Eye, EyeOff, RotateCcw, X } from "lucide-react";
 
 import { ArabicText } from "@/components/arabic-text";
 import { ReadingExercise } from "@/components/reading-exercise";
@@ -10,9 +10,11 @@ import {
   type LevelTwoOrderItem,
   type LevelTwoReading,
   type LevelTwoReadingDrill,
+  type LevelTwoReadingQuestion,
   type LevelTwoReadingSentence,
 } from "@/data/level-two-lessons";
 import { cn } from "@/lib/cn";
+import { mistakeRange } from "@/lib/mistake-range";
 
 type Tab = { id: string; label: string };
 
@@ -51,7 +53,7 @@ export function ReadingDrills({ reading }: { reading: LevelTwoReading }) {
         {drill ? (
           <>
             <DrillInstruction heading={drill.heading} instruction={drill.instruction} />
-            <DrillBody reading={reading} drill={drill} />
+            <DrillBody drill={drill} />
           </>
         ) : (
           <>
@@ -66,17 +68,146 @@ export function ReadingDrills({ reading }: { reading: LevelTwoReading }) {
   );
 }
 
-function DrillBody({ reading, drill }: { reading: LevelTwoReading; drill: LevelTwoReadingDrill }) {
+function DrillBody({ drill }: { drill: LevelTwoReadingDrill }) {
   if (drill.kind === "match") return <MatchingExercise key={drill.id} drill={drill} />;
   if (drill.kind === "order") return <OrderingExercise key={drill.id} items={drill.items} />;
+  return <SpotTheMistake key={drill.id} items={drill.items} />;
+}
+
+/* ---------- Spot the mistake ---------- */
+
+function SpotTheMistake({ items }: { items: readonly LevelTwoReadingQuestion[] }) {
+  const [taps, setTaps] = useState<Readonly<Record<string, number>>>({});
+  const [english, setEnglish] = useState(false);
+  const answered = items.filter((item) => taps[item.id] !== undefined);
+  const right = answered.filter((item) => {
+    const [from, to] = mistakeRange(item.question, item.answer);
+    return taps[item.id] >= from && taps[item.id] < to;
+  }).length;
+
   return (
-    <ReadingExercise
-      key={drill.id}
-      reading={reading}
-      questions={drill.items}
-      resultsKey={`${reading.slug}--${drill.id}`}
-      answerLabel="Correction"
-    />
+    <div className="space-y-3">
+      <div className="flex flex-wrap items-center gap-x-4 gap-y-2 rounded-[10px] border border-hairline bg-card px-3 py-2 text-sm" aria-live="polite">
+        <span className="font-semibold tabular-nums">
+          {right} / {items.length} found
+        </span>
+        <span className="text-xs text-muted-foreground">
+          {answered.length === items.length ? "All done." : "Each sentence has one thing that doesn’t make sense. Tap the word that’s wrong."}
+        </span>
+        <span className="ml-auto flex items-center gap-3">
+          <button
+            type="button"
+            onClick={() => setEnglish((value) => !value)}
+            aria-pressed={english}
+            className="inline-flex items-center gap-1 text-xs font-semibold text-primary focus-ring"
+          >
+            {english ? <EyeOff className="h-3.5 w-3.5" aria-hidden /> : <Eye className="h-3.5 w-3.5" aria-hidden />}
+            {english ? "Hide English" : "Need a hint? Show English"}
+          </button>
+          {answered.length ? (
+            <button type="button" onClick={() => setTaps({})} className="inline-flex items-center gap-1 text-xs font-semibold text-primary focus-ring">
+              <RotateCcw className="h-3.5 w-3.5" aria-hidden />
+              Start again
+            </button>
+          ) : null}
+        </span>
+      </div>
+      <ol className="grid gap-2 sm:gap-3 md:grid-cols-2">
+        {items.map((item, index) => (
+          <MistakeCard
+            key={item.id}
+            item={item}
+            number={item.number ?? index + 1}
+            tapped={taps[item.id]}
+            english={english}
+            onTap={(word) => setTaps((current) => ({ ...current, [item.id]: word }))}
+          />
+        ))}
+      </ol>
+    </div>
+  );
+}
+
+function MistakeCard({
+  item,
+  number,
+  tapped,
+  english,
+  onTap,
+}: {
+  item: LevelTwoReadingQuestion;
+  number: number;
+  tapped: number | undefined;
+  english: boolean;
+  onTap: (word: number) => void;
+}) {
+  const [from, to] = mistakeRange(item.question, item.answer);
+  const answered = tapped !== undefined;
+  const found = answered && tapped >= from && tapped < to;
+  const fixedFrom = from;
+  const fixedTo = item.answer.tokens.length - (item.question.tokens.length - to);
+
+  return (
+    <li
+      className={cn(
+        "surface flex h-full flex-col gap-2 p-3 sm:p-4",
+        answered && (found ? "border-l-4 border-l-success" : "border-l-4 border-l-danger"),
+      )}
+    >
+      <span className="flex h-7 w-7 items-center justify-center rounded-full bg-primary-soft text-xs font-semibold tabular-nums text-primary">
+        {answered ? (found ? <Check className="h-4 w-4" aria-label="Found" /> : <X className="h-4 w-4" aria-label="Missed" />) : number}
+      </span>
+      <p dir="rtl" lang="ar" className="flex flex-wrap gap-1.5">
+        {item.question.tokens.map((token, wordIndex) => {
+          const inMistake = wordIndex >= from && wordIndex < to;
+          return (
+            <button
+              key={wordIndex}
+              type="button"
+              disabled={answered}
+              onClick={() => onTap(wordIndex)}
+              className={cn(
+                "rounded-[8px] border px-2 py-0.5 font-arabic text-xl leading-loose transition-colors focus-ring",
+                !answered && "border-transparent hover:border-primary/40 hover:bg-primary-soft",
+                answered && inMistake && "border-danger/50 bg-danger-soft text-danger line-through",
+                answered && !inMistake && wordIndex === tapped && "border-hairline bg-muted",
+                answered && !inMistake && wordIndex !== tapped && "border-transparent",
+              )}
+            >
+              {token.punctuationBefore ?? ""}
+              {token.arabic}
+              {token.punctuationAfter ?? ""}
+            </button>
+          );
+        })}
+      </p>
+      {english || answered ? (
+        <p className="text-sm text-muted-foreground">
+          <span lang="ar-Latn" className="italic">{item.question.transliteration}</span> · {item.question.english}
+        </p>
+      ) : null}
+      {answered ? (
+        <div className="mt-auto space-y-1 border-t border-hairline pt-2 text-sm" aria-live="polite">
+          <p className={cn("font-medium", found ? "text-success" : "text-danger")}>
+            {found ? "Yes, that’s the mistake." : "That word is fine. The mistake is crossed out above."}
+          </p>
+          <p className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">Corrected</p>
+          <p dir="rtl" lang="ar" className="font-arabic text-xl leading-loose text-foreground">
+            {item.answer.tokens.map((token, wordIndex) => (
+              <span key={wordIndex} className={cn(wordIndex >= fixedFrom && wordIndex < fixedTo && "font-bold text-success")}>
+                {token.punctuationBefore ?? ""}
+                {token.arabic}
+                {token.punctuationAfter ?? ""}
+                {wordIndex < item.answer.tokens.length - 1 ? " " : ""}
+              </span>
+            ))}
+          </p>
+          <p className="text-muted-foreground">
+            <span lang="ar-Latn" className="italic">{item.answer.transliteration}</span> · {item.answer.english}
+          </p>
+        </div>
+      ) : null}
+    </li>
   );
 }
 
