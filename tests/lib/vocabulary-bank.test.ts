@@ -140,7 +140,11 @@ describe("Level 2 vocabulary bank coverage", () => {
     "lists every Arabic word in the %s lesson notes on its own",
     (_slug, notes) => {
       const standalone = new Set<string>();
-      for (const entry of levelTwoEntries) {
+      // Only this lesson's own entries count, so a word can't pass on a gloss
+      // that belongs to (and may later vanish from) another lesson.
+      for (const entry of levelTwoEntries.filter((candidate) =>
+        candidate.topicSlugs.includes(`level-2-${notes.slug}`),
+      )) {
         for (const part of entry.arabicFolded.split(/\s*\/\s*/)) standalone.add(part.trim());
         for (const form of entry.arabicSearchForms ?? []) standalone.add(form);
       }

@@ -23,7 +23,15 @@ export type NoteCell = string | NoteItem;
  */
 export type NoteBlock =
   | { kind: "dialogue"; id: string; title?: string; lines: readonly NoteDialogueLine[]; numbered?: boolean }
-  | { kind: "table"; id: string; title?: string; columns: readonly string[]; rows: readonly (readonly NoteCell[])[] }
+  | {
+      kind: "table";
+      id: string;
+      title?: string;
+      columns: readonly string[];
+      rows: readonly (readonly NoteCell[])[];
+      /** The first column is a short row label (e.g. a country or a number): narrow, and shown as the row's heading on phones. */
+      rowHeader?: boolean;
+    }
   | { kind: "bullets"; id: string; title?: string; items: readonly string[]; ordered?: boolean }
   | { kind: "examples"; id: string; title?: string; items: readonly NoteItem[] }
   | {

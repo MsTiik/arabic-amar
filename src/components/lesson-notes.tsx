@@ -14,7 +14,11 @@ import {
 } from "@/data/level-two-lesson-notes";
 import { cn } from "@/lib/cn";
 
-const ARABIC_RUN = /([؀-ۿ](?:[؀-ۿ\s،؛؟]*[؀-ۿ])?)/;
+// Arabic letters, harakat and tatweel. The Arabic comma is deliberately not
+// part of a run: in "مَكْتَب → مَكَاتِب، مِسْطَرَة → مَسَاطِر" the pieces must
+// stay separate, in reading order, or a right-to-left span flips the pairs.
+const ARABIC_LETTER = "\\u0610-\\u061A\\u0620-\\u065F\\u0670-\\u06D3";
+const ARABIC_RUN = new RegExp(`([${ARABIC_LETTER}](?:[${ARABIC_LETTER}\\s]*[${ARABIC_LETTER}])?؟?)`);
 
 /** English prose with any Arabic in it set in the Arabic font. */
 export function Prose({ text }: { text: string }) {
@@ -118,9 +122,8 @@ function Block({ block }: { block: NoteBlock }) {
   }
 
   if (block.kind === "table") {
-    const columns = `repeat(${block.columns.length}, minmax(0, 1fr))`;
-    const leadingText = block.rows.every((row) => typeof row[0] === "string" && row[0].length <= 14);
-    const template = leadingText ? `minmax(0, 0.6fr) repeat(${block.columns.length - 1}, minmax(0, 1fr))` : columns;
+    const rest = block.rowHeader ? block.columns.length - 1 : block.columns.length;
+    const template = `${block.rowHeader ? "minmax(0, 0.6fr) " : ""}repeat(${rest}, minmax(0, 1fr))`;
     return (
       <div>
         <BlockTitle title={block.title} />
@@ -135,14 +138,20 @@ function Block({ block }: { block: NoteBlock }) {
           <ul className="divide-y divide-hairline">
             {block.rows.map((row, rowIndex) => (
               <li key={rowIndex} className="grid gap-x-4 gap-y-2 px-3 py-3 sm:px-5 sm:[grid-template-columns:var(--cols)]">
-                {row.map((cell, cellIndex) => (
-                  <div key={cellIndex} className="min-w-0">
-                    <p className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground sm:hidden">
-                      <Prose text={block.columns[cellIndex]} />
+                {row.map((cell, cellIndex) =>
+                  block.rowHeader && cellIndex === 0 && typeof cell === "string" ? (
+                    <p key={cellIndex} className="text-sm font-semibold text-foreground sm:font-normal sm:text-foreground-soft">
+                      <Prose text={cell} />
                     </p>
-                    <Cell cell={cell} />
-                  </div>
-                ))}
+                  ) : (
+                    <div key={cellIndex} className="min-w-0">
+                      <p className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground sm:hidden">
+                        <Prose text={block.columns[cellIndex]} />
+                      </p>
+                      <Cell cell={cell} />
+                    </div>
+                  ),
+                )}
               </li>
             ))}
           </ul>
@@ -268,7 +277,7 @@ export function LessonNotesPage({ notes }: { notes: LevelTwoLessonNotes }) {
           <Prose text={notes.description} />
         </p>
         <Link href="/vocabulary" className="mt-4 btn btn-secondary btn-sm">
-          Search this lesson’s words in the vocabulary bank
+          Look up these words in the vocabulary bank
         </Link>
       </header>
 
