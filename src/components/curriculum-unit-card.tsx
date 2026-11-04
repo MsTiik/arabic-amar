@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, BookOpenText, House, Languages, ShoppingBasket, VenusAndMars, Waypoints } from "lucide-react";
+import { ArrowRight, BookOpenText, House, Languages, MessagesSquare, ShoppingBasket, VenusAndMars, Waypoints } from "lucide-react";
 
 import { ReadingScoreBadge } from "@/components/reading-score-badge";
 import type { CurriculumUnit } from "@/data/curriculum";
@@ -26,6 +26,10 @@ const UNIT_IDENTITIES = {
   "core-verb-families": {
     icon: Waypoints,
     chip: "bg-tense-command text-tense-command-accent",
+  },
+  "getting-to-know-each-other": {
+    icon: MessagesSquare,
+    chip: "bg-accent-amber-soft text-accent-amber",
   },
   "masculine-and-feminine": {
     icon: VenusAndMars,

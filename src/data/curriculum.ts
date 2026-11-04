@@ -98,6 +98,17 @@ const LEVEL_TWO_UNITS: readonly CurriculumUnit[] = [
     ],
   },
   {
+    id: "getting-to-know-each-other",
+    title: "Getting to know each other",
+    description:
+      "Lesson 13: greetings, names, how you are, where you are from and nationalities, with three dialogue exercises and words of position. Then the dual, the broken plural, and counting from one to four.",
+    topicSlugs: [],
+    links: [
+      { href: "/levels/level-2/getting-to-know-each-other", label: "Open the lesson" },
+      { href: "/levels/level-2/getting-to-know-each-other#dual-and-plural", label: "The dual and the broken plural" },
+    ],
+  },
+  {
     id: "masculine-and-feminine",
     title: "Masculine and feminine",
     description:

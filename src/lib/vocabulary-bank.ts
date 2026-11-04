@@ -13,6 +13,7 @@ import {
   type LevelTwoVocabTheme,
   type VocabSetItem,
 } from "@/data/level-two-vocab-sets";
+import { LEVEL_TWO_LESSON_NOTES, lessonNoteItems, type LevelTwoLessonNotes } from "@/data/level-two-lesson-notes";
 import { LEVEL_TWO_GRAMMAR_SHEETS, chartForms, plainArabic } from "@/data/level-two-grammar";
 import type { GrammarItem, LevelTwoGrammarSheet } from "@/data/level-two-grammar";
 import { VERB_FAMILIES, VERB_FORM_KEYS } from "@/data/verb-families";
@@ -68,6 +69,10 @@ const READING_KIND_LABELS: Record<LevelTwoReadingTokenKind, string> = {
   connector: "Connecting word",
 };
 
+export function lessonNotesTopicSlug(notes: Pick<LevelTwoLessonNotes, "slug">): string {
+  return `level-2-${notes.slug}`;
+}
+
 export function grammarSheetTopicSlug(sheet: Pick<LevelTwoGrammarSheet, "slug">): string {
   return `level-2-${sheet.slug}`;
 }
@@ -92,6 +97,10 @@ const LEVEL_TWO_TOPICS: readonly { slug: string; name: string }[] = [
   ...LEVEL_TWO_READINGS.map((reading) => ({
     slug: readingTopicSlug(reading),
     name: `Level 2 · ${reading.shortTitle ?? reading.title} reading`,
+  })),
+  ...LEVEL_TWO_LESSON_NOTES.map((notes) => ({
+    slug: lessonNotesTopicSlug(notes),
+    name: `Level 2 · ${notes.shortTitle}`,
   })),
   ...LEVEL_TWO_GRAMMAR_SHEETS.map((sheet) => ({
     slug: grammarSheetTopicSlug(sheet),
@@ -297,6 +306,8 @@ export function getLevelTwoVocabularyEntries(): VocabEntry[] {
 
   for (const sheet of LEVEL_TWO_GRAMMAR_SHEETS) words.push(...grammarSheetBankWords(sheet));
 
+  for (const notes of LEVEL_TWO_LESSON_NOTES) words.push(...lessonNotesBankWords(notes));
+
   for (const theme of LEVEL_TWO_VOCAB_THEMES) words.push(...vocabThemeBankWords(theme));
 
   return words.map(toVocabEntry);
@@ -358,6 +369,27 @@ function readingBankWords(reading: LevelTwoReading): LevelTwoBankWord[] {
       category,
       subCategory: "Useful phrase",
       topicSlug: readingTopicSlug(reading),
+    });
+  }
+  return words;
+}
+
+/** Each distinct phrase, sentence and word in a lesson's notes. */
+function lessonNotesBankWords(notes: LevelTwoLessonNotes): LevelTwoBankWord[] {
+  const words: LevelTwoBankWord[] = [];
+  const seen = new Set<string>();
+  for (const [index, { item, where }] of lessonNoteItems(notes).entries()) {
+    const key = `${foldForSearch(item.arabic)}\u0000${item.english}`;
+    if (seen.has(key)) continue;
+    seen.add(key);
+    words.push({
+      id: `${notes.slug}__${index + 1}`,
+      arabic: item.arabic,
+      pronunciation: item.transliteration,
+      english: item.english,
+      category: `Level 2 · ${notes.shortTitle}`,
+      subCategory: where,
+      topicSlug: lessonNotesTopicSlug(notes),
     });
   }
   return words;

@@ -12,6 +12,7 @@ import {
   type LevelTwoReading,
   type LevelTwoReadingSentence,
 } from "@/data/level-two-lessons";
+import { LEVEL_TWO_LESSON_NOTES, lessonNoteItems } from "@/data/level-two-lesson-notes";
 import { LEVEL_TWO_VOCAB_SETS, LEVEL_TWO_VOCAB_THEMES } from "@/data/level-two-vocab-sets";
 import { VERB_FAMILIES } from "@/data/verb-families";
 
@@ -193,6 +194,34 @@ export function validateLevelTwoPublishedContent(
       const location = `${readingLocation}.${sentence.id}`;
       requireReadingSentence(sentence, location);
       requireTransliteration(sentence.transliteration ?? "", location);
+    }
+  }
+
+  for (const notes of LEVEL_TWO_LESSON_NOTES) {
+    const notesLocation = `lesson-notes.${notes.slug}`;
+    requireUniqueId(notes.slug, notesLocation);
+    requireText(notes.source, notesLocation, "Source");
+    requireReviewStatus(notes.reviewStatus, notesLocation);
+    for (const section of notes.sections) {
+      const sectionLocation = `${notesLocation}.${section.id}`;
+      requireUniqueId(`${notes.slug}.${section.id}`, sectionLocation);
+      for (const block of section.blocks) {
+        const blockLocation = `${sectionLocation}.${block.id}`;
+        requireUniqueId(`${notes.slug}.${block.id}`, blockLocation);
+        if (block.kind === "table") {
+          for (const [index, row] of block.rows.entries()) {
+            if (row.length !== block.columns.length) {
+              issues.push({ location: `${blockLocation}.row.${index + 1}`, message: "Table row does not match its columns." });
+            }
+          }
+        }
+      }
+    }
+    for (const [index, { item, where }] of lessonNoteItems(notes).entries()) {
+      const location = `${notesLocation}.item.${index + 1} (${where})`;
+      requireArabic(item.arabic, location);
+      requireTransliteration(item.transliteration, location);
+      requireText(item.english, location, "English");
     }
   }
 

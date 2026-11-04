@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 
 import { ArabicText } from "@/components/arabic-text";
+import { LessonNotesPage } from "@/components/lesson-notes";
 import { InteractiveArabicReading } from "@/components/interactive-arabic-reading";
 import { ReadingDrills } from "@/components/reading-drills";
 import { ReadingExercise } from "@/components/reading-exercise";
@@ -26,6 +27,7 @@ import {
   type LevelTwoAction,
   type LevelTwoSentence,
 } from "@/data/level-two-lessons";
+import { LEVEL_TWO_LESSON_NOTES, getLevelTwoLessonNotes } from "@/data/level-two-lesson-notes";
 import { LEVEL_TWO_KHALIDS_HOUSE_ROOMS } from "@/data/level-two-khalids-house-rooms";
 import { LEVEL_TWO_MASJID_AL_HARAM } from "@/data/level-two-masjid-al-haram";
 import { LEVEL_TWO_VOCAB_THEMES, getLevelTwoVocabTheme } from "@/data/level-two-vocab-sets";
@@ -119,6 +121,7 @@ export function generateStaticParams() {
   return [
     ...Object.keys(UNIT_META),
     ...LEVEL_TWO_VOCAB_THEMES.map((theme) => theme.slug),
+    ...LEVEL_TWO_LESSON_NOTES.map((notes) => notes.slug),
   ].map((unit) => ({ unit }));
 }
 
@@ -128,7 +131,7 @@ export async function generateMetadata({
   params: Promise<{ unit: string }>;
 }) {
   const { unit } = await params;
-  const meta = UNIT_META[unit as UnitSlug] ?? getLevelTwoVocabTheme(unit);
+  const meta = UNIT_META[unit as UnitSlug] ?? getLevelTwoVocabTheme(unit) ?? getLevelTwoLessonNotes(unit);
   return meta ? { title: `${meta.title} · Level 2` } : {};
 }
 
@@ -140,6 +143,8 @@ export default async function LevelTwoUnitPage({
   const { unit } = await params;
   const vocabTheme = getLevelTwoVocabTheme(unit);
   if (vocabTheme) return <VocabThemePage theme={vocabTheme} />;
+  const lessonNotes = getLevelTwoLessonNotes(unit);
+  if (lessonNotes) return <LessonNotesPage notes={lessonNotes} />;
   if (!(unit in UNIT_META)) notFound();
   const slug = unit as UnitSlug;
   const meta: UnitMeta = UNIT_META[slug];

@@ -47,6 +47,15 @@ const REFERENCE_PAGES = [
     accent: "bg-accent-teal-soft text-accent-teal",
     badge: "Level 2",
   },
+  {
+    href: "/levels/level-2/getting-to-know-each-other#dual-and-plural",
+    title: "The dual and the broken plural",
+    titleArabic: "المُثَنَّى وَجَمْعُ التَّكْسِيرِ",
+    description:
+      "One, two, three or more: the regular dual ending ـَانِ, broken plurals and their patterns, the sound feminine plural, and counting to four.",
+    accent: "bg-accent-amber-soft text-accent-amber",
+    badge: "Level 2",
+  },
 ] as const;
 
 export default function GrammarPage() {

@@ -11,6 +11,12 @@ import {
 import { LEVEL_TWO_KHALIDS_HOUSE_ROOMS } from "../../src/data/level-two-khalids-house-rooms";
 import { LEVEL_TWO_MASJID_AL_HARAM } from "../../src/data/level-two-masjid-al-haram";
 import {
+  LEVEL_TWO_LESSON_NOTES,
+  arabicWords,
+  lessonNoteItems,
+  lessonNoteProse,
+} from "../../src/data/level-two-lesson-notes";
+import {
   LEVEL_TWO_GRAMMAR_SHEETS,
   chartForms,
   plainArabic,
@@ -128,6 +134,44 @@ describe("Level 2 vocabulary bank coverage", () => {
     expect(matches("sunburu").map((entry) => entry.arabic)).toContain("صُنْبُورُ");
     expect(matches("قبيح").map((entry) => entry.english)).toContain("ugly");
     expect(matches("رتب").map((entry) => entry.english)).toContain("arrange (command)");
+  });
+
+  test.each(LEVEL_TWO_LESSON_NOTES.map((notes) => [notes.slug, notes] as const))(
+    "lists every Arabic word in the %s lesson notes on its own",
+    (_slug, notes) => {
+      const standalone = new Set<string>();
+      for (const entry of levelTwoEntries) {
+        for (const part of entry.arabicFolded.split(/\s*\/\s*/)) standalone.add(part.trim());
+        for (const form of entry.arabicSearchForms ?? []) standalone.add(form);
+      }
+      const words = new Set<string>();
+      for (const { item } of lessonNoteItems(notes)) for (const word of arabicWords(item.arabic)) words.add(word);
+      for (const text of lessonNoteProse(notes)) for (const word of arabicWords(text)) words.add(word);
+      const missing = [...words].filter((word) => {
+        const folded = foldForSearch(word).replace(/\u0640/g, "");
+        // Single letters (root letters, ة, ي) are spelling notes, not vocabulary.
+        if (folded.length < 2) return false;
+        return !standalone.has(foldForSearch(word));
+      });
+      expect(missing, `Add these to sentenceWords: ${missing.join(" ")}`).toEqual([]);
+
+      expect(bank.topics.map((topic) => topic.slug)).toContain(`level-2-${notes.slug}`);
+    },
+  );
+
+  test("finds Lesson 13 words by Arabic, transliteration and English", () => {
+    const topic = bank.vocab.filter((entry) => entry.topicSlugs.includes("level-2-getting-to-know-each-other"));
+    const matches = (query: string) =>
+      topic.filter((entry) =>
+        [entry.arabicFolded, foldForSearch(entry.pronunciation ?? ""), foldForSearch(entry.english)].some((value) =>
+          value.includes(foldForSearch(query)),
+        ),
+      );
+    expect(matches("صينية").map((entry) => entry.english)).toContain("Chinese (f.)");
+    expect(matches("siniyyatun").map((entry) => entry.arabic)).toContain("صِينِيَّةٌ");
+    expect(matches("two bags").map((entry) => entry.arabic)).toContain("حَقِيبَتَانِ");
+    expect(matches("warā").map((entry) => entry.arabic)).toContain("وَرَاءَ");
+    expect(matches("what is your name").map((entry) => entry.arabic)).toContain("مَا اسْمُكَ؟");
   });
 
   test.each([
