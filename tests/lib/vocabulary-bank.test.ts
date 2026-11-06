@@ -184,6 +184,73 @@ describe("Level 2 vocabulary bank coverage", () => {
     expect(topic.map((entry) => entry.arabic)).not.toContain("ثَلَاثُ أَقْلَامٍ");
   });
 
+  test("finds every Lesson 14 noun and plural by Arabic, transliteration and English", () => {
+    const topic = bank.vocab.filter((entry) => entry.topicSlugs.includes("level-2-vocabulary-of-the-home"));
+    const search = (query: string) => {
+      const folded = foldForSearch(query);
+      return topic.filter((entry) =>
+        [entry.arabicFolded, ...(entry.arabicSearchForms ?? []), foldForSearch(entry.pronunciation ?? ""), foldForSearch(entry.english)].some(
+          (value) => foldedSearchMatches(value, folded, { exactArabic: true }),
+        ),
+      );
+    };
+    // [singular, transliteration, English, plural, plural transliteration] as on the board.
+    const nouns = [
+      ["غُرْفَة", "ghurfah", "room", "غُرَف", "ghuraf"],
+      ["مَكَان", "makān", "place", "أَمَاكِن", "amākin"],
+      ["مَطْبَخ", "maṭbakh", "kitchen", "مَطَابِخ", "maṭābikh"],
+      ["حَمَّام", "ḥammām", "bathroom", "حَمَّامَات", "ḥammāmāt"],
+      ["طَعَام", "ṭaʿām", "food", "أَطْعِمَة", "aṭʿimah"],
+      ["سُلَّم", "sullam", "stairs, staircase, ladder", "سَلَالِم", "salālim"],
+      ["أَرِيكَة", "arīkah", "sofa, couch", "أَرَائِك", "arāʾik"],
+      ["مِنْضَدَة", "minḍadah", "table (side or coffee table)", "مَنَاضِد", "manāḍid"],
+      ["تِلْفَاز", "tilfāz", "television", "تِلْفَازَات", "tilfāzāt"],
+      ["سَجَّادَة", "sajjādah", "carpet, rug, prayer mat", "سَجَاجِيد", "sajājīd"],
+      ["زَهْرِيَّة", "zahriyyah", "vase", "زَهْرِيَّات", "zahriyyāt"],
+      ["ثُرَيَّا", "thurayyā", "chandelier", "ثُرَيَّات", "thurayyāt"],
+      ["سَقْف", "saqf", "ceiling, roof", "أَسْقُف", "asquf"],
+      ["مَائِدَة", "māʾidah", "dining table, table spread with food", "مَوَائِد", "mawāʾid"],
+      ["طَبَق", "ṭabaq", "plate, dish", "أَطْبَاق", "aṭbāq"],
+      ["شَوْكَة", "shawkah", "fork (also: thorn)", "شُوَك", "shuwak"],
+      ["مِلْعَقَة", "milʿaqah", "spoon", "مَلَاعِق", "malāʿiq"],
+      ["سَرِير", "sarīr", "bed", "أَسِرَّة", "asirrah"],
+      ["خِزَانَة", "khizānah", "cupboard, wardrobe, safe", "خَزَائِن", "khazāʾin"],
+      ["شَمَّاعَة", "shammāʿah", "clothes hanger, coat rack", "شَمَّاعَات", "shammāʿāt"],
+      ["وِسَادَة", "wisādah", "pillow, cushion", "وَسَائِد", "wasāʾid"],
+      ["بَطَّانِيَّة", "baṭṭāniyyah", "blanket", "بَطَاطِين", "baṭāṭīn"],
+      ["مِرْآة", "mirʾāh", "mirror", "مَرَايَا", "marāyā"],
+      ["مُكَيِّف", "mukayyif", "air conditioner", "مُكَيِّفَات", "mukayyifāt"],
+      ["شُرْفَة", "shurfah", "balcony", "شُرُفَات", "shurufāt"],
+      ["سِتَار", "sitār", "curtain", "سَتَائِر", "satāʾir"],
+    ] as const;
+    expect(nouns).toHaveLength(26);
+    for (const [arabic, transliteration, english, plural, pluralTransliteration] of nouns) {
+      // Typed without vowel marks, as a learner would.
+      expect(search(plainArabic(arabic)).map((entry) => entry.english), arabic).toContain(english);
+      expect(search(plainArabic(plural)).length, plural).toBeGreaterThan(0);
+      // Identical entries from other lessons merge, so compare without vowel marks.
+      const found = (query: string) => search(query).map((entry) => entry.arabicFolded).join(" / ").split(/\s*\/\s*/);
+      expect(found(transliteration), transliteration).toContain(foldForSearch(arabic));
+      expect(found(pluralTransliteration), pluralTransliteration).toContain(foldForSearch(plural));
+      expect(found(english), english).toContain(foldForSearch(arabic));
+    }
+    // Extra words, verb forms and opposites from the board.
+    const searchFolded = (query: string) => search(query).map((entry) => entry.arabicFolded);
+    expect(searchFolded("fridge"), "fridge").toContain(foldForSearch("ثَلَّاجَة"));
+    expect(searchFolded("toothbrush"), "toothbrush").toContain(foldForSearch("فُرْشَاةُ الأَسْنَانِ"));
+    expect(search("ستار").map((entry) => entry.english)).toContain("curtain");
+    expect(search("الثلاجة").map((entry) => entry.english)).toContain("the fridge");
+    expect(searchFolded("thallajah"), "thallajah").toContain(foldForSearch("ثَلَّاجَة"));
+    expect(searchFolded("he bade farewell"), "he bade farewell").toContain(foldForSearch("وَدَّعَ"));
+    expect(search("نم").map((entry) => entry.english)).toContain("sleep!");
+    expect(searchFolded("istayqaza"), "istayqaza").toContain(foldForSearch("اِسْتَيْقَظَ"));
+    expect(searchFolded("heavy"), "heavy").toContain(foldForSearch("ثَقِيل"));
+    expect(searchFolded("khafif"), "khafif").toContain(foldForSearch("خَفِيف"));
+    expect(searchFolded("bedroom"), "bedroom").toContain(foldForSearch("غُرْفَةُ النَّوْمِ"));
+    expect(searchFolded("the Ever-Living"), "the Ever-Living").toContain(foldForSearch("الحَيُّ"));
+    expect(topic.some((entry) => entry.english.startsWith("✗"))).toBe(false);
+  });
+
   test.each([
     ["وَسَجّادَةٌ", "wa-sajjādatun", ["سجادة"]],
     ["وَلِلْغُرْفَةِ", "wa-li-l-ghurfati", ["للغرفة", "غرفة"]],

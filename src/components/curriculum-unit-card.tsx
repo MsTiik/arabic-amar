@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, BookOpenText, House, Languages, MessagesSquare, ShoppingBasket, VenusAndMars, Waypoints } from "lucide-react";
+import { ArrowRight, BookOpenText, House, Languages, MessagesSquare, ShoppingBasket, Sofa, VenusAndMars, Waypoints } from "lucide-react";
 
 import { ReadingScoreBadge } from "@/components/reading-score-badge";
 import type { CurriculumUnit } from "@/data/curriculum";
@@ -30,6 +30,10 @@ const UNIT_IDENTITIES = {
   "getting-to-know-each-other": {
     icon: MessagesSquare,
     chip: "bg-accent-amber-soft text-accent-amber",
+  },
+  "vocabulary-of-the-home": {
+    icon: Sofa,
+    chip: "bg-accent-sky-soft text-accent-sky",
   },
   "masculine-and-feminine": {
     icon: VenusAndMars,

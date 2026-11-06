@@ -77,7 +77,7 @@ const LEVEL_TWO_UNITS: readonly CurriculumUnit[] = [
     id: "core-verb-families",
     title: "Verb families",
     description:
-      "Compare past, present, command, verbal noun, and related forms: the five class-note verbs, then 17 more from the boards in lessons 3 to 9, from sitting and drawing to buying and weighing.",
+      "Compare past, present, command, verbal noun, and related forms: the five class-note verbs, then 19 more from the boards in lessons 3 to 14, from sitting and drawing to buying, weighing, welcoming and sleeping.",
     topicSlugs: ["verbs-in-the-classroom"],
     links: [
       { href: "/practice/verb-families", label: "Explore the verb families" },
@@ -94,6 +94,7 @@ const LEVEL_TWO_UNITS: readonly CurriculumUnit[] = [
       { href: "/levels/level-2/khalids-house", label: "Read Khalid’s house" },
       { href: "/levels/level-2/khalids-house-rooms", label: "Name every room in Khalid’s house" },
       { href: "/levels/level-2/masjid-al-haram", label: "Read about the Sacred Mosque" },
+      { href: "/levels/level-2/vocabulary-of-the-home", label: "Lesson 14: vocabulary of the home" },
       { href: "/vocabulary", label: "Search the vocabulary bank" },
     ],
   },
@@ -106,6 +107,17 @@ const LEVEL_TWO_UNITS: readonly CurriculumUnit[] = [
     links: [
       { href: "/levels/level-2/getting-to-know-each-other", label: "Open the lesson" },
       { href: "/levels/level-2/getting-to-know-each-other#dual-and-plural", label: "The dual and the broken plural" },
+    ],
+  },
+  {
+    id: "vocabulary-of-the-home",
+    title: "Vocabulary of the home",
+    description:
+      "Lesson 14: 26 nouns for rooms, furniture and household items, each with its plural, a board sentence and the question made from it. Two verb tables (to welcome, to sleep), light and heavy, seven Qur’an verses, the plural patterns, and practice asking and answering.",
+    topicSlugs: [],
+    links: [
+      { href: "/levels/level-2/vocabulary-of-the-home", label: "Open the lesson" },
+      { href: "/levels/level-2/vocabulary-of-the-home#practice", label: "Practise asking and answering" },
     ],
   },
   {
