@@ -90,8 +90,8 @@ describe("published Level 2 content", () => {
     expect(LEVEL_TWO_ACTIONS).toHaveLength(27);
     expect(LEVEL_TWO_ACTION_SENTENCES).toHaveLength(11);
     expect(VERB_FAMILIES.filter((family) => family.levelTwoSourcePage !== undefined)).toHaveLength(5);
-    expect(VERB_FAMILIES.filter((family) => family.levelTwoLesson !== undefined)).toHaveLength(17);
-    expect(VERB_FAMILIES.filter((family) => family.levelTwoOrder !== undefined)).toHaveLength(22);
+    expect(VERB_FAMILIES.filter((family) => family.levelTwoLesson !== undefined)).toHaveLength(19);
+    expect(VERB_FAMILIES.filter((family) => family.levelTwoOrder !== undefined)).toHaveLength(24);
   });
 
   test("adds the teacher’s five near-and-far examples to the qarīb card", () => {

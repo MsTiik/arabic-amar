@@ -1,5 +1,6 @@
 import type { ContentReviewStatus } from "@/data/level-two-lessons";
 import { LEVEL_TWO_LESSON_13 } from "@/data/level-two-lesson-13";
+import { LEVEL_TWO_LESSON_14 } from "@/data/level-two-lesson-14";
 
 /** An Arabic word, phrase or sentence with its transliteration and English. */
 export interface NoteItem {
@@ -114,7 +115,7 @@ export interface LevelTwoLessonNotes {
   sentenceWords: readonly NoteItem[];
 }
 
-export const LEVEL_TWO_LESSON_NOTES: readonly LevelTwoLessonNotes[] = [LEVEL_TWO_LESSON_13];
+export const LEVEL_TWO_LESSON_NOTES: readonly LevelTwoLessonNotes[] = [LEVEL_TWO_LESSON_13, LEVEL_TWO_LESSON_14];
 
 export function getLevelTwoLessonNotes(slug: string): LevelTwoLessonNotes | undefined {
   return LEVEL_TWO_LESSON_NOTES.find((notes) => notes.slug === slug);

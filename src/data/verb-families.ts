@@ -29,7 +29,7 @@ export interface VerbFamily {
   forms: Record<VerbFormKey, VerbForm>;
   /** Optional nouns or participles recorded alongside the four core forms. */
   relatedForms?: Array<VerbForm & { label: string }>;
-  /** Display order for the Level 2 families (class notes first, then lessons 3 to 9). */
+  /** Display order for the Level 2 families (class notes first, then lessons 3 to 14). */
   levelTwoOrder?: number;
   /** Page in the supplied Level 2 PDF notes (the five class-note families). */
   levelTwoSourcePage?: number;
@@ -373,7 +373,7 @@ const VERB_FAMILY_DECK: VerbFamily[] = [
     examples: [
       {
         kind: "quran",
-        reference: "Qur’an 2:255",
+        reference: "Qur’an 2:255 · on the lesson 14 board",
         arabic: "لَا تَأْخُذُهُ سِنَةٌ وَلَا نَوْمٌ",
         transliteration: "lā taʾkhudhuhu sinatun wa-lā nawmun",
         english: "Neither drowsiness nor sleep overtakes Him.",
@@ -1591,6 +1591,142 @@ const VERB_FAMILY_DECK: VerbFamily[] = [
     ],
     usageNote:
       "This one is also on your vocab sheet. It always goes with مِنْ (of). The teacher's board used the past, تَكَوَّنَ العَالَمُ, but for a fact that's always true, like the world having seven continents, the present يَتَكَوَّنُ is more natural, so that's what the examples use.",
+  },
+  {
+    id: "istaqbala",
+    root: "ق-ب-ل",
+    meaning: "to welcome",
+    pattern: "Form X",
+    levelTwoOrder: 23,
+    levelTwoLesson: 14,
+    levelTwoReviewStatus: "confirmed",
+    forms: {
+      past: { arabic: "اِسْتَقْبَلَ", transliteration: "istaqbala", english: "he received, welcomed" },
+      present: { arabic: "يَسْتَقْبِلُ", transliteration: "yastaqbilu", english: "he receives, welcomes" },
+      command: { arabic: "اِسْتَقْبِلْ", transliteration: "istaqbil", english: "welcome! receive!" },
+      masdar: { arabic: "اِسْتِقْبَال", transliteration: "istiqbāl", english: "reception, welcoming" },
+    },
+    relatedForms: [
+      { label: "Related word", arabic: "مُسْتَقْبَل", transliteration: "mustaqbal", english: "future" },
+    ],
+    opposite: { arabic: "وَدَّعَ", transliteration: "waddaʿa", english: "he bade farewell" },
+    examples: [
+      {
+        kind: "class",
+        reference: "AMAR Level 2 · lesson 14 · board sentence",
+        arabic: "اِسْتَقْبَلَ أَحْمَدُ خَالِدًا فِي البَيْتِ.",
+        transliteration: "istaqbala aḥmadu khālidan fī l-bayt.",
+        english: "Ahmad welcomed Khalid in the house.",
+        focusArabic: "اِسْتَقْبَلَ",
+      },
+      {
+        kind: "class",
+        reference: "AMAR Level 2 · lesson 14 · board sentence",
+        arabic: "اِسْتَقْبَلَ أَهْلُ المَدِينَةِ النَّبِيَّ ﷺ.",
+        transliteration: "istaqbala ahlu l-madīnati n-nabiyya ṣallā llāhu ʿalayhi wa-sallam.",
+        english: "The people of Madinah welcomed the Prophet ﷺ.",
+        focusArabic: "اِسْتَقْبَلَ",
+      },
+      {
+        kind: "class",
+        reference: "AMAR Level 2 · lesson 14 · board sentence",
+        arabic: "يَسْتَقْبِلُ المُسْلِمُونَ شَهْرَ رَمَضَانَ.",
+        transliteration: "yastaqbilu l-muslimūna shahra ramaḍān.",
+        english: "Muslims welcome the month of Ramadan.",
+        focusArabic: "يَسْتَقْبِلُ",
+      },
+      {
+        kind: "class",
+        reference: "AMAR Level 2 · lesson 14 · board sentence",
+        arabic: "تَسْتَقْبِلُ فَاطِمَةُ زَيْنَبَ فِي البَيْتِ.",
+        transliteration: "tastaqbilu fāṭimatu zaynaba fī l-bayt.",
+        english: "Fatimah welcomes Zaynab at home.",
+        focusArabic: "تَسْتَقْبِلُ",
+      },
+      {
+        kind: "class",
+        reference: "AMAR Level 2 · lesson 14 · board sentence",
+        arabic: "يَا خَالِدُ اسْتَقْبِلْ أَحْمَدَ.",
+        transliteration: "yā khālidu staqbil aḥmad.",
+        english: "O Khalid, welcome Ahmad!",
+        focusArabic: "اسْتَقْبِلْ",
+      },
+      {
+        kind: "class",
+        reference: "AMAR Level 2 · lesson 14 · board sentence",
+        arabic: "يَجْلِسُ أَحْمَدُ وَخَالِدٌ فِي غُرْفَةِ الاِسْتِقْبَالِ.",
+        transliteration: "yajlisu aḥmadu wa-khālidun fī ghurfati l-istiqbāl.",
+        english: "Ahmad and Khalid sit in the reception room.",
+        focusArabic: "الاِسْتِقْبَالِ",
+      },
+    ],
+    usageNote:
+      "Form X, on the pattern اِسْتَفْعَلَ, so the verbal noun is اِسْتِقْبَال. غُرْفَةُ الاِسْتِقْبَالِ (the room of receiving) is the sitting room where guests are welcomed. Watch the vowel in مُسْتَقْبَل: with fatḥa it means “future”; with kasra, مُسْتَقْبِل, it is “the one who receives”.",
+  },
+  {
+    id: "nama",
+    root: "ن-و-م",
+    meaning: "to sleep",
+    pattern: "Form I · hollow (middle و)",
+    levelTwoOrder: 24,
+    levelTwoLesson: 14,
+    levelTwoReviewStatus: "confirmed",
+    forms: {
+      past: { arabic: "نَامَ", transliteration: "nāma", english: "he slept" },
+      present: { arabic: "يَنَامُ", transliteration: "yanāmu", english: "he sleeps" },
+      command: { arabic: "نَمْ", transliteration: "nam", english: "sleep!" },
+      masdar: { arabic: "نَوْم", transliteration: "nawm", english: "sleep" },
+    },
+    relatedForms: [
+      { label: "Related word", arabic: "نَائِم", transliteration: "nāʾim", english: "sleeping, asleep" },
+    ],
+    opposite: { arabic: "اِسْتَيْقَظَ", transliteration: "istayqaẓa", english: "he woke up" },
+    examples: [
+      {
+        kind: "class",
+        reference: "AMAR Level 2 · lesson 14 · board sentence",
+        arabic: "نَامَ خَالِدٌ عَلَى السَّرِيرِ.",
+        transliteration: "nāma khālidun ʿalā s-sarīr.",
+        english: "Khalid slept on the bed.",
+        focusArabic: "نَامَ",
+      },
+      {
+        kind: "class",
+        reference: "AMAR Level 2 · lesson 14 · board sentence",
+        arabic: "يَنَامُ أَحْمَدُ قَبْلَ الفَجْرِ.",
+        transliteration: "yanāmu aḥmadu qabla l-fajr.",
+        english: "Ahmad sleeps before Fajr.",
+        focusArabic: "يَنَامُ",
+      },
+      {
+        kind: "class",
+        reference: "AMAR Level 2 · lesson 14 · board sentence",
+        arabic: "يَا خَالِدُ نَمْ فِي غُرْفَةِ النَّوْمِ.",
+        transliteration: "yā khālidu nam fī ghurfati n-nawm.",
+        english: "O Khalid, sleep in the bedroom.",
+        focusArabic: "نَمْ",
+      },
+      {
+        kind: "quran",
+        reference: "Qur’an 2:255 · on the lesson 14 board",
+        arabic: "لَا تَأْخُذُهُ سِنَةٌ وَلَا نَوْمٌ",
+        transliteration: "lā taʾkhudhuhū sinatun wa-lā nawm",
+        english: "Neither drowsiness nor sleep overtakes Him.",
+        focusArabic: "نَوْمٌ",
+        url: "https://quran.com/2/255",
+        note: "From Āyat al-Kursī, written on the board in lesson 14.",
+      },
+      {
+        kind: "class",
+        reference: "AMAR Level 2 · lesson 14 · board sentence",
+        arabic: "أَنَا أَسْتَيْقِظُ مِنَ النَّوْمِ فِي الفَجْرِ.",
+        transliteration: "anā astayqiẓu mina n-nawmi fī l-fajr.",
+        english: "I wake up from sleep at Fajr.",
+        focusArabic: "أَسْتَيْقِظُ",
+      },
+    ],
+    usageNote:
+      "A hollow verb: the middle root letter و shows in the verbal noun نَوْم, but becomes a long ā in نَامَ. In the command the long vowel drops, so it is نَمْ, not نَامْ. غُرْفَةُ النَّوْمِ (the room of sleep) is the bedroom.",
   },
 ];
 

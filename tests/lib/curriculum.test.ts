@@ -34,6 +34,7 @@ describe("curriculum levels", () => {
       "core-verb-families",
       "home-and-places",
       "getting-to-know-each-other",
+      "vocabulary-of-the-home",
       "masculine-and-feminine",
     ]);
   });
