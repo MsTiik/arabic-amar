@@ -74,6 +74,8 @@ export type NoteBlock =
       rows: readonly (readonly NoteCell[])[];
       /** The first column is a short row label (e.g. a country or a number): narrow, and shown as the row's heading on phones. */
       rowHeader?: boolean;
+      /** Always draw as a table, even with two columns (otherwise two columns become small pair cards). */
+      layout?: "table";
     }
   | { kind: "bullets"; id: string; title?: string; items: readonly string[]; ordered?: boolean }
   | { kind: "examples"; id: string; title?: string; items: readonly NoteItem[] }

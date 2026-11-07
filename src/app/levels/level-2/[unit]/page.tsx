@@ -13,6 +13,8 @@ import {
 
 import { ArabicText } from "@/components/arabic-text";
 import { Disclosure } from "@/components/disclosure";
+import { PageHero } from "@/components/page-hero";
+import { Prose } from "@/components/prose";
 import { LessonNotesPage } from "@/components/lesson-notes";
 import { InteractiveArabicReading } from "@/components/interactive-arabic-reading";
 import { ReadingDrills } from "@/components/reading-drills";
@@ -152,25 +154,14 @@ export default async function LevelTwoUnitPage({
 
   return (
     <div className="mx-auto w-full max-w-6xl px-4 py-4 sm:py-8">
-      <header className="brand-panel rounded-[18px] shadow-[var(--shadow-md),inset_0_1px_0_oklch(1_0_0/8%)] p-4 sm:p-6">
-        <Link
-          href={meta.parent?.href ?? "/levels/level-2"}
-          className="text-sm text-muted-foreground hover:text-foreground"
-        >
-          ← {meta.parent?.label ?? "Level 2 topics"}
-        </Link>
-        <div className="mt-2 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 sm:mt-4">
-          <h1 className="max-w-4xl text-2xl font-bold leading-tight tracking-tight sm:text-3xl">{meta.title}</h1>
-          {meta.titleArabic ? (
-            <ArabicText variant="display" as="p" className="text-2xl text-foreground-soft sm:text-3xl">
-              {meta.titleArabic}
-            </ArabicText>
-          ) : null}
-        </div>
-        <p className="mt-1 hidden max-w-3xl text-base leading-relaxed text-foreground-soft sm:mt-2 sm:block">
-          {meta.description}
-        </p>
-      </header>
+      <PageHero
+        back={{ href: meta.parent?.href ?? "/levels/level-2", label: meta.parent?.label ?? "Level 2 topics" }}
+        eyebrow={meta.parent ? `Level 2 · ${meta.parent.label}` : "Level 2"}
+        title={meta.title}
+        titleArabic={meta.titleArabic}
+        description={meta.description}
+        clampDescription
+      />
 
       {slug === "marketplace-reading" ? <MarketplaceReading /> : null}
       {slug === "khalids-house" ? <KhalidsHouseReading /> : null}
@@ -184,28 +175,18 @@ export default async function LevelTwoUnitPage({
 function VocabThemePage({ theme }: { theme: NonNullable<ReturnType<typeof getLevelTwoVocabTheme>> }) {
   return (
     <div className="mx-auto w-full max-w-6xl px-4 py-4 sm:py-8">
-      <header className="brand-panel rounded-[18px] shadow-[var(--shadow-md),inset_0_1px_0_oklch(1_0_0/8%)] p-4 sm:p-6">
-        <Link
-          href="/levels/level-2"
-          className="text-sm text-muted-foreground hover:text-foreground"
-        >
-          ← Level 2 topics
-        </Link>
-        <p className="mt-2 section-label">Level 2 vocabulary</p>
-        <div className="mt-1 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
-          <h1 className="text-2xl font-bold leading-tight tracking-tight sm:text-3xl">{theme.title}</h1>
-          <ArabicText variant="display" as="p" className="text-2xl text-foreground-soft sm:text-3xl">
-            {theme.titleArabic}
-          </ArabicText>
-        </div>
-        <p className="mt-1.5 max-w-3xl text-sm leading-relaxed text-foreground-soft sm:text-base">
-          {theme.description}
-        </p>
-        <Link href="/vocabulary" className="mt-3 btn btn-secondary btn-sm">
+      <PageHero
+        back={{ href: "/levels/level-2", label: "Level 2 topics" }}
+        eyebrow="Level 2 · Vocabulary"
+        title={theme.title}
+        titleArabic={theme.titleArabic}
+        description={theme.description}
+      >
+        <Link href="/vocabulary" className="btn btn-secondary btn-sm">
           Search these words in the vocabulary bank
           <ArrowRight className="h-3.5 w-3.5" aria-hidden />
         </Link>
-      </header>
+      </PageHero>
 
       {theme.readingSlugs?.length ? (
         <section className="mt-4 sm:mt-6" aria-labelledby="home-stories-heading">
@@ -316,15 +297,7 @@ function KhalidsHouseRoomsReading() {
         </div>
       </section>
 
-      <details className="surface group p-4 sm:p-5">
-        <summary className="flex cursor-pointer list-none items-center justify-between gap-3 font-semibold focus-ring [&::-webkit-details-marker]:hidden">
-          About this text
-          <ChevronDown className="h-5 w-5 shrink-0 text-muted-foreground transition-transform group-open:rotate-180" aria-hidden />
-        </summary>
-        <ul className="mt-3 list-disc space-y-2 border-t border-hairline pt-3 pl-5 text-sm leading-relaxed text-foreground-soft">
-          {reading.notes?.map((note) => <li key={note}>{note}</li>)}
-        </ul>
-      </details>
+      {reading.notes?.length ? <AboutThisText notes={reading.notes} /> : null}
 
       <div className="grid gap-3 md:grid-cols-2">
         <LessonLink
@@ -357,7 +330,7 @@ function MasjidAlHaramReading() {
       <section aria-labelledby="haram-questions-heading">
         <SectionHeading id="haram-questions-heading" eyebrow="Exercises" title="Practise with the passage" />
         <Disclosure
-          title="Four exercises from the sheet"
+          title="Four exercises on the passage"
           meta={`Questions · matching · word order · corrections`}
           bodyClassName="bg-background-soft/40"
         >
@@ -366,14 +339,10 @@ function MasjidAlHaramReading() {
       </section>
 
       {reading.wordList?.length ? (
-        <details className="surface group p-4 sm:p-5">
-          <summary className="flex cursor-pointer list-none items-center justify-between gap-3 font-semibold focus-ring [&::-webkit-details-marker]:hidden">
-            Word list ({reading.wordList.length} words)
-            <ChevronDown className="h-5 w-5 shrink-0 text-muted-foreground transition-transform group-open:rotate-180" aria-hidden />
-          </summary>
-          <ol className="mt-3 grid gap-2 border-t border-hairline pt-3 sm:grid-cols-2 lg:grid-cols-3">
+        <Disclosure tone="plain" title="Word list" meta={`${reading.wordList.length} words from the paragraph`}>
+          <ol className="grid gap-1.5 sm:grid-cols-2 lg:grid-cols-3">
             {reading.wordList.map((word, index) => (
-              <li key={`${word.arabic}-${index}`} className="tile flex min-w-0 items-center gap-3 p-3">
+              <li key={`${word.arabic}-${index}`} className="tile flex min-w-0 items-center gap-3 px-3 py-2">
                 <span className="w-6 shrink-0 text-xs tabular-nums text-muted-foreground">{index + 1}</span>
                 <span className="min-w-0 flex-1">
                   <span lang="ar-Latn" className="block text-sm italic text-foreground-soft">{word.transliteration}</span>
@@ -383,20 +352,10 @@ function MasjidAlHaramReading() {
               </li>
             ))}
           </ol>
-        </details>
+        </Disclosure>
       ) : null}
 
-      {reading.notes?.length ? (
-        <details className="surface group p-4 sm:p-5">
-          <summary className="flex cursor-pointer list-none items-center justify-between gap-3 font-semibold focus-ring [&::-webkit-details-marker]:hidden">
-            About this text
-            <ChevronDown className="h-5 w-5 shrink-0 text-muted-foreground transition-transform group-open:rotate-180" aria-hidden />
-          </summary>
-          <ul className="mt-3 list-disc space-y-2 border-t border-hairline pt-3 pl-5 text-sm leading-relaxed text-foreground-soft">
-            {reading.notes.map((note) => <li key={note}>{note}</li>)}
-          </ul>
-        </details>
-      ) : null}
+      {reading.notes?.length ? <AboutThisText notes={reading.notes} /> : null}
 
       <div className="grid gap-3 md:grid-cols-2">
         <LessonLink
@@ -555,6 +514,21 @@ function ActionSentenceCollection({ sentences }: { sentences: readonly LevelTwoS
         ))}
       </div>
     </section>
+  );
+}
+
+/** Notes on spelling and transliteration, folded away under the reading. */
+function AboutThisText({ notes }: { notes: readonly string[] }) {
+  return (
+    <Disclosure tone="plain" title="About this text" meta="Notes on spelling and transliteration">
+      <ul className="list-disc space-y-1.5 pl-5 text-sm leading-relaxed text-foreground-soft">
+        {notes.map((note) => (
+          <li key={note}>
+            <Prose text={note} />
+          </li>
+        ))}
+      </ul>
+    </Disclosure>
   );
 }
 

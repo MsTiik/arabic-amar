@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 import { ArabicText } from "@/components/arabic-text";
+import { PageHero } from "@/components/page-hero";
 import { AccordionControls, AccordionSection } from "@/components/section-accordion";
 import { GrammarPractice, VerbChart } from "@/components/gender-grammar-client";
 import { MarkedArabic } from "@/components/marked-arabic";
@@ -22,25 +23,19 @@ export default function MasculineAndFemininePage() {
 
   return (
     <div className="mx-auto w-full max-w-5xl px-4 py-4 sm:py-8">
-      <header className="brand-panel mb-4 rounded-[18px] p-4 shadow-[var(--shadow-md),inset_0_1px_0_oklch(1_0_0/8%)] sm:mb-6 sm:p-6">
-        <Link href="/levels/level-2" className="text-sm text-muted-foreground hover:text-foreground">
-          ← Level 2 topics
-        </Link>
-        <div className="mt-2 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
-          <div className="min-w-0">
-            <p className="section-label">Level 2 · Grammar</p>
-            <h1 className="mt-1 text-2xl font-bold leading-tight tracking-tight sm:text-3xl">Masculine and feminine</h1>
-          </div>
-          <ArabicText variant="display" as="p" className="text-2xl text-foreground-soft sm:text-3xl">
-            {SHEET.titleArabic}
-          </ArabicText>
-        </div>
-        <p className="mt-2 max-w-3xl text-sm leading-relaxed text-foreground-soft sm:text-base">{SHEET.description}</p>
-        <Link href="/grammar" className="mt-3 btn btn-secondary btn-sm">
+      <PageHero
+        className="mb-4 sm:mb-6"
+        back={{ href: "/levels/level-2", label: "Level 2 topics" }}
+        eyebrow="Level 2 · Grammar"
+        title="Masculine and feminine"
+        titleArabic={SHEET.titleArabic}
+        description={SHEET.description}
+      >
+        <Link href="/grammar" className="btn btn-secondary btn-sm">
           All grammar references
           <ArrowRight className="h-3.5 w-3.5" aria-hidden />
         </Link>
-      </header>
+      </PageHero>
 
       <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
         <p className="text-sm text-muted-foreground">
@@ -208,7 +203,7 @@ export default function MasculineAndFemininePage() {
           id="chart"
           number={4}
           title="Verb chart"
-          intro={<>The verbs from class, in the present tense for all five people. Pick a
+          intro={<>Ten everyday verbs in the present tense, for all five people. Pick a
           verb to see its chart.</>}
           contents={[`${SHEET.chartVerbs.length} verbs`]} next={{ id: SECTIONS[4].id, label: SECTIONS[4].label }}
         >

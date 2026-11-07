@@ -18,7 +18,7 @@ export const LESSON_13_QURAN: Readonly<Record<string, readonly QuranExample[]>> 
         text: "[سَلَٰمٌ عَلَيۡكُم] بِمَا صَبَرۡتُمۡ …",
         english: "Peace be upon you for what you patiently endured.",
         focus: n("سَلَامٌ عَلَيْكُمْ", "salāmun ʿalaykum", "peace be upon you"),
-        note: "The angels greet the people of Paradise with سَلَامٌ عَلَيْكُمْ: the same greeting as in class, without ال.",
+        note: "The angels greet the people of Paradise with سَلَامٌ عَلَيْكُمْ: the same everyday greeting, without ال.",
       },
       {
         surah: 1,

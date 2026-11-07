@@ -48,7 +48,7 @@ const LESSON: LevelTwoLessonNotes = {
   slug: "getting-to-know-each-other",
   lesson: 13,
   title: "Getting to know each other, the dual and the broken plural",
-  shortTitle: "Lesson 13: Getting to know each other",
+  shortTitle: "Getting to know each other",
   titleArabic: "التَّعَارُفُ",
   description:
     "Greet someone, ask their name, how they are, where they are from and whether they are a student. Then meet the dual (المُثَنَّى) and the broken plural (جَمْعُ التَّكْسِيرِ), and count objects from one to four.",
@@ -668,7 +668,7 @@ const LESSON: LevelTwoLessonNotes = {
       part: 2,
       title: "First look at numbers: counting objects 1 to 4",
       intro:
-        "The lesson ends by using the singular, dual and plural to count. Numbers 1 and 2 behave differently from 3 and up.",
+        "Now put the singular, dual and plural to work by counting. Numbers 1 and 2 behave differently from 3 and up.",
       blocks: [
         {
           kind: "table",

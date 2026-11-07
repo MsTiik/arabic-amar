@@ -1027,9 +1027,8 @@ export const LEVEL_TWO_MASJID_AL_HARAM: LevelTwoReading = {
   drills: [MATCHING, ORDERING, CORRECTIONS],
   wordList: WORD_LIST,
   notes: [
-    "As in the sheet’s transliteration, the case ending is dropped at each pause (comma or full stop), as you would when reading aloud.",
+    "In the transliteration, the case ending is dropped at each pause (comma or full stop), as you would when reading aloud.",
     "In the matching exercise the second column lists طَوَابِقُ; after a number such as أَرْبَعَةُ it is written طَوَابِقَ, because it is a diptote and takes fatha in the genitive.",
-    "In the word-order exercise more than one order can be correct; the sentence shown is the sheet’s suggestion.",
-    "The corrections keep the board’s numbering, which skips 6 and 7.",
+    "In the word-order exercise more than one order can be correct; the sentence shown is one good answer.",
   ],
 };

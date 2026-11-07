@@ -165,7 +165,7 @@ export const MASCULINE_AND_FEMININE: LevelTwoGrammarSheet = {
   title: "Masculine and feminine",
   titleArabic: "المُذَكَّر وَالمُؤَنَّث",
   description:
-    "One grammar thread that runs through lessons 1, 2, 3, 4 and 9: how to tell if a noun is feminine, and how verbs change when you talk about or to a woman.",
+    "How to tell if a noun is feminine, when to say هَذَا or هَذِهِ, and how present-tense verbs change when you talk about or to a woman.",
   source: "Masculine and feminine grammar sheet (Level 2, supplied October 2026)",
   reviewStatus: "confirmed",
   lessons: [1, 2, 3, 4, 9],

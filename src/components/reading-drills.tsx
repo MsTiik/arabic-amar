@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { Check, Eye, EyeOff, RotateCcw, X } from "lucide-react";
 
 import { ArabicText } from "@/components/arabic-text";
+import { ScoreStrip, StripAction } from "@/components/practice-ui";
 import { ReadingExercise } from "@/components/reading-exercise";
 import {
   readingSentenceToArabic,
@@ -18,7 +19,7 @@ import { mistakeRange } from "@/lib/mistake-range";
 
 type Tab = { id: string; label: string };
 
-/** A reading's questions plus its further drills, one tab per exercise on the sheet. */
+/** A reading's questions plus its further drills, one tab per exercise. */
 export function ReadingDrills({ reading }: { reading: LevelTwoReading }) {
   const drills = reading.drills ?? [];
   const tabs: Tab[] = [
@@ -87,37 +88,22 @@ function SpotTheMistake({ items }: { items: readonly LevelTwoReadingQuestion[] }
 
   return (
     <div className="space-y-3">
-      <div className="flex flex-wrap items-center gap-x-4 gap-y-2 rounded-[10px] border border-hairline bg-card px-3 py-2 text-sm" aria-live="polite">
-        <span className="font-semibold tabular-nums">
-          {right} / {items.length} found
-        </span>
-        <span className="text-xs text-muted-foreground">
-          {answered.length === items.length ? "All done." : "Each sentence has one thing that doesn’t make sense. Tap the word that’s wrong."}
-        </span>
-        <span className="ml-auto flex items-center gap-3">
-          <button
-            type="button"
-            onClick={() => setEnglish((value) => !value)}
-            aria-pressed={english}
-            className="inline-flex items-center gap-1 text-xs font-semibold text-primary focus-ring"
-          >
-            {english ? <EyeOff className="h-3.5 w-3.5" aria-hidden /> : <Eye className="h-3.5 w-3.5" aria-hidden />}
-            {english ? "Hide English" : "Need a hint? Show English"}
-          </button>
-          {answered.length ? (
-            <button type="button" onClick={() => setTaps({})} className="inline-flex items-center gap-1 text-xs font-semibold text-primary focus-ring">
-              <RotateCcw className="h-3.5 w-3.5" aria-hidden />
-              Start again
-            </button>
-          ) : null}
-        </span>
-      </div>
+      <ScoreStrip
+        score={`${right} / ${items.length} found`}
+        hint={answered.length === items.length ? "All done." : "Each sentence has one thing that doesn’t make sense. Tap the word that’s wrong."}
+        complete={answered.length === items.length && right === items.length}
+      >
+        <StripAction onClick={() => setEnglish((value) => !value)} pressed={english} icon={english ? EyeOff : Eye}>
+          {english ? "Hide English" : "Need a hint? Show English"}
+        </StripAction>
+        {answered.length ? <StripAction onClick={() => setTaps({})}>Start again</StripAction> : null}
+      </ScoreStrip>
       <ol className="grid gap-2 sm:gap-3 md:grid-cols-2">
         {items.map((item, index) => (
           <MistakeCard
             key={item.id}
             item={item}
-            number={item.number ?? index + 1}
+            number={index + 1}
             tapped={taps[item.id]}
             english={english}
             onTap={(word) => setTaps((current) => ({ ...current, [item.id]: word }))}
@@ -315,40 +301,29 @@ function MatchingExercise({ drill }: { drill: MatchDrill }) {
 
   return (
     <div className="surface p-3 sm:p-5">
-      <div className="mb-3 flex flex-wrap items-center gap-3 text-sm" aria-live="polite">
-        <span className="font-semibold tabular-nums">
-          {matched.size} / {drill.pairs.length} matched
-        </span>
-        <span className="text-xs text-muted-foreground">
-          {done ? "All matched" : "Tap a word in one column, then the word it goes with in the other."}
-        </span>
-        <span className="ml-auto flex gap-2">
+      <div className="mb-3">
+        <ScoreStrip
+          score={`${matched.size} / ${drill.pairs.length} matched`}
+          hint={done ? "All matched" : "Tap a word in one column, then the word it goes with in the other."}
+          complete={done}
+        >
           {!done ? (
-            <button
-              type="button"
-              onClick={() => setMatched(new Set(drill.pairs.map((pair) => pair.id)))}
-              className="inline-flex items-center gap-1 text-xs font-semibold text-primary focus-ring"
-            >
-              <Eye className="h-3.5 w-3.5" aria-hidden />
+            <StripAction onClick={() => setMatched(new Set(drill.pairs.map((pair) => pair.id)))} icon={Eye}>
               Show all
-            </button>
+            </StripAction>
           ) : null}
           {matched.size > initial().size ? (
-            <button
-              type="button"
+            <StripAction
               onClick={() => {
                 setMatched(initial());
                 setSelected(null);
               }}
-              className="inline-flex items-center gap-1 text-xs font-semibold text-primary focus-ring"
             >
-              <RotateCcw className="h-3.5 w-3.5" aria-hidden />
               Start again
-            </button>
+            </StripAction>
           ) : null}
-        </span>
+        </ScoreStrip>
       </div>
-
       <div dir="rtl" className="grid grid-cols-2 gap-2 sm:gap-4">
         <div>
           <p dir="ltr" className="mb-2 text-center text-xs font-semibold text-muted-foreground">Column ١</p>

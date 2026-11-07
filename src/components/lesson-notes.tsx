@@ -5,6 +5,8 @@ import { ArabicText } from "@/components/arabic-text";
 import { Disclosure } from "@/components/disclosure";
 import { ChatDialogue, ChoicePractice, GapDialogue } from "@/components/lesson-notes-client";
 import { MarkedArabic } from "@/components/marked-arabic";
+import { PageHero } from "@/components/page-hero";
+import { Prose } from "@/components/prose";
 import { AccordionControls, AccordionSection } from "@/components/section-accordion";
 import { SpeakerButton } from "@/components/speaker-button";
 import { ayahAudioUrl } from "@/data/quran";
@@ -18,25 +20,6 @@ import {
   type QuranExample,
 } from "@/data/level-two-lesson-notes";
 import { cn } from "@/lib/cn";
-import { ARABIC_RUN } from "@/lib/inline-arabic";
-
-/** English prose with any Arabic in it set in the Arabic font. */
-export function Prose({ text }: { text: string }) {
-  const parts = text.split(ARABIC_RUN);
-  return (
-    <>
-      {parts.map((part, index) =>
-        index % 2 === 1 ? (
-          <ArabicText key={index} variant="inline" className="text-[1.15em]">
-            {part}
-          </ArabicText>
-        ) : (
-          part
-        ),
-      )}
-    </>
-  );
-}
 
 /* ---------- Items ---------- */
 
@@ -166,12 +149,29 @@ function PairCards({ block }: { block: TableBlock }) {
 }
 
 /** Three or more columns: a tight grid that folds to two columns on phones. */
-function CompactTable({ block }: { block: TableBlock }) {
+function CompactTable({ block, split = true }: { block: TableBlock; split?: boolean }) {
+  // A long two-column word list sits as two half-tables side by side on wide screens.
+  if (split && block.columns.length <= 2 && block.rows.length > 12) {
+    const half = Math.ceil(block.rows.length / 2);
+    return (
+      <div className="grid items-start gap-2 lg:grid-cols-2">
+        <CompactTable block={{ ...block, rows: block.rows.slice(0, half) }} split={false} />
+        <CompactTable block={{ ...block, rows: block.rows.slice(half) }} split={false} />
+      </div>
+    );
+  }
+  // Two plain columns fit a phone as they are: keep the header row, skip the per-cell labels.
+  const plain = block.columns.length <= 2 && !block.rowHeader;
   const rest = block.rowHeader ? block.columns.length - 1 : block.columns.length;
   const template = `${block.rowHeader ? "minmax(0, 0.55fr) " : ""}repeat(${rest}, minmax(0, 1fr))`;
   return (
     <div className="overflow-hidden rounded-[12px] border border-hairline bg-card" style={{ "--cols": template } as React.CSSProperties}>
-      <div className="hidden gap-3 border-b border-hairline bg-background-soft/60 px-4 py-1.5 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground sm:grid sm:[grid-template-columns:var(--cols)]">
+      <div
+        className={cn(
+          "gap-3 border-b border-hairline bg-background-soft/60 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground sm:grid sm:px-4 sm:[grid-template-columns:var(--cols)]",
+          plain ? "grid grid-cols-2" : "hidden",
+        )}
+      >
         {block.columns.map((column) => (
           <span key={column}>
             <Prose text={column} />
@@ -188,9 +188,11 @@ function CompactTable({ block }: { block: TableBlock }) {
                 </p>
               ) : (
                 <div key={cellIndex} className="min-w-0">
-                  <p className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground sm:hidden">
-                    <Prose text={block.columns[cellIndex]} />
-                  </p>
+                  {plain ? null : (
+                    <p className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground sm:hidden">
+                      <Prose text={block.columns[cellIndex]} />
+                    </p>
+                  )}
                   <Cell cell={cell} />
                 </div>
               ),
@@ -208,7 +210,13 @@ function Table({ block }: { block: TableBlock }) {
   return (
     <div>
       <BlockTitle title={block.title} />
-      {labelled ? <LabelledTiles block={block} /> : twoColumns ? <PairCards block={block} /> : <CompactTable block={block} />}
+      {labelled ? (
+        <LabelledTiles block={block} />
+      ) : twoColumns && block.layout !== "table" ? (
+        <PairCards block={block} />
+      ) : (
+        <CompactTable block={block} />
+      )}
     </div>
   );
 }
@@ -254,11 +262,11 @@ function QuranCard({ example }: { example: QuranExample }) {
 
 type ExamplesBlock = Extract<NoteBlock, { kind: "examples" }>;
 
-/** A run of the board's short sentence groups (word → its sentences), one row each. */
+/** A run of short sentence groups (word → its example sentences), one row each. */
 function BoardGroup({ blocks }: { blocks: readonly ExamplesBlock[] }) {
   return (
     <div>
-      <h3 className="mb-1.5 text-sm font-semibold text-foreground sm:text-base">On the board</h3>
+      <h3 className="mb-1.5 text-sm font-semibold text-foreground sm:text-base">Example sentences</h3>
       <ul className="divide-y divide-hairline overflow-hidden rounded-[12px] border border-hairline bg-card">
         {blocks.map((block) => (
           <li key={block.id} className="grid gap-x-4 gap-y-1 px-3 py-2 sm:px-4 md:grid-cols-[8.5rem_minmax(0,1fr)]">
@@ -439,6 +447,7 @@ function sectionContents(section: NoteSection): string[] {
   let exercises = 0;
   let verses = 0;
   let notes = 0;
+  let sentences = 0;
   for (const block of section.blocks) {
     if (block.kind === "dialogue") {
       if (block.lines.some((line) => line.gap)) exercises++;
@@ -448,10 +457,12 @@ function sectionContents(section: NoteSection): string[] {
     if (block.kind === "practice" || block.kind === "quiz") exercises++;
     if (block.kind === "quran") verses += block.items.length;
     if (block.kind === "bullets") notes++;
+    if (block.kind === "examples" && !block.items.every(isShortItem)) sentences += block.items.length;
   }
   return [
     dialogues ? plural(dialogues, "dialogue") : "",
     tables ? plural(tables, "table") : "",
+    sentences ? plural(sentences, "example sentence") : "",
     notes ? plural(notes, "note") : "",
     exercises ? plural(exercises, "exercise") : "",
     verses ? plural(verses, "Qur’an verse") : "",
@@ -484,27 +495,20 @@ function Section({ section, number, next, defaultOpen }: { section: NoteSection;
 export function LessonNotesPage({ notes }: { notes: LevelTwoLessonNotes }) {
   return (
     <div className="mx-auto w-full max-w-5xl px-4 py-4 sm:py-8">
-      <header className="brand-panel mb-4 rounded-[18px] p-4 shadow-[var(--shadow-md),inset_0_1px_0_oklch(1_0_0/8%)] sm:mb-6 sm:p-6">
-        <Link href="/levels/level-2" className="text-sm text-muted-foreground hover:text-foreground">
-          ← Level 2 topics
-        </Link>
-        <div className="mt-2 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
-          <div className="min-w-0">
-            <p className="section-label">Level 2 · Lesson {notes.lesson}</p>
-            <h1 className="mt-1 max-w-3xl text-2xl font-bold leading-tight tracking-tight sm:text-3xl">{notes.title}</h1>
-          </div>
-          <ArabicText variant="display" as="p" className="text-2xl text-foreground-soft sm:text-3xl">
-            {notes.titleArabic}
-          </ArabicText>
-        </div>
-        <p className="mt-2 line-clamp-3 max-w-3xl text-sm leading-relaxed text-foreground-soft sm:line-clamp-none sm:text-base">
-          <Prose text={notes.description} />
-        </p>
-        <Link href="/vocabulary" className="mt-3 btn btn-secondary btn-sm">
+      <PageHero
+        className="mb-4 sm:mb-6"
+        back={{ href: "/levels/level-2", label: "Level 2 topics" }}
+        eyebrow="Level 2"
+        title={notes.title}
+        titleArabic={notes.titleArabic}
+        description={<Prose text={notes.description} />}
+        clampDescription
+      >
+        <Link href="/vocabulary" className="btn btn-secondary btn-sm">
           Look up these words in the vocabulary bank
           <ArrowRight className="h-3.5 w-3.5" aria-hidden />
         </Link>
-      </header>
+      </PageHero>
 
       <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
         <p className="text-sm text-muted-foreground">

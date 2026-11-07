@@ -77,7 +77,7 @@ const LEVEL_TWO_UNITS: readonly CurriculumUnit[] = [
     id: "core-verb-families",
     title: "Verb families",
     description:
-      "Compare past, present, command, verbal noun, and related forms: the five class-note verbs, then 19 more from the boards in lessons 3 to 14, from sitting and drawing to buying, weighing, welcoming and sleeping.",
+      "Compare past, present, command, verbal noun, and related forms for 24 everyday verbs, from writing and studying to sitting, drawing, buying, weighing, welcoming and sleeping.",
     topicSlugs: ["verbs-in-the-classroom"],
     links: [
       { href: "/practice/verb-families", label: "Explore the verb families" },
@@ -94,7 +94,7 @@ const LEVEL_TWO_UNITS: readonly CurriculumUnit[] = [
       { href: "/levels/level-2/khalids-house", label: "Read Khalid’s house" },
       { href: "/levels/level-2/khalids-house-rooms", label: "Name every room in Khalid’s house" },
       { href: "/levels/level-2/masjid-al-haram", label: "Read about the Sacred Mosque" },
-      { href: "/levels/level-2/vocabulary-of-the-home", label: "Lesson 14: vocabulary of the home" },
+      { href: "/levels/level-2/vocabulary-of-the-home", label: "Vocabulary of the home" },
       { href: "/vocabulary", label: "Search the vocabulary bank" },
     ],
   },
@@ -102,7 +102,7 @@ const LEVEL_TWO_UNITS: readonly CurriculumUnit[] = [
     id: "getting-to-know-each-other",
     title: "Getting to know each other",
     description:
-      "Lesson 13: greetings, names, how you are, where you are from and nationalities, with two dialogue exercises, a nationalities exercise and words of position. Then the dual, the broken plural, and counting from one to four.",
+      "Greetings, names, how you are, where you are from and nationalities, with dialogue exercises and words of position. Then the dual, the broken plural, and counting from one to four.",
     topicSlugs: [],
     links: [
       { href: "/levels/level-2/getting-to-know-each-other", label: "Open the lesson" },
@@ -113,7 +113,7 @@ const LEVEL_TWO_UNITS: readonly CurriculumUnit[] = [
     id: "vocabulary-of-the-home",
     title: "Vocabulary of the home",
     description:
-      "Lesson 14: 26 nouns for rooms, furniture and household items, each with its plural, a board sentence and the question made from it. Two verb tables (to welcome, to sleep), light and heavy, seven Qur’an verses, the plural patterns, and practice asking and answering.",
+      "26 nouns for rooms, furniture and household items, each with its plural and example sentences. Two verbs (to welcome, to sleep), light and heavy, seven Qur’an verses, the plural patterns, and practice asking and answering.",
     topicSlugs: [],
     links: [
       { href: "/levels/level-2/vocabulary-of-the-home", label: "Open the lesson" },
@@ -127,7 +127,7 @@ const LEVEL_TWO_UNITS: readonly CurriculumUnit[] = [
       "How to spot a feminine noun, when to use هَذَا or هَذِهِ, and how present-tense verbs change for he, she, you and I, with a verb chart and a short quiz.",
     topicSlugs: [],
     links: [
-      { href: "/grammar/masculine-and-feminine", label: "Open the grammar sheet" },
+      { href: "/grammar/masculine-and-feminine", label: "Open the grammar guide" },
     ],
   },
 ] as const;

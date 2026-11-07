@@ -1,116 +1,15 @@
 "use client";
 
 import { useState } from "react";
-import { Check, Eye, EyeOff, RotateCcw, X } from "lucide-react";
+import { Check, Eye, EyeOff, X } from "lucide-react";
 
 import { ArabicText } from "@/components/arabic-text";
 import { Disclosure } from "@/components/disclosure";
+import { Feedback, PILL, pillState, ScoreBar, shuffled, StripAction } from "@/components/practice-ui";
+import { Prose } from "@/components/prose";
 import { SpeakerButton } from "@/components/speaker-button";
 import type { NoteDialogueLine, NoteItem, PracticeQuestion, PracticeVisual } from "@/data/level-two-lesson-notes";
 import { cn } from "@/lib/cn";
-import { ARABIC_RUN } from "@/lib/inline-arabic";
-
-/* ---------- Shared bits ---------- */
-
-const PILL = "inline-flex min-h-11 items-center gap-1.5 rounded-full border px-4 py-1.5 font-arabic text-xl transition-colors focus-ring";
-
-function pillState(answered: boolean, isAnswer: boolean, isPicked: boolean) {
-  return cn(
-    !answered && "border-hairline bg-card hover:border-primary/50 hover:bg-primary-soft",
-    answered && isAnswer && "border-success bg-success-soft text-success",
-    answered && isPicked && !isAnswer && "border-danger bg-danger-soft text-danger",
-    answered && !isPicked && !isAnswer && "border-hairline opacity-50",
-  );
-}
-
-/** English with inline Arabic set in the Arabic font (client twin of `Prose`). */
-function inlineArabic(text: string): React.ReactNode {
-  return text.split(ARABIC_RUN).map((part, index) =>
-    index % 2 === 1 ? (
-      <ArabicText key={index} variant="inline" className="text-[1.15em]">
-        {part}
-      </ArabicText>
-    ) : (
-      part
-    ),
-  );
-}
-
-function Feedback({ correct, why }: { correct: boolean; why: string }) {
-  return (
-    <p className={cn("text-sm font-medium", correct ? "text-success" : "text-danger")}>
-      {correct ? "Correct. " : "Not quite. "}
-      {inlineArabic(why)}
-    </p>
-  );
-}
-
-/** A stable shuffle: round 0 keeps the authored order, later rounds reorder. */
-function shuffled<T>(items: readonly T[], seed: number): T[] {
-  const copy = [...items];
-  if (seed === 0) return copy;
-  let state = seed * 9301 + 49297;
-  for (let index = copy.length - 1; index > 0; index--) {
-    state = (state * 9301 + 49297) % 233280;
-    const swap = Math.floor((state / 233280) * (index + 1));
-    [copy[index], copy[swap]] = [copy[swap], copy[index]];
-  }
-  return copy;
-}
-
-export function ScoreBar({
-  right,
-  answered,
-  total,
-  onRetryMissed,
-  onRestart,
-  children,
-}: {
-  right: number;
-  answered: number;
-  total: number;
-  onRetryMissed: () => void;
-  onRestart: () => void;
-  children?: React.ReactNode;
-}) {
-  const done = answered === total;
-  const missed = answered - right;
-  return (
-    <div
-      className={cn(
-        "flex flex-wrap items-center gap-x-4 gap-y-2 rounded-[10px] border px-3 py-2 text-sm",
-        done && missed === 0 ? "border-success/40 bg-success-soft" : "border-hairline bg-card",
-      )}
-      aria-live="polite"
-    >
-      <span className="font-semibold tabular-nums">
-        {right} / {total} correct
-      </span>
-      <span className="text-xs text-muted-foreground">
-        {done
-          ? missed === 0
-            ? "All right. Well done!"
-            : `Done. ${missed} to look at again.`
-          : `${total - answered} to go`}
-      </span>
-      <span className="ml-auto flex flex-wrap items-center gap-3">
-        {children}
-        {done && missed > 0 ? (
-          <button type="button" onClick={onRetryMissed} className="inline-flex items-center gap-1 text-xs font-semibold text-primary focus-ring">
-            <RotateCcw className="h-3.5 w-3.5" aria-hidden />
-            Retry the {missed} I missed
-          </button>
-        ) : null}
-        {answered > 0 ? (
-          <button type="button" onClick={onRestart} className="inline-flex items-center gap-1 text-xs font-semibold text-primary focus-ring">
-            <RotateCcw className="h-3.5 w-3.5" aria-hidden />
-            Start again
-          </button>
-        ) : null}
-      </span>
-    </div>
-  );
-}
 
 /* ---------- Dialogue as a conversation ---------- */
 
@@ -193,7 +92,7 @@ export function GapDialogue({ lines, title }: { lines: readonly NoteDialogueLine
 
   return (
     <Disclosure
-      title={inlineArabic(title ?? "Complete the dialogue")}
+      title={<Prose text={title ?? "Complete the dialogue"} />}
       meta={`${lines.length} lines · ${gaps.length} to choose`}
       status={answered.length ? `${right} / ${gaps.length} correct` : undefined}
       bodyClassName="space-y-2 bg-background-soft/40"
@@ -213,15 +112,9 @@ export function GapDialogue({ lines, title }: { lines: readonly NoteDialogueLine
           setRound((value) => value + 1);
         }}
       >
-        <button
-          type="button"
-          onClick={() => setEnglish((value) => !value)}
-          aria-pressed={english}
-          className="inline-flex items-center gap-1 text-xs font-semibold text-primary focus-ring"
-        >
-          {english ? <EyeOff className="h-3.5 w-3.5" aria-hidden /> : <Eye className="h-3.5 w-3.5" aria-hidden />}
+        <StripAction onClick={() => setEnglish((value) => !value)} pressed={english} icon={english ? EyeOff : Eye}>
           {english ? "Hide English" : "Show English"}
-        </button>
+        </StripAction>
       </ScoreBar>
       <ol className="divide-y divide-hairline rounded-[12px] border border-hairline bg-card px-3 sm:px-4">
         {lines.map((line, index) => {
@@ -487,7 +380,7 @@ function ChoiceCard({
         >
           {answered ? (correct ? <Check className="h-3.5 w-3.5" aria-label="Right" /> : <X className="h-3.5 w-3.5" aria-label="Wrong" />) : number}
         </span>
-        <span className="min-w-0">{inlineArabic(question.ask)}</span>
+        <span className="min-w-0"><Prose text={question.ask} /></span>
       </p>
       {question.visual ? <Picture visual={question.visual} /> : null}
       {question.stem !== undefined ? (
@@ -554,27 +447,34 @@ export function ChoicePractice({
   questions,
   title,
   intro,
+  meta,
+  defaultOpen = false,
 }: {
   questions: readonly PracticeQuestion[];
   title?: string;
   intro?: string;
+  /** Detail beside the title; defaults to the number of questions. */
+  meta?: string;
+  defaultOpen?: boolean;
 }) {
   const [picks, setPicks] = useState<Readonly<Record<string, NoteItem>>>({});
   const [round, setRound] = useState(0);
   const answered = questions.filter((question) => picks[question.id]);
   const right = answered.filter((question) => picks[question.id].arabic === question.answer).length;
   // Three across when every question is short; long sentences need two.
-  const longest = Math.max(0, ...questions.map((question) => (question.stem ?? "").length));
-  const columns = longest > 34 ? "sm:grid-cols-2" : "sm:grid-cols-2 lg:grid-cols-3";
+  const letters = (text: string) => text.replace(/[\u064B-\u065F\u0670\u0640\s]/g, "").length;
+  const longest = Math.max(0, ...questions.map((question) => letters(question.stem ?? "")));
+  const columns = longest > 22 ? "sm:grid-cols-2" : "sm:grid-cols-2 lg:grid-cols-3";
 
   return (
     <Disclosure
-      title={inlineArabic(title ?? "Practice")}
-      meta={`${questions.length} questions`}
+      title={<Prose text={title ?? "Practice"} />}
+      meta={meta ?? `${questions.length} questions`}
       status={answered.length ? `${right} / ${questions.length} correct` : undefined}
+      defaultOpen={defaultOpen}
       bodyClassName="space-y-3 bg-background-soft/40"
     >
-      {intro ? <p className="max-w-3xl text-sm leading-relaxed text-muted-foreground">{inlineArabic(intro)}</p> : null}
+      {intro ? <p className="max-w-3xl text-sm leading-relaxed text-muted-foreground"><Prose text={intro} /></p> : null}
       <ScoreBar
         right={right}
         answered={answered.length}
