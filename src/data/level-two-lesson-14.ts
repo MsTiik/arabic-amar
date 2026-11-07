@@ -20,7 +20,7 @@ const q = (
 /** One board entry's sentences and the question made from them. */
 const board = (id: string, title: string, items: readonly NoteItem[]): NoteBlock => ({ kind: "examples", id, title, items });
 
-const quran = (id: string, items: readonly QuranExample[]): NoteBlock => ({ kind: "quran", id, title: "On the board: from the Qur’an", items });
+const quran = (id: string, items: readonly QuranExample[]): NoteBlock => ({ kind: "quran", id, title: "In the Qur’an", items });
 
 /**
  * The Arabic in the Qur’an blocks is copied word for word from the Uthmani
@@ -33,44 +33,54 @@ const LESSON: LevelTwoLessonNotes = {
   slug: "vocabulary-of-the-home",
   lesson: 14,
   title: "Vocabulary of the home: rooms, furniture and household items",
-  shortTitle: "Lesson 14: Vocabulary of the home",
+  shortTitle: "Vocabulary of the home",
   titleArabic: "مُفْرَدَاتُ البَيْتِ",
   description:
-    "Twenty-six nouns for the home, from غُرْفَة (room) to سِتَار (curtain), each with its plural, a sentence from the board and the question made from it. Two full verb tables, اِسْتَقْبَلَ (to welcome) and نَامَ (to sleep), the opposites خَفِيف and ثَقِيل, and seven Qur’an verses that use the new words.",
+    "Twenty-six nouns for the home, from غُرْفَة (room) to سِتَار (curtain), each with its plural, example sentences and the questions you can ask about them. Also two verbs, اِسْتَقْبَلَ (to welcome) and نَامَ (to sleep), the opposites خَفِيف and ثَقِيل, and seven Qur’an verses that use the new words.",
   source: "Lesson 14 class video, Ustadh Abdulrahman Hassan, 5 November 2026 (17 board pages)",
   reviewStatus: "normalised",
   sections: [
     {
-      id: "how-it-works",
-      label: "How each word is taught",
+      id: "words",
+      label: "All the words",
       part: 1,
-      title: "How each word is taught",
+      title: "All 26 words and their plurals",
       heading: n("الكَلِمَةُ وَالجَمْعُ", "al-kalimatu wa-l-jamʿ", "the word and the plural"),
       intro:
-        "Every noun in this lesson comes from the dictionary (القَامُوس) and is taught the same way: the word, its plural, an example sentence, then the sentence turned into a question. Learn each noun together with its plural, and practise asking about it as well as describing it.",
+        "Rooms, furniture and things around the home. Learn each noun together with its plural: most of these are broken plurals, so they have to be learnt by heart. The parts after this one use every word in example sentences.",
       blocks: [
         {
           kind: "table",
-          id: "board-headings",
-          title: "The headings on each page",
-          columns: ["Heading", "What goes under it"],
+          id: "all-words",
+          layout: "table",
+          columns: ["Singular", "Plural"],
           rows: [
-            [n("الكَلِمَة", "al-kalimah", "the word"), "The new noun, written in red."],
-            [n("الجَمْع", "al-jamʿ", "the plural"), "Its plural. Most plurals here are broken plurals, so learn them by heart."],
-            [n("التَّصْرِيف", "at-taṣrīf", "related forms"), "Other words from the same root, e.g. سَجَّادَة → مَسْجِد، سَجَدَ."],
-            [n("العَكْس", "al-ʿaks", "the opposite"), "The opposite word, e.g. خَفِيف ↔ ثَقِيل."],
-          ],
-        },
-        {
-          kind: "table",
-          id: "question-words",
-          title: "The four question words",
-          columns: ["Question word", "On the board"],
-          rows: [
-            [n("أَيْنَ", "ayna", "where"), n("أَيْنَ الثَّلَّاجَةُ؟", "ayna th-thallājah?", "Where is the fridge?")],
-            [n("مَا", "mā", "what (before a noun)"), n("مَا الأَطْعِمَةُ؟", "mā l-aṭʿimah?", "What are the foods?")],
-            [n("مَاذَا", "mādhā", "what"), n("مَاذَا فِي سَقْفِ المَسْجِدِ؟", "mādhā fī saqfi l-masjid?", "What is in the ceiling of the mosque?")],
-            [n("كَمْ", "kam", "how many"), n("كَمْ غُرْفَةً فِي الشَّقَّةِ؟", "kam ghurfatan fī sh-shaqqah?", "How many rooms are in the flat?")],
+            [n("غُرْفَة", "ghurfah", "room"), n("غُرَف", "ghuraf", "rooms")],
+            [n("مَكَان", "makān", "place"), n("أَمَاكِن", "amākin", "places")],
+            [n("مَطْبَخ", "maṭbakh", "kitchen"), n("مَطَابِخ", "maṭābikh", "kitchens")],
+            [n("حَمَّام", "ḥammām", "bathroom"), n("حَمَّامَات", "ḥammāmāt", "bathrooms")],
+            [n("طَعَام", "ṭaʿām", "food"), n("أَطْعِمَة", "aṭʿimah", "foods")],
+            [n("سُلَّم", "sullam", "stairs, staircase, ladder"), n("سَلَالِم", "salālim", "staircases, ladders")],
+            [n("أَرِيكَة", "arīkah", "sofa, couch"), n("أَرَائِك", "arāʾik", "sofas, couches")],
+            [n("مِنْضَدَة", "minḍadah", "table (side or coffee table)"), n("مَنَاضِد", "manāḍid", "tables")],
+            [n("تِلْفَاز", "tilfāz", "television"), n("تِلْفَازَات", "tilfāzāt", "televisions")],
+            [n("سَجَّادَة", "sajjādah", "carpet, rug, prayer mat"), n("سَجَاجِيد", "sajājīd", "carpets, rugs")],
+            [n("زَهْرِيَّة", "zahriyyah", "vase"), n("زَهْرِيَّات", "zahriyyāt", "vases")],
+            [n("ثُرَيَّا", "thurayyā", "chandelier"), n("ثُرَيَّات", "thurayyāt", "chandeliers")],
+            [n("سَقْف", "saqf", "ceiling, roof"), n("أَسْقُف", "asquf", "ceilings, roofs")],
+            [n("مَائِدَة", "māʾidah", "dining table, table spread with food"), n("مَوَائِد", "mawāʾid", "dining tables")],
+            [n("طَبَق", "ṭabaq", "plate, dish"), n("أَطْبَاق", "aṭbāq", "plates, dishes")],
+            [n("شَوْكَة", "shawkah", "fork (also: thorn)"), n("شُوَك", "shuwak", "forks")],
+            [n("مِلْعَقَة", "milʿaqah", "spoon"), n("مَلَاعِق", "malāʿiq", "spoons")],
+            [n("سَرِير", "sarīr", "bed"), n("سُرُر / أَسِرَّة", "surur / asirrah", "beds")],
+            [n("خِزَانَة", "khizānah", "cupboard, wardrobe, safe"), n("خَزَائِن", "khazāʾin", "cupboards, safes, treasuries")],
+            [n("شَمَّاعَة", "shammāʿah", "clothes hanger, coat rack"), n("شَمَّاعَات", "shammāʿāt", "hangers")],
+            [n("وِسَادَة", "wisādah", "pillow, cushion"), n("وَسَائِد", "wasāʾid", "pillows, cushions")],
+            [n("بَطَّانِيَّة", "baṭṭāniyyah", "blanket"), n("بَطَاطِين", "baṭāṭīn", "blankets")],
+            [n("مِرْآة", "mirʾāh", "mirror"), n("مَرَايَا", "marāyā", "mirrors")],
+            [n("مُكَيِّف", "mukayyif", "air conditioner"), n("مُكَيِّفَات", "mukayyifāt", "air conditioners")],
+            [n("شُرْفَة", "shurfah", "balcony"), n("شُرُفَات", "shurufāt", "balconies")],
+            [n("سِتَار", "sitār", "curtain"), n("سَتَائِر", "satāʾir", "curtains")],
           ],
         },
       ],
@@ -80,28 +90,15 @@ const LESSON: LevelTwoLessonNotes = {
       label: "Rooms, places and food",
       part: 1,
       title: "Rooms, places and food",
-      intro: "The first pages: a room, a place, the kitchen, the bathroom and food.",
+      intro: "A room, a place, the kitchen, the bathroom and food.",
       blocks: [
-        {
-          kind: "table",
-          id: "rooms-words",
-          title: "The words",
-          columns: ["Word", "Plural"],
-          rows: [
-            [n("غُرْفَة", "ghurfah", "room"), n("غُرَف", "ghuraf", "rooms")],
-            [n("مَكَان", "makān", "place"), n("أَمَاكِن", "amākin", "places")],
-            [n("مَطْبَخ", "maṭbakh", "kitchen"), n("مَطَابِخ", "maṭābikh", "kitchens")],
-            [n("حَمَّام", "ḥammām", "bathroom"), n("حَمَّامَات", "ḥammāmāt", "bathrooms")],
-            [n("طَعَام", "ṭaʿām", "food"), n("أَطْعِمَة", "aṭʿimah", "foods")],
-          ],
-        },
         board("ghurfa-board", "غُرْفَة (room)", [
           n("فِي شَقَّتِي ثَلَاثُ غُرَفٍ.", "fī shaqqatī thalāthu ghuraf.", "In my flat there are three rooms."),
           n("كَمْ غُرْفَةً فِي الشَّقَّةِ؟", "kam ghurfatan fī sh-shaqqah?", "How many rooms are in the flat?"),
         ]),
         board("makan-board", "مَكَان (place)", [
-          n("فِي الفَصْلِ سَبْعَةُ أَمَاكِنَ لِسَبْعَةِ طُلَّابٍ.", "fī l-faṣli sabʿatu amākina li-sabʿati ṭullāb.", "In the class there are seven places for seven students."),
-          n("كَمْ مَكَانًا فِي الفَصْلِ؟", "kam makānan fī l-faṣl?", "How many places are in the class?"),
+          n("فِي الفَصْلِ سَبْعَةُ أَمَاكِنَ لِسَبْعَةِ طُلَّابٍ.", "fī l-faṣli sabʿatu amākina li-sabʿati ṭullāb.", "In the classroom there are seven places for seven students."),
+          n("كَمْ مَكَانًا فِي الفَصْلِ؟", "kam makānan fī l-faṣl?", "How many places are in the classroom?"),
         ]),
         board("matbakh-board", "مَطْبَخ (kitchen)", [
           n("الثَّلَّاجَةُ فِي المَطْبَخِ.", "ath-thallājatu fī l-maṭbakh.", "The fridge is in the kitchen."),
@@ -109,7 +106,7 @@ const LESSON: LevelTwoLessonNotes = {
         ]),
         board("hammam-board", "حَمَّام (bathroom)", [
           n("فُرْشَاةُ الأَسْنَانِ فِي الحَمَّامِ.", "furshātu l-asnāni fī l-ḥammām.", "The toothbrush is in the bathroom."),
-          n("أَيْنَ فُرْشَاةُ الأَسْنَانِ؟", "ayna furshātu l-asnān?", "Where is the toothbrush? (asked the same way; not written on the board)"),
+          n("أَيْنَ فُرْشَاةُ الأَسْنَانِ؟", "ayna furshātu l-asnān?", "Where is the toothbrush?"),
         ]),
         board("taam-board", "طَعَام (food)", [
           n("الأَطْعِمَةُ: فَوَاكِهُ وَخَضْرَوَاتٌ وَلُحُومٌ.", "al-aṭʿimatu: fawākihu wa-khaḍrawātun wa-luḥūm.", "Foods: fruits, vegetables and meats."),
@@ -118,7 +115,7 @@ const LESSON: LevelTwoLessonNotes = {
         {
           kind: "examples",
           id: "rooms-extra-words",
-          title: "Other words on these pages",
+          title: "Other words in this part",
           items: [
             n("شَقَّة", "shaqqah", "flat, apartment"),
             n("ثَلَّاجَة", "thallājah", "fridge"),
@@ -139,7 +136,7 @@ const LESSON: LevelTwoLessonNotes = {
       part: 1,
       title: "Two verbs: to welcome and to sleep",
       intro:
-        "Each verb gets a six-column table: past, present, command, verbal noun, one more derived form, and the opposite. The sentences after it use the past, the present, the command, and the verbal noun in a room name. Both verbs are also in the verb families practice.",
+        "Each verb is shown in six forms: past, present, command, verbal noun, one more related word, and its opposite. The sentences after it use the past, the present, the command, and the verbal noun in a room name. Both verbs are also in the verb families practice.",
       blocks: [
         {
           kind: "table",
@@ -206,7 +203,7 @@ const LESSON: LevelTwoLessonNotes = {
             text: "ٱللَّهُ لَآ إِلَٰهَ إِلَّا هُوَ ٱلۡحَيُّ ٱلۡقَيُّومُۚ لَا تَأۡخُذُهُۥ سِنَةٞ وَلَا [نَوۡمٞ] …",
             english: "Allah: there is no god but Him, the Ever-Living, the Sustainer of all. Neither drowsiness nor sleep overtakes Him.",
             focus: n("نَوْمٌ", "nawmun", "sleep"),
-            note: "Āyat al-Kursī. نَوْم is the verbal noun from the table. On the board he underlined الحَيُّ القَيُّومُ (the Ever-Living, the Sustainer of all).",
+            note: "Āyat al-Kursī. نَوْم is the verbal noun from the table. The ayah also has الحَيُّ القَيُّومُ (the Ever-Living, the Sustainer of all).",
           },
         ]),
         {
@@ -228,20 +225,6 @@ const LESSON: LevelTwoLessonNotes = {
       title: "Stairs and the sitting room",
       intro: "The staircase, the sofa, the coffee table, the television, the carpet and the vase.",
       blocks: [
-        {
-          kind: "table",
-          id: "sitting-room-words",
-          title: "The words",
-          columns: ["Word", "Plural"],
-          rows: [
-            [n("سُلَّم", "sullam", "stairs, staircase, ladder"), n("سَلَالِم", "salālim", "staircases, ladders")],
-            [n("أَرِيكَة", "arīkah", "sofa, couch"), n("أَرَائِك", "arāʾik", "sofas, couches")],
-            [n("مِنْضَدَة", "minḍadah", "table (side or coffee table)"), n("مَنَاضِد", "manāḍid", "tables")],
-            [n("تِلْفَاز", "tilfāz", "television"), n("تِلْفَازَات", "tilfāzāt", "televisions")],
-            [n("سَجَّادَة", "sajjādah", "carpet, rug, prayer mat"), n("سَجَاجِيد", "sajājīd", "carpets, rugs")],
-            [n("زَهْرِيَّة", "zahriyyah", "vase"), n("زَهْرِيَّات", "zahriyyāt", "vases")],
-          ],
-        },
         board("sullam-board", "سُلَّم (stairs)", [
           n("أَمْشِي عَلَى السُّلَّمِ لِلطَّابِقِ الثَّانِي.", "amshī ʿalā s-sullami li-ṭ-ṭābiqi th-thānī.", "I walk up the stairs to the second floor."),
         ]),
@@ -256,7 +239,7 @@ const LESSON: LevelTwoLessonNotes = {
             text: "عَلَى [ٱلۡأَرَآئِكِ] يَنظُرُونَ",
             english: "On couches, looking on.",
             focus: n("الأَرَائِكِ", "al-arāʾiki", "the couches"),
-            note: "The board sentence ends with these words. The same ayah comes again at 83:35. أَرَائِك is the plural of أَرِيكَة.",
+            note: "The example sentence above ends with these words. The same ayah comes again at 83:35. أَرَائِك is the plural of أَرِيكَة.",
           },
         ]),
         board("mindada-board", "مِنْضَدَة (table)", [
@@ -287,7 +270,7 @@ const LESSON: LevelTwoLessonNotes = {
         {
           kind: "examples",
           id: "sitting-room-extra-words",
-          title: "Other words on these pages",
+          title: "Other words in this part",
           items: [
             n("طَابِق", "ṭābiq", "floor, storey"),
             n("وَرْد", "ward", "roses"),
@@ -303,20 +286,6 @@ const LESSON: LevelTwoLessonNotes = {
       title: "The ceiling and the dining table",
       intro: "Looking up (the chandelier and the ceiling), then laying the table: the table spread with food, plates, forks and spoons.",
       blocks: [
-        {
-          kind: "table",
-          id: "dining-words",
-          title: "The words",
-          columns: ["Word", "Plural"],
-          rows: [
-            [n("ثُرَيَّا", "thurayyā", "chandelier"), n("ثُرَيَّات", "thurayyāt", "chandeliers")],
-            [n("سَقْف", "saqf", "ceiling, roof"), n("أَسْقُف", "asquf", "ceilings, roofs")],
-            [n("مَائِدَة", "māʾidah", "dining table, table spread with food"), n("مَوَائِد", "mawāʾid", "dining tables")],
-            [n("طَبَق", "ṭabaq", "plate, dish"), n("أَطْبَاق", "aṭbāq", "plates, dishes")],
-            [n("شَوْكَة", "shawkah", "fork (also: thorn)"), n("شُوَك", "shuwak", "forks")],
-            [n("مِلْعَقَة", "milʿaqah", "spoon"), n("مَلَاعِق", "malāʿiq", "spoons")],
-          ],
-        },
         board("thurayya-board", "ثُرَيَّا (chandelier)", [
           n("فِي سَقْفِ المَسْجِدِ ثُرَيَّاتٌ كَبِيرَةٌ.", "fī saqfi l-masjidi thurayyātun kabīrah.", "In the ceiling of the mosque there are big chandeliers."),
           n("مَاذَا فِي سَقْفِ المَسْجِدِ؟", "mādhā fī saqfi l-masjid?", "What is in the ceiling of the mosque?"),
@@ -345,8 +314,7 @@ const LESSON: LevelTwoLessonNotes = {
           kind: "bullets",
           id: "saqf-notes",
           items: [
-            "The plural on the board is أَسْقُف. سُقُف and سُقُوف are also used; the Qur’an has سُقُفًا (43:33).",
-            "The page had an العَكْس (opposite) heading for سَقْف, but nothing was written under it.",
+            "The plural given here is أَسْقُف. سُقُف and سُقُوف are also used; the Qur’an has سُقُفًا (43:33).",
           ],
         },
         board("maida-board", "مَائِدَة (dining table)", [
@@ -392,19 +360,6 @@ const LESSON: LevelTwoLessonNotes = {
       title: "The bedroom",
       intro: "The bed, the wardrobe, the hanger, the pillow and the blanket.",
       blocks: [
-        {
-          kind: "table",
-          id: "bedroom-words",
-          title: "The words",
-          columns: ["Word", "Plural"],
-          rows: [
-            [n("سَرِير", "sarīr", "bed"), n("سُرُر / أَسِرَّة", "surur / asirrah", "beds")],
-            [n("خِزَانَة", "khizānah", "cupboard, wardrobe, safe"), n("خَزَائِن", "khazāʾin", "cupboards, safes, treasuries")],
-            [n("شَمَّاعَة", "shammāʿah", "clothes hanger, coat rack"), n("شَمَّاعَات", "shammāʿāt", "hangers")],
-            [n("وِسَادَة", "wisādah", "pillow, cushion"), n("وَسَائِد", "wasāʾid", "pillows, cushions")],
-            [n("بَطَّانِيَّة", "baṭṭāniyyah", "blanket"), n("بَطَاطِين", "baṭāṭīn", "blankets")],
-          ],
-        },
         board("sarir-board", "سَرِير (bed)", [
           n("السَّرِيرُ فِي حُجْرَةِ النَّوْمِ.", "as-sarīru fī ḥujrati n-nawm.", "The bed is in the bedroom."),
           n("أَيْنَ السَّرِيرُ؟", "ayna s-sarīr?", "Where is the bed?"),
@@ -419,7 +374,7 @@ const LESSON: LevelTwoLessonNotes = {
             text: "فِيهَا [سُرُرٞ] مَّرۡفُوعَةٞ",
             english: "In it are raised couches.",
             focus: n("سُرُرٌ", "sururun", "beds, couches"),
-            note: "سُرُر is one of the two plurals of سَرِير on the board.",
+            note: "سُرُر is one of the two plurals of سَرِير.",
           },
         ]),
         board("khizana-board", "خِزَانَة (wardrobe, safe)", [
@@ -452,7 +407,7 @@ const LESSON: LevelTwoLessonNotes = {
         {
           kind: "examples",
           id: "bedroom-extra-words",
-          title: "Other words on these pages",
+          title: "Other words in this part",
           items: [
             n("حُجْرَة", "ḥujrah", "room (another word for غُرْفَة)"),
             n("حُجْرَةُ النَّوْمِ", "ḥujratu n-nawm", "bedroom"),
@@ -470,18 +425,6 @@ const LESSON: LevelTwoLessonNotes = {
       title: "Around the house: mirror, air conditioner, balcony, curtain",
       intro: "The last four nouns, then a pair of opposites to finish: خَفِيف (light) and ثَقِيل (heavy).",
       blocks: [
-        {
-          kind: "table",
-          id: "around-words",
-          title: "The words",
-          columns: ["Word", "Plural"],
-          rows: [
-            [n("مِرْآة", "mirʾāh", "mirror"), n("مَرَايَا", "marāyā", "mirrors")],
-            [n("مُكَيِّف", "mukayyif", "air conditioner"), n("مُكَيِّفَات", "mukayyifāt", "air conditioners")],
-            [n("شُرْفَة", "shurfah", "balcony"), n("شُرُفَات", "shurufāt", "balconies")],
-            [n("سِتَار", "sitār", "curtain"), n("سَتَائِر", "satāʾir", "curtains")],
-          ],
-        },
         board("mirah-board", "مِرْآة (mirror)", [
           n("المِرْآةُ عَلَى الحَائِطِ فِي الحَمَّامِ.", "al-mirʾātu ʿalā l-ḥāʾiṭi fī l-ḥammām.", "The mirror is on the wall in the bathroom."),
           n("أَيْنَ المِرْآةُ؟", "ayna l-mirʾāh?", "Where is the mirror?"),
@@ -514,14 +457,14 @@ const LESSON: LevelTwoLessonNotes = {
           columns: ["Word", "Opposite"],
           rows: [[n("خَفِيف", "khafīf", "light (in weight)"), n("ثَقِيل", "thaqīl", "heavy")]],
         },
-        board("light-heavy-board", "خَفِيف ↔ ثَقِيل on the board", [
+        board("light-heavy-board", "خَفِيف ↔ ثَقِيل in sentences", [
           n("عَلَى بَابِ الشُّرْفَةِ سِتَارٌ خَفِيفٌ.", "ʿalā bābi sh-shurfati sitārun khafīf.", "On the balcony door there is a light curtain."),
           n("وَاحِدُ كِيلُوجْرَام وَزْنٌ خَفِيفٌ، وَمِائَةُ كِيلُوجْرَام وَزْنٌ ثَقِيلٌ.", "wāḥidu kīlūgrām waznun khafīf, wa-miʾatu kīlūgrām waznun thaqīl.", "One kilogram is a light weight, and 100 kilograms is a heavy weight."),
         ]),
         {
           kind: "examples",
           id: "around-extra-words",
-          title: "Other words on these pages",
+          title: "Other words in this part",
           items: [
             n("حَائِط", "ḥāʾiṭ", "wall"),
             n("هَوَاء", "hawāʾ", "air"),
@@ -537,11 +480,23 @@ const LESSON: LevelTwoLessonNotes = {
     },
     {
       id: "grammar",
-      label: "Grammar on the board",
+      label: "Grammar points",
       part: 2,
-      title: "Grammar on the board",
-      intro: "The patterns the pages show, gathered in one place.",
+      title: "Grammar points",
+      intro: "The question words, word order, numbers and plural patterns used in this lesson, gathered in one place.",
       blocks: [
+        {
+          kind: "table",
+          id: "question-words",
+          title: "The four question words",
+          columns: ["Question word", "Example"],
+          rows: [
+            [n("أَيْنَ", "ayna", "where"), n("أَيْنَ الثَّلَّاجَةُ؟", "ayna th-thallājah?", "Where is the fridge?")],
+            [n("مَا", "mā", "what (before a noun)"), n("مَا الأَطْعِمَةُ؟", "mā l-aṭʿimah?", "What are the foods?")],
+            [n("مَاذَا", "mādhā", "what"), n("مَاذَا فِي سَقْفِ المَسْجِدِ؟", "mādhā fī saqfi l-masjid?", "What is in the ceiling of the mosque?")],
+            [n("كَمْ", "kam", "how many"), n("كَمْ غُرْفَةً فِي الشَّقَّةِ؟", "kam ghurfatan fī sh-shaqqah?", "How many rooms are in the flat?")],
+          ],
+        },
         {
           kind: "bullets",
           id: "grammar-rules",
@@ -560,7 +515,7 @@ const LESSON: LevelTwoLessonNotes = {
           kind: "table",
           id: "place-words",
           title: "Words for where things are",
-          columns: ["Word", "On the board"],
+          columns: ["Word", "Example"],
           rows: [
             [n("فِي", "fī", "in"), n("الثَّلَّاجَةُ فِي المَطْبَخِ.", "ath-thallājatu fī l-maṭbakh.", "The fridge is in the kitchen.")],
             [n("عَلَى", "ʿalā", "on"), n("الطَّعَامُ عَلَى المَائِدَةِ.", "aṭ-ṭaʿāmu ʿalā l-māʾidah.", "The food is on the table.")],
@@ -610,7 +565,7 @@ const LESSON: LevelTwoLessonNotes = {
       label: "Practice",
       part: 2,
       title: "Practice: ask and answer",
-      intro: "Every sentence on the board was turned into a question. Practise both directions, then the plurals and the opposites.",
+      intro: "Every example sentence can be turned into a question. Practise both directions, then the plurals and the opposites.",
       blocks: [
         {
           kind: "practice",
@@ -655,14 +610,14 @@ const LESSON: LevelTwoLessonNotes = {
               n("مَكَانٌ", "makānun", "a place (with ḍammatayn)"),
             ], "مَكَانًا", "كَمْ takes a singular noun with fatḥatayn (ـًا), never the plural.", {
               stem: "كَمْ ___ فِي الفَصْلِ؟",
-              result: n("كَمْ مَكَانًا فِي الفَصْلِ؟", "kam makānan fī l-faṣl?", "How many places are in the class?"),
+              result: n("كَمْ مَكَانًا فِي الفَصْلِ؟", "kam makānan fī l-faṣl?", "How many places are in the classroom?"),
             }),
           ],
         },
         {
           kind: "practice",
           id: "where-practice",
-          title: "Where is it? Answer as on the board",
+          title: "Where is it?",
           questions: [
             q("where-toothbrush", "أَيْنَ فُرْشَاةُ الأَسْنَانِ؟", [
               n("فِي المَطْبَخِ", "fī l-maṭbakh", "in the kitchen"),
@@ -705,7 +660,7 @@ const LESSON: LevelTwoLessonNotes = {
               n("عَلَى الحَائِطِ فِي الحَمَّامِ", "ʿalā l-ḥāʾiṭi fī l-ḥammām", "on the wall in the bathroom"),
               n("تَحْتَ المِنْضَدَةِ", "taḥta l-minḍadah", "under the table"),
               n("عَلَى المَائِدَةِ", "ʿalā l-māʾidah", "on the dining table"),
-            ], "عَلَى الحَائِطِ فِي الحَمَّامِ", "On the board the mirror is on the bathroom wall.", {
+            ], "عَلَى الحَائِطِ فِي الحَمَّامِ", "In the example sentence, the mirror is on the bathroom wall.", {
               result: n("المِرْآةُ عَلَى الحَائِطِ فِي الحَمَّامِ.", "al-mirʾātu ʿalā l-ḥāʾiṭi fī l-ḥammām.", "The mirror is on the wall in the bathroom."),
             }),
             q("where-pillow", "أَيْنَ الوِسَادَةُ؟", [
@@ -734,7 +689,7 @@ const LESSON: LevelTwoLessonNotes = {
               n("سَبْعَةُ", "sabʿatu", "seven (with a masculine noun)"),
             ], "سَبْعَةُ", "مَكَان is masculine, so the number takes ة: سَبْعَةُ أَمَاكِنَ.", {
               stem: "فِي الفَصْلِ ___ أَمَاكِنَ.",
-              result: n("فِي الفَصْلِ سَبْعَةُ أَمَاكِنَ.", "fī l-faṣli sabʿatu amākin.", "In the class there are seven places."),
+              result: n("فِي الفَصْلِ سَبْعَةُ أَمَاكِنَ.", "fī l-faṣli sabʿatu amākin.", "In the classroom there are seven places."),
             }),
           ],
         },
@@ -777,7 +732,7 @@ const LESSON: LevelTwoLessonNotes = {
               n("سَلَالِم", "salālim", "staircases"),
               n("أَسِرَّة", "asirrah", "beds"),
               n("غُرَف", "ghuraf", "rooms"),
-            ], "أَسِرَّة", "سَرِير has two plurals on the board: سُرُر and أَسِرَّة."),
+            ], "أَسِرَّة", "سَرِير has two plurals: سُرُر and أَسِرَّة."),
           ],
         },
         {
@@ -836,7 +791,7 @@ const LESSON: LevelTwoLessonNotes = {
             { id: "st-translate", question: "Translate: التِّلْفَازُ فَوْقَ المِنْضَدَةِ.", answer: "The television is on the table." },
             {
               id: "st-root",
-              question: "Which two words on the board share the root of سَجَّادَة?",
+              question: "Which two words share the root of سَجَّادَة?",
               answer: n("مَسْجِد، سَجَدَ", "masjid, sajada", "mosque, he prostrated"),
             },
             {
@@ -861,7 +816,8 @@ const LESSON: LevelTwoLessonNotes = {
     n("البَيْتِ", "al-bayti", "the house"),
     n("الكَلِمَةُ", "al-kalimatu", "the word"),
     n("وَالجَمْعُ", "wa-l-jamʿu", "and the plural"),
-    n("القَامُوس", "al-qāmūs", "the dictionary"),
+    n("التَّصْرِيف", "at-taṣrīf", "related forms (words from the same root)"),
+    n("العَكْس", "al-ʿaks", "the opposite"),
     n("مَاضٍ", "māḍin", "past (tense)"),
     n("مُضَارِع", "muḍāriʿ", "present (tense)"),
     n("أَمْر", "amr", "command"),

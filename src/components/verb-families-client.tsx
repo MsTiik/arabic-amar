@@ -198,14 +198,9 @@ function ExploreMode({
             <h2 className="mt-1 section-title">
               {family.meaning}
             </h2>
-            {family.pattern || family.levelTwoLesson ? (
+            {family.pattern ? (
               <p className="mt-2 flex flex-wrap gap-1.5">
-                {family.pattern ? (
-                  <span className="chip bg-background-soft text-muted-foreground">{family.pattern}</span>
-                ) : null}
-                {family.levelTwoLesson ? (
-                  <span className="chip bg-primary-soft text-primary">Lesson {family.levelTwoLesson}</span>
-                ) : null}
+                <span className="chip bg-background-soft text-muted-foreground">{family.pattern}</span>
               </p>
             ) : null}
             {family.usageNote ? (
@@ -376,7 +371,8 @@ function ContextCarousel({ family }: { family: VerbFamily }) {
                 rel="noreferrer"
                 className="inline-flex items-center gap-1 text-xs font-semibold text-primary hover:underline focus-ring"
               >
-                {example.reference}
+                {/* The reference may end with where the example was met in class; show only the source. */}
+                {example.reference.split(" · ")[0]}
                 <ExternalLink className="h-3.5 w-3.5" aria-hidden />
               </a>
             ) : null}

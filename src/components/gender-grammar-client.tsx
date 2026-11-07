@@ -1,9 +1,10 @@
 "use client";
 
-import { Check, RotateCcw, X } from "lucide-react";
 import { useState } from "react";
 
 import { ArabicText } from "@/components/arabic-text";
+import { ChoicePractice } from "@/components/lesson-notes-client";
+import type { PracticeQuestion } from "@/data/level-two-lesson-notes";
 import { MarkedArabic } from "@/components/marked-arabic";
 import { cn } from "@/lib/cn";
 import {
@@ -26,7 +27,7 @@ export function VerbChart({
   const forms = chartForms(verb, persons);
 
   return (
-    <div className="surface p-3 sm:p-6">
+    <div className="rounded-[12px] border border-hairline bg-card p-3 sm:p-4">
       <div
         role="tablist"
         aria-label="Choose a verb"
@@ -68,7 +69,7 @@ export function VerbChart({
               <ArabicText className="text-xl text-foreground">{form.person.pronoun.arabic}</ArabicText>
               <p className="text-xs text-muted-foreground">{form.person.pronoun.english}</p>
             </div>
-            <MarkedArabic text={form.arabic} className="text-2xl text-foreground sm:order-last sm:text-end" />
+            <MarkedArabic text={form.arabic} className="text-2xl text-foreground sm:order-last sm:text-right" />
             <p className="text-sm text-muted-foreground">
               <span lang="ar-Latn" className="italic">{form.transliteration}</span> · {form.english}
             </p>
@@ -79,86 +80,39 @@ export function VerbChart({
   );
 }
 
-function QuestionCard({ question, index }: { question: GrammarQuestion; index: number }) {
-  const [picked, setPicked] = useState<string | null>(null);
-  const answered = picked !== null;
-  const correct = picked === question.answer;
-  const [before, after] = question.stem.split("___");
-
+/**
+ * Choose-the-word questions, drawn with the same practice cards as
+ * the Level 2 lessons: each becomes a choice question whose result is the
+ * completed sentence.
+ */
+export function GrammarPractice({
+  questions,
+  title = "Choose the right word",
+  defaultOpen = false,
+}: {
+  questions: readonly GrammarQuestion[];
+  title?: string;
+  defaultOpen?: boolean;
+}) {
+  const practice: PracticeQuestion[] = questions.map((question) => ({
+    id: question.id,
+    ask: question.ask,
+    stem: question.stem,
+    options: question.options,
+    answer: question.answer,
+    why: question.why,
+    result: {
+      arabic: question.stem.replace("___", question.answer),
+      transliteration: question.transliteration,
+      english: question.english,
+    },
+  }));
   return (
-    <li className="tile p-3 sm:p-4">
-      <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-        {index + 1}. {question.ask}
-      </p>
-      <div className="mt-1 flex flex-wrap items-center justify-between gap-x-3 gap-y-1 sm:mt-2 sm:block" dir="rtl">
-      <ArabicText className="text-2xl leading-loose text-foreground">
-        {before}
-        <span
-          className={cn(
-            "mx-1 inline-block min-w-16 border-b-2 px-1 text-center",
-            answered ? "border-transparent text-primary" : "border-muted-foreground/50",
-          )}
-        >
-          {answered ? question.answer : "\u00a0"}
-        </span>
-        {after}
-      </ArabicText>
-      <div className="flex flex-wrap gap-2 sm:mt-3" dir="rtl">
-        {question.options.map((option) => {
-          const isAnswer = option.arabic === question.answer;
-          const isPicked = option.arabic === picked;
-          return (
-            <button
-              key={option.arabic}
-              type="button"
-              disabled={answered}
-              onClick={() => setPicked(option.arabic)}
-              className={cn(
-                "inline-flex items-center gap-1.5 rounded-full border px-4 py-1.5 font-arabic text-xl focus-ring",
-                !answered && "border-hairline bg-background-soft hover:bg-muted",
-                answered && isAnswer && "border-success bg-success-soft text-success",
-                answered && isPicked && !isAnswer && "border-danger bg-danger-soft text-danger",
-                answered && !isPicked && !isAnswer && "border-hairline opacity-60",
-              )}
-            >
-              <span lang="ar">{option.arabic}</span>
-              {answered && isAnswer ? <Check className="size-4" aria-hidden /> : null}
-              {answered && isPicked && !isAnswer ? <X className="size-4" aria-hidden /> : null}
-            </button>
-          );
-        })}
-      </div>
-      </div>
-      {answered ? (
-        <div className="mt-2 space-y-1 text-sm" aria-live="polite">
-          <p className={cn("font-medium", correct ? "text-success" : "text-danger")}>
-            {correct ? "Correct." : "Not quite."} {question.why}
-          </p>
-          <p className="text-muted-foreground">
-            <span lang="ar-Latn" className="italic">{question.transliteration}</span> · {question.english}
-          </p>
-        </div>
-      ) : null}
-    </li>
-  );
-}
-
-export function GrammarPractice({ questions }: { questions: readonly GrammarQuestion[] }) {
-  const [round, setRound] = useState(0);
-  return (
-    <div>
-      <ol key={round} className="grid grid-cols-1 gap-3 md:grid-cols-2">
-        {questions.map((question, index) => (
-          <QuestionCard key={question.id} question={question} index={index} />
-        ))}
-      </ol>
-      <button
-        type="button"
-        onClick={() => setRound((value) => value + 1)}
-        className="mt-4 inline-flex items-center gap-1.5 rounded-full border border-hairline bg-background-soft px-3 py-1.5 text-sm font-medium hover:bg-muted focus-ring"
-      >
-        <RotateCcw className="size-4" aria-hidden /> Start again
-      </button>
-    </div>
+    <ChoicePractice
+      questions={practice}
+      title={title}
+      meta={`${questions.length} questions · verbs, هَذَا / هَذِهِ, مَنْ / مَا`}
+      defaultOpen={defaultOpen}
+    />
   );
 }

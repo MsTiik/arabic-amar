@@ -1088,7 +1088,7 @@ export const LEVEL_TWO_KHALIDS_HOUSE_ROOMS: LevelTwoReading = {
   }
 ],
   notes: [
-  "The original handwritten board has مَلابِسٍ with tanwin. It is written here as مَلابِسَ because it is a diptote (mamnūʿ min aṣ-ṣarf) and does not take tanwin.",
+  "You may see مَلابِسٍ written with tanwin. It is written here as مَلابِسَ because it is a diptote (mamnūʿ min aṣ-ṣarf) and does not take tanwin.",
   "In the transliteration the case ending is dropped at each full stop, as you would pause when reading aloud. Word lists keep the full ending except where a word ends a sentence."
 ],
 };

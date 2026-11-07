@@ -1,8 +1,9 @@
 "use client";
 
-import { Check, ChevronDown, RotateCcw, ScrollText, X } from "lucide-react";
+import { Check, ChevronDown, ScrollText, X } from "lucide-react";
 
 import { ArabicText } from "@/components/arabic-text";
+import { ScoreStrip, StripAction } from "@/components/practice-ui";
 import {
   readingSentenceToArabic,
   type LevelTwoReading,
@@ -42,23 +43,16 @@ export function ReadingExercise({
 
   return (
     <div>
-      <div className="mb-3 flex items-center gap-3 rounded-[10px] border border-hairline bg-card px-3 py-2 text-sm" aria-live="polite">
-        <span className="font-semibold tabular-nums">
-          {score.right} / {score.total} correct
-        </span>
-        <span className="text-xs text-muted-foreground">
-          {score.answered === score.total ? "All answered" : `${score.total - score.answered} still to mark`}
-        </span>
-        {score.answered > 0 ? (
-          <button
-            type="button"
-            onClick={() => readingResultsActions.reset(resultsKey)}
-            className="ml-auto inline-flex items-center gap-1 text-xs font-semibold text-primary focus-ring"
-          >
-            <RotateCcw className="h-3.5 w-3.5" aria-hidden />
-            Start again
-          </button>
-        ) : null}
+      <div className="mb-3">
+        <ScoreStrip
+          score={`${score.right} / ${score.total} correct`}
+          hint={score.answered === score.total ? "All answered" : `${score.total - score.answered} still to mark`}
+          complete={score.answered === score.total && score.right === score.total}
+        >
+          {score.answered > 0 ? (
+            <StripAction onClick={() => readingResultsActions.reset(resultsKey)}>Start again</StripAction>
+          ) : null}
+        </ScoreStrip>
       </div>
       <ol className="grid gap-2 sm:gap-3 md:grid-cols-2">
         {questions.map((question, index) => (

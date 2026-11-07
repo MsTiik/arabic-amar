@@ -367,6 +367,14 @@ body::before {
       0 0 0 0 var(--hairline-strong);
   }
 
+  .btn-ghost {
+    background: transparent;
+  }
+  .btn-ghost:hover {
+    background: var(--muted);
+    color: var(--foreground);
+  }
+
   .btn-danger-soft {
     background: var(--danger-soft);
     color: var(--foreground);
