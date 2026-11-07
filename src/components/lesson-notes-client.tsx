@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Check, Eye, EyeOff, RotateCcw, X } from "lucide-react";
 
 import { ArabicText } from "@/components/arabic-text";
+import { Disclosure } from "@/components/disclosure";
 import { SpeakerButton } from "@/components/speaker-button";
 import type { NoteDialogueLine, NoteItem, PracticeQuestion, PracticeVisual } from "@/data/level-two-lesson-notes";
 import { cn } from "@/lib/cn";
@@ -57,7 +58,7 @@ function shuffled<T>(items: readonly T[], seed: number): T[] {
   return copy;
 }
 
-function ScoreBar({
+export function ScoreBar({
   right,
   answered,
   total,
@@ -111,10 +112,78 @@ function ScoreBar({
   );
 }
 
+/* ---------- Dialogue as a conversation ---------- */
+
+/**
+ * A model dialogue drawn as chat bubbles: the first speaker on the right (as
+ * an Arabic conversation reads), the other on the left. Lines without a
+ * speaker alternate. The translation can be hidden to read the Arabic alone.
+ */
+export function ChatDialogue({
+  lines,
+  numbered = false,
+}: {
+  lines: readonly NoteDialogueLine[];
+  numbered?: boolean;
+}) {
+  const [english, setEnglish] = useState(true);
+  const firstSpeaker = lines.find((line) => line.speaker)?.speaker;
+  return (
+    <div className="rounded-[14px] border border-hairline bg-background-soft/50 p-2.5 sm:p-3">
+      <div className="mb-1.5 flex justify-end">
+        <button
+          type="button"
+          onClick={() => setEnglish((value) => !value)}
+          aria-pressed={!english}
+          className="inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-semibold text-primary hover:bg-primary-soft focus-ring"
+        >
+          {english ? <EyeOff className="h-3.5 w-3.5" aria-hidden /> : <Eye className="h-3.5 w-3.5" aria-hidden />}
+          {english ? "Hide translation" : "Show translation"}
+        </button>
+      </div>
+      <ol className="space-y-1.5">
+        {lines.map((line, index) => {
+          const right = line.speaker ? line.speaker === firstSpeaker : index % 2 === 0;
+          return (
+            <li key={index} className={cn("flex", right ? "justify-end" : "justify-start")}>
+              <div
+                className={cn(
+                  "min-w-0 max-w-[92%] rounded-2xl px-3 py-1.5 shadow-[var(--shadow-sm)] sm:max-w-[78%]",
+                  right
+                    ? "rounded-tr-md bg-primary-soft"
+                    : "rounded-tl-md border border-hairline bg-card",
+                )}
+              >
+                {line.speaker || numbered ? (
+                  <p className={cn("flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-muted-foreground", right && "justify-end")}>
+                    {numbered ? <span className="tabular-nums text-primary">{index + 1}</span> : null}
+                    {line.speaker}
+                  </p>
+                ) : null}
+                <div className="flex items-start gap-2">
+                  <SpeakerButton arabic={line.arabic} label={line.english} size="sm" className="mt-1.5 shrink-0" />
+                  <ArabicText className="min-w-0 flex-1 text-xl leading-relaxed text-foreground sm:text-[1.4rem]">
+                    {line.arabic}
+                  </ArabicText>
+                </div>
+                {english ? (
+                  <p className={cn("text-xs leading-snug text-muted-foreground sm:text-[13px]", right && "text-right")}>
+                    <span lang="ar-Latn" className="italic text-foreground-soft">{line.transliteration}</span> · {line.english}
+                  </p>
+                ) : null}
+              </div>
+            </li>
+          );
+        })}
+      </ol>
+    </div>
+  );
+}
+
 /* ---------- Choose the missing line ---------- */
 
 /** A numbered dialogue where each missing line is chosen from a few options. */
-export function GapDialogue({ lines }: { lines: readonly NoteDialogueLine[] }) {
+export function GapDialogue({ lines, title }: { lines: readonly NoteDialogueLine[]; title?: string }) {
   const gaps = lines.flatMap((line, index) => (line.gap ? [index] : []));
   const [picks, setPicks] = useState<Readonly<Record<number, string>>>({});
   const [round, setRound] = useState(0);
@@ -123,7 +192,12 @@ export function GapDialogue({ lines }: { lines: readonly NoteDialogueLine[] }) {
   const right = answered.filter((index) => picks[index] === lines[index].arabic).length;
 
   return (
-    <div className="space-y-2">
+    <Disclosure
+      title={inlineArabic(title ?? "Complete the dialogue")}
+      meta={`${lines.length} lines · ${gaps.length} to choose`}
+      status={answered.length ? `${right} / ${gaps.length} correct` : undefined}
+      bodyClassName="space-y-2 bg-background-soft/40"
+    >
       <ScoreBar
         right={right}
         answered={answered.length}
@@ -149,12 +223,12 @@ export function GapDialogue({ lines }: { lines: readonly NoteDialogueLine[] }) {
           {english ? "Hide English" : "Show English"}
         </button>
       </ScoreBar>
-      <ol className="surface divide-y divide-hairline px-3 sm:px-5">
+      <ol className="divide-y divide-hairline rounded-[12px] border border-hairline bg-card px-3 sm:px-4">
         {lines.map((line, index) => {
           const picked = picks[index];
           const open = !line.gap || picked !== undefined;
           return (
-            <li key={index} className="flex items-start gap-3 py-3">
+            <li key={index} className="flex items-start gap-3 py-2">
               <span
                 className={cn(
                   "mt-1.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-xs font-semibold tabular-nums",
@@ -184,8 +258,8 @@ export function GapDialogue({ lines }: { lines: readonly NoteDialogueLine[] }) {
                 ) : (
                   <>
                     <div className="flex items-start gap-2">
-                      <ArabicText className="min-w-0 flex-1 text-xl leading-loose text-foreground sm:text-2xl">{line.arabic}</ArabicText>
-                      <SpeakerButton arabic={line.arabic} label={line.english} size="sm" className="mt-2" />
+                      <ArabicText className="min-w-0 flex-1 text-xl leading-relaxed text-foreground sm:text-2xl">{line.arabic}</ArabicText>
+                      <SpeakerButton arabic={line.arabic} label={line.english} size="sm" className="mt-1.5" />
                     </div>
                     {line.gap && picked !== undefined ? (
                       <div className="mt-1 space-y-1">
@@ -198,10 +272,9 @@ export function GapDialogue({ lines }: { lines: readonly NoteDialogueLine[] }) {
                       </div>
                     ) : null}
                     {english || (line.gap && picked !== undefined) ? (
-                      <>
-                        <p lang="ar-Latn" className="text-sm italic text-foreground-soft">{line.transliteration}</p>
-                        <p className="text-sm text-muted-foreground">{line.english}</p>
-                      </>
+                      <p className="text-sm leading-snug text-muted-foreground">
+                        <span lang="ar-Latn" className="italic text-foreground-soft">{line.transliteration}</span> · {line.english}
+                      </p>
                     ) : null}
                   </>
                 )}
@@ -210,7 +283,7 @@ export function GapDialogue({ lines }: { lines: readonly NoteDialogueLine[] }) {
           );
         })}
       </ol>
-    </div>
+    </Disclosure>
   );
 }
 
@@ -364,7 +437,7 @@ function CountScene({ object, count }: Extract<PracticeVisual, { kind: "count" }
 function Picture({ visual }: { visual: PracticeVisual }) {
   const label = visual.kind === "count" ? `A picture of ${visual.count} ${visual.object}${visual.count > 1 ? "s" : ""}` : "Where is the ball?";
   return (
-    <figure className="mx-auto w-full max-w-[15rem] overflow-hidden rounded-[12px] border border-hairline bg-background-soft">
+    <figure className="mx-auto w-full max-w-[13rem] overflow-hidden rounded-[12px] border border-hairline bg-background-soft">
       <svg viewBox="0 0 200 120" className="block h-auto w-full" role="img" aria-label={label}>
         <Ground />
         {visual.kind === "position" ? <PositionScene position={visual.position} /> : <CountScene {...visual} />}
@@ -397,20 +470,28 @@ function ChoiceCard({
   return (
     <li
       className={cn(
-        "tile flex h-full flex-col gap-3 p-3 sm:p-4",
-        answered && correct && "border-l-4 border-l-success",
-        answered && !correct && "border-l-4 border-l-danger",
+        "flex h-full flex-col gap-2.5 rounded-[12px] border bg-card p-3 shadow-[var(--shadow-sm)]",
+        !answered && "border-hairline-strong",
+        answered && correct && "border-success/50",
+        answered && !correct && "border-danger/50",
       )}
     >
       <p className="flex items-center gap-2 text-sm font-semibold">
-        <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary-soft text-xs tabular-nums text-primary">
+        <span
+          className={cn(
+            "flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-xs tabular-nums",
+            !answered && "bg-primary-soft text-primary",
+            answered && correct && "bg-success text-white",
+            answered && !correct && "bg-danger text-white",
+          )}
+        >
           {answered ? (correct ? <Check className="h-3.5 w-3.5" aria-label="Right" /> : <X className="h-3.5 w-3.5" aria-label="Wrong" />) : number}
         </span>
         <span className="min-w-0">{inlineArabic(question.ask)}</span>
       </p>
       {question.visual ? <Picture visual={question.visual} /> : null}
       {question.stem !== undefined ? (
-        <ArabicText className="text-center text-2xl leading-loose text-foreground">
+        <ArabicText className="text-center text-2xl leading-relaxed text-foreground">
           {before}
           <span
             className={cn(
@@ -444,7 +525,7 @@ function ChoiceCard({
         })}
       </div>
       {answered ? (
-        <div className="mt-auto space-y-1.5 border-t border-hairline pt-2 text-sm" aria-live="polite">
+        <div className="mt-auto space-y-1.5 border-t border-hairline pt-2 text-sm leading-snug" aria-live="polite">
           <Feedback correct={correct} why={question.why} />
           {!correct ? (
             <p className="text-muted-foreground">
@@ -454,7 +535,7 @@ function ChoiceCard({
           {shown ? (
             <div className="flex items-start gap-2 rounded-[8px] bg-background-soft px-2.5 py-1.5">
               <div className="min-w-0 flex-1">
-                <ArabicText className="text-lg leading-loose text-foreground">{shown.arabic}</ArabicText>
+                <ArabicText className="text-lg leading-relaxed text-foreground">{shown.arabic}</ArabicText>
                 <p className="text-muted-foreground">
                   <span lang="ar-Latn" className="italic">{shown.transliteration}</span> · {shown.english}
                 </p>
@@ -469,14 +550,31 @@ function ChoiceCard({
 }
 
 /** A set of choose-the-answer questions with a running score. */
-export function ChoicePractice({ questions }: { questions: readonly PracticeQuestion[] }) {
+export function ChoicePractice({
+  questions,
+  title,
+  intro,
+}: {
+  questions: readonly PracticeQuestion[];
+  title?: string;
+  intro?: string;
+}) {
   const [picks, setPicks] = useState<Readonly<Record<string, NoteItem>>>({});
   const [round, setRound] = useState(0);
   const answered = questions.filter((question) => picks[question.id]);
   const right = answered.filter((question) => picks[question.id].arabic === question.answer).length;
+  // Three across when every question is short; long sentences need two.
+  const longest = Math.max(0, ...questions.map((question) => (question.stem ?? "").length));
+  const columns = longest > 34 ? "sm:grid-cols-2" : "sm:grid-cols-2 lg:grid-cols-3";
 
   return (
-    <div className="space-y-3">
+    <Disclosure
+      title={inlineArabic(title ?? "Practice")}
+      meta={`${questions.length} questions`}
+      status={answered.length ? `${right} / ${questions.length} correct` : undefined}
+      bodyClassName="space-y-3 bg-background-soft/40"
+    >
+      {intro ? <p className="max-w-3xl text-sm leading-relaxed text-muted-foreground">{inlineArabic(intro)}</p> : null}
       <ScoreBar
         right={right}
         answered={answered.length}
@@ -494,7 +592,7 @@ export function ChoicePractice({ questions }: { questions: readonly PracticeQues
           setRound((value) => value + 1);
         }}
       />
-      <ol className="grid grid-cols-1 gap-3 md:grid-cols-2">
+      <ol className={cn("grid grid-cols-1 gap-2.5", columns)}>
         {questions.map((question, index) => (
           <ChoiceCard
             key={question.id}
@@ -506,6 +604,6 @@ export function ChoicePractice({ questions }: { questions: readonly PracticeQues
           />
         ))}
       </ol>
-    </div>
+    </Disclosure>
   );
 }

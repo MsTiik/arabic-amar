@@ -1,7 +1,7 @@
 "use client";
 
 import { Fragment, useEffect, useState } from "react";
-import { Eye, EyeOff, X } from "lucide-react";
+import { ChevronDown, Eye, EyeOff, MessageSquareText, X } from "lucide-react";
 
 import { ArabicText } from "@/components/arabic-text";
 import { SpeakerButton } from "@/components/speaker-button";
@@ -39,6 +39,8 @@ export function VocabSetView({ theme }: { theme: LevelTwoVocabTheme }) {
   const [showEnglish, setShowEnglish] = useState(true);
   const [selected, setSelected] = useState<SelectedToken | null>(null);
   const [sheetOpen, setSheetOpen] = useState(false);
+  // Example sentences stay folded until asked for, to keep the cards short.
+  const [openSentences, setOpenSentences] = useState<Readonly<Record<string, boolean>>>({});
 
   useEffect(() => {
     if (!sheetOpen) return;
@@ -53,12 +55,16 @@ export function VocabSetView({ theme }: { theme: LevelTwoVocabTheme }) {
     set.words.some((word) => word.kind === kind),
   );
   const words = set.words.filter((word) => filter === "all" || word.kind === filter);
+  const allOpen = words.length > 0 && words.every((word) => openSentences[word.id]);
+  const toggleAllSentences = () =>
+    setOpenSentences(allOpen ? {} : Object.fromEntries(words.map((word) => [word.id, true])));
 
   function chooseSet(slug: string) {
     setSetSlug(slug);
     setFilter("all");
     setSelected(null);
     setSheetOpen(false);
+    setOpenSentences({});
   }
 
   function selectToken(key: string, token: VocabSetToken) {
@@ -68,97 +74,95 @@ export function VocabSetView({ theme }: { theme: LevelTwoVocabTheme }) {
   }
 
   return (
-    <div className="space-y-5">
-      <div className="space-y-3">
-        {theme.sets.length > 1 ? (
-          <div className="-mx-4 overflow-x-auto px-4 sm:mx-0 sm:px-0">
-            <div className="segmented" role="group" aria-label={`${theme.title} word sets`}>
-              {theme.sets.map((entry) => (
-                <FilterButton
-                  key={entry.slug}
-                  active={entry.slug === set.slug}
-                  onClick={() => chooseSet(entry.slug)}
-                >
-                  <span className="whitespace-nowrap">{entry.title}</span>
-                </FilterButton>
-              ))}
-            </div>
+    <div className="space-y-3">
+      {theme.sets.length > 1 ? (
+        <div className="-mx-4 overflow-x-auto px-4 sm:mx-0 sm:px-0">
+          <div className="segmented" role="group" aria-label={`${theme.title} word sets`}>
+            {theme.sets.map((entry) => (
+              <FilterButton key={entry.slug} active={entry.slug === set.slug} onClick={() => chooseSet(entry.slug)}>
+                <span className="whitespace-nowrap">{entry.title}</span>
+              </FilterButton>
+            ))}
           </div>
-        ) : null}
+        </div>
+      ) : null}
+
+      <div className="surface space-y-3 p-3 sm:p-4">
         <div>
           <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
             <h2 className="text-lg font-semibold">{set.title}</h2>
             <ArabicText variant="inline" className="text-xl text-foreground-soft">
               {set.titleArabic}
             </ArabicText>
-            <span className="text-sm tabular-nums text-muted-foreground">
-              {set.words.length} words
-            </span>
+            <span className="text-sm tabular-nums text-muted-foreground">{set.words.length} words</span>
           </div>
-          <p className="mt-1 text-sm text-muted-foreground">{set.description}</p>
+          <p className="mt-0.5 text-sm text-muted-foreground">{set.description}</p>
         </div>
+
+        <div className="flex flex-col gap-2 border-t border-hairline pt-3 lg:flex-row lg:flex-wrap lg:items-center lg:justify-between">
+          <div className="-mx-3 overflow-x-auto px-3 sm:mx-0 sm:px-0">
+            <div className="segmented" role="group" aria-label="Show word types">
+              <FilterButton active={filter === "all"} onClick={() => setFilter("all")}>
+                All {set.words.length}
+              </FilterButton>
+              {kinds.map((kind) => (
+                <FilterButton key={kind} active={filter === kind} onClick={() => setFilter(kind)}>
+                  {KIND_LABELS[kind].many} {set.words.filter((word) => word.kind === kind).length}
+                </FilterButton>
+              ))}
+            </div>
+          </div>
+          <div className="flex flex-wrap gap-1.5" role="group" aria-label="Display options">
+            <ToggleButton pressed={allOpen} onClick={toggleAllSentences} icon={MessageSquareText}>
+              All sentences
+            </ToggleButton>
+            <ToggleButton pressed={showTransliteration} onClick={() => setShowTransliteration((value) => !value)}>
+              Transliteration
+            </ToggleButton>
+            <ToggleButton pressed={showEnglish} onClick={() => setShowEnglish((value) => !value)}>
+              English
+            </ToggleButton>
+          </div>
+        </div>
+
+        <nav aria-label="Words in this set" className="border-t border-hairline pt-3">
+          <ul className="-mx-3 flex gap-1.5 overflow-x-auto px-3 pb-1 sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0 sm:pb-0">
+            {words.map((word) => (
+              <li key={word.id} className="shrink-0">
+                <a
+                  href={`#word-${word.id}`}
+                  className="tile flex items-baseline gap-2 px-2.5 py-1 text-sm transition-colors hover:border-primary/40 focus-ring"
+                >
+                  <ArabicText variant="inline" className="text-lg leading-none text-accent-rose">
+                    {word.headword.arabic}
+                  </ArabicText>
+                  <span lang="ar-Latn" className="text-xs italic text-foreground-soft">
+                    {word.headword.transliteration}
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
       </div>
 
-      <div className="surface flex flex-col gap-3 p-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between sm:p-4">
-        <div className="segmented" role="group" aria-label="Show word types">
-          <FilterButton active={filter === "all"} onClick={() => setFilter("all")}>
-            All {set.words.length}
-          </FilterButton>
-          {kinds.map((kind) => (
-            <FilterButton key={kind} active={filter === kind} onClick={() => setFilter(kind)}>
-              {KIND_LABELS[kind].many}{" "}
-              {set.words.filter((word) => word.kind === kind).length}
-            </FilterButton>
-          ))}
-        </div>
-        <div className="flex flex-wrap gap-2" role="group" aria-label="Display options">
-          <ToggleButton
-            pressed={showTransliteration}
-            onClick={() => setShowTransliteration((value) => !value)}
-          >
-            Transliteration
-          </ToggleButton>
-          <ToggleButton pressed={showEnglish} onClick={() => setShowEnglish((value) => !value)}>
-            English
-          </ToggleButton>
-        </div>
-      </div>
-
-      <nav aria-label="Words in this set">
-        <ul className="-mx-4 flex gap-2 overflow-x-auto px-4 pb-1 sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0">
-          {words.map((word) => (
-            <li key={word.id} className="shrink-0">
-              <a
-                href={`#word-${word.id}`}
-                className="tile flex items-baseline gap-2 px-3 py-1.5 text-sm transition-colors hover:border-primary/40 focus-ring"
-              >
-                <ArabicText variant="inline" className="text-lg leading-none text-accent-rose">
-                  {word.headword.arabic}
-                </ArabicText>
-                <span lang="ar-Latn" className="text-xs italic text-foreground-soft">
-                  {word.headword.transliteration}
-                </span>
-              </a>
-            </li>
-          ))}
-        </ul>
-      </nav>
-
-      <p className="text-sm text-muted-foreground">
-        <span className="hidden [@media(hover:hover)]:inline">Hover over</span>
-        <span className="[@media(hover:hover)]:hidden">Tap</span> any Arabic word in a sentence
-        to see its transliteration and meaning. Words in{" "}
-        <span className="font-semibold text-accent-rose">red</span>{" "}
-        are the card&rsquo;s word.
+      <p className="text-xs text-muted-foreground sm:text-sm">
+        Open a card&rsquo;s sentences, then{" "}
+        <span className="hidden [@media(hover:hover)]:inline">hover over</span>
+        <span className="[@media(hover:hover)]:hidden">tap</span> any Arabic word to see its meaning. Words in{" "}
+        <span className="font-semibold text-accent-rose">red</span>
+        {" are the card’s word."}
       </p>
 
-      <div className="grid items-start gap-4 lg:grid-cols-2">
+      <div className="grid items-start gap-3 lg:grid-cols-2">
         {words.map((word) => (
           <WordCard
             key={word.id}
             word={word}
             showTransliteration={showTransliteration}
             showEnglish={showEnglish}
+            sentencesOpen={Boolean(openSentences[word.id])}
+            onToggleSentences={() => setOpenSentences((current) => ({ ...current, [word.id]: !current[word.id] }))}
             selectedKey={selected?.key}
             onSelectToken={selectToken}
           />
@@ -221,13 +225,15 @@ function FilterButton({
 function ToggleButton({
   pressed,
   onClick,
+  icon,
   children,
 }: {
   pressed: boolean;
   onClick: () => void;
+  icon?: typeof Eye;
   children: React.ReactNode;
 }) {
-  const Icon = pressed ? Eye : EyeOff;
+  const Icon = icon ?? (pressed ? Eye : EyeOff);
   return (
     <button
       type="button"
@@ -235,7 +241,8 @@ function ToggleButton({
       onClick={onClick}
       className={cn(
         "btn btn-sm",
-        pressed ? "btn-secondary" : "btn-ghost text-muted-foreground line-through",
+        pressed ? "btn-secondary" : "btn-ghost text-muted-foreground",
+        !pressed && !icon && "line-through",
       )}
     >
       <Icon className="h-4 w-4" aria-hidden />
@@ -244,23 +251,30 @@ function ToggleButton({
   );
 }
 
+/** Forms sit side by side even on phones: two or three across. */
 const FORM_GRID_COLUMNS: Record<number, string> = {
-  1: "sm:grid-cols-1",
-  2: "sm:grid-cols-2",
-  3: "sm:grid-cols-3",
-  4: "sm:grid-cols-2",
+  1: "grid-cols-1",
+  2: "grid-cols-2",
+  3: "grid-cols-3",
+  4: "grid-cols-2 sm:grid-cols-4",
+  5: "grid-cols-3",
+  6: "grid-cols-3",
 };
 
 function WordCard({
   word,
   showTransliteration,
   showEnglish,
+  sentencesOpen,
+  onToggleSentences,
   selectedKey,
   onSelectToken,
 }: {
   word: VocabSetWord;
   showTransliteration: boolean;
   showEnglish: boolean;
+  sentencesOpen: boolean;
+  onToggleSentences: () => void;
   selectedKey?: string;
   onSelectToken: (key: string, token: VocabSetToken) => void;
 }) {
@@ -269,9 +283,9 @@ function WordCard({
     <article
       id={`word-${word.id}`}
       aria-labelledby={headingId}
-      className="surface scroll-mt-24 p-4 sm:p-6"
+      className="surface scroll-mt-24 p-3 sm:p-4"
     >
-      <header className="flex items-start justify-between gap-3 border-b-2 border-accent-rose/70 pb-3">
+      <header className="flex items-start justify-between gap-3 border-b-2 border-accent-rose/60 pb-2">
         <div className="min-w-0 pt-1">
           <h3 id={headingId} className="text-lg font-semibold leading-snug">
             <span lang="ar-Latn">{word.headword.transliteration}</span>
@@ -279,7 +293,7 @@ function WordCard({
               <span className="font-normal text-muted-foreground"> · {word.headword.english}</span>
             ) : null}
           </h3>
-          <div className="mt-1.5 flex items-center gap-2">
+          <div className="mt-1 flex items-center gap-2">
             <span className="chip text-xs">{KIND_LABELS[word.kind].one}</span>
             <SpeakerButton
               arabic={word.headword.arabic}
@@ -291,7 +305,7 @@ function WordCard({
         <ArabicText
           variant="display"
           as="p"
-          className="shrink-0 text-[2.25rem] leading-tight text-accent-rose sm:text-5xl"
+          className="shrink-0 text-[2.1rem] leading-tight text-accent-rose sm:text-[2.6rem]"
         >
           {word.headword.arabic}
         </ArabicText>
@@ -300,8 +314,8 @@ function WordCard({
       <dl
         dir="rtl"
         className={cn(
-          "mt-4 grid grid-cols-1 gap-1.5 sm:gap-2",
-          FORM_GRID_COLUMNS[word.forms.length] ?? "sm:grid-cols-3",
+          "mt-3 grid gap-1.5",
+          FORM_GRID_COLUMNS[word.forms.length] ?? "grid-cols-3",
         )}
       >
         {word.forms.map((form) => (
@@ -314,32 +328,38 @@ function WordCard({
         ))}
       </dl>
 
-      <section className="mt-5" aria-label={`Example sentences for ${word.headword.transliteration}`}>
-        <h4 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-          Sentences ·{" "}
-          <span lang="ar" className="font-arabic text-sm normal-case">
-            الجُمَل
+      <section className="mt-3" aria-label={`Example sentences for ${word.headword.transliteration}`}>
+        <button
+          type="button"
+          onClick={onToggleSentences}
+          aria-expanded={sentencesOpen}
+          className="flex w-full items-center gap-2 rounded-[10px] border border-dashed border-hairline-strong px-3 py-1.5 text-left text-xs font-semibold text-muted-foreground transition-colors hover:border-accent-rose/50 hover:text-foreground focus-ring"
+        >
+          <MessageSquareText className="h-3.5 w-3.5 text-accent-rose" aria-hidden />
+          <span className="flex-1">
+            {sentencesOpen ? "Hide" : "Show"} {word.sentences.length} example{" "}
+            {word.sentences.length === 1 ? "sentence" : "sentences"}{" "}
+            <span lang="ar" className="font-arabic text-sm font-normal">· الجُمَل</span>
           </span>
-        </h4>
-        <ol className="mt-2 divide-y divide-dashed divide-hairline border-t border-dashed border-hairline">
-          {word.sentences.map((sentence) => (
-            <li key={sentence.id} className="py-3">
-              <GlossedSentence
-                sentence={sentence}
-                selectedKey={selectedKey}
-                onSelectToken={onSelectToken}
-              />
-              {showTransliteration ? (
-                <p lang="ar-Latn" className="mt-1 text-right text-sm italic text-foreground-soft">
-                  {sentence.transliteration}
-                </p>
-              ) : null}
-              {showEnglish ? (
-                <p className="text-right text-sm text-muted-foreground">{sentence.english}</p>
-              ) : null}
-            </li>
-          ))}
-        </ol>
+          <ChevronDown className={cn("h-4 w-4 transition-transform", sentencesOpen && "rotate-180")} aria-hidden />
+        </button>
+        {sentencesOpen ? (
+          <ol className="mt-1 divide-y divide-dashed divide-hairline">
+            {word.sentences.map((sentence) => (
+              <li key={sentence.id} className="py-2">
+                <GlossedSentence sentence={sentence} selectedKey={selectedKey} onSelectToken={onSelectToken} />
+                {showTransliteration || showEnglish ? (
+                  <p className="text-right text-sm leading-snug">
+                    {showTransliteration ? (
+                      <span lang="ar-Latn" className="block italic text-foreground-soft">{sentence.transliteration}</span>
+                    ) : null}
+                    {showEnglish ? <span className="block text-muted-foreground">{sentence.english}</span> : null}
+                  </p>
+                ) : null}
+              </li>
+            ))}
+          </ol>
+        ) : null}
       </section>
     </article>
   );
@@ -358,36 +378,29 @@ function FormCell({
   return (
     <div
       dir="ltr"
-      className="flex min-w-0 items-center gap-3 rounded-lg border border-hairline bg-background-soft/50 px-3 py-2 sm:flex-col sm:gap-1.5 sm:px-2 sm:py-3 sm:text-center"
+      className="flex min-w-0 flex-col items-center gap-0.5 rounded-lg border border-hairline bg-background-soft/50 px-1.5 py-1.5 text-center sm:px-2 sm:py-2"
     >
-      <dt className="w-20 shrink-0 sm:w-auto">
-        <span lang="ar" dir="rtl" className="block text-left font-arabic text-sm font-semibold text-accent-rose sm:text-center">
+      <dt className="leading-tight">
+        <span lang="ar" dir="rtl" className="font-arabic text-xs font-semibold text-accent-rose sm:text-sm">
           {label.arabic}
         </span>
-        <span className="block text-[0.65rem] font-medium uppercase tracking-wider text-muted-foreground">
+        <span className="ml-1 text-[0.6rem] font-medium uppercase tracking-wider text-muted-foreground sm:ml-0 sm:block sm:text-[0.65rem]">
           {label.english}
         </span>
       </dt>
-      <dd className="min-w-0 flex-1 text-right sm:w-full sm:text-center">
-        <ArabicText className="text-[1.6rem] leading-snug sm:text-[1.75rem]">
+      <dd className="w-full min-w-0">
+        <ArabicText className="text-[1.3rem] leading-snug sm:text-[1.55rem]">
           {form.items.map((item) => item.arabic).join("، ")}
         </ArabicText>
         {showTransliteration || showEnglish ? (
-          <p className="text-sm leading-snug">
+          <p className="text-xs leading-snug">
             {showTransliteration ? (
-              <span lang="ar-Latn" className="italic text-foreground-soft sm:block">
+              <span lang="ar-Latn" className="block italic text-foreground-soft">
                 {form.items.map((item) => item.transliteration).join(", ")}
               </span>
             ) : null}
-            {showTransliteration && showEnglish ? (
-              <span className="text-muted-foreground sm:hidden" aria-hidden>
-                {" · "}
-              </span>
-            ) : null}
             {showEnglish ? (
-              <span className="text-muted-foreground sm:block sm:text-xs">
-                {form.items.map((item) => item.english).join(", ")}
-              </span>
+              <span className="block text-muted-foreground">{form.items.map((item) => item.english).join(", ")}</span>
             ) : null}
           </p>
         ) : null}
@@ -409,7 +422,7 @@ function GlossedSentence({
     <p
       lang="ar"
       dir="rtl"
-      className="font-arabic text-[1.45rem] leading-[2.2] sm:text-[1.7rem]"
+      className="font-arabic text-[1.35rem] leading-[2.1] sm:text-[1.55rem]"
       aria-label={sentenceArabic(sentence)}
     >
       {sentence.tokens.map((token, index) => {

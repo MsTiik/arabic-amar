@@ -65,6 +65,7 @@ export interface LevelTwoVocabTheme {
   titleArabic: string;
   description: string;
   sets: readonly LevelTwoVocabSet[];
+  /** Readings and lesson pages linked from the top of the theme page. */
   readingSlugs?: readonly string[];
 }
 
@@ -666,7 +667,7 @@ const HOME_AND_PLACES: LevelTwoVocabTheme = {
   description:
     "Words for the home, its rooms and the places around it, with their forms and example sentences you can explore word by word.",
   sets: [BAYT_TO_MASJID],
-  readingSlugs: ["khalids-house", "khalids-house-rooms", "masjid-al-haram"],
+  readingSlugs: ["khalids-house", "khalids-house-rooms", "masjid-al-haram", "vocabulary-of-the-home"],
 };
 
 /** Level 2 vocabulary themes. Add new word sets to a theme's `sets`, in the order supplied. */

@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 
 import { ArabicText } from "@/components/arabic-text";
+import { Disclosure } from "@/components/disclosure";
 import { LessonNotesPage } from "@/components/lesson-notes";
 import { InteractiveArabicReading } from "@/components/interactive-arabic-reading";
 import { ReadingDrills } from "@/components/reading-drills";
@@ -150,8 +151,8 @@ export default async function LevelTwoUnitPage({
   const meta: UnitMeta = UNIT_META[slug];
 
   return (
-    <div className="mx-auto w-full max-w-6xl px-4 py-4 sm:py-10">
-      <header className="brand-panel rounded-[18px] shadow-[var(--shadow-md),inset_0_1px_0_oklch(1_0_0/8%)] p-4 sm:p-8">
+    <div className="mx-auto w-full max-w-6xl px-4 py-4 sm:py-8">
+      <header className="brand-panel rounded-[18px] shadow-[var(--shadow-md),inset_0_1px_0_oklch(1_0_0/8%)] p-4 sm:p-6">
         <Link
           href={meta.parent?.href ?? "/levels/level-2"}
           className="text-sm text-muted-foreground hover:text-foreground"
@@ -159,7 +160,7 @@ export default async function LevelTwoUnitPage({
           ← {meta.parent?.label ?? "Level 2 topics"}
         </Link>
         <div className="mt-2 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 sm:mt-4">
-          <h1 className="max-w-4xl page-title">{meta.title}</h1>
+          <h1 className="max-w-4xl text-2xl font-bold leading-tight tracking-tight sm:text-3xl">{meta.title}</h1>
           {meta.titleArabic ? (
             <ArabicText variant="display" as="p" className="text-2xl text-foreground-soft sm:text-3xl">
               {meta.titleArabic}
@@ -182,40 +183,39 @@ export default async function LevelTwoUnitPage({
 
 function VocabThemePage({ theme }: { theme: NonNullable<ReturnType<typeof getLevelTwoVocabTheme>> }) {
   return (
-    <div className="mx-auto w-full max-w-6xl px-4 py-8 sm:py-10">
-      <header className="brand-panel rounded-[18px] shadow-[var(--shadow-md),inset_0_1px_0_oklch(1_0_0/8%)] p-5 sm:p-8">
+    <div className="mx-auto w-full max-w-6xl px-4 py-4 sm:py-8">
+      <header className="brand-panel rounded-[18px] shadow-[var(--shadow-md),inset_0_1px_0_oklch(1_0_0/8%)] p-4 sm:p-6">
         <Link
           href="/levels/level-2"
           className="text-sm text-muted-foreground hover:text-foreground"
         >
           ← Level 2 topics
         </Link>
-        <p className="mt-4 section-label">Level 2 vocabulary</p>
+        <p className="mt-2 section-label">Level 2 vocabulary</p>
         <div className="mt-1 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
-          <h1 className="page-title">{theme.title}</h1>
+          <h1 className="text-2xl font-bold leading-tight tracking-tight sm:text-3xl">{theme.title}</h1>
           <ArabicText variant="display" as="p" className="text-2xl text-foreground-soft sm:text-3xl">
             {theme.titleArabic}
           </ArabicText>
         </div>
-        <p className="mt-2 max-w-3xl text-base leading-relaxed text-foreground-soft">
+        <p className="mt-1.5 max-w-3xl text-sm leading-relaxed text-foreground-soft sm:text-base">
           {theme.description}
         </p>
-        <Link href="/vocabulary" className="mt-4 btn btn-secondary btn-sm">
+        <Link href="/vocabulary" className="mt-3 btn btn-secondary btn-sm">
           Search these words in the vocabulary bank
           <ArrowRight className="h-3.5 w-3.5" aria-hidden />
         </Link>
       </header>
 
       {theme.readingSlugs?.length ? (
-        <section className="mt-6" aria-labelledby="home-stories-heading">
-          <SectionHeading
-            id="home-stories-heading"
-            eyebrow="Read about the home and places"
-            title="Stories"
-          />
-          <div className="grid gap-3 md:grid-cols-2">
+        <section className="mt-4 sm:mt-6" aria-labelledby="home-stories-heading">
+          <h2 id="home-stories-heading" className="mb-2 section-label">
+            Stories and lessons about the home and places
+          </h2>
+          <div className="-mx-4 flex snap-x gap-2 overflow-x-auto px-4 pb-1 sm:mx-0 sm:grid sm:grid-cols-2 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-4 [&>*]:w-[78%] [&>*]:shrink-0 [&>*]:snap-start sm:[&>*]:w-auto">
             {theme.readingSlugs.map((slug) => {
-              const reading = UNIT_META[slug as UnitSlug];
+              const notes = getLevelTwoLessonNotes(slug);
+              const reading = UNIT_META[slug as UnitSlug] ?? (notes ? { title: notes.shortTitle, description: notes.description } : undefined);
               if (!reading) return null;
               return (
                 <LessonLink
@@ -232,7 +232,7 @@ function VocabThemePage({ theme }: { theme: NonNullable<ReturnType<typeof getLev
         </section>
       ) : null}
 
-      <section className="mt-8" aria-label={`${theme.title} word cards`}>
+      <section className="mt-4 sm:mt-6" aria-label={`${theme.title} word cards`}>
         <VocabSetView theme={theme} />
       </section>
     </div>
@@ -254,26 +254,28 @@ function MarketplaceReading() {
 function KhalidsHouseReading() {
   const reading = LEVEL_TWO_KHALIDS_HOUSE;
   return (
-    <div className="mt-4 space-y-8 sm:mt-8 sm:space-y-10">
+    <div className="mt-4 space-y-6 sm:mt-6 sm:space-y-8">
       <section aria-labelledby="khalid-passage-heading">
         <SectionHeading id="khalid-passage-heading" eyebrow="Interactive reading" title="Read the story" />
         <InteractiveArabicReading sentences={reading.sentences} english={reading.english} />
       </section>
 
       <section aria-labelledby="khalid-questions-heading">
-        <SectionHeading
-          id="khalid-questions-heading"
-          eyebrow="Exercise"
+        <SectionHeading id="khalid-questions-heading" eyebrow="Exercise" title="Check your understanding" />
+        <Disclosure
           title="Answer the questions"
-          description="Answer each question in Arabic first, then tap it to check, and mark whether you got it."
-        />
-        <ReadingExercise reading={reading} />
+          meta={`${reading.questions.length} questions · answer in Arabic first, then tap to check`}
+          bodyClassName="bg-background-soft/40"
+        >
+          <ReadingExercise reading={reading} />
+        </Disclosure>
       </section>
 
       <LessonLink
         href="/levels/level-2/home-and-places"
         title="Study the words from this story"
         body="The Bayt to Masjid cards cover بَيْت, حَدِيقَة, طَابِق, قَرِيب and more, with their forms and example sentences."
+        compact
       />
     </div>
   );
@@ -282,7 +284,7 @@ function KhalidsHouseReading() {
 function KhalidsHouseRoomsReading() {
   const reading = LEVEL_TWO_KHALIDS_HOUSE_ROOMS;
   return (
-    <div className="mt-4 space-y-8 sm:mt-8 sm:space-y-10">
+    <div className="mt-4 space-y-6 sm:mt-6 sm:space-y-8">
       <section aria-labelledby="khalid-rooms-reading-heading">
         <SectionHeading
           id="khalid-rooms-reading-heading"
@@ -298,13 +300,17 @@ function KhalidsHouseRoomsReading() {
           eyebrow="Literal vs real meaning"
           title="Useful phrases"
         />
-        <div className="grid gap-2 md:grid-cols-2">
+        <div className="grid gap-1.5 sm:grid-cols-2 lg:grid-cols-3">
           {reading.phrases?.map((phrase) => (
-            <article key={phrase.arabic} className="tile min-w-0 p-3.5 sm:p-4">
-              <ArabicText className="text-xl leading-relaxed sm:text-2xl">{phrase.arabic}</ArabicText>
-              <p className="mt-1 text-sm italic text-muted-foreground">{phrase.transliteration}</p>
-              <p className="mt-2 text-sm text-muted-foreground">Literally: {phrase.literal}</p>
-              <p className="mt-0.5 font-semibold">{phrase.meaning}</p>
+            <article key={phrase.arabic} className="tile flex min-w-0 items-start justify-between gap-3 px-3 py-2">
+              <div className="min-w-0">
+                <p className="text-sm font-semibold leading-snug">{phrase.meaning}</p>
+                <p className="text-xs leading-snug text-muted-foreground">
+                  <span lang="ar-Latn" className="italic text-foreground-soft">{phrase.transliteration}</span>
+                  {" · "}literally “{phrase.literal}”
+                </p>
+              </div>
+              <ArabicText className="shrink-0 text-xl leading-relaxed">{phrase.arabic}</ArabicText>
             </article>
           ))}
         </div>
@@ -326,11 +332,13 @@ function KhalidsHouseRoomsReading() {
           title="Read the first Khalid’s house story"
           body="Return to the first story, with a short reading exercise."
           reading
+          compact
         />
         <LessonLink
           href="/vocabulary"
           title="Search these words in the vocabulary bank"
           body="Look up the story’s words and useful phrases by Arabic, transliteration or English."
+          compact
         />
       </div>
     </div>
@@ -340,20 +348,21 @@ function KhalidsHouseRoomsReading() {
 function MasjidAlHaramReading() {
   const reading = LEVEL_TWO_MASJID_AL_HARAM;
   return (
-    <div className="mt-4 space-y-8 sm:mt-8 sm:space-y-10">
+    <div className="mt-4 space-y-6 sm:mt-6 sm:space-y-8">
       <section aria-labelledby="haram-passage-heading">
         <SectionHeading id="haram-passage-heading" eyebrow="Interactive reading" title="Read the paragraph" />
         <InteractiveArabicReading sentences={reading.sentences} english={reading.english} />
       </section>
 
       <section aria-labelledby="haram-questions-heading">
-        <SectionHeading
-          id="haram-questions-heading"
-          eyebrow="Exercises"
-          title="Practise with the passage"
-          description="Four exercises from the sheet: answer the questions, match the pairs, put the words in order, and correct the sentences."
-        />
-        <ReadingDrills reading={reading} />
+        <SectionHeading id="haram-questions-heading" eyebrow="Exercises" title="Practise with the passage" />
+        <Disclosure
+          title="Four exercises from the sheet"
+          meta={`Questions · matching · word order · corrections`}
+          bodyClassName="bg-background-soft/40"
+        >
+          <ReadingDrills reading={reading} />
+        </Disclosure>
       </section>
 
       {reading.wordList?.length ? (
@@ -394,11 +403,13 @@ function MasjidAlHaramReading() {
           href="/levels/level-2/home-and-places"
           title="Study the Bayt to Masjid word cards"
           body="مَسْجِد, طَابِق, قَرِيب, حَوْلَ and more, with their forms and example sentences."
+          compact
         />
         <LessonLink
           href="/vocabulary"
           title="Search these words in the vocabulary bank"
           body="Look up every word from the paragraph, questions and word list by Arabic, transliteration or English."
+          compact
         />
       </div>
     </div>
@@ -592,15 +603,15 @@ function LessonLink({
       href={href}
       className={cn(
         "group flex items-start gap-4 rounded-[10px] border border-primary/30 bg-primary-soft hover-lift focus-ring",
-        compact ? "p-4" : "p-5",
+        compact ? "p-3" : "p-5",
       )}
     >
-      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[10px] bg-primary text-primary-foreground">
-        <Icon className="h-5 w-5" aria-hidden />
+      <span className={cn("flex shrink-0 items-center justify-center rounded-[10px] bg-primary text-primary-foreground", compact ? "h-8 w-8" : "h-10 w-10")}>
+        <Icon className={compact ? "h-4 w-4" : "h-5 w-5"} aria-hidden />
       </span>
       <span className="min-w-0 flex-1">
-        <span className="block font-semibold">{title}</span>
-        <span className="mt-1 block text-sm text-foreground-soft">{body}</span>
+        <span className={cn("block font-semibold", compact && "text-sm")}>{title}</span>
+        <span className={cn("mt-0.5 block text-foreground-soft", compact ? "line-clamp-2 text-xs" : "text-sm")}>{body}</span>
       </span>
       <ArrowRight className="mt-3 h-4 w-4 shrink-0 text-primary transition-transform group-hover:translate-x-1" aria-hidden />
     </Link>
