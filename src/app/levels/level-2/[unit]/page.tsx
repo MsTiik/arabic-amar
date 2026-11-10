@@ -60,6 +60,7 @@ const UNIT_META: Record<UnitSlug, UnitMeta> = {
     title: "Khalid’s house",
     description:
       "Read a short description of Khalid’s house, tap any word to check it, then answer eight questions about it.",
+    parent: { href: "/levels/level-2/home-and-places", label: "Home and Places" },
   },
   "khalids-house-rooms": {
     title: "Naming every room and item in Khalid’s house",

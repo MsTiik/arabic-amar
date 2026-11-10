@@ -1,17 +1,16 @@
 export type CurriculumLevelSlug = "level-1" | "level-2";
 
-export interface CurriculumLink {
-  href: string;
-  label: string;
-}
-
 export interface CurriculumUnit {
   id: string;
   title: string;
   description: string;
   /** Existing topic records reused by this unit, so word progress is shared. */
   topicSlugs: readonly string[];
-  links: readonly CurriculumLink[];
+  /** The one way into this topic. Every Level 2 page has exactly one entry point. */
+  href: string;
+  cta: string;
+  /** Pages that live inside this topic, listed so its scope is visible from the overview. */
+  includes?: readonly string[];
 }
 
 export interface CurriculumLevel {
@@ -47,20 +46,8 @@ const LEVEL_TWO_UNITS: readonly CurriculumUnit[] = [
     description:
       "Read a short shopping passage and explore the meaning and pronunciation of each Arabic word.",
     topicSlugs: ["the-marketplace", "colours"],
-    links: [
-      { href: "/levels/level-2/marketplace-reading", label: "Open the reading" },
-    ],
-  },
-  {
-    id: "khalids-house",
-    title: "Khalid’s house",
-    description:
-      "Read a short description of Khalid’s house word by word, then answer eight questions about where it is and what is around it.",
-    topicSlugs: [],
-    links: [
-      { href: "/levels/level-2/khalids-house", label: "Open the reading" },
-      { href: "/levels/level-2/home-and-places", label: "Study the words" },
-    ],
+    href: "/levels/level-2/marketplace-reading",
+    cta: "Open the reading",
   },
   {
     id: "actions-in-context",
@@ -68,10 +55,8 @@ const LEVEL_TWO_UNITS: readonly CurriculumUnit[] = [
     description:
       "Learn classroom actions as complete present-tense forms, then read them in short standard-Arabic sentences.",
     topicSlugs: ["verbs-in-the-classroom"],
-    links: [
-      { href: "/levels/level-2/actions-in-context", label: "Explore the action verbs" },
-      { href: "/grammar/lessons/verbs-in-the-classroom", label: "Study the verb tables" },
-    ],
+    href: "/levels/level-2/actions-in-context",
+    cta: "Explore the action verbs",
   },
   {
     id: "core-verb-families",
@@ -79,23 +64,23 @@ const LEVEL_TWO_UNITS: readonly CurriculumUnit[] = [
     description:
       "Compare past, present, command, verbal noun, and related forms for 24 everyday verbs, from writing and studying to sitting, drawing, buying, weighing, welcoming and sleeping.",
     topicSlugs: ["verbs-in-the-classroom"],
-    links: [
-      { href: "/practice/verb-families", label: "Explore the verb families" },
-    ],
+    href: "/practice/verb-families",
+    cta: "Explore the verb families",
   },
   {
     id: "home-and-places",
     title: "Home and Places",
     description:
-      "Words for the home, its rooms and the places around it, with plurals, opposites, verb forms, and example sentences you can explore word by word. Includes the Bayt to Masjid set, a longer story naming every room and item in Khalid’s house, and a reading about the Sacred Mosque in Makkah.",
+      "Words for the home, its rooms and the places around it, with plurals, opposites, verb forms and example sentences, plus the stories and lesson that use them.",
     topicSlugs: [],
-    links: [
-      { href: "/levels/level-2/home-and-places", label: "Open the word cards" },
-      { href: "/levels/level-2/khalids-house", label: "Read Khalid’s house" },
-      { href: "/levels/level-2/khalids-house-rooms", label: "Name every room in Khalid’s house" },
-      { href: "/levels/level-2/masjid-al-haram", label: "Read about the Sacred Mosque" },
-      { href: "/levels/level-2/vocabulary-of-the-home", label: "Vocabulary of the home" },
-      { href: "/vocabulary", label: "Search the vocabulary bank" },
+    href: "/levels/level-2/home-and-places",
+    cta: "Open Home and Places",
+    includes: [
+      "Bayt to Masjid word cards",
+      "Khalid’s house (reading)",
+      "Naming every room in Khalid’s house",
+      "The Sacred Mosque in Makkah",
+      "Vocabulary of the home (Lesson 14)",
     ],
   },
   {
@@ -104,21 +89,8 @@ const LEVEL_TWO_UNITS: readonly CurriculumUnit[] = [
     description:
       "Greetings, names, how you are, where you are from and nationalities, with dialogue exercises and words of position. Then the dual, the broken plural, and counting from one to four.",
     topicSlugs: [],
-    links: [
-      { href: "/levels/level-2/getting-to-know-each-other", label: "Open the lesson" },
-      { href: "/levels/level-2/getting-to-know-each-other#dual-and-plural", label: "The dual and the broken plural" },
-    ],
-  },
-  {
-    id: "vocabulary-of-the-home",
-    title: "Vocabulary of the home",
-    description:
-      "26 nouns for rooms, furniture and household items, each with its plural and example sentences. Two verbs (to welcome, to sleep), light and heavy, seven Qur’an verses, the plural patterns, and practice asking and answering.",
-    topicSlugs: [],
-    links: [
-      { href: "/levels/level-2/vocabulary-of-the-home", label: "Open the lesson" },
-      { href: "/levels/level-2/vocabulary-of-the-home#practice", label: "Practise asking and answering" },
-    ],
+    href: "/levels/level-2/getting-to-know-each-other",
+    cta: "Open the lesson",
   },
   {
     id: "masculine-and-feminine",
@@ -126,9 +98,8 @@ const LEVEL_TWO_UNITS: readonly CurriculumUnit[] = [
     description:
       "How to spot a feminine noun, when to use هَذَا or هَذِهِ, and how present-tense verbs change for he, she, you and I, with a verb chart and a short quiz.",
     topicSlugs: [],
-    links: [
-      { href: "/grammar/masculine-and-feminine", label: "Open the grammar guide" },
-    ],
+    href: "/grammar/masculine-and-feminine",
+    cta: "Open the grammar guide",
   },
 ] as const;
 

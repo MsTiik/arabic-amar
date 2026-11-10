@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, BookOpenText, House, Languages, MessagesSquare, ShoppingBasket, Sofa, VenusAndMars, Waypoints } from "lucide-react";
+import { ArrowRight, House, Languages, MessagesSquare, ShoppingBasket, VenusAndMars, Waypoints } from "lucide-react";
 
 import { ReadingScoreBadge } from "@/components/reading-score-badge";
 import type { CurriculumUnit } from "@/data/curriculum";
@@ -10,10 +10,6 @@ const UNIT_IDENTITIES = {
   "marketplace-reading": {
     icon: ShoppingBasket,
     chip: "bg-accent-amber-soft text-accent-amber",
-  },
-  "khalids-house": {
-    icon: BookOpenText,
-    chip: "bg-accent-sky-soft text-accent-sky",
   },
   "actions-in-context": {
     icon: Languages,
@@ -30,10 +26,6 @@ const UNIT_IDENTITIES = {
   "getting-to-know-each-other": {
     icon: MessagesSquare,
     chip: "bg-accent-amber-soft text-accent-amber",
-  },
-  "vocabulary-of-the-home": {
-    icon: Sofa,
-    chip: "bg-accent-sky-soft text-accent-sky",
   },
   "masculine-and-feminine": {
     icon: VenusAndMars,
@@ -66,21 +58,22 @@ export function CurriculumUnitCard({
         <ReadingScoreBadge slug={reading.slug} questionIds={reading.questions.map((question) => question.id)} />
       ) : null}
 
-      <div className="mt-auto flex flex-col items-start gap-2 pt-5">
-        {unit.links.map((link, linkIndex) => (
-          <Link
-            key={link.href}
-            href={link.href}
-            className={cn(
-              linkIndex === 0
-                ? "btn btn-primary btn-sm"
-                : "btn btn-secondary btn-sm",
-            )}
-          >
-            {link.label}
-            <ArrowRight className="h-3.5 w-3.5" aria-hidden />
-          </Link>
-        ))}
+      {unit.includes?.length ? (
+        <div className="mt-3">
+          <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">Inside</p>
+          <ul className="mt-1 list-disc space-y-0.5 pl-5 text-sm text-foreground-soft">
+            {unit.includes.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+        </div>
+      ) : null}
+
+      <div className="mt-auto pt-5">
+        <Link href={unit.href} className="btn btn-primary btn-sm">
+          {unit.cta}
+          <ArrowRight className="h-3.5 w-3.5" aria-hidden />
+        </Link>
       </div>
     </article>
   );
