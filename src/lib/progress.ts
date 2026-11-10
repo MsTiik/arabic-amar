@@ -307,6 +307,9 @@ export function mergeProgress(local: UserProgress, remote: UserProgress): UserPr
     daily,
     words,
     topics,
+    ...((local.newWordSource ?? remote.newWordSource)
+      ? { newWordSource: local.newWordSource ?? remote.newWordSource }
+      : {}),
   };
 }
 
@@ -414,6 +417,13 @@ export const progressActions = {
     });
   },
 
+  setNewWordSource(source: string): void {
+    update((p) => {
+      if (source === DEFAULT_NEW_WORD_SOURCE) delete p.newWordSource;
+      else p.newWordSource = source;
+    });
+  },
+
   setDailyGoal(goal: number): void {
     update((p) => {
       p.daily.goalCards = Math.max(1, Math.min(200, Math.round(goal)));
@@ -517,10 +527,48 @@ export function topicNewCount(
   ).length;
 }
 
-export function getNewWordIds(progress: UserProgress, vocab: VocabEntry[]): string[] {
+/** Where new words come from when the learner hasn't chosen: every lesson, in course order. */
+export const DEFAULT_NEW_WORD_SOURCE = "all";
+
+const isLevelTwoTopicSlug = (slug: string) => slug.startsWith("level-2-");
+
+/** Does a word belong to the chosen new-word source ("all", "level-1", "level-2" or a topic slug)? */
+export function matchesNewWordSource(entry: VocabEntry, source: string | undefined): boolean {
+  if (!source || source === DEFAULT_NEW_WORD_SOURCE) return true;
+  if (source === "level-2") return entry.topicSlugs.some(isLevelTwoTopicSlug);
+  if (source === "level-1") return entry.topicSlugs.some((slug) => !isLevelTwoTopicSlug(slug));
+  return entry.topicSlugs.includes(source);
+}
+
+function matchesTopicSource(topic: Topic, source: string | undefined): boolean {
+  if (!source || source === DEFAULT_NEW_WORD_SOURCE) return true;
+  if (source === "level-2") return isLevelTwoTopicSlug(topic.slug);
+  if (source === "level-1") return !isLevelTwoTopicSlug(topic.slug);
+  return topic.slug === source;
+}
+
+/** Unseen words, in course order, from the learner's chosen source. */
+export function getNewWordIds(
+  progress: UserProgress,
+  vocab: VocabEntry[],
+  source: string | undefined = progress.newWordSource,
+): string[] {
   return activeVocab(vocab)
-    .filter((v) => !progress.words[v.id])
+    .filter((v) => !progress.words[v.id] && matchesNewWordSource(v, source))
     .map((v) => v.id);
+}
+
+function newWordSourceSuffix(source: string | undefined, topics: Topic[]): string {
+  if (!source || source === DEFAULT_NEW_WORD_SOURCE) return "";
+  if (source === "level-1") return " from Level 1";
+  if (source === "level-2") return " from Level 2";
+  const topic = topics.find((candidate) => candidate.slug === source);
+  return topic ? ` from ${topic.name}` : "";
+}
+
+/** Where a topic's lesson lives. */
+export function topicHref(topic: Pick<Topic, "slug" | "href">): string {
+  return topic.href ?? `/topics/${topic.slug}`;
 }
 
 /** Due words for the review deck, prioritized and capped at
@@ -557,7 +605,11 @@ export function getNextTopic(
 ): Topic | undefined {
   return [...topics]
     .sort((a, b) => a.order - b.order)
-    .find((topic) => topicNewCount(progress, vocab, topic.slug) > 0);
+    .find(
+      (topic) =>
+        matchesTopicSource(topic, progress.newWordSource) &&
+        topicNewCount(progress, vocab, topic.slug) > 0,
+    );
 }
 
 export function buildDailyPathPlan(
@@ -599,8 +651,10 @@ export function buildDailyPathPlan(
       title: "Add new words",
       description:
         newIds.length > 0
-          ? "Introduce a small set of unseen vocabulary."
-          : "All core words have been introduced.",
+          ? `Introduce a small set of unseen vocabulary${newWordSourceSuffix(progress.newWordSource, topics)}.`
+          : progress.newWordSource && progress.newWordSource !== DEFAULT_NEW_WORD_SOURCE
+            ? "Every word from your chosen deck has been introduced."
+            : "All core words have been introduced.",
       count: newIds.length,
       href: "/practice?deck=new",
       status: newIds.length > 0 ? "ready" : "complete",
@@ -613,7 +667,7 @@ export function buildDailyPathPlan(
       title: `Continue ${nextTopic.name}`,
       description: `${nextTopicNewCount} new word${nextTopicNewCount === 1 ? "" : "s"} left in this lesson.`,
       count: nextTopicNewCount,
-      href: `/topics/${nextTopic.slug}`,
+      href: topicHref(nextTopic),
       status: "ready",
     });
   }

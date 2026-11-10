@@ -1,5 +1,13 @@
 export type Gender = "M" | "F" | "Both" | "Unknown";
 
+/** One form on a card that teaches several forms together (e.g. a verb's present tense). */
+export interface CardForm {
+  label: string;
+  arabic: string;
+  pronunciation: string;
+  english: string;
+}
+
 export interface VocabEntry {
   /** Stable id derived from arabic + lessonId; unchanged across doc edits as long as the word stays the same. */
   id: string;
@@ -32,6 +40,11 @@ export interface VocabEntry {
   topicSlugs: string[];
   /** Lesson id this vocab was extracted from. */
   lessonId: string;
+  /** Forms learnt together on this one card (a verb's past, present, command
+   *  and verbal noun). Flashcards show them all; quizzes ask about one. */
+  cardForms?: CardForm[];
+  /** Facts shown on the back of the flashcard: root, opposite, related words. */
+  cardNotes?: string[];
 }
 
 export interface GrammarRule {
@@ -88,6 +101,10 @@ export interface Topic {
   vocabCount: number;
   ruleCount: number;
   conversationCount: number;
+  /** Where the topic's lesson lives, when it isn't a `/topics/[slug]` page (Level 2 decks). */
+  href?: string;
+  /** The order to study the topic's words in, when it differs from the vocabulary order. */
+  wordIds?: string[];
   /** Section-level notes — explanations that apply to a whole category and were
    *  duplicated across many entries in the source doc (e.g. the Hijri/Gregorian
    *  calendar explanation that the Google Doc repeated for every month). */
@@ -250,6 +267,9 @@ export interface UserProgress {
   };
   words: Record<string, WordProgress>;
   topics: Record<string, { lastVisited: string }>;
+  /** Where "Add new words" takes unseen words from: "all" (course order),
+   *  "level-1", "level-2" or one topic/deck slug. Optional for back-compat. */
+  newWordSource?: string;
 }
 
 export type ExerciseKind =
@@ -312,6 +332,12 @@ export interface ExerciseQuestion {
    *  blank when revealing the answer. */
   clozeBefore?: string;
   clozeAfter?: string;
+  /** The single word to play when `promptArabic` lists several forms. */
+  audioArabic?: string;
+  /** Flashcard back: the forms on a multi-form card, in the order shown on the front. */
+  answerForms?: CardForm[];
+  /** Flashcard back: short extra facts (root, opposite, related words). */
+  answerNotes?: string[];
 }
 
 export interface ExerciseDeck {

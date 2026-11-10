@@ -21,20 +21,20 @@ import { useProgressSync } from "@/components/progress-sync-provider";
 import type { DailyPathPlan, DailyPathStep } from "@/lib/progress";
 import type { CourseProgress } from "@/lib/course-progress";
 import { buildDailyPathPlan, progressActions, summarizeMastery, useProgress } from "@/lib/progress";
-import { getSiteContent } from "@/lib/content";
 import { getCourseProgress } from "@/lib/course-progress";
 import { cn } from "@/lib/cn";
+import type { Topic, VocabEntry } from "@/lib/types";
 
-export function DashboardHero() {
+/** `vocab` and `topics` are the study set: Level 1 words plus the Level 2 flashcards. */
+export function DashboardHero({ vocab, topics }: { vocab: VocabEntry[]; topics: Topic[] }) {
   const [goalDialogOpen, setGoalDialogOpen] = useState(false);
   const [goalInput, setGoalInput] = useState("");
   const progress = useProgress();
   const sync = useProgressSync();
-  const content = getSiteContent();
-  const allWordIds = useMemo(() => content.vocab.map((v) => v.id), [content.vocab]);
+  const allWordIds = useMemo(() => vocab.map((v) => v.id), [vocab]);
   const summary = summarizeMastery(progress, allWordIds);
-  const course = getCourseProgress(progress, content.vocab, content.topics);
-  const dailyPath = buildDailyPathPlan(progress, content.vocab, content.topics);
+  const course = getCourseProgress(progress, vocab, topics);
+  const dailyPath = buildDailyPathPlan(progress, vocab, topics);
   const goal = progress.daily.goalCards;
   const seen = progress.daily.today.cardsSeen;
   const correctToday = progress.daily.today.correct;
@@ -519,7 +519,7 @@ function CourseProgressCard({ course }: { course: CourseProgress }) {
         {next ? (
           <>
             Next:{" "}
-            <Link href={`/topics/${next.slug}`} className="font-semibold text-foreground underline-offset-2 hover:underline focus-ring rounded">
+            <Link href={next.href} className="font-semibold text-foreground underline-offset-2 hover:underline focus-ring rounded">
               {next.name}
             </Link>{" "}
             — {next.newCount} new word{next.newCount === 1 ? "" : "s"} left

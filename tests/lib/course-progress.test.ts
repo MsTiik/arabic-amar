@@ -59,7 +59,7 @@ describe("getCourseProgress", () => {
     expect(c.masteredFraction).toBe(0);
     expect(c.lessonsTotal).toBe(2);
     expect(c.lessonsCovered).toBe(0);
-    expect(c.nextLesson).toEqual({ slug: "body-parts", name: "Body Parts", newCount: 2 });
+    expect(c.nextLesson).toEqual({ slug: "body-parts", name: "Body Parts", href: "/topics/body-parts", newCount: 2 });
   });
 
   test("counts mastered words and covered lessons from word progress", () => {
@@ -77,7 +77,7 @@ describe("getCourseProgress", () => {
   test("next lesson is the earliest with uncovered words and ignores extras", () => {
     const c = getCourseProgress(makeProgress({ head: word(2), hand: word(2) }), bank, topics);
     expect(c.lessonsCovered).toBe(1);
-    expect(c.nextLesson).toEqual({ slug: "numbers", name: "Numbers", newCount: 1 });
+    expect(c.nextLesson).toEqual({ slug: "numbers", name: "Numbers", href: "/topics/numbers", newCount: 1 });
   });
 
   test("handles an empty bank", () => {

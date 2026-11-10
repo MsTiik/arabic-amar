@@ -6,6 +6,7 @@ import { Disclosure } from "@/components/disclosure";
 import { ChatDialogue, ChoicePractice, GapDialogue } from "@/components/lesson-notes-client";
 import { MarkedArabic } from "@/components/marked-arabic";
 import { PageHero } from "@/components/page-hero";
+import { PractiseDeckButton } from "@/components/practise-deck-button";
 import { Prose } from "@/components/prose";
 import { AccordionControls, AccordionSection } from "@/components/section-accordion";
 import { SpeakerButton } from "@/components/speaker-button";
@@ -511,6 +512,9 @@ export function LessonNotesPage({ notes }: { notes: LevelTwoLessonNotes }) {
         description={<Prose text={notes.description} />}
         clampDescription
       >
+        <PractiseDeckButton
+          href={parent ? `/levels/level-2/${parent.slug}` : `/levels/level-2/${notes.slug}`}
+        />
         <Link href="/vocabulary" className="btn btn-secondary btn-sm">
           Look up these words in the vocabulary bank
           <ArrowRight className="h-3.5 w-3.5" aria-hidden />
