@@ -111,6 +111,12 @@ function formQuestion(
   const form = forms[formIndex];
   const base = { id: `${v.id}__mc_${direction}_${idx}`, kind, wordId: v.id };
 
+  // Arabic-to-English quizzes (the default) alternate: one time "which form
+  // is this?" with the verb's own forms as choices, the next its meaning.
+  if (direction === "ar-to-en" && (idx + seed) % 2 === 0) {
+    return formQuestion(v, pool, "en-to-ar", "multiple-choice-en-to-ar", idx, seed);
+  }
+
   if (direction === "ar-to-en") {
     const seen = new Set([form.english]);
     const distractors: ExerciseOption[] = [];

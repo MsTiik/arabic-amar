@@ -148,6 +148,12 @@ describe("Level 2 flashcards in exercises", () => {
     }
   });
 
+  test("an Arabic-to-English quiz alternates between naming the form and asking its meaning", () => {
+    const [formQuestion] = makeMultipleChoiceDeck([verb], study.vocab, "ar-to-en", { id: "t", title: "t" }, 2).questions;
+    expect(formQuestion.prompt).toBe("Command of “to write”");
+    expect(formQuestion.options?.map((option) => option.text).sort()).toEqual(verb.cardForms!.map((f) => f.arabic).sort());
+  });
+
   test("an Arabic-to-English quiz shows one form and asks its meaning", () => {
     const [question] = makeMultipleChoiceDeck([verb], study.vocab, "ar-to-en", { id: "t", title: "t" }, 1).questions;
     expect(question.promptArabic).toBe("يَكْتُبُ");
