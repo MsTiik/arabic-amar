@@ -1,11 +1,12 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { createContext, useContext, useEffect, useMemo, useRef, useState } from "react";
 import { ArrowLeft, Check, Flame, RotateCcw, Trophy, X } from "lucide-react";
 
 import { ArabicText } from "@/components/arabic-text";
 import { AutoplayToggle } from "@/components/autoplay-toggle";
 import { FeedbackToggle } from "@/components/feedback-toggle";
+import { Prose } from "@/components/prose";
 import { SpeakerButton } from "@/components/speaker-button";
 import { TranslitReveal } from "@/components/translit-reveal";
 import { trackEvent } from "@/lib/analytics";
@@ -42,9 +43,21 @@ interface Props {
   deck: ExerciseDeck;
   onExit: () => void;
   onAttempt: (wordId: string | undefined, correct: boolean) => void;
+  /** Every word that counts toward "words mastered" (Level 1 and Level 2 cards). */
+  masteryWordIds?: string[];
 }
 
-export function ExerciseRunner({ deck, onExit, onAttempt }: Props) {
+const MasteryWordIdsContext = createContext<string[] | undefined>(undefined);
+
+export function ExerciseRunner({ masteryWordIds, ...props }: Props) {
+  return (
+    <MasteryWordIdsContext.Provider value={masteryWordIds}>
+      <ExerciseRunnerInner {...props} />
+    </MasteryWordIdsContext.Provider>
+  );
+}
+
+function ExerciseRunnerInner({ deck, onExit, onAttempt }: Omit<Props, "masteryWordIds">) {
   // Immersive mode: on phones the site chrome (topbar, tab bar, footer) is
   // hidden via this body class while a deck is running, so the whole
   // viewport belongs to the session.
@@ -403,9 +416,10 @@ function CompletionScreen({
 /** Words mastered across the vocabulary bank, derived from existing progress. */
 function MasteryChip() {
   const progress = useProgress();
+  const provided = useContext(MasteryWordIdsContext);
   const allWordIds = useMemo(
-    () => getSiteContent().vocab.filter((v) => !v.isExtra).map((v) => v.id),
-    [],
+    () => provided ?? getSiteContent().vocab.filter((v) => !v.isExtra).map((v) => v.id),
+    [provided],
   );
   const summary = summarizeMastery(progress, allWordIds);
   return (
@@ -571,7 +585,7 @@ function FlashcardView({
     const now = Date.now();
     if (now - lastFlipRef.current < 550) return;
     lastFlipRef.current = now;
-    if (!flipped) autoplayWord(question.promptArabic);
+    if (!flipped) autoplayWord(question.audioArabic ?? question.promptArabic);
     setFlipped((f) => !f);
   }
   const flipLabel = flipped
@@ -586,7 +600,9 @@ function FlashcardView({
       <div
         className={cn(
           "flip-scene relative mt-4 w-full sm:mt-6",
-          flashcardSceneSize(question.promptArabic, question.prompt),
+          question.answerForms?.length || question.answerNotes?.length
+            ? "h-[22rem] sm:h-[26rem]"
+            : flashcardSceneSize(question.promptArabic, question.prompt),
         )}
       >
         <div className={cn("flip-inner absolute inset-0", flipped && "is-flipped")}>
@@ -633,6 +649,29 @@ function FlashcardView({
                 {question.answerDetail}
               </p>
             ) : null}
+            {question.answerForms?.length ? (
+              <dl className="grid w-full max-w-md grid-cols-[auto_1fr] gap-x-3 gap-y-0.5 text-left text-sm">
+                {question.answerForms.map((form) => (
+                  <div key={form.label} className="contents">
+                    <dt className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                      {form.label}
+                    </dt>
+                    <dd className="text-foreground-soft">
+                      <span lang="ar-Latn" className="italic">{form.pronunciation}</span> · {form.english}
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+            ) : null}
+            {question.answerNotes?.length ? (
+              <ul className="max-w-md space-y-0.5 text-xs leading-5 text-muted-foreground">
+                {question.answerNotes.map((note) => (
+                  <li key={note}>
+                    <Prose text={note} />
+                  </li>
+                ))}
+              </ul>
+            ) : null}
             {question.sourceLabel ? (
               <p className="mt-1 text-xs font-medium text-muted-foreground">
                 Source: {question.sourceLabel}
@@ -651,7 +690,7 @@ function FlashcardView({
           ) : null}
           {question.promptArabic && question.showAudio !== false ? (
             <SpeakerButton
-              arabic={question.promptArabic}
+              arabic={question.audioArabic ?? question.promptArabic}
               label={question.prompt}
               size="sm"
               showUnavailable

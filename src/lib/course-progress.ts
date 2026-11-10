@@ -1,4 +1,4 @@
-import { summarizeMastery, topicNewCount } from "@/lib/progress";
+import { summarizeMastery, topicHref, topicNewCount } from "@/lib/progress";
 import type { Topic, UserProgress, VocabEntry } from "@/lib/types";
 
 /**
@@ -14,7 +14,7 @@ export interface CourseProgress {
   lessonsTotal: number;
   lessonsCovered: number;
   /** The first lesson that still has words to introduce, or null when done. */
-  nextLesson: { slug: string; name: string; newCount: number } | null;
+  nextLesson: { slug: string; name: string; href: string; newCount: number } | null;
 }
 
 export function getCourseProgress(
@@ -33,7 +33,7 @@ export function getCourseProgress(
   for (const topic of ordered) {
     const newCount = topicNewCount(progress, vocab, topic.slug);
     if (newCount === 0) lessonsCovered++;
-    else if (!nextLesson) nextLesson = { slug: topic.slug, name: topic.name, newCount };
+    else if (!nextLesson) nextLesson = { slug: topic.slug, name: topic.name, href: topicHref(topic), newCount };
   }
   return {
     totalWords: summary.total,

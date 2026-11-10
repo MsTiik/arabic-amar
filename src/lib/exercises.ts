@@ -58,15 +58,111 @@ export function makeFlashcardDeck(
   vocab: VocabEntry[],
   opts: { id: string; title: string; topicSlug?: string; lessonId?: string },
 ): ExerciseDeck {
-  const questions: ExerciseQuestion[] = withEnglish(vocab).map((v, idx) => ({
-    id: `${v.id}__flash_${idx}`,
-    kind: "flashcard",
-    wordId: v.id,
-    prompt: v.english,
-    promptArabic: v.arabic,
-    promptHint: v.pronunciation,
-  }));
+  const questions: ExerciseQuestion[] = withEnglish(vocab).map((v, idx) => {
+    const forms = v.cardForms ?? [];
+    const notes = v.cardNotes?.length ? { answerNotes: v.cardNotes } : {};
+    if (forms.length > 1) {
+      // A verb card: every form on the front, each form's meaning on the back.
+      return {
+        id: `${v.id}__flash_${idx}`,
+        kind: "flashcard",
+        wordId: v.id,
+        prompt: v.english,
+        promptArabic: forms.map((form) => form.arabic).join(" · "),
+        promptHint: forms.map((form) => form.pronunciation).join(" · "),
+        audioArabic: v.arabic,
+        answerForms: forms,
+        ...notes,
+      };
+    }
+    return {
+      id: `${v.id}__flash_${idx}`,
+      kind: "flashcard",
+      wordId: v.id,
+      prompt: v.english,
+      promptArabic: v.arabic,
+      promptHint: v.pronunciation,
+      ...notes,
+    };
+  });
   return { ...opts, questions };
+}
+
+/** Days since the epoch: rotates which form a multi-form card asks about. */
+function dayNumber(): number {
+  return Math.floor(Date.now() / 86400000);
+}
+
+/**
+ * A multiple-choice question about one form of a multi-form card (a verb).
+ * Asking for the Arabic offers the verb's own forms as the choices, so the
+ * learner has to tell past, present, command and verbal noun apart.
+ */
+function formQuestion(
+  v: VocabEntry,
+  pool: VocabEntry[],
+  direction: "en-to-ar" | "ar-to-en" | "translit-to-ar",
+  kind: ExerciseKind,
+  idx: number,
+  seed: number,
+): ExerciseQuestion {
+  const forms = v.cardForms ?? [];
+  const formIndex = (idx + seed) % forms.length;
+  const form = forms[formIndex];
+  const base = { id: `${v.id}__mc_${direction}_${idx}`, kind, wordId: v.id };
+
+  // Arabic-to-English quizzes (the default) alternate: one time "which form
+  // is this?" with the verb's own forms as choices, the next its meaning.
+  if (direction === "ar-to-en" && (idx + seed) % 2 === 0) {
+    return formQuestion(v, pool, "en-to-ar", "multiple-choice-en-to-ar", idx, seed);
+  }
+
+  if (direction === "ar-to-en") {
+    const seen = new Set([form.english]);
+    const distractors: ExerciseOption[] = [];
+    const candidates = pickDistractors(pool, v, pool.length, idx + 1);
+    const sameForm = (other: VocabEntry) => Boolean(other.cardForms?.some((f) => f.label === form.label));
+    // Prefer the same form of other verbs, so "he writes" sits beside "he reads", not "library".
+    for (const other of [...candidates.filter(sameForm), ...candidates.filter((other) => !sameForm(other))]) {
+      if (distractors.length === 3) break;
+      const text = other.cardForms?.find((f) => f.label === form.label)?.english ?? other.english;
+      if (!text || seen.has(text)) continue;
+      seen.add(text);
+      distractors.push({ id: `opt-${other.id}`, text, isArabic: false });
+    }
+    const correct: ExerciseOption = { id: `opt-${v.id}`, text: form.english, isArabic: false };
+    return {
+      ...base,
+      prompt: "What does this word mean?",
+      promptArabic: form.arabic,
+      promptHint: form.pronunciation,
+      options: shuffle([correct, ...distractors], idx + 7),
+      correctAnswerId: correct.id,
+    };
+  }
+
+  const withTranslit = direction === "en-to-ar";
+  const own: ExerciseOption[] = forms.map((f, i) => ({
+    id: `opt-${v.id}-form-${i}`,
+    text: f.arabic,
+    isArabic: true,
+    ...(withTranslit ? { translit: f.pronunciation } : {}),
+  }));
+  const padding = pickDistractors(withPronunciation(pool), v, Math.max(0, 4 - own.length), idx + 1).map(
+    (other): ExerciseOption => ({
+      id: `opt-${other.id}`,
+      text: other.arabic,
+      isArabic: true,
+      ...(withTranslit && other.pronunciation ? { translit: other.pronunciation } : {}),
+    }),
+  );
+  return {
+    ...base,
+    prompt: withTranslit ? `${form.label} of “${v.english}”` : form.pronunciation,
+    promptHint: withTranslit ? form.pronunciation : `${form.label}: ${form.english}`,
+    options: shuffle([...own, ...padding], idx + 7),
+    correctAnswerId: own[formIndex].id,
+  };
 }
 
 export function makeMultipleChoiceDeck(
@@ -74,6 +170,8 @@ export function makeMultipleChoiceDeck(
   pool: VocabEntry[],
   direction: "en-to-ar" | "ar-to-en" | "translit-to-ar",
   opts: { id: string; title: string; topicSlug?: string; lessonId?: string },
+  /** Rotates which form a multi-form card asks about; defaults to today. */
+  formSeed: number = dayNumber(),
 ): ExerciseDeck {
   const kindMap: Record<typeof direction, ExerciseKind> = {
     "en-to-ar": "multiple-choice-en-to-ar",
@@ -87,6 +185,7 @@ export function makeMultipleChoiceDeck(
   const sourceVocab = needsEnglish ? withEnglish(vocab) : withPronunciation(vocab);
   const sourcePool = needsEnglish ? withEnglish(pool) : withPronunciation(pool);
   const questions: ExerciseQuestion[] = sourceVocab.map((v, idx) => {
+    if ((v.cardForms?.length ?? 0) > 1) return formQuestion(v, sourcePool, direction, kind, idx, formSeed);
     const distractors = pickDistractors(sourcePool, v, 3, idx + 1);
     const allCandidates = [v, ...distractors];
     const shuffled = shuffle(allCandidates, idx + 7);

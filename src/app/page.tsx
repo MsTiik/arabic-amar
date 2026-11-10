@@ -8,13 +8,15 @@ import { NamesOfAllahTeaser } from "@/components/names-of-allah-teaser";
 import { RefreshContentButton } from "@/components/refresh-content-button";
 import { CURRICULUM_LEVELS } from "@/data/curriculum";
 import { getSiteContent } from "@/lib/content";
+import { getStudyContent } from "@/lib/study-cards";
 
 export default function Home() {
   const content = getSiteContent();
+  const study = getStudyContent(content);
 
   return (
     <div className="ambient-hero mx-auto w-full max-w-6xl px-4 py-5 sm:py-7">
-      <DashboardHero />
+      <DashboardHero vocab={study.vocab} topics={study.topics} />
 
       <section className="mt-12">
         <header className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between sm:gap-4">

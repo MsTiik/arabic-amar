@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { PractiseDeckButton } from "@/components/practise-deck-button";
 import { VerbFamiliesClient } from "@/components/verb-families-client";
 
 export const metadata = { title: "Verb families" };
@@ -22,6 +23,9 @@ export default function VerbFamiliesPage() {
           verbal noun—then sort its shuffled forms. Level 2 and Qur’anic
           examples show how the same root changes inside a real sentence.
         </p>
+        <div className="mt-3">
+          <PractiseDeckButton href="/practice/verb-families" />
+        </div>
         <details className="mt-3 max-w-3xl tile p-3 text-sm sm:mt-4 sm:p-4 leading-relaxed text-foreground-soft">
           <summary className="cursor-pointer font-semibold text-primary focus-ring">
             How the reference forms work

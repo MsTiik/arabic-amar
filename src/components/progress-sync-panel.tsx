@@ -1,11 +1,10 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { Cloud, CloudOff, RefreshCw } from "lucide-react";
 
 import { useProgressSync } from "@/components/progress-sync-provider";
 import { summarizeMastery, useProgress } from "@/lib/progress";
-import { getSiteContent } from "@/lib/content";
 
 const SIGN_IN_COOLDOWN_SECONDS = 60;
 
@@ -18,9 +17,8 @@ export function ProgressSyncPanel() {
   const [verifying, setVerifying] = useState(false);
   const [cooldownUntil, setCooldownUntil] = useState(0);
   const [now, setNow] = useState(() => Date.now());
-  const content = getSiteContent();
-  const wordIds = useMemo(() => content.vocab.map((v) => v.id), [content.vocab]);
-  const summary = summarizeMastery(progress, wordIds);
+  // Every word with a progress record, Level 1 and Level 2 alike.
+  const summary = summarizeMastery(progress, Object.keys(progress.words));
   const practiced = summary.learning + summary.familiar + summary.mastered;
   const cooldownRemaining = Math.max(0, Math.ceil((cooldownUntil - now) / 1000));
   const emailReady = email.trim().length > 0;

@@ -6,10 +6,12 @@ import { Disclosure } from "@/components/disclosure";
 import { ChatDialogue, ChoicePractice, GapDialogue } from "@/components/lesson-notes-client";
 import { MarkedArabic } from "@/components/marked-arabic";
 import { PageHero } from "@/components/page-hero";
+import { PractiseDeckButton } from "@/components/practise-deck-button";
 import { Prose } from "@/components/prose";
 import { AccordionControls, AccordionSection } from "@/components/section-accordion";
 import { SpeakerButton } from "@/components/speaker-button";
 import { ayahAudioUrl } from "@/data/quran";
+import { LEVEL_TWO_VOCAB_THEMES } from "@/data/level-two-vocab-sets";
 import {
   isNoteItem,
   type LevelTwoLessonNotes,
@@ -493,17 +495,26 @@ function Section({ section, number, next, defaultOpen }: { section: NoteSection;
 }
 
 export function LessonNotesPage({ notes }: { notes: LevelTwoLessonNotes }) {
+  // A lesson that lives inside a Level 2 topic (e.g. Home and Places) leads back there.
+  const parent = LEVEL_TWO_VOCAB_THEMES.find((theme) => theme.readingSlugs?.includes(notes.slug));
   return (
     <div className="mx-auto w-full max-w-5xl px-4 py-4 sm:py-8">
       <PageHero
         className="mb-4 sm:mb-6"
-        back={{ href: "/levels/level-2", label: "Level 2 topics" }}
-        eyebrow="Level 2"
+        back={
+          parent
+            ? { href: `/levels/level-2/${parent.slug}`, label: parent.title }
+            : { href: "/levels/level-2", label: "Level 2 topics" }
+        }
+        eyebrow={parent ? `Level 2 · ${parent.title}` : "Level 2"}
         title={notes.title}
         titleArabic={notes.titleArabic}
         description={<Prose text={notes.description} />}
         clampDescription
       >
+        <PractiseDeckButton
+          href={parent ? `/levels/level-2/${parent.slug}` : `/levels/level-2/${notes.slug}`}
+        />
         <Link href="/vocabulary" className="btn btn-secondary btn-sm">
           Look up these words in the vocabulary bank
           <ArrowRight className="h-3.5 w-3.5" aria-hidden />

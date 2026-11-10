@@ -31,6 +31,7 @@ import {
   makeWhichLetterDeck,
 } from "@/lib/exercises";
 import {
+  DEFAULT_NEW_WORD_SOURCE,
   getDueStudyWordIds,
   getMistakeWords,
   getNewWordIds,
@@ -125,8 +126,8 @@ function buildUrlDeck({
     return buildNamesOfAllahFlashcardDeck();
   }
   if (topicSlug) {
-    const subset = vocab.filter((v) => v.topicSlugs.includes(topicSlug));
     const topic = topics.find((t) => t.slug === topicSlug);
+    const subset = topicVocab(vocab, topic, topicSlug);
     if (subset.length === 0 || !topic) return null;
     const title = `${topic.name} · ${kindLabel(kindParam)}`;
     return buildDeck(kindParam, subset, vocab, topicSlug, title);
@@ -177,6 +178,11 @@ function PracticeSession({
 
   const progress = useProgress();
   const allWordIds = useMemo(() => vocab.map((v) => v.id), [vocab]);
+  const masteryWordIds = useMemo(() => vocab.filter((v) => !v.isExtra).map((v) => v.id), [vocab]);
+  const levelTwoDecks = useMemo(
+    () => topics.filter((topic) => topic.slug.startsWith("level-2-")).sort((a, b) => a.order - b.order),
+    [topics],
+  );
   const urlDeckKey = `${deckParam ?? ""}|${topicSlug}|${kindParam}`;
 
   // Manually selected deck (from button clicks) takes precedence over the URL deck.
@@ -244,6 +250,7 @@ function PracticeSession({
     return (
       <ExerciseRunner
         deck={activeDeck}
+        masteryWordIds={masteryWordIds}
         onExit={exitActive}
         onAttempt={(wordId, correct) => {
           if (wordId)
@@ -330,6 +337,8 @@ function PracticeSession({
         </div>
       </section>
 
+      <NewWordSourcePicker decks={levelTwoDecks} />
+
       <section>
         <h2 className="text-lg font-display">Quick decks</h2>
         <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
@@ -358,7 +367,7 @@ function PracticeSession({
           {newIds.length > 0 ? (
             <DeckCard
               title="Add new words"
-              description="Preview 10 unseen words as flashcards."
+              description={`Preview 10 unseen words as flashcards, from ${newWordSourceLabel(progress.newWordSource, levelTwoDecks)}.`}
               icon={Sparkles}
               hue="gold"
               badge={`${Math.min(newIds.length, 10)} new`}
@@ -548,8 +557,64 @@ function PracticeSession({
         </div>
       </section>
 
+      {levelTwoDecks.length > 0 ? (
+        <section aria-labelledby="level-two-decks-heading">
+          <h2 id="level-two-decks-heading" className="text-lg font-display">
+            Level 2 decks
+          </h2>
+          <p className="text-xs text-muted-foreground">
+            One deck per Level 2 topic. A verb is one card with its past, present, command and
+            verbal noun; quizzes ask about one form at a time.
+          </p>
+          <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
+            {levelTwoDecks.map((deck) => {
+              const subset = topicVocab(vocab, deck, deck.slug);
+              if (subset.length === 0) return null;
+              const fraction = topicProgressFraction(
+                progress,
+                subset.map((v) => v.id),
+              );
+              return (
+                <div
+                  key={deck.slug}
+                  className="flex items-center gap-4 rounded-[14px] border-2 border-hairline bg-card p-4"
+                >
+                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[10px] bg-tense-command text-tense-command-accent">
+                    <Layers className="h-5 w-5" aria-hidden />
+                  </span>
+                  <div className="min-w-0 flex-1">
+                    <p className="truncate text-sm font-semibold">
+                      {deck.name.replace(/^Level 2 · /, "")}
+                    </p>
+                    <div className="mt-1.5 flex items-center gap-2">
+                      <div className="h-1.5 w-full max-w-40 overflow-hidden rounded-full bg-muted">
+                        <div
+                          className="h-full rounded-full bg-tense-command-accent"
+                          style={{ width: `${Math.round(fraction * 100)}%` }}
+                        />
+                      </div>
+                      <span className="shrink-0 text-xs text-muted-foreground">
+                        {subset.length} cards
+                      </span>
+                    </div>
+                    <div className="mt-2 flex gap-3 text-sm font-bold text-primary">
+                      <Link href={`/practice?topic=${deck.slug}&kind=flashcard`} className="rounded focus-ring hover:underline">
+                        Flashcards →
+                      </Link>
+                      <Link href={`/practice?topic=${deck.slug}&kind=mc`} className="rounded focus-ring hover:underline">
+                        Quiz →
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </section>
+      ) : null}
+
       <section>
-        <h2 className="text-lg font-display">By lesson</h2>
+        <h2 className="text-lg font-display">Level 1 lessons</h2>
         <p className="text-xs text-muted-foreground">
           Run through a single lesson’s worth of words.
         </p>
@@ -597,6 +662,53 @@ function PracticeSession({
         </div>
       </section>
     </div>
+  );
+}
+
+/** A topic's words, in the topic's own study order when it has one. */
+function topicVocab(vocab: VocabEntry[], topic: Topic | undefined, slug: string): VocabEntry[] {
+  if (!topic?.wordIds) return vocab.filter((v) => v.topicSlugs.includes(slug));
+  const byId = new Map(vocab.map((v) => [v.id, v]));
+  return topic.wordIds.map((id) => byId.get(id)).filter((v): v is VocabEntry => Boolean(v));
+}
+
+function newWordSourceLabel(source: string | undefined, decks: Topic[]): string {
+  if (!source || source === DEFAULT_NEW_WORD_SOURCE) return "every lesson in course order";
+  if (source === "level-1") return "Level 1";
+  if (source === "level-2") return "Level 2";
+  return decks.find((deck) => deck.slug === source)?.name ?? "every lesson in course order";
+}
+
+/** Where "Add new words" (here and on the home page) takes unseen words from. */
+function NewWordSourcePicker({ decks }: { decks: Topic[] }) {
+  const progress = useProgress();
+  const value = progress.newWordSource ?? DEFAULT_NEW_WORD_SOURCE;
+  return (
+    <section className="surface flex flex-wrap items-center justify-between gap-3 px-4 py-3">
+      <div className="min-w-0">
+        <label htmlFor="new-word-source" className="text-sm font-semibold">
+          New words come from
+        </label>
+        <p className="text-xs text-muted-foreground">
+          Reviews always include every word you have started, from any level.
+        </p>
+      </div>
+      <select
+        id="new-word-source"
+        value={value}
+        onChange={(event) => progressActions.setNewWordSource(event.target.value)}
+        className="h-10 max-w-full rounded-[10px] border-2 border-hairline bg-background-soft px-3 text-sm font-medium focus-ring"
+      >
+        <option value={DEFAULT_NEW_WORD_SOURCE}>All lessons, in course order</option>
+        <option value="level-1">Level 1</option>
+        <option value="level-2">Level 2</option>
+        {decks.map((deck) => (
+          <option key={deck.slug} value={deck.slug}>
+            {deck.name}
+          </option>
+        ))}
+      </select>
+    </section>
   );
 }
 

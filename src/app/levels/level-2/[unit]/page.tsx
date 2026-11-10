@@ -20,6 +20,7 @@ import { InteractiveArabicReading } from "@/components/interactive-arabic-readin
 import { ReadingDrills } from "@/components/reading-drills";
 import { ReadingExercise } from "@/components/reading-exercise";
 import { SectionedReading } from "@/components/sectioned-reading";
+import { PractiseDeckButton } from "@/components/practise-deck-button";
 import { VocabSetView } from "@/components/vocab-set-view";
 import {
   LEVEL_TWO_ACTIONS,
@@ -35,6 +36,7 @@ import { LEVEL_TWO_KHALIDS_HOUSE_ROOMS } from "@/data/level-two-khalids-house-ro
 import { LEVEL_TWO_MASJID_AL_HARAM } from "@/data/level-two-masjid-al-haram";
 import { LEVEL_TWO_VOCAB_THEMES, getLevelTwoVocabTheme } from "@/data/level-two-vocab-sets";
 import { cn } from "@/lib/cn";
+import { levelTwoDeckForPage } from "@/lib/study-cards";
 
 type UnitSlug =
   | "marketplace-reading"
@@ -60,6 +62,7 @@ const UNIT_META: Record<UnitSlug, UnitMeta> = {
     title: "Khalid’s house",
     description:
       "Read a short description of Khalid’s house, tap any word to check it, then answer eight questions about it.",
+    parent: { href: "/levels/level-2/home-and-places", label: "Home and Places" },
   },
   "khalids-house-rooms": {
     title: "Naming every room and item in Khalid’s house",
@@ -161,7 +164,11 @@ export default async function LevelTwoUnitPage({
         titleArabic={meta.titleArabic}
         description={meta.description}
         clampDescription
-      />
+      >
+        {levelTwoDeckForPage(`/levels/level-2/${slug}`) ? (
+          <PractiseDeckButton href={`/levels/level-2/${slug}`} />
+        ) : null}
+      </PageHero>
 
       {slug === "marketplace-reading" ? <MarketplaceReading /> : null}
       {slug === "khalids-house" ? <KhalidsHouseReading /> : null}
@@ -182,6 +189,7 @@ function VocabThemePage({ theme }: { theme: NonNullable<ReturnType<typeof getLev
         titleArabic={theme.titleArabic}
         description={theme.description}
       >
+        <PractiseDeckButton href={`/levels/level-2/${theme.slug}`} />
         <Link href="/vocabulary" className="btn btn-secondary btn-sm">
           Search these words in the vocabulary bank
           <ArrowRight className="h-3.5 w-3.5" aria-hidden />
