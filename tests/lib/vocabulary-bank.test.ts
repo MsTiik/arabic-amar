@@ -10,6 +10,7 @@ import {
 } from "../../src/data/level-two-lessons";
 import { LEVEL_TWO_KHALIDS_HOUSE_ROOMS } from "../../src/data/level-two-khalids-house-rooms";
 import { LEVEL_TWO_MASJID_AL_HARAM } from "../../src/data/level-two-masjid-al-haram";
+import { LEVEL_TWO_UMAR_STORY } from "../../src/data/level-two-umar-story";
 import {
   LEVEL_TWO_LESSON_NOTES,
   arabicWords,
@@ -249,6 +250,63 @@ describe("Level 2 vocabulary bank coverage", () => {
     expect(searchFolded("bedroom"), "bedroom").toContain(foldForSearch("غُرْفَةُ النَّوْمِ"));
     expect(searchFolded("the Ever-Living"), "the Ever-Living").toContain(foldForSearch("الحَيُّ"));
     expect(topic.some((entry) => entry.english.startsWith("✗"))).toBe(false);
+  });
+
+  test("finds Lesson 15 words and verbs by Arabic, transliteration and English", () => {
+    const topic = bank.vocab.filter((entry) => entry.topicSlugs.includes("level-2-daily-actions-at-home"));
+    const search = (query: string) => {
+      const folded = foldForSearch(query);
+      return topic.filter((entry) =>
+        [entry.arabicFolded, ...(entry.arabicSearchForms ?? []), foldForSearch(entry.pronunciation ?? ""), foldForSearch(entry.english)].some(
+          (value) => foldedSearchMatches(value, folded, { exactArabic: true }),
+        ),
+      );
+    };
+    const arabicOf = (query: string) => search(query).map((entry) => entry.arabicFolded).join(" / ").split(/\s*\/\s*/);
+    // [Arabic, transliteration, English] for the seven home words and the seventeen verbs.
+    const words = [
+      ["رَفّ", "raff", "shelf"], ["رُفُوف", "rufūf", "shelves"], ["مَوْقِد", "mawqid", "stove"],
+      ["ثَلَّاجَة", "thallājah", "fridge"], ["حَوْض", "ḥawḍ", "sink"], ["سَلَّةُ مُهْمَلَات", "sallatu muhmalāt", "waste basket"],
+      ["غَسَّالَة", "ghassālah", "washing machine"], ["صُنْبُور", "ṣunbūr", "tap"], ["صَنَابِير", "ṣanābīr", "taps"],
+      ["طَبَخَ", "ṭabakha", "he cooked"], ["يَطْبُخُ", "yaṭbukhu", "he cooks"], ["أَشْعَلَ", "ashʿala", "he lit"],
+      ["يُشْعِلُ", "yushʿilu", "he lights"], ["يُنَظِّفُ", "yunaẓẓifu", "he cleans"], ["يُجَهِّزُ", "yujahhizu", "he prepares"],
+      ["يَسْتَيْقِظُ", "yastayqiẓu", "he wakes up"], ["يُرَتِّبُ", "yurattibu", "he tidies"], ["يُعَلِّقُ", "yuʿalliqu", "he hangs"],
+      ["يَلْبَسُ", "yalbasu", "he wears"], ["يَسْتَحِمُّ", "yastaḥimmu", "he bathes"], ["يَنْشُرُ", "yanshuru", "he spreads out"],
+      ["يَصْعَدُ", "yaṣʿadu", "he goes up"], ["يَفْرِشُ", "yafrishu", "he spreads"], ["يُذَاكِرُ", "yudhākiru", "he studies"],
+      ["كِبْرِيت", "kibrīt", "match"], ["صَابُون", "ṣābūn", "soap"], ["خَلِيفَة", "khalīfah", "caliph"],
+      ["حِجَارَة", "ḥijārah", "stones"], ["دَقِيق", "daqīq", "flour"], ["يُطْعِمُ", "yuṭʿimu", "he feeds"],
+    ] as const;
+    for (const [arabic, transliteration, english] of words) {
+      expect(search(plainArabic(arabic)).length, arabic).toBeGreaterThan(0);
+      expect(arabicOf(transliteration), transliteration).toContain(foldForSearch(arabic));
+      expect(arabicOf(english), english).toContain(foldForSearch(arabic));
+    }
+    expect(search("what is he doing").length + search("mādhā yafʿalu").length).toBeGreaterThan(0);
+    expect(topic.some((entry) => entry.english.startsWith("✗"))).toBe(false);
+  });
+
+  test("includes every word of the ʿUmar story, its questions and answers", () => {
+    const story = LEVEL_TWO_UMAR_STORY;
+    for (const sentence of [
+      story.instruction!,
+      story.questionsHeading!,
+      ...story.sentences,
+      ...story.questions.flatMap((question) => [question.question, question.answer]),
+    ]) {
+      for (const token of sentence.tokens) expectArabicInLevelTwoBank(token.arabic);
+    }
+    const topic = bank.vocab.filter((entry) => entry.topicSlugs.includes("level-2-umar-and-the-woman-with-the-pot-reading"));
+    const find = (query: string) =>
+      topic.filter((entry) =>
+        [entry.arabicFolded, ...(entry.arabicSearchForms ?? []), foldForSearch(entry.pronunciation ?? ""), foldForSearch(entry.english)].some(
+          (value) => value.includes(foldForSearch(query)),
+        ),
+      );
+    expect(find("حجارة").map((entry) => entry.english)).toContain("and stones");
+    expect(find("ḥijāratun").map((entry) => entry.arabic)).toContain("وَحِجارَةٌ");
+    expect(find("flour").map((entry) => entry.arabic)).toContain("دَقيقًا");
+    expect(find("the caliph").map((entry) => entry.arabic)).toContain("الخَليفَةُ");
+    expect(find("خليفة").map((entry) => entry.english)).toContain("a caliph");
   });
 
   test.each([

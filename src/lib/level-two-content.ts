@@ -258,6 +258,9 @@ export function validateLevelTwoPublishedContent(
             requireText(question.why, questionLocation, "Why");
           }
         }
+        if (block.kind === "reading" && !readings.some((reading) => reading.slug === block.slug)) {
+          issues.push({ location: blockLocation, message: `No Level 2 reading has the slug "${block.slug}".` });
+        }
         if (block.kind === "table") {
           for (const [index, row] of block.rows.entries()) {
             if (row.length !== block.columns.length) {

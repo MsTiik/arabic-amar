@@ -3,14 +3,17 @@ import { ArrowRight, ChevronDown, Lightbulb } from "lucide-react";
 
 import { ArabicText } from "@/components/arabic-text";
 import { Disclosure } from "@/components/disclosure";
+import { InteractiveArabicReading } from "@/components/interactive-arabic-reading";
 import { ChatDialogue, ChoicePractice, GapDialogue } from "@/components/lesson-notes-client";
 import { MarkedArabic } from "@/components/marked-arabic";
 import { PageHero } from "@/components/page-hero";
 import { PractiseDeckButton } from "@/components/practise-deck-button";
+import { ReadingDrills } from "@/components/reading-drills";
 import { Prose } from "@/components/prose";
 import { AccordionControls, AccordionSection } from "@/components/section-accordion";
 import { SpeakerButton } from "@/components/speaker-button";
 import { ayahAudioUrl } from "@/data/quran";
+import { LEVEL_TWO_READINGS } from "@/data/level-two-lessons";
 import { LEVEL_TWO_VOCAB_THEMES } from "@/data/level-two-vocab-sets";
 import {
   isNoteItem,
@@ -377,6 +380,8 @@ function Block({ block }: { block: NoteBlock }) {
     return <ChoicePractice questions={block.questions} title={block.title} intro={block.intro} />;
   }
 
+  if (block.kind === "reading") return <LessonReading block={block} />;
+
   return (
     <Disclosure
       tone="quiz"
@@ -415,6 +420,30 @@ function Block({ block }: { block: NoteBlock }) {
   );
 }
 
+/* ---------- Readings ---------- */
+
+/** A story read inside the lesson: tap any word, then answer its questions. */
+function LessonReading({ block }: { block: Extract<NoteBlock, { kind: "reading" }> }) {
+  const reading = LEVEL_TWO_READINGS.find((candidate) => candidate.slug === block.slug);
+  if (!reading) return null;
+  return (
+    <div className="space-y-2.5">
+      <BlockTitle title={block.title} />
+      <InteractiveArabicReading sentences={reading.sentences} english={reading.english} />
+      <Disclosure
+        title="Answer the questions"
+        meta={`${plural(reading.questions.length, "question")} · answer in Arabic first, then tap to check`}
+        bodyClassName="bg-background-soft/40"
+      >
+        <ReadingDrills reading={reading} />
+      </Disclosure>
+      {reading.notes?.length ? (
+        <Block block={{ kind: "bullets", id: `${block.id}-notes`, title: "About this text", items: reading.notes }} />
+      ) : null}
+    </div>
+  );
+}
+
 /* ---------- Sections ---------- */
 
 /** A board sentence group: a titled examples block of up to three sentences. */
@@ -450,6 +479,7 @@ function sectionContents(section: NoteSection): string[] {
   let verses = 0;
   let notes = 0;
   let sentences = 0;
+  let stories = 0;
   for (const block of section.blocks) {
     if (block.kind === "dialogue") {
       if (block.lines.some((line) => line.gap)) exercises++;
@@ -460,8 +490,13 @@ function sectionContents(section: NoteSection): string[] {
     if (block.kind === "quran") verses += block.items.length;
     if (block.kind === "bullets") notes++;
     if (block.kind === "examples" && !block.items.every(isShortItem)) sentences += block.items.length;
+    if (block.kind === "reading") {
+      stories++;
+      exercises++;
+    }
   }
   return [
+    stories ? plural(stories, "story", "stories") : "",
     dialogues ? plural(dialogues, "dialogue") : "",
     tables ? plural(tables, "table") : "",
     sentences ? plural(sentences, "example sentence") : "",

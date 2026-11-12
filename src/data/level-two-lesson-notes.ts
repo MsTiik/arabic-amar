@@ -1,6 +1,7 @@
 import type { ContentReviewStatus } from "@/data/level-two-lessons";
 import { LEVEL_TWO_LESSON_13 } from "@/data/level-two-lesson-13";
 import { LEVEL_TWO_LESSON_14 } from "@/data/level-two-lesson-14";
+import { LEVEL_TWO_LESSON_15 } from "@/data/level-two-lesson-15";
 
 /** An Arabic word, phrase or sentence with its transliteration and English. */
 export interface NoteItem {
@@ -81,6 +82,12 @@ export type NoteBlock =
   | { kind: "examples"; id: string; title?: string; items: readonly NoteItem[] }
   | { kind: "practice"; id: string; title?: string; intro?: string; questions: readonly PracticeQuestion[] }
   | { kind: "quran"; id: string; title?: string; items: readonly QuranExample[] }
+  /**
+   * A Level 2 reading (one of LEVEL_TWO_READINGS, by slug) shown inside the
+   * lesson: tap-a-word passage, then its questions. Its words reach the
+   * vocabulary bank through the reading itself.
+   */
+  | { kind: "reading"; id: string; title?: string; slug: string }
   | {
       kind: "quiz";
       id: string;
@@ -117,7 +124,7 @@ export interface LevelTwoLessonNotes {
   sentenceWords: readonly NoteItem[];
 }
 
-export const LEVEL_TWO_LESSON_NOTES: readonly LevelTwoLessonNotes[] = [LEVEL_TWO_LESSON_13, LEVEL_TWO_LESSON_14];
+export const LEVEL_TWO_LESSON_NOTES: readonly LevelTwoLessonNotes[] = [LEVEL_TWO_LESSON_13, LEVEL_TWO_LESSON_14, LEVEL_TWO_LESSON_15];
 
 export function getLevelTwoLessonNotes(slug: string): LevelTwoLessonNotes | undefined {
   return LEVEL_TWO_LESSON_NOTES.find((notes) => notes.slug === slug);

@@ -78,7 +78,7 @@ describe("Level 2 flashcards", () => {
     const write = LEVEL_TWO_ACTIONS.find((action) => action.id === "write");
     expect(write).toBeDefined();
     const card = cards.find((entry) => entry.id === "level-2-card__verb__kataba");
-    expect(card?.topicSlugs).toEqual([LEVEL_TWO_DECKS.verbFamilies.slug, LEVEL_TWO_DECKS.actionVerbs.slug]);
+    expect(card?.topicSlugs.slice(0, 2)).toEqual([LEVEL_TWO_DECKS.verbFamilies.slug, LEVEL_TWO_DECKS.actionVerbs.slug]);
     expect(deckCards(LEVEL_TWO_DECKS.actionVerbs.slug)).toHaveLength(LEVEL_TWO_ACTIONS.length);
   });
 
@@ -119,6 +119,58 @@ describe("Level 2 flashcards", () => {
         .filter((form) => !folded.has(form) && ![...folded].some((entry) => entry.split(/\s*\/\s*/).includes(form))),
     );
     expect(missing).toEqual([]);
+  });
+
+  test("Lesson 15 words are flashcards in the Home and Places deck", () => {
+    const home = deckCards(LEVEL_TWO_DECKS.homeAndPlaces.slug);
+    const inHome = (arabic: string) => home.find((entry) => entry.arabic === arabic || entry.arabic.startsWith(`${arabic} /`));
+    // The seven home words, each with its plural.
+    for (const pair of ["رَفّ / رُفُوف / أَرْفُف", "مَوْقِد / مَوَاقِد", "حَوْض / أَحْوَاض", "غَسَّالَة / غَسَّالَات", "صُنْبُور / صَنَابِير"]) {
+      expect(inHome(pair)?.arabic, pair).toBe(pair);
+    }
+    expect(inHome("سَلَّةُ مُهْمَلَات")).toBeDefined();
+    // A new verb is one card with its past and present.
+    const cook = inHome("طَبَخَ");
+    expect(cook?.english).toBe("to cook");
+    expect(cook?.cardForms?.map((form) => form.arabic)).toEqual(["طَبَخَ", "يَطْبُخُ"]);
+    // A verb Level 2 already teaches keeps its card: نَامَ is still the verb-family card.
+    const sleep = cards.find((entry) => entry.id === "level-2-card__verb__nama");
+    expect(sleep?.topicSlugs).toContain(LEVEL_TWO_DECKS.homeAndPlaces.slug);
+    expect(cards.filter((entry) => entry.cardForms?.some((form) => form.arabic === "يَنَامُ"))).toHaveLength(1);
+    // A present-tense action gains its past: يُذَاكِرُ becomes ذَاكَرَ / يُذَاكِرُ.
+    expect(cards.find((entry) => entry.cardForms?.some((form) => form.arabic === "يُذَاكِرُ"))?.arabic).toBe("ذَاكَرَ");
+    // اِسْتَيْقَظَ is taught in Lesson 14 (as an opposite) and Lesson 15: one card.
+    expect(cards.filter((entry) => entry.cardForms?.some((form) => form.arabic === "اِسْتَيْقَظَ"))).toHaveLength(1);
+    // Story words and verbs.
+    for (const word of ["خَلِيفَة / خُلَفَاء", "إِنَاء / آنِيَة", "حَجَر / حِجَارَة", "دَقِيق", "خُبْز", "جَزَاكَ اللهُ خَيْرًا"]) {
+      expect(inHome(word), word).toBeDefined();
+    }
+    expect(inHome("أَطْعَمَ")?.cardForms?.map((form) => form.arabic)).toEqual(["أَطْعَمَ", "يُطْعِمُ"]);
+  });
+
+  test("the extra words in Lessons 14 and 15 and the Masjid al-Haram word list are flashcards", () => {
+    const home = deckCards(LEVEL_TWO_DECKS.homeAndPlaces.slug).map((entry) => foldForSearch(entry.arabic));
+    const has = (arabic: string) => home.some((entry) => entry.split(/\s*\/\s*/).includes(foldForSearch(arabic)));
+    for (const word of ["شَقَّة", "فُرْشَاة", "وَرْد", "حُجْرَة", "هَوَاء", "كِيلُوجْرَام", "كِبْرِيت", "صَابُون", "ظِلّ", "سَجَدَ", "وَدَّعَ"]) {
+      expect(has(word), word).toBe(true);
+    }
+    for (const word of ["فُنْدُقٍ", "بِئْرُ", "سَطْحِ", "ثَمَنُ", "الْكَعْبَةُ"]) expect(has(word), word).toBe(true);
+    // Verb forms in the word list stay on their verb's card.
+    expect(cards.some((entry) => entry.arabic === "يَتَكَوَّنُ")).toBe(false);
+  });
+
+  test("Masculine and feminine has its own deck", () => {
+    const deck = deckCards(LEVEL_TWO_DECKS.masculineFeminine.slug);
+    const arabic = deck.map((entry) => entry.arabic);
+    for (const word of ["طَالِبَة", "صَحْرَاء", "لَيْلَى", "هَذِهِ", "هِيَ", "أَنْتَ", "أَنْتِ", "أَنَا"]) {
+      expect(arabic, word).toContain(word);
+    }
+    // Chart verbs: a verb Level 2 already teaches joins the deck; a new one is its he-form.
+    expect(deck.some((entry) => entry.id === "level-2-card__verb__kataba")).toBe(true);
+    const study = deck.find((entry) => entry.arabic === "يَدْرُسُ");
+    expect(study?.english).toBe("he studies");
+    expect(study?.cardNotes).toContain("you (f.): تَدْرُسِينَ (you (f.) study)");
+    expect(levelTwoDeckForPage("/grammar/masculine-and-feminine")).toBe(LEVEL_TWO_DECKS.masculineFeminine);
   });
 
   test("each Level 2 topic page with words links to its deck", () => {

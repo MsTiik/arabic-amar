@@ -1,5 +1,6 @@
 import { LEVEL_TWO_KHALIDS_HOUSE_ROOMS } from "@/data/level-two-khalids-house-rooms";
 import { LEVEL_TWO_MASJID_AL_HARAM } from "@/data/level-two-masjid-al-haram";
+import { LEVEL_TWO_UMAR_STORY } from "@/data/level-two-umar-story";
 
 export type ContentReviewStatus = "confirmed" | "normalised";
 
@@ -557,4 +558,5 @@ export const LEVEL_TWO_READINGS: readonly LevelTwoReading[] = [
   LEVEL_TWO_KHALIDS_HOUSE,
   LEVEL_TWO_KHALIDS_HOUSE_ROOMS,
   LEVEL_TWO_MASJID_AL_HARAM,
+  LEVEL_TWO_UMAR_STORY,
 ];

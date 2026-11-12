@@ -15,6 +15,8 @@ import { VERB_FAMILIES } from "../../src/data/verb-families";
 import { LEVEL_TWO_VOCAB_SETS, LEVEL_TWO_VOCAB_THEMES } from "../../src/data/level-two-vocab-sets";
 import { LEVEL_TWO_KHALIDS_HOUSE_ROOMS } from "../../src/data/level-two-khalids-house-rooms";
 import { LEVEL_TWO_MASJID_AL_HARAM } from "../../src/data/level-two-masjid-al-haram";
+import { LEVEL_TWO_UMAR_STORY } from "../../src/data/level-two-umar-story";
+import { LEVEL_TWO_LESSON_NOTES } from "../../src/data/level-two-lesson-notes";
 import { validateLevelTwoPublishedContent } from "../../src/lib/level-two-content";
 
 describe("published Level 2 content", () => {
@@ -56,7 +58,7 @@ describe("published Level 2 content", () => {
     expect(LEVEL_TWO_MARKETPLACE_READING.flatMap((sentence) => sentence.tokens)).toHaveLength(39);
     expect(LEVEL_TWO_KHALIDS_HOUSE.sentences).toHaveLength(9);
     expect(LEVEL_TWO_KHALIDS_HOUSE.questions).toHaveLength(8);
-    expect(LEVEL_TWO_READINGS).toHaveLength(3);
+    expect(LEVEL_TWO_READINGS).toHaveLength(4);
     expect(LEVEL_TWO_MASJID_AL_HARAM.sentences).toHaveLength(13);
     expect(LEVEL_TWO_MASJID_AL_HARAM.questions).toHaveLength(12);
     expect(LEVEL_TWO_MASJID_AL_HARAM.drills?.map((drill) => drill.kind)).toEqual(["match", "order", "correct"]);
@@ -92,6 +94,49 @@ describe("published Level 2 content", () => {
     expect(VERB_FAMILIES.filter((family) => family.levelTwoSourcePage !== undefined)).toHaveLength(5);
     expect(VERB_FAMILIES.filter((family) => family.levelTwoLesson !== undefined)).toHaveLength(19);
     expect(VERB_FAMILIES.filter((family) => family.levelTwoOrder !== undefined)).toHaveLength(24);
+  });
+
+  test("keeps the ʿUmar story sheet word for word, with its six questions", () => {
+    const story = LEVEL_TWO_UMAR_STORY;
+    expect(story.sentences).toHaveLength(11);
+    expect(story.questions).toHaveLength(6);
+    const text = (index: number) =>
+      story.sentences[index].tokens
+        .map((token) => `${token.punctuationBefore ?? ""}${token.arabic}${token.punctuationAfter ?? ""}`)
+        .join(" ");
+    expect(text(0)).toBe(
+      "خَرَجَ سَيِّدُنا عُمَرُ بْنُ الخَطّابِ (رَضِيَ اللهُ عَنْهُ) مِنْ بَيْتِهِ، يَمْشي في شَوارِعِ المَدينَةِ في اللَّيْلِ،",
+    );
+    expect(text(3)).toBe("فَقالَتِ المَرْأَةُ: في الإِناءِ ماءٌ وَحِجارَةٌ.");
+    expect(text(9)).toBe("وَوَضَعَ الدَّقيقَ وَالزَّيْتَ في الإِناءِ، وَطَبَخَ (وَصَنَعَ) خُبْزًا، وَأَطْعَمَ الأَوْلادَ.");
+    expect(text(10)).toBe("فَقالَتِ المَرْأَةُ: جَزاكَ اللهُ خَيْرًا، أَنْتَ الخَليفَةُ حَقًّا لا عُمَرُ.");
+    const sentenceIds = story.sentences.map((sentence) => sentence.id);
+    for (const question of story.questions) expect(sentenceIds).toContain(question.sentenceId);
+    // In question 3 the water and stones are objects of وَضَعَتْ, so they take fatḥatayn.
+    expect(story.questions[2].question.tokens.map((token) => token.arabic)).toContain("مَاءً");
+  });
+
+  test("shows the story inside Lesson 15, which lives in Home and Places", () => {
+    const lesson = LEVEL_TWO_LESSON_NOTES.find((notes) => notes.slug === "daily-actions-at-home");
+    expect(lesson?.lesson).toBe(15);
+    const blocks = lesson?.sections.flatMap((section) => section.blocks) ?? [];
+    expect(blocks.filter((block) => block.kind === "reading").map((block) => block.kind === "reading" && block.slug)).toEqual([
+      LEVEL_TWO_UMAR_STORY.slug,
+    ]);
+    expect(LEVEL_TWO_VOCAB_THEMES[0].readingSlugs).toContain("daily-actions-at-home");
+    const table = (id: string) => blocks.find((block) => block.kind === "table" && block.id === id);
+    const rows = (id: string) => {
+      const block = table(id);
+      return block?.kind === "table" ? block.rows : [];
+    };
+    expect(rows("home-words-table")).toHaveLength(7);
+    expect(rows("lesson-verbs")).toHaveLength(17);
+  });
+
+  test("flags a lesson reading block that names no reading", () => {
+    const lesson = LEVEL_TWO_LESSON_NOTES.find((notes) => notes.slug === "daily-actions-at-home")!;
+    const issues = validateLevelTwoPublishedContent(LEVEL_TWO_READINGS.filter((reading) => reading.slug !== LEVEL_TWO_UMAR_STORY.slug));
+    expect(issues.some((issue) => issue.location.startsWith(`lesson-notes.${lesson.slug}.story.umar-reading`))).toBe(true);
   });
 
   test("adds the teacher’s five near-and-far examples to the qarīb card", () => {
