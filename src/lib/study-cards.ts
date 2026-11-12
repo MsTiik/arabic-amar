@@ -1,5 +1,7 @@
+import { LEVEL_TWO_GRAMMAR_SHEETS, chartForms, plainArabic, type GrammarItem } from "@/data/level-two-grammar";
 import { LEVEL_TWO_KHALIDS_HOUSE_ROOMS } from "@/data/level-two-khalids-house-rooms";
 import { LEVEL_TWO_ACTIONS } from "@/data/level-two-lessons";
+import { LEVEL_TWO_MASJID_AL_HARAM } from "@/data/level-two-masjid-al-haram";
 import {
   LEVEL_TWO_LESSON_NOTES,
   isNoteItem,
@@ -63,6 +65,11 @@ export const LEVEL_TWO_DECKS = {
     name: "Level 2 · Getting to know each other",
     href: "/levels/level-2/getting-to-know-each-other",
   },
+  masculineFeminine: {
+    slug: `${LEVEL_TWO_DECK_PREFIX}masculine-and-feminine`,
+    name: "Level 2 · Masculine and feminine",
+    href: "/grammar/masculine-and-feminine",
+  },
 } as const satisfies Record<string, LevelTwoDeck>;
 
 export const LEVEL_TWO_DECK_LIST: readonly LevelTwoDeck[] = [
@@ -70,6 +77,7 @@ export const LEVEL_TWO_DECK_LIST: readonly LevelTwoDeck[] = [
   LEVEL_TWO_DECKS.verbFamilies,
   LEVEL_TWO_DECKS.homeAndPlaces,
   LEVEL_TWO_DECKS.gettingToKnow,
+  LEVEL_TWO_DECKS.masculineFeminine,
 ];
 
 /** The deck for a Level 2 topic page, if its words are on flashcards. */
@@ -94,6 +102,8 @@ const STANDALONE_RELATED_LABELS = new Set(["Related noun", "Related word", "Acti
 interface Card {
   key: string;
   entry: VocabEntry;
+  /** When the card joined each deck, so a deck lists its cards in the order its topic teaches them. */
+  joined: Map<string, number>;
 }
 
 /** The bare letters of the first form shown on a card, used to spot the same word taught twice. */
@@ -121,6 +131,11 @@ function gloss(item: { arabic: string; english: string }): string {
 
 class CardCollector {
   private readonly cards = new Map<string, Card>();
+  private joins = 0;
+
+  private join(card: Card, deck: LevelTwoDeck): void {
+    if (!card.joined.has(deck.slug)) card.joined.set(deck.slug, this.joins++);
+  }
 
   add(
     key: string,
@@ -131,6 +146,7 @@ class CardCollector {
     if (existing) {
       const entry = existing.entry;
       if (!entry.topicSlugs.includes(deck.slug)) entry.topicSlugs.push(deck.slug);
+      this.join(existing, deck);
       // The same word taught again with more forms (e.g. now with its plural): show them all.
       if (!entry.cardForms && card.arabic.split("/").length > entry.arabic.split("/").length) {
         entry.arabic = card.arabic;
@@ -142,8 +158,9 @@ class CardCollector {
       if (notes.length) entry.cardNotes = [...new Set(notes)];
       return;
     }
-    this.cards.set(key, {
+    const created: Card = {
       key,
+      joined: new Map(),
       entry: {
         ...card,
         id: `level-2-card__${card.id}`,
@@ -153,16 +170,41 @@ class CardCollector {
         topicSlugs: [deck.slug],
         lessonId: deck.slug,
       },
-    });
+    };
+    this.join(created, deck);
+    this.cards.set(key, created);
   }
 
   has(key: string): boolean {
     return this.cards.has(key);
   }
 
+  /** The key of a verb card that already teaches this form (past, present, command…), if any. */
+  verbWithForm(arabic: string): string | undefined {
+    const bare = wordKey(arabic);
+    for (const card of this.cards.values()) {
+      if (!card.key.startsWith("verb:")) continue;
+      const forms = card.entry.cardForms ?? [{ arabic: card.entry.arabic }];
+      if (forms.some((form) => wordKey(form.arabic) === bare)) return card.key;
+    }
+    return undefined;
+  }
+
+  /** Give a verb card known only by one form (a present-tense action) the full set of forms. */
+  addForms(key: string, card: Pick<VocabEntry, "arabic" | "pronunciation" | "cardForms">): void {
+    const entry = this.cards.get(key)?.entry;
+    if (!entry || entry.cardForms) return;
+    entry.arabic = card.arabic;
+    entry.arabicFolded = foldForSearch(card.arabic);
+    entry.pronunciation = card.pronunciation;
+    entry.cardForms = card.cardForms;
+  }
+
   addToDeck(key: string, deck: LevelTwoDeck): void {
     const existing = this.cards.get(key);
-    if (existing && !existing.entry.topicSlugs.includes(deck.slug)) existing.entry.topicSlugs.push(deck.slug);
+    if (!existing) return;
+    if (!existing.entry.topicSlugs.includes(deck.slug)) existing.entry.topicSlugs.push(deck.slug);
+    this.join(existing, deck);
   }
 
   list(): Card[] {
@@ -335,9 +377,145 @@ function addFirstColumn(
   }
 }
 
+/**
+ * One verb card per row of a [past, present, meaning] table. A verb another
+ * Level 2 topic already teaches keeps its card and joins this deck.
+ */
+function addVerbRows(cards: CardCollector, lessonSlug: string, tableId: string, deck: LevelTwoDeck): void {
+  for (const row of lessonTable(lessonSlug, tableId)) {
+    const [past, present, meaning] = row;
+    if (!isNoteItem(past) || !isNoteItem(present)) continue;
+    const key = cards.verbWithForm(past.arabic) ?? verbKey(present.arabic);
+    const cardForms: CardForm[] = [
+      { label: VERB_FORM_LABELS.past, arabic: past.arabic, pronunciation: past.transliteration, english: past.english },
+      { label: VERB_FORM_LABELS.present, arabic: present.arabic, pronunciation: present.transliteration, english: present.english },
+    ];
+    if (cards.has(key)) {
+      cards.addToDeck(key, deck);
+      cards.addForms(key, { arabic: past.arabic, pronunciation: past.transliteration, cardForms });
+      continue;
+    }
+    cards.add(key, deck, {
+      id: `${lessonSlug}__${slugify(past.transliteration)}`,
+      arabic: past.arabic,
+      pronunciation: past.transliteration,
+      english: typeof meaning === "string" ? meaning : past.english,
+      subCategory: "Verb",
+      cardForms,
+    });
+  }
+}
+
+/** A verb taught only by its past form (e.g. as an opposite): one card, unless a verb card already has it. */
+function addPastVerb(cards: CardCollector, id: string, deck: LevelTwoDeck, past: NoteItem, notes: string[]): void {
+  const existing = cards.verbWithForm(past.arabic);
+  if (existing) {
+    cards.addToDeck(existing, deck);
+    return;
+  }
+  cards.add(`verb:${wordKey(past.arabic)}`, deck, {
+    id,
+    arabic: past.arabic,
+    pronunciation: past.transliteration,
+    english: past.english,
+    subCategory: "Verb",
+    cardNotes: notes,
+  });
+}
+
+/** A word and its plural (or related form) on one card; rows whose second cell is text are the word alone. */
+function addWordRows(cards: CardCollector, lessonSlug: string, tableId: string, deck: LevelTwoDeck, subCategory: string): void {
+  for (const row of lessonTable(lessonSlug, tableId)) {
+    const [word, other] = row;
+    if (!isNoteItem(word)) continue;
+    const item = isNoteItem(other)
+      ? {
+          arabic: `${word.arabic} / ${other.arabic}`,
+          transliteration: `${word.transliteration} / ${other.transliteration}`,
+          english: `${word.english} / ${other.english}`,
+        }
+      : word;
+    addItem(cards, `${lessonSlug}__${slugify(word.transliteration)}`, deck, item, subCategory);
+  }
+}
+
+/** Every "Other words in this part" list in a lesson: each word is a card. */
+function addOtherWords(cards: CardCollector, lessonSlug: string, deck: LevelTwoDeck): void {
+  const notes = LEVEL_TWO_LESSON_NOTES.find((lesson) => lesson.slug === lessonSlug);
+  for (const section of notes?.sections ?? []) {
+    for (const block of section.blocks) {
+      if (block.kind !== "examples" || !/^other words/i.test(block.title ?? "")) continue;
+      for (const item of block.items) {
+        addItem(cards, `${lessonSlug}__${slugify(item.transliteration)}`, deck, item, "Lesson vocabulary");
+      }
+    }
+  }
+}
+
+/** The Masculine and feminine sheet: feminine words, pairs, this/who/what, pronouns and its chart verbs. */
+function addGrammarSheets(cards: CardCollector, deck: LevelTwoDeck): void {
+  const plain = (item: GrammarItem): NoteItem => ({
+    arabic: plainArabic(item.arabic),
+    transliteration: item.transliteration,
+    english: item.english,
+  });
+  for (const sheet of LEVEL_TWO_GRAMMAR_SHEETS) {
+    const id = (part: string) => `grammar__${sheet.slug}__${slugify(part)}`;
+    for (const marker of sheet.markers) {
+      for (const example of marker.examples) {
+        addItem(cards, id(example.transliteration), deck, plain(example), "Feminine word", [`Feminine ending ${marker.symbol}`]);
+      }
+    }
+    for (const pair of sheet.pairs) {
+      const masculine = plain(pair.masculine);
+      const feminine = plain(pair.feminine);
+      addItem(
+        cards,
+        id(masculine.transliteration),
+        deck,
+        {
+          arabic: `${masculine.arabic} / ${feminine.arabic}`,
+          transliteration: `${masculine.transliteration} / ${feminine.transliteration}`,
+          english: `${masculine.english} / ${feminine.english}`,
+        },
+        "Masculine and feminine",
+        [`Feminine: ${gloss(feminine)}`],
+      );
+    }
+    for (const word of sheet.demonstrativeWords) addItem(cards, id(word.transliteration), deck, plain(word), "This, who, what");
+    // أَنْتَ and أَنْتِ differ only in their vowels, so pronouns are keyed by their full spelling.
+    for (const person of sheet.persons) {
+      cards.add(`exact:${person.pronoun.arabic}`, deck, {
+        id: id(`pronoun-${person.pronoun.transliteration}`),
+        arabic: person.pronoun.arabic,
+        pronunciation: person.pronoun.transliteration,
+        english: person.pronoun.english,
+        subCategory: "Pronoun",
+        cardNotes: [`Present tense: ${person.how}`],
+      });
+    }
+    for (const chartVerb of sheet.chartVerbs) {
+      const forms = chartForms(chartVerb, sheet.persons).map((form) => ({ ...form, arabic: plainArabic(form.arabic) }));
+      const key = verbKey(forms[0].arabic);
+      if (cards.has(key)) {
+        cards.addToDeck(key, deck);
+        continue;
+      }
+      cards.add(key, deck, {
+        id: id(`verb-${chartVerb.id}`),
+        arabic: forms[0].arabic,
+        pronunciation: forms[0].transliteration,
+        english: forms[0].english,
+        subCategory: "Present tense",
+        cardNotes: forms.slice(1).map((form) => `${form.person.subject}: ${form.arabic} (${form.english})`),
+      });
+    }
+  }
+}
+
 function buildLevelTwoCards(): Card[] {
   const cards = new CardCollector();
-  const { actionVerbs, verbFamilies, homeAndPlaces, gettingToKnow } = LEVEL_TWO_DECKS;
+  const { actionVerbs, verbFamilies, homeAndPlaces, gettingToKnow, masculineFeminine } = LEVEL_TWO_DECKS;
 
   // Verbs first, so the same verb met elsewhere joins this one card.
   const families = VERB_FAMILIES.filter((family) => family.levelTwoOrder !== undefined).sort(
@@ -361,7 +539,7 @@ function buildLevelTwoCards(): Card[] {
     });
   }
 
-  // Home and Places: the word cards, Lesson 14 and the useful phrases from Khalid's house.
+  // Home and Places: the word cards, Lessons 14 and 15, the readings' word lists and phrases.
   const home = LEVEL_TWO_VOCAB_THEMES.find((theme) => theme.slug === "home-and-places");
   for (const set of home?.sets ?? []) {
     for (const word of set.words) addVocabSetWord(cards, set.slug, word, homeAndPlaces);
@@ -375,6 +553,32 @@ function buildLevelTwoCards(): Card[] {
   }
   addFirstColumn(cards, lesson14, "question-words", homeAndPlaces, "Question word");
   addFirstColumn(cards, lesson14, "place-words", homeAndPlaces, "Where things are");
+  addFirstColumn(cards, lesson14, "sajjada-root", homeAndPlaces, "Same root");
+  addOtherWords(cards, lesson14, homeAndPlaces);
+
+  const lesson15 = "daily-actions-at-home";
+  addPluralRows(cards, lesson15, "home-words-table", homeAndPlaces);
+  addVerbRows(cards, lesson15, "lesson-verbs", homeAndPlaces);
+  addOtherWords(cards, lesson15, homeAndPlaces);
+  addVerbRows(cards, lesson15, "story-verbs", homeAndPlaces);
+  addWordRows(cards, lesson15, "story-words", homeAndPlaces, "Story word");
+
+  // Opposites taught by their past form only; اِسْتَيْقَظَ joins its Lesson 15 card.
+  for (const row of lessonTable(lesson14, "opposites")) {
+    const [word, opposite] = cellItems(row);
+    if (!/^he /.test(opposite.english)) continue;
+    addPastVerb(cards, `${lesson14}__${slugify(opposite.transliteration)}`, homeAndPlaces, opposite, [`Opposite: ${gloss(word)}`]);
+  }
+
+  for (const word of LEVEL_TWO_MASJID_AL_HARAM.wordList ?? []) {
+    // A verb form in the list (اِقْرَأْ, يَتَكَوَّنُ) belongs to that verb's card.
+    const verb = cards.verbWithForm(word.arabic);
+    if (verb) {
+      cards.addToDeck(verb, homeAndPlaces);
+      continue;
+    }
+    addItem(cards, `${LEVEL_TWO_MASJID_AL_HARAM.slug}__${slugify(word.transliteration)}`, homeAndPlaces, word, "Reading word list");
+  }
   for (const phrase of LEVEL_TWO_KHALIDS_HOUSE_ROOMS.phrases ?? []) {
     addItem(
       cards,
@@ -415,6 +619,8 @@ function buildLevelTwoCards(): Card[] {
     }
   }
 
+  addGrammarSheets(cards, masculineFeminine);
+
   return cards.list();
 }
 
@@ -443,8 +649,9 @@ export function getStudyContent(base: SiteContent): { vocab: VocabEntry[]; topic
     if (!levelOneByKey.has(key)) levelOneByKey.set(key, entry);
   }
 
-  // Each deck lists its cards in Level 2 order, including Level 1 cards it shares.
+  // Each deck lists its cards in the order its topic teaches them, including Level 1 cards it shares.
   const deckOrder = new Map<string, string[]>(LEVEL_TWO_DECK_LIST.map((deck) => [deck.slug, []]));
+  const entryFor = new Map<Card, VocabEntry>();
   for (const card of buildLevelTwoCardsOnce()) {
     const existing = card.key.startsWith("word:") ? levelOneByKey.get(card.key.slice("word:".length)) : undefined;
     const entry = existing ?? { ...card.entry, topicSlugs: [...card.entry.topicSlugs] };
@@ -458,9 +665,15 @@ export function getStudyContent(base: SiteContent): { vocab: VocabEntry[]; topic
     } else {
       vocab.push(entry);
     }
-    for (const slug of card.entry.topicSlugs) {
-      const ids = deckOrder.get(slug);
-      if (ids && !ids.includes(entry.id)) ids.push(entry.id);
+    entryFor.set(card, entry);
+  }
+  for (const [slug, ids] of deckOrder) {
+    const members = buildLevelTwoCardsOnce()
+      .filter((card) => card.joined.has(slug))
+      .sort((a, b) => (a.joined.get(slug) ?? 0) - (b.joined.get(slug) ?? 0));
+    for (const card of members) {
+      const id = entryFor.get(card)?.id;
+      if (id && !ids.includes(id)) ids.push(id);
     }
   }
 

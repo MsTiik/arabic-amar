@@ -3,6 +3,7 @@ import { ArrowRight } from "lucide-react";
 
 import { ArabicText } from "@/components/arabic-text";
 import { PageHero } from "@/components/page-hero";
+import { PractiseDeckButton } from "@/components/practise-deck-button";
 import { AccordionControls, AccordionSection } from "@/components/section-accordion";
 import { GrammarPractice, VerbChart } from "@/components/gender-grammar-client";
 import { MarkedArabic } from "@/components/marked-arabic";
@@ -31,6 +32,7 @@ export default function MasculineAndFemininePage() {
         titleArabic={SHEET.titleArabic}
         description={SHEET.description}
       >
+        <PractiseDeckButton href="/grammar/masculine-and-feminine" />
         <Link href="/grammar" className="btn btn-secondary btn-sm">
           All grammar references
           <ArrowRight className="h-3.5 w-3.5" aria-hidden />

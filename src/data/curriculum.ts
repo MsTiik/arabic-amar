@@ -71,7 +71,7 @@ const LEVEL_TWO_UNITS: readonly CurriculumUnit[] = [
     id: "home-and-places",
     title: "Home and Places",
     description:
-      "Words for the home, its rooms and the places around it, with plurals, opposites, verb forms and example sentences, plus the stories and lesson that use them.",
+      "Words for the home, its rooms and the places around it, with plurals, opposites, verb forms and example sentences, plus the stories and lessons that use them: what people do around the house, and the story of ʿUmar and the woman with the pot.",
     topicSlugs: [],
     href: "/levels/level-2/home-and-places",
     cta: "Open Home and Places",
@@ -81,6 +81,7 @@ const LEVEL_TWO_UNITS: readonly CurriculumUnit[] = [
       "Naming every room in Khalid’s house",
       "The Sacred Mosque in Makkah",
       "Vocabulary of the home (Lesson 14)",
+      "Daily actions at home and the story of ʿUmar (Lesson 15)",
     ],
   },
   {
